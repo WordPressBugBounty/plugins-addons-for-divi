@@ -1,0 +1,62 @@
+// #toplevel_page_diviepic-plugins .wp-submenu li.wp-first-item::after {
+// 	content: '';
+// 	border-bottom: 1px solid rgb(255 255 255 / 0.2);
+// 	display: block;
+// 	float: left;
+// 	margin: 8px 0;
+// 	width: 100%;
+// }
+
+// #toplevel_page_diviepic-plugins .wp-submenu li.wp-last-item::before {
+// 	content: '';
+// 	border-bottom: 1px solid rgb(255 255 255 / 0.2);
+// 	display: block;
+// 	float: left;
+// 	margin: 8px 0;
+// 	width: 100%;
+// }
+
+.diviepic-docs {
+	fill: none;
+}
+
+.diviepic-admin a:focus,
+.diviepic-admin button:focus,
+.diviepic-admin input:focus {
+	box-shadow: none;
+	outline: none;
+}
+
+.divitorque-lite-admin a:focus,
+.divitorque-lite-admin button:focus,
+.divitorque-lite-admin input:focus {
+	box-shadow: none;
+	outline: none;
+}
+
+/**
+ * Review
+ */
+.review-notice {
+	display: flex;
+	align-items: center;
+
+	.review-image {
+		border-radius: 100%;
+		margin-right: 10px;
+
+		img {
+			border-radius: 100%;
+		}
+	}
+
+	.review-buttons {
+		display: flex;
+		align-items: center;
+		margin-left: auto;
+
+		.review-button {
+			margin-right: 10px;
+		}
+	}
+}
