@@ -54,7 +54,8 @@ class Review
             return;
         }
 
-        $activation_timestamp = get_option('divitorque_activation_time', false);
+        $activation_timestamp = get_option('divitorque_lite_activation_time', false);
+
         $three_days_ago = strtotime('-3 days');
 
         if ($activation_timestamp && $activation_timestamp < $three_days_ago) :

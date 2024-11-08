@@ -8,9 +8,7 @@ use DiviTorqueLite\RestApi;
 use DiviTorqueLite\Dashboard;
 use DiviTorqueLite\ModulesManager;
 use DiviTorqueLite\Review;
-
 use DiviTorqueLite\Deprecated;
-
 use DiviTorqueLite\Divi_Library_Shortcode;
 
 class PluginLoader
@@ -72,8 +70,8 @@ class PluginLoader
         }
 
         // Activation Timestamp
-        if (!get_option('divitorque_activation_time')) {
-            update_option('divitorque_activation_time', time());
+        if (!get_option('divitorque_lite_activation_time')) {
+            update_option('divitorque_lite_activation_time', time());
         }
 
         // Set the version

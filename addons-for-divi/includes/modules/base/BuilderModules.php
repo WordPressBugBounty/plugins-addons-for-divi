@@ -3,10 +3,12 @@ class Divi_Torque_Lite_Module extends ET_Builder_Module
 {
 
 	public $module_credits = array(
-		'module_uri' => 'https://diviepic.com/torque-pro/?utm_source=builder&utm_medium=torque-module',
+		'module_uri' => 'https://diviepic.com/',
 		'author'     => 'DiviEpic',
 		'author_uri' => 'https://diviepic.com/',
 	);
+
+	public $icon_path;
 
 	public $folder_name = 'divi_torque_lite';
 
