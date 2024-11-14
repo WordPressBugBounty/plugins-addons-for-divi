@@ -137,7 +137,7 @@ class AssetsManager
 		$styles = [
 			'slick' => 'slick/slick.min.css',
 			'tippy' => 'tippy/tippy.min.css',
-			'magnific-popup' => 'magnific-popup/magnific-popup.min.css',
+			'magnific-popup' => 'magnific-popup/magnific-popup.css',
 
 		];
 
