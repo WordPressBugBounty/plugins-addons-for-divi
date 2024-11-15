@@ -5,7 +5,7 @@
  * Description: Create beautiful and attracting posts, pages, and landing pages with Divi Torque Lite.
  * Author:      DiviEpic
  * Author URI:  https://diviepic.com
- * Version: 4.0.7
+ * Version: 4.0.8
  * 
  * License:     GPL3
  * License URI: https://www.gnu.org/licenses/gpl-3.0.txt
@@ -24,7 +24,7 @@ if (!defined('WPINC')) {
 
 define('DIVI_TORQUE_LITE_FILE', __FILE__);
 define('DIVI_TORQUE_LITE_BASE', plugin_basename(__FILE__));
-define('DIVI_TORQUE_LITE_VERSION', '4.0.7');
+define('DIVI_TORQUE_LITE_VERSION', '4.0.8');
 define('DIVI_TORQUE_LITE_DIR', plugin_dir_path(__FILE__));
 define('DIVI_TORQUE_LITE_URL', plugin_dir_url(__FILE__));
 define('DIVI_TORQUE_LITE_ASSETS', trailingslashit(DIVI_TORQUE_LITE_URL . 'assets'));

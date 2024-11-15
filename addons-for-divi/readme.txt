@@ -5,7 +5,7 @@ Tags: divi, divi builder, divi theme, divi module
 Requires at least: 5.0
 Tested up to: 6.5.3
 Requires PHP: 7.4
-Stable tag: 4.0.7
+Stable tag: 4.0.8
 License: GPLv3
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 
@@ -121,6 +121,9 @@ No, It won’t break your site or any page where you used our plugin. We put our
 4. Image Carousel
 
 == Changelog ==
+
+= Version 4.0.8 =
+* Fix: jQuery error
 
 = Version 4.0.7 =
 * Fix: Magnific Popup issue
