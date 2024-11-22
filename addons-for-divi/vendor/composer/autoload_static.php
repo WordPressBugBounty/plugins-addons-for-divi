@@ -15,7 +15,7 @@ class ComposerStaticInit0091dd1a442bec0f6d7c3c4f0540df6a
         'BaPostHelper' => __DIR__ . '/../..' . '/includes/modules/base/PostHelper.php',
         'Composer\\InstalledVersions' => __DIR__ . '/..' . '/composer/InstalledVersions.php',
         'DiviTorqueLite\\AdminHelper' => __DIR__ . '/../..' . '/includes/admin-helper.php',
-        'DiviTorqueLite\\AdminMenu' => __DIR__ . '/../..' . '/includes/admin-menu.php',
+        'DiviTorqueLite\\Admin_Notices' => __DIR__ . '/../..' . '/includes/upsell/notices.php',
         'DiviTorqueLite\\AssetsManager' => __DIR__ . '/../..' . '/includes/assets-manager.php',
         'DiviTorqueLite\\BackendHelpers' => __DIR__ . '/../..' . '/includes/backend-helpers.php',
         'DiviTorqueLite\\Dashboard' => __DIR__ . '/../..' . '/includes/dashboard.php',
@@ -25,7 +25,6 @@ class ComposerStaticInit0091dd1a442bec0f6d7c3c4f0540df6a
         'DiviTorqueLite\\ModulesManager' => __DIR__ . '/../..' . '/includes/modules-manager.php',
         'DiviTorqueLite\\Plugin_Upgrader' => __DIR__ . '/../..' . '/includes/plugin-upgrader.php',
         'DiviTorqueLite\\RestApi' => __DIR__ . '/../..' . '/includes/rest-api.php',
-        'DiviTorqueLite\\Review' => __DIR__ . '/../..' . '/includes/review.php',
         'Divi_Torque_Lite_Module' => __DIR__ . '/../..' . '/includes/modules/base/BuilderModules.php',
     );
 

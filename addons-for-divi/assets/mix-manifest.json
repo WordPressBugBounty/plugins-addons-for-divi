@@ -1,14 +1,11 @@
 {
-    "/js/bundle.js": "/js/bundle.js?id=8405e774bb7f5ee8777a1ed3b2acd412",
+    "/js/bundle.js": "/js/bundle.js?id=2718491d57cb806aaab404c06805a47f",
     "/js/frontend.js": "/js/frontend.js?id=c3543ee76d26cb76ce19b23fba2c2149",
-    "/admin/js/dashboard.js": "/admin/js/dashboard.js?id=1037b4d296018baa5dac19ffea587996",
-    "/admin/js/admin.js": "/admin/js/admin.js?id=47dc9a3f00def94df1a39987fbc27d08",
-    "/admin/js/app.js": "/admin/js/app.js?id=f0a41d233fe3e894c16a2b29a83abc71",
-    "/admin/css/app.css": "/admin/css/app.css?id=835a3bfd9f8386cbe83dd0cdf2315018",
-    "/admin/css/admin.css": "/admin/css/admin.css?id=a26518d96c4814f507fe443f44db421c",
-    "/admin/css/dashboard.css": "/admin/css/dashboard.css?id=1fdcfbc32cdcdd2c2105469bf8daadba",
+    "/admin/js/dashboard.js": "/admin/js/dashboard.js?id=9365068a241de6c2951e690278df3fdc",
+    "/admin/js/admin-notice.js": "/admin/js/admin-notice.js?id=8226994d4460053d4609a7e60e766eb0",
+    "/admin/css/fs-override.css": "/admin/css/fs-override.css?id=7df4e3a86f00f972082c3df16aac8cc4",
+    "/admin/css/dashboard.css": "/admin/css/dashboard.css?id=c2e8c71b99762ef4ddc70ccfd7b8dd96",
     "/css/frontend.css": "/css/frontend.css?id=56ef80d15509b2b31647b09100aa58ad",
     "/css/bundle.css": "/css/bundle.css?id=bc85c0b06b933318009584b67502285b",
-    "/admin/css/fs-override.css": "/admin/css/fs-override.css?id=7df4e3a86f00f972082c3df16aac8cc4",
     "/css/modules-style.css": "/css/modules-style.css?id=8dc1b993c973250c611cd30bc1dc1b4e"
 }

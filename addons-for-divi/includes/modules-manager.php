@@ -10,28 +10,35 @@ class ModulesManager
 
     private $modules_pro = [
         [
-            'name' => 'contact-form7',
+            'name'  => 'contact-form7',
             'title' => 'Contact Form 7',
-            'icon' => 'contact-form.svg',
+            'icon'  => 'contact-forms.svg',
             'child_name' => '',
-            'demo_link' => 'https://diviepic.com/torque-pro/#live-preview-237',
+            'demo_link' => '',
             'is_pro' => true
         ],
-
+        [
+            'name' => 'nav-menu',
+            'title' => 'Nav Menu',
+            'icon' => 'nav-menu.svg',
+            'child_name' => '',
+            'demo_link' => '',
+            'is_pro' => true
+        ],
         [
             'name' => 'fluent-forms',
             'title' => 'Fluent Forms',
-            'icon' => 'contact-form.svg',
+            'icon' => 'contact-forms.svg',
             'child_name' => '',
-            'demo_link' => 'https://diviepic.com/torque-pro/#live-preview-348',
+            'demo_link' => '',
             'is_pro' => true
         ],
         [
             'name' => 'gravity-forms',
             'title' => 'Gravity Forms',
-            'icon' => 'form.svg',
+            'icon' => 'contact-forms.svg',
             'child_name' => '',
-            'demo_link' => 'https://diviepic.com/torque-pro/#live-preview-349',
+            'demo_link' => '',
             'is_pro' => true
         ],
         [
@@ -39,7 +46,7 @@ class ModulesManager
             'title' => 'Inline Notice',
             'icon' => 'inline-notice.svg',
             'child_name' => '',
-            'demo_link' => 'https://diviepic.com/torque-pro/#live-preview-199',
+            'demo_link' => '',
             'is_pro' => true
         ],
         [
@@ -47,7 +54,7 @@ class ModulesManager
             'title' => 'Basic List',
             'icon' => 'list.svg',
             'child_name' => 'basic-list-child',
-            'demo_link' => 'https://diviepic.com/torque-pro/#live-preview-377',
+            'demo_link' => '',
             'is_pro' => true
         ],
         [
@@ -55,7 +62,7 @@ class ModulesManager
             'title' => 'Icon List',
             'icon' => 'icon-list.svg',
             'child_name' => 'icon-list-child',
-            'demo_link' => 'https://diviepic.com/torque-pro/#live-preview-375',
+            'demo_link' => '',
             'is_pro' => true
         ],
         [
@@ -63,15 +70,15 @@ class ModulesManager
             'title' => 'Opening Hours',
             'icon' => 'business-hours.svg',
             'child_name' => 'business-hour-child',
-            'demo_link' => 'https://diviepic.com/torque-pro/#live-preview-378',
+            'demo_link' => '#378',
             'is_pro' => true
         ],
         [
             'name' => 'carousel',
             'title' => 'Image Carousel',
-            'icon' => 'carousel-2.svg',
+            'icon' => 'image-carousel.svg',
             'child_name' => 'carousel-child',
-            'demo_link' => 'https://diviepic.com/torque-pro/#live-preview-299',
+            'demo_link' => '#299',
             'is_pro' => true
         ],
         [
@@ -79,7 +86,7 @@ class ModulesManager
             'title' => 'Checkmark List',
             'icon' => 'list.svg',
             'child_name' => 'checkmark-list-child',
-            'demo_link' => 'https://diviepic.com/torque-pro/#live-preview-376',
+            'demo_link' => '#376',
             'is_pro' => true
         ],
         [
@@ -87,7 +94,7 @@ class ModulesManager
             'title' => 'Before & After Slider',
             'icon' => 'before-after.svg',
             'child_name' => '',
-            'demo_link' => 'https://diviepic.com/torque-pro/#live-preview-297',
+            'demo_link' => '#297',
             'is_pro' => true
         ],
         [
@@ -95,7 +102,7 @@ class ModulesManager
             'title' => 'Content Toggle',
             'icon' => 'switch.svg',
             'child_name' => '',
-            'demo_link' => 'https://diviepic.com/torque-pro/#live-preview-325',
+            'demo_link' => '#325',
             'is_pro' => true
         ],
         [
@@ -103,7 +110,7 @@ class ModulesManager
             'title' => 'Countdown',
             'icon' => 'countdown.svg',
             'child_name' => '',
-            'demo_link' => 'https://diviepic.com/torque-pro/#live-preview-373',
+            'demo_link' => '#373',
             'is_pro' => true
         ],
         [
@@ -111,15 +118,15 @@ class ModulesManager
             'title' => 'Advanced Divider',
             'icon' => 'divider.svg',
             'child_name' => '',
-            'demo_link' => 'https://diviepic.com/torque-pro/#live-preview-352',
+            'demo_link' => '#352',
             'is_pro' => true
         ],
         [
             'name' => 'filterable-gallery',
             'title' => 'Filterable Gallery',
-            'icon' => 'grid.svg',
+            'icon' => 'filterable-gallery.svg',
             'child_name' => '',
-            'demo_link' => 'https://diviepic.com/torque-pro/#live-preview-350',
+            'demo_link' => '#350',
             'is_pro' => true
         ],
         [
@@ -127,7 +134,7 @@ class ModulesManager
             'title' => 'Flip Box',
             'icon' => 'flip-box.svg',
             'child_name' => '',
-            'demo_link' => 'https://diviepic.com/torque-pro/#live-preview-239',
+            'demo_link' => '#239',
             'is_pro' => true
         ],
         [
@@ -135,7 +142,7 @@ class ModulesManager
             'title' => 'Gradient Heading',
             'icon' => 'heading.svg',
             'child_name' => '',
-            'demo_link' => 'https://diviepic.com/torque-pro/#live-preview-211',
+            'demo_link' => '#211',
             'is_pro' => true
         ],
         [
@@ -143,15 +150,15 @@ class ModulesManager
             'title' => 'Heading',
             'icon' => 'heading.svg',
             'child_name' => '',
-            'demo_link' => 'https://diviepic.com/torque-pro/#live-preview-400',
+            'demo_link' => '#400',
             'is_pro' => true
         ],
         [
             'name' => 'horizontal-timeline',
             'title' => 'Horizontal Timeline',
-            'icon' => 'timeline.svg',
+            'icon' => 'horizontal-timeline.svg',
             'child_name' => 'horizontal-timeline-child',
-            'demo_link' => 'https://diviepic.com/torque-pro/#live-preview-301',
+            'demo_link' => '#301',
             'is_pro' => true
         ],
         [
@@ -159,40 +166,39 @@ class ModulesManager
             'title' => 'Image Hotspots',
             'icon' => 'image-hotspots.svg',
             'child_name' => 'hotspots-child',
-            'demo_link' => 'https://diviepic.com/torque-pro/#live-preview-212',
+            'demo_link' => '#212',
             'is_pro' => true
         ],
         [
             'name' => 'icon-box',
-            'title' => 'Icon Box',
+            'title' => 'Iconbox',
             'icon' => 'icon-box.svg',
             'child_name' => '',
-            'demo_link' => 'https://diviepic.com/torque-pro/#live-preview-300',
+            'demo_link' => '#300',
             'is_pro' => true
         ],
-
         [
             'name' => 'scroll-image',
             'title' => 'Scroll Image',
-            'icon' => 'image.svg',
+            'icon' => 'scroll-image',
             'child_name' => '',
-            'demo_link' => 'https://diviepic.com/torque-pro/#live-preview-257',
+            'demo_link' => '#257',
             'is_pro' => true
         ],
         [
             'name' => 'image-zoom',
             'title' => 'Image Magnifier',
-            'icon' => 'image.svg',
+            'icon' => 'image-magnifier.svg',
             'child_name' => '',
-            'demo_link' => 'https://diviepic.com/torque-pro/#live-preview-213',
+            'demo_link' => '#213',
             'is_pro' => true
         ],
         [
             'name' => 'inline-svg',
             'title' => 'Inline SVG',
-            'icon' => 'inline-svg.svg',
+            'icon' => 'svg-animator.svg',
             'child_name' => '',
-            'demo_link' => 'https://diviepic.com/torque-pro/#live-preview-200',
+            'demo_link' => '#200',
             'is_pro' => true
         ],
         [
@@ -200,7 +206,7 @@ class ModulesManager
             'title' => 'Instagram Chat',
             'icon' => 'instagram.svg',
             'child_name' => '',
-            'demo_link' => 'https://diviepic.com/torque-pro/#live-preview-328',
+            'demo_link' => '#328',
             'is_pro' => true
         ],
         [
@@ -208,22 +214,23 @@ class ModulesManager
             'title' => 'Instagram Feed',
             'icon' => 'instagram.svg',
             'child_name' => '',
-            'demo_link' => 'https://diviepic.com/torque-pro/#live-preview-187'
+            'demo_link' => '#187',
+            'is_pro' => true
         ],
         [
             'name' => 'logo-carousel',
             'title' => 'Logo Carousel',
             'icon' => 'carousel.svg',
             'child_name' => 'logo-carousel-child',
-            'demo_link' => 'https://diviepic.com/torque-pro/#live-preview-399',
+            'demo_link' => '#399',
             'is_pro' => true
         ],
         [
             'name' => 'logo-list',
             'title' => 'Logo List',
-            'icon' => 'logo-grid.svg',
+            'icon' => 'list.svg',
             'child_name' => 'logo-grid-child',
-            'demo_link' => 'https://diviepic.com/torque-pro/#live-preview-281',
+            'demo_link' => '#281',
             'is_pro' => true
         ],
         [
@@ -231,7 +238,7 @@ class ModulesManager
             'title' => 'Lottie',
             'icon' => 'lottie.svg',
             'child_name' => '',
-            'demo_link' => 'https://diviepic.com/torque-pro/#live-preview-198',
+            'demo_link' => '#198',
             'is_pro' => true
         ],
         [
@@ -239,7 +246,7 @@ class ModulesManager
             'title' => 'Pricing Table',
             'icon' => 'pricing-table.svg',
             'child_name' => 'pricing-table-child',
-            'demo_link' => 'https://diviepic.com/torque-pro/#live-preview-134',
+            'demo_link' => '#134',
             'is_pro' => true
         ],
         [
@@ -247,7 +254,7 @@ class ModulesManager
             'title' => 'Progress Bars',
             'icon' => 'progress-bar.svg',
             'child_name' => 'progress-bar-child',
-            'demo_link' => 'https://diviepic.com/torque-pro/#live-preview-256',
+            'demo_link' => '#256',
             'is_pro' => true
         ],
         [
@@ -255,7 +262,7 @@ class ModulesManager
             'title' => 'Price List',
             'icon' => 'price-list.svg',
             'child_name' => 'price-list-child',
-            'demo_link' => 'https://diviepic.com/torque-pro/#live-preview-280',
+            'demo_link' => '#280',
             'is_pro' => true
         ],
         [
@@ -263,7 +270,7 @@ class ModulesManager
             'title' => 'Review Box',
             'icon' => 'review.svg',
             'child_name' => '',
-            'demo_link' => 'https://diviepic.com/torque-pro/#live-preview-279',
+            'demo_link' => '#279',
             'is_pro' => true
         ],
         [
@@ -271,7 +278,7 @@ class ModulesManager
             'title' => 'Info Card',
             'icon' => 'info-box.svg',
             'child_name' => '',
-            'demo_link' => 'https://diviepic.com/torque-pro/#live-preview-324',
+            'demo_link' => '#324',
             'is_pro' => true
         ],
         [
@@ -279,15 +286,15 @@ class ModulesManager
             'title' => 'Social Share Buttons',
             'icon' => 'social-share.svg',
             'child_name' => 'social-share-child',
-            'demo_link' => 'https://diviepic.com/torque-pro/#live-preview-193',
+            'demo_link' => '#193',
             'is_pro' => true
         ],
         [
             'name' => 'star-rating',
             'title' => 'Star Rating',
-            'icon' => 'star-rating.svg',
+            'icon' => 'rating.svg',
             'child_name' => '',
-            'demo_link' => 'https://diviepic.com/torque-pro/#live-preview-374',
+            'demo_link' => '#374',
             'is_pro' => true
         ],
         [
@@ -295,15 +302,15 @@ class ModulesManager
             'title' => 'Stats Grid',
             'icon' => 'grid.svg',
             'child_name' => 'stats-grid-child',
-            'demo_link' => 'https://diviepic.com/torque-pro/#live-preview-351',
+            'demo_link' => '#351',
             'is_pro' => true
         ],
         [
-            'name' => 'team-box',
+            'name' => 'team',
             'title' => 'Team Box',
             'icon' => 'team.svg',
             'child_name' => '',
-            'demo_link' => 'https://diviepic.com/torque-pro/#live-preview-398',
+            'demo_link' => '#398',
             'is_pro' => true
         ],
         [
@@ -311,15 +318,15 @@ class ModulesManager
             'title' => 'Telegram Chat',
             'icon' => 'telegram.svg',
             'child_name' => '',
-            'demo_link' => 'https://diviepic.com/torque-pro/#live-preview-327',
+            'demo_link' => '#327',
             'is_pro' => true
         ],
         [
             'name' => 'testimonial',
-            'title' => 'Advanced Testimonial',
+            'title' => 'Testimonial',
             'icon' => 'testimonial.svg',
             'child_name' => '',
-            'demo_link' => 'https://diviepic.com/torque-pro/#live-preview-255',
+            'demo_link' => '#255',
             'is_pro' => true
         ],
         [
@@ -327,7 +334,7 @@ class ModulesManager
             'title' => 'Timeline',
             'icon' => 'timeline.svg',
             'child_name' => 'timeline-child',
-            'demo_link' => 'https://diviepic.com/torque-pro/#live-preview-326',
+            'demo_link' => '#326',
             'is_pro' => true
         ],
         [
@@ -335,7 +342,7 @@ class ModulesManager
             'title' => 'Video Modal',
             'icon' => 'video-modal.svg',
             'child_name' => '',
-            'demo_link' => 'https://diviepic.com/torque-pro/#live-preview-238',
+            'demo_link' => '#238',
             'is_pro' => true
         ],
 
@@ -344,15 +351,15 @@ class ModulesManager
             'title' => 'Logo Grid',
             'icon' => 'grid.svg',
             'child_name' => '',
-            'demo_link' => 'https://diviepic.com/torque-pro/#live-preview-281',
+            'demo_link' => '#281',
             'is_pro' => true
         ],
         [
-            'name' => 'blurb',
-            'title' => 'Info Box',
+            'name' => 'blurb-module',
+            'title' => 'Blurb Module',
             'icon' => 'info-box.svg',
             'child_name' => '',
-            'demo_link' => 'https://diviepic.com/torque-pro/#live-preview-298',
+            'demo_link' => '#298',
             'is_pro' => true
         ],
         [
@@ -360,8 +367,71 @@ class ModulesManager
             'title' => 'WhatsApp Chat',
             'icon' => 'whatsapp.svg',
             'child_name' => '',
-            'demo_link' => 'https://diviepic.com/torque-pro/#live-preview-347',
+            'demo_link' => '#347',
             'is_pro' => true
+        ],
+        [
+            'name' => 'post-grid',
+            'title' => 'Post Grid',
+            'icon' => 'post-grid.svg',
+            'child_name' => '',
+            'demo_link' => '#',
+            'is_pro' => true,
+            'badge' => 'new'
+        ],
+        [
+            'name' => 'ajax-search',
+            'title' => 'Ajax Search',
+            'icon' => 'ajax-search.svg',
+            'child_name' => '',
+            'demo_link' => '#',
+            'is_pro' => true,
+            'badge' => 'new'
+        ],
+        [
+            'name' => 'google-reviews',
+            'title' => 'Google Reviews',
+            'icon' => 'google.svg',
+            'child_name' => '',
+            'demo_link' => '#',
+            'is_pro' => true,
+            'badge' => 'new'
+        ],
+        [
+            'name' => 'masonry-gallery',
+            'title' => 'Masonry Gallery',
+            'icon' => 'masonry-gallery.svg',
+            'child_name' => '',
+            'demo_link' => '#',
+            'is_pro' => true,
+            'badge' => 'new'
+        ],
+        [
+            'name' => 'post-carousel',
+            'title' => 'Post Carousel',
+            'icon' => 'post-carousel.svg',
+            'child_name' => '',
+            'demo_link' => '#',
+            'is_pro' => true,
+            'badge' => 'new'
+        ],
+        [
+            'name' => 'related-posts',
+            'title' => 'Related Posts',
+            'icon' => 'post-grid.svg',
+            'child_name' => '',
+            'demo_link' => '',
+            'is_pro' => true,
+            'badge' => 'new'
+        ],
+        [
+            'name'  => 'image-slider',
+            'title' => 'Image Slider',
+            'icon' => 'image-slider.svg',
+            'child_name' => '',
+            'demo_link' => '',
+            'is_pro' => true,
+            'badge' => 'new'
         ]
     ];
 
@@ -371,91 +441,84 @@ class ModulesManager
             'title' => 'Icon Box',
             'icon' => 'icon-box.svg',
             'child_name' => '',
-            'demo_link' => 'https://diviepic.com/torque-pro/#live-preview-375',
+            'demo_link' => '',
         ],
         [
             'name' => 'contact-form7',
             'title' => 'Contact Form 7',
-            'icon' => 'contact-form.svg',
+            'icon' => 'contact-forms.svg',
             'child_name' => '',
-            'demo_link' => 'https://diviepic.com/torque-pro/#live-preview-237'
+            'demo_link' => ''
         ],
         [
             'name' => 'divider',
-            'title' => 'Separator',
+            'title' => 'Divider',
             'icon' => 'divider.svg',
             'child_name' => '',
-            'demo_link' => 'https://diviepic.com/torque-pro/#live-preview-352'
+            'demo_link' => ''
         ],
         [
             'name' => 'skill-bar',
             'title' => 'Skill Bar',
             'icon' => 'progress-bar.svg',
             'child_name' => 'skill-bar-child',
-            'demo_link' => 'https://diviepic.com/torque-pro/#live-preview-256'
+            'demo_link' => ''
         ],
         [
             'name' => 'logo-grid',
             'title' => 'Logo Grid',
             'icon' => 'grid.svg',
             'child_name' => 'logo-grid-child',
-            'demo_link' => 'https://diviepic.com/torque-pro/#live-preview-281'
+            'demo_link' => ''
         ],
         [
             'name' => 'team-box',
             'title' => 'Person',
             'icon' => 'team.svg',
             'child_name' => '',
-            'demo_link' => 'https://diviepic.com/torque-pro/#live-preview-398'
+            'demo_link' => ''
         ],
         [
             'name' => 'testimonial',
             'title' => 'Testimonial',
             'icon' => 'testimonial.svg',
             'child_name' => '',
-            'demo_link' => 'https://diviepic.com/torque-pro/#live-preview-255'
-        ],
-        [
-            'name' => 'info-box',
-            'title' => 'Info Box',
-            'icon' => 'info-box.svg',
-            'child_name' => '',
-            'demo_link' => 'https://diviepic.com/torque-pro/#live-preview-324'
+            'demo_link' => '#255'
         ],
         [
             'name' => 'info-card',
             'title' => 'Info Card',
             'icon' => 'info-box.svg',
             'child_name' => '',
-            'demo_link' => 'https://diviepic.com/torque-pro/#live-preview-324',
+            'demo_link' => '#324',
         ],
         [
             'name' => 'dual-button',
             'title' => 'Dual Button',
-            'icon' => 'buttons.svg',
+            'icon' => 'button-group.svg',
             'child_name' => '',
-            'demo_link' => 'https://diviepic.com/torque-pro/#live-preview-325'
+            'demo_link' => '#325'
         ],
         [
             'name' => 'compare-image',
             'title' => 'Before & After Slider',
             'icon' => 'before-after.svg',
             'child_name' => '',
-            'demo_link' => 'https://diviepic.com/torque-pro/#live-preview-297',
+            'demo_link' => '#297',
         ],
         [
             'name' => 'image-carousel',
             'title' => 'Image Carousel',
-            'icon' => 'carousel-2.svg',
+            'icon' => 'image-carousel.svg',
             'child_name' => 'image-carousel-child',
-            'demo_link' => 'https://diviepic.com/torque-pro/#live-preview-299'
+            'demo_link' => '#299'
         ],
         [
             'name' => 'logo-carousel',
             'title' => 'Logo Carousel',
             'icon' => 'carousel.svg',
             'child_name' => 'logo-carousel-child',
-            'demo_link' => 'https://diviepic.com/torque-pro/#live-preview-399'
+            'demo_link' => '#399'
         ],
         [
             'name' => 'twitter-feed-carousel',
@@ -476,78 +539,85 @@ class ModulesManager
             'title' => 'Number',
             'icon' => 'number.svg',
             'child_name' => '',
-            'demo_link' => '#'
+            'demo_link' => ''
         ],
         [
             'name' => 'video-modal',
-            'title' => 'Video Modal',
-            'icon' => 'video-modal.svg',
+            'title' => 'Video Popup',
+            'icon' => 'video-popup.svg',
             'child_name' => '',
-            'demo_link' => 'https://diviepic.com/torque-pro/#live-preview-238'
+            'demo_link' => ''
+        ],
+        [
+            'name' => 'info-box',
+            'title' => 'Info Box',
+            'icon' => 'info-box.svg',
+            'child_name' => '',
+            'demo_link' => ''
         ],
         [
             'name' => 'scroll-image',
             'title' => 'Scroll Image',
             'icon' => 'image.svg',
             'child_name' => '',
-            'demo_link' => 'https://diviepic.com/torque-pro/#live-preview-257'
+            'demo_link' => ''
         ],
         [
             'name' => 'news-ticker',
             'title' => 'News Ticker',
             'icon' => 'ticker.svg',
             'child_name' => '',
-            'demo_link' => '#'
+            'demo_link' => ''
         ],
         [
             'name' => 'post-list',
             'title' => 'Post List',
             'icon' => 'post-list.svg',
             'child_name' => '',
-            'demo_link' => '#'
+            'demo_link' => ''
         ],
         [
             'name' => 'review',
             'title' => 'Review Box',
-            'icon' => 'review.svg',
+            'icon' => 'rating.svg',
             'child_name' => '',
-            'demo_link' => 'https://diviepic.com/torque-pro/#live-preview-279'
+            'demo_link' => ''
         ],
         [
             'name' => 'flip-box',
-            'title' => 'Flip Card',
+            'title' => 'Flip Box',
             'icon' => 'flip-box.svg',
             'child_name' => '',
-            'demo_link' => 'https://diviepic.com/torque-pro/#live-preview-239'
+            'demo_link' => ''
         ],
         [
             'name' => 'animated-text',
             'title' => 'Animated Text',
             'icon' => 'text.svg',
             'child_name' => '',
-            'demo_link' => '#'
+            'demo_link' => ''
         ],
         [
             'name' => 'business-hour',
             'title' => 'Business Hours',
             'icon' => 'business-hours.svg',
             'child_name' => 'business-hour-child',
-            'demo_link' => 'https://diviepic.com/torque-pro/#live-preview-378'
+            'demo_link' => ''
         ],
         [
             'name' => 'gradient-heading',
             'title' => 'Gradient Heading',
             'icon' => 'heading.svg',
             'child_name' => '',
-            'demo_link' => 'https://diviepic.com/torque-pro/#live-preview-211'
+            'demo_link' => ''
         ],
         [
             'name' => 'inline-notice',
             'title' => 'Inline Notice',
             'icon' => 'inline-notice.svg',
             'child_name' => '',
-            'demo_link' => 'https://diviepic.com/torque-pro/#live-preview-199'
-        ]
+            'demo_link' => ''
+        ],
     ];
 
     public static function get_instance()

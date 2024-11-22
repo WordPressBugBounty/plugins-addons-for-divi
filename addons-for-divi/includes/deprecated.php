@@ -9,14 +9,6 @@ class Deprecated
     {
         $this->includes();
 
-        // $version = get_option('divitorque_version');
-
-        // if ($version && is_admin()) {
-        //     if (version_compare($version, '3.5.7', '<=')) {
-        //         new Deprecated_DiviTorque_Admin();
-        //     }
-        // }
-
         add_action('wp_enqueue_scripts', array($this, 'enqueue_scripts'));
     }
 
