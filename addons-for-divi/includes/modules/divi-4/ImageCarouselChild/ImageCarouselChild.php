@@ -506,11 +506,11 @@ class DTQ_Image_Carousel_Child extends Divi_Torque_Lite_Module
                     %3$s
                     <img class="dtq-swapped-img %4$s" data-mfp-src="%1$s" src="%1$s" %2$s alt="%5$s"/>
                 </figure>',
-				$photo,
+				esc_url($photo),
 				$data_schema,
 				$overlay,
 				$use_lightbox === 'on' ? 'dtq-lightbox' : '',
-				$photo_alt
+				esc_attr($photo_alt)
 			);
 		}
 	}

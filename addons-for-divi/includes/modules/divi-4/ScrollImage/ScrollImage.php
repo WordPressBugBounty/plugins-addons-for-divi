@@ -364,8 +364,6 @@ class DTQ_Scroll_Image extends Divi_Torque_Lite_Module
 		}
 	}
 
-
-
 	public function render($attrs, $content, $render_slug)
 	{
 
@@ -388,12 +386,12 @@ class DTQ_Scroll_Image extends Divi_Torque_Lite_Module
                         <img class="dtq-scroll-image-el" src="%3$s" alt="%4$s" />
                     </div>
                 </div>',
-				$this->render_icon(),
-				$this->render_overlay(),
-				$image,
-				$image_alt,
-				$scroll_type === 'on_hover' ? $scroll_dir_hover : 'none',
-				$scroll_type === 'on_scroll' ? $scroll_dir_scroll : 'none'
+				$this->render_icon(), // phpcs:ignore
+				$this->render_overlay(), // phpcs:ignore
+				esc_url($image),
+				esc_attr($image_alt),
+				esc_attr($scroll_type === 'on_hover' ? $scroll_dir_hover : 'none'),
+				esc_attr($scroll_type === 'on_scroll' ? $scroll_dir_scroll : 'none')
 			);
 		} else {
 			return '<div class="dtq-module dtq-scroll-image"></div>';

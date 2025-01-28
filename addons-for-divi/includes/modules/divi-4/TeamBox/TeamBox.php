@@ -7,7 +7,7 @@ class DTQ_Advanced_Team extends Divi_Torque_Lite_Module
 
 		$this->slug = 'ba_advanced_team';
 		$this->vb_support = 'on';
-		$this->name = esc_html__('Person', 'addons-for-divi');
+		$this->name = esc_html__('Team Box', 'addons-for-divi');
 
 		$this->icon_path  	= $this->dtl_icon_path('team');
 
@@ -786,10 +786,10 @@ class DTQ_Advanced_Team extends Divi_Torque_Lite_Module
 
 		return sprintf(
 			'<img class="dtq-swapped-img %3$s" data-mfp-src="%1$s" src="%1$s" %2$s alt="%4$s"/>',
-			$photo,
+			esc_url($photo),
 			$data_schema,
 			'on' === $use_lightbox ? 'dtq-lightbox' : '',
-			$photo_alt
+			esc_attr($photo_alt)
 		);
 	}
 
@@ -884,8 +884,8 @@ class DTQ_Advanced_Team extends Divi_Torque_Lite_Module
 				$html = $html . sprintf(
 					'<li><a class="dtq-icon" href="%3$s%2$s"><span>%1$s</span></a></li>',
 					$icon,
-					$this->props[$item['type']],
-					$href_prefix
+					esc_url($this->props[$item['type']]),
+					esc_html($href_prefix)
 				);
 			}
 		}

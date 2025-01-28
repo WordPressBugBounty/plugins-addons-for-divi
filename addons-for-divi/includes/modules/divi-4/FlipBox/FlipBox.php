@@ -1041,8 +1041,8 @@ class DTQ__Flipbox extends Divi_Torque_Lite_Module
 			'<div class="dtq-flipbox-img-front">
                 <img src="%1$s" alt="%2$s"/>
             </div>',
-			$this->props['front_img'],
-			$this->props['front_img_alt']
+			esc_url($this->props['front_img']),
+			esc_attr($this->props['front_img_alt'])
 		);
 	}
 
@@ -1052,8 +1052,8 @@ class DTQ__Flipbox extends Divi_Torque_Lite_Module
 			'<div class="dtq-flipbox-img-back">
                 <img src="%1$s" alt="%2$s"/>
             </div>',
-			$this->props['back_img'],
-			$this->props['back_img_alt']
+			esc_url($this->props['back_img']),
+			esc_attr($this->props['back_img_alt'])
 		);
 	}
 

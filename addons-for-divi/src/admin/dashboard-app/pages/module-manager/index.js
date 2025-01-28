@@ -192,10 +192,10 @@ const Modules = () => {
 							{__('🚀 Divi Torque Pro', 'addons-for-divi')}
 						</h2>
 						<p
-							className="text-center text-base"
+							className="text-base"
 							dangerouslySetInnerHTML={{
 								__html: __(
-									'Get <strong>100</strong> lifetime licenses for just <strong>$89</strong> this Black Friday!',
+									'Find the right plan for you & supercharge with 50+ PRO Divi Modules and 8+ Extensions',
 									'addons-for-divi'
 								),
 							}}

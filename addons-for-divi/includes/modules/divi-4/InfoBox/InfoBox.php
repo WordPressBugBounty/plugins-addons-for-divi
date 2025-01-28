@@ -850,7 +850,7 @@ class DTQ_Info_Box extends Divi_Torque_Lite_Module
 			$data_schema            = $this->get_swapped_img_schema('photo');
 			return sprintf(
 				'<img class="dtq-info-box-img dtq-swapped-img" src="%1$s" %2$s alt=""/>',
-				$photo,
+				esc_url($photo),
 				$data_schema,
 				$overlay_html
 			);

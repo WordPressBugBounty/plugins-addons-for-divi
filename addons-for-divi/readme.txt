@@ -1,11 +1,11 @@
-=== Divi Torque Lite - Best Divi Addon, Extensions, Modules & Social Modules  ===
-Contributors: diviepic, badhonrocks
+=== Divi Torque Lite  ===
+Contributors: divitorque, badhonrocks
 Donate link: https://diviepic.com/divi-torque-pro
 Tags: divi, divi builder, divi theme, divi module
 Requires at least: 5.0
-Tested up to: 6.5.3
+Tested up to: 6.7.1
 Requires PHP: 7.4
-Stable tag: 4.1.0
+Stable tag: 4.1.1
 License: GPLv3
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 
@@ -153,6 +153,9 @@ No, It won’t break your site or any page where you used our plugin. We put our
 4. Image Carousel
 
 == Changelog ==
+
+= Version 4.1.1 =
+* Fix: Some modules issue
 
 = Version 4.1.0 =
 

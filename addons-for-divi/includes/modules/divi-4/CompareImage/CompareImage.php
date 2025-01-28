@@ -379,8 +379,8 @@ class DTQ_Image_Compare extends Divi_Torque_Lite_Module
 		$html = sprintf(
 			'<img class="dtq-before-img" style="position: absolute;" src=" %1$s " alt="%3$s"/>
 			<img class="dtq-after-img" src=" %2$s " alt="%4$s"/>',
-			esc_attr($before_img),
-			esc_attr($after_img),
+			esc_url($before_img),
+			esc_url($after_img),
 			esc_attr($before_label),
 			esc_attr($after_label)
 		);
@@ -425,10 +425,10 @@ class DTQ_Image_Compare extends Divi_Torque_Lite_Module
 
 		$images = self::get_image_compare(
 			array(
-				'before_img'   => $before_img,
-				'after_img'    => $after_img,
-				'before_label' => $before_label,
-				'after_label'  => $after_label,
+				'before_img'   => esc_url($before_img),
+				'after_img'    => esc_url($after_img),
+				'before_label' => esc_attr($before_label),
+				'after_label'  => esc_attr($after_label),
 			)
 		);
 

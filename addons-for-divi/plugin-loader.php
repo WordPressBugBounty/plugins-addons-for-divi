@@ -62,27 +62,7 @@ class PluginLoader
 
         AssetsManager::get_instance();
         RestApi::get_instance();
-
-        if (!dt_is_pro_installed()) {
-            Dashboard::get_instance();
-
-            new Admin_Notices([
-                'slug' => 'black_friday_deal',
-                'title' => __('🔥 Black Friday Deal: 100 Sites for Life!', 'divitorque'),
-                'message' => __('Upgrade to <strong>Divi Torque Pro</strong> with an amazing Black Friday offer. Get lifetime access for 100 sites at just <strong>$89</strong>! Limited time offer, don\'t miss out!', 'divitorque'),
-                'type' => 'success',
-                'show_after' => 'day',
-                'screens' => ['plugins', 'divitorque'],
-                'buttons' => [
-                    [
-                        'text' => __('Claim Black Friday Offer', 'divitorque'),
-                        'url' => 'https://diviepic.com/divi-torque-pro/#pricing',
-                        'class' => 'button-primary',
-                        'target' => '_blank'
-                    ]
-                ]
-            ]);
-        }
+        Dashboard::get_instance();
 
         if (!get_option('divitorque_version')) {
             Divi_Library_Shortcode::get_instance();

@@ -131,7 +131,7 @@ class Dashboard
                 wp_redirect('https://diviepic.com/divi-torque-pro/#pricing?utm_source=wpadmin&utm_medium=click&utm_campaign=menubtn&utm_content=divi-torque');
                 exit;
             },
-            100
+            999
         );
     }
 

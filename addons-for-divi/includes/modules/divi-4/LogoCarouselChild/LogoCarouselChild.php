@@ -176,10 +176,10 @@ class DTQ_Logo_Carousel_Child extends Divi_Torque_Lite_Module
 			return sprintf(
 				'<a target="%1$s" href="%2$s" %3$s><img class="dtq-swapped-img" data-mfp-src="%4$s" src="%4$s" alt="%5$s" %6$s /></a>',
 				$target,
-				$link_url,
+				esc_url($link_url),
 				$this->render_ref_attr(),
-				$logo,
-				$brand_name,
+				esc_url($logo),
+				esc_attr($brand_name),
 				$data_schema
 			);
 		}

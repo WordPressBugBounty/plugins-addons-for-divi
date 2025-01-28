@@ -688,11 +688,11 @@ class DTQ_Card extends Divi_Torque_Lite_Module
                     <img class="dtq-img-cover dtq-card-figure-img dtq-swapped-img %5$s" data-mfp-src="%2$s" src="%2$s" %3$s alt="%6$s"/>
                 </div>',
 				$this->render_Badge(),
-				$photo,
+				esc_url($photo),
 				$swapped_img,
 				$overlay_icon,
 				$lightbox,
-				$photo_alt
+				esc_attr($photo_alt)
 			);
 		}
 	}

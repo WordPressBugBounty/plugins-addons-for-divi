@@ -254,9 +254,9 @@ class DTQ_Gradient_Heading extends Divi_Torque_Lite_Module
 				'<a target="%1$s" href="%2$s" %3$s>
           			%4$s
 				</a>',
-				$link_target,
-				$this->props['link_url'],
-				$link_rel,
+				esc_attr($link_target),
+				esc_url($this->props['link_url']),
+				esc_attr($link_rel),
 				$this->props['title']
 			);
 		}
@@ -340,7 +340,7 @@ class DTQ_Gradient_Heading extends Divi_Torque_Lite_Module
 
 		return sprintf(
 			'<%1$s class="dtq-gradient-heading">%2$s</%1$s>',
-			$this->props['html_tag'],
+			esc_attr($this->props['html_tag']),
 			$this->render_title()
 		);
 	}

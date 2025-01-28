@@ -1146,8 +1146,8 @@ class DTQ_Testimonial extends Divi_Torque_Lite_Module
                         <figure class="dtq-testimonial-img">
                             <img class="dtq-img-cover" src="%1$s" alt="%2$s" />
                         </figure>',
-					$image,
-					$image_alt
+					esc_url($image),
+					esc_attr($image_alt)
 				);
 			}
 		}
@@ -1190,8 +1190,8 @@ class DTQ_Testimonial extends Divi_Torque_Lite_Module
                     </div>
                 </div>',
 				$this->_render_image(array('relative')),
-				$name_html,
-				$title_html,
+				$name_html, // phpcs:ignore
+				$title_html, // phpcs:ignore
 				$this->render_rating('reviewer')
 			);
 		}

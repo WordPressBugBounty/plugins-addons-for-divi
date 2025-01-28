@@ -191,8 +191,8 @@ class DTQ_Logo_Grid_Child extends Divi_Torque_Lite_Module
 		if (!empty($logo_url)) {
 			return sprintf(
 				'<img src="%1$s" alt="%2$s"/>',
-				$logo_url,
-				$brand_name
+				esc_url($logo_url),
+				esc_attr($brand_name)
 			);
 		}
 	}

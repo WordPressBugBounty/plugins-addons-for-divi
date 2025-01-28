@@ -485,8 +485,8 @@ class DTQ_InlineNotice extends Divi_Torque_Lite_Module
 				'<div class="dtq-alert-icon">
 					<img class="dtq-alert-icon-inner" src="%1$s" alt="%2$s">
 				</div>',
-				$image,
-				$image_alt
+				esc_url($image),
+				esc_attr($image_alt)
 			);
 		}
 	}

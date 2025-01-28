@@ -702,10 +702,10 @@ class DTQ_Review extends Divi_Torque_Lite_Module
 					%3$s
                     <img class="dtq-img-cover dtq-swapped-img %5$s" data-mfp-src="%1$s" src="%1$s" %2$s alt="%4$s"/>
                 </div>',
-				$image,
+				esc_url($image),
 				$data_schema,
 				$overlay,
-				$image_alt,
+				esc_attr($image_alt),
 				'on' === $use_lightbox ? 'dtq-lightbox' : '',
 				$this->render_badge()
 			);

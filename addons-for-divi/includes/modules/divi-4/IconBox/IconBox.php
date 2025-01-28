@@ -518,7 +518,7 @@ class DTQ_Icon_Box extends Divi_Torque_Lite_Module
 			$icon = esc_attr(et_pb_process_font_icon($icon));
 			$html = '<i class="dtq-icon dtq-et-icon">' . $icon . '</i>';
 		} else {
-			$html = '<img class="dtq-icon-image" src="' . $icon_image . '" alt="' . $image_alt . '" />';
+			$html = '<img class="dtq-icon-image" src="' . esc_url($icon_image) . '" alt="' . esc_attr($image_alt) . '" />';
 		}
 
 		if (!empty($icon) || !empty($icon_image)) {
