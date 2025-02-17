@@ -1,19 +1,27 @@
-# Copyright (C) 2025 DiviTorque Lite
-# This file is distributed under the same license as the DiviTorque Lite package.
+# Copyright (C) 2025 Divi Torque Lite
+# This file is distributed under the same license as the Divi Torque Lite package.
 msgid ""
 msgstr ""
-"Project-Id-Version: DiviTorque Lite\n"
+"Project-Id-Version: Divi Torque Lite\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language-Team: DiviEpic <help@diviepic.com>\n"
-"POT-Creation-Date: 2025-01-28 15:10+0000\n"
+"Language-Team: PlugPress <support@plugpress.io>\n"
+"POT-Creation-Date: 2025-02-17 21:45+0000\n"
 "X-Poedit-Basepath: ..\n"
 "X-Poedit-KeywordsList: __;_e;_ex:1,2c;_n:1,2;_n_noop:1,2;_nx:1,2,4c;_nx_noop:1,2,3c;_x:1,2c;esc_attr__;esc_attr_e;esc_attr_x:1,2c;esc_html__;esc_html_e;esc_html_x:1,2c\n"
 "X-Poedit-SearchPath-0: .\n"
 "X-Poedit-SearchPathExcluded-0: *.js\n"
 "X-Poedit-SourceCharset: UTF-8\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: freemius.php:37
+msgid "License"
+msgstr ""
+
+#: freemius.php:38
+msgid "Help"
+msgstr ""
 
 #: includes/backend-helpers.php:27
 msgid "Monday"
@@ -111,16 +119,20 @@ msgstr ""
 msgid "Awesome Gradient Heading"
 msgstr ""
 
-#: includes/dashboard.php:256
+#: includes/dashboard.php:199
 msgid "You do not have permission to access this page."
 msgstr ""
 
-#: includes/dashboard.php:257, includes/dashboard.php:283
+#: includes/dashboard.php:200, includes/dashboard.php:226
 msgid "Rollback to Previous Version"
 msgstr ""
 
-#: includes/dashboard.php:267
+#: includes/dashboard.php:210
 msgid "Error occurred, The version selected is invalid. Try selecting different version."
+msgstr ""
+
+#: includes/dashboard.php:247
+msgid "Rollback"
 msgstr ""
 
 #: includes/plugin-upgrader.php:72
@@ -399,7 +411,7 @@ msgstr ""
 msgid "Lite Shortcode"
 msgstr ""
 
-#: includes/upsell/notices.php:173
+#: includes/upsell/notices.php:126
 msgid "Dismiss this notice."
 msgstr ""
 

@@ -25,8 +25,6 @@ const ModuleCard = ({
 		const newStatus = isModuleActive ? 'disabled' : name;
 		const updatedStatuses = { ...modulesStatuses, [name]: newStatus };
 
-		console.log(updatedStatuses);
-
 		wp.apiFetch({
 			path: '/divitorque-lite/v1/save_common_settings',
 			method: 'POST',
@@ -54,19 +52,7 @@ const ModuleCard = ({
 
 	return (
 		<div className={cardClass}>
-			<div className="flex-shrink-0">
-				<ReactSVG
-					src={moduleIcon}
-					title={title}
-					wrapper="span"
-					beforeInjection={(svg) => {
-						svg.setAttribute(
-							'style',
-							'width: auto; height: 40px; fill: none;'
-						);
-					}}
-				/>
-			</div>
+			<div className="flex-shrink-0"></div>
 			<div className="flex-1 min-w-0">
 				<p
 					className={`text-base font-medium text-de-black flex items-center`}
@@ -97,13 +83,7 @@ const ModuleCard = ({
 				</div>
 			</div>
 			<div className="dt-toggle-control">
-				{is_pro ? (
-					<ToggleControl
-						checked={isModuleActive}
-						onChange={toggleModuleStatus}
-						disabled={true}
-					/>
-				) : (
+				{!is_pro && (
 					<ToggleControl
 						checked={isModuleActive}
 						onChange={toggleModuleStatus}

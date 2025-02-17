@@ -14,7 +14,7 @@ class ModulesManager
             'title' => 'Contact Form 7',
             'icon'  => 'contact-forms.svg',
             'child_name' => '',
-            'demo_link' => '',
+            'demo_link' => 'https://divitorque.com/features/contact-form7',
             'is_pro' => true
         ],
         [
@@ -22,7 +22,7 @@ class ModulesManager
             'title' => 'Nav Menu',
             'icon' => 'nav-menu.svg',
             'child_name' => '',
-            'demo_link' => '',
+            'demo_link' => 'https://divitorque.com/features/nav-menu',
             'is_pro' => true
         ],
         [
@@ -30,7 +30,7 @@ class ModulesManager
             'title' => 'Fluent Forms',
             'icon' => 'contact-forms.svg',
             'child_name' => '',
-            'demo_link' => '',
+            'demo_link' => 'https://divitorque.com/features/fluent-forms',
             'is_pro' => true
         ],
         [
@@ -38,7 +38,7 @@ class ModulesManager
             'title' => 'Gravity Forms',
             'icon' => 'contact-forms.svg',
             'child_name' => '',
-            'demo_link' => '',
+            'demo_link' => 'https://divitorque.com/features/gravity-forms',
             'is_pro' => true
         ],
         [
@@ -46,7 +46,7 @@ class ModulesManager
             'title' => 'Inline Notice',
             'icon' => 'inline-notice.svg',
             'child_name' => '',
-            'demo_link' => '',
+            'demo_link' => 'https://divitorque.com/features/inline-notice',
             'is_pro' => true
         ],
         [
@@ -54,7 +54,7 @@ class ModulesManager
             'title' => 'Basic List',
             'icon' => 'list.svg',
             'child_name' => 'basic-list-child',
-            'demo_link' => '',
+            'demo_link' => 'https://divitorque.com/features/basic-list',
             'is_pro' => true
         ],
         [
@@ -62,7 +62,7 @@ class ModulesManager
             'title' => 'Icon List',
             'icon' => 'icon-list.svg',
             'child_name' => 'icon-list-child',
-            'demo_link' => '',
+            'demo_link' => 'https://divitorque.com/features/icon-list',
             'is_pro' => true
         ],
         [
@@ -70,7 +70,7 @@ class ModulesManager
             'title' => 'Opening Hours',
             'icon' => 'business-hours.svg',
             'child_name' => 'business-hour-child',
-            'demo_link' => '#378',
+            'demo_link' => 'https://divitorque.com/features/opening-hours',
             'is_pro' => true
         ],
         [
@@ -78,7 +78,7 @@ class ModulesManager
             'title' => 'Image Carousel',
             'icon' => 'image-carousel.svg',
             'child_name' => 'carousel-child',
-            'demo_link' => '#299',
+            'demo_link' => 'https://divitorque.com/features/image-carousel',
             'is_pro' => true
         ],
         [
@@ -86,7 +86,7 @@ class ModulesManager
             'title' => 'Checkmark List',
             'icon' => 'list.svg',
             'child_name' => 'checkmark-list-child',
-            'demo_link' => '#376',
+            'demo_link' => 'https://divitorque.com/features/checkmark-list',
             'is_pro' => true
         ],
         [
@@ -94,7 +94,7 @@ class ModulesManager
             'title' => 'Before & After Slider',
             'icon' => 'before-after.svg',
             'child_name' => '',
-            'demo_link' => '#297',
+            'demo_link' => 'https://divitorque.com/features/before-after-slider',
             'is_pro' => true
         ],
         [
@@ -102,7 +102,7 @@ class ModulesManager
             'title' => 'Content Toggle',
             'icon' => 'switch.svg',
             'child_name' => '',
-            'demo_link' => '#325',
+            'demo_link' => 'https://divitorque.com/features/content-toggle',
             'is_pro' => true
         ],
         [
@@ -110,7 +110,7 @@ class ModulesManager
             'title' => 'Countdown',
             'icon' => 'countdown.svg',
             'child_name' => '',
-            'demo_link' => '#373',
+            'demo_link' => 'https://divitorque.com/features/countdown',
             'is_pro' => true
         ],
         [
@@ -118,7 +118,7 @@ class ModulesManager
             'title' => 'Advanced Divider',
             'icon' => 'divider.svg',
             'child_name' => '',
-            'demo_link' => '#352',
+            'demo_link' => 'https://divitorque.com/features/advanced-divider',
             'is_pro' => true
         ],
         [
@@ -126,7 +126,7 @@ class ModulesManager
             'title' => 'Filterable Gallery',
             'icon' => 'filterable-gallery.svg',
             'child_name' => '',
-            'demo_link' => '#350',
+            'demo_link' => 'https://divitorque.com/features/filterable-gallery',
             'is_pro' => true
         ],
         [
@@ -134,7 +134,7 @@ class ModulesManager
             'title' => 'Flip Box',
             'icon' => 'flip-box.svg',
             'child_name' => '',
-            'demo_link' => '#239',
+            'demo_link' => 'https://divitorque.com/features/flip-box',
             'is_pro' => true
         ],
         [
@@ -142,7 +142,7 @@ class ModulesManager
             'title' => 'Gradient Heading',
             'icon' => 'heading.svg',
             'child_name' => '',
-            'demo_link' => '#211',
+            'demo_link' => 'https://divitorque.com/features/gradient-heading',
             'is_pro' => true
         ],
         [
@@ -150,7 +150,7 @@ class ModulesManager
             'title' => 'Heading',
             'icon' => 'heading.svg',
             'child_name' => '',
-            'demo_link' => '#400',
+            'demo_link' => 'https://divitorque.com/features/heading',
             'is_pro' => true
         ],
         [
@@ -158,7 +158,7 @@ class ModulesManager
             'title' => 'Horizontal Timeline',
             'icon' => 'horizontal-timeline.svg',
             'child_name' => 'horizontal-timeline-child',
-            'demo_link' => '#301',
+            'demo_link' => 'https://divitorque.com/features/horizontal-timeline',
             'is_pro' => true
         ],
         [
@@ -166,7 +166,7 @@ class ModulesManager
             'title' => 'Image Hotspots',
             'icon' => 'image-hotspots.svg',
             'child_name' => 'hotspots-child',
-            'demo_link' => '#212',
+            'demo_link' => 'https://divitorque.com/features/image-hotspots',
             'is_pro' => true
         ],
         [
@@ -174,7 +174,7 @@ class ModulesManager
             'title' => 'Iconbox',
             'icon' => 'icon-box.svg',
             'child_name' => '',
-            'demo_link' => '#300',
+            'demo_link' => 'https://divitorque.com/features/iconbox',
             'is_pro' => true
         ],
         [
@@ -182,7 +182,7 @@ class ModulesManager
             'title' => 'Scroll Image',
             'icon' => 'scroll-image',
             'child_name' => '',
-            'demo_link' => '#257',
+            'demo_link' => 'https://divitorque.com/features/scroll-image',
             'is_pro' => true
         ],
         [
@@ -190,7 +190,7 @@ class ModulesManager
             'title' => 'Image Magnifier',
             'icon' => 'image-magnifier.svg',
             'child_name' => '',
-            'demo_link' => '#213',
+            'demo_link' => 'https://divitorque.com/features/image-magnifier',
             'is_pro' => true
         ],
         [
@@ -198,7 +198,7 @@ class ModulesManager
             'title' => 'Inline SVG',
             'icon' => 'svg-animator.svg',
             'child_name' => '',
-            'demo_link' => '#200',
+            'demo_link' => 'https://divitorque.com/features/inline-svg',
             'is_pro' => true
         ],
         [
@@ -206,7 +206,7 @@ class ModulesManager
             'title' => 'Instagram Chat',
             'icon' => 'instagram.svg',
             'child_name' => '',
-            'demo_link' => '#328',
+            'demo_link' => 'https://divitorque.com/features/instagram-chat',
             'is_pro' => true
         ],
         [
@@ -214,7 +214,7 @@ class ModulesManager
             'title' => 'Instagram Feed',
             'icon' => 'instagram.svg',
             'child_name' => '',
-            'demo_link' => '#187',
+            'demo_link' => 'https://divitorque.com/features/instagram-feed',
             'is_pro' => true
         ],
         [
@@ -222,7 +222,7 @@ class ModulesManager
             'title' => 'Logo Carousel',
             'icon' => 'carousel.svg',
             'child_name' => 'logo-carousel-child',
-            'demo_link' => '#399',
+            'demo_link' => 'https://divitorque.com/features/logo-carousel',
             'is_pro' => true
         ],
         [
@@ -230,7 +230,7 @@ class ModulesManager
             'title' => 'Logo List',
             'icon' => 'list.svg',
             'child_name' => 'logo-grid-child',
-            'demo_link' => '#281',
+            'demo_link' => 'https://divitorque.com/features/logo-list',
             'is_pro' => true
         ],
         [
@@ -238,7 +238,7 @@ class ModulesManager
             'title' => 'Lottie',
             'icon' => 'lottie.svg',
             'child_name' => '',
-            'demo_link' => '#198',
+            'demo_link' => 'https://divitorque.com/features/lottie',
             'is_pro' => true
         ],
         [
@@ -246,7 +246,7 @@ class ModulesManager
             'title' => 'Pricing Table',
             'icon' => 'pricing-table.svg',
             'child_name' => 'pricing-table-child',
-            'demo_link' => '#134',
+            'demo_link' => 'https://divitorque.com/features/pricing-table',
             'is_pro' => true
         ],
         [
@@ -254,7 +254,7 @@ class ModulesManager
             'title' => 'Progress Bars',
             'icon' => 'progress-bar.svg',
             'child_name' => 'progress-bar-child',
-            'demo_link' => '#256',
+            'demo_link' => 'https://divitorque.com/features/progress-bars',
             'is_pro' => true
         ],
         [
@@ -262,7 +262,7 @@ class ModulesManager
             'title' => 'Price List',
             'icon' => 'price-list.svg',
             'child_name' => 'price-list-child',
-            'demo_link' => '#280',
+            'demo_link' => 'https://divitorque.com/features/price-list',
             'is_pro' => true
         ],
         [
@@ -270,7 +270,7 @@ class ModulesManager
             'title' => 'Review Box',
             'icon' => 'review.svg',
             'child_name' => '',
-            'demo_link' => '#279',
+            'demo_link' => 'https://divitorque.com/features/review-box',
             'is_pro' => true
         ],
         [
@@ -278,7 +278,7 @@ class ModulesManager
             'title' => 'Info Card',
             'icon' => 'info-box.svg',
             'child_name' => '',
-            'demo_link' => '#324',
+            'demo_link' => 'https://divitorque.com/features/info-card',
             'is_pro' => true
         ],
         [
@@ -286,7 +286,7 @@ class ModulesManager
             'title' => 'Social Share Buttons',
             'icon' => 'social-share.svg',
             'child_name' => 'social-share-child',
-            'demo_link' => '#193',
+            'demo_link' => 'https://divitorque.com/features/social-share-buttons',
             'is_pro' => true
         ],
         [
@@ -294,7 +294,7 @@ class ModulesManager
             'title' => 'Star Rating',
             'icon' => 'rating.svg',
             'child_name' => '',
-            'demo_link' => '#374',
+            'demo_link' => 'https://divitorque.com/features/star-rating',
             'is_pro' => true
         ],
         [

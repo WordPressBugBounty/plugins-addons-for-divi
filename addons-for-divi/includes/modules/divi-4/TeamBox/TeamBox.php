@@ -869,7 +869,6 @@ class DTQ_Advanced_Team extends Divi_Torque_Lite_Module
 
 		$html     = '';
 		$is_empty = true;
-
 		foreach ($links as $item) {
 
 			if (!empty($this->props[$item['type']])) {
@@ -884,7 +883,7 @@ class DTQ_Advanced_Team extends Divi_Torque_Lite_Module
 				$html = $html . sprintf(
 					'<li><a class="dtq-icon" href="%3$s%2$s"><span>%1$s</span></a></li>',
 					$icon,
-					esc_url($this->props[$item['type']]),
+					('email' === $item['type']) ? sanitize_email($this->props[$item['type']]) : esc_url($this->props[$item['type']]),
 					esc_html($href_prefix)
 				);
 			}

@@ -42,7 +42,7 @@ class AdminHelper
 
     public static function is_pro_installed()
     {
-        return dt_is_dm_pro_installed() || dt_is_pro_installed();
+        return defined('DTP_VERSION');
     }
 
     public static function get_rollback_versions()

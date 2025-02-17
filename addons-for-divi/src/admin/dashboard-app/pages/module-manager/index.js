@@ -100,7 +100,7 @@ const Modules = () => {
 				<div className="w-3/4">
 					<div className="bg-white p-4 rounded-lg">
 						<h2 className="font-semibold text-2xl flex-1">
-							{__('Module Manager', 'addons-for-divi')}
+							{__('Modules', 'addons-for-divi')}
 						</h2>
 
 						<div className="mx-auto mt-5 flex items-center justify-between">
@@ -188,14 +188,14 @@ const Modules = () => {
 
 				<div className="w-1/4">
 					<div className="bg-white px-10 py-[40px] rounded-lg h-auto sticky top-10">
-						<h2 className="font-semibold text-2xl mb-4">
-							{__('🚀 Divi Torque Pro', 'addons-for-divi')}
+						<h2 className="font-semibold text-xl mb-4">
+							{__('Divi Torque Pro', 'addons-for-divi')}
 						</h2>
 						<p
 							className="text-base"
 							dangerouslySetInnerHTML={{
 								__html: __(
-									'Find the right plan for you & supercharge with 50+ PRO Divi Modules and 8+ Extensions',
+									'Supercharge with 50+ PRO Divi Modules and 8+ Extensions',
 									'addons-for-divi'
 								),
 							}}
@@ -204,7 +204,7 @@ const Modules = () => {
 						<ul className="list-inside py-[20px] text-base">
 							<li className="flex items-center">
 								<svg
-									class="w-3.5 h-3.5 me-2 text-green-500 dark:text-green-400 flex-shrink-0"
+									className="w-3.5 h-3.5 me-2 text-green-500 dark:text-green-400 flex-shrink-0"
 									aria-hidden="true"
 									xmlns="http://www.w3.org/2000/svg"
 									fill="currentColor"
@@ -217,7 +217,7 @@ const Modules = () => {
 							</li>
 							<li className="flex items-center">
 								<svg
-									class="w-3.5 h-3.5 me-2 text-green-500 dark:text-green-400 flex-shrink-0"
+									className="w-3.5 h-3.5 me-2 text-green-500 dark:text-green-400 flex-shrink-0"
 									aria-hidden="true"
 									xmlns="http://www.w3.org/2000/svg"
 									fill="currentColor"
@@ -230,7 +230,7 @@ const Modules = () => {
 							</li>
 							<li className="flex items-center">
 								<svg
-									class="w-3.5 h-3.5 me-2 text-green-500 dark:text-green-400 flex-shrink-0"
+									className="w-3.5 h-3.5 me-2 text-green-500 dark:text-green-400 flex-shrink-0"
 									aria-hidden="true"
 									xmlns="http://www.w3.org/2000/svg"
 									fill="currentColor"
@@ -243,7 +243,7 @@ const Modules = () => {
 							</li>
 							<li className="flex items-center">
 								<svg
-									class="w-3.5 h-3.5 me-2 text-green-500 dark:text-green-400 flex-shrink-0"
+									className="w-3.5 h-3.5 me-2 text-green-500 dark:text-green-400 flex-shrink-0"
 									aria-hidden="true"
 									xmlns="http://www.w3.org/2000/svg"
 									fill="currentColor"
@@ -256,7 +256,7 @@ const Modules = () => {
 							</li>
 							<li className="flex items-center">
 								<svg
-									class="w-3.5 h-3.5 me-2 text-green-500 dark:text-green-400 flex-shrink-0"
+									className="w-3.5 h-3.5 me-2 text-green-500 dark:text-green-400 flex-shrink-0"
 									aria-hidden="true"
 									xmlns="http://www.w3.org/2000/svg"
 									fill="currentColor"
@@ -269,7 +269,7 @@ const Modules = () => {
 							</li>
 							<li className="flex items-center">
 								<svg
-									class="w-3.5 h-3.5 me-2 text-green-500 dark:text-green-400 flex-shrink-0"
+									className="w-3.5 h-3.5 me-2 text-green-500 dark:text-green-400 flex-shrink-0"
 									aria-hidden="true"
 									xmlns="http://www.w3.org/2000/svg"
 									fill="currentColor"
@@ -282,7 +282,7 @@ const Modules = () => {
 							</li>
 							<li className="flex items-center">
 								<svg
-									class="w-3.5 h-3.5 me-2 text-green-500 dark:text-green-400 flex-shrink-0"
+									className="w-3.5 h-3.5 me-2 text-green-500 dark:text-green-400 flex-shrink-0"
 									aria-hidden="true"
 									xmlns="http://www.w3.org/2000/svg"
 									fill="currentColor"
@@ -295,7 +295,7 @@ const Modules = () => {
 							</li>
 							<li className="flex items-center">
 								<svg
-									class="w-3.5 h-3.5 me-2 text-green-500 dark:text-green-400 flex-shrink-0"
+									className="w-3.5 h-3.5 me-2 text-green-500 dark:text-green-400 flex-shrink-0"
 									aria-hidden="true"
 									xmlns="http://www.w3.org/2000/svg"
 									fill="currentColor"
@@ -308,7 +308,7 @@ const Modules = () => {
 							</li>
 							<li className="flex items-center">
 								<svg
-									class="w-3.5 h-3.5 me-2 text-green-500 dark:text-green-400 flex-shrink-0"
+									className="w-3.5 h-3.5 me-2 text-green-500 dark:text-green-400 flex-shrink-0"
 									aria-hidden="true"
 									xmlns="http://www.w3.org/2000/svg"
 									fill="currentColor"

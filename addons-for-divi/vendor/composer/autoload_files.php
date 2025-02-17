@@ -6,6 +6,7 @@ $vendorDir = dirname(__DIR__);
 $baseDir = dirname($vendorDir);
 
 return array(
-    '3c1c9fe734b56eff27cae6603e28de68' => $baseDir . '/includes/functions.php',
-    'fd3dc0c2990d5742c4cc22c3da13a12b' => $baseDir . '/includes/functions-forms.php',
+    '8d50dc88e56bace65e1e72f6017983ed' => $vendorDir . '/freemius/wordpress-sdk/start.php',
+    '9bd029850c1dbe692602ac21a5eeb676' => $baseDir . '/includes/functions.php',
+    'dcf5fea6dc74ff0cc74882efd74371dc' => $baseDir . '/includes/functions-forms.php',
 );

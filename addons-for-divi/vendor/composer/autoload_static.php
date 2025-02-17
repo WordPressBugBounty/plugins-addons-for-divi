@@ -4,11 +4,12 @@
 
 namespace Composer\Autoload;
 
-class ComposerStaticInit0091dd1a442bec0f6d7c3c4f0540df6a
+class ComposerStaticInitd024a156f682ce70d0314fa15a16badc
 {
     public static $files = array (
-        '3c1c9fe734b56eff27cae6603e28de68' => __DIR__ . '/../..' . '/includes/functions.php',
-        'fd3dc0c2990d5742c4cc22c3da13a12b' => __DIR__ . '/../..' . '/includes/functions-forms.php',
+        '8d50dc88e56bace65e1e72f6017983ed' => __DIR__ . '/..' . '/freemius/wordpress-sdk/start.php',
+        '9bd029850c1dbe692602ac21a5eeb676' => __DIR__ . '/../..' . '/includes/functions.php',
+        'dcf5fea6dc74ff0cc74882efd74371dc' => __DIR__ . '/../..' . '/includes/functions-forms.php',
     );
 
     public static $classMap = array (
@@ -16,13 +17,14 @@ class ComposerStaticInit0091dd1a442bec0f6d7c3c4f0540df6a
         'Composer\\InstalledVersions' => __DIR__ . '/..' . '/composer/InstalledVersions.php',
         'DiviTorqueLite\\AdminHelper' => __DIR__ . '/../..' . '/includes/admin-helper.php',
         'DiviTorqueLite\\Admin_Notices' => __DIR__ . '/../..' . '/includes/upsell/notices.php',
-        'DiviTorqueLite\\AssetsManager' => __DIR__ . '/../..' . '/includes/assets-manager.php',
+        'DiviTorqueLite\\AssetsManager' => __DIR__ . '/../..' . '/includes/assets.php',
         'DiviTorqueLite\\BackendHelpers' => __DIR__ . '/../..' . '/includes/backend-helpers.php',
         'DiviTorqueLite\\Dashboard' => __DIR__ . '/../..' . '/includes/dashboard.php',
         'DiviTorqueLite\\Divi_Library_Shortcode' => __DIR__ . '/../..' . '/includes/extensions/divi-library-shortcode.php',
         'DiviTorqueLite\\Filesystem' => __DIR__ . '/../..' . '/includes/filesystem.php',
         'DiviTorqueLite\\Helpers' => __DIR__ . '/../..' . '/includes/helpers.php',
         'DiviTorqueLite\\ModulesManager' => __DIR__ . '/../..' . '/includes/modules-manager.php',
+        'DiviTorqueLite\\PluginLoader' => __DIR__ . '/../..' . '/includes/plugin.php',
         'DiviTorqueLite\\Plugin_Upgrader' => __DIR__ . '/../..' . '/includes/plugin-upgrader.php',
         'DiviTorqueLite\\RestApi' => __DIR__ . '/../..' . '/includes/rest-api.php',
         'Divi_Torque_Lite_Module' => __DIR__ . '/../..' . '/includes/modules/base/BuilderModules.php',
@@ -31,7 +33,7 @@ class ComposerStaticInit0091dd1a442bec0f6d7c3c4f0540df6a
     public static function getInitializer(ClassLoader $loader)
     {
         return \Closure::bind(function () use ($loader) {
-            $loader->classMap = ComposerStaticInit0091dd1a442bec0f6d7c3c4f0540df6a::$classMap;
+            $loader->classMap = ComposerStaticInitd024a156f682ce70d0314fa15a16badc::$classMap;
 
         }, null, ClassLoader::class);
     }
