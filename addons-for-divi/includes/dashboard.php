@@ -84,21 +84,6 @@ class Dashboard
                 [$this, 'render_app']
             );
         }
-
-        // if (dtFreemius()->is_not_paying()) {
-        //     add_submenu_page(
-        //         $this->menu_slug,
-        //         __('Upgrade to Pro', 'divitorque'),
-        //         __('Upgrade to Pro', 'divitorque'),
-        //         $this->capability,
-        //         'go_divitorque_pro',
-        //         function () {
-        //             wp_redirect('https://divitorque.com/pricing-lifetime/?utm_source=divi-torque-lite&utm_medium=wp-admin&utm_campaign=upgrade-to-pro&utm_content=menu-button');
-        //             exit;
-        //         },
-        //         999
-        //     );
-        // }
     }
 
     public function render_app()
@@ -148,7 +133,7 @@ class Dashboard
             'pro_module_info'   => ModulesManager::get_all_pro_modules(),
             'module_icon_path'  => DIVI_TORQUE_LITE_URL . 'assets/imgs/icons',
             'isProInstalled'    => AdminHelper::is_pro_installed(),
-            'upgradeLink'       => dtFreemius()->get_upgrade_url(),
+            'upgradeLink'       => 'https://divitorque.com/pricing-lifetime/?utm_source=divi-torque-lite&utm_medium=wp-admin&utm_campaign=upgrade-to-pro&utm_content=menu-button',
             'rollbackLink'      => esc_url(
                 add_query_arg(
                     'version',

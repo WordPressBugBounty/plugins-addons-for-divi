@@ -5,7 +5,7 @@ Tags: divi, divi builder, divi theme, divi module
 Requires at least: 5.0
 Tested up to: 6.7.1
 Requires PHP: 7.4
-Stable tag: 4.1.2
+Stable tag: 4.2.0
 License: GPLv3
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 
@@ -17,7 +17,7 @@ Enhance your Divi page-building experience with 20+ free modules. Supercharge yo
 
 ## DIVI TORQUE: 70+ TOP DIVI MODULES, 7+ EXTENSIONS, AND TRUSTED BY 50,000+ ACTIVE USERS ##
 
-<a href="https://divitorque.com/demos/?utm_campaign=lite-readme&utm_source=wp.org&utm_medium=textlink-demos" target="_blank" rel="">Check the Demos</a> | <a href="https://divitorque.com/features/?utm_campaign=lite-readme&utm_source=wp.org&utm_medium=textlink-features" target="_blank" rel="">Features</a> | <a href="https://divitorque.com/pricing-lifetime/?utm_campaign=lite-readme&utm_source=wp.org&utm_medium=textlink-pro" target="_blank" rel="">Pro Version</a>
+<a href="https://divitorque.com/features/?utm_campaign=lite-readme&utm_source=wp.org&utm_medium=textlink-features" target="_blank" rel="">Demos</a> | <a href="https://divitorque.com/pricing-lifetime/?utm_campaign=lite-readme&utm_source=wp.org&utm_medium=textlink-pro" target="_blank" rel="">Pro Version</a>
 
 ### Fully Customizable
 Every Divi module and extension offers extensive options to customize your website exactly how you envision it. Create nearly any design you can imagine.
@@ -154,11 +154,16 @@ No, It won’t break your site or any page where you used our plugin. We put our
 
 == Changelog ==
 
+= Version 4.2.0 =
+* Fix: Dashboard link issue
+
+= Version 4.1.2 =
+* Fix: Freemius SDK security issue
+
 = Version 4.1.1 =
 * Fix: Some modules issue
 
 = Version 4.1.0 =
-
 Fix: As of WordPress 6.7.0, translations must be loaded at 'init' hook or later to prevent
 the "_load_textdomain_just_in_time" notice. We've moved the textdomain loading to 
 init hook and ensured the textdomain matches our plugin's domain 'addons-for-divi'.
@@ -174,26 +179,24 @@ init hook and ensured the textdomain matches our plugin's domain 'addons-for-div
 
 = Version 4.0.5 = 
 Fix: Divi Library Shortcode issue
-Fix: Infobox overlay issue
-Added: Custom Icon for Video Modal
+* Fix: Infobox overlay issue
+* Added: Custom Icon for Video Modal
 
 = Version 4.0.4 = 
-Fix: Image overlay issue - Showing blue images
+* Fix: Image overlay issue - Showing blue images
 
 = Version 4.0.3 = 
-Fix: Post Lists module issue
-Fix: News Ticker module issue
+* Fix: Post Lists module issue
+* Fix: News Ticker module issue
 
 = Version 4.0.2 = 
-Fix: SVN version issue 4.0.0 to 4.0.1
-Added: Loading icon to rollback button
+* Fix: SVN version issue 4.0.0 to 4.0.1
+* Added: Loading icon to rollback button
 
-= Version 4.0.1 = 
-
-Fix: Resolved various user-facing issues encountered during the update from version 3.6.6 to 4.0.0.
+= Version 4.0.1 =   
+* Fix: Resolved various user-facing issues encountered during the update from version 3.6.6 to 4.0.0.
 
 = Version 4.0.0 =
-
 * Fix: Security issues
 * Added: Module on-load demos
 * Added: New module manager
@@ -201,33 +204,26 @@ Fix: Resolved various user-facing issues encountered during the update from vers
 * Update: Clean codebase
 
 = Version 3.6.6 =
-
 * Fix: Moduuels php error
 
 = Version 3.6.5 =
-
 * Fix: Module deprecated warnings
 
 = Version 3.6.4 =
-
 * Fix: Modules php error
 
 = Version 3.6.3 =
-
 * Fix: Big close icon issue.
 
 = Version 3.6.2 =
-
 * Added a single folder for all modules
 * Fix: Modules security issues with 6.2
 * Fix: Swap image issues
 
 = Version 3.6.1 =
-
 * Security Update
 
 = Version 3.6.0 =
-
 * Deprecated popup extension
 * Deprecated login designer extension
 * Deprecated the admin page
@@ -245,3 +241,8 @@ Fix: Resolved various user-facing issues encountered during the update from vers
 
 = Version 1.0.0 =
 * Public beta release
+
+== Upgrade Notice ==
+
+= v4.2.0 =
+You must update to the latest version of Divi Torque to use this plugin. There is a security issue in the previous version, so please update immediately.
