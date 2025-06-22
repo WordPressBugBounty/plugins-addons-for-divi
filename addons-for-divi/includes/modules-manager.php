@@ -119,7 +119,7 @@ class ModulesManager
             'icon' => 'divider.svg',
             'child_name' => '',
             'demo_link' => 'https://divitorque.com/features/advanced-divider',
-            'is_pro' => true
+            'is_pro' => false,
         ],
         [
             'name' => 'filterable-gallery',
@@ -543,7 +543,7 @@ class ModulesManager
         ],
         [
             'name' => 'video-modal',
-            'title' => 'Video Popup',
+            'title' => 'Video Modal',
             'icon' => 'video-popup.svg',
             'child_name' => '',
             'demo_link' => ''

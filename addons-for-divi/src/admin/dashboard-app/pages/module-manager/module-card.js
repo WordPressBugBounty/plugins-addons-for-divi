@@ -69,19 +69,17 @@ const ModuleCard = ({
 						</span>
 					)}
 				</p>
-				<div className="flex items-center gap-2">
-					{demo_link && (
-						<a
-							href={demo_link}
-							target="_blank"
-							rel="noreferrer noopener"
-							className="focus-visible:text-slate-500 active:text-slate-500 hover:text-slate-500 focus:text-slate-400 text-slate-400 text-sm truncate"
-						>
-							{__('Live Demo', 'divitorque')}
-						</a>
-					)}
-				</div>
 			</div>
+			{is_pro && (
+				<a
+					href="https://divitorque.com/pricing/"
+					target="_blank"
+					rel="noreferrer noopener"
+					className="text-de-app-color-dark"
+				>
+					{__('Pro', 'divitorque')}
+				</a>
+			)}
 			<div className="dt-toggle-control">
 				{!is_pro && (
 					<ToggleControl

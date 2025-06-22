@@ -5,7 +5,7 @@ Tags: divi, divi builder, divi theme, divi module
 Requires at least: 5.0
 Tested up to: 6.7.1
 Requires PHP: 7.4
-Stable tag: 4.2.0
+Stable tag: 4.2.1
 License: GPLv3
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 
@@ -17,7 +17,7 @@ Enhance your Divi page-building experience with 20+ free modules. Supercharge yo
 
 ## DIVI TORQUE: 70+ TOP DIVI MODULES, 7+ EXTENSIONS, AND TRUSTED BY 50,000+ ACTIVE USERS ##
 
-<a href="https://divitorque.com/features/?utm_campaign=lite-readme&utm_source=wp.org&utm_medium=textlink-features" target="_blank" rel="">Demos</a> | <a href="https://divitorque.com/pricing-lifetime/?utm_campaign=lite-readme&utm_source=wp.org&utm_medium=textlink-pro" target="_blank" rel="">Pro Version</a>
+<a href="https://divitorque.com/features/?utm_campaign=lite-readme&utm_source=wp.org&utm_medium=textlink-features" target="_blank" rel="">Demos</a> | <a href="https://divitorque.com/pricing/?utm_campaign=lite-readme&utm_source=wp.org&utm_medium=textlink-pro" target="_blank" rel="">Pro Version</a>
 
 ### Fully Customizable
 Every Divi module and extension offers extensive options to customize your website exactly how you envision it. Create nearly any design you can imagine.
@@ -61,7 +61,7 @@ We’ve crafted over 25 of the most powerful widgets to enhance your Divi page-b
 23. [Gradient Heading](https://divitorque.com/features/gradient-heading) – The Divi Gradient Heading adds a vibrant touch to your text, utilizing stunning gradient effects to draw attention and enhance visual appeal.
 24. [Inline Notice](https://divitorque.com/features/inline-notice) – The Inline Notice module is a simple Divi module that helps you highlight important notes. Its ready-to-use box lets you quickly add text. You can customize the look with layouts, colors, and typography options.
 
-### More modules (50+) on [Premium Version](https://divitorque.com/features/)
+### More modules (50+) on [Premium Version](https://divitorque.com/pricing/)
 
 1. [Image Zoom](https://divitorque.com/features/image-zoom) - Add interactive zoom effects to images, enhancing engagement on your website.
 2. [Related Posts](https://divitorque.com/features/related-posts) - Display related posts to keep visitors engaged with similar content.

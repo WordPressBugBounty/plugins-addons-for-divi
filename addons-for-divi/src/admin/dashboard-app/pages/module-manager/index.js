@@ -30,7 +30,7 @@ const Modules = () => {
 
 		setAllDisabled(liteStatuses.every((status) => status === 'disabled'));
 		setAllEnabled(liteStatuses.every((status) => status !== 'disabled'));
-	}, [allModulesStatuses]);
+	}, [allModulesStatuses, allLiteModules]);
 
 	// Sort modules based on the 'new' badge and title
 	const sortedModules = allModules.sort((a, b) => {
@@ -87,7 +87,7 @@ const Modules = () => {
 	const renderModules = () => {
 		return getFilteredModules().map((module, index) => (
 			<ModuleCard
-				key={index}
+				key={module.name || index}
 				moduleInfo={module}
 				isLiteInstalled={is_lite_installed}
 			/>
@@ -96,15 +96,21 @@ const Modules = () => {
 
 	return (
 		<div className="divitorque-app">
-			<div className="flex gap-4">
+			<div className="flex gap-6">
+				{/* Main Content Area */}
 				<div className="w-3/4">
-					<div className="bg-white p-4 rounded-lg">
-						<h2 className="font-semibold text-2xl flex-1">
-							{__('Modules', 'addons-for-divi')}
-						</h2>
+					<div className="bg-white p-6 rounded-xl shadow-sm border border-gray-100">
+						{/* Header */}
+						<div className="flex items-center justify-between mb-6">
+							<h2 className="font-bold text-3xl text-gray-900">
+								{__('Modules', 'addons-for-divi')}
+							</h2>
+						</div>
 
-						<div className="mx-auto mt-5 flex items-center justify-between">
-							<div className="flex items-center gap-2">
+						{/* Filter and Action Buttons */}
+						<div className="flex items-center justify-between mb-8">
+							{/* Filter Buttons */}
+							<div className="flex items-center gap-3">
 								{['all', 'pro', 'lite'].map((filterType) => (
 									<button
 										key={filterType}
@@ -114,10 +120,10 @@ const Modules = () => {
 											'addons-for-divi'
 										)}
 										type="button"
-										className={`inline-flex items-center px-4 py-1 border text-sm font-medium rounded-full transition ${
+										className={`px-6 py-2.5 text-sm font-medium rounded-lg transition-all duration-200 ${
 											filter === filterType
-												? 'bg-de-app-color-dark border-de-app-color-dark text-white'
-												: 'bg-transparent border-de-gray text-de-gray hover:bg-white focus:text-de-gray'
+												? 'bg-de-app-color-dark text-white shadow-md'
+												: 'bg-gray-50 text-gray-600 hover:bg-gray-100 border border-gray-200'
 										}`}
 										onClick={() => setFilter(filterType)}
 										disabled={isLoading}
@@ -136,17 +142,19 @@ const Modules = () => {
 									</button>
 								))}
 							</div>
-							<div className="flex items-center gap-2">
+
+							{/* Action Buttons */}
+							<div className="flex items-center gap-3">
 								<button
 									aria-label={__(
-										'Disable',
+										'Disable All',
 										'addons-for-divi'
 									)}
 									type="button"
-									className={`focus:text-de-black hover:bg-white relative inline-flex items-center px-4 py-2 border border-de-app-color-dark bg-transparent text-sm font-medium text-de-app-color-dark focus:z-10 rounded-md transition ${
+									className={`px-6 py-2.5 text-sm font-medium rounded-lg transition-all duration-200 border ${
 										allDisabled || isLoading
-											? 'opacity-50'
-											: ''
+											? 'opacity-50 cursor-not-allowed bg-gray-100 border-gray-200 text-gray-400'
+											: 'bg-white border-red-500 text-red-600 hover:bg-red-50 hover:border-red-600'
 									}`}
 									onClick={() => toggleModuleStatus(false)}
 									disabled={
@@ -157,15 +165,18 @@ const Modules = () => {
 								>
 									{isLoading
 										? __('Processing...', 'addons-for-divi')
-										: __('Disable', 'addons-for-divi')}
+										: __('Disable All', 'addons-for-divi')}
 								</button>
 								<button
-									aria-label={__('Enable', 'addons-for-divi')}
+									aria-label={__(
+										'Enable All',
+										'addons-for-divi'
+									)}
 									type="button"
-									className={`focus:text-slate-200 relative inline-flex items-center px-4 py-2 border border-de-app-color-dark bg-de-app-color-dark text-sm font-medium text-white focus:z-10 rounded-md transition ${
+									className={`px-6 py-2.5 text-sm font-medium rounded-lg transition-all duration-200 ${
 										allEnabled || isLoading
-											? 'opacity-50'
-											: ''
+											? 'opacity-50 cursor-not-allowed bg-gray-300 text-gray-500'
+											: 'bg-de-app-color-dark text-white hover:bg-de-app-color shadow-md hover:shadow-lg'
 									}`}
 									onClick={() => toggleModuleStatus(true)}
 									disabled={
@@ -176,159 +187,151 @@ const Modules = () => {
 								>
 									{isLoading
 										? __('Processing...', 'addons-for-divi')
-										: __('Enable', 'addons-for-divi')}
+										: __('Enable All', 'addons-for-divi')}
 								</button>
 							</div>
 						</div>
-						<div className="mx-auto mt-10 grid grid-flow-row grid-cols-3 gap-6">
+
+						{/* Modules Grid */}
+						<div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
 							{renderModules()}
 						</div>
 					</div>
 				</div>
 
+				{/* Sidebar */}
 				<div className="w-1/4">
-					<div className="bg-white px-10 py-[40px] rounded-lg h-auto sticky top-10">
-						<h2 className="font-semibold text-xl mb-4">
-							{__('Divi Torque Pro', 'addons-for-divi')}
-						</h2>
-						<p
-							className="text-base"
-							dangerouslySetInnerHTML={{
-								__html: __(
+					<div className="bg-white rounded-2xl shadow-sm border border-gray-200 overflow-hidden sticky top-10">
+						{/* Header */}
+						<div className="bg-gradient-to-r from-de-app-color-dark to-de-app-color px-6 py-8 text-white">
+							{/* Summer Discount Banner */}
+							<div className="bg-gradient-to-r from-orange-400 to-red-500 rounded-xl p-3 mb-6 text-center shadow-lg">
+								<div className="flex items-center justify-center">
+									<svg
+										className="w-5 h-5 mr-2"
+										fill="currentColor"
+										viewBox="0 0 20 20"
+									>
+										<path
+											fillRule="evenodd"
+											d="M3 6a3 3 0 013-3h10a1 1 0 01.8 1.6L14.25 8l2.55 3.4A1 1 0 0116 13H6a1 1 0 00-1 1v3a1 1 0 11-2 0V6z"
+											clipRule="evenodd"
+										/>
+									</svg>
+									<span className="font-bold text-sm">
+										{__(
+											'SUMMER SALE - 40% OFF',
+											'addons-for-divi'
+										)}
+									</span>
+								</div>
+								<div className="text-xs opacity-90 mt-1">
+									{__(
+										'Limited time offer',
+										'addons-for-divi'
+									)}
+								</div>
+							</div>
+
+							<h2 className="text-xl font-bold text-white mb-2">
+								{__('Divi Torque Pro', 'addons-for-divi')}
+							</h2>
+							<p className="text-base opacity-90 text-white leading-relaxed">
+								{__(
 									'Supercharge with 50+ PRO Divi Modules and 8+ Extensions',
 									'addons-for-divi'
-								),
-							}}
-						/>
+								)}
+							</p>
+						</div>
 
-						<ul className="list-inside py-[20px] text-base">
-							<li className="flex items-center">
-								<svg
-									className="w-3.5 h-3.5 me-2 text-green-500 dark:text-green-400 flex-shrink-0"
-									aria-hidden="true"
-									xmlns="http://www.w3.org/2000/svg"
-									fill="currentColor"
-									viewBox="0 0 20 20"
+						{/* Features List */}
+						<div className="p-6">
+							<div className="space-y-4">
+								{[
+									__('50+ Pro Modules', 'addons-for-divi'),
+									__('Popup Builder', 'addons-for-divi'),
+									__('Megamenu Builder', 'addons-for-divi'),
+									__('Maintenance Mode', 'addons-for-divi'),
+									__('Dark Menu', 'addons-for-divi'),
+									__('Google Reviews', 'addons-for-divi'),
+									__('Instagram Feed', 'addons-for-divi'),
+									__('Divi Duplicate', 'addons-for-divi'),
+									__('Priority Support', 'addons-for-divi'),
+								].map((feature, index) => (
+									<div
+										key={index}
+										className="flex items-center"
+									>
+										<div className="flex-shrink-0 w-5 h-5 bg-green-100 rounded-full flex items-center justify-center mr-3">
+											<svg
+												className="w-3 h-3 text-green-600"
+												fill="currentColor"
+												viewBox="0 0 20 20"
+											>
+												<path
+													fillRule="evenodd"
+													d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+													clipRule="evenodd"
+												/>
+											</svg>
+										</div>
+										<span className="text-sm text-gray-700">
+											{feature}
+										</span>
+									</div>
+								))}
+							</div>
+
+							{/* CTA Button */}
+							<div className="mt-8">
+								<a
+									href="https://divitorque.com/pricing/?utm_source=divi-torque-lite&utm_medium=wp-admin&utm_campaign=upgrade-to-pro&utm_content=menu-button"
+									className="block w-full bg-gradient-to-r from-de-app-color-dark to-de-app-color hover:from-de-app-color hover:to-de-app-color-dark text-white text-center py-4 px-6 rounded-xl font-medium transition-all duration-200 shadow-md hover:shadow-lg transform hover:-translate-y-0.5"
+									target="_blank"
+									rel="noopener noreferrer"
 								>
-									<path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5Zm3.707 8.207-4 4a1 1 0 0 1-1.414 0l-2-2a1 1 0 0 1 1.414-1.414L9 10.586l3.293-3.293a1 1 0 0 1 1.414 1.414Z" />
-								</svg>
+									<div className="flex items-center justify-center">
+										<svg
+											className="w-5 h-5 mr-2"
+											fill="none"
+											stroke="currentColor"
+											viewBox="0 0 24 24"
+										>
+											<path
+												strokeLinecap="round"
+												strokeLinejoin="round"
+												strokeWidth={2}
+												d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"
+											/>
+										</svg>
+										{__(
+											'Upgrade to Pro',
+											'addons-for-divi'
+										)}
+									</div>
+								</a>
+							</div>
 
-								{__('50+ Pro Modules', 'addons-for-divi')}
-							</li>
-							<li className="flex items-center">
-								<svg
-									className="w-3.5 h-3.5 me-2 text-green-500 dark:text-green-400 flex-shrink-0"
-									aria-hidden="true"
-									xmlns="http://www.w3.org/2000/svg"
-									fill="currentColor"
-									viewBox="0 0 20 20"
-								>
-									<path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5Zm3.707 8.207-4 4a1 1 0 0 1-1.414 0l-2-2a1 1 0 0 1 1.414-1.414L9 10.586l3.293-3.293a1 1 0 0 1 1.414 1.414Z" />
-								</svg>
-
-								{__('Popup Builder', 'addons-for-divi')}
-							</li>
-							<li className="flex items-center">
-								<svg
-									className="w-3.5 h-3.5 me-2 text-green-500 dark:text-green-400 flex-shrink-0"
-									aria-hidden="true"
-									xmlns="http://www.w3.org/2000/svg"
-									fill="currentColor"
-									viewBox="0 0 20 20"
-								>
-									<path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5Zm3.707 8.207-4 4a1 1 0 0 1-1.414 0l-2-2a1 1 0 0 1 1.414-1.414L9 10.586l3.293-3.293a1 1 0 0 1 1.414 1.414Z" />
-								</svg>
-
-								{__('Megamenu Builder', 'addons-for-divi')}
-							</li>
-							<li className="flex items-center">
-								<svg
-									className="w-3.5 h-3.5 me-2 text-green-500 dark:text-green-400 flex-shrink-0"
-									aria-hidden="true"
-									xmlns="http://www.w3.org/2000/svg"
-									fill="currentColor"
-									viewBox="0 0 20 20"
-								>
-									<path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5Zm3.707 8.207-4 4a1 1 0 0 1-1.414 0l-2-2a1 1 0 0 1 1.414-1.414L9 10.586l3.293-3.293a1 1 0 0 1 1.414 1.414Z" />
-								</svg>
-
-								{__('Maintenance Mode', 'addons-for-divi')}
-							</li>
-							<li className="flex items-center">
-								<svg
-									className="w-3.5 h-3.5 me-2 text-green-500 dark:text-green-400 flex-shrink-0"
-									aria-hidden="true"
-									xmlns="http://www.w3.org/2000/svg"
-									fill="currentColor"
-									viewBox="0 0 20 20"
-								>
-									<path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5Zm3.707 8.207-4 4a1 1 0 0 1-1.414 0l-2-2a1 1 0 0 1 1.414-1.414L9 10.586l3.293-3.293a1 1 0 0 1 1.414 1.414Z" />
-								</svg>
-
-								{__('Dark Menu', 'addons-for-divi')}
-							</li>
-							<li className="flex items-center">
-								<svg
-									className="w-3.5 h-3.5 me-2 text-green-500 dark:text-green-400 flex-shrink-0"
-									aria-hidden="true"
-									xmlns="http://www.w3.org/2000/svg"
-									fill="currentColor"
-									viewBox="0 0 20 20"
-								>
-									<path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5Zm3.707 8.207-4 4a1 1 0 0 1-1.414 0l-2-2a1 1 0 0 1 1.414-1.414L9 10.586l3.293-3.293a1 1 0 0 1 1.414 1.414Z" />
-								</svg>
-
-								{__('Google Reviews', 'addons-for-divi')}
-							</li>
-							<li className="flex items-center">
-								<svg
-									className="w-3.5 h-3.5 me-2 text-green-500 dark:text-green-400 flex-shrink-0"
-									aria-hidden="true"
-									xmlns="http://www.w3.org/2000/svg"
-									fill="currentColor"
-									viewBox="0 0 20 20"
-								>
-									<path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5Zm3.707 8.207-4 4a1 1 0 0 1-1.414 0l-2-2a1 1 0 0 1 1.414-1.414L9 10.586l3.293-3.293a1 1 0 0 1 1.414 1.414Z" />
-								</svg>
-
-								{__('Instagram Feed', 'addons-for-divi')}
-							</li>
-							<li className="flex items-center">
-								<svg
-									className="w-3.5 h-3.5 me-2 text-green-500 dark:text-green-400 flex-shrink-0"
-									aria-hidden="true"
-									xmlns="http://www.w3.org/2000/svg"
-									fill="currentColor"
-									viewBox="0 0 20 20"
-								>
-									<path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5Zm3.707 8.207-4 4a1 1 0 0 1-1.414 0l-2-2a1 1 0 0 1 1.414-1.414L9 10.586l3.293-3.293a1 1 0 0 1 1.414 1.414Z" />
-								</svg>
-
-								{__('Divi Duplicate', 'addons-for-divi')}
-							</li>
-							<li className="flex items-center">
-								<svg
-									className="w-3.5 h-3.5 me-2 text-green-500 dark:text-green-400 flex-shrink-0"
-									aria-hidden="true"
-									xmlns="http://www.w3.org/2000/svg"
-									fill="currentColor"
-									viewBox="0 0 20 20"
-								>
-									<path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5Zm3.707 8.207-4 4a1 1 0 0 1-1.414 0l-2-2a1 1 0 0 1 1.414-1.414L9 10.586l3.293-3.293a1 1 0 0 1 1.414 1.414Z" />
-								</svg>
-
-								{__('Priority Support', 'addons-for-divi')}
-							</li>
-						</ul>
-
-						<a
-							href="https://diviepic.com/divi-torque-pro/?utm_source=module-manager&amp;utm_campaign=pro&amp;utm_medium=dashboard"
-							className="w-full bg-de-app-color-dark hover:bg-de-app-color text-white hover:text-white text-base py-3 px-0 rounded block text-center"
-							title={__('Get Divi Torque Pro', 'addons-for-divi')}
-							target="_new"
-						>
-							{__('Get Divi Torque Pro', 'addons-for-divi')}
-						</a>
+							{/* Stats */}
+							<div className="mt-6 grid grid-cols-2 gap-4">
+								<div className="text-center p-4 bg-gray-50 rounded-lg">
+									<div className="text-2xl font-bold text-de-app-color-dark">
+										{__('50+', 'addons-for-divi')}
+									</div>
+									<div className="text-xs text-gray-600">
+										{__('Pro Modules', 'addons-for-divi')}
+									</div>
+								</div>
+								<div className="text-center p-4 bg-gray-50 rounded-lg">
+									<div className="text-2xl font-bold text-de-app-color-dark">
+										{__('8+', 'addons-for-divi')}
+									</div>
+									<div className="text-xs text-gray-600">
+										{__('Extensions', 'addons-for-divi')}
+									</div>
+								</div>
+							</div>
+						</div>
 					</div>
 				</div>
 			</div>
