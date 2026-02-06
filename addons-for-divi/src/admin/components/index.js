@@ -9,3 +9,6 @@ export { default as TorqueLogo } from './TorqueLogo';
 
 // Upsell
 export { default as UpsellSection } from './upsell';
+
+// Notices
+export { default as Divi5Notice } from './Divi5Notice';

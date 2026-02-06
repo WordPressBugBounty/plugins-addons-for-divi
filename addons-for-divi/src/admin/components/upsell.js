@@ -42,7 +42,7 @@ const UpsellSection = ({ heading, points, upgradeLink, videoLink }) => {
 
 					<div className="flex flex-col sm:flex-row items-start sm:items-center space-y-4 sm:space-y-0 sm:space-x-6">
 						<div className="relative">
-							<span className="inline-flex items-center px-4 py-2 bg-gradient-to-r from-orange-400 to-red-500 text-white text-sm font-bold rounded-full shadow-lg transform hover:scale-105 transition-transform duration-200">
+							<span className="inline-flex items-center px-4 py-2 bg-gradient-to-r from-purple-600 to-pink-600 text-white text-sm font-bold rounded-full shadow-lg transform hover:scale-105 transition-transform duration-200">
 								<svg
 									className="w-4 h-4 mr-2"
 									fill="currentColor"
@@ -55,7 +55,7 @@ const UpsellSection = ({ heading, points, upgradeLink, videoLink }) => {
 									/>
 								</svg>
 								{__(
-									'Summer Sale - 40% OFF!',
+									'Black Friday - 50% OFF!',
 									'addons-for-divi'
 								)}
 							</span>

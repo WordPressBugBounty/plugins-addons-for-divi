@@ -7,13 +7,21 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Language-Team: PlugPress <support@plugpress.io>\n"
-"POT-Creation-Date: 2025-06-22 03:28+0000\n"
+"POT-Creation-Date: 2025-11-28 22:42+0000\n"
 "X-Poedit-Basepath: ..\n"
 "X-Poedit-KeywordsList: __;_e;_ex:1,2c;_n:1,2;_n_noop:1,2;_nx:1,2,4c;_nx_noop:1,2,3c;_x:1,2c;esc_attr__;esc_attr_e;esc_attr_x:1,2c;esc_html__;esc_html_e;esc_html_x:1,2c\n"
 "X-Poedit-SearchPath-0: .\n"
 "X-Poedit-SearchPathExcluded-0: *.js\n"
 "X-Poedit-SourceCharset: UTF-8\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: includes/admin-notice.php:154
+msgid "You do not have permission to dismiss this notice."
+msgstr ""
+
+#: includes/admin-notice.php:161
+msgid "Nonce verification failed."
+msgstr ""
 
 #: includes/backend-helpers.php:27
 msgid "Monday"
@@ -109,26 +117,6 @@ msgstr ""
 
 #: includes/backend-helpers.php:220
 msgid "Awesome Gradient Heading"
-msgstr ""
-
-#: includes/dashboard.php:184
-msgid "You do not have permission to access this page."
-msgstr ""
-
-#: includes/dashboard.php:185, includes/dashboard.php:211
-msgid "Rollback to Previous Version"
-msgstr ""
-
-#: includes/dashboard.php:195
-msgid "Error occurred, The version selected is invalid. Try selecting different version."
-msgstr ""
-
-#: includes/dashboard.php:232
-msgid "Rollback"
-msgstr ""
-
-#: includes/plugin-upgrader.php:72
-msgid "Divi Torque Lite <p>Rollback to Previous Version</p>"
 msgstr ""
 
 #: includes/deprecated/admin.php:22, includes/deprecated/admin.php:23
@@ -401,10 +389,6 @@ msgstr ""
 
 #: includes/extensions/divi-library-shortcode.php:26
 msgid "Lite Shortcode"
-msgstr ""
-
-#: includes/upsell/notices.php:126
-msgid "Dismiss this notice."
 msgstr ""
 
 #: includes/deprecated/admin/feedback.php:37

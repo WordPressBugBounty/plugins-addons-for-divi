@@ -1,6 +1,6 @@
 import { __ } from '@wordpress/i18n';
 import ModuleCard from './module-card';
-import { Toast } from '@DashboardComponents';
+import { Toast, Divi5Notice } from '@DashboardComponents';
 import { useDispatch, useSelect } from '@wordpress/data';
 import { useState, useEffect } from '@wordpress/element';
 
@@ -45,14 +45,8 @@ const Modules = () => {
 	const dispatch = useDispatch('divitorque/dashboard');
 
 	const getFilteredModules = () => {
-		switch (filter) {
-			case 'pro':
-				return proModules;
-			case 'lite':
-				return liteModules;
-			default:
-				return sortedModules;
-		}
+		// Only show lite modules - no pro placeholders
+		return filter === 'lite' ? liteModules : liteModules;
 	};
 
 	const toggleModuleStatus = async (status) => {
@@ -96,243 +90,129 @@ const Modules = () => {
 
 	return (
 		<div className="divitorque-app">
-			<div className="flex gap-6">
-				{/* Main Content Area */}
-				<div className="w-3/4">
-					<div className="bg-white p-6 rounded-xl shadow-sm border border-gray-100">
-						{/* Header */}
-						<div className="flex items-center justify-between mb-6">
-							<h2 className="font-bold text-3xl text-gray-900">
-								{__('Modules', 'addons-for-divi')}
-							</h2>
-						</div>
+			{/* Divi 5 Roadmap Notice */}
+			<Divi5Notice />
 
-						{/* Filter and Action Buttons */}
-						<div className="flex items-center justify-between mb-8">
-							{/* Filter Buttons */}
-							<div className="flex items-center gap-3">
-								{['all', 'pro', 'lite'].map((filterType) => (
-									<button
-										key={filterType}
-										aria-label={__(
-											filterType.charAt(0).toUpperCase() +
-												filterType.slice(1),
-											'addons-for-divi'
-										)}
-										type="button"
-										className={`px-6 py-2.5 text-sm font-medium rounded-lg transition-all duration-200 ${
-											filter === filterType
-												? 'bg-de-app-color-dark text-white shadow-md'
-												: 'bg-gray-50 text-gray-600 hover:bg-gray-100 border border-gray-200'
-										}`}
-										onClick={() => setFilter(filterType)}
-										disabled={isLoading}
-									>
-										{__(
-											filterType.charAt(0).toUpperCase() +
-												filterType.slice(1),
-											'addons-for-divi'
-										)}
-										{filterType !== 'all' &&
-											` (${
-												filterType === 'pro'
-													? proModules.length
-													: liteModules.length
-											})`}
-									</button>
-								))}
-							</div>
-
-							{/* Action Buttons */}
-							<div className="flex items-center gap-3">
-								<button
-									aria-label={__(
-										'Disable All',
+			{/* Black Friday Compact Banner */}
+			<div className="bg-gradient-to-r from-purple-600 to-pink-600 rounded-xl p-4 mb-6 shadow-lg">
+				<div className="flex items-center justify-between">
+					<div className="flex items-center gap-4">
+						<div className="flex items-center gap-2">
+							<svg
+								className="w-5 h-5 text-yellow-300"
+								fill="currentColor"
+								viewBox="0 0 20 20"
+							>
+								<path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+							</svg>
+							<div>
+								<div className="text-white font-bold text-lg">
+									{__(
+										'Black Friday: 50% OFF',
 										'addons-for-divi'
 									)}
-									type="button"
-									className={`px-6 py-2.5 text-sm font-medium rounded-lg transition-all duration-200 border ${
-										allDisabled || isLoading
-											? 'opacity-50 cursor-not-allowed bg-gray-100 border-gray-200 text-gray-400'
-											: 'bg-white border-red-500 text-red-600 hover:bg-red-50 hover:border-red-600'
-									}`}
-									onClick={() => toggleModuleStatus(false)}
-									disabled={
-										allDisabled ||
-										filter === 'pro' ||
-										isLoading
-									}
-								>
-									{isLoading
-										? __('Processing...', 'addons-for-divi')
-										: __('Disable All', 'addons-for-divi')}
-								</button>
-								<button
-									aria-label={__(
-										'Enable All',
+								</div>
+								<div className="text-white/90 text-xs">
+									{__(
+										'Divi Torque Pro - $89.50 (was $179)',
 										'addons-for-divi'
 									)}
-									type="button"
-									className={`px-6 py-2.5 text-sm font-medium rounded-lg transition-all duration-200 ${
-										allEnabled || isLoading
-											? 'opacity-50 cursor-not-allowed bg-gray-300 text-gray-500'
-											: 'bg-de-app-color-dark text-white hover:bg-de-app-color shadow-md hover:shadow-lg'
-									}`}
-									onClick={() => toggleModuleStatus(true)}
-									disabled={
-										allEnabled ||
-										filter === 'pro' ||
-										isLoading
-									}
-								>
-									{isLoading
-										? __('Processing...', 'addons-for-divi')
-										: __('Enable All', 'addons-for-divi')}
-								</button>
+								</div>
 							</div>
-						</div>
-
-						{/* Modules Grid */}
-						<div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-							{renderModules()}
 						</div>
 					</div>
+					<a
+						href="https://divitorque.com/black-friday/?utm_source=divi-torque-lite&utm_medium=dashboard&utm_campaign=black-friday"
+						target="_blank"
+						rel="noopener noreferrer"
+						className="px-6 py-2.5 bg-white text-purple-600 font-bold text-sm rounded-lg hover:bg-purple-50 transition-all shadow-md hover:shadow-lg"
+					>
+						{__('Get 50% OFF →', 'addons-for-divi')}
+					</a>
 				</div>
+			</div>
 
-				{/* Sidebar */}
-				<div className="w-1/4">
-					<div className="bg-white rounded-2xl shadow-sm border border-gray-200 overflow-hidden sticky top-10">
-						{/* Header */}
-						<div className="bg-gradient-to-r from-de-app-color-dark to-de-app-color px-6 py-8 text-white">
-							{/* Summer Discount Banner */}
-							<div className="bg-gradient-to-r from-orange-400 to-red-500 rounded-xl p-3 mb-6 text-center shadow-lg">
-								<div className="flex items-center justify-center">
-									<svg
-										className="w-5 h-5 mr-2"
-										fill="currentColor"
-										viewBox="0 0 20 20"
-									>
-										<path
-											fillRule="evenodd"
-											d="M3 6a3 3 0 013-3h10a1 1 0 01.8 1.6L14.25 8l2.55 3.4A1 1 0 0116 13H6a1 1 0 00-1 1v3a1 1 0 11-2 0V6z"
-											clipRule="evenodd"
-										/>
-									</svg>
-									<span className="font-bold text-sm">
-										{__(
-											'SUMMER SALE - 40% OFF',
-											'addons-for-divi'
-										)}
-									</span>
-								</div>
-								<div className="text-xs opacity-90 mt-1">
-									{__(
-										'Limited time offer',
-										'addons-for-divi'
-									)}
-								</div>
-							</div>
-
-							<h2 className="text-xl font-bold text-white mb-2">
-								{__('Divi Torque Pro', 'addons-for-divi')}
+			{/* Main Content Area - Full Width */}
+			<div className="bg-white rounded-lg shadow-sm border border-gray-200">
+				{/* Header */}
+				<div className="px-6 py-4 border-b border-gray-200">
+					<div className="flex items-center justify-between">
+						<div>
+							<h2 className="text-lg font-semibold text-gray-900">
+								{__('Modules', 'addons-for-divi')}
 							</h2>
-							<p className="text-base opacity-90 text-white leading-relaxed">
+							<p className="text-sm text-gray-500 mt-0.5">
 								{__(
-									'Supercharge with 50+ PRO Divi Modules and 8+ Extensions',
+									'Manage your Divi Torque modules',
 									'addons-for-divi'
 								)}
 							</p>
 						</div>
 
-						{/* Features List */}
-						<div className="p-6">
-							<div className="space-y-4">
-								{[
-									__('50+ Pro Modules', 'addons-for-divi'),
-									__('Popup Builder', 'addons-for-divi'),
-									__('Megamenu Builder', 'addons-for-divi'),
-									__('Maintenance Mode', 'addons-for-divi'),
-									__('Dark Menu', 'addons-for-divi'),
-									__('Google Reviews', 'addons-for-divi'),
-									__('Instagram Feed', 'addons-for-divi'),
-									__('Divi Duplicate', 'addons-for-divi'),
-									__('Priority Support', 'addons-for-divi'),
-								].map((feature, index) => (
-									<div
-										key={index}
-										className="flex items-center"
-									>
-										<div className="flex-shrink-0 w-5 h-5 bg-green-100 rounded-full flex items-center justify-center mr-3">
-											<svg
-												className="w-3 h-3 text-green-600"
-												fill="currentColor"
-												viewBox="0 0 20 20"
-											>
-												<path
-													fillRule="evenodd"
-													d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
-													clipRule="evenodd"
-												/>
-											</svg>
-										</div>
-										<span className="text-sm text-gray-700">
-											{feature}
-										</span>
-									</div>
-								))}
-							</div>
-
-							{/* CTA Button */}
-							<div className="mt-8">
-								<a
-									href="https://divitorque.com/pricing/?utm_source=divi-torque-lite&utm_medium=wp-admin&utm_campaign=upgrade-to-pro&utm_content=menu-button"
-									className="block w-full bg-gradient-to-r from-de-app-color-dark to-de-app-color hover:from-de-app-color hover:to-de-app-color-dark text-white text-center py-4 px-6 rounded-xl font-medium transition-all duration-200 shadow-md hover:shadow-lg transform hover:-translate-y-0.5"
-									target="_blank"
-									rel="noopener noreferrer"
-								>
-									<div className="flex items-center justify-center">
-										<svg
-											className="w-5 h-5 mr-2"
-											fill="none"
-											stroke="currentColor"
-											viewBox="0 0 24 24"
-										>
-											<path
-												strokeLinecap="round"
-												strokeLinejoin="round"
-												strokeWidth={2}
-												d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"
-											/>
-										</svg>
-										{__(
-											'Upgrade to Pro',
-											'addons-for-divi'
-										)}
-									</div>
-								</a>
-							</div>
-
-							{/* Stats */}
-							<div className="mt-6 grid grid-cols-2 gap-4">
-								<div className="text-center p-4 bg-gray-50 rounded-lg">
-									<div className="text-2xl font-bold text-de-app-color-dark">
-										{__('50+', 'addons-for-divi')}
-									</div>
-									<div className="text-xs text-gray-600">
-										{__('Pro Modules', 'addons-for-divi')}
-									</div>
-								</div>
-								<div className="text-center p-4 bg-gray-50 rounded-lg">
-									<div className="text-2xl font-bold text-de-app-color-dark">
-										{__('8+', 'addons-for-divi')}
-									</div>
-									<div className="text-xs text-gray-600">
-										{__('Extensions', 'addons-for-divi')}
-									</div>
-								</div>
-							</div>
+						{/* Action Buttons */}
+						<div className="flex items-center gap-2">
+							<button
+								type="button"
+								className={`px-4 py-2 text-sm font-medium rounded-md transition-colors ${
+									allDisabled || isLoading
+										? 'opacity-50 cursor-not-allowed bg-gray-100 text-gray-400'
+										: 'text-gray-700 hover:bg-gray-100'
+								}`}
+								onClick={() => toggleModuleStatus(false)}
+								disabled={allDisabled || isLoading}
+							>
+								{isLoading
+									? __('Processing...', 'addons-for-divi')
+									: __('Disable all', 'addons-for-divi')}
+							</button>
+							<button
+								type="button"
+								className={`px-4 py-2 text-sm font-medium rounded-md transition-colors ${
+									allEnabled || isLoading
+										? 'opacity-50 cursor-not-allowed bg-gray-100 text-gray-500'
+										: 'bg-indigo-600 text-white hover:bg-indigo-700'
+								}`}
+								onClick={() => toggleModuleStatus(true)}
+								disabled={allEnabled || isLoading}
+							>
+								{isLoading
+									? __('Processing...', 'addons-for-divi')
+									: __('Enable all', 'addons-for-divi')}
+							</button>
 						</div>
 					</div>
+				</div>
+
+				{/* Modules Grid - 5 columns */}
+				<div className="p-6">
+					<div className="grid grid-cols-5 gap-3">
+						{renderModules()}
+					</div>
+				</div>
+			</div>
+
+			{/* Upgrade CTA - Minimal Footer */}
+			<div className="mt-6 bg-gradient-to-r from-indigo-50 to-purple-50 rounded-xl p-5 border border-purple-100">
+				<div className="flex items-center justify-between">
+					<div>
+						<h4 className="font-bold text-gray-900 mb-1">
+							{__('Need More Power?', 'addons-for-divi')}
+						</h4>
+						<p className="text-sm text-gray-600">
+							{__(
+								'Unlock 50+ PRO modules, extensions, and priority support',
+								'addons-for-divi'
+							)}
+						</p>
+					</div>
+					<a
+						href="https://divitorque.com/pricing/?utm_source=divi-torque-lite&utm_medium=dashboard&utm_campaign=upgrade"
+						target="_blank"
+						rel="noopener noreferrer"
+						className="px-6 py-2.5 bg-gradient-to-r from-purple-600 to-indigo-600 text-white font-semibold text-sm rounded-lg hover:from-purple-700 hover:to-indigo-700 transition-all shadow-md hover:shadow-lg whitespace-nowrap"
+					>
+						{__('View Pro Features', 'addons-for-divi')}
+					</a>
 				</div>
 			</div>
 		</div>

@@ -1,11 +1,11 @@
-=== Divi Torque - Plugin for Divi Theme and Builder ===
+=== Divi Torque Lite - Divi Theme, Divi Builder & Extra Theme ===
 Contributors: plugpressco, badhonrocks
 Donate link: https://divitorque.com/
 Tags: divi, divi builder, divi theme, divi module
 Requires at least: 5.0
-Tested up to: 6.7.1
+Tested up to: 6.8
 Requires PHP: 7.4
-Stable tag: 4.2.1
+Stable tag: 4.2.2
 License: GPLv3
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 
@@ -14,8 +14,6 @@ The Divi Torque plugin you install after Divi builder! Packed with 70+ stunning 
 == Description ==
 
 Enhance your Divi page-building experience with 20+ free modules. Supercharge your website builder with user-friendly pro Divi modules and features like the Divi Popup Builder, Divi Mega Menu, and Divi Dark Mode, Divi Contact Form Submission, and more.
-
-## DIVI TORQUE: 70+ TOP DIVI MODULES, 7+ EXTENSIONS, AND TRUSTED BY 50,000+ ACTIVE USERS ##
 
 <a href="https://divitorque.com/features/?utm_campaign=lite-readme&utm_source=wp.org&utm_medium=textlink-features" target="_blank" rel="">Demos</a> | <a href="https://divitorque.com/pricing/?utm_campaign=lite-readme&utm_source=wp.org&utm_medium=textlink-pro" target="_blank" rel="">Pro Version</a>
 
@@ -153,6 +151,10 @@ No, It won’t break your site or any page where you used our plugin. We put our
 4. Image Carousel
 
 == Changelog ==
+
+= Version 4.2.1 =
+* Fix: Dashboard link issue
+* Fix: Module manager issue
 
 = Version 4.2.0 =
 * Fix: Dashboard link issue

@@ -53,6 +53,12 @@ class PluginLoader
         RestApi::get_instance();
         Dashboard::get_instance();
 
+        // Admin Notice
+        if (is_admin()) {
+            require_once DIVI_TORQUE_LITE_DIR . 'includes/admin-notice.php';
+            new Admin_Notice();
+        }
+
         if (!get_option('divitorque_version')) {
             Divi_Library_Shortcode::get_instance();
         }

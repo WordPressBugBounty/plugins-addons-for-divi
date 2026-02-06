@@ -5,7 +5,7 @@ import { UpsellSection } from '@DashboardComponents';
 
 // Import your pages/components
 import Modules from './pages/module-manager';
-import Rollback from './pages/rollback';
+import FreeVsPro from './pages/free-vs-pro';
 const Popups = () => (
 	<UpsellSection
 		heading="Create Popups"
@@ -81,6 +81,10 @@ const AppRoutes = () => {
 				routePage = <Modules />;
 				break;
 
+			case 'free-vs-pro':
+				routePage = <FreeVsPro />;
+				break;
+
 			case 'popups':
 				routePage = <Popups />;
 				break;
@@ -99,10 +103,6 @@ const AppRoutes = () => {
 
 			case 'dark-mode':
 				routePage = <DarkMode />;
-				break;
-
-			case 'rollback':
-				routePage = <Rollback />;
 				break;
 
 			default:

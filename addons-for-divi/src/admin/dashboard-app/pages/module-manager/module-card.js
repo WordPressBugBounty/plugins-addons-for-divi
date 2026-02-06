@@ -3,12 +3,8 @@ import { __ } from '@wordpress/i18n';
 import { useSelect, useDispatch } from '@wordpress/data';
 import { ToggleControl } from '@wordpress/components';
 import { Toast } from '@DashboardComponents';
-import { ReactSVG } from 'react-svg';
 
-const ModuleCard = ({
-	moduleInfo: { name, title, icon, is_pro, badge, demo_link },
-	isLiteInstalled,
-}) => {
+const ModuleCard = ({ moduleInfo: { name, title } }) => {
 	const modulesStatuses = useSelect((select) =>
 		select('divitorque/dashboard').getModulesStatuses()
 	);
@@ -46,48 +42,19 @@ const ModuleCard = ({
 			});
 	};
 
-	const moduleIconPath = window.diviTorque?.module_icon_path || '';
-	const moduleIcon = `${moduleIconPath}/${icon}`;
-	const cardClass = `p-4 bg-white border border-solid border-de-light-gray rounded-md flex items-center gap-x-4`;
-
 	return (
-		<div className={cardClass}>
-			<div className="flex-shrink-0"></div>
-			<div className="flex-1 min-w-0">
-				<p
-					className={`text-base font-medium text-de-black flex items-center`}
-				>
+		<div className="bg-white border border-gray-200 rounded-lg p-4 hover:border-indigo-300 transition-all">
+			<div className="flex items-center justify-between gap-3">
+				<div className="text-sm font-medium text-gray-800 leading-snug flex-1">
 					{title}
-					{!is_pro && (
-						<span className="ml-2 px-1.5 text-[11px] bg-de-light-gray text-de-gray rounded uppercase">
-							{__('Lite', 'divitorque')}
-						</span>
-					)}
-					{badge && (
-						<span className="ml-2 px-1.5 text-[10px] bg-de-app-color-dark text-de-light-gray rounded uppercase">
-							{badge}
-						</span>
-					)}
-				</p>
-			</div>
-			{is_pro && (
-				<a
-					href="https://divitorque.com/pricing/"
-					target="_blank"
-					rel="noreferrer noopener"
-					className="text-de-app-color-dark"
-				>
-					{__('Pro', 'divitorque')}
-				</a>
-			)}
-			<div className="dt-toggle-control">
-				{!is_pro && (
+				</div>
+				<div className="dt-toggle-control flex-shrink-0">
 					<ToggleControl
 						checked={isModuleActive}
 						onChange={toggleModuleStatus}
 						disabled={isLoading}
 					/>
-				)}
+				</div>
 			</div>
 		</div>
 	);
