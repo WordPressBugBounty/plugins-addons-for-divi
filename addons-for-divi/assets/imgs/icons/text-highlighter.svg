@@ -1,0 +1,28 @@
+<svg width="30" height="30" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M5.30396 16.6812L9.73639 5.6001L14.1688 16.6812" stroke="url(#paint0_linear_360_604)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M7.52026 12.2485H11.9527" stroke="url(#paint1_linear_360_604)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M24.5001 13.9108C24.5001 15.5477 22.9486 17.0392 20.8177 17.0392C18.6867 17.0392 17.1353 15.5477 17.1353 13.9108C17.1353 12.274 18.6867 10.7825 20.8177 10.7825C22.9486 10.7825 24.5001 12.274 24.5001 13.9108Z" stroke="url(#paint2_linear_360_604)" stroke-width="1.5"/>
+<path d="M18.6013 8.92439C20.2635 7.81629 24.1419 7.8163 24.6959 10.0325C25.0725 11.5388 24.7404 15.8968 24.6918 17.2352" stroke="url(#paint3_linear_360_604)" stroke-width="1.5" stroke-linecap="round"/>
+<path d="M4.75 20.5596H25.25" stroke="url(#paint4_linear_360_604)" stroke-width="1.5" stroke-linecap="round"/>
+<path d="M4.75 24.4377H25.25" stroke="url(#paint5_linear_360_604)" stroke-width="1.5" stroke-linecap="round"/>
+<defs>
+<linearGradient id="paint0_linear_360_604" x1="9.73639" y1="5.6001" x2="9.73639" y2="16.6812" gradientUnits="userSpaceOnUse">
+<stop offset="1"/>
+</linearGradient>
+<linearGradient id="paint1_linear_360_604" x1="nan" y1="nan" x2="nan" y2="nan" gradientUnits="userSpaceOnUse">
+<stop offset="1"/>
+</linearGradient>
+<linearGradient id="paint2_linear_360_604" x1="20.8177" y1="10.0325" x2="20.8177" y2="17.7892" gradientUnits="userSpaceOnUse">
+<stop offset="1"/>
+</linearGradient>
+<linearGradient id="paint3_linear_360_604" x1="21.7374" y1="8.19653" x2="21.7374" y2="17.2352" gradientUnits="userSpaceOnUse">
+<stop offset="1"/>
+</linearGradient>
+<linearGradient id="paint4_linear_360_604" x1="nan" y1="nan" x2="nan" y2="nan" gradientUnits="userSpaceOnUse">
+<stop offset="1"/>
+</linearGradient>
+<linearGradient id="paint5_linear_360_604" x1="nan" y1="nan" x2="nan" y2="nan" gradientUnits="userSpaceOnUse">
+<stop offset="1"/>
+</linearGradient>
+</defs>
+</svg>

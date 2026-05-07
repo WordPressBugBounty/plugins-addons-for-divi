@@ -71,49 +71,4 @@ class Helpers
         return $ip;
     }
 
-    public static function get_city()
-    {
-        $ip = self::get_ip();
-
-        $url = "http://ip-api.com/json/{$ip}";
-
-        $response = wp_remote_get($url);
-
-        if (is_wp_error($response)) {
-            return false;
-        }
-
-        $body = wp_remote_retrieve_body($response);
-
-        $data = json_decode($body, true);
-
-        if (isset($data['city'])) {
-            return $data['city'];
-        }
-
-        return false;
-    }
-
-    public static function get_country()
-    {
-        $ip = self::get_ip();
-
-        $url = "http://ip-api.com/json/{$ip}";
-
-        $response = wp_remote_get($url);
-
-        if (is_wp_error($response)) {
-            return false;
-        }
-
-        $body = wp_remote_retrieve_body($response);
-
-        $data = json_decode($body, true);
-
-        if (isset($data['country'])) {
-            return $data['country'];
-        }
-
-        return false;
-    }
 }

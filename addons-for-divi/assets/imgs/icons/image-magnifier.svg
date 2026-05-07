@@ -1,0 +1,24 @@
+<svg width="30" height="30" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M2.5 16.2707C13 13.5 17.5 20 20.5 24.5" stroke="url(#paint0_linear_360_427)" stroke-width="1.5" stroke-miterlimit="7.3333" stroke-linecap="round"/>
+<path d="M16.5 20.0001C16.5 20.0001 18.5 17.0001 22.5 17.5001" stroke="url(#paint1_linear_360_427)" stroke-width="1.5" stroke-miterlimit="7.3333"/>
+<path d="M22.5 11.75C24.2949 11.75 25.75 10.2949 25.75 8.5C25.75 6.70507 24.2949 5.25 22.5 5.25C20.7051 5.25 19.25 6.70507 19.25 8.5C19.25 10.2949 20.7051 11.75 22.5 11.75Z" stroke="url(#paint2_linear_360_427)" stroke-width="1.5"/>
+<path d="M27.4073 12.7192C27.7487 12.9536 28.2156 12.8669 28.4501 12.5254C28.6845 12.1839 28.5977 11.717 28.2563 11.4826L27.4073 12.7192ZM25.0755 11.1183L27.4073 12.7192L28.2563 11.4826L25.9245 9.88171L25.0755 11.1183Z" fill="url(#paint3_linear_360_427)"/>
+<path d="M22.5 14.5V19.5C22.5 22.3284 22.5 23.7426 21.6213 24.6213C20.7426 25.5 19.3284 25.5 16.5 25.5H8.5C5.67157 25.5 4.25736 25.5 3.37868 24.6213C2.5 23.7426 2.5 22.3284 2.5 19.5V11.5C2.5 8.67157 2.5 7.25736 3.37868 6.37868C4.25736 5.5 5.67157 5.5 8.5 5.5H17.5" stroke="url(#paint4_linear_360_427)" stroke-width="1.5" stroke-linecap="round"/>
+<defs>
+<linearGradient id="paint0_linear_360_427" x1="11.5" y1="15.6057" x2="11.5" y2="24.5" gradientUnits="userSpaceOnUse">
+<stop offset="1"/>
+</linearGradient>
+<linearGradient id="paint1_linear_360_427" x1="19.5" y1="17.4438" x2="19.5" y2="20.0001" gradientUnits="userSpaceOnUse">
+<stop offset="1"/>
+</linearGradient>
+<linearGradient id="paint2_linear_360_427" x1="22.5" y1="4.5" x2="22.5" y2="12.5" gradientUnits="userSpaceOnUse">
+<stop offset="1"/>
+</linearGradient>
+<linearGradient id="paint3_linear_360_427" x1="26.4832" y1="10.3173" x2="26.8486" y2="12.2836" gradientUnits="userSpaceOnUse">
+<stop offset="1"/>
+</linearGradient>
+<linearGradient id="paint4_linear_360_427" x1="12.5" y1="5.5" x2="12.5" y2="25.5" gradientUnits="userSpaceOnUse">
+<stop offset="1"/>
+</linearGradient>
+</defs>
+</svg>

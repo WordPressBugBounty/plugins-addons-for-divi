@@ -9,7 +9,6 @@ return array(
     'BaPostHelper' => $baseDir . '/includes/modules/base/PostHelper.php',
     'Composer\\InstalledVersions' => $vendorDir . '/composer/InstalledVersions.php',
     'DiviTorqueLite\\AdminHelper' => $baseDir . '/includes/admin-helper.php',
-    'DiviTorqueLite\\Admin_Notices' => $baseDir . '/includes/upsell/notices.php',
     'DiviTorqueLite\\AssetsManager' => $baseDir . '/includes/assets.php',
     'DiviTorqueLite\\BackendHelpers' => $baseDir . '/includes/backend-helpers.php',
     'DiviTorqueLite\\Dashboard' => $baseDir . '/includes/dashboard.php',
@@ -18,7 +17,6 @@ return array(
     'DiviTorqueLite\\Helpers' => $baseDir . '/includes/helpers.php',
     'DiviTorqueLite\\ModulesManager' => $baseDir . '/includes/modules-manager.php',
     'DiviTorqueLite\\PluginLoader' => $baseDir . '/includes/plugin.php',
-    'DiviTorqueLite\\Plugin_Upgrader' => $baseDir . '/includes/plugin-upgrader.php',
     'DiviTorqueLite\\RestApi' => $baseDir . '/includes/rest-api.php',
     'Divi_Torque_Lite_Module' => $baseDir . '/includes/modules/base/BuilderModules.php',
 );

@@ -1,15 +1,14 @@
-=== Divi Torque Lite - Divi Theme, Divi Builder & Extra Theme ===
-Contributors: plugpressco, badhonrocks
-Donate link: https://divitorque.com/
+DiviTorque Lite - Divi Theme, Divi Builder & Extra Theme ===
+Contributors: divipeople, plugpressco, badhonrocks
 Tags: divi, divi builder, divi theme, divi module
 Requires at least: 5.0
-Tested up to: 6.8
+Tested up to: 6.9
 Requires PHP: 7.4
-Stable tag: 4.2.2
+Stable tag: 4.2.3
 License: GPLv3
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 
-The Divi Torque plugin you install after Divi builder! Packed with 70+ stunning modules like Post Grid, Filterable Gallery, Google Reviews, and more.
+The DiviTorque plugin you install after Divi builder! Packed with 70+ stunning modules like Post Grid, Filterable Gallery, Google Reviews, and more.
 
 == Description ==
 
@@ -36,7 +35,7 @@ We’ve crafted over 25 of the most powerful widgets to enhance your Divi page-b
 
 1. [Icon Box](https://divitorque.com/features/icon-box) – Merge icons and text harmoniously with the Divi Icon Box, illustrating concepts or services in a visually appealing and informative manner.
 2. [Contact Form 7 Styler](https://divitorque.com/features/contact-form-7) – Seamlessly integrate the popular Contact Form 7 plugin with the Divi Contact Form 7 module, facilitating easy and efficient communication for users.
-3. [Separator](https://divitorque.com/features/separator) – Use the Separator module to add clear and customizable dividers between sections, enhancing your site's structure and readability.
+3. [Separator](https://divitorque.com/features/separator) – Use the Separator module to add precise and customizable dividers between sections, enhancing your site's structure and readability.
 4. [Skill Bar](https://divitorque.com/features/skill-bar) – Showcase skills and competencies with the Skill Bar module, featuring animated bars that visually represent proficiency levels.
 5. [Divi Logo Grid](https://divitorque.com/features/logo-grid) – Present a clean and organized collection of logos with the Logo Grid module, ideal for highlighting clients, partners, or sponsors professionally.
 6. [Person](https://divitorque.com/features/person) – Use the Person module to showcase team members or individual profiles, complete with photos, biographies, and social media links.
@@ -47,7 +46,7 @@ We’ve crafted over 25 of the most powerful widgets to enhance your Divi page-b
 11. [Before & After Slider](https://divitorque.com/features/before-after-slider) – Enable users to compare two images with the Before & After Slider module effortlessly. Featuring an interactive slider, it’s perfect for highlighting transformations or contrasts.
 12. [Image Carousel](https://divitorque.com/features/image-carousel) – Enhance your website's design with the Image Carousel module. Select beautiful photos and customize slider options to create the perfect image carousel for your site.
 13. [Logo Carousel](https://divitorque.com/features/logo-carousel) – Elegantly showcase client or partner logos with the Divi Logo Carousel, displaying your affiliations and enhancing your credibility.
-14. [Number](https://divitorque.com/features/number) – Use the Number module to highlight statistics or key figures, making important numbers stand out on your site.
+14. [Number](https://divitorque.com/features/number) – Use the Number module to highlight statistics or key figures, making essential numbers stand out on your site.
 15. [Video Modal](https://divitorque.com/features/video-modal) – Embed videos with the Divi Video Modal, offering a sleek and responsive viewing experience that harmoniously integrates with your site's aesthetic.
 16. [Scroll Image](https://divitorque.com/features/scroll-image) – Integrate vertical or horizontal scrolling images with the Divi Image Scroll, adding depth and intrigue to your site while uniquely presenting your content.
 17. [News Ticker](https://divitorque.com/features/news-ticker) – Keep your audience informed with the News Ticker module, displaying real-time updates or important announcements.

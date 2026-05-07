@@ -48,16 +48,11 @@ class PluginLoader
     {
         add_action('divi_extensions_init', array($this, 'init_extension'));
         add_filter('plugin_action_links_' . plugin_basename(DIVI_TORQUE_LITE_FILE), array($this, 'add_pro_link'));
+        add_action('admin_menu', array($this, 'register_rollback_page'), 999);
 
         AssetsManager::get_instance();
         RestApi::get_instance();
         Dashboard::get_instance();
-
-        // Admin Notice
-        if (is_admin()) {
-            require_once DIVI_TORQUE_LITE_DIR . 'includes/admin-notice.php';
-            new Admin_Notice();
-        }
 
         if (!get_option('divitorque_version')) {
             Divi_Library_Shortcode::get_instance();
@@ -147,7 +142,130 @@ class PluginLoader
             __('Dashboard', 'divitorque')
         );
 
+        if (current_user_can('update_plugins')) {
+            $links[] = sprintf(
+                '<a href="%s">%s</a>',
+                esc_url(admin_url('admin.php?page=divitorque-rollback')),
+                __('Rollback', 'divitorque')
+            );
+        }
+
         return $links;
+    }
+
+    public function register_rollback_page()
+    {
+        add_submenu_page(
+            null,
+            __('Rollback Divi Torque Lite', 'divitorque'),
+            __('Rollback', 'divitorque'),
+            'update_plugins',
+            'divitorque-rollback',
+            array($this, 'render_rollback_page')
+        );
+    }
+
+    public function render_rollback_page()
+    {
+        if (!current_user_can('update_plugins')) {
+            wp_die(__('You do not have permission to access this page.', 'divitorque'));
+        }
+
+        $rest_root  = esc_url_raw(rest_url('divitorque-lite/v1'));
+        $rest_nonce = wp_create_nonce('wp_rest');
+        $current    = DIVI_TORQUE_LITE_VERSION;
+        ?>
+        <div class="wrap" style="max-width:560px;">
+            <h1><?php esc_html_e('Rollback Divi Torque Lite', 'divitorque'); ?></h1>
+            <p><?php printf(esc_html__('Currently installed: %s', 'divitorque'), '<code>' . esc_html($current) . '</code>'); ?></p>
+
+            <p class="description" style="margin:12px 0;">
+                <?php esc_html_e('Choose a previous version published on WordPress.org. Your active state will be preserved.', 'divitorque'); ?>
+            </p>
+
+            <p>
+                <label for="dtl-rollback-version"><strong><?php esc_html_e('Version', 'divitorque'); ?></strong></label><br>
+                <select id="dtl-rollback-version" style="min-width:240px;margin-top:6px;">
+                    <option value=""><?php esc_html_e('Loading versions…', 'divitorque'); ?></option>
+                </select>
+            </p>
+
+            <p>
+                <button type="button" class="button button-primary" id="dtl-rollback-btn" disabled>
+                    <?php esc_html_e('Rollback', 'divitorque'); ?>
+                </button>
+                <span id="dtl-rollback-status" style="margin-left:12px;"></span>
+            </p>
+
+            <script>
+            (function(){
+                var REST  = <?php echo wp_json_encode($rest_root); ?>;
+                var NONCE = <?php echo wp_json_encode($rest_nonce); ?>;
+                var CURRENT = <?php echo wp_json_encode($current); ?>;
+                var $sel = document.getElementById('dtl-rollback-version');
+                var $btn = document.getElementById('dtl-rollback-btn');
+                var $status = document.getElementById('dtl-rollback-status');
+
+                function setStatus(msg, isError) {
+                    $status.textContent = msg || '';
+                    $status.style.color = isError ? '#b32d2e' : '#1d2327';
+                }
+
+                fetch(REST + '/get_plugin_versions', {
+                    headers: { 'X-WP-Nonce': NONCE }
+                }).then(function(r){ return r.json(); }).then(function(data){
+                    if (!data || !data.versions) { setStatus('Could not load versions.', true); return; }
+                    $sel.innerHTML = '';
+                    data.versions.forEach(function(v){
+                        if (v === CURRENT) return;
+                        var opt = document.createElement('option');
+                        opt.value = v;
+                        opt.textContent = v;
+                        $sel.appendChild(opt);
+                    });
+                    if ($sel.options.length === 0) {
+                        $sel.innerHTML = '<option value="">' + 'No other versions available' + '</option>';
+                    } else {
+                        $btn.disabled = false;
+                    }
+                }).catch(function(){
+                    setStatus('Could not load versions.', true);
+                });
+
+                $btn.addEventListener('click', function(){
+                    var version = $sel.value;
+                    if (!version) return;
+                    if (!confirm('Rollback Divi Torque Lite to version ' + version + '?')) return;
+
+                    $btn.disabled = true;
+                    setStatus('Rolling back to ' + version + '…');
+
+                    fetch(REST + '/rollback_plugin', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'X-WP-Nonce': NONCE
+                        },
+                        body: JSON.stringify({ version: version })
+                    }).then(function(r){ return r.json().then(function(j){ return { ok: r.ok, body: j }; }); })
+                    .then(function(res){
+                        if (res.ok && res.body && res.body.success) {
+                            setStatus('Done. Reloading…');
+                            setTimeout(function(){ window.location.reload(); }, 1200);
+                        } else {
+                            var msg = (res.body && (res.body.message || res.body.code)) || 'Rollback failed.';
+                            setStatus(msg, true);
+                            $btn.disabled = false;
+                        }
+                    }).catch(function(){
+                        setStatus('Rollback failed.', true);
+                        $btn.disabled = false;
+                    });
+                });
+            })();
+            </script>
+        </div>
+        <?php
     }
 
     /**

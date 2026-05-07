@@ -1,0 +1,16 @@
+<svg width="30" height="30" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M12 12.4649C12 10.8252 13.3252 9.5 14.9649 9.5C16.6046 9.5 17.9299 10.8252 17.9299 12.4649C17.9299 13.8014 16.8742 14.5314 16.0319 15.4074C15.4479 16.0139 14.9762 16.8674 14.9088 17.721" stroke="url(#paint0_linear_360_305)" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round"/>
+<path d="M14.9648 20.6748V20.6187" stroke="url(#paint1_linear_360_305)" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round"/>
+<path d="M26.8638 17.03C26.0626 22.6579 21.3063 26.3066 16.57 26.9019C13.8025 27.25 11.1812 26.6548 8.99871 25.3857C8.71746 25.2172 8.39121 25.1836 8.08746 25.2846C7.04121 25.6553 5.2412 26.374 4.31869 26.7559C4.05994 26.8569 3.78994 26.6436 3.84619 26.3628C4.05994 25.2397 4.52119 22.8812 4.73495 21.7357C4.7912 21.4774 4.73495 21.2079 4.59994 20.972C3.33994 18.782 2.74369 16.1652 3.10369 13.3912C3.79584 8.05782 7.68726 4.03689 12.97 3.17117C21.1938 1.82347 28.0611 8.61938 26.8638 17.03Z" stroke="url(#paint2_linear_360_305)" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round"/>
+<defs>
+<linearGradient id="paint0_linear_360_305" x1="14.9649" y1="9.5" x2="14.9649" y2="17.721" gradientUnits="userSpaceOnUse">
+<stop offset="1"/>
+</linearGradient>
+<linearGradient id="paint1_linear_360_305" x1="nan" y1="nan" x2="nan" y2="nan" gradientUnits="userSpaceOnUse">
+<stop offset="1"/>
+</linearGradient>
+<linearGradient id="paint2_linear_360_305" x1="15" y1="3" x2="15" y2="27" gradientUnits="userSpaceOnUse">
+<stop offset="1"/>
+</linearGradient>
+</defs>
+</svg>

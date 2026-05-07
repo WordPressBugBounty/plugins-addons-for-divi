@@ -1,0 +1,36 @@
+<svg width="30" height="30" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M21 3.75H9C7.20507 3.75 5.75 5.20507 5.75 7V23C5.75 24.7949 7.20507 26.25 9 26.25H21C22.7949 26.25 24.25 24.7949 24.25 23V7C24.25 5.20507 22.7949 3.75 21 3.75Z" stroke="url(#paint0_linear_360_575)" stroke-width="1.5"/>
+<path d="M6 8.25H24" stroke="url(#paint1_linear_360_575)" stroke-width="1.5"/>
+<path d="M13.5 12.5H20.5" stroke="url(#paint2_linear_360_575)" stroke-width="1.5" stroke-linecap="round"/>
+<path d="M13.5 17.5H20.5" stroke="url(#paint3_linear_360_575)" stroke-width="1.5" stroke-linecap="round"/>
+<path d="M13.5 22.5H20.5" stroke="url(#paint4_linear_360_575)" stroke-width="1.5" stroke-linecap="round"/>
+<path d="M10.5 12.5C10.5 12.7761 10.2761 13 10 13C9.72386 13 9.5 12.7761 9.5 12.5C9.5 12.2239 9.72386 12 10 12C10.2761 12 10.5 12.2239 10.5 12.5Z" stroke="url(#paint5_linear_360_575)" stroke-width="1.5"/>
+<path d="M10.5 17.5C10.5 17.7761 10.2761 18 10 18C9.72386 18 9.5 17.7761 9.5 17.5C9.5 17.2239 9.72386 17 10 17C10.2761 17 10.5 17.2239 10.5 17.5Z" stroke="url(#paint6_linear_360_575)" stroke-width="1.5"/>
+<path d="M10.5 22.5C10.5 22.7761 10.2761 23 10 23C9.72386 23 9.5 22.7761 9.5 22.5C9.5 22.2239 9.72386 22 10 22C10.2761 22 10.5 22.2239 10.5 22.5Z" stroke="url(#paint7_linear_360_575)" stroke-width="1.5"/>
+<defs>
+<linearGradient id="paint0_linear_360_575" x1="15" y1="3" x2="15" y2="27" gradientUnits="userSpaceOnUse">
+<stop offset="1"/>
+</linearGradient>
+<linearGradient id="paint1_linear_360_575" x1="nan" y1="nan" x2="nan" y2="nan" gradientUnits="userSpaceOnUse">
+<stop offset="1"/>
+</linearGradient>
+<linearGradient id="paint2_linear_360_575" x1="nan" y1="nan" x2="nan" y2="nan" gradientUnits="userSpaceOnUse">
+<stop offset="1"/>
+</linearGradient>
+<linearGradient id="paint3_linear_360_575" x1="nan" y1="nan" x2="nan" y2="nan" gradientUnits="userSpaceOnUse">
+<stop offset="1"/>
+</linearGradient>
+<linearGradient id="paint4_linear_360_575" x1="nan" y1="nan" x2="nan" y2="nan" gradientUnits="userSpaceOnUse">
+<stop offset="1"/>
+</linearGradient>
+<linearGradient id="paint5_linear_360_575" x1="10" y1="12" x2="10" y2="13" gradientUnits="userSpaceOnUse">
+<stop offset="1"/>
+</linearGradient>
+<linearGradient id="paint6_linear_360_575" x1="10" y1="17" x2="10" y2="18" gradientUnits="userSpaceOnUse">
+<stop offset="1"/>
+</linearGradient>
+<linearGradient id="paint7_linear_360_575" x1="10" y1="22" x2="10" y2="23" gradientUnits="userSpaceOnUse">
+<stop offset="1"/>
+</linearGradient>
+</defs>
+</svg>
