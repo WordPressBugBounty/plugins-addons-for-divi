@@ -156,13 +156,14 @@ class PluginLoader
     public function register_rollback_page()
     {
         add_submenu_page(
-            null,
+            'divitorque',
             __('Rollback Divi Torque Lite', 'divitorque'),
             __('Rollback', 'divitorque'),
             'update_plugins',
             'divitorque-rollback',
             array($this, 'render_rollback_page')
         );
+        remove_submenu_page('divitorque', 'divitorque-rollback');
     }
 
     public function render_rollback_page()

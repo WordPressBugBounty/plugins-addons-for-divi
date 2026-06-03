@@ -11,6 +11,20 @@ class ComposerStaticInitd024a156f682ce70d0314fa15a16badc
         'dcf5fea6dc74ff0cc74882efd74371dc' => __DIR__ . '/../..' . '/includes/functions-forms.php',
     );
 
+    public static $prefixLengthsPsr4 = array (
+        'D' => 
+        array (
+            'DiviTorqueLite\\Modules\\' => 23,
+        ),
+    );
+
+    public static $prefixDirsPsr4 = array (
+        'DiviTorqueLite\\Modules\\' => 
+        array (
+            0 => __DIR__ . '/../..' . '/includes/divi5/modules',
+        ),
+    );
+
     public static $classMap = array (
         'BaPostHelper' => __DIR__ . '/../..' . '/includes/modules/base/PostHelper.php',
         'Composer\\InstalledVersions' => __DIR__ . '/..' . '/composer/InstalledVersions.php',
@@ -30,6 +44,8 @@ class ComposerStaticInitd024a156f682ce70d0314fa15a16badc
     public static function getInitializer(ClassLoader $loader)
     {
         return \Closure::bind(function () use ($loader) {
+            $loader->prefixLengthsPsr4 = ComposerStaticInitd024a156f682ce70d0314fa15a16badc::$prefixLengthsPsr4;
+            $loader->prefixDirsPsr4 = ComposerStaticInitd024a156f682ce70d0314fa15a16badc::$prefixDirsPsr4;
             $loader->classMap = ComposerStaticInitd024a156f682ce70d0314fa15a16badc::$classMap;
 
         }, null, ClassLoader::class);

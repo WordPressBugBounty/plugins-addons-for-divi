@@ -130,7 +130,7 @@ class AssetsManager
 			'anime' => 'anime/anime.min.js',
 			'text-animation' => 'text-animation/text-animation.min.js',
 			'counter-up' => 'counter-up/counter-up.min.js',
-			'magnific-popup' => 'magnific-popup/magnific-popup.js'
+			'magnific-popup' => 'magnific-popup/magnific-popup.min.js'
 
 		];
 

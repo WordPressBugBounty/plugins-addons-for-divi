@@ -6,4 +6,5 @@ $vendorDir = dirname(__DIR__);
 $baseDir = dirname($vendorDir);
 
 return array(
+    'DiviTorqueLite\\Modules\\' => array($baseDir . '/includes/divi5/modules'),
 );
