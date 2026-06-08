@@ -24,6 +24,13 @@ require_once $dtl_d5_dependency_interface;
 // slug => [ folder, fully-qualified class ]
 $dtl_d5_modules = array(
     'gradient_heading' => array('GradientHeading', '\\DiviTorqueLite\\Modules\\GradientHeading\\GradientHeading'),
+    'divider'          => array('Divider', '\\DiviTorqueLite\\Modules\\Divider\\Divider'),
+    'icon_box'         => array('IconBox', '\\DiviTorqueLite\\Modules\\IconBox\\IconBox'),
+    'inline_notice'    => array('InlineNotice', '\\DiviTorqueLite\\Modules\\InlineNotice\\InlineNotice'),
+    'dual_button'      => array('DualButton', '\\DiviTorqueLite\\Modules\\DualButton\\DualButton'),
+    'info_box'         => array('InfoBox', '\\DiviTorqueLite\\Modules\\InfoBox\\InfoBox'),
+    'info_card'        => array('InfoCard', '\\DiviTorqueLite\\Modules\\InfoCard\\InfoCard'),
+    'team_box'         => array('TeamBox', '\\DiviTorqueLite\\Modules\\TeamBox\\TeamBox'),
 );
 
 $dtl_d5_loaded = array();
@@ -54,6 +61,13 @@ add_filter(
     function ($file_path, $module_name) {
         $outlines = array(
             'divitorque/gradient-heading' => 'gradient-heading/conversion-outline.json',
+            'divitorque/divider'          => 'divider/conversion-outline.json',
+            'divitorque/icon-box'         => 'icon-box/conversion-outline.json',
+            'divitorque/inline-notice'    => 'inline-notice/conversion-outline.json',
+            'divitorque/dual-button'      => 'dual-button/conversion-outline.json',
+            'divitorque/info-box'         => 'info-box/conversion-outline.json',
+            'divitorque/info-card'        => 'info-card/conversion-outline.json',
+            'divitorque/team-box'         => 'team-box/conversion-outline.json',
         );
         if (isset($outlines[$module_name])) {
             return DIVI_TORQUE_LITE_MODULES_JSON_PATH . $outlines[$module_name];

@@ -4,7 +4,7 @@ Tags: divi, divi builder, divi modules, page builder, divi theme
 Requires at least: 5.0
 Tested up to: 7.0
 Requires PHP: 7.4
-Stable tag: 4.3.0
+Stable tag: 4.4.0
 License: GPLv3
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 
@@ -18,7 +18,7 @@ Divi Torque Lite adds 25+ free, beautifully designed modules to the Divi Builder
 
 = Now Divi 5 ready =
 
-Divi Torque is being rebuilt for the new Divi 5 Builder. Starting in 4.3.0, the Gradient Heading module runs natively in Divi 5, with more modules arriving in each release — and your existing Divi 4 layouts keep working exactly as before.
+Divi Torque is being rebuilt for the new Divi 5 Builder. As of 4.4.0, eight modules run natively in Divi 5 — Gradient Heading, Divider, Icon Box, Inline Notice, Dual Button, Info Box, Info Card, and Team Member — with more arriving in each release. Your existing Divi 4 layouts migrate automatically and keep working exactly as before.
 
 = Why Divi Torque Lite? =
 
@@ -98,7 +98,7 @@ Yes. Divi Torque Lite extends Divi, so it requires the Divi Theme or the Divi Bu
 
 = Is Divi Torque Lite compatible with Divi 5? =
 
-Yes. As of version 4.3.0 we've begun shipping native Divi 5 modules (starting with Gradient Heading), and all existing Divi 4 modules continue to work in both Divi 4 and Divi 5.
+Yes. As of version 4.4.0 we ship eight native Divi 5 modules (Gradient Heading, Divider, Icon Box, Inline Notice, Dual Button, Info Box, Info Card, and Team Member), with more in each release. All existing Divi 4 modules continue to work in both Divi 4 and Divi 5.
 
 = Will these modules slow down my site? =
 
@@ -116,6 +116,13 @@ No. Updates are backward compatible and won't break pages built with our modules
 4. Image Carousel
 
 == Changelog ==
+
+= Version 4.4.0 =
+* Added: Seven more modules now run natively in the Divi 5 Builder — Divider, Icon Box, Inline Notice, Dual Button, Info Box, Info Card, and Team Member (joining Gradient Heading). Your existing Divi 4 layouts migrate automatically with their styling intact.
+* Added: Video Modal videos now autoplay on mobile (muted, as mobile browsers require) — desktop playback is unchanged.
+* Improved: Divi 5 module spacing, icon rendering, and Dual Button gap/alignment now match the Divi 4 output exactly.
+* Fix: Info Box "Layout" settings group no longer conflicts with the Divi 5 layout options.
+* Compatibility: Fully backward compatible — all Divi 4 modules and saved layouts continue to work in both Divi 4 and Divi 5.
 
 = Version 4.3.0 =
 * Added: Divi 5 support begins! The Gradient Heading module is now available natively in the Divi 5 Builder, with more modules being converted in upcoming releases.
@@ -222,6 +229,9 @@ No. Updates are backward compatible and won't break pages built with our modules
 * Public beta release
 
 == Upgrade Notice ==
+
+= v4.4.0 =
+Seven more modules now run natively in Divi 5 (Divider, Icon Box, Inline Notice, Dual Button, Info Box, Info Card, Team Member). Existing Divi 4 layouts are unaffected and migrate automatically.
 
 = v4.3.0 =
 Adds native Divi 5 support for the Gradient Heading module. Fully backward compatible — Divi 4 sites and existing layouts are unaffected.

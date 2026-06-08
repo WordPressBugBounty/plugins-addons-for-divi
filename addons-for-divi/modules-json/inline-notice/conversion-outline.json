@@ -1,0 +1,73 @@
+{
+  "advanced": {
+    "admin_label": "module.meta.adminLabel",
+    "animation": "module.decoration.animation",
+    "background": "module.decoration.background",
+    "borders": {
+      "icon": "icon.decoration.border",
+      "main": "module.decoration.border"
+    },
+    "box_shadow": {
+      "default": "module.decoration.boxShadow"
+    },
+    "disabled_on": "module.decoration.disabledOn",
+    "filters": {
+      "default": "module.decoration.filters"
+    },
+    "fonts": {
+      "title": "title.decoration.font",
+      "body": "content.decoration.bodyFont.body"
+    },
+    "height": "module.decoration.sizing",
+    "margin_padding": "module.decoration.spacing",
+    "max_width": "module.decoration.sizing",
+    "module": "module.advanced.htmlAttributes",
+    "overflow": "module.decoration.overflow",
+    "position_fields": "module.decoration.position",
+    "scroll": "module.decoration.scroll",
+    "sticky": "module.decoration.sticky",
+    "text": "module.advanced.text",
+    "text_shadow": {
+      "default": "module.advanced.text.textShadow"
+    },
+    "transform": "module.decoration.transform",
+    "transition": "module.decoration.transition",
+    "z_index": "module.decoration.zIndex"
+  },
+  "css": {
+    "after": "css.*.after",
+    "before": "css.*.before",
+    "free_form": "css.*.freeForm",
+    "main_element": "css.*.mainElement",
+    "icon_wrapper": "css.*.iconWrapper",
+    "icon": "css.*.icon",
+    "title": "css.*.title",
+    "desc": "css.*.desc"
+  },
+  "module": {
+    "use_icon": "module.advanced.useIcon.*",
+    "icon": "module.advanced.icon.*",
+    "image": "module.advanced.image.*",
+    "image_alt": "module.advanced.imageAlt.*",
+    "title": "title.innerContent.*",
+    "description": "content.innerContent.*",
+    "alert_type": "module.advanced.alertType.*",
+    "show_dismiss": "module.advanced.showDismiss.*",
+    "align_items": "module.advanced.alignItems.*",
+    "header_level": "title.decoration.font.font.*.headingLevel",
+    "icon_size": "module.advanced.iconSize.*",
+    "icon_color": "module.advanced.iconColor.*",
+    "icon_spacing": "module.advanced.iconSpacing.*",
+    "use_icon_box": "module.advanced.useIconBox.*",
+    "icon_bg_color": "module.advanced.iconBackgroundColor.*",
+    "icon_width": "module.advanced.iconWidth.*",
+    "icon_height": "module.advanced.iconHeight.*",
+    "dismiss_size": "module.advanced.dismissSize.*",
+    "dismiss_color": "module.advanced.dismissColor.*",
+    "dismiss_spacing": "module.advanced.dismissSpacing.*",
+    "title_spacing": "module.advanced.titleSpacing.*"
+  },
+  "valueExpansionFunctionMap": {
+    "icon": "convertFontIcon"
+  }
+}

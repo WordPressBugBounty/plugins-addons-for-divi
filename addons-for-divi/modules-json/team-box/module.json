@@ -1,0 +1,1837 @@
+{
+  "name": "divitorque/team-box",
+  "d4Shortcode": "ba_advanced_team",
+  "moduleClassName": "dtq_team_box",
+  "moduleOrderClassName": "dtq_team_box",
+  "title": "Team Box",
+  "titles": "Team Boxes",
+  "moduleIcon": "divitorque/team-box",
+  "category": "module",
+  "attributes": {
+    "module": {
+      "type": "object",
+      "selector": "{{selector}}",
+      "default": {
+        "advanced": {
+          "useLightbox": {
+            "desktop": {
+              "value": "off"
+            }
+          },
+          "contentOnHover": {
+            "desktop": {
+              "value": "off"
+            }
+          },
+          "hoverStyle": {
+            "desktop": {
+              "value": "hover_1"
+            }
+          },
+          "hoverSpeed": {
+            "desktop": {
+              "value": "400ms"
+            }
+          },
+          "linksPosition": {
+            "desktop": {
+              "value": "content"
+            }
+          },
+          "usePhotoAbs": {
+            "desktop": {
+              "value": "off"
+            }
+          },
+          "photoPlacement": {
+            "desktop": {
+              "value": "left_top"
+            }
+          },
+          "photoOffsetX": {
+            "desktop": {
+              "value": "50%"
+            }
+          },
+          "photoOffsetY": {
+            "desktop": {
+              "value": "0px"
+            }
+          },
+          "photoWidth": {
+            "desktop": {
+              "value": "auto"
+            }
+          },
+          "photoHeight": {
+            "desktop": {
+              "value": "auto"
+            }
+          },
+          "photoAlignment": {
+            "desktop": {
+              "value": "left"
+            }
+          },
+          "photoHoverAnimation": {
+            "desktop": {
+              "value": "none"
+            }
+          },
+          "contentAlignment": {
+            "desktop": {
+              "value": "left"
+            }
+          },
+          "contentPadding": {
+            "desktop": {
+              "value": {
+                "top": "20px",
+                "right": "20px",
+                "bottom": "20px",
+                "left": "20px"
+              }
+            }
+          },
+          "socialIconColor": {
+            "desktop": {
+              "value": "#333"
+            }
+          },
+          "linksBg": {
+            "desktop": {
+              "value": "#e5e5e5"
+            }
+          },
+          "linksMarginBetween": {
+            "desktop": {
+              "value": "5px"
+            }
+          },
+          "linksMarginTop": {
+            "desktop": {
+              "value": "15px"
+            }
+          },
+          "linksHeight": {
+            "desktop": {
+              "value": "36px"
+            }
+          },
+          "linksWidth": {
+            "desktop": {
+              "value": "36px"
+            }
+          },
+          "linksIconSize": {
+            "desktop": {
+              "value": "16px"
+            }
+          },
+          "linksRadius": {
+            "desktop": {
+              "value": "4px"
+            }
+          },
+          "nameBottomSpacing": {
+            "desktop": {
+              "value": "10px"
+            }
+          },
+          "jobBottomSpacing": {
+            "desktop": {
+              "value": "10px"
+            }
+          },
+          "overlayOnHover": {
+            "desktop": {
+              "value": "off"
+            }
+          },
+          "overlayHoverSpeed": {
+            "desktop": {
+              "value": "500ms"
+            }
+          },
+          "overlayIcon": {
+            "desktop": {
+              "value": {
+                "unicode": "&#x2b;",
+                "type": "divi",
+                "weight": "400"
+              }
+            }
+          },
+          "overlayIconColor": {
+            "desktop": {
+              "value": "#2EA3F2"
+            }
+          },
+          "overlayIconSize": {
+            "desktop": {
+              "value": "32px"
+            }
+          },
+          "overlayIconOpacity": {
+            "desktop": {
+              "value": "1"
+            }
+          },
+          "overlayColor": {
+            "desktop": {
+              "value": "#2EA3F2"
+            }
+          },
+          "contentBgColor": {
+            "desktop": {
+              "value": "#ffffff"
+            }
+          }
+        }
+      },
+      "settings": {
+        "meta": {
+          "adminLabel": {}
+        },
+        "advanced": {
+          "htmlAttributes": {},
+          "contentOnHover": {
+            "groupType": "group-item",
+            "item": {
+              "groupSlug": "contentSettings",
+              "attrName": "module.advanced.contentOnHover",
+              "label": "Show Content on Hover",
+              "description": "Enable to visualize the content during hover.",
+              "priority": 10,
+              "render": true,
+              "features": {
+                "sticky": false,
+                "responsive": false,
+                "hover": false
+              },
+              "component": {
+                "type": "field",
+                "name": "divi/toggle"
+              }
+            }
+          },
+          "hoverStyle": {
+            "groupType": "group-item",
+            "item": {
+              "groupSlug": "contentSettings",
+              "attrName": "module.advanced.hoverStyle",
+              "label": "Hover Animation",
+              "description": "Choose animation type during the hover.",
+              "priority": 20,
+              "render": true,
+              "features": {
+                "sticky": false,
+                "responsive": false,
+                "hover": false
+              },
+              "component": {
+                "type": "field",
+                "name": "divi/select",
+                "props": {
+                  "options": {
+                    "hover_1": {
+                      "label": "Slide Bottom"
+                    },
+                    "hover_2": {
+                      "label": "Fade In"
+                    },
+                    "hover_3": {
+                      "label": "Slide Up"
+                    },
+                    "hover_4": {
+                      "label": "Zoom In"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "hoverSpeed": {
+            "groupType": "group-item",
+            "item": {
+              "groupSlug": "contentSettings",
+              "attrName": "module.advanced.hoverSpeed",
+              "label": "Hover Animation Speed",
+              "description": "Set the time for the hover animation speed.",
+              "priority": 30,
+              "render": true,
+              "features": {
+                "sticky": false,
+                "responsive": false,
+                "hover": false
+              },
+              "component": {
+                "type": "field",
+                "name": "divi/range",
+                "props": {
+                  "min": 0,
+                  "max": 1000,
+                  "step": 1,
+                  "defaultUnit": "ms",
+                  "allowedUnits": [
+                    "ms"
+                  ]
+                }
+              }
+            }
+          },
+          "linksPosition": {
+            "groupType": "group-item",
+            "item": {
+              "groupSlug": "contentSettings",
+              "attrName": "module.advanced.linksPosition",
+              "label": "Social Links Hover Position",
+              "description": "Select where you want to put social links icons during the hover.",
+              "priority": 40,
+              "render": true,
+              "features": {
+                "sticky": false,
+                "responsive": false,
+                "hover": false
+              },
+              "component": {
+                "type": "field",
+                "name": "divi/select",
+                "props": {
+                  "options": {
+                    "content": {
+                      "label": "Relative to the Content"
+                    },
+                    "photo": {
+                      "label": "Relative to the Photo"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "usePhotoAbs": {
+            "groupType": "group-item",
+            "item": {
+              "groupSlug": "designPhoto",
+              "attrName": "module.advanced.usePhotoAbs",
+              "label": "Use Absolute Photo Position",
+              "description": "If enabled the photo will be in absolute position according to its parent.",
+              "priority": 10,
+              "render": true,
+              "features": {
+                "sticky": false,
+                "responsive": false,
+                "hover": false
+              },
+              "component": {
+                "type": "field",
+                "name": "divi/toggle"
+              }
+            }
+          },
+          "photoPlacement": {
+            "groupType": "group-item",
+            "item": {
+              "groupSlug": "designPhoto",
+              "attrName": "module.advanced.photoPlacement",
+              "label": "Photo Position",
+              "description": "Select the placement of the photo.",
+              "priority": 20,
+              "render": true,
+              "features": {
+                "sticky": false,
+                "responsive": false,
+                "hover": false
+              },
+              "component": {
+                "type": "field",
+                "name": "divi/select",
+                "props": {
+                  "options": {
+                    "left_top": {
+                      "label": "Left Top"
+                    },
+                    "left_bottom": {
+                      "label": "Left Bottom"
+                    },
+                    "right_top": {
+                      "label": "Right Top"
+                    },
+                    "right_bottom": {
+                      "label": "Right Bottom"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "photoOffsetX": {
+            "groupType": "group-item",
+            "item": {
+              "groupSlug": "designPhoto",
+              "attrName": "module.advanced.photoOffsetX",
+              "label": "Photo Offset X",
+              "description": "Set horizontal absolute position value of the photo.",
+              "priority": 30,
+              "render": true,
+              "features": {
+                "sticky": false,
+                "responsive": false,
+                "hover": false
+              },
+              "component": {
+                "type": "field",
+                "name": "divi/range",
+                "props": {
+                  "min": -500,
+                  "max": 500,
+                  "step": 1
+                }
+              }
+            }
+          },
+          "photoOffsetY": {
+            "groupType": "group-item",
+            "item": {
+              "groupSlug": "designPhoto",
+              "attrName": "module.advanced.photoOffsetY",
+              "label": "Photo Offset Y",
+              "description": "Set vertical absolute position value of the photo.",
+              "priority": 40,
+              "render": true,
+              "features": {
+                "sticky": false,
+                "responsive": false,
+                "hover": false
+              },
+              "component": {
+                "type": "field",
+                "name": "divi/range",
+                "props": {
+                  "min": -500,
+                  "max": 500,
+                  "step": 1
+                }
+              }
+            }
+          },
+          "photoWidth": {
+            "groupType": "group-item",
+            "item": {
+              "groupSlug": "designPhoto",
+              "attrName": "module.advanced.photoWidth",
+              "label": "Photo Width",
+              "description": "Increase or decrease the width of member photo.",
+              "priority": 50,
+              "render": true,
+              "features": {
+                "sticky": false,
+                "responsive": true,
+                "hover": false
+              },
+              "component": {
+                "type": "field",
+                "name": "divi/range",
+                "props": {
+                  "min": 0,
+                  "max": 800,
+                  "step": 1,
+                  "defaultUnit": "px"
+                }
+              }
+            }
+          },
+          "photoHeight": {
+            "groupType": "group-item",
+            "item": {
+              "groupSlug": "designPhoto",
+              "attrName": "module.advanced.photoHeight",
+              "label": "Photo Height",
+              "description": "Increase or decrease the height of member photo.",
+              "priority": 60,
+              "render": true,
+              "features": {
+                "sticky": false,
+                "responsive": true,
+                "hover": false
+              },
+              "component": {
+                "type": "field",
+                "name": "divi/range",
+                "props": {
+                  "min": 0,
+                  "max": 500,
+                  "step": 1,
+                  "defaultUnit": "px"
+                }
+              }
+            }
+          },
+          "photoAlignment": {
+            "groupType": "group-item",
+            "item": {
+              "groupSlug": "designPhoto",
+              "attrName": "module.advanced.photoAlignment",
+              "label": "Photo Alignment",
+              "description": "Align photo to the left, right or center.",
+              "priority": 70,
+              "render": true,
+              "features": {
+                "sticky": false,
+                "responsive": false,
+                "hover": false
+              },
+              "component": {
+                "type": "field",
+                "name": "divi/select",
+                "props": {
+                  "options": {
+                    "left": {
+                      "label": "Left"
+                    },
+                    "center": {
+                      "label": "Center"
+                    },
+                    "right": {
+                      "label": "Right"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "photoHoverAnimation": {
+            "groupType": "group-item",
+            "item": {
+              "groupSlug": "designPhoto",
+              "attrName": "module.advanced.photoHoverAnimation",
+              "label": "Photo Hover Animation",
+              "description": "Select photo mouse hover animation.",
+              "priority": 80,
+              "render": true,
+              "features": {
+                "sticky": false,
+                "responsive": false,
+                "hover": false
+              },
+              "component": {
+                "type": "field",
+                "name": "divi/select",
+                "props": {
+                  "options": {
+                    "none": {
+                      "label": "None"
+                    },
+                    "zoom-in": {
+                      "label": "Zoom In"
+                    },
+                    "zoom-out": {
+                      "label": "Zoom Out"
+                    },
+                    "pulse": {
+                      "label": "Pulse"
+                    },
+                    "bounce": {
+                      "label": "Bounce"
+                    },
+                    "flash": {
+                      "label": "Flash"
+                    },
+                    "rubberBand": {
+                      "label": "Rubber Band"
+                    },
+                    "shake": {
+                      "label": "Shake"
+                    },
+                    "swing": {
+                      "label": "Swing"
+                    },
+                    "tada": {
+                      "label": "Tada"
+                    },
+                    "wobble": {
+                      "label": "Wobble"
+                    },
+                    "jello": {
+                      "label": "Jello"
+                    },
+                    "heartBeat": {
+                      "label": "Heart Beat"
+                    },
+                    "bounceIn": {
+                      "label": "Bounce In"
+                    },
+                    "fadeIn": {
+                      "label": "Fade In"
+                    },
+                    "flip": {
+                      "label": "Flip"
+                    },
+                    "rotateIn": {
+                      "label": "Rotate In"
+                    },
+                    "slideInUp": {
+                      "label": "Slide In Up"
+                    },
+                    "slideInDown": {
+                      "label": "Slide In Down"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "contentAlignment": {
+            "groupType": "group-item",
+            "item": {
+              "groupSlug": "designContent",
+              "attrName": "module.advanced.contentAlignment",
+              "label": "Content Alignment",
+              "description": "Align content to the left, right or center.",
+              "priority": 10,
+              "render": true,
+              "features": {
+                "sticky": false,
+                "responsive": false,
+                "hover": false
+              },
+              "component": {
+                "type": "field",
+                "name": "divi/select",
+                "props": {
+                  "options": {
+                    "left": {
+                      "label": "Left"
+                    },
+                    "center": {
+                      "label": "Center"
+                    },
+                    "right": {
+                      "label": "Right"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "contentPadding": {
+            "groupType": "group-item",
+            "item": {
+              "groupSlug": "designContent",
+              "attrName": "module.advanced.contentPadding",
+              "label": "Content Padding",
+              "description": "Padding adds extra space to the inside of the element.",
+              "priority": 20,
+              "render": true,
+              "features": {
+                "sticky": false,
+                "responsive": true,
+                "hover": false
+              },
+              "component": {
+                "type": "field",
+                "name": "divi/spacing"
+              }
+            }
+          },
+          "contentBgColor": {
+            "groupType": "group-item",
+            "item": {
+              "groupSlug": "designContent",
+              "attrName": "module.advanced.contentBgColor",
+              "label": "Content Background",
+              "description": "Pick a background color for the content area.",
+              "priority": 30,
+              "render": true,
+              "features": {
+                "sticky": false,
+                "responsive": false,
+                "hover": true
+              },
+              "component": {
+                "type": "field",
+                "name": "divi/color-picker",
+                "props": {
+                  "isAlpha": true
+                }
+              }
+            }
+          },
+          "socialIconColor": {
+            "groupType": "group-item",
+            "item": {
+              "groupSlug": "designLinks",
+              "attrName": "module.advanced.socialIconColor",
+              "label": "Icon Color",
+              "description": "Here you can define a custom color for your icon.",
+              "priority": 10,
+              "render": true,
+              "features": {
+                "sticky": false,
+                "responsive": false,
+                "hover": true
+              },
+              "component": {
+                "type": "field",
+                "name": "divi/color-picker",
+                "props": {
+                  "isAlpha": true
+                }
+              }
+            }
+          },
+          "linksBg": {
+            "groupType": "group-item",
+            "item": {
+              "groupSlug": "designLinks",
+              "attrName": "module.advanced.linksBg",
+              "label": "Background",
+              "description": "Here you can define a custom background color for your icon.",
+              "priority": 20,
+              "render": true,
+              "features": {
+                "sticky": false,
+                "responsive": false,
+                "hover": true
+              },
+              "component": {
+                "type": "field",
+                "name": "divi/color-picker",
+                "props": {
+                  "isAlpha": true
+                }
+              }
+            }
+          },
+          "linksMarginBetween": {
+            "groupType": "group-item",
+            "item": {
+              "groupSlug": "designLinks",
+              "attrName": "module.advanced.linksMarginBetween",
+              "label": "Spacing Between",
+              "description": "Set how much space between social icons.",
+              "priority": 30,
+              "render": true,
+              "features": {
+                "sticky": false,
+                "responsive": false,
+                "hover": false
+              },
+              "component": {
+                "type": "field",
+                "name": "divi/range",
+                "props": {
+                  "min": 0,
+                  "max": 50,
+                  "step": 1,
+                  "defaultUnit": "px"
+                }
+              }
+            }
+          },
+          "linksMarginTop": {
+            "groupType": "group-item",
+            "item": {
+              "groupSlug": "designLinks",
+              "attrName": "module.advanced.linksMarginTop",
+              "label": "Top Spacing",
+              "description": "Set how much space the icons will take from the top.",
+              "priority": 40,
+              "render": true,
+              "features": {
+                "sticky": false,
+                "responsive": false,
+                "hover": false
+              },
+              "component": {
+                "type": "field",
+                "name": "divi/range",
+                "props": {
+                  "min": 0,
+                  "max": 100,
+                  "step": 1,
+                  "defaultUnit": "px"
+                }
+              }
+            }
+          },
+          "linksHeight": {
+            "groupType": "group-item",
+            "item": {
+              "groupSlug": "designLinks",
+              "attrName": "module.advanced.linksHeight",
+              "label": "Height",
+              "description": "Increase or decrease social icons box height.",
+              "priority": 50,
+              "render": true,
+              "features": {
+                "sticky": false,
+                "responsive": false,
+                "hover": false
+              },
+              "component": {
+                "type": "field",
+                "name": "divi/range",
+                "props": {
+                  "min": 10,
+                  "max": 100,
+                  "step": 1,
+                  "defaultUnit": "px"
+                }
+              }
+            }
+          },
+          "linksWidth": {
+            "groupType": "group-item",
+            "item": {
+              "groupSlug": "designLinks",
+              "attrName": "module.advanced.linksWidth",
+              "label": "Width",
+              "description": "Increase or decrease social icons box width.",
+              "priority": 60,
+              "render": true,
+              "features": {
+                "sticky": false,
+                "responsive": false,
+                "hover": false
+              },
+              "component": {
+                "type": "field",
+                "name": "divi/range",
+                "props": {
+                  "min": 10,
+                  "max": 100,
+                  "step": 1,
+                  "defaultUnit": "px"
+                }
+              }
+            }
+          },
+          "linksIconSize": {
+            "groupType": "group-item",
+            "item": {
+              "groupSlug": "designLinks",
+              "attrName": "module.advanced.linksIconSize",
+              "label": "Icon Size",
+              "description": "Control the size of the icon by increasing or decreasing the font size.",
+              "priority": 70,
+              "render": true,
+              "features": {
+                "sticky": false,
+                "responsive": false,
+                "hover": false
+              },
+              "component": {
+                "type": "field",
+                "name": "divi/range",
+                "props": {
+                  "min": 10,
+                  "max": 100,
+                  "step": 1,
+                  "defaultUnit": "px"
+                }
+              }
+            }
+          },
+          "linksRadius": {
+            "groupType": "group-item",
+            "item": {
+              "groupSlug": "designLinks",
+              "attrName": "module.advanced.linksRadius",
+              "label": "Border Radius",
+              "description": "Here you can control the corner radius of social icons.",
+              "priority": 80,
+              "render": true,
+              "features": {
+                "sticky": false,
+                "responsive": false,
+                "hover": false
+              },
+              "component": {
+                "type": "field",
+                "name": "divi/range",
+                "props": {
+                  "min": 0,
+                  "max": 200,
+                  "step": 1,
+                  "defaultUnit": "px"
+                }
+              }
+            }
+          },
+          "nameBottomSpacing": {
+            "groupType": "group-item",
+            "item": {
+              "groupSlug": "designName",
+              "attrName": "module.advanced.nameBottomSpacing",
+              "label": "Spacing Bottom",
+              "description": "Set how much space the element will take at the bottom.",
+              "priority": 90,
+              "render": true,
+              "features": {
+                "sticky": false,
+                "responsive": true,
+                "hover": false
+              },
+              "component": {
+                "type": "field",
+                "name": "divi/range",
+                "props": {
+                  "min": 0,
+                  "max": 100,
+                  "step": 1,
+                  "defaultUnit": "px",
+                  "allowedUnits": [
+                    "px"
+                  ]
+                }
+              }
+            }
+          },
+          "jobBottomSpacing": {
+            "groupType": "group-item",
+            "item": {
+              "groupSlug": "designJobTitle",
+              "attrName": "module.advanced.jobBottomSpacing",
+              "label": "Spacing Bottom",
+              "description": "Set how much space the element will take at the bottom.",
+              "priority": 90,
+              "render": true,
+              "features": {
+                "sticky": false,
+                "responsive": true,
+                "hover": false
+              },
+              "component": {
+                "type": "field",
+                "name": "divi/range",
+                "props": {
+                  "min": 0,
+                  "max": 100,
+                  "step": 1,
+                  "defaultUnit": "px",
+                  "allowedUnits": [
+                    "px"
+                  ]
+                }
+              }
+            }
+          },
+          "overlayOnHover": {
+            "groupType": "group-item",
+            "item": {
+              "groupSlug": "designOverlay",
+              "attrName": "module.advanced.overlayOnHover",
+              "label": "Overlay",
+              "description": "Enable overlay on hover.",
+              "priority": 10,
+              "render": true,
+              "features": {
+                "sticky": false,
+                "responsive": false,
+                "hover": false
+              },
+              "component": {
+                "type": "field",
+                "name": "divi/toggle"
+              }
+            }
+          },
+          "overlayHoverSpeed": {
+            "groupType": "group-item",
+            "item": {
+              "groupSlug": "designOverlay",
+              "attrName": "module.advanced.overlayHoverSpeed",
+              "label": "Speed",
+              "description": "Set how long it will take for the overlay to be visible.",
+              "priority": 20,
+              "render": true,
+              "features": {
+                "sticky": false,
+                "responsive": false,
+                "hover": false
+              },
+              "component": {
+                "type": "field",
+                "name": "divi/range",
+                "props": {
+                  "min": 0,
+                  "max": 5000,
+                  "step": 50,
+                  "defaultUnit": "ms",
+                  "allowedUnits": [
+                    "ms"
+                  ]
+                }
+              }
+            }
+          },
+          "overlayIcon": {
+            "groupType": "group-item",
+            "item": {
+              "groupSlug": "designOverlay",
+              "attrName": "module.advanced.overlayIcon",
+              "label": "Icon",
+              "description": "Select icon for the overlay.",
+              "priority": 30,
+              "render": true,
+              "features": {
+                "sticky": false,
+                "responsive": false,
+                "hover": false
+              },
+              "component": {
+                "type": "field",
+                "name": "divi/icon-picker"
+              }
+            }
+          },
+          "overlayIconColor": {
+            "groupType": "group-item",
+            "item": {
+              "groupSlug": "designOverlay",
+              "attrName": "module.advanced.overlayIconColor",
+              "label": "Icon Color",
+              "description": "Here you can define a custom color for your overlay icon.",
+              "priority": 40,
+              "render": true,
+              "features": {
+                "sticky": false,
+                "responsive": false,
+                "hover": true
+              },
+              "component": {
+                "type": "field",
+                "name": "divi/color-picker",
+                "props": {
+                  "isAlpha": true
+                }
+              }
+            }
+          },
+          "overlayIconSize": {
+            "groupType": "group-item",
+            "item": {
+              "groupSlug": "designOverlay",
+              "attrName": "module.advanced.overlayIconSize",
+              "label": "Icon Size",
+              "description": "Here you can define a icon size for your overlay icon.",
+              "priority": 50,
+              "render": true,
+              "features": {
+                "sticky": false,
+                "responsive": false,
+                "hover": false
+              },
+              "component": {
+                "type": "field",
+                "name": "divi/range",
+                "props": {
+                  "min": 0,
+                  "max": 200,
+                  "step": 1,
+                  "defaultUnit": "px"
+                }
+              }
+            }
+          },
+          "overlayIconOpacity": {
+            "groupType": "group-item",
+            "item": {
+              "groupSlug": "designOverlay",
+              "attrName": "module.advanced.overlayIconOpacity",
+              "label": "Icon Opacity",
+              "description": "Select the opacity of the overlay icon. Set the value from 0 - 1.",
+              "priority": 60,
+              "render": true,
+              "features": {
+                "sticky": false,
+                "responsive": false,
+                "hover": false
+              },
+              "component": {
+                "type": "field",
+                "name": "divi/range",
+                "props": {
+                  "min": 0,
+                  "max": 1,
+                  "step": 0.02
+                }
+              }
+            }
+          },
+          "overlayColor": {
+            "groupType": "group-item",
+            "item": {
+              "groupSlug": "designOverlay",
+              "attrName": "module.advanced.overlayColor",
+              "label": "Overlay Color",
+              "priority": 70,
+              "render": true,
+              "features": {
+                "sticky": false,
+                "responsive": false,
+                "hover": true
+              },
+              "component": {
+                "type": "field",
+                "name": "divi/color-picker",
+                "props": {
+                  "isAlpha": true
+                }
+              }
+            }
+          },
+          "useLightbox": {
+            "groupType": "group-item",
+            "item": {
+              "groupSlug": "contentMain",
+              "attrName": "module.advanced.useLightbox",
+              "label": "Open Photo in Lightbox",
+              "priority": 20,
+              "render": true,
+              "features": {
+                "sticky": false,
+                "responsive": false,
+                "hover": false
+              },
+              "component": {
+                "type": "field",
+                "name": "divi/toggle"
+              }
+            }
+          },
+          "website": {
+            "groupType": "group-item",
+            "item": {
+              "groupSlug": "contentLinks",
+              "attrName": "module.advanced.website",
+              "label": "Website URL",
+              "description": "Website URL of the team member.",
+              "priority": 10,
+              "render": true,
+              "features": {
+                "sticky": false,
+                "responsive": false,
+                "hover": false,
+                "dynamicContent": true
+              },
+              "component": {
+                "type": "field",
+                "name": "divi/text"
+              }
+            }
+          },
+          "email": {
+            "groupType": "group-item",
+            "item": {
+              "groupSlug": "contentLinks",
+              "attrName": "module.advanced.email",
+              "label": "Email Address",
+              "description": "Email address of the team member.",
+              "priority": 20,
+              "render": true,
+              "features": {
+                "sticky": false,
+                "responsive": false,
+                "hover": false,
+                "dynamicContent": true
+              },
+              "component": {
+                "type": "field",
+                "name": "divi/text"
+              }
+            }
+          },
+          "facebook": {
+            "groupType": "group-item",
+            "item": {
+              "groupSlug": "contentLinks",
+              "attrName": "module.advanced.facebook",
+              "label": "Facebook URL",
+              "description": "Facebook profile or page URL of the team member.",
+              "priority": 30,
+              "render": true,
+              "features": {
+                "sticky": false,
+                "responsive": false,
+                "hover": false,
+                "dynamicContent": true
+              },
+              "component": {
+                "type": "field",
+                "name": "divi/text"
+              }
+            }
+          },
+          "twitter": {
+            "groupType": "group-item",
+            "item": {
+              "groupSlug": "contentLinks",
+              "attrName": "module.advanced.twitter",
+              "label": "Twitter URL",
+              "description": "Twitter account URL of the team member.",
+              "priority": 40,
+              "render": true,
+              "features": {
+                "sticky": false,
+                "responsive": false,
+                "hover": false,
+                "dynamicContent": true
+              },
+              "component": {
+                "type": "field",
+                "name": "divi/text"
+              }
+            }
+          },
+          "instagram": {
+            "groupType": "group-item",
+            "item": {
+              "groupSlug": "contentLinks",
+              "attrName": "module.advanced.instagram",
+              "label": "Instagram URL",
+              "description": "Instagram account URL of the team member.",
+              "priority": 50,
+              "render": true,
+              "features": {
+                "sticky": false,
+                "responsive": false,
+                "hover": false,
+                "dynamicContent": true
+              },
+              "component": {
+                "type": "field",
+                "name": "divi/text"
+              }
+            }
+          },
+          "linkedin": {
+            "groupType": "group-item",
+            "item": {
+              "groupSlug": "contentLinks",
+              "attrName": "module.advanced.linkedin",
+              "label": "Linkedin URL",
+              "description": "Linkedin profile URL of the team member.",
+              "priority": 60,
+              "render": true,
+              "features": {
+                "sticky": false,
+                "responsive": false,
+                "hover": false,
+                "dynamicContent": true
+              },
+              "component": {
+                "type": "field",
+                "name": "divi/text"
+              }
+            }
+          },
+          "github": {
+            "groupType": "group-item",
+            "item": {
+              "groupSlug": "contentLinks",
+              "attrName": "module.advanced.github",
+              "label": "Github URL",
+              "description": "Github profile URL of the team member.",
+              "priority": 70,
+              "render": true,
+              "features": {
+                "sticky": false,
+                "responsive": false,
+                "hover": false,
+                "dynamicContent": true
+              },
+              "component": {
+                "type": "field",
+                "name": "divi/text"
+              }
+            }
+          },
+          "behance": {
+            "groupType": "group-item",
+            "item": {
+              "groupSlug": "contentLinks",
+              "attrName": "module.advanced.behance",
+              "label": "Behance URL",
+              "description": "Behance profile URL of the team member.",
+              "priority": 80,
+              "render": true,
+              "features": {
+                "sticky": false,
+                "responsive": false,
+                "hover": false,
+                "dynamicContent": true
+              },
+              "component": {
+                "type": "field",
+                "name": "divi/text"
+              }
+            }
+          },
+          "dribbble": {
+            "groupType": "group-item",
+            "item": {
+              "groupSlug": "contentLinks",
+              "attrName": "module.advanced.dribbble",
+              "label": "Dribbble URL",
+              "description": "Dribbble account URL of the team member.",
+              "priority": 90,
+              "render": true,
+              "features": {
+                "sticky": false,
+                "responsive": false,
+                "hover": false,
+                "dynamicContent": true
+              },
+              "component": {
+                "type": "field",
+                "name": "divi/text"
+              }
+            }
+          }
+        },
+        "decoration": {
+          "animation": {},
+          "layout": {},
+          "background": {},
+          "border": {},
+          "boxShadow": {},
+          "filters": {},
+          "overflow": {},
+          "position": {},
+          "scroll": {},
+          "spacing": {},
+          "sizing": {},
+          "sticky": {},
+          "transform": {},
+          "transition": {},
+          "zIndex": {},
+          "disabledOn": {}
+        }
+      },
+      "styleProps": {
+        "background": {
+          "selector": "{{selector}} .dtq-team",
+          "selectors": {
+            "desktop": {
+              "value": "{{selector}} .dtq-team",
+              "hover": "{{selector}} .dtq-team:hover"
+            }
+          }
+        },
+        "border": {
+          "selector": "{{selector}} .dtq-team",
+          "selectors": {
+            "desktop": {
+              "value": "{{selector}} .dtq-team",
+              "hover": "{{selector}} .dtq-team:hover"
+            }
+          }
+        },
+        "boxShadow": {
+          "selector": "{{selector}} .dtq-team",
+          "selectors": {
+            "desktop": {
+              "value": "{{selector}} .dtq-team",
+              "hover": "{{selector}} .dtq-team:hover"
+            }
+          }
+        },
+        "spacing": {
+          "selector": "{{selector}} .dtq-team",
+          "important": true
+        },
+        "sizing": {
+          "selector": "{{selector}} .dtq-team",
+          "important": true
+        }
+      }
+    },
+    "photo": {
+      "type": "object",
+      "selector": "{{selector}} .dtq-team figure img",
+      "attributes": {
+        "class": "dtq-swapped-img"
+      },
+      "default": {
+        "decoration": {
+          "border": {
+            "radius": {
+              "desktop": {
+                "value": {
+                  "topLeft": "0px",
+                  "topRight": "0px",
+                  "bottomLeft": "0px",
+                  "bottomRight": "0px"
+                }
+              }
+            }
+          }
+        }
+      },
+      "settings": {
+        "innerContent": {
+          "groupType": "group-item",
+          "item": {
+            "groupSlug": "contentMain",
+            "attrName": "photo.innerContent",
+            "label": "Photo",
+            "description": "Upload an image of the team member, or type in the URL to the image you would like to display for the team member.",
+            "priority": 10,
+            "render": true,
+            "features": {
+              "sticky": false,
+              "responsive": false,
+              "hover": false
+            },
+            "component": {
+              "type": "field",
+              "name": "divi/upload"
+            }
+          }
+        },
+        "advanced": {
+          "alt": {
+            "groupType": "group-item",
+            "item": {
+              "groupSlug": "contentMain",
+              "attrName": "photo.advanced.alt",
+              "label": "Photo Alt Text",
+              "description": "Define the HTML ALT text for your image here.",
+              "priority": 30,
+              "render": true,
+              "features": {
+                "sticky": false,
+                "responsive": false,
+                "hover": false
+              },
+              "component": {
+                "type": "field",
+                "name": "divi/text"
+              }
+            }
+          }
+        },
+        "decoration": {
+          "border": {
+            "groupType": "group-item",
+            "item": {
+              "groupSlug": "designPhoto",
+              "priority": 90,
+              "render": true,
+              "component": {
+                "name": "divi/border",
+                "type": "group",
+                "props": {
+                  "grouped": false,
+                  "fieldLabel": "Photo Border"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "contentWrap": {
+      "type": "object",
+      "selector": "{{selector}} .dtq-team-content",
+      "settings": {
+        "decoration": {
+          "border": {
+            "groupType": "group-item",
+            "item": {
+              "groupSlug": "designContent",
+              "priority": 40,
+              "render": true,
+              "component": {
+                "name": "divi/border",
+                "type": "group",
+                "props": {
+                  "grouped": false,
+                  "fieldLabel": "Content Border"
+                }
+              }
+            }
+          },
+          "boxShadow": {
+            "groupType": "group-item",
+            "item": {
+              "groupSlug": "designContent",
+              "priority": 50,
+              "render": true,
+              "component": {
+                "name": "divi/box-shadow",
+                "type": "group",
+                "props": {
+                  "grouped": false,
+                  "fieldLabel": "Content Box Shadow"
+                }
+              }
+            }
+          }
+        }
+      },
+      "default": {
+        "decoration": {
+          "border": {
+            "radius": {
+              "desktop": {
+                "value": {
+                  "topLeft": "0px",
+                  "topRight": "0px",
+                  "bottomLeft": "0px",
+                  "bottomRight": "0px"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "memberName": {
+      "type": "object",
+      "selector": "{{selector}} .dtq-team-content .dtq-team-content-name",
+      "elementType": "heading",
+      "tagName": "h3",
+      "inlineEditor": "plainText",
+      "attributes": {
+        "class": "dtq-team-content-name"
+      },
+      "childrenSanitizer": "et_core_esc_previously",
+      "default": {
+        "decoration": {
+          "font": {
+            "font": {
+              "desktop": {
+                "value": {
+                  "size": "22px"
+                }
+              }
+            }
+          }
+        }
+      },
+      "settings": {
+        "innerContent": {
+          "groupType": "group-item",
+          "item": {
+            "groupSlug": "contentMain",
+            "attrName": "memberName.innerContent",
+            "label": "Member Name",
+            "description": "The team member name.",
+            "priority": 40,
+            "render": true,
+            "component": {
+              "type": "field",
+              "name": "divi/text"
+            },
+            "features": {
+              "sticky": false,
+              "responsive": false,
+              "hover": false,
+              "dynamicContent": true
+            }
+          }
+        },
+        "decoration": {
+          "font": {
+            "groupType": "group-item",
+            "item": {
+              "groupSlug": "designName",
+              "priority": 10,
+              "render": true,
+              "component": {
+                "name": "divi/font",
+                "type": "group",
+                "props": {
+                  "grouped": false,
+                  "fieldLabel": "Name"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "jobTitle": {
+      "type": "object",
+      "selector": "{{selector}} .dtq-team-content .dtq-team-content-job-title",
+      "elementType": "content",
+      "tagName": "div",
+      "inlineEditor": "plainText",
+      "attributes": {
+        "class": "dtq-team-content-job-title"
+      },
+      "childrenSanitizer": "et_core_esc_previously",
+      "default": {
+        "decoration": {
+          "font": {
+            "font": {
+              "desktop": {
+                "value": {
+                  "size": "14px"
+                }
+              }
+            }
+          }
+        }
+      },
+      "settings": {
+        "innerContent": {
+          "groupType": "group-item",
+          "item": {
+            "groupSlug": "contentMain",
+            "attrName": "jobTitle.innerContent",
+            "label": "Job Title",
+            "description": "The job title or position of the team member.",
+            "priority": 50,
+            "render": true,
+            "component": {
+              "type": "field",
+              "name": "divi/text"
+            },
+            "features": {
+              "sticky": false,
+              "responsive": false,
+              "hover": false,
+              "dynamicContent": true
+            }
+          }
+        },
+        "decoration": {
+          "font": {
+            "groupType": "group-item",
+            "item": {
+              "groupSlug": "designJobTitle",
+              "priority": 10,
+              "render": true,
+              "component": {
+                "name": "divi/font",
+                "type": "group",
+                "props": {
+                  "grouped": false,
+                  "fieldLabel": "Job Title"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "shortBio": {
+      "type": "object",
+      "selector": "{{selector}} .dtq-team-content .dtq-team-content-bio",
+      "elementType": "content",
+      "tagName": "div",
+      "inlineEditor": "plainText",
+      "attributes": {
+        "class": "dtq-team-content-bio"
+      },
+      "childrenSanitizer": "et_core_esc_previously",
+      "default": {
+        "decoration": {
+          "font": {
+            "font": {
+              "desktop": {
+                "value": {
+                  "size": "14px"
+                }
+              }
+            }
+          }
+        }
+      },
+      "settings": {
+        "innerContent": {
+          "groupType": "group-item",
+          "item": {
+            "groupSlug": "contentMain",
+            "attrName": "shortBio.innerContent",
+            "label": "Member Bio",
+            "description": "Short biography of the team member.",
+            "priority": 60,
+            "render": true,
+            "component": {
+              "type": "field",
+              "name": "divi/textarea"
+            },
+            "features": {
+              "sticky": false,
+              "responsive": false,
+              "hover": false,
+              "dynamicContent": true
+            }
+          }
+        },
+        "decoration": {
+          "font": {
+            "groupType": "group-item",
+            "item": {
+              "groupSlug": "designBio",
+              "priority": 10,
+              "render": true,
+              "component": {
+                "name": "divi/font",
+                "type": "group",
+                "props": {
+                  "grouped": false,
+                  "fieldLabel": "Bio"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "customCssFields": {
+    "photo": {
+      "subName": "photo",
+      "selectorSuffix": " .dtq-team figure img"
+    },
+    "name": {
+      "subName": "name",
+      "selectorSuffix": " .dtq-team-content h3"
+    },
+    "jobTitle": {
+      "subName": "jobTitle",
+      "selectorSuffix": " .dtq-team-content .dtq-team-content-job-title"
+    },
+    "shortBio": {
+      "subName": "shortBio",
+      "selectorSuffix": " .dtq-team-content p"
+    },
+    "social": {
+      "subName": "social",
+      "selectorSuffix": " .dtq-team-social .dtq-icon"
+    }
+  },
+  "settings": {
+    "content": "auto",
+    "design": "auto",
+    "advanced": "auto",
+    "groups": {
+      "contentMain": {
+        "panel": "content",
+        "priority": 10,
+        "groupName": "content",
+        "component": {
+          "name": "divi/composite",
+          "props": {
+            "groupLabel": "Content"
+          }
+        }
+      },
+      "contentLinks": {
+        "panel": "content",
+        "priority": 20,
+        "groupName": "links",
+        "component": {
+          "name": "divi/composite",
+          "props": {
+            "groupLabel": "Social Links"
+          }
+        }
+      },
+      "contentSettings": {
+        "panel": "content",
+        "priority": 30,
+        "groupName": "settings",
+        "component": {
+          "name": "divi/composite",
+          "props": {
+            "groupLabel": "Settings"
+          }
+        }
+      },
+      "designPhoto": {
+        "panel": "design",
+        "priority": 10,
+        "groupName": "photo",
+        "component": {
+          "name": "divi/composite",
+          "props": {
+            "groupLabel": "Photo"
+          }
+        }
+      },
+      "designContent": {
+        "panel": "design",
+        "priority": 20,
+        "groupName": "content",
+        "component": {
+          "name": "divi/composite",
+          "props": {
+            "groupLabel": "Content"
+          }
+        }
+      },
+      "designOverlay": {
+        "panel": "design",
+        "priority": 30,
+        "groupName": "overlay",
+        "component": {
+          "name": "divi/composite",
+          "props": {
+            "groupLabel": "Overlay"
+          }
+        }
+      },
+      "designName": {
+        "panel": "design",
+        "priority": 40,
+        "groupName": "name",
+        "multiElements": true,
+        "component": {
+          "name": "divi/composite",
+          "props": {
+            "groupLabel": "Name",
+            "clipboardCategory": "style",
+            "presetGroup": "divi/font"
+          }
+        }
+      },
+      "designJobTitle": {
+        "panel": "design",
+        "priority": 50,
+        "groupName": "jobTitle",
+        "multiElements": true,
+        "component": {
+          "name": "divi/composite",
+          "props": {
+            "groupLabel": "Job Title",
+            "clipboardCategory": "style",
+            "presetGroup": "divi/font"
+          }
+        }
+      },
+      "designBio": {
+        "panel": "design",
+        "priority": 60,
+        "groupName": "bio",
+        "multiElements": true,
+        "component": {
+          "name": "divi/composite",
+          "props": {
+            "groupLabel": "Bio",
+            "clipboardCategory": "style",
+            "presetGroup": "divi/font"
+          }
+        }
+      },
+      "designLinks": {
+        "panel": "design",
+        "priority": 70,
+        "groupName": "links",
+        "component": {
+          "name": "divi/composite",
+          "props": {
+            "groupLabel": "Social Links"
+          }
+        }
+      }
+    }
+  }
+}

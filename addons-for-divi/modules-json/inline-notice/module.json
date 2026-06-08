@@ -1,0 +1,904 @@
+{
+  "name": "divitorque/inline-notice",
+  "d4Shortcode": "ba_alert",
+  "moduleClassName": "dtq_inline_notice",
+  "moduleOrderClassName": "dtq_inline_notice",
+  "title": "Alert Box",
+  "titles": "Alert Boxes",
+  "moduleIcon": "divitorque/inline-notice",
+  "category": "module",
+  "attributes": {
+    "module": {
+      "type": "object",
+      "selector": "{{selector}}",
+      "default": {
+        "advanced": {
+          "useIcon": {
+            "desktop": {
+              "value": "on"
+            }
+          },
+          "alertType": {
+            "desktop": {
+              "value": "danger"
+            }
+          },
+          "showDismiss": {
+            "desktop": {
+              "value": "on"
+            }
+          },
+          "alignItems": {
+            "desktop": {
+              "value": "center"
+            }
+          },
+          "iconSize": {
+            "desktop": {
+              "value": "40px"
+            }
+          },
+          "iconSpacing": {
+            "desktop": {
+              "value": "20px"
+            }
+          },
+          "useIconBox": {
+            "desktop": {
+              "value": "off"
+            }
+          },
+          "iconWidth": {
+            "desktop": {
+              "value": "80px"
+            }
+          },
+          "iconHeight": {
+            "desktop": {
+              "value": "80px"
+            }
+          },
+          "dismissSize": {
+            "desktop": {
+              "value": "22px"
+            }
+          },
+          "dismissSpacing": {
+            "desktop": {
+              "value": "20px"
+            }
+          },
+          "titleSpacing": {
+            "desktop": {
+              "value": "0px"
+            }
+          }
+        }
+      },
+      "settings": {
+        "meta": {
+          "adminLabel": {}
+        },
+        "advanced": {
+          "htmlAttributes": {},
+          "useIcon": {
+            "groupType": "group-item",
+            "item": {
+              "groupSlug": "contentSettings",
+              "attrName": "module.advanced.useIcon",
+              "label": "Use Icon",
+              "description": "Here you can choose whether icon set below should be used.",
+              "priority": 10,
+              "render": true,
+              "features": {
+                "sticky": false,
+                "responsive": false,
+                "hover": false
+              },
+              "component": {
+                "type": "field",
+                "name": "divi/toggle"
+              }
+            }
+          },
+          "icon": {
+            "groupType": "group-item",
+            "item": {
+              "groupSlug": "contentSettings",
+              "attrName": "module.advanced.icon",
+              "label": "Select Icon",
+              "description": "Here you can select the icon you would like to use for your inline notice.",
+              "priority": 20,
+              "render": true,
+              "features": {
+                "sticky": false,
+                "responsive": false,
+                "hover": false
+              },
+              "component": {
+                "type": "field",
+                "name": "divi/icon-picker"
+              }
+            }
+          },
+          "image": {
+            "groupType": "group-item",
+            "item": {
+              "groupSlug": "contentSettings",
+              "attrName": "module.advanced.image",
+              "label": "Upload Image",
+              "description": "Upload an image or type in the URL of the image you would like to display.",
+              "priority": 30,
+              "render": true,
+              "features": {
+                "sticky": false,
+                "responsive": false,
+                "hover": false,
+                "dynamicContent": true
+              },
+              "component": {
+                "type": "field",
+                "name": "divi/upload",
+                "props": {
+                  "type": "image"
+                }
+              }
+            }
+          },
+          "imageAlt": {
+            "groupType": "group-item",
+            "item": {
+              "groupSlug": "contentSettings",
+              "attrName": "module.advanced.imageAlt",
+              "label": "Image Alt",
+              "description": "Here you can define the HTML ALT text for your image.",
+              "priority": 40,
+              "render": true,
+              "features": {
+                "sticky": false,
+                "responsive": false,
+                "hover": false
+              },
+              "component": {
+                "type": "field",
+                "name": "divi/text"
+              }
+            }
+          },
+          "alertType": {
+            "groupType": "group-item",
+            "item": {
+              "groupSlug": "contentSettings",
+              "attrName": "module.advanced.alertType",
+              "label": "Type",
+              "description": "Here you can define different types of pre made alert layout.",
+              "priority": 50,
+              "render": true,
+              "features": {
+                "sticky": false,
+                "responsive": false,
+                "hover": false
+              },
+              "component": {
+                "type": "field",
+                "name": "divi/select",
+                "props": {
+                  "options": {
+                    "danger": {
+                      "label": "Danger"
+                    },
+                    "warning": {
+                      "label": "Warning"
+                    },
+                    "info": {
+                      "label": "Info"
+                    },
+                    "light": {
+                      "label": "Light"
+                    },
+                    "dark": {
+                      "label": "Dark"
+                    },
+                    "ltdark": {
+                      "label": "Light Dark"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "showDismiss": {
+            "groupType": "group-item",
+            "item": {
+              "groupSlug": "contentSettings",
+              "attrName": "module.advanced.showDismiss",
+              "label": "Show Dismiss Button",
+              "description": "Here you can choose whether dismiss button should be displayed.",
+              "priority": 60,
+              "render": true,
+              "features": {
+                "sticky": false,
+                "responsive": false,
+                "hover": false
+              },
+              "component": {
+                "type": "field",
+                "name": "divi/toggle"
+              }
+            }
+          },
+          "alignItems": {
+            "groupType": "group-item",
+            "item": {
+              "groupSlug": "contentSettings",
+              "attrName": "module.advanced.alignItems",
+              "label": "Content Vertical Alignment",
+              "description": "Here you can set the vertical content alignment.",
+              "priority": 70,
+              "render": true,
+              "features": {
+                "sticky": false,
+                "responsive": false,
+                "hover": false
+              },
+              "component": {
+                "type": "field",
+                "name": "divi/select",
+                "props": {
+                  "options": {
+                    "flex-start": {
+                      "label": "Top"
+                    },
+                    "center": {
+                      "label": "Center"
+                    },
+                    "flex-end": {
+                      "label": "Bottom"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "iconSize": {
+            "groupType": "group-item",
+            "item": {
+              "groupSlug": "designIcon",
+              "attrName": "module.advanced.iconSize",
+              "label": "Icon Size",
+              "description": "Here you can define a custom size for your alert icon.",
+              "priority": 10,
+              "render": true,
+              "features": {
+                "sticky": false,
+                "responsive": true,
+                "hover": false
+              },
+              "component": {
+                "type": "field",
+                "name": "divi/range",
+                "props": {
+                  "min": 0,
+                  "max": 200,
+                  "step": 1,
+                  "defaultUnit": "px",
+                  "allowedUnits": [
+                    "px",
+                    "em",
+                    "rem",
+                    "%",
+                    "vw",
+                    "vh"
+                  ]
+                }
+              }
+            }
+          },
+          "iconColor": {
+            "groupType": "group-item",
+            "item": {
+              "groupSlug": "designIcon",
+              "attrName": "module.advanced.iconColor",
+              "label": "Icon Color",
+              "description": "Pick a color to use for the icon.",
+              "priority": 20,
+              "render": true,
+              "features": {
+                "sticky": false,
+                "responsive": false,
+                "hover": true
+              },
+              "component": {
+                "type": "field",
+                "name": "divi/color-picker",
+                "props": {
+                  "isAlpha": true
+                }
+              }
+            }
+          },
+          "iconSpacing": {
+            "groupType": "group-item",
+            "item": {
+              "groupSlug": "designIcon",
+              "attrName": "module.advanced.iconSpacing",
+              "label": "Icon Spacing Gap",
+              "description": "Here you can define a custom spacing between icon and content.",
+              "priority": 30,
+              "render": true,
+              "features": {
+                "sticky": false,
+                "responsive": true,
+                "hover": false
+              },
+              "component": {
+                "type": "field",
+                "name": "divi/range",
+                "props": {
+                  "min": 0,
+                  "max": 200,
+                  "step": 1,
+                  "defaultUnit": "px",
+                  "allowedUnits": [
+                    "px",
+                    "em",
+                    "rem",
+                    "%",
+                    "vw",
+                    "vh"
+                  ]
+                }
+              }
+            }
+          },
+          "useIconBox": {
+            "groupType": "group-item",
+            "item": {
+              "groupSlug": "designIcon",
+              "attrName": "module.advanced.useIconBox",
+              "label": "Use Icon Box",
+              "description": "Here you can choose whether icon should display within a box.",
+              "priority": 40,
+              "render": true,
+              "features": {
+                "sticky": false,
+                "responsive": false,
+                "hover": false
+              },
+              "component": {
+                "type": "field",
+                "name": "divi/toggle"
+              }
+            }
+          },
+          "iconBackgroundColor": {
+            "groupType": "group-item",
+            "item": {
+              "groupSlug": "designIcon",
+              "attrName": "module.advanced.iconBackgroundColor",
+              "label": "Icon Box Background",
+              "description": "Pick a background color for the icon box.",
+              "priority": 50,
+              "render": true,
+              "features": {
+                "sticky": false,
+                "responsive": false,
+                "hover": true
+              },
+              "component": {
+                "type": "field",
+                "name": "divi/color-picker",
+                "props": {
+                  "isAlpha": true
+                }
+              }
+            }
+          },
+          "iconWidth": {
+            "groupType": "group-item",
+            "item": {
+              "groupSlug": "designIcon",
+              "attrName": "module.advanced.iconWidth",
+              "label": "Icon Box Width",
+              "description": "Define static width for the icon box.",
+              "priority": 60,
+              "render": true,
+              "features": {
+                "sticky": false,
+                "responsive": true,
+                "hover": false
+              },
+              "component": {
+                "type": "field",
+                "name": "divi/range",
+                "props": {
+                  "min": 1,
+                  "max": 500,
+                  "step": 1,
+                  "defaultUnit": "px",
+                  "allowedUnits": [
+                    "px",
+                    "em",
+                    "rem",
+                    "%",
+                    "vw",
+                    "vh"
+                  ]
+                }
+              }
+            }
+          },
+          "iconHeight": {
+            "groupType": "group-item",
+            "item": {
+              "groupSlug": "designIcon",
+              "attrName": "module.advanced.iconHeight",
+              "label": "Icon Box Height",
+              "description": "Define static height for the icon box.",
+              "priority": 70,
+              "render": true,
+              "features": {
+                "sticky": false,
+                "responsive": true,
+                "hover": false
+              },
+              "component": {
+                "type": "field",
+                "name": "divi/range",
+                "props": {
+                  "min": 1,
+                  "max": 400,
+                  "step": 1,
+                  "defaultUnit": "px",
+                  "allowedUnits": [
+                    "px",
+                    "em",
+                    "rem",
+                    "%",
+                    "vw",
+                    "vh"
+                  ]
+                }
+              }
+            }
+          },
+          "dismissSize": {
+            "groupType": "group-item",
+            "item": {
+              "groupSlug": "designDismiss",
+              "attrName": "module.advanced.dismissSize",
+              "label": "Dismiss Size",
+              "description": "Here you can define a custom size for the dismiss icon.",
+              "priority": 10,
+              "render": true,
+              "features": {
+                "sticky": false,
+                "responsive": true,
+                "hover": false
+              },
+              "component": {
+                "type": "field",
+                "name": "divi/range",
+                "props": {
+                  "min": 0,
+                  "max": 200,
+                  "step": 1,
+                  "defaultUnit": "px",
+                  "allowedUnits": [
+                    "px",
+                    "em",
+                    "rem",
+                    "%",
+                    "vw",
+                    "vh"
+                  ]
+                }
+              }
+            }
+          },
+          "dismissColor": {
+            "groupType": "group-item",
+            "item": {
+              "groupSlug": "designDismiss",
+              "attrName": "module.advanced.dismissColor",
+              "label": "Dismiss Color",
+              "description": "Pick a color to use for the dismiss icon.",
+              "priority": 20,
+              "render": true,
+              "features": {
+                "sticky": false,
+                "responsive": false,
+                "hover": true
+              },
+              "component": {
+                "type": "field",
+                "name": "divi/color-picker",
+                "props": {
+                  "isAlpha": true
+                }
+              }
+            }
+          },
+          "dismissSpacing": {
+            "groupType": "group-item",
+            "item": {
+              "groupSlug": "designDismiss",
+              "attrName": "module.advanced.dismissSpacing",
+              "label": "Dismiss Spacing Gap",
+              "description": "Here you can define a custom spacing between dismiss icon and content.",
+              "priority": 30,
+              "render": true,
+              "features": {
+                "sticky": false,
+                "responsive": true,
+                "hover": false
+              },
+              "component": {
+                "type": "field",
+                "name": "divi/range",
+                "props": {
+                  "min": 0,
+                  "max": 200,
+                  "step": 1,
+                  "defaultUnit": "px",
+                  "allowedUnits": [
+                    "px",
+                    "em",
+                    "rem",
+                    "%",
+                    "vw",
+                    "vh"
+                  ]
+                }
+              }
+            }
+          },
+          "titleSpacing": {
+            "groupType": "group-item",
+            "item": {
+              "groupSlug": "designTitleSpacing",
+              "attrName": "module.advanced.titleSpacing",
+              "label": "Title Spacing Bottom",
+              "description": "Here you can define a custom spacing at the bottom of the title.",
+              "priority": 10,
+              "render": true,
+              "features": {
+                "sticky": false,
+                "responsive": true,
+                "hover": false
+              },
+              "component": {
+                "type": "field",
+                "name": "divi/range",
+                "props": {
+                  "min": 0,
+                  "max": 100,
+                  "step": 1,
+                  "defaultUnit": "px",
+                  "allowedUnits": [
+                    "px",
+                    "em",
+                    "rem",
+                    "%",
+                    "vw",
+                    "vh"
+                  ]
+                }
+              }
+            }
+          }
+        },
+        "decoration": {
+          "animation": {},
+          "layout": {},
+          "background": {},
+          "border": {},
+          "boxShadow": {},
+          "filters": {},
+          "overflow": {},
+          "position": {},
+          "scroll": {},
+          "spacing": {},
+          "sizing": {},
+          "sticky": {},
+          "transform": {},
+          "transition": {},
+          "zIndex": {},
+          "disabledOn": {}
+        }
+      }
+    },
+    "icon": {
+      "type": "object",
+      "selector": "{{selector}} .dtq-alert-icon",
+      "default": {
+        "decoration": {
+          "border": {
+            "desktop": {
+              "value": {
+                "radius": {
+                  "sync": "on",
+                  "topLeft": "0px",
+                  "topRight": "0px",
+                  "bottomRight": "0px",
+                  "bottomLeft": "0px"
+                },
+                "styles": {
+                  "all": {
+                    "width": "0px",
+                    "color": "",
+                    "style": "solid"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "settings": {
+        "decoration": {
+          "border": {
+            "groupType": "group-item",
+            "item": {
+              "groupSlug": "designIconBorder",
+              "priority": 10,
+              "render": true,
+              "component": {
+                "type": "group",
+                "name": "divi/border",
+                "props": {
+                  "grouped": false,
+                  "fieldLabel": "Icon Box"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "title": {
+      "type": "object",
+      "selector": "{{selector}} .dtq-alert-title",
+      "elementType": "heading",
+      "tagName": "h5",
+      "inlineEditor": "plainText",
+      "attributes": {
+        "class": "dtq-alert-title"
+      },
+      "childrenSanitizer": "et_core_esc_previously",
+      "default": {
+        "decoration": {
+          "font": {
+            "font": {
+              "desktop": {
+                "value": {
+                  "headingLevel": "h5",
+                  "size": "16px",
+                  "lineHeight": "1.7em"
+                }
+              }
+            }
+          }
+        }
+      },
+      "settings": {
+        "innerContent": {
+          "groupType": "group-item",
+          "item": {
+            "groupSlug": "contentText",
+            "priority": 10,
+            "render": true,
+            "attrName": "title.innerContent",
+            "label": "Title",
+            "description": "Here you can define the title for your inline notice.",
+            "component": {
+              "type": "field",
+              "name": "divi/text"
+            },
+            "features": {
+              "sticky": false,
+              "responsive": false,
+              "hover": false,
+              "dynamicContent": true
+            }
+          }
+        },
+        "decoration": {
+          "font": {
+            "groupType": "group-item",
+            "item": {
+              "groupSlug": "designTitleText",
+              "priority": 10,
+              "render": true,
+              "component": {
+                "name": "divi/font",
+                "type": "group",
+                "props": {
+                  "grouped": false,
+                  "fieldLabel": "Title",
+                  "fields": {
+                    "headingLevel": {
+                      "render": true
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "content": {
+      "type": "object",
+      "selector": "{{selector}} .dtq-alert-desc",
+      "elementType": "richText",
+      "tagName": "div",
+      "inlineEditor": "richText",
+      "attributes": {
+        "class": "dtq-alert-desc"
+      },
+      "childrenSanitizer": "et_core_esc_previously",
+      "settings": {
+        "innerContent": {
+          "groupType": "group-item",
+          "item": {
+            "groupSlug": "contentText",
+            "priority": 20,
+            "render": true,
+            "attrName": "content.innerContent",
+            "label": "Description",
+            "description": "Here you can define the description for your inline notice.",
+            "component": {
+              "type": "field",
+              "name": "divi/richtext"
+            },
+            "features": {
+              "sticky": false,
+              "responsive": false,
+              "hover": false,
+              "dynamicContent": true
+            }
+          }
+        },
+        "decoration": {
+          "bodyFont": {
+            "groupType": "group-item",
+            "item": {
+              "groupSlug": "designBodyText",
+              "priority": 10,
+              "render": true,
+              "component": {
+                "name": "divi/font-body",
+                "type": "group",
+                "props": {
+                  "fieldLabel": "Body"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "customCssFields": {
+    "iconWrapper": {
+      "subName": "iconWrapper",
+      "selectorSuffix": " .dtq-alert .dtq-alert-icon"
+    },
+    "icon": {
+      "subName": "icon",
+      "selectorSuffix": " .dtq-alert .dtq-alert-icon .dtq-alert-icon-inner"
+    },
+    "title": {
+      "subName": "title",
+      "selectorSuffix": " .dtq-alert .dtq-alert-title"
+    },
+    "desc": {
+      "subName": "desc",
+      "selectorSuffix": " .dtq-alert .dtq-alert-desc"
+    }
+  },
+  "settings": {
+    "content": "auto",
+    "design": "auto",
+    "advanced": "auto",
+    "groups": {
+      "contentText": {
+        "panel": "content",
+        "priority": 10,
+        "groupName": "text",
+        "component": {
+          "name": "divi/composite",
+          "props": {
+            "groupLabel": "Text"
+          }
+        }
+      },
+      "contentSettings": {
+        "panel": "content",
+        "priority": 20,
+        "groupName": "settings",
+        "component": {
+          "name": "divi/composite",
+          "props": {
+            "groupLabel": "Settings"
+          }
+        }
+      },
+      "designTitleText": {
+        "panel": "design",
+        "priority": 10,
+        "groupName": "titleText",
+        "multiElements": true,
+        "component": {
+          "name": "divi/composite",
+          "props": {
+            "groupLabel": "Title Text",
+            "clipboardCategory": "style",
+            "presetGroup": "divi/font"
+          }
+        }
+      },
+      "designBodyText": {
+        "panel": "design",
+        "priority": 20,
+        "groupName": "bodyText",
+        "multiElements": true,
+        "component": {
+          "name": "divi/composite",
+          "props": {
+            "groupLabel": "Body Text",
+            "clipboardCategory": "style",
+            "presetGroup": "divi/font-body"
+          }
+        }
+      },
+      "designIcon": {
+        "panel": "design",
+        "priority": 30,
+        "groupName": "icon",
+        "component": {
+          "name": "divi/composite",
+          "props": {
+            "groupLabel": "Icon"
+          }
+        }
+      },
+      "designIconBorder": {
+        "panel": "design",
+        "priority": 35,
+        "groupName": "iconBorder",
+        "component": {
+          "name": "divi/composite",
+          "props": {
+            "groupLabel": "Icon Box Border",
+            "clipboardCategory": "style",
+            "presetGroup": "divi/border"
+          }
+        }
+      },
+      "designDismiss": {
+        "panel": "design",
+        "priority": 40,
+        "groupName": "dismiss",
+        "component": {
+          "name": "divi/composite",
+          "props": {
+            "groupLabel": "Dismiss"
+          }
+        }
+      },
+      "designTitleSpacing": {
+        "panel": "design",
+        "priority": 50,
+        "groupName": "titleSpacing",
+        "component": {
+          "name": "divi/composite",
+          "props": {
+            "groupLabel": "Title"
+          }
+        }
+      }
+    }
+  }
+}

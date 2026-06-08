@@ -132,23 +132,108 @@ function dt_backend_helpers($helpers)
 
 add_filter('et_fb_backend_helpers', 'dt_backend_helpers');
 
+/**
+ * Track which icon-font asset handles this request needs.
+ *
+ * @param string|null $add Handle to mark as needed (et_icons_fa|et_icons_all).
+ *
+ * @return string[] All handles marked needed so far.
+ */
+function dtq_needed_icon_assets($add = null)
+{
+	static $needed = array();
+	if (null !== $add) {
+		$needed[$add] = true;
+	}
+	return array_keys($needed);
+}
+
 function dtq_global_assets_list($global_list)
 {
 
-	$assets_list   = array();
 	$assets_prefix = et_get_dynamic_assets_path();
 
-	$assets_list['et_icons_fa'] = array(
-		'css' => "{$assets_prefix}/css/icons_fa_all.css",
+	$map = array(
+		'et_icons_fa'  => "{$assets_prefix}/css/icons_fa_all.css",
+		'et_icons_all' => "{$assets_prefix}/css/icons_all.css",
 	);
+
+	$assets_list = array();
+	foreach (dtq_needed_icon_assets() as $handle) {
+		if (isset($map[$handle])) {
+			$assets_list[$handle] = array('css' => $map[$handle]);
+		}
+	}
 
 	return array_merge($global_list, $assets_list);
 }
 
+/**
+ * Ensure the correct icon font is loaded for a rendered icon.
+ *
+ * FontAwesome icons need the FA font; every other (Divi) icon needs the full
+ * Divi icon font (icons_all) — otherwise only the small base set renders and
+ * extended glyphs (e.g. warning) fall back to a literal letter.
+ *
+ * @param string $icon_data Icon value (unicode, optionally "||type||weight").
+ */
 function dtq_inject_fa_icons($icon_data)
 {
-	if (function_exists('et_pb_maybe_fa_font_icon') && et_pb_maybe_fa_font_icon($icon_data)) {
-		add_filter('et_global_assets_list', 'dtq_global_assets_list');
-		add_filter('et_late_global_assets_list', 'dtq_global_assets_list');
+	$is_fa = function_exists('et_pb_maybe_fa_font_icon') && et_pb_maybe_fa_font_icon($icon_data);
+	dtq_needed_icon_assets($is_fa ? 'et_icons_fa' : 'et_icons_all');
+
+	add_filter('et_global_assets_list', 'dtq_global_assets_list');
+	add_filter('et_late_global_assets_list', 'dtq_global_assets_list');
+}
+
+/**
+ * Ensure the COMPLETE Divi icon font is available on the front end.
+ *
+ * Divi's "Dynamic Icons" performance feature only ships the small subset of
+ * glyphs it detects in the page content, and its detector does not see icons
+ * stored in our D5 module attributes. So extended Divi icons (warning, star,
+ * heart, …) have no glyph and fall back to a literal letter. When one of our
+ * modules has rendered a Divi icon, register the full ETmodules @font-face so
+ * every glyph resolves. The full font is a superset of the base one, so this
+ * is safe for base glyphs too.
+ */
+function dtq_print_full_icon_font()
+{
+	if (! in_array('et_icons_all', dtq_needed_icon_assets(), true)) {
+		return;
 	}
+
+	$font_url = get_template_directory_uri() . '/core/admin/fonts/modules/all/modules.woff';
+
+	printf(
+		'<style id="dtq-et-icons-all">@font-face{font-family:"ETmodules";font-display:swap;src:url("%s") format("woff");}</style>',
+		esc_url($font_url)
+	);
+}
+add_action('wp_footer', 'dtq_print_full_icon_font', 99);
+
+/**
+ * Normalize an icon unicode value for output.
+ *
+ * Divi 4 stored icons either as a unicode entity ("&#xe0XX;", optionally with
+ * "||type||weight") or as the legacy index format "%%NN%%". When a layout using
+ * the legacy format is migrated to Divi 5, that "%%NN%%" string can survive into
+ * the D5 icon object's `unicode` field and would otherwise render as raw glyphs.
+ * Resolve it the same way Divi 4 did, via et_pb_process_font_icon(). Values that
+ * are already a unicode entity are returned unchanged.
+ *
+ * @param string $unicode Raw unicode value from the icon attribute.
+ *
+ * @return string Unicode entity safe to print inside the icon <i>.
+ */
+function dtq_resolve_icon_unicode($unicode)
+{
+	$unicode = (string) $unicode;
+	if (false !== strpos($unicode, '%%') && function_exists('et_pb_process_font_icon')) {
+		// et_pb_process_font_icon() returns the entity with the ampersand already
+		// escaped ("&amp;#xe0XX;"); decode once so the raw entity ("&#xe0XX;") is
+		// what lands inside the icon <i> and the browser renders the glyph.
+		return html_entity_decode(et_pb_process_font_icon($unicode));
+	}
+	return $unicode;
 }

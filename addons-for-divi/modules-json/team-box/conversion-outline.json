@@ -1,0 +1,107 @@
+{
+  "advanced": {
+    "admin_label": "module.meta.adminLabel",
+    "animation": "module.decoration.animation",
+    "background": "module.decoration.background",
+    "borders": {
+      "default": "module.decoration.border",
+      "item": "module.decoration.border",
+      "content": "contentWrap.decoration.border",
+      "photo": "photo.decoration.border"
+    },
+    "box_shadow": {
+      "default": "module.decoration.boxShadow",
+      "main": "module.decoration.boxShadow",
+      "content": "contentWrap.decoration.boxShadow"
+    },
+    "disabled_on": "module.decoration.disabledOn",
+    "filters": {
+      "default": "module.decoration.filters"
+    },
+    "fonts": {
+      "name": "memberName.decoration.font",
+      "job_title": "jobTitle.decoration.font",
+      "short_bio": "shortBio.decoration.font"
+    },
+    "height": "module.decoration.sizing",
+    "margin_padding": "module.decoration.spacing",
+    "max_width": "module.decoration.sizing",
+    "module": "module.advanced.htmlAttributes",
+    "overflow": "module.decoration.overflow",
+    "position_fields": "module.decoration.position",
+    "scroll": "module.decoration.scroll",
+    "sticky": "module.decoration.sticky",
+    "text": "module.advanced.text",
+    "text_shadow": {
+      "default": "module.advanced.text.textShadow"
+    },
+    "transform": "module.decoration.transform",
+    "transition": "module.decoration.transition",
+    "width": "module.decoration.sizing",
+    "z_index": "module.decoration.zIndex"
+  },
+  "css": {
+    "after": "css.*.after",
+    "before": "css.*.before",
+    "free_form": "css.*.freeForm",
+    "main_element": "css.*.mainElement",
+    "photo": "css.*.photo",
+    "name": "css.*.name",
+    "job_title": "css.*.jobTitle",
+    "short_bio": "css.*.shortBio",
+    "social": "css.*.social"
+  },
+  "module": {
+    "photo": "photo.innerContent.*.src",
+    "photo_alt": "photo.innerContent.*.alt",
+    "use_lightbox": "module.advanced.useLightbox.*",
+    "member_name": "memberName.innerContent.*",
+    "job_title": "jobTitle.innerContent.*",
+    "short_bio": "shortBio.innerContent.*",
+    "website": "module.advanced.website.*",
+    "email": "module.advanced.email.*",
+    "facebook": "module.advanced.facebook.*",
+    "twitter": "module.advanced.twitter.*",
+    "instagram": "module.advanced.instagram.*",
+    "linkedin": "module.advanced.linkedin.*",
+    "github": "module.advanced.github.*",
+    "behance": "module.advanced.behance.*",
+    "dribbble": "module.advanced.dribbble.*",
+    "content_on_hover": "module.advanced.contentOnHover.*",
+    "hover_style": "module.advanced.hoverStyle.*",
+    "hover_speed": "module.advanced.hoverSpeed.*",
+    "links_position": "module.advanced.linksPosition.*",
+    "use_photo_abs": "module.advanced.usePhotoAbs.*",
+    "photo_placement": "module.advanced.photoPlacement.*",
+    "photo_offset_x": "module.advanced.photoOffsetX.*",
+    "photo_offset_y": "module.advanced.photoOffsetY.*",
+    "photo_width": "module.advanced.photoWidth.*",
+    "photo_height": "module.advanced.photoHeight.*",
+    "photo_alignment": "module.advanced.photoAlignment.*",
+    "photo_hover_animation": "module.advanced.photoHoverAnimation.*",
+    "content_alignment": "module.advanced.contentAlignment.*",
+    "content_padding": "module.advanced.contentPadding.*",
+    "social_icon_color": "module.advanced.socialIconColor.*",
+    "links_bg": "module.advanced.linksBg.*",
+    "links_margin_between": "module.advanced.linksMarginBetween.*",
+    "links_margin_top": "module.advanced.linksMarginTop.*",
+    "links_height": "module.advanced.linksHeight.*",
+    "links_width": "module.advanced.linksWidth.*",
+    "links_icon_size": "module.advanced.linksIconSize.*",
+    "links_radius": "module.advanced.linksRadius.*",
+    "name_bottom_spacing": "module.advanced.nameBottomSpacing.*",
+    "job_bottom_spacing": "module.advanced.jobBottomSpacing.*",
+    "content_bg_color": "module.advanced.contentBgColor.*",
+    "overlay_on_hover": "module.advanced.overlayOnHover.*",
+    "overlay_hover_speed": "module.advanced.overlayHoverSpeed.*",
+    "overlay_icon": "module.advanced.overlayIcon.*",
+    "overlay_icon_color": "module.advanced.overlayIconColor.*",
+    "overlay_icon_size": "module.advanced.overlayIconSize.*",
+    "overlay_icon_opacity": "module.advanced.overlayIconOpacity.*",
+    "overlay_color": "module.advanced.overlayColor.*"
+  },
+  "valueExpansionFunctionMap": {
+    "content_padding": "convertSpacing",
+    "overlay_icon": "convertFontIcon"
+  }
+}

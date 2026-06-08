@@ -1,0 +1,1399 @@
+{
+  "name": "divitorque/info-box",
+  "d4Shortcode": "ba_info_box",
+  "moduleClassName": "dtq_info_box",
+  "moduleOrderClassName": "dtq_info_box",
+  "title": "Feature Box",
+  "titles": "Feature Boxes",
+  "moduleIcon": "divitorque/info-box",
+  "category": "module",
+  "attributes": {
+    "module": {
+      "type": "object",
+      "selector": "{{selector}}",
+      "default": {
+        "advanced": {
+          "mainFigure": {
+            "desktop": {
+              "value": "image"
+            }
+          },
+          "useButton": {
+            "desktop": {
+              "value": "off"
+            }
+          },
+          "isNewWindow": {
+            "desktop": {
+              "value": "off"
+            }
+          },
+          "useOverlay": {
+            "desktop": {
+              "value": "off"
+            }
+          },
+          "voIconSize": {
+            "desktop": {
+              "value": "6rem"
+            }
+          },
+          "equalizeContent": {
+            "desktop": {
+              "value": "off"
+            }
+          },
+          "contentAlignment": {
+            "desktop": {
+              "value": "left"
+            }
+          },
+          "alignItems": {
+            "desktop": {
+              "value": "flex-start"
+            }
+          },
+          "contentPadding": {
+            "desktop": {
+              "value": "15px|0px|0px|0px"
+            }
+          },
+          "figurePlacement": {
+            "desktop": {
+              "value": "top"
+            }
+          },
+          "iconColor": {
+            "desktop": {
+              "value": "#333"
+            }
+          },
+          "iconSize": {
+            "desktop": {
+              "value": "45px"
+            }
+          },
+          "imageWidth": {
+            "desktop": {
+              "value": "100%"
+            }
+          },
+          "imageHeight": {
+            "desktop": {
+              "value": "auto"
+            }
+          },
+          "imgAnim": {
+            "desktop": {
+              "value": "none"
+            }
+          },
+          "iconPadding": {
+            "desktop": {
+              "value": "0px|0px|0px|0px"
+            }
+          },
+          "useIconBox": {
+            "desktop": {
+              "value": "off"
+            }
+          },
+          "iconBg": {
+            "desktop": {
+              "value": "transparent"
+            }
+          },
+          "iconHeight": {
+            "desktop": {
+              "value": "80px"
+            }
+          },
+          "iconWidth": {
+            "desktop": {
+              "value": "80px"
+            }
+          },
+          "btnSpacingTop": {
+            "desktop": {
+              "value": "15px"
+            }
+          },
+          "titleBottomSpacing": {
+            "desktop": {
+              "value": "10px"
+            }
+          },
+          "overlayOnHover": {
+            "desktop": {
+              "value": "on"
+            }
+          },
+          "overlayHoverSpeed": {
+            "desktop": {
+              "value": "500ms"
+            }
+          },
+          "overlayIconColor": {
+            "desktop": {
+              "value": "#2EA3F2"
+            }
+          },
+          "overlayIconSize": {
+            "desktop": {
+              "value": "32px"
+            }
+          },
+          "overlayIconOpacity": {
+            "desktop": {
+              "value": "1"
+            }
+          },
+          "overlayColor": {
+            "desktop": {
+              "value": "#2EA3F2"
+            }
+          }
+        }
+      },
+      "settings": {
+        "meta": {
+          "adminLabel": {}
+        },
+        "advanced": {
+          "htmlAttributes": {},
+          "mainFigure": {
+            "groupType": "group-item",
+            "item": {
+              "groupSlug": "contentMedia",
+              "attrName": "module.advanced.mainFigure",
+              "label": "Media Element",
+              "description": "Choose icon/image/video for the info box media.",
+              "priority": 10,
+              "render": true,
+              "features": {
+                "sticky": false,
+                "responsive": false,
+                "hover": false
+              },
+              "component": {
+                "type": "field",
+                "name": "divi/select",
+                "props": {
+                  "options": {
+                    "image": {
+                      "label": "Image"
+                    },
+                    "video": {
+                      "label": "Video"
+                    },
+                    "icon": {
+                      "label": "Icon"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "photo": {
+            "groupType": "group-item",
+            "item": {
+              "groupSlug": "contentMedia",
+              "attrName": "module.advanced.photo",
+              "label": "Upload Image",
+              "description": "Upload an image or type in the URL of the image you would like to display for the info box.",
+              "priority": 20,
+              "render": true,
+              "features": {
+                "sticky": false,
+                "responsive": true,
+                "hover": true,
+                "dynamicContent": true
+              },
+              "component": {
+                "type": "field",
+                "name": "divi/upload"
+              }
+            }
+          },
+          "video": {
+            "groupType": "group-item",
+            "item": {
+              "groupSlug": "contentMedia",
+              "attrName": "module.advanced.video",
+              "label": "Video MP4 File Or Youtube URL",
+              "description": "Upload your desired video in .MP4 format, or type in the URL to the video you would like to display.",
+              "priority": 30,
+              "render": true,
+              "features": {
+                "sticky": false,
+                "responsive": false,
+                "hover": false
+              },
+              "component": {
+                "type": "field",
+                "name": "divi/upload"
+              }
+            }
+          },
+          "icon": {
+            "groupType": "group-item",
+            "item": {
+              "groupSlug": "contentMedia",
+              "attrName": "module.advanced.icon",
+              "label": "Select Icon",
+              "description": "Select icon for the info box.",
+              "priority": 40,
+              "render": true,
+              "features": {
+                "sticky": false,
+                "responsive": false,
+                "hover": false
+              },
+              "component": {
+                "type": "field",
+                "name": "divi/icon-picker"
+              }
+            }
+          },
+          "useButton": {
+            "groupType": "group-item",
+            "item": {
+              "groupSlug": "contentButton",
+              "attrName": "module.advanced.useButton",
+              "label": "Use Button",
+              "description": "Here you can choose whether button should be used.",
+              "priority": 10,
+              "render": true,
+              "features": {
+                "sticky": false,
+                "responsive": false,
+                "hover": false
+              },
+              "component": {
+                "type": "field",
+                "name": "divi/toggle"
+              }
+            }
+          },
+          "buttonText": {
+            "groupType": "group-item",
+            "item": {
+              "groupSlug": "contentButton",
+              "attrName": "module.advanced.buttonText",
+              "label": "Button Text",
+              "description": "Define the button text for your info box.",
+              "priority": 20,
+              "render": true,
+              "features": {
+                "sticky": false,
+                "responsive": false,
+                "hover": false,
+                "dynamicContent": true
+              },
+              "component": {
+                "type": "field",
+                "name": "divi/text"
+              }
+            }
+          },
+          "buttonLink": {
+            "groupType": "group-item",
+            "item": {
+              "groupSlug": "contentButton",
+              "attrName": "module.advanced.buttonLink",
+              "label": "Button Link",
+              "description": "Define the button link url for your info box.",
+              "priority": 30,
+              "render": true,
+              "features": {
+                "sticky": false,
+                "responsive": false,
+                "hover": false,
+                "dynamicContent": true
+              },
+              "component": {
+                "type": "field",
+                "name": "divi/text"
+              }
+            }
+          },
+          "isNewWindow": {
+            "groupType": "group-item",
+            "item": {
+              "groupSlug": "contentButton",
+              "attrName": "module.advanced.isNewWindow",
+              "label": "Open Button link in new window",
+              "description": "Here you can choose whether button URL should be opened in new window.",
+              "priority": 40,
+              "render": true,
+              "features": {
+                "sticky": false,
+                "responsive": false,
+                "hover": false
+              },
+              "component": {
+                "type": "field",
+                "name": "divi/toggle"
+              }
+            }
+          },
+          "useOverlay": {
+            "groupType": "group-item",
+            "item": {
+              "groupSlug": "designOverlay",
+              "attrName": "module.advanced.useOverlay",
+              "label": "Use Overlay Image",
+              "description": "Here you can choose whether video overlay should be used.",
+              "priority": 10,
+              "render": true,
+              "features": {
+                "sticky": false,
+                "responsive": false,
+                "hover": false
+              },
+              "component": {
+                "type": "field",
+                "name": "divi/toggle"
+              }
+            }
+          },
+          "voSrc": {
+            "groupType": "group-item",
+            "item": {
+              "groupSlug": "designOverlay",
+              "attrName": "module.advanced.voSrc",
+              "label": "Overlay Image",
+              "description": "Upload an overlay image or type in the URL of the image you would like to display.",
+              "priority": 20,
+              "render": true,
+              "features": {
+                "sticky": false,
+                "responsive": false,
+                "hover": false
+              },
+              "component": {
+                "type": "field",
+                "name": "divi/upload"
+              }
+            }
+          },
+          "voIconColor": {
+            "groupType": "group-item",
+            "item": {
+              "groupSlug": "designOverlay",
+              "attrName": "module.advanced.voIconColor",
+              "label": "Overlay Icon Color",
+              "description": "Here you can define a custom color for your overlay icon.",
+              "priority": 30,
+              "render": true,
+              "features": {
+                "sticky": false,
+                "responsive": false,
+                "hover": false
+              },
+              "component": {
+                "type": "field",
+                "name": "divi/color-picker",
+                "props": {
+                  "isAlpha": true
+                }
+              }
+            }
+          },
+          "voIconSize": {
+            "groupType": "group-item",
+            "item": {
+              "groupSlug": "designOverlay",
+              "attrName": "module.advanced.voIconSize",
+              "label": "Overlay Icon Size",
+              "description": "Here you can define a custom size for your overlay icon.",
+              "priority": 40,
+              "render": true,
+              "features": {
+                "sticky": false,
+                "responsive": true,
+                "hover": false
+              },
+              "component": {
+                "type": "field",
+                "name": "divi/range",
+                "props": {
+                  "min": 0,
+                  "max": 200,
+                  "step": 1,
+                  "defaultUnit": "px"
+                }
+              }
+            }
+          },
+          "voBg": {
+            "groupType": "group-item",
+            "item": {
+              "groupSlug": "designOverlay",
+              "attrName": "module.advanced.voBg",
+              "label": "Overlay background",
+              "description": "Here you can define a custom background color for your overlay.",
+              "priority": 50,
+              "render": true,
+              "features": {
+                "sticky": false,
+                "responsive": false,
+                "hover": false
+              },
+              "component": {
+                "type": "field",
+                "name": "divi/color-picker",
+                "props": {
+                  "isAlpha": true
+                }
+              }
+            }
+          },
+          "overlayOnHover": {
+            "groupType": "group-item",
+            "item": {
+              "groupSlug": "designOverlay",
+              "attrName": "module.advanced.overlayOnHover",
+              "label": "Overlay",
+              "description": "Enable overlay on hover.",
+              "priority": 60,
+              "render": true,
+              "features": {
+                "sticky": false,
+                "responsive": false,
+                "hover": false
+              },
+              "component": {
+                "type": "field",
+                "name": "divi/toggle"
+              }
+            }
+          },
+          "overlayHoverSpeed": {
+            "groupType": "group-item",
+            "item": {
+              "groupSlug": "designOverlay",
+              "attrName": "module.advanced.overlayHoverSpeed",
+              "label": "Speed",
+              "description": "Set how long it will take for the overlay to be visible.",
+              "priority": 70,
+              "render": true,
+              "features": {
+                "sticky": false,
+                "responsive": false,
+                "hover": false
+              },
+              "component": {
+                "type": "field",
+                "name": "divi/range",
+                "props": {
+                  "min": 0,
+                  "max": 5000,
+                  "step": 50,
+                  "defaultUnit": "ms",
+                  "allowedUnits": [
+                    "ms"
+                  ]
+                }
+              }
+            }
+          },
+          "overlayIcon": {
+            "groupType": "group-item",
+            "item": {
+              "groupSlug": "designOverlay",
+              "attrName": "module.advanced.overlayIcon",
+              "label": "Icon",
+              "description": "Select icon for the overlay.",
+              "priority": 80,
+              "render": true,
+              "features": {
+                "sticky": false,
+                "responsive": false,
+                "hover": false
+              },
+              "component": {
+                "type": "field",
+                "name": "divi/icon-picker"
+              }
+            }
+          },
+          "overlayIconColor": {
+            "groupType": "group-item",
+            "item": {
+              "groupSlug": "designOverlay",
+              "attrName": "module.advanced.overlayIconColor",
+              "label": "Icon Color",
+              "description": "Here you can define a custom color for your overlay icon.",
+              "priority": 90,
+              "render": true,
+              "features": {
+                "sticky": false,
+                "responsive": false,
+                "hover": true
+              },
+              "component": {
+                "type": "field",
+                "name": "divi/color-picker",
+                "props": {
+                  "isAlpha": true
+                }
+              }
+            }
+          },
+          "overlayIconSize": {
+            "groupType": "group-item",
+            "item": {
+              "groupSlug": "designOverlay",
+              "attrName": "module.advanced.overlayIconSize",
+              "label": "Icon Size",
+              "description": "Here you can define a icon size for your overlay icon.",
+              "priority": 100,
+              "render": true,
+              "features": {
+                "sticky": false,
+                "responsive": false,
+                "hover": true
+              },
+              "component": {
+                "type": "field",
+                "name": "divi/range",
+                "props": {
+                  "min": 0,
+                  "max": 200,
+                  "step": 1,
+                  "defaultUnit": "px"
+                }
+              }
+            }
+          },
+          "overlayIconOpacity": {
+            "groupType": "group-item",
+            "item": {
+              "groupSlug": "designOverlay",
+              "attrName": "module.advanced.overlayIconOpacity",
+              "label": "Icon Opacity",
+              "description": "Select the opacity of the overlay icon. Set the value from 0 - 1. The lower value, the more transparent.",
+              "priority": 110,
+              "render": true,
+              "features": {
+                "sticky": false,
+                "responsive": false,
+                "hover": true
+              },
+              "component": {
+                "type": "field",
+                "name": "divi/range",
+                "props": {
+                  "min": 0,
+                  "max": 1,
+                  "step": 0.02,
+                  "unitless": true
+                }
+              }
+            }
+          },
+          "overlayColor": {
+            "groupType": "group-item",
+            "item": {
+              "groupSlug": "designOverlay",
+              "attrName": "module.advanced.overlayColor",
+              "label": "Overlay Color",
+              "description": "Here you can define a custom overlay color.",
+              "priority": 120,
+              "render": true,
+              "features": {
+                "sticky": false,
+                "responsive": false,
+                "hover": true
+              },
+              "component": {
+                "type": "field",
+                "name": "divi/color-picker",
+                "props": {
+                  "isAlpha": true
+                }
+              }
+            }
+          },
+          "equalizeContent": {
+            "groupType": "group-item",
+            "item": {
+              "groupSlug": "designLayout",
+              "attrName": "module.advanced.equalizeContent",
+              "label": "Equalize Content Height",
+              "description": "Here you can equalize content heights for the both sides.",
+              "priority": 10,
+              "render": true,
+              "features": {
+                "sticky": false,
+                "responsive": false,
+                "hover": false
+              },
+              "component": {
+                "type": "field",
+                "name": "divi/toggle"
+              }
+            }
+          },
+          "contentAlignment": {
+            "groupType": "group-item",
+            "item": {
+              "groupSlug": "designLayout",
+              "attrName": "module.advanced.contentAlignment",
+              "label": "Content Alignment",
+              "description": "Align content to the left, right or center.",
+              "priority": 20,
+              "render": true,
+              "features": {
+                "sticky": false,
+                "responsive": true,
+                "hover": false
+              },
+              "component": {
+                "type": "field",
+                "name": "divi/select",
+                "props": {
+                  "options": {
+                    "left": {
+                      "label": "Left"
+                    },
+                    "center": {
+                      "label": "Center"
+                    },
+                    "right": {
+                      "label": "Right"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "alignItems": {
+            "groupType": "group-item",
+            "item": {
+              "groupSlug": "designLayout",
+              "attrName": "module.advanced.alignItems",
+              "label": "Vertical Alignment",
+              "description": "Choose content vertical alignment.",
+              "priority": 30,
+              "render": true,
+              "features": {
+                "sticky": false,
+                "responsive": false,
+                "hover": false
+              },
+              "component": {
+                "type": "field",
+                "name": "divi/select",
+                "props": {
+                  "options": {
+                    "flex-start": {
+                      "label": "Top"
+                    },
+                    "center": {
+                      "label": "Center"
+                    },
+                    "flex-end": {
+                      "label": "Bottom"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "contentPadding": {
+            "groupType": "group-item",
+            "item": {
+              "groupSlug": "designLayout",
+              "attrName": "module.advanced.contentPadding",
+              "label": "Content Padding",
+              "description": "Define custom content padding for the info box content.",
+              "priority": 40,
+              "render": true,
+              "features": {
+                "sticky": false,
+                "responsive": true,
+                "hover": false
+              },
+              "component": {
+                "type": "field",
+                "name": "divi/spacing"
+              }
+            }
+          },
+          "figurePlacement": {
+            "groupType": "group-item",
+            "item": {
+              "groupSlug": "designMedia",
+              "attrName": "module.advanced.figurePlacement",
+              "label": "Media Placement",
+              "description": "Choose icon/image placement.",
+              "priority": 10,
+              "render": true,
+              "features": {
+                "sticky": false,
+                "responsive": false,
+                "hover": false
+              },
+              "component": {
+                "type": "field",
+                "name": "divi/select",
+                "props": {
+                  "options": {
+                    "top": {
+                      "label": "Top"
+                    },
+                    "left": {
+                      "label": "Left"
+                    },
+                    "right": {
+                      "label": "Right"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "iconColor": {
+            "groupType": "group-item",
+            "item": {
+              "groupSlug": "designMedia",
+              "attrName": "module.advanced.iconColor",
+              "label": "Icon Color",
+              "description": "Here you can define a custom color for your icon.",
+              "priority": 20,
+              "render": true,
+              "features": {
+                "sticky": false,
+                "responsive": false,
+                "hover": true
+              },
+              "component": {
+                "type": "field",
+                "name": "divi/color-picker",
+                "props": {
+                  "isAlpha": true
+                }
+              }
+            }
+          },
+          "iconSize": {
+            "groupType": "group-item",
+            "item": {
+              "groupSlug": "designMedia",
+              "attrName": "module.advanced.iconSize",
+              "label": "Icon Size",
+              "description": "Here you can define a custom size for your icon.",
+              "priority": 30,
+              "render": true,
+              "features": {
+                "sticky": false,
+                "responsive": true,
+                "hover": false
+              },
+              "component": {
+                "type": "field",
+                "name": "divi/range",
+                "props": {
+                  "min": 0,
+                  "max": 400,
+                  "step": 1,
+                  "defaultUnit": "px"
+                }
+              }
+            }
+          },
+          "imageWidth": {
+            "groupType": "group-item",
+            "item": {
+              "groupSlug": "designMedia",
+              "attrName": "module.advanced.imageWidth",
+              "label": "Image Width",
+              "description": "Here you can define a custom width for your image.",
+              "priority": 40,
+              "render": true,
+              "features": {
+                "sticky": false,
+                "responsive": true,
+                "hover": false
+              },
+              "component": {
+                "type": "field",
+                "name": "divi/range",
+                "props": {
+                  "min": 0,
+                  "max": 100,
+                  "step": 1,
+                  "defaultUnit": "%"
+                }
+              }
+            }
+          },
+          "imageHeight": {
+            "groupType": "group-item",
+            "item": {
+              "groupSlug": "designMedia",
+              "attrName": "module.advanced.imageHeight",
+              "label": "Image Height",
+              "description": "Here you can define a custom height for your image.",
+              "priority": 50,
+              "render": true,
+              "features": {
+                "sticky": false,
+                "responsive": true,
+                "hover": false
+              },
+              "component": {
+                "type": "field",
+                "name": "divi/range",
+                "props": {
+                  "min": 0,
+                  "max": 1000,
+                  "step": 1,
+                  "defaultUnit": "px"
+                }
+              }
+            }
+          },
+          "imgAnim": {
+            "groupType": "group-item",
+            "item": {
+              "groupSlug": "designMedia",
+              "attrName": "module.advanced.imgAnim",
+              "label": "Hover Animation",
+              "description": "Select image hover animation.",
+              "priority": 60,
+              "render": true,
+              "features": {
+                "sticky": false,
+                "responsive": false,
+                "hover": false
+              },
+              "component": {
+                "type": "field",
+                "name": "divi/select",
+                "props": {
+                  "options": {
+                    "none": {
+                      "label": "None"
+                    },
+                    "zoom-in": {
+                      "label": "Zoom In"
+                    },
+                    "zoom-out": {
+                      "label": "Zoom Out"
+                    },
+                    "pulse": {
+                      "label": "Pulse"
+                    },
+                    "bounce": {
+                      "label": "Bounce"
+                    },
+                    "flash": {
+                      "label": "Flash"
+                    },
+                    "rubberBand": {
+                      "label": "Rubber Band"
+                    },
+                    "shake": {
+                      "label": "Shake"
+                    },
+                    "swing": {
+                      "label": "Swing"
+                    },
+                    "tada": {
+                      "label": "Tada"
+                    },
+                    "wobble": {
+                      "label": "Wobble"
+                    },
+                    "jello": {
+                      "label": "Jello"
+                    },
+                    "heartBeat": {
+                      "label": "Heart Beat"
+                    },
+                    "bounceIn": {
+                      "label": "Bounce In"
+                    },
+                    "fadeIn": {
+                      "label": "Fade In"
+                    },
+                    "flip": {
+                      "label": "Flip"
+                    },
+                    "lightSpeedIn": {
+                      "label": "Light Speed In"
+                    },
+                    "rotateIn": {
+                      "label": "Rotate In"
+                    },
+                    "slideInUp": {
+                      "label": "Slide In Up"
+                    },
+                    "slideInDown": {
+                      "label": "Slide In Down"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "iconPadding": {
+            "groupType": "group-item",
+            "item": {
+              "groupSlug": "designMedia",
+              "attrName": "module.advanced.iconPadding",
+              "label": "Icon Padding",
+              "description": "Define custom icon padding for the info box icon.",
+              "priority": 70,
+              "render": true,
+              "features": {
+                "sticky": false,
+                "responsive": true,
+                "hover": false
+              },
+              "component": {
+                "type": "field",
+                "name": "divi/spacing"
+              }
+            }
+          },
+          "useIconBox": {
+            "groupType": "group-item",
+            "item": {
+              "groupSlug": "designMedia",
+              "attrName": "module.advanced.useIconBox",
+              "label": "Use Icon Box",
+              "description": "Here you can choose whether icon box should be used.",
+              "priority": 80,
+              "render": true,
+              "features": {
+                "sticky": false,
+                "responsive": false,
+                "hover": false
+              },
+              "component": {
+                "type": "field",
+                "name": "divi/toggle"
+              }
+            }
+          },
+          "iconBg": {
+            "groupType": "group-item",
+            "item": {
+              "groupSlug": "designMedia",
+              "attrName": "module.advanced.iconBg",
+              "label": "Icon Background",
+              "description": "Here you can define a custom background color for your icon.",
+              "priority": 90,
+              "render": true,
+              "features": {
+                "sticky": false,
+                "responsive": false,
+                "hover": true
+              },
+              "component": {
+                "type": "field",
+                "name": "divi/color-picker",
+                "props": {
+                  "isAlpha": true
+                }
+              }
+            }
+          },
+          "iconHeight": {
+            "groupType": "group-item",
+            "item": {
+              "groupSlug": "designMedia",
+              "attrName": "module.advanced.iconHeight",
+              "label": "Icon Height",
+              "description": "Here you can define a custom height for your icon box.",
+              "priority": 100,
+              "render": true,
+              "features": {
+                "sticky": false,
+                "responsive": true,
+                "hover": false
+              },
+              "component": {
+                "type": "field",
+                "name": "divi/range",
+                "props": {
+                  "min": 0,
+                  "max": 200,
+                  "step": 1,
+                  "defaultUnit": "px"
+                }
+              }
+            }
+          },
+          "iconWidth": {
+            "groupType": "group-item",
+            "item": {
+              "groupSlug": "designMedia",
+              "attrName": "module.advanced.iconWidth",
+              "label": "Icon Width",
+              "description": "Here you can define a custom width for your icon box.",
+              "priority": 110,
+              "render": true,
+              "features": {
+                "sticky": false,
+                "responsive": true,
+                "hover": false
+              },
+              "component": {
+                "type": "field",
+                "name": "divi/range",
+                "props": {
+                  "min": 0,
+                  "max": 200,
+                  "step": 1,
+                  "defaultUnit": "px"
+                }
+              }
+            }
+          },
+          "btnSpacingTop": {
+            "groupType": "group-item",
+            "item": {
+              "groupSlug": "designButton",
+              "attrName": "module.advanced.btnSpacingTop",
+              "label": "Button Spacing Top",
+              "description": "Here you can define a custom spacing at the top of the button.",
+              "priority": 10,
+              "render": true,
+              "features": {
+                "sticky": false,
+                "responsive": true,
+                "hover": false
+              },
+              "component": {
+                "type": "field",
+                "name": "divi/range",
+                "props": {
+                  "min": 0,
+                  "max": 100,
+                  "step": 1,
+                  "defaultUnit": "px",
+                  "allowedUnits": [
+                    "px"
+                  ]
+                }
+              }
+            }
+          },
+          "titleBottomSpacing": {
+            "groupType": "group-item",
+            "item": {
+              "groupSlug": "designTitle",
+              "attrName": "module.advanced.titleBottomSpacing",
+              "label": "Title Spacing Bottom",
+              "description": "Here you can define a custom spacing at the bottom of the title.",
+              "priority": 10,
+              "render": true,
+              "features": {
+                "sticky": false,
+                "responsive": true,
+                "hover": false
+              },
+              "component": {
+                "type": "field",
+                "name": "divi/range",
+                "props": {
+                  "min": 0,
+                  "max": 100,
+                  "step": 1,
+                  "defaultUnit": "px"
+                }
+              }
+            }
+          }
+        },
+        "decoration": {
+          "animation": {},
+          "layout": {},
+          "background": {},
+          "border": {},
+          "boxShadow": {},
+          "filters": {},
+          "overflow": {},
+          "position": {},
+          "scroll": {},
+          "spacing": {},
+          "sizing": {},
+          "sticky": {},
+          "transform": {},
+          "transition": {},
+          "zIndex": {},
+          "disabledOn": {}
+        }
+      },
+      "styleProps": {
+        "border": {
+          "selector": "{{selector}} .dtq-info-box-figure, {{selector}} .dtq-info-box-icon, {{selector}} .dtq-content-video",
+          "selectors": {
+            "desktop": {
+              "value": "{{selector}} .dtq-info-box-figure, {{selector}} .dtq-info-box-icon, {{selector}} .dtq-content-video",
+              "hover": "{{selector}} .dtq-info-box-figure:hover, {{selector}} .dtq-info-box-icon:hover, {{selector}} .dtq-content-video:hover"
+            }
+          }
+        }
+      }
+    },
+    "title": {
+      "type": "object",
+      "selector": "{{selector}} .dtq-info-box-title",
+      "elementType": "heading",
+      "tagName": "h2",
+      "inlineEditor": "plainText",
+      "attributes": {
+        "class": "dtq-info-box-title"
+      },
+      "childrenSanitizer": "et_core_esc_previously",
+      "default": {
+        "decoration": {
+          "font": {
+            "font": {
+              "desktop": {
+                "value": {
+                  "headingLevel": "h2",
+                  "size": "26px",
+                  "lineHeight": "1em"
+                }
+              }
+            }
+          }
+        }
+      },
+      "settings": {
+        "innerContent": {
+          "groupType": "group-item",
+          "item": {
+            "groupSlug": "contentText",
+            "priority": 10,
+            "render": true,
+            "attrName": "title.innerContent",
+            "label": "Title",
+            "description": "Define the title for your info box.",
+            "component": {
+              "type": "field",
+              "name": "divi/text"
+            },
+            "features": {
+              "sticky": false,
+              "responsive": false,
+              "hover": false,
+              "dynamicContent": true
+            }
+          }
+        },
+        "decoration": {
+          "font": {
+            "groupType": "group-item",
+            "item": {
+              "groupSlug": "designTitle",
+              "priority": 20,
+              "render": true,
+              "component": {
+                "name": "divi/font",
+                "type": "group",
+                "props": {
+                  "grouped": false,
+                  "fieldLabel": "Title",
+                  "fields": {
+                    "headingLevel": {
+                      "render": true
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "content": {
+      "type": "object",
+      "selector": "{{selector}} .dtq-mce-content",
+      "elementType": "richText",
+      "tagName": "div",
+      "inlineEditor": "richText",
+      "attributes": {
+        "class": "dtq-mce-content"
+      },
+      "childrenSanitizer": "et_core_esc_previously",
+      "settings": {
+        "innerContent": {
+          "groupType": "group-item",
+          "item": {
+            "groupSlug": "contentText",
+            "priority": 20,
+            "render": true,
+            "attrName": "content.innerContent",
+            "label": "Content",
+            "description": "Define the body content for your info box.",
+            "component": {
+              "type": "field",
+              "name": "divi/richtext"
+            },
+            "features": {
+              "sticky": false,
+              "responsive": false,
+              "hover": false,
+              "dynamicContent": true
+            }
+          }
+        },
+        "decoration": {
+          "bodyFont": {}
+        }
+      }
+    },
+    "button": {
+      "type": "object",
+      "selector": "{{selector}} .dtq-btn-info-box",
+      "elementType": "button",
+      "attributes": {
+        "class": "dtq-btn-info-box"
+      },
+      "settings": {
+        "decoration": {
+          "button": {
+            "groupType": "group-item",
+            "item": {
+              "groupSlug": "designButton",
+              "priority": 20,
+              "render": true,
+              "component": {
+                "name": "divi/button",
+                "type": "group"
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "customCssFields": {
+    "image": {
+      "subName": "image",
+      "selectorSuffix": " .dtq-info-box .dtq-info-box-figure img"
+    },
+    "icon": {
+      "subName": "icon",
+      "selectorSuffix": " .dtq-info-box-icon i"
+    },
+    "video": {
+      "subName": "video",
+      "selectorSuffix": " .dtq-content-video video"
+    },
+    "title": {
+      "subName": "title",
+      "selectorSuffix": " .dtq-info-box-title"
+    },
+    "button": {
+      "subName": "button",
+      "selectorSuffix": " .dtq-btn-info-box"
+    }
+  },
+  "settings": {
+    "content": "auto",
+    "design": "auto",
+    "advanced": "auto",
+    "groups": {
+      "contentText": {
+        "panel": "content",
+        "priority": 10,
+        "groupName": "text",
+        "component": {
+          "name": "divi/composite",
+          "props": {
+            "groupLabel": "Text"
+          }
+        }
+      },
+      "contentMedia": {
+        "panel": "content",
+        "priority": 20,
+        "groupName": "media",
+        "component": {
+          "name": "divi/composite",
+          "props": {
+            "groupLabel": "Media"
+          }
+        }
+      },
+      "contentButton": {
+        "panel": "content",
+        "priority": 30,
+        "groupName": "button",
+        "component": {
+          "name": "divi/composite",
+          "props": {
+            "groupLabel": "Button"
+          }
+        }
+      },
+      "designLayout": {
+        "panel": "design",
+        "priority": 10,
+        "groupName": "contentLayout",
+        "component": {
+          "name": "divi/composite",
+          "props": {
+            "groupLabel": "Content Layout"
+          }
+        }
+      },
+      "designMedia": {
+        "panel": "design",
+        "priority": 20,
+        "groupName": "media",
+        "component": {
+          "name": "divi/composite",
+          "props": {
+            "groupLabel": "Media"
+          }
+        }
+      },
+      "designOverlay": {
+        "panel": "design",
+        "priority": 30,
+        "groupName": "overlay",
+        "component": {
+          "name": "divi/composite",
+          "props": {
+            "groupLabel": "Overlay"
+          }
+        }
+      },
+      "designTitle": {
+        "panel": "design",
+        "priority": 40,
+        "groupName": "title",
+        "multiElements": true,
+        "component": {
+          "name": "divi/composite",
+          "props": {
+            "groupLabel": "Title",
+            "clipboardCategory": "style",
+            "presetGroup": "divi/font"
+          }
+        }
+      },
+      "designButton": {
+        "panel": "design",
+        "priority": 60,
+        "groupName": "button",
+        "component": {
+          "name": "divi/composite",
+          "props": {
+            "groupLabel": "Button"
+          }
+        }
+      }
+    }
+  }
+}

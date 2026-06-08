@@ -13,14 +13,46 @@
       "selector": "{{selector}}",
       "default": {
         "advanced": {
-          "useLink":           { "desktop": { "value": "off" } },
-          "gradientType":      { "desktop": { "value": "linear" } },
-          "primaryColor":      { "desktop": { "value": "#5b2cff" } },
-          "primaryLocation":   { "desktop": { "value": "11" } },
-          "secondaryColor":    { "desktop": { "value": "#e02b20" } },
-          "secondaryLocation": { "desktop": { "value": "37" } },
-          "gradientAngle":     { "desktop": { "value": "130" } },
-          "radialPosition":    { "desktop": { "value": "center center" } }
+          "useLink": {
+            "desktop": {
+              "value": "off"
+            }
+          },
+          "gradientType": {
+            "desktop": {
+              "value": "linear"
+            }
+          },
+          "primaryColor": {
+            "desktop": {
+              "value": "#5b2cff"
+            }
+          },
+          "primaryLocation": {
+            "desktop": {
+              "value": "11"
+            }
+          },
+          "secondaryColor": {
+            "desktop": {
+              "value": "#e02b20"
+            }
+          },
+          "secondaryLocation": {
+            "desktop": {
+              "value": "37"
+            }
+          },
+          "gradientAngle": {
+            "desktop": {
+              "value": "130"
+            }
+          },
+          "radialPosition": {
+            "desktop": {
+              "value": "center center"
+            }
+          }
         }
       },
       "settings": {
@@ -88,8 +120,12 @@
                 "name": "divi/checkboxes",
                 "props": {
                   "options": {
-                    "linkTarget": { "label": "Open in new window" },
-                    "linkRel": { "label": "Add nofollow" }
+                    "linkTarget": {
+                      "label": "Open in new window"
+                    },
+                    "linkRel": {
+                      "label": "Add nofollow"
+                    }
                   }
                 }
               }
@@ -114,8 +150,12 @@
                 "name": "divi/select",
                 "props": {
                   "options": {
-                    "linear": { "label": "Linear" },
-                    "radial": { "label": "Radial" }
+                    "linear": {
+                      "label": "Linear"
+                    },
+                    "radial": {
+                      "label": "Radial"
+                    }
                   }
                 }
               }
@@ -255,15 +295,33 @@
                 "name": "divi/select",
                 "props": {
                   "options": {
-                    "center center": { "label": "Center Center" },
-                    "bottom center": { "label": "Bottom Center" },
-                    "bottom left":   { "label": "Bottom Left" },
-                    "bottom right":  { "label": "Bottom Right" },
-                    "center left":   { "label": "Center Left" },
-                    "center right":  { "label": "Center Right" },
-                    "top center":    { "label": "Top Center" },
-                    "top left":      { "label": "Top Left" },
-                    "top right":     { "label": "Top Right" }
+                    "center center": {
+                      "label": "Center Center"
+                    },
+                    "bottom center": {
+                      "label": "Bottom Center"
+                    },
+                    "bottom left": {
+                      "label": "Bottom Left"
+                    },
+                    "bottom right": {
+                      "label": "Bottom Right"
+                    },
+                    "center left": {
+                      "label": "Center Left"
+                    },
+                    "center right": {
+                      "label": "Center Right"
+                    },
+                    "top center": {
+                      "label": "Top Center"
+                    },
+                    "top left": {
+                      "label": "Top Left"
+                    },
+                    "top right": {
+                      "label": "Top Right"
+                    }
                   }
                 }
               }
@@ -272,6 +330,7 @@
         },
         "decoration": {
           "animation": {},
+          "layout": {},
           "background": {},
           "border": {},
           "boxShadow": {},
@@ -325,7 +384,10 @@
             "attrName": "title.innerContent",
             "label": "Title Text",
             "description": "Define the title text. Use <br> for line break.",
-            "component": { "type": "field", "name": "divi/textarea" },
+            "component": {
+              "type": "field",
+              "name": "divi/textarea"
+            },
             "features": {
               "sticky": false,
               "responsive": false,
@@ -348,7 +410,9 @@
                   "grouped": false,
                   "fieldLabel": "Title",
                   "fields": {
-                    "headingLevel": { "render": true }
+                    "headingLevel": {
+                      "render": true
+                    }
                   }
                 }
               }
@@ -375,7 +439,9 @@
         "groupName": "text",
         "component": {
           "name": "divi/composite",
-          "props": { "groupLabel": "Text" }
+          "props": {
+            "groupLabel": "Text"
+          }
         }
       },
       "contentLink": {
@@ -384,7 +450,9 @@
         "groupName": "link",
         "component": {
           "name": "divi/composite",
-          "props": { "groupLabel": "Link" }
+          "props": {
+            "groupLabel": "Link"
+          }
         }
       },
       "designGradient": {
@@ -393,7 +461,9 @@
         "groupName": "gradient",
         "component": {
           "name": "divi/composite",
-          "props": { "groupLabel": "Gradient" }
+          "props": {
+            "groupLabel": "Gradient"
+          }
         }
       },
       "designText": {
@@ -411,9 +481,5 @@
         }
       }
     }
-  },
-  "wrapper": {
-    "status": true,
-    "tag": "div"
   }
 }
