@@ -1,0 +1,352 @@
+{
+  "name": "divitorque/skill-bar-item",
+  "d4Shortcode": "ba_skill_bar_child",
+  "moduleClassName": "dtq_skill_bar_item",
+  "moduleOrderClassName": "dtq_skill_bar_item",
+  "title": "Skill Bar Item",
+  "titles": "Skill Bar Items",
+  "moduleIcon": "divitorque/skill-bar-item",
+  "category": "child-module",
+  "attributes": {
+    "module": {
+      "type": "object",
+      "selector": "{{selector}}",
+      "default": {
+        "advanced": {
+          "useName": { "desktop": { "value": "on" } },
+          "level": { "desktop": { "value": "30%" } },
+          "isHideLevel": { "desktop": { "value": "off" } },
+          "textPlacement": { "desktop": { "value": "in" } },
+          "barHeight": { "desktop": { "value": "30px" } },
+          "barRadius": { "desktop": { "value": "40px" } },
+          "textSpacing": { "desktop": { "value": "12px" } },
+          "levelBgColor": { "desktop": { "value": "#0e40ff" } },
+          "barBgColor": { "desktop": { "value": "#b2bad1" } }
+        }
+      },
+      "settings": {
+        "meta": { "adminLabel": {} },
+        "advanced": {
+          "htmlAttributes": {},
+          "useName": {
+            "groupType": "group-item",
+            "item": {
+              "groupSlug": "contentMain",
+              "attrName": "module.advanced.useName",
+              "label": "Use Name",
+              "description": "Here you can choose whether name text should be used.",
+              "priority": 10,
+              "render": true,
+              "features": { "sticky": false, "responsive": false, "hover": false },
+              "component": { "type": "field", "name": "divi/toggle" }
+            }
+          },
+          "level": {
+            "groupType": "group-item",
+            "item": {
+              "groupSlug": "contentMain",
+              "attrName": "module.advanced.level",
+              "label": "Level",
+              "description": "Define the level text for the skill bar.",
+              "priority": 30,
+              "render": true,
+              "features": { "sticky": false, "responsive": false, "hover": false },
+              "component": { "type": "field", "name": "divi/range", "props": { "min": 0, "max": 100, "step": 1, "defaultUnit": "%", "allowedUnits": ["%"] } }
+            }
+          },
+          "isHideLevel": {
+            "groupType": "group-item",
+            "item": {
+              "groupSlug": "contentMain",
+              "attrName": "module.advanced.isHideLevel",
+              "label": "Hide Level Text",
+              "description": "Here you can choose whether level text should be hidden.",
+              "priority": 40,
+              "render": true,
+              "features": { "sticky": false, "responsive": false, "hover": false },
+              "component": { "type": "field", "name": "divi/toggle" }
+            }
+          },
+          "textPlacement": {
+            "groupType": "group-item",
+            "item": {
+              "groupSlug": "contentMain",
+              "attrName": "module.advanced.textPlacement",
+              "label": "Text Placement",
+              "description": "Define text placement for the skill bar.",
+              "priority": 50,
+              "render": true,
+              "features": { "sticky": false, "responsive": false, "hover": false },
+              "component": { "type": "field", "name": "divi/select", "props": { "options": { "in": { "label": "Inside" }, "out": { "label": "Outside" } } } }
+            }
+          },
+          "levelBgColor": {
+            "groupType": "group-item",
+            "item": {
+              "groupSlug": "designBar",
+              "attrName": "module.advanced.levelBgColor",
+              "label": "Level Background",
+              "description": "Adjust the background color of the level (filled) bar.",
+              "priority": 10,
+              "render": true,
+              "features": { "sticky": false, "responsive": false, "hover": true },
+              "component": { "type": "field", "name": "divi/color-picker", "props": { "isAlpha": true } }
+            }
+          },
+          "barBgColor": {
+            "groupType": "group-item",
+            "item": {
+              "groupSlug": "designBar",
+              "attrName": "module.advanced.barBgColor",
+              "label": "Bar Background",
+              "description": "Adjust the background color of the bar.",
+              "priority": 20,
+              "render": true,
+              "features": { "sticky": false, "responsive": false, "hover": true },
+              "component": { "type": "field", "name": "divi/color-picker", "props": { "isAlpha": true } }
+            }
+          },
+          "barHeight": {
+            "groupType": "group-item",
+            "item": {
+              "groupSlug": "designBar",
+              "attrName": "module.advanced.barHeight",
+              "label": "Bar Height",
+              "description": "Define static height for the bar.",
+              "priority": 30,
+              "render": true,
+              "features": { "sticky": false, "responsive": true, "hover": false },
+              "component": { "type": "field", "name": "divi/range", "props": { "min": 0, "max": 100, "step": 1, "defaultUnit": "px" } }
+            }
+          },
+          "barRadius": {
+            "groupType": "group-item",
+            "item": {
+              "groupSlug": "designBar",
+              "attrName": "module.advanced.barRadius",
+              "label": "Bar Border Radius",
+              "description": "Define border radius value for the bar.",
+              "priority": 40,
+              "render": true,
+              "features": { "sticky": false, "responsive": false, "hover": false },
+              "component": { "type": "field", "name": "divi/range", "props": { "min": 0, "max": 100, "step": 1, "defaultUnit": "px" } }
+            }
+          },
+          "textSpacing": {
+            "groupType": "group-item",
+            "item": {
+              "groupSlug": "designBar",
+              "attrName": "module.advanced.textSpacing",
+              "label": "Outer Text Spacing",
+              "description": "Define spacing for the outer text.",
+              "priority": 50,
+              "render": true,
+              "features": { "sticky": false, "responsive": false, "hover": false },
+              "component": { "type": "field", "name": "divi/range", "props": { "min": 0, "max": 100, "step": 1, "defaultUnit": "px" } }
+            }
+          },
+          "nameSpacing": {
+            "groupType": "group-item",
+            "item": {
+              "groupSlug": "designName",
+              "attrName": "module.advanced.nameSpacing",
+              "label": "Name Spacing",
+              "description": "Define name spacing from the edge.",
+              "priority": 20,
+              "render": true,
+              "features": { "sticky": false, "responsive": true, "hover": false },
+              "component": { "type": "field", "name": "divi/range", "props": { "min": 0, "max": 100, "step": 1, "defaultUnit": "px" } }
+            }
+          },
+          "levelSpacing": {
+            "groupType": "group-item",
+            "item": {
+              "groupSlug": "designLevel",
+              "attrName": "module.advanced.levelSpacing",
+              "label": "Level Spacing",
+              "description": "Define level spacing from the edge.",
+              "priority": 20,
+              "render": true,
+              "features": { "sticky": false, "responsive": true, "hover": false },
+              "component": { "type": "field", "name": "divi/range", "props": { "min": 0, "max": 100, "step": 1, "defaultUnit": "px" } }
+            }
+          }
+        },
+        "decoration": {
+          "animation": {},
+          "layout": {},
+          "background": {},
+          "border": {},
+          "boxShadow": {},
+          "filters": {},
+          "spacing": {},
+          "transform": {},
+          "transition": {},
+          "disabledOn": {}
+        }
+      }
+    },
+    "name": {
+      "type": "object",
+      "selector": ".dtq-skill {{selector}} .dtq-skillbar__name",
+      "elementType": "content",
+      "tagName": "span",
+      "inlineEditor": "plainText",
+      "attributes": {
+        "class": "dtq-skillbar__name"
+      },
+      "childrenSanitizer": "et_core_esc_previously",
+      "default": {
+        "decoration": {
+          "font": {
+            "font": {
+              "desktop": {
+                "value": {
+                  "size": "14px",
+                  "lineHeight": "1em"
+                }
+              }
+            }
+          }
+        }
+      },
+      "settings": {
+        "innerContent": {
+          "groupType": "group-item",
+          "item": {
+            "groupSlug": "contentMain",
+            "priority": 20,
+            "render": true,
+            "attrName": "name.innerContent",
+            "label": "Name",
+            "description": "Define the name text for the skill bar.",
+            "component": { "type": "field", "name": "divi/text" },
+            "features": { "sticky": false, "responsive": false, "hover": false, "dynamicContent": true }
+          }
+        },
+        "decoration": {
+          "font": {
+            "groupType": "group-item",
+            "item": {
+              "groupSlug": "designName",
+              "priority": 10,
+              "render": true,
+              "component": {
+                "name": "divi/font",
+                "type": "group",
+                "props": {
+                  "grouped": false,
+                  "fieldLabel": "Name",
+                  "hideTextAlign": true
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "level": {
+      "type": "object",
+      "selector": ".dtq-skill {{selector}} .dtq-skillbar__level",
+      "default": {
+        "decoration": {
+          "font": {
+            "font": {
+              "desktop": {
+                "value": {
+                  "size": "14px",
+                  "lineHeight": "1em"
+                }
+              }
+            }
+          }
+        }
+      },
+      "settings": {
+        "decoration": {
+          "font": {
+            "groupType": "group-item",
+            "item": {
+              "groupSlug": "designLevel",
+              "priority": 10,
+              "render": true,
+              "component": {
+                "name": "divi/font",
+                "type": "group",
+                "props": {
+                  "grouped": false,
+                  "fieldLabel": "Level",
+                  "hideTextAlign": true
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "bar": {
+      "type": "object",
+      "selector": "{{selector}} .dtq-skillbar__wrapper",
+      "settings": {
+        "decoration": {
+          "boxShadow": {
+            "groupType": "group-item",
+            "item": {
+              "groupSlug": "designBar",
+              "priority": 60,
+              "render": true,
+              "attrName": "bar.decoration.boxShadow",
+              "component": {
+                "name": "divi/box-shadow",
+                "type": "group",
+                "props": {
+                  "grouped": false,
+                  "fieldLabel": "Bar"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "customCssFields": {
+    "nameText": { "subName": "nameText", "selectorSuffix": " .dtq-skillbar__name" },
+    "levelText": { "subName": "levelText", "selectorSuffix": " .dtq-skillbar__level" },
+    "level": { "subName": "level", "selectorSuffix": " .dtq-skillbar__inner" },
+    "bar": { "subName": "bar", "selectorSuffix": " .dtq-skillbar__wrapper" }
+  },
+  "settings": {
+    "content": "auto",
+    "design": "auto",
+    "advanced": "auto",
+    "groups": {
+      "contentMain": {
+        "panel": "content",
+        "priority": 10,
+        "groupName": "main",
+        "component": { "name": "divi/composite", "props": { "groupLabel": "Content" } }
+      },
+      "designBar": {
+        "panel": "design",
+        "priority": 10,
+        "groupName": "bar",
+        "component": { "name": "divi/composite", "props": { "groupLabel": "Bar Style" } }
+      },
+      "designName": {
+        "panel": "design",
+        "priority": 20,
+        "groupName": "name",
+        "multiElements": true,
+        "component": { "name": "divi/composite", "props": { "groupLabel": "Name Text", "clipboardCategory": "style", "presetGroup": "divi/font" } }
+      },
+      "designLevel": {
+        "panel": "design",
+        "priority": 30,
+        "groupName": "level",
+        "multiElements": true,
+        "component": { "name": "divi/composite", "props": { "groupLabel": "Level Text", "clipboardCategory": "style", "presetGroup": "divi/font" } }
+      }
+    }
+  }
+}

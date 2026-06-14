@@ -4,7 +4,7 @@ Tags: divi, divi builder, divi modules, page builder, divi theme
 Requires at least: 5.0
 Tested up to: 7.0
 Requires PHP: 7.4
-Stable tag: 4.4.0
+Stable tag: 4.5.0
 License: GPLv3
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 
@@ -18,7 +18,7 @@ Divi Torque Lite adds 25+ free, beautifully designed modules to the Divi Builder
 
 = Now Divi 5 ready =
 
-Divi Torque is being rebuilt for the new Divi 5 Builder. As of 4.4.0, eight modules run natively in Divi 5 — Gradient Heading, Divider, Icon Box, Inline Notice, Dual Button, Info Box, Info Card, and Team Member — with more arriving in each release. Your existing Divi 4 layouts migrate automatically and keep working exactly as before.
+Divi Torque is being rebuilt for the new Divi 5 Builder. As of 4.5.0, every static module runs natively in Divi 5 — Gradient Heading, Divider, Icon Box, Inline Notice, Dual Button, Info Box, Info Card, Team Member, Image Carousel, Logo Carousel, Logo Grid, Skill Bar, Business Hours, Scroll Image, Review Box, Flip Card, Testimonial, Number Counter, Before & After Slider, Video Modal, and Animated Text. Your existing Divi 4 layouts migrate automatically and keep working exactly as before.
 
 = Why Divi Torque Lite? =
 
@@ -98,7 +98,7 @@ Yes. Divi Torque Lite extends Divi, so it requires the Divi Theme or the Divi Bu
 
 = Is Divi Torque Lite compatible with Divi 5? =
 
-Yes. As of version 4.4.0 we ship eight native Divi 5 modules (Gradient Heading, Divider, Icon Box, Inline Notice, Dual Button, Info Box, Info Card, and Team Member), with more in each release. All existing Divi 4 modules continue to work in both Divi 4 and Divi 5.
+Yes. As of version 4.5.0 every static module is native in the Divi 5 Builder, with the dynamic modules (Post List, Contact Form 7, News Ticker, Twitter Feed) arriving next. All existing Divi 4 modules continue to work in both Divi 4 and Divi 5.
 
 = Will these modules slow down my site? =
 
@@ -116,6 +116,17 @@ No. Updates are backward compatible and won't break pages built with our modules
 4. Image Carousel
 
 == Changelog ==
+
+= Version 4.5.0 =
+* Added: Thirteen more modules now run natively in the Divi 5 Builder — Image Carousel, Logo Carousel, Logo Grid, Skill Bar, Business Hours, Scroll Image, Review Box, Flip Card, Testimonial, Number Counter, Before & After Slider, Video Modal, and Animated Text. Every static DiviTorque module is now native in Divi 5, and your existing Divi 4 layouts migrate automatically with their styling intact.
+* Added: All DiviTorque modules are now grouped under a "Divi Torque" folder in the Divi 5 module inserter for quicker access.
+* Added: Logo Grid tooltips now initialize correctly in both Divi 4 and Divi 5.
+* Improved: Business Hours separator/divider SVG patterns render identically in the builder preview and on the front end.
+* Improved: Animated Text typing animation now uses a built-in engine with no external library, so it runs reliably everywhere.
+* Improved: Conditional settings now show and hide correctly in the Divi 5 panels (Review Box, Flip Card, Testimonial, Number Counter, and more).
+* Fix: Flip Card back-side description custom CSS now targets the correct element.
+* Fix: Animated Text per-element border radius now carries over when migrating a Divi 4 layout.
+* Compatibility: Fully backward compatible — all Divi 4 modules and saved layouts continue to work in both Divi 4 and Divi 5.
 
 = Version 4.4.0 =
 * Added: Seven more modules now run natively in the Divi 5 Builder — Divider, Icon Box, Inline Notice, Dual Button, Info Box, Info Card, and Team Member (joining Gradient Heading). Your existing Divi 4 layouts migrate automatically with their styling intact.

@@ -1,0 +1,78 @@
+{
+  "advanced": {
+    "admin_label": "module.meta.adminLabel",
+    "animation": "module.decoration.animation",
+    "background": "module.decoration.background",
+    "borders": {
+      "main": "module.decoration.border",
+      "item": "item.decoration.border",
+      "title": "titleBox.decoration.border"
+    },
+    "box_shadow": {
+      "default": "module.decoration.boxShadow",
+      "item": "item.decoration.boxShadow"
+    },
+    "disabled_on": "module.decoration.disabledOn",
+    "filters": {
+      "default": "module.decoration.filters"
+    },
+    "fonts": {
+      "title": "title.decoration.font",
+      "day": "day.decoration.font",
+      "time": "time.decoration.font"
+    },
+    "height": "module.decoration.sizing",
+    "width": "module.decoration.sizing",
+    "margin_padding": "module.decoration.spacing",
+    "max_width": "module.decoration.sizing",
+    "module": "module.advanced.htmlAttributes",
+    "overflow": "module.decoration.overflow",
+    "position_fields": "module.decoration.position",
+    "scroll": "module.decoration.scroll",
+    "sticky": "module.decoration.sticky",
+    "text": "module.advanced.text",
+    "text_shadow": {
+      "default": "module.advanced.text.textShadow"
+    },
+    "transform": "module.decoration.transform",
+    "transition": "module.decoration.transition",
+    "z_index": "module.decoration.zIndex"
+  },
+  "css": {
+    "after": "css.*.after",
+    "before": "css.*.before",
+    "free_form": "css.*.freeForm",
+    "main_element": "css.*.mainElement",
+    "title": "css.*.title",
+    "day": "css.*.day",
+    "time": "css.*.time",
+    "separator": "css.*.separator"
+  },
+  "module": {
+    "show_title": "module.advanced.showTitle.*",
+    "title": "title.innerContent.*",
+    "item_spacing": "module.advanced.itemSpacing.*",
+    "show_separator": "module.advanced.showSeparator.*",
+    "show_divider": "module.advanced.showDivider.*",
+    "divider_type": "module.advanced.dividerType.*",
+    "divider_color": "module.advanced.dividerColor.*",
+    "divider_weight": "module.advanced.dividerWeight.*",
+    "divider_height": "module.advanced.dividerHeight.*",
+    "day_text_width": "module.advanced.dayTextWidth.*",
+    "time_text_width": "module.advanced.timeTextWidth.*",
+    "item_padding": "module.advanced.itemPadding.*",
+    "title_padding": "module.advanced.titlePadding.*",
+    "title_spacing": "module.advanced.titleSpacing.*",
+    "separator_type": "module.advanced.separatorType.*",
+    "separator_gap": "module.advanced.separatorGap.*",
+    "separator_color": "module.advanced.separatorColor.*",
+    "separator_weight": "module.advanced.separatorWeight.*",
+    "separator_height": "module.advanced.separatorHeight.*",
+    "title_bg_color": "titleBox.decoration.background.*.color",
+    "item_bg_color": "item.decoration.background.*.color"
+  },
+  "valueExpansionFunctionMap": {
+    "item_padding": "convertSpacing",
+    "title_padding": "convertSpacing"
+  }
+}

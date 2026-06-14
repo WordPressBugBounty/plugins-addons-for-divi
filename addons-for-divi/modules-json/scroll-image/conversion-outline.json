@@ -1,0 +1,63 @@
+{
+  "advanced": {
+    "admin_label": "module.meta.adminLabel",
+    "animation": "module.decoration.animation",
+    "background": "module.decoration.background",
+    "borders": {
+      "main": "module.decoration.border",
+      "icon": "icon.decoration.border"
+    },
+    "box_shadow": {
+      "default": "module.decoration.boxShadow"
+    },
+    "disabled_on": "module.decoration.disabledOn",
+    "filters": {
+      "default": "module.decoration.filters"
+    },
+    "height": "module.decoration.sizing",
+    "width": "module.decoration.sizing",
+    "margin_padding": "module.decoration.spacing",
+    "max_width": "module.decoration.sizing",
+    "module": "module.advanced.htmlAttributes",
+    "overflow": "module.decoration.overflow",
+    "position_fields": "module.decoration.position",
+    "scroll": "module.decoration.scroll",
+    "sticky": "module.decoration.sticky",
+    "text": "module.advanced.text",
+    "text_shadow": {
+      "default": "module.advanced.text.textShadow"
+    },
+    "transform": "module.decoration.transform",
+    "transition": "module.decoration.transition",
+    "z_index": "module.decoration.zIndex"
+  },
+  "css": {
+    "after": "css.*.after",
+    "before": "css.*.before",
+    "free_form": "css.*.freeForm",
+    "main_element": "css.*.mainElement",
+    "image": "css.*.image",
+    "icon": "css.*.icon"
+  },
+  "module": {
+    "image": "image.innerContent.*.src",
+    "image_alt": "image.advanced.alt.*",
+    "show_icon": "module.advanced.showIcon.*",
+    "icon": "module.advanced.icon.*",
+    "use_image": "module.advanced.useImage.*",
+    "icon_image": "module.advanced.iconImage.*",
+    "use_icon_anim": "module.advanced.useIconAnim.*",
+    "scroll_type": "module.advanced.scrollType.*",
+    "scroll_dir_scroll": "module.advanced.scrollDirScroll.*",
+    "scroll_dir_hover": "module.advanced.scrollDirHover.*",
+    "scroll_speed": "module.advanced.scrollSpeed.*",
+    "img_height": "module.advanced.imgHeight.*",
+    "use_overlay": "module.advanced.useOverlay.*",
+    "icon_color": "module.advanced.iconColor.*",
+    "icon_size": "module.advanced.iconSize.*",
+    "overlay_bg_color": "overlay.decoration.background.*.color"
+  },
+  "valueExpansionFunctionMap": {
+    "icon": "convertFontIcon"
+  }
+}

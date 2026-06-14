@@ -1,0 +1,110 @@
+{
+  "advanced": {
+    "admin_label": "module.meta.adminLabel",
+    "animation": "module.decoration.animation",
+    "background": "module.decoration.background",
+    "borders": {
+      "main": "module.decoration.border",
+      "image": "image.decoration.border",
+      "badge": "badge.decoration.border"
+    },
+    "box_shadow": {
+      "default": "module.decoration.boxShadow"
+    },
+    "button": {
+      "button": "button.decoration.button"
+    },
+    "disabled_on": "module.decoration.disabledOn",
+    "filters": {
+      "default": "module.decoration.filters"
+    },
+    "fonts": {
+      "badge": "badge.decoration.font",
+      "title": "title.decoration.font",
+      "desc": "description.decoration.bodyFont.body"
+    },
+    "height": "module.decoration.sizing",
+    "width": "module.decoration.sizing",
+    "margin_padding": "module.decoration.spacing",
+    "max_width": "module.decoration.sizing",
+    "module": "module.advanced.htmlAttributes",
+    "overflow": "module.decoration.overflow",
+    "position_fields": "module.decoration.position",
+    "scroll": "module.decoration.scroll",
+    "sticky": "module.decoration.sticky",
+    "text": "module.advanced.text",
+    "text_shadow": {
+      "default": "module.advanced.text.textShadow"
+    },
+    "transform": "module.decoration.transform",
+    "transition": "module.decoration.transition",
+    "z_index": "module.decoration.zIndex"
+  },
+  "css": {
+    "after": "css.*.after",
+    "before": "css.*.before",
+    "free_form": "css.*.freeForm",
+    "main_element": "css.*.mainElement",
+    "rating": "css.*.rating",
+    "rating_number": "css.*.ratingNumber",
+    "image": "css.*.image",
+    "title": "css.*.title",
+    "desc": "css.*.desc",
+    "button_wrap": "css.*.buttonWrap",
+    "button": "css.*.button"
+  },
+  "module": {
+    "scale": "module.advanced.scale.*",
+    "rating": "module.advanced.rating.*",
+    "show_number": "module.advanced.showNumber.*",
+    "image": "image.innerContent.*.src",
+    "use_lightbox": "module.advanced.useLightbox.*",
+    "image_alt": "image.advanced.alt.*",
+    "use_badge": "module.advanced.useBadge.*",
+    "badge_text": "badge.innerContent.*",
+    "title": "title.innerContent.*",
+    "title_level": "title.decoration.font.font.*.headingLevel",
+    "description": "description.innerContent.*",
+    "use_button": "module.advanced.useButton.*",
+    "button_text": "button.innerContent.*.text",
+    "button_link": "button.innerContent.*.linkUrl",
+    "is_new_window": "button.innerContent.*.linkTarget",
+    "rating_bottom_spacing": "module.advanced.ratingBottomSpacing.*",
+    "star_size": "module.advanced.starSize.*",
+    "star_spacing": "module.advanced.starSpacing.*",
+    "star_color": "module.advanced.starColor.*",
+    "star_active_color": "module.advanced.starActiveColor.*",
+    "rating_text_size": "module.advanced.ratingTextSize.*",
+    "rating_text_color": "module.advanced.ratingTextColor.*",
+    "rating_text_spacing": "module.advanced.ratingTextSpacing.*",
+    "img_pos": "module.advanced.imgPos.*",
+    "img_anim": "module.advanced.imgAnim.*",
+    "img_height": "module.advanced.imgHeight.*",
+    "img_width": "module.advanced.imgWidth.*",
+    "img_padding": "module.advanced.imgPadding.*",
+    "btn_spacing_top": "module.advanced.btnSpacingTop.*",
+    "title_bottom_spacing": "module.advanced.titleBottomSpacing.*",
+    "content_alignment": "module.advanced.contentAlignment.*",
+    "content_padding": "module.advanced.contentPadding.*",
+    "overlay_on_hover": "module.advanced.overlayOnHover.*",
+    "overlay_hover_speed": "module.advanced.overlayHoverSpeed.*",
+    "overlay_icon": "module.advanced.overlayIcon.*",
+    "overlay_icon_color": "module.advanced.overlayIconColor.*",
+    "overlay_icon_size": "module.advanced.overlayIconSize.*",
+    "overlay_icon_opacity": "module.advanced.overlayIconOpacity.*",
+    "overlay_color": "module.advanced.overlayColor.*",
+    "badge_position": "module.advanced.badgePosition.*",
+    "badge_is_center_x": "module.advanced.badgeIsCenterX.*",
+    "badge_is_center_y": "module.advanced.badgeIsCenterY.*",
+    "badge_offset_x": "module.advanced.badgeOffsetX.*",
+    "badge_offset_y": "module.advanced.badgeOffsetY.*",
+    "badge_padding": "module.advanced.badgePadding.*",
+    "badge_bg_color": "module.advanced.badgeBgColor.*"
+  },
+  "valueExpansionFunctionMap": {
+    "img_padding": "convertSpacing",
+    "content_padding": "convertSpacing",
+    "badge_padding": "convertSpacing",
+    "overlay_icon": "convertFontIcon"
+  }
+}

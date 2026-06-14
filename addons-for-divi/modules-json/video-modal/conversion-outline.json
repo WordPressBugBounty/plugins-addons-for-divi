@@ -1,0 +1,78 @@
+{
+  "advanced": {
+    "admin_label": "module.meta.adminLabel",
+    "animation": "module.decoration.animation",
+    "background": "module.decoration.background",
+    "borders": {
+      "default": "module.decoration.border"
+    },
+    "box_shadow": {
+      "default": "module.decoration.boxShadow"
+    },
+    "disabled_on": "module.decoration.disabledOn",
+    "filters": {
+      "default": "module.decoration.filters"
+    },
+    "fonts": {
+      "trigger": "text.decoration.font"
+    },
+    "height": "module.decoration.sizing",
+    "width": "module.decoration.sizing",
+    "margin_padding": "module.decoration.spacing",
+    "max_width": "module.decoration.sizing",
+    "module": "module.advanced.htmlAttributes",
+    "overflow": "module.decoration.overflow",
+    "position_fields": "module.decoration.position",
+    "scroll": "module.decoration.scroll",
+    "sticky": "module.decoration.sticky",
+    "text": "module.advanced.text",
+    "text_shadow": {
+      "default": "module.advanced.text.textShadow"
+    },
+    "transform": "module.decoration.transform",
+    "transition": "module.decoration.transition",
+    "z_index": "module.decoration.zIndex"
+  },
+  "css": {
+    "after": "css.*.after",
+    "before": "css.*.before",
+    "free_form": "css.*.freeForm",
+    "main_element": "css.*.mainElement",
+    "image": "css.*.image",
+    "icon_wrapper": "css.*.iconWrapper",
+    "icon": "css.*.icon",
+    "text": "css.*.text"
+  },
+  "module": {
+    "use_overlay": "module.advanced.useOverlay.*",
+    "image": "image.innerContent.*.src",
+    "image_alt": "image.advanced.alt.*",
+    "trigger_element": "module.advanced.triggerElement.*",
+    "icon": "module.advanced.icon.*",
+    "custom_play_icon": "module.advanced.customPlayIcon.*",
+    "text": "text.innerContent.*",
+    "type": "module.advanced.type.*",
+    "video_link": "module.advanced.videoLink.*",
+    "video": "module.advanced.video.*",
+    "use_animation": "module.advanced.useAnimation.*",
+    "wave_bg": "module.advanced.waveBg.*",
+    "icon_alignment": "module.advanced.iconAlignment.*",
+    "icon_spacing": "module.advanced.iconSpacing.*",
+    "img_height": "module.advanced.imgHeight.*",
+    "icon_color": "module.advanced.iconColor.*",
+    "icon_size": "module.advanced.iconSize.*",
+    "icon_opacity": "module.advanced.iconOpacity.*",
+    "icon_height": "module.advanced.iconHeight.*",
+    "icon_width": "module.advanced.iconWidth.*",
+    "icon_bg": "module.advanced.iconBg.*",
+    "icon_radius": "module.advanced.iconRadius.*",
+    "popup_bg": "module.advanced.popupBg.*",
+    "close_icon_color": "module.advanced.closeIconColor.*",
+    "use_text_box": "module.advanced.useTextBox.*",
+    "text_box_height": "module.advanced.textBoxHeight.*",
+    "text_box_width": "module.advanced.textBoxWidth.*",
+    "text_box_bg": "module.advanced.textBoxBg.*",
+    "text_box_radius": "module.advanced.textBoxRadius.*",
+    "image_bg_color": "overlay.decoration.background.*.color"
+  }
+}

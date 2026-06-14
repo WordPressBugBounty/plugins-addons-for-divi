@@ -1,0 +1,33 @@
+<?php
+/**
+ * LogoGridItem: Module script data trait.
+ *
+ * @package DiviTorqueLite\Modules\LogoGridItem
+ * @since   4.4.0
+ */
+
+namespace DiviTorqueLite\Modules\LogoGridItem\LogoGridItemTrait;
+
+if (!defined('ABSPATH')) {
+    exit;
+}
+
+trait ModuleScriptDataTrait
+{
+    /**
+     * Output script data for the module.
+     *
+     * @param array $args Script data args.
+     *
+     * @return void
+     */
+    public static function module_script_data($args)
+    {
+        $elements = $args['elements'] ?? null;
+        if (!$elements) {
+            return;
+        }
+
+        $elements->script_data(['attrName' => 'module']);
+    }
+}

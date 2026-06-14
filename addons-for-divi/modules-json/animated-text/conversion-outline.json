@@ -1,0 +1,103 @@
+{
+  "advanced": {
+    "admin_label": "module.meta.adminLabel",
+    "animation": "module.decoration.animation",
+    "background": "module.decoration.background",
+    "borders": {
+      "default": "module.decoration.border"
+    },
+    "box_shadow": {
+      "default": "module.decoration.boxShadow"
+    },
+    "disabled_on": "module.decoration.disabledOn",
+    "filters": {
+      "default": "module.decoration.filters"
+    },
+    "fonts": {
+      "animated": "animated.decoration.font",
+      "main": "animated.decoration.font",
+      "prefix": "prefix.decoration.font",
+      "suffix": "suffix.decoration.font"
+    },
+    "height": "module.decoration.sizing",
+    "width": "module.decoration.sizing",
+    "margin_padding": "module.decoration.spacing",
+    "max_width": "module.decoration.sizing",
+    "module": "module.advanced.htmlAttributes",
+    "overflow": "module.decoration.overflow",
+    "position_fields": "module.decoration.position",
+    "scroll": "module.decoration.scroll",
+    "sticky": "module.decoration.sticky",
+    "text": "module.advanced.text",
+    "text_shadow": {
+      "default": "module.advanced.text.textShadow"
+    },
+    "transform": "module.decoration.transform",
+    "transition": "module.decoration.transition",
+    "z_index": "module.decoration.zIndex"
+  },
+  "css": {
+    "after": "css.*.after",
+    "before": "css.*.before",
+    "free_form": "css.*.freeForm",
+    "main_element": "css.*.mainElement",
+    "prefix": "css.*.prefix",
+    "animated_text": "css.*.animatedText",
+    "suffix": "css.*.suffix"
+  },
+  "module": {
+    "prefix": "prefix.innerContent.*",
+    "suffix": "suffix.innerContent.*",
+    "animated_text": "animatedText.innerContent.*",
+    "animation_type": "module.advanced.animationType.*",
+    "animation_speed": "module.advanced.animationSpeed.*",
+    "start_delay": "module.advanced.startDelay.*",
+    "back_speed": "module.advanced.backSpeed.*",
+    "back_delay": "module.advanced.backDelay.*",
+    "use_loop": "module.advanced.useLoop.*",
+    "show_cursor": "module.advanced.showCursor.*",
+    "tilt_in": "module.advanced.tiltIn.*",
+    "tilt_out": "module.advanced.tiltOut.*",
+    "tilt_delay": "module.advanced.tiltDelay.*",
+    "tilt_sync": "module.advanced.tiltSync.*",
+    "tilt_reverse": "module.advanced.tiltReverse.*",
+    "tilt_shuffle": "module.advanced.tiltShuffle.*",
+    "slide_animation": "module.advanced.slideAnimation.*",
+    "slide_gap": "module.advanced.slideGap.*",
+    "text_alignment": "module.advanced.textAlignment.*",
+    "layout": "module.advanced.layout.*",
+    "prefix_padding": "prefix.decoration.spacing.*.padding",
+    "prefix_margin": "prefix.decoration.spacing.*.margin",
+    "prefix_bg": "prefix.decoration.background.*.color",
+    "prefix_radius": "prefix.decoration.border.*.radius",
+    "prefix_stroke": "module.advanced.prefixStroke.*",
+    "prefix_stroke_color": "module.advanced.prefixStrokeColor.*",
+    "animated_padding": "animated.decoration.spacing.*.padding",
+    "animated_margin": "animated.decoration.spacing.*.margin",
+    "animated_bg": "animated.decoration.background.*.color",
+    "animated_radius": "animated.decoration.border.*.radius",
+    "animated_stroke": "module.advanced.animatedStroke.*",
+    "animated_stroke_color": "module.advanced.animatedStrokeColor.*",
+    "suffix_padding": "suffix.decoration.spacing.*.padding",
+    "suffix_margin": "suffix.decoration.spacing.*.margin",
+    "suffix_bg": "suffix.decoration.background.*.color",
+    "suffix_radius": "suffix.decoration.border.*.radius",
+    "suffix_stroke": "module.advanced.suffixStroke.*",
+    "suffix_stroke_color": "module.advanced.suffixStrokeColor.*",
+    "cursor_gap": "module.advanced.cursorGap.*",
+    "cursor_width": "module.advanced.cursorWidth.*",
+    "cursor_height": "module.advanced.cursorHeight.*",
+    "cursor_color": "module.advanced.cursorColor.*"
+  },
+  "valueExpansionFunctionMap": {
+    "prefix_padding": "convertSpacing",
+    "prefix_margin": "convertSpacing",
+    "animated_padding": "convertSpacing",
+    "animated_margin": "convertSpacing",
+    "suffix_padding": "convertSpacing",
+    "suffix_margin": "convertSpacing",
+    "prefix_radius": "convertBorderRadii",
+    "animated_radius": "convertBorderRadii",
+    "suffix_radius": "convertBorderRadii"
+  }
+}

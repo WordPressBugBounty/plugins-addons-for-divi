@@ -1,0 +1,938 @@
+{
+  "name": "divitorque/animated-text",
+  "d4Shortcode": "ba_animated_text",
+  "moduleClassName": "dtq_animated_text",
+  "moduleOrderClassName": "dtq_animated_text",
+  "title": "Animated Text",
+  "titles": "Animated Texts",
+  "moduleIcon": "divitorque/animated-text",
+  "category": "module",
+  "attributes": {
+    "module": {
+      "type": "object",
+      "selector": "{{selector}}",
+      "default": {
+        "advanced": {
+          "animationType": { "desktop": { "value": "typed" } },
+          "textAlignment": { "desktop": { "value": "left" } },
+          "layout": { "desktop": { "value": "inline" } },
+          "animationSpeed": { "desktop": { "value": "100ms" } },
+          "startDelay": { "desktop": { "value": "300ms" } },
+          "backSpeed": { "desktop": { "value": "50ms" } },
+          "backDelay": { "desktop": { "value": "500ms" } },
+          "useLoop": { "desktop": { "value": "on" } },
+          "showCursor": { "desktop": { "value": "on" } },
+          "tiltIn": { "desktop": { "value": "flip" } },
+          "tiltOut": { "desktop": { "value": "rotateOutDownLeft" } },
+          "tiltDelay": { "desktop": { "value": "50ms" } },
+          "tiltSync": { "desktop": { "value": "off|off" } },
+          "tiltReverse": { "desktop": { "value": "off|off" } },
+          "tiltShuffle": { "desktop": { "value": "off|off" } },
+          "slideAnimation": { "desktop": { "value": "flipInX" } },
+          "slideGap": { "desktop": { "value": "1500ms" } },
+          "cursorGap": { "desktop": { "value": "8px" } },
+          "cursorWidth": { "desktop": { "value": "3px" } },
+          "cursorHeight": { "desktop": { "value": "100%" } },
+          "cursorColor": { "desktop": { "value": "#333333" } }
+        }
+      },
+      "settings": {
+        "meta": {
+          "adminLabel": {}
+        },
+        "advanced": {
+          "htmlAttributes": {},
+          "animationType": {
+            "groupType": "group-item",
+            "item": {
+              "groupSlug": "contentSettings",
+              "attrName": "module.advanced.animationType",
+              "label": "Animation Mode",
+              "description": "Define the animation type from the list.",
+              "priority": 20,
+              "render": true,
+              "features": { "sticky": false, "responsive": false, "hover": false },
+              "component": {
+                "type": "field",
+                "name": "divi/select",
+                "props": {
+                  "options": {
+                    "typed": { "label": "Text Typing" },
+                    "tilt": { "label": "Text Tilt" },
+                    "slide": { "label": "Animated Slide" }
+                  }
+                }
+              }
+            }
+          },
+          "animationSpeed": {
+            "groupType": "group-item",
+            "item": {
+              "groupSlug": "contentTyped",
+              "attrName": "module.advanced.animationSpeed",
+              "label": "Animation Speed",
+              "description": "Increase or decrease text animation speed.",
+              "priority": 10,
+              "render": true,
+              "features": { "sticky": false, "responsive": false, "hover": false },
+              "component": {
+                "type": "field",
+                "name": "divi/range",
+                "props": { "min": 0, "max": 500, "step": 1, "defaultUnit": "ms", "allowedUnits": ["ms"] }
+              }
+            }
+          },
+          "startDelay": {
+            "groupType": "group-item",
+            "item": {
+              "groupSlug": "contentTyped",
+              "attrName": "module.advanced.startDelay",
+              "label": "Start Delay",
+              "description": "Specifies a delay for the start of text animation.",
+              "priority": 20,
+              "render": true,
+              "features": { "sticky": false, "responsive": false, "hover": false },
+              "component": {
+                "type": "field",
+                "name": "divi/range",
+                "props": { "min": 0, "max": 500, "step": 1, "defaultUnit": "ms", "allowedUnits": ["ms"] }
+              }
+            }
+          },
+          "backSpeed": {
+            "groupType": "group-item",
+            "item": {
+              "groupSlug": "contentTyped",
+              "attrName": "module.advanced.backSpeed",
+              "label": "Type Back Speed",
+              "description": "Increase or decrease typing back animation speed.",
+              "priority": 30,
+              "render": true,
+              "features": { "sticky": false, "responsive": false, "hover": false },
+              "component": {
+                "type": "field",
+                "name": "divi/range",
+                "props": { "min": 0, "max": 500, "step": 1, "defaultUnit": "ms", "allowedUnits": ["ms"] }
+              }
+            }
+          },
+          "backDelay": {
+            "groupType": "group-item",
+            "item": {
+              "groupSlug": "contentTyped",
+              "attrName": "module.advanced.backDelay",
+              "label": "Type Back Delay",
+              "description": "Specifies a delay for the start of typing back animation.",
+              "priority": 40,
+              "render": true,
+              "features": { "sticky": false, "responsive": false, "hover": false },
+              "component": {
+                "type": "field",
+                "name": "divi/range",
+                "props": { "min": 0, "max": 500, "step": 1, "defaultUnit": "ms", "allowedUnits": ["ms"] }
+              }
+            }
+          },
+          "useLoop": {
+            "groupType": "group-item",
+            "item": {
+              "groupSlug": "contentTyped",
+              "attrName": "module.advanced.useLoop",
+              "label": "Animation Loop",
+              "description": "Choose whether the endless of times an animation should be played or not.",
+              "priority": 50,
+              "render": true,
+              "features": { "sticky": false, "responsive": false, "hover": false },
+              "component": { "type": "field", "name": "divi/toggle" }
+            }
+          },
+          "showCursor": {
+            "groupType": "group-item",
+            "item": {
+              "groupSlug": "contentTyped",
+              "attrName": "module.advanced.showCursor",
+              "label": "Show Cursor",
+              "description": "Show or hide cursor during text animation.",
+              "priority": 60,
+              "render": true,
+              "features": { "sticky": false, "responsive": false, "hover": false },
+              "component": { "type": "field", "name": "divi/toggle" }
+            }
+          },
+          "tiltIn": {
+            "groupType": "group-item",
+            "item": {
+              "groupSlug": "contentTilt",
+              "attrName": "module.advanced.tiltIn",
+              "label": "In Animation",
+              "description": "Define the text in animation.",
+              "priority": 10,
+              "render": true,
+              "features": { "sticky": false, "responsive": false, "hover": false },
+              "component": {
+                "type": "field",
+                "name": "divi/select",
+                "props": {
+                  "options": {
+                    "flash": { "label": "flash" },
+                    "bounce": { "label": "bounce" },
+                    "shake": { "label": "shake" },
+                    "tada": { "label": "tada" },
+                    "swing": { "label": "swing" },
+                    "wobble": { "label": "wobble" },
+                    "pulse": { "label": "pulse" },
+                    "flip": { "label": "flip" },
+                    "flipInX": { "label": "flipInX" },
+                    "flipInY": { "label": "flipInY" },
+                    "fadeIn": { "label": "fadeIn" },
+                    "fadeInUp": { "label": "fadeInUp" },
+                    "fadeInDown": { "label": "fadeInDown" },
+                    "fadeInLeft": { "label": "fadeInLeft" },
+                    "fadeInRight": { "label": "fadeInRight" },
+                    "fadeInUpBig": { "label": "fadeInUpBig" },
+                    "fadeInDownBig": { "label": "fadeInDownBig" },
+                    "fadeInLeftBig": { "label": "fadeInLeftBig" },
+                    "fadeInRightBig": { "label": "fadeInRightBig" },
+                    "bounceIn": { "label": "bounceIn" },
+                    "bounceInDown": { "label": "bounceInDown" },
+                    "bounceInUp": { "label": "bounceInUp" },
+                    "bounceInLeft": { "label": "bounceInLeft" },
+                    "bounceInRight": { "label": "bounceInRight" },
+                    "rotateIn": { "label": "rotateIn" },
+                    "rotateInDownLeft": { "label": "rotateInDownLeft" },
+                    "rotateInDownRight": { "label": "rotateInDownRight" },
+                    "rotateInUpLeft": { "label": "rotateInUpLeft" },
+                    "rotateInUpRight": { "label": "rotateInUpRight" },
+                    "rollIn": { "label": "rollIn" }
+                  }
+                }
+              }
+            }
+          },
+          "tiltOut": {
+            "groupType": "group-item",
+            "item": {
+              "groupSlug": "contentTilt",
+              "attrName": "module.advanced.tiltOut",
+              "label": "Out Animation",
+              "description": "Define the text out animation.",
+              "priority": 20,
+              "render": true,
+              "features": { "sticky": false, "responsive": false, "hover": false },
+              "component": {
+                "type": "field",
+                "name": "divi/select",
+                "props": {
+                  "options": {
+                    "flash": { "label": "flash" },
+                    "bounce": { "label": "bounce" },
+                    "shake": { "label": "shake" },
+                    "tada": { "label": "tada" },
+                    "swing": { "label": "swing" },
+                    "wobble": { "label": "wobble" },
+                    "pulse": { "label": "pulse" },
+                    "flip": { "label": "flip" },
+                    "flipOutX": { "label": "flipOutX" },
+                    "flipOutY": { "label": "flipOutY" },
+                    "fadeOut": { "label": "fadeOut" },
+                    "fadeOutUp": { "label": "fadeOutUp" },
+                    "fadeOutDown": { "label": "fadeOutDown" },
+                    "fadeOutLeft": { "label": "fadeOutLeft" },
+                    "fadeOutRight": { "label": "fadeOutRight" },
+                    "fadeOutUpBig": { "label": "fadeOutUpBig" },
+                    "fadeOutDownBig": { "label": "fadeOutDownBig" },
+                    "fadeOutLeftBig": { "label": "fadeOutLeftBig" },
+                    "fadeOutRightBig": { "label": "fadeOutRightBig" },
+                    "bounceOut": { "label": "bounceOut" },
+                    "bounceOutDown": { "label": "bounceOutDown" },
+                    "bounceOutUp": { "label": "bounceOutUp" },
+                    "bounceOutLeft": { "label": "bounceOutLeft" },
+                    "bounceOutRight": { "label": "bounceOutRight" },
+                    "rotateOut": { "label": "rotateOut" },
+                    "rotateOutDownLeft": { "label": "rotateOutDownLeft" },
+                    "rotateOutDownRight": { "label": "rotateOutDownRight" },
+                    "rotateOutUpLeft": { "label": "rotateOutUpLeft" },
+                    "rotateOutUpRight": { "label": "rotateOutUpRight" },
+                    "rollOut": { "label": "rollOut" }
+                  }
+                }
+              }
+            }
+          },
+          "tiltDelay": {
+            "groupType": "group-item",
+            "item": {
+              "groupSlug": "contentTilt",
+              "attrName": "module.advanced.tiltDelay",
+              "label": "Animation Delay",
+              "description": "Here you can set the time for the animation gap between text in and out.",
+              "priority": 30,
+              "render": true,
+              "features": { "sticky": false, "responsive": false, "hover": false },
+              "component": {
+                "type": "field",
+                "name": "divi/range",
+                "props": { "min": 0, "max": 500, "step": 1, "defaultUnit": "ms", "allowedUnits": ["ms"] }
+              }
+            }
+          },
+          "tiltSync": {
+            "groupType": "group-item",
+            "item": {
+              "groupSlug": "contentTilt",
+              "attrName": "module.advanced.tiltSync",
+              "label": "Sync",
+              "description": "Select where to use synchronize text tilt animation. Format: in|out (on/off each).",
+              "priority": 40,
+              "render": true,
+              "features": { "sticky": false, "responsive": false, "hover": false },
+              "component": { "type": "field", "name": "divi/text" }
+            }
+          },
+          "tiltReverse": {
+            "groupType": "group-item",
+            "item": {
+              "groupSlug": "contentTilt",
+              "attrName": "module.advanced.tiltReverse",
+              "label": "Reverse",
+              "description": "Select where to use reverse text tilt animation. Format: in|out (on/off each).",
+              "priority": 50,
+              "render": true,
+              "features": { "sticky": false, "responsive": false, "hover": false },
+              "component": { "type": "field", "name": "divi/text" }
+            }
+          },
+          "tiltShuffle": {
+            "groupType": "group-item",
+            "item": {
+              "groupSlug": "contentTilt",
+              "attrName": "module.advanced.tiltShuffle",
+              "label": "Shuffle",
+              "description": "Select where to use shuffle text tilt animation. Format: in|out (on/off each).",
+              "priority": 60,
+              "render": true,
+              "features": { "sticky": false, "responsive": false, "hover": false },
+              "component": { "type": "field", "name": "divi/text" }
+            }
+          },
+          "slideAnimation": {
+            "groupType": "group-item",
+            "item": {
+              "groupSlug": "contentSlide",
+              "attrName": "module.advanced.slideAnimation",
+              "label": "Slide Animation",
+              "description": "Select sliding animation from the list.",
+              "priority": 10,
+              "render": true,
+              "features": { "sticky": false, "responsive": false, "hover": false },
+              "component": {
+                "type": "field",
+                "name": "divi/select",
+                "props": {
+                  "options": {
+                    "flash": { "label": "flash" },
+                    "bounce": { "label": "bounce" },
+                    "shake": { "label": "shake" },
+                    "swing": { "label": "swing" },
+                    "wobble": { "label": "wobble" },
+                    "pulse": { "label": "pulse" },
+                    "flipInX": { "label": "flipInX" },
+                    "flipInY": { "label": "flipInY" },
+                    "fadeIn": { "label": "fadeIn" },
+                    "fadeInUp": { "label": "fadeInUp" },
+                    "fadeInDown": { "label": "fadeInDown" },
+                    "fadeInLeft": { "label": "fadeInLeft" },
+                    "fadeInRight": { "label": "fadeInRight" },
+                    "fadeInUpBig": { "label": "fadeInUpBig" },
+                    "fadeInDownBig": { "label": "fadeInDownBig" },
+                    "fadeInLeftBig": { "label": "fadeInLeftBig" },
+                    "fadeInRightBig": { "label": "fadeInRightBig" },
+                    "bounceIn": { "label": "bounceIn" },
+                    "bounceInDown": { "label": "bounceInDown" },
+                    "bounceInUp": { "label": "bounceInUp" },
+                    "bounceInLeft": { "label": "bounceInLeft" },
+                    "bounceInRight": { "label": "bounceInRight" },
+                    "rotateIn": { "label": "rotateIn" },
+                    "rotateInDownLeft": { "label": "rotateInDownLeft" },
+                    "rotateInDownRight": { "label": "rotateInDownRight" },
+                    "rotateInUpLeft": { "label": "rotateInUpLeft" },
+                    "rotateInUpRight": { "label": "rotateInUpRight" }
+                  }
+                }
+              }
+            }
+          },
+          "slideGap": {
+            "groupType": "group-item",
+            "item": {
+              "groupSlug": "contentSlide",
+              "attrName": "module.advanced.slideGap",
+              "label": "Slide Gap",
+              "description": "Here you can set the duration of the slide change.",
+              "priority": 20,
+              "render": true,
+              "features": { "sticky": false, "responsive": false, "hover": false },
+              "component": {
+                "type": "field",
+                "name": "divi/range",
+                "props": { "min": 0, "max": 1500, "step": 1, "defaultUnit": "ms", "allowedUnits": ["ms"] }
+              }
+            }
+          },
+          "textAlignment": {
+            "groupType": "group-item",
+            "item": {
+              "groupSlug": "designGeneral",
+              "attrName": "module.advanced.textAlignment",
+              "label": "Text Alignment",
+              "description": "Align text to the left, right or center.",
+              "priority": 10,
+              "render": true,
+              "features": { "sticky": false, "responsive": true, "hover": false },
+              "component": {
+                "type": "field",
+                "name": "divi/select",
+                "props": {
+                  "options": {
+                    "left": { "label": "Left" },
+                    "center": { "label": "Center" },
+                    "right": { "label": "Right" }
+                  }
+                }
+              }
+            }
+          },
+          "layout": {
+            "groupType": "group-item",
+            "item": {
+              "groupSlug": "designGeneral",
+              "attrName": "module.advanced.layout",
+              "label": "Layout",
+              "description": "Here you can define block/inline type layout for the module text.",
+              "priority": 20,
+              "render": true,
+              "features": { "sticky": false, "responsive": false, "hover": false },
+              "component": {
+                "type": "field",
+                "name": "divi/select",
+                "props": {
+                  "options": {
+                    "block": { "label": "Block" },
+                    "inline": { "label": "Inline" }
+                  }
+                }
+              }
+            }
+          },
+          "cursorGap": {
+            "groupType": "group-item",
+            "item": {
+              "groupSlug": "designCursor",
+              "attrName": "module.advanced.cursorGap",
+              "label": "Spacing Gap",
+              "description": "Define spacing between text and cursor pointer.",
+              "priority": 10,
+              "render": true,
+              "features": { "sticky": false, "responsive": false, "hover": false },
+              "component": {
+                "type": "field",
+                "name": "divi/range",
+                "props": { "min": 0, "max": 100, "step": 1, "defaultUnit": "px" }
+              }
+            }
+          },
+          "cursorWidth": {
+            "groupType": "group-item",
+            "item": {
+              "groupSlug": "designCursor",
+              "attrName": "module.advanced.cursorWidth",
+              "label": "Width",
+              "description": "Here you can define custom width for the cursor pointer.",
+              "priority": 20,
+              "render": true,
+              "features": { "sticky": false, "responsive": false, "hover": false },
+              "component": {
+                "type": "field",
+                "name": "divi/range",
+                "props": { "min": 0, "max": 100, "step": 1, "defaultUnit": "px" }
+              }
+            }
+          },
+          "cursorHeight": {
+            "groupType": "group-item",
+            "item": {
+              "groupSlug": "designCursor",
+              "attrName": "module.advanced.cursorHeight",
+              "label": "Height",
+              "description": "Here you can define custom height for the cursor pointer.",
+              "priority": 30,
+              "render": true,
+              "features": { "sticky": false, "responsive": false, "hover": false },
+              "component": {
+                "type": "field",
+                "name": "divi/range",
+                "props": { "min": 0, "max": 100, "step": 1, "defaultUnit": "px", "allowedUnits": ["px", "%"] }
+              }
+            }
+          },
+          "cursorColor": {
+            "groupType": "group-item",
+            "item": {
+              "groupSlug": "designCursor",
+              "attrName": "module.advanced.cursorColor",
+              "label": "Color",
+              "description": "Pick a color to use for the cursor pointer.",
+              "priority": 40,
+              "render": true,
+              "features": { "sticky": false, "responsive": false, "hover": false },
+              "component": { "type": "field", "name": "divi/color-picker", "props": { "isAlpha": true } }
+            }
+          },
+          "prefixStroke": {
+            "groupType": "group-item",
+            "item": {
+              "groupSlug": "designPrefix",
+              "attrName": "module.advanced.prefixStroke",
+              "label": "Text Stroke",
+              "description": "Define the weight of prefix text stroke.",
+              "priority": 50,
+              "render": true,
+              "features": { "sticky": false, "responsive": false, "hover": false },
+              "component": { "type": "field", "name": "divi/range", "props": { "min": 0, "max": 20, "step": 0.1, "defaultUnit": "px" } }
+            }
+          },
+          "prefixStrokeColor": {
+            "groupType": "group-item",
+            "item": {
+              "groupSlug": "designPrefix",
+              "attrName": "module.advanced.prefixStrokeColor",
+              "label": "Stroke Color",
+              "description": "Pick a color to use for the prefix text stroke.",
+              "priority": 60,
+              "render": true,
+              "features": { "sticky": false, "responsive": false, "hover": false },
+              "component": { "type": "field", "name": "divi/color-picker", "props": { "isAlpha": true } }
+            }
+          },
+          "animatedStroke": {
+            "groupType": "group-item",
+            "item": {
+              "groupSlug": "designAnimated",
+              "attrName": "module.advanced.animatedStroke",
+              "label": "Text Stroke",
+              "description": "Define the weight of animated text stroke.",
+              "priority": 50,
+              "render": true,
+              "features": { "sticky": false, "responsive": false, "hover": false },
+              "component": { "type": "field", "name": "divi/range", "props": { "min": 0, "max": 20, "step": 0.1, "defaultUnit": "px" } }
+            }
+          },
+          "animatedStrokeColor": {
+            "groupType": "group-item",
+            "item": {
+              "groupSlug": "designAnimated",
+              "attrName": "module.advanced.animatedStrokeColor",
+              "label": "Stroke Color",
+              "description": "Pick a color to use for the animated text stroke.",
+              "priority": 60,
+              "render": true,
+              "features": { "sticky": false, "responsive": false, "hover": false },
+              "component": { "type": "field", "name": "divi/color-picker", "props": { "isAlpha": true } }
+            }
+          },
+          "suffixStroke": {
+            "groupType": "group-item",
+            "item": {
+              "groupSlug": "designSuffix",
+              "attrName": "module.advanced.suffixStroke",
+              "label": "Text Stroke",
+              "description": "Define the weight of suffix text stroke.",
+              "priority": 50,
+              "render": true,
+              "features": { "sticky": false, "responsive": false, "hover": false },
+              "component": { "type": "field", "name": "divi/range", "props": { "min": 0, "max": 20, "step": 0.1, "defaultUnit": "px" } }
+            }
+          },
+          "suffixStrokeColor": {
+            "groupType": "group-item",
+            "item": {
+              "groupSlug": "designSuffix",
+              "attrName": "module.advanced.suffixStrokeColor",
+              "label": "Stroke Color",
+              "description": "Pick a color to use for the suffix text stroke.",
+              "priority": 60,
+              "render": true,
+              "features": { "sticky": false, "responsive": false, "hover": false },
+              "component": { "type": "field", "name": "divi/color-picker", "props": { "isAlpha": true } }
+            }
+          }
+        },
+        "decoration": {
+          "animation": {},
+          "layout": {},
+          "background": {},
+          "border": {},
+          "boxShadow": {},
+          "filters": {},
+          "overflow": {},
+          "position": {},
+          "scroll": {},
+          "spacing": {},
+          "sizing": {},
+          "sticky": {},
+          "transform": {},
+          "transition": {},
+          "zIndex": {},
+          "disabledOn": {}
+        }
+      }
+    },
+    "prefix": {
+      "type": "object",
+      "selector": "{{selector}} .dtq-animated-text-prefix span",
+      "elementType": "plainText",
+      "tagName": "span",
+      "default": {},
+      "settings": {
+        "innerContent": {
+          "groupType": "group-item",
+          "item": {
+            "groupSlug": "contentMain",
+            "attrName": "prefix.innerContent",
+            "label": "Prefix",
+            "description": "Define the prefix text.",
+            "priority": 10,
+            "render": true,
+            "features": { "sticky": false, "responsive": false, "hover": false, "dynamicContent": true },
+            "component": { "type": "field", "name": "divi/text" }
+          }
+        },
+        "decoration": {
+          "font": {
+            "groupType": "group-item",
+            "item": {
+              "groupSlug": "designPrefixText",
+              "priority": 10,
+              "render": true,
+              "component": {
+                "name": "divi/font",
+                "type": "group",
+                "props": { "grouped": false, "fieldLabel": "Prefix", "hideTextAlign": true }
+              }
+            }
+          },
+          "background": {
+            "groupType": "group-item",
+            "item": {
+              "groupSlug": "designPrefix",
+              "attrName": "prefix.decoration.background",
+              "priority": 30,
+              "render": true,
+              "component": {
+                "name": "divi/background",
+                "type": "group",
+                "props": { "grouped": false, "fieldLabel": "Prefix" }
+              }
+            }
+          },
+          "border": {
+            "groupType": "group-item",
+            "item": {
+              "groupSlug": "designPrefix",
+              "priority": 40,
+              "render": true,
+              "component": {
+                "name": "divi/border",
+                "type": "group",
+                "props": { "grouped": false, "fieldLabel": "Prefix" }
+              }
+            }
+          },
+          "spacing": {
+            "groupType": "group-item",
+            "item": {
+              "groupSlug": "designPrefix",
+              "priority": 20,
+              "render": true,
+              "component": {
+                "name": "divi/spacing",
+                "type": "group",
+                "props": { "grouped": false, "fieldLabel": "Prefix" }
+              }
+            }
+          }
+        }
+      }
+    },
+    "animated": {
+      "type": "object",
+      "selector": "{{selector}} .dtq-animated-text-main",
+      "default": {},
+      "settings": {
+        "decoration": {
+          "font": {
+            "groupType": "group-item",
+            "item": {
+              "groupSlug": "designAnimatedText",
+              "priority": 10,
+              "render": true,
+              "component": {
+                "name": "divi/font",
+                "type": "group",
+                "props": { "grouped": false, "fieldLabel": "Animated", "hideTextAlign": true }
+              }
+            }
+          },
+          "background": {
+            "groupType": "group-item",
+            "item": {
+              "groupSlug": "designAnimated",
+              "attrName": "animated.decoration.background",
+              "priority": 30,
+              "render": true,
+              "component": {
+                "name": "divi/background",
+                "type": "group",
+                "props": { "grouped": false, "fieldLabel": "Animated" }
+              }
+            }
+          },
+          "border": {
+            "groupType": "group-item",
+            "item": {
+              "groupSlug": "designAnimated",
+              "priority": 40,
+              "render": true,
+              "component": {
+                "name": "divi/border",
+                "type": "group",
+                "props": { "grouped": false, "fieldLabel": "Animated" }
+              }
+            }
+          },
+          "spacing": {
+            "groupType": "group-item",
+            "item": {
+              "groupSlug": "designAnimated",
+              "priority": 20,
+              "render": true,
+              "component": {
+                "name": "divi/spacing",
+                "type": "group",
+                "props": { "grouped": false, "fieldLabel": "Animated" }
+              }
+            }
+          }
+        }
+      }
+    },
+    "suffix": {
+      "type": "object",
+      "selector": "{{selector}} .dtq-animated-text-suffix span",
+      "elementType": "plainText",
+      "tagName": "span",
+      "default": {},
+      "settings": {
+        "innerContent": {
+          "groupType": "group-item",
+          "item": {
+            "groupSlug": "contentMain",
+            "attrName": "suffix.innerContent",
+            "label": "Suffix",
+            "description": "Define the suffix text.",
+            "priority": 30,
+            "render": true,
+            "features": { "sticky": false, "responsive": false, "hover": false, "dynamicContent": true },
+            "component": { "type": "field", "name": "divi/text" }
+          }
+        },
+        "decoration": {
+          "font": {
+            "groupType": "group-item",
+            "item": {
+              "groupSlug": "designSuffixText",
+              "priority": 10,
+              "render": true,
+              "component": {
+                "name": "divi/font",
+                "type": "group",
+                "props": { "grouped": false, "fieldLabel": "Suffix", "hideTextAlign": true }
+              }
+            }
+          },
+          "background": {
+            "groupType": "group-item",
+            "item": {
+              "groupSlug": "designSuffix",
+              "attrName": "suffix.decoration.background",
+              "priority": 30,
+              "render": true,
+              "component": {
+                "name": "divi/background",
+                "type": "group",
+                "props": { "grouped": false, "fieldLabel": "Suffix" }
+              }
+            }
+          },
+          "border": {
+            "groupType": "group-item",
+            "item": {
+              "groupSlug": "designSuffix",
+              "priority": 40,
+              "render": true,
+              "component": {
+                "name": "divi/border",
+                "type": "group",
+                "props": { "grouped": false, "fieldLabel": "Suffix" }
+              }
+            }
+          },
+          "spacing": {
+            "groupType": "group-item",
+            "item": {
+              "groupSlug": "designSuffix",
+              "priority": 20,
+              "render": true,
+              "component": {
+                "name": "divi/spacing",
+                "type": "group",
+                "props": { "grouped": false, "fieldLabel": "Suffix" }
+              }
+            }
+          }
+        }
+      }
+    },
+    "animatedText": {
+      "type": "object",
+      "elementType": "content",
+      "default": {},
+      "settings": {
+        "innerContent": {
+          "groupType": "group-item",
+          "item": {
+            "groupSlug": "contentMain",
+            "attrName": "animatedText.innerContent",
+            "label": "Animated Text",
+            "description": "Define the main animated text. Enter one phrase per line.",
+            "priority": 20,
+            "render": true,
+            "features": { "sticky": false, "responsive": false, "hover": false },
+            "component": { "type": "field", "name": "divi/textarea" }
+          }
+        }
+      }
+    }
+  },
+  "customCssFields": {
+    "prefix": {
+      "subName": "prefix",
+      "selectorSuffix": " .dtq-animated-text-prefix"
+    },
+    "animatedText": {
+      "subName": "animatedText",
+      "selectorSuffix": " .dtq-animated-text-main"
+    },
+    "suffix": {
+      "subName": "suffix",
+      "selectorSuffix": " .dtq-animated-text-suffix"
+    }
+  },
+  "settings": {
+    "content": "auto",
+    "design": "auto",
+    "advanced": "auto",
+    "groups": {
+      "contentMain": {
+        "panel": "content",
+        "priority": 10,
+        "groupName": "mainContent",
+        "component": { "name": "divi/composite", "props": { "groupLabel": "Content" } }
+      },
+      "contentSettings": {
+        "panel": "content",
+        "priority": 20,
+        "groupName": "settings",
+        "component": { "name": "divi/composite", "props": { "groupLabel": "Settings" } }
+      },
+      "contentTyped": {
+        "panel": "content",
+        "priority": 30,
+        "groupName": "typedSettings",
+        "component": { "name": "divi/composite", "props": { "groupLabel": "Typing Settings" } }
+      },
+      "contentTilt": {
+        "panel": "content",
+        "priority": 40,
+        "groupName": "tiltSettings",
+        "component": { "name": "divi/composite", "props": { "groupLabel": "Tilt Settings" } }
+      },
+      "contentSlide": {
+        "panel": "content",
+        "priority": 50,
+        "groupName": "slideSettings",
+        "component": { "name": "divi/composite", "props": { "groupLabel": "Slide Settings" } }
+      },
+      "designGeneral": {
+        "panel": "design",
+        "priority": 10,
+        "groupName": "general",
+        "component": { "name": "divi/composite", "props": { "groupLabel": "General" } }
+      },
+      "designPrefixText": {
+        "panel": "design",
+        "priority": 20,
+        "groupName": "prefixText",
+        "multiElements": true,
+        "component": {
+          "name": "divi/composite",
+          "props": { "groupLabel": "Prefix Text", "clipboardCategory": "style", "presetGroup": "divi/font" }
+        }
+      },
+      "designAnimatedText": {
+        "panel": "design",
+        "priority": 30,
+        "groupName": "animatedTextFont",
+        "multiElements": true,
+        "component": {
+          "name": "divi/composite",
+          "props": { "groupLabel": "Animated Text", "clipboardCategory": "style", "presetGroup": "divi/font" }
+        }
+      },
+      "designSuffixText": {
+        "panel": "design",
+        "priority": 40,
+        "groupName": "suffixText",
+        "multiElements": true,
+        "component": {
+          "name": "divi/composite",
+          "props": { "groupLabel": "Suffix Text", "clipboardCategory": "style", "presetGroup": "divi/font" }
+        }
+      },
+      "designPrefix": {
+        "panel": "design",
+        "priority": 50,
+        "groupName": "prefix",
+        "component": { "name": "divi/composite", "props": { "groupLabel": "Prefix Box" } }
+      },
+      "designAnimated": {
+        "panel": "design",
+        "priority": 60,
+        "groupName": "animated",
+        "component": { "name": "divi/composite", "props": { "groupLabel": "Animated Box" } }
+      },
+      "designSuffix": {
+        "panel": "design",
+        "priority": 70,
+        "groupName": "suffix",
+        "component": { "name": "divi/composite", "props": { "groupLabel": "Suffix Box" } }
+      },
+      "designCursor": {
+        "panel": "design",
+        "priority": 80,
+        "groupName": "cursor",
+        "component": { "name": "divi/composite", "props": { "groupLabel": "Cursor" } }
+      }
+    }
+  }
+}

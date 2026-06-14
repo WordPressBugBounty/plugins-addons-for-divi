@@ -1,0 +1,46 @@
+{
+  "advanced": {
+    "admin_label": "module.meta.adminLabel",
+    "animation": "module.decoration.animation",
+    "background": "module.decoration.background",
+    "borders": {
+      "default": "module.decoration.border",
+      "logo": "logo.decoration.border"
+    },
+    "box_shadow": {
+      "default": "module.decoration.boxShadow"
+    },
+    "disabled_on": "module.decoration.disabledOn",
+    "filters": {
+      "default": "module.decoration.filters"
+    },
+    "margin_padding": "module.decoration.spacing",
+    "module": "module.advanced.htmlAttributes",
+    "text": "module.advanced.text",
+    "transform": "module.decoration.transform",
+    "transition": "module.decoration.transition"
+  },
+  "css": {
+    "after": "css.*.after",
+    "before": "css.*.before",
+    "main_element": "css.*.mainElement",
+    "logo": "css.*.logo"
+  },
+  "module": {
+    "logo": "logo.innerContent.*.src",
+    "brand_name": "logo.advanced.alt.*",
+    "is_link": "module.advanced.isLink.*",
+    "link_url": "module.advanced.linkUrl.*",
+    "link_options": "module.advanced.linkOptions.*",
+    "overlay_on_hover": "module.advanced.overlayOnHover.*",
+    "overlay_icon": "module.advanced.overlayIcon.*",
+    "overlay_icon_color": "module.advanced.overlayIconColor.*",
+    "overlay_icon_size": "module.advanced.overlayIconSize.*",
+    "overlay_icon_opacity": "module.advanced.overlayIconOpacity.*",
+    "overlay_color": "module.advanced.overlayColor.*",
+    "overlay_hover_speed": "module.advanced.overlayHoverSpeed.*"
+  },
+  "valueExpansionFunctionMap": {
+    "overlay_icon": "convertFontIcon"
+  }
+}

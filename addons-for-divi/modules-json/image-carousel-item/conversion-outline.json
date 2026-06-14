@@ -1,0 +1,81 @@
+{
+  "advanced": {
+    "admin_label": "module.meta.adminLabel",
+    "animation": "module.decoration.animation",
+    "background": "module.decoration.background",
+    "borders": {
+      "default": "module.decoration.border",
+      "image": "photo.decoration.border"
+    },
+    "box_shadow": {
+      "default": "module.decoration.boxShadow"
+    },
+    "disabled_on": "module.decoration.disabledOn",
+    "filters": {
+      "default": "module.decoration.filters"
+    },
+    "fonts": {
+      "title": "title.decoration.font",
+      "subtitle": "subTitle.decoration.font"
+    },
+    "margin_padding": "module.decoration.spacing",
+    "module": "module.advanced.htmlAttributes",
+    "text": "module.advanced.text",
+    "transform": "module.decoration.transform",
+    "transition": "module.decoration.transition"
+  },
+  "css": {
+    "after": "css.*.after",
+    "before": "css.*.before",
+    "main_element": "css.*.mainElement",
+    "image": "css.*.image",
+    "title": "css.*.title",
+    "subtitle": "css.*.subtitle",
+    "button": "css.*.button"
+  },
+  "module": {
+    "photo": "photo.innerContent.*.src",
+    "photo_alt": "photo.advanced.alt.*",
+    "title": "title.innerContent.*",
+    "title_level": "title.decoration.font.font.*.headingLevel",
+    "sub_title": "subTitle.innerContent.*",
+    "subtitle_level": "subTitle.decoration.font.font.*.headingLevel",
+    "content_type": "module.advanced.contentType.*",
+    "content_position": "module.advanced.contentPosition.*",
+    "content_alignment": "module.advanced.contentAlignment.*",
+    "content_width": "module.advanced.contentWidth.*",
+    "content_pos_x": "module.advanced.contentPosX.*",
+    "content_offset_x": "module.advanced.contentOffsetX.*",
+    "content_pos_y": "module.advanced.contentPosY.*",
+    "content_offset_y": "module.advanced.contentOffsetY.*",
+    "image_hover_animation": "module.advanced.imageHoverAnimation.*",
+    "image_height": "module.advanced.imageHeight.*",
+    "title_bottom_spacing": "module.advanced.titleBottomSpacing.*",
+    "content_padding": "module.advanced.contentPadding.*",
+    "content_background_color": "module.advanced.contentBgColor.*",
+    "use_button": "module.advanced.useButton.*",
+    "button_text": "module.advanced.buttonText.*",
+    "button_link": "module.advanced.buttonLink.*",
+    "is_new_window": "module.advanced.buttonTarget.*",
+    "button_icon": "module.advanced.buttonIcon.*",
+    "btn_spacing_top": "module.advanced.btnSpacingTop.*",
+    "button_text_color": "module.advanced.buttonTextColor.*",
+    "button_bg_color": "module.advanced.buttonBgColor.*",
+    "button_text_size": "module.advanced.buttonFontSize.*",
+    "button_border_width": "module.advanced.buttonBorderWidth.*",
+    "button_border_color": "module.advanced.buttonBorderColor.*",
+    "button_border_radius": "module.advanced.buttonRadius.*",
+    "overlay_on_hover": "module.advanced.overlayOnHover.*",
+    "overlay_icon": "module.advanced.overlayIcon.*",
+    "overlay_icon_color": "module.advanced.overlayIconColor.*",
+    "overlay_icon_size": "module.advanced.overlayIconSize.*",
+    "overlay_icon_opacity": "module.advanced.overlayIconOpacity.*",
+    "overlay_color": "module.advanced.overlayColor.*",
+    "overlay_hover_speed": "module.advanced.overlayHoverSpeed.*"
+  },
+  "valueExpansionFunctionMap": {
+    "content_padding": "convertSpacing",
+    "overlay_icon": "convertFontIcon",
+    "button_icon": "convertFontIcon"
+  }
+}

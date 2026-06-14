@@ -1,0 +1,185 @@
+{
+  "name": "divitorque/logo-grid",
+  "d4Shortcode": "ba_logo_grid",
+  "moduleClassName": "dtq_logo_grid",
+  "moduleOrderClassName": "dtq_logo_grid",
+  "title": "Logo Grid",
+  "titles": "Logo Grids",
+  "moduleIcon": "divitorque/logo-grid",
+  "category": "module",
+  "childModuleName": "divitorque/logo-grid-item",
+  "childModuleTitle": "Logo Grid Item",
+  "childrenName": [
+    "divitorque/logo-grid-item"
+  ],
+  "attributes": {
+    "module": {
+      "type": "object",
+      "selector": "{{selector}}",
+      "default": {
+        "advanced": {
+          "columnCount": { "desktop": { "value": "4" } },
+          "gridGap": { "desktop": { "value": "5px" } },
+          "imageHover": { "desktop": { "value": "zoom_in" } },
+          "logoOverflow": { "desktop": { "value": "visible" } }
+        }
+      },
+      "settings": {
+        "meta": { "adminLabel": {} },
+        "advanced": {
+          "htmlAttributes": {},
+          "columnCount": {
+            "groupType": "group-item",
+            "item": {
+              "groupSlug": "contentGrid",
+              "attrName": "module.advanced.columnCount",
+              "label": "Column",
+              "description": "Here you can define grid columns number.",
+              "priority": 10,
+              "render": true,
+              "features": { "sticky": false, "responsive": true, "hover": false },
+              "component": {
+                "type": "field",
+                "name": "divi/select",
+                "props": {
+                  "options": {
+                    "1": { "label": "1" },
+                    "2": { "label": "2" },
+                    "3": { "label": "3" },
+                    "4": { "label": "4" },
+                    "5": { "label": "5" },
+                    "6": { "label": "6" },
+                    "7": { "label": "7" },
+                    "8": { "label": "8" },
+                    "9": { "label": "9" },
+                    "10": { "label": "10" }
+                  }
+                }
+              }
+            }
+          },
+          "gridHeight": {
+            "groupType": "group-item",
+            "item": {
+              "groupSlug": "contentGrid",
+              "attrName": "module.advanced.gridHeight",
+              "label": "Column Height",
+              "description": "Here you can define grid column height.",
+              "priority": 20,
+              "render": true,
+              "features": { "sticky": false, "responsive": true, "hover": false },
+              "component": { "type": "field", "name": "divi/range", "props": { "min": 0, "max": 800, "step": 1, "defaultUnit": "px" } }
+            }
+          },
+          "gridGap": {
+            "groupType": "group-item",
+            "item": {
+              "groupSlug": "contentGrid",
+              "attrName": "module.advanced.gridGap",
+              "label": "Grid Gap",
+              "description": "Here you can define the spacing between grid columns.",
+              "priority": 30,
+              "render": true,
+              "features": { "sticky": false, "responsive": true, "hover": false },
+              "component": { "type": "field", "name": "divi/range", "props": { "min": 0, "max": 100, "step": 1, "defaultUnit": "px", "allowedUnits": ["px", "%", "em"] } }
+            }
+          },
+          "logoSize": {
+            "groupType": "group-item",
+            "item": {
+              "groupSlug": "contentGrid",
+              "attrName": "module.advanced.logoSize",
+              "label": "Logo Size",
+              "description": "Here you can define static logo width.",
+              "priority": 40,
+              "render": true,
+              "features": { "sticky": false, "responsive": true, "hover": false },
+              "component": { "type": "field", "name": "divi/range", "props": { "min": 0, "max": 1000, "step": 1, "defaultUnit": "px" } }
+            }
+          },
+          "imageHover": {
+            "groupType": "group-item",
+            "item": {
+              "groupSlug": "contentGrid",
+              "attrName": "module.advanced.imageHover",
+              "label": "Logo Hover Style",
+              "description": "Select logo hover animation.",
+              "priority": 50,
+              "render": true,
+              "features": { "sticky": false, "responsive": false, "hover": false },
+              "component": {
+                "type": "field",
+                "name": "divi/select",
+                "props": {
+                  "options": {
+                    "no_hover": { "label": "None" },
+                    "zoom_in": { "label": "Zoom In" },
+                    "zoom_out": { "label": "Zoom Out" },
+                    "fade": { "label": "Fade Out" },
+                    "black_n_white": { "label": "Black and White" }
+                  }
+                }
+              }
+            }
+          },
+          "logoOverflow": {
+            "groupType": "group-item",
+            "item": {
+              "groupSlug": "contentGrid",
+              "attrName": "module.advanced.logoOverflow",
+              "label": "Logo Overflow",
+              "description": "Here you can control logo image overflow on the X and Y axis. If set to hidden, logo will be clipped.",
+              "priority": 60,
+              "render": true,
+              "features": { "sticky": false, "responsive": false, "hover": false },
+              "component": {
+                "type": "field",
+                "name": "divi/select",
+                "props": {
+                  "options": {
+                    "hidden": { "label": "Hidden" },
+                    "visible": { "label": "Visible" }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "decoration": {
+          "animation": {},
+          "layout": {},
+          "background": {},
+          "border": {},
+          "boxShadow": {},
+          "filters": {},
+          "overflow": {},
+          "position": {},
+          "scroll": {},
+          "spacing": {},
+          "sizing": {},
+          "sticky": {},
+          "transform": {},
+          "transition": {},
+          "zIndex": {},
+          "disabledOn": {}
+        }
+      }
+    }
+  },
+  "customCssFields": {
+    "logo": { "subName": "logo", "selectorSuffix": " .dtq-logo-grid__item img" }
+  },
+  "settings": {
+    "content": "auto",
+    "design": "auto",
+    "advanced": "auto",
+    "groups": {
+      "contentGrid": {
+        "panel": "content",
+        "priority": 10,
+        "groupName": "grid",
+        "component": { "name": "divi/composite", "props": { "groupLabel": "Grid Settings" } }
+      }
+    }
+  }
+}

@@ -44,7 +44,10 @@ trait RenderCallbackTrait
         $hover_anim  = $advanced['imageHoverAnimation']['desktop']['value'] ?? 'none';
         $use_light   = ($advanced['useLightbox']['desktop']['value'] ?? 'off') === 'on';
 
-        $photo_src = $attrs['photo']['innerContent']['desktop']['value'] ?? '';
+        // The D5 upload field stores the image as an object (`{ src, ... }`);
+        // accept both that and a plain URL string.
+        $photo_val = $attrs['photo']['innerContent']['desktop']['value'] ?? '';
+        $photo_src = is_array($photo_val) ? ($photo_val['src'] ?? '') : $photo_val;
         $photo_alt = $attrs['photo']['advanced']['alt']['desktop']['value'] ?? '';
 
         // Badge.

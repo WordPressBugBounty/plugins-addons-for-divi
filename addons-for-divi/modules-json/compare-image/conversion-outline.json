@@ -1,0 +1,69 @@
+{
+  "advanced": {
+    "admin_label": "module.meta.adminLabel",
+    "animation": "module.decoration.animation",
+    "background": "module.decoration.background",
+    "borders": {
+      "main": "module.decoration.border",
+      "label": "labelBox.decoration.border"
+    },
+    "box_shadow": {
+      "default": "module.decoration.boxShadow"
+    },
+    "disabled_on": "module.decoration.disabledOn",
+    "filters": {
+      "default": "module.decoration.filters"
+    },
+    "fonts": {
+      "label": "label.decoration.font"
+    },
+    "height": "module.decoration.sizing",
+    "width": "module.decoration.sizing",
+    "margin_padding": "module.decoration.spacing",
+    "max_width": "module.decoration.sizing",
+    "module": "module.advanced.htmlAttributes",
+    "overflow": "module.decoration.overflow",
+    "position_fields": "module.decoration.position",
+    "scroll": "module.decoration.scroll",
+    "sticky": "module.decoration.sticky",
+    "text": "module.advanced.text",
+    "text_shadow": {
+      "default": "module.advanced.text.textShadow"
+    },
+    "transform": "module.decoration.transform",
+    "transition": "module.decoration.transition",
+    "z_index": "module.decoration.zIndex"
+  },
+  "css": {
+    "after": "css.*.after",
+    "before": "css.*.before",
+    "free_form": "css.*.freeForm",
+    "main_element": "css.*.mainElement",
+    "before_img": "css.*.beforeImg",
+    "after_img": "css.*.afterImg",
+    "before_label": "css.*.beforeLabel",
+    "after_label": "css.*.afterLabel"
+  },
+  "module": {
+    "before_img": "beforeImage.innerContent.*.src",
+    "before_label": "module.advanced.beforeLabel.*",
+    "before_label_bg": "module.advanced.beforeLabelBg.*",
+    "after_img": "afterImage.innerContent.*.src",
+    "after_label": "module.advanced.afterLabel.*",
+    "after_label_bg": "module.advanced.afterLabelBg.*",
+    "orientation": "module.advanced.orientation.*",
+    "offset_pct": "module.advanced.offsetPct.*",
+    "move_on_hover": "module.advanced.moveOnHover.*",
+    "overlay": "module.advanced.overlay.*",
+    "show_label": "module.advanced.showLabel.*",
+    "label_padding": "module.advanced.labelPadding.*",
+    "label_height": "module.advanced.labelHeight.*",
+    "label_width": "module.advanced.labelWidth.*",
+    "handle_style": "module.advanced.handleStyle.*",
+    "handle_color": "module.advanced.handleColor.*",
+    "arrow_color": "module.advanced.arrowColor.*"
+  },
+  "valueExpansionFunctionMap": {
+    "label_padding": "convertSpacing"
+  }
+}

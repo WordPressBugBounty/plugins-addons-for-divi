@@ -115,8 +115,10 @@ trait RenderCallbackTrait
         $content_alignment   = $advanced['contentAlignment']['desktop']['value'] ?? 'left';
         $overlay_on_hover    = $advanced['overlayOnHover']['desktop']['value'] ?? 'off';
 
-        // Photo.
-        $photo_src = $attrs['photo']['innerContent']['desktop']['value'] ?? '';
+        // Photo. The D5 upload field stores the image as an object
+        // (`{ src, ... }`); accept both that and a plain URL string.
+        $photo_val = $attrs['photo']['innerContent']['desktop']['value'] ?? '';
+        $photo_src = is_array($photo_val) ? ($photo_val['src'] ?? '') : $photo_val;
         $photo_alt = $attrs['photo']['advanced']['alt']['desktop']['value'] ?? '';
         $photo     = '';
         if (!empty($photo_src)) {

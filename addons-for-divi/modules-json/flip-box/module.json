@@ -1,0 +1,2289 @@
+{
+  "name": "divitorque/flip-box",
+  "d4Shortcode": "ba_flipbox",
+  "moduleClassName": "dtq_flip_box",
+  "moduleOrderClassName": "dtq_flip_box",
+  "title": "Flip Card",
+  "titles": "Flip Cards",
+  "moduleIcon": "divitorque/flip-box",
+  "category": "module",
+  "attributes": {
+    "module": {
+      "type": "object",
+      "selector": "{{selector}}",
+      "default": {
+        "advanced": {
+          "frontMediaType": {
+            "desktop": {
+              "value": "icon"
+            }
+          },
+          "frontIcon": {
+            "desktop": {
+              "value": {
+                "unicode": "&#xe60c;",
+                "type": "divi",
+                "weight": "400"
+              }
+            }
+          },
+          "backMediaType": {
+            "desktop": {
+              "value": "icon"
+            }
+          },
+          "backIcon": {
+            "desktop": {
+              "value": {
+                "unicode": "&#x2b;",
+                "type": "divi",
+                "weight": "400"
+              }
+            }
+          },
+          "useButton": {
+            "desktop": {
+              "value": "off"
+            }
+          },
+          "animationType": {
+            "desktop": {
+              "value": "flip"
+            }
+          },
+          "flankColor": {
+            "desktop": {
+              "value": "#dddddd"
+            }
+          },
+          "direction": {
+            "desktop": {
+              "value": "right"
+            }
+          },
+          "directionDiagonal": {
+            "desktop": {
+              "value": "right"
+            }
+          },
+          "directionAlt": {
+            "desktop": {
+              "value": "h"
+            }
+          },
+          "animation3d": {
+            "desktop": {
+              "value": "off"
+            }
+          },
+          "duration": {
+            "desktop": {
+              "value": "600ms"
+            }
+          },
+          "mainHeight": {
+            "desktop": {
+              "value": "300px"
+            }
+          },
+          "frontImgPosition": {
+            "desktop": {
+              "value": "center"
+            }
+          },
+          "frontImgPadding": {
+            "desktop": {
+              "value": "0px|0px|0px|0px"
+            }
+          },
+          "frontIconSize": {
+            "desktop": {
+              "value": "60px"
+            }
+          },
+          "backImgPosition": {
+            "desktop": {
+              "value": "center"
+            }
+          },
+          "backImgPadding": {
+            "desktop": {
+              "value": "0px|0px|0px|0px"
+            }
+          },
+          "backIconSize": {
+            "desktop": {
+              "value": "60px"
+            }
+          },
+          "frontAlignment": {
+            "desktop": {
+              "value": "center"
+            }
+          },
+          "frontAlignItems": {
+            "desktop": {
+              "value": "center"
+            }
+          },
+          "frontPadding": {
+            "desktop": {
+              "value": "30px|30px|30px|30px"
+            }
+          },
+          "frontCtPadding": {
+            "desktop": {
+              "value": "0px|0px|0px|0px"
+            }
+          },
+          "backAlignment": {
+            "desktop": {
+              "value": "center"
+            }
+          },
+          "backAlignItems": {
+            "desktop": {
+              "value": "center"
+            }
+          },
+          "backPadding": {
+            "desktop": {
+              "value": "30px|30px|30px|30px"
+            }
+          },
+          "backCtPadding": {
+            "desktop": {
+              "value": "0px|0px|0px|0px"
+            }
+          },
+          "frontSubtitleSpacing": {
+            "desktop": {
+              "value": "0px"
+            }
+          },
+          "backSubtitleSpacing": {
+            "desktop": {
+              "value": "0px"
+            }
+          },
+          "frontDescSpacing": {
+            "desktop": {
+              "value": "0px"
+            }
+          },
+          "backDescSpacing": {
+            "desktop": {
+              "value": "0px"
+            }
+          },
+          "btnSpacing": {
+            "desktop": {
+              "value": "15px"
+            }
+          }
+        }
+      },
+      "settings": {
+        "meta": {
+          "adminLabel": {}
+        },
+        "advanced": {
+          "htmlAttributes": {},
+          "frontMediaType": {
+            "groupType": "group-item",
+            "item": {
+              "groupSlug": "contentFront",
+              "attrName": "module.advanced.frontMediaType",
+              "label": "Media Type",
+              "description": "Select front side media type.",
+              "priority": 10,
+              "render": true,
+              "features": {
+                "sticky": false,
+                "responsive": false,
+                "hover": false
+              },
+              "component": {
+                "type": "field",
+                "name": "divi/select",
+                "props": {
+                  "options": {
+                    "none": {
+                      "label": "None"
+                    },
+                    "icon": {
+                      "label": "Icon"
+                    },
+                    "image": {
+                      "label": "Image"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "frontIcon": {
+            "groupType": "group-item",
+            "item": {
+              "groupSlug": "contentFront",
+              "attrName": "module.advanced.frontIcon",
+              "label": "Select Icon",
+              "description": "Select front side icon.",
+              "priority": 20,
+              "render": true,
+              "features": {
+                "sticky": false,
+                "responsive": false,
+                "hover": false
+              },
+              "component": {
+                "type": "field",
+                "name": "divi/icon-picker"
+              }
+            }
+          },
+          "backMediaType": {
+            "groupType": "group-item",
+            "item": {
+              "groupSlug": "contentBack",
+              "attrName": "module.advanced.backMediaType",
+              "label": "Media Type",
+              "description": "Select back side media type.",
+              "priority": 10,
+              "render": true,
+              "features": {
+                "sticky": false,
+                "responsive": false,
+                "hover": false
+              },
+              "component": {
+                "type": "field",
+                "name": "divi/select",
+                "props": {
+                  "options": {
+                    "none": {
+                      "label": "None"
+                    },
+                    "icon": {
+                      "label": "Icon"
+                    },
+                    "image": {
+                      "label": "Image"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "backIcon": {
+            "groupType": "group-item",
+            "item": {
+              "groupSlug": "contentBack",
+              "attrName": "module.advanced.backIcon",
+              "label": "Select Icon",
+              "description": "Select back side icon.",
+              "priority": 20,
+              "render": true,
+              "features": {
+                "sticky": false,
+                "responsive": false,
+                "hover": false
+              },
+              "component": {
+                "type": "field",
+                "name": "divi/icon-picker"
+              }
+            }
+          },
+          "useButton": {
+            "groupType": "group-item",
+            "item": {
+              "groupSlug": "contentBack",
+              "attrName": "module.advanced.useButton",
+              "label": "Use Button",
+              "description": "Here you can choose whether button should be used.",
+              "priority": 80,
+              "render": true,
+              "features": {
+                "sticky": false,
+                "responsive": false,
+                "hover": false
+              },
+              "component": {
+                "type": "field",
+                "name": "divi/toggle"
+              }
+            }
+          },
+          "animationType": {
+            "groupType": "group-item",
+            "item": {
+              "groupSlug": "contentSettings",
+              "attrName": "module.advanced.animationType",
+              "label": "Animation Type",
+              "description": "Select the animation type.",
+              "priority": 10,
+              "render": true,
+              "features": {
+                "sticky": false,
+                "responsive": false,
+                "hover": false
+              },
+              "component": {
+                "type": "field",
+                "name": "divi/select",
+                "props": {
+                  "options": {
+                    "flip": {
+                      "label": "Flip"
+                    },
+                    "diagonal": {
+                      "label": "Flip Diagonal"
+                    },
+                    "shake": {
+                      "label": "Flip Shake"
+                    },
+                    "push": {
+                      "label": "Push"
+                    },
+                    "slide": {
+                      "label": "Slide"
+                    },
+                    "fade": {
+                      "label": "Fade"
+                    },
+                    "zoom_in": {
+                      "label": "Zoom In"
+                    },
+                    "zoom_out": {
+                      "label": "Zoom Out"
+                    },
+                    "rotate_3d": {
+                      "label": "Rotate 3D"
+                    },
+                    "open_up": {
+                      "label": "Open Up"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "flankColor": {
+            "groupType": "group-item",
+            "item": {
+              "groupSlug": "contentSettings",
+              "attrName": "module.advanced.flankColor",
+              "label": "Divider Flank Color",
+              "description": "Pick a color to use for the flank color.",
+              "priority": 20,
+              "render": true,
+              "features": {
+                "sticky": false,
+                "responsive": false,
+                "hover": false
+              },
+              "component": {
+                "type": "field",
+                "name": "divi/color-picker",
+                "props": {
+                  "isAlpha": true
+                }
+              }
+            }
+          },
+          "direction": {
+            "groupType": "group-item",
+            "item": {
+              "groupSlug": "contentSettings",
+              "attrName": "module.advanced.direction",
+              "label": "Animation Direction",
+              "description": "Select the animation direction.",
+              "priority": 30,
+              "render": true,
+              "features": {
+                "sticky": false,
+                "responsive": false,
+                "hover": false
+              },
+              "component": {
+                "type": "field",
+                "name": "divi/select",
+                "props": {
+                  "options": {
+                    "up": {
+                      "label": "Up"
+                    },
+                    "right": {
+                      "label": "Right"
+                    },
+                    "down": {
+                      "label": "Down"
+                    },
+                    "left": {
+                      "label": "Left"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "directionDiagonal": {
+            "groupType": "group-item",
+            "item": {
+              "groupSlug": "contentSettings",
+              "attrName": "module.advanced.directionDiagonal",
+              "label": "Animation Direction",
+              "description": "Select the animation direction.",
+              "priority": 40,
+              "render": true,
+              "features": {
+                "sticky": false,
+                "responsive": false,
+                "hover": false
+              },
+              "component": {
+                "type": "field",
+                "name": "divi/select",
+                "props": {
+                  "options": {
+                    "right": {
+                      "label": "Right"
+                    },
+                    "left": {
+                      "label": "Left"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "directionAlt": {
+            "groupType": "group-item",
+            "item": {
+              "groupSlug": "contentSettings",
+              "attrName": "module.advanced.directionAlt",
+              "label": "Animation Direction",
+              "description": "Select the animation direction.",
+              "priority": 50,
+              "render": true,
+              "features": {
+                "sticky": false,
+                "responsive": false,
+                "hover": false
+              },
+              "component": {
+                "type": "field",
+                "name": "divi/select",
+                "props": {
+                  "options": {
+                    "v": {
+                      "label": "Vertical"
+                    },
+                    "h": {
+                      "label": "Horizontal"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "animation3d": {
+            "groupType": "group-item",
+            "item": {
+              "groupSlug": "contentSettings",
+              "attrName": "module.advanced.animation3d",
+              "label": "Use 3d Animation",
+              "description": "Here you can choose whether 3d animation should be used.",
+              "priority": 60,
+              "render": true,
+              "features": {
+                "sticky": false,
+                "responsive": false,
+                "hover": false
+              },
+              "component": {
+                "type": "field",
+                "name": "divi/toggle"
+              }
+            }
+          },
+          "duration": {
+            "groupType": "group-item",
+            "item": {
+              "groupSlug": "contentSettings",
+              "attrName": "module.advanced.duration",
+              "label": "Animation Duration",
+              "description": "Define the length of time that the animation takes.",
+              "priority": 70,
+              "render": true,
+              "features": {
+                "sticky": false,
+                "responsive": false,
+                "hover": false
+              },
+              "component": {
+                "type": "field",
+                "name": "divi/range",
+                "props": {
+                  "min": 0,
+                  "max": 3000,
+                  "step": 50,
+                  "defaultUnit": "ms",
+                  "allowedUnits": [
+                    "ms"
+                  ]
+                }
+              }
+            }
+          },
+          "mainHeight": {
+            "groupType": "group-item",
+            "item": {
+              "groupSlug": "contentSettings",
+              "attrName": "module.advanced.mainHeight",
+              "label": "Height",
+              "description": "Define height for your flip box.",
+              "priority": 80,
+              "render": true,
+              "features": {
+                "sticky": false,
+                "responsive": true,
+                "hover": false
+              },
+              "component": {
+                "type": "field",
+                "name": "divi/range",
+                "props": {
+                  "min": 0,
+                  "max": 1000,
+                  "step": 1,
+                  "defaultUnit": "px"
+                }
+              }
+            }
+          },
+          "frontAlignment": {
+            "groupType": "group-item",
+            "item": {
+              "groupSlug": "designFront",
+              "attrName": "module.advanced.frontAlignment",
+              "label": "Content Alignment",
+              "description": "Align content to the left, right or center.",
+              "priority": 10,
+              "render": true,
+              "features": {
+                "sticky": false,
+                "responsive": true,
+                "hover": false
+              },
+              "component": {
+                "type": "field",
+                "name": "divi/select",
+                "props": {
+                  "options": {
+                    "left": {
+                      "label": "Left"
+                    },
+                    "center": {
+                      "label": "Center"
+                    },
+                    "right": {
+                      "label": "Right"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "frontAlignItems": {
+            "groupType": "group-item",
+            "item": {
+              "groupSlug": "designFront",
+              "attrName": "module.advanced.frontAlignItems",
+              "label": "Content Vertical Alignment",
+              "description": "Select front side content vertical alignment.",
+              "priority": 20,
+              "render": true,
+              "features": {
+                "sticky": false,
+                "responsive": false,
+                "hover": false
+              },
+              "component": {
+                "type": "field",
+                "name": "divi/select",
+                "props": {
+                  "options": {
+                    "flex-start": {
+                      "label": "Start"
+                    },
+                    "center": {
+                      "label": "Center"
+                    },
+                    "flex-end": {
+                      "label": "End"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "frontPadding": {
+            "groupType": "group-item",
+            "item": {
+              "groupSlug": "designFront",
+              "attrName": "module.advanced.frontPadding",
+              "label": "Padding",
+              "description": "Padding adds extra space to the inside of the element.",
+              "priority": 30,
+              "render": true,
+              "features": {
+                "sticky": false,
+                "responsive": true,
+                "hover": false
+              },
+              "component": {
+                "type": "field",
+                "name": "divi/spacing"
+              }
+            }
+          },
+          "frontCtPadding": {
+            "groupType": "group-item",
+            "item": {
+              "groupSlug": "designFront",
+              "attrName": "module.advanced.frontCtPadding",
+              "label": "Content Padding",
+              "description": "Set front side card content padding.",
+              "priority": 40,
+              "render": true,
+              "features": {
+                "sticky": false,
+                "responsive": true,
+                "hover": false
+              },
+              "component": {
+                "type": "field",
+                "name": "divi/spacing"
+              }
+            }
+          },
+          "backAlignment": {
+            "groupType": "group-item",
+            "item": {
+              "groupSlug": "designBack",
+              "attrName": "module.advanced.backAlignment",
+              "label": "Content Alignment",
+              "description": "Align content to the left, right or center.",
+              "priority": 10,
+              "render": true,
+              "features": {
+                "sticky": false,
+                "responsive": true,
+                "hover": false
+              },
+              "component": {
+                "type": "field",
+                "name": "divi/select",
+                "props": {
+                  "options": {
+                    "left": {
+                      "label": "Left"
+                    },
+                    "center": {
+                      "label": "Center"
+                    },
+                    "right": {
+                      "label": "Right"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "backAlignItems": {
+            "groupType": "group-item",
+            "item": {
+              "groupSlug": "designBack",
+              "attrName": "module.advanced.backAlignItems",
+              "label": "Content Vertical Alignment",
+              "description": "Select back side content vertical alignment.",
+              "priority": 20,
+              "render": true,
+              "features": {
+                "sticky": false,
+                "responsive": false,
+                "hover": false
+              },
+              "component": {
+                "type": "field",
+                "name": "divi/select",
+                "props": {
+                  "options": {
+                    "flex-start": {
+                      "label": "Start"
+                    },
+                    "center": {
+                      "label": "Center"
+                    },
+                    "flex-end": {
+                      "label": "End"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "backPadding": {
+            "groupType": "group-item",
+            "item": {
+              "groupSlug": "designBack",
+              "attrName": "module.advanced.backPadding",
+              "label": "Padding",
+              "description": "Padding adds extra space to the inside of the element.",
+              "priority": 30,
+              "render": true,
+              "features": {
+                "sticky": false,
+                "responsive": true,
+                "hover": false
+              },
+              "component": {
+                "type": "field",
+                "name": "divi/spacing"
+              }
+            }
+          },
+          "backCtPadding": {
+            "groupType": "group-item",
+            "item": {
+              "groupSlug": "designBack",
+              "attrName": "module.advanced.backCtPadding",
+              "label": "Content Padding",
+              "description": "Set back side card content padding.",
+              "priority": 40,
+              "render": true,
+              "features": {
+                "sticky": false,
+                "responsive": true,
+                "hover": false
+              },
+              "component": {
+                "type": "field",
+                "name": "divi/spacing"
+              }
+            }
+          },
+          "frontImgPosition": {
+            "groupType": "group-item",
+            "item": {
+              "groupSlug": "designFrontMedia",
+              "attrName": "module.advanced.frontImgPosition",
+              "label": "Position",
+              "description": "Select image position for the front side.",
+              "priority": 10,
+              "render": true,
+              "features": {
+                "sticky": false,
+                "responsive": false,
+                "hover": false
+              },
+              "component": {
+                "type": "field",
+                "name": "divi/select",
+                "props": {
+                  "options": {
+                    "left": {
+                      "label": "Left"
+                    },
+                    "center": {
+                      "label": "Center"
+                    },
+                    "right": {
+                      "label": "Right"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "frontImgPadding": {
+            "groupType": "group-item",
+            "item": {
+              "groupSlug": "designFrontMedia",
+              "attrName": "module.advanced.frontImgPadding",
+              "label": "Padding",
+              "description": "Here you can define a custom padding for your front side icon/image.",
+              "priority": 20,
+              "render": true,
+              "features": {
+                "sticky": false,
+                "responsive": true,
+                "hover": false
+              },
+              "component": {
+                "type": "field",
+                "name": "divi/spacing"
+              }
+            }
+          },
+          "frontIconColor": {
+            "groupType": "group-item",
+            "item": {
+              "groupSlug": "designFrontMedia",
+              "attrName": "module.advanced.frontIconColor",
+              "label": "Icon Color",
+              "description": "Here you can define a custom color for your front side icon.",
+              "priority": 30,
+              "render": true,
+              "features": {
+                "sticky": false,
+                "responsive": false,
+                "hover": false
+              },
+              "component": {
+                "type": "field",
+                "name": "divi/color-picker",
+                "props": {
+                  "isAlpha": true
+                }
+              }
+            }
+          },
+          "frontIconSize": {
+            "groupType": "group-item",
+            "item": {
+              "groupSlug": "designFrontMedia",
+              "attrName": "module.advanced.frontIconSize",
+              "label": "Icon Size",
+              "description": "Here you can define a custom size for your front side icon.",
+              "priority": 40,
+              "render": true,
+              "features": {
+                "sticky": false,
+                "responsive": true,
+                "hover": false
+              },
+              "component": {
+                "type": "field",
+                "name": "divi/range",
+                "props": {
+                  "min": 0,
+                  "max": 1000,
+                  "step": 1,
+                  "defaultUnit": "px"
+                }
+              }
+            }
+          },
+          "frontImgHeight": {
+            "groupType": "group-item",
+            "item": {
+              "groupSlug": "designFrontMedia",
+              "attrName": "module.advanced.frontImgHeight",
+              "label": "Height",
+              "description": "Here you can define a custom height for your front side image/icon.",
+              "priority": 50,
+              "render": true,
+              "features": {
+                "sticky": false,
+                "responsive": true,
+                "hover": false
+              },
+              "component": {
+                "type": "field",
+                "name": "divi/range",
+                "props": {
+                  "min": 0,
+                  "max": 1000,
+                  "step": 1,
+                  "defaultUnit": "px"
+                }
+              }
+            }
+          },
+          "frontImgWidth": {
+            "groupType": "group-item",
+            "item": {
+              "groupSlug": "designFrontMedia",
+              "attrName": "module.advanced.frontImgWidth",
+              "label": "Width",
+              "description": "Here you can define a custom width for your front side image/icon.",
+              "priority": 60,
+              "render": true,
+              "features": {
+                "sticky": false,
+                "responsive": true,
+                "hover": false
+              },
+              "component": {
+                "type": "field",
+                "name": "divi/range",
+                "props": {
+                  "min": 0,
+                  "max": 1000,
+                  "step": 1,
+                  "defaultUnit": "px"
+                }
+              }
+            }
+          },
+          "backImgPosition": {
+            "groupType": "group-item",
+            "item": {
+              "groupSlug": "designBackMedia",
+              "attrName": "module.advanced.backImgPosition",
+              "label": "Position",
+              "description": "Select image position for the back side.",
+              "priority": 10,
+              "render": true,
+              "features": {
+                "sticky": false,
+                "responsive": false,
+                "hover": false
+              },
+              "component": {
+                "type": "field",
+                "name": "divi/select",
+                "props": {
+                  "options": {
+                    "flex-start": {
+                      "label": "Left"
+                    },
+                    "center": {
+                      "label": "Center"
+                    },
+                    "flex-end": {
+                      "label": "Right"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "backImgPadding": {
+            "groupType": "group-item",
+            "item": {
+              "groupSlug": "designBackMedia",
+              "attrName": "module.advanced.backImgPadding",
+              "label": "Padding",
+              "description": "Here you can define a custom padding for your back side icon/image.",
+              "priority": 20,
+              "render": true,
+              "features": {
+                "sticky": false,
+                "responsive": true,
+                "hover": false
+              },
+              "component": {
+                "type": "field",
+                "name": "divi/spacing"
+              }
+            }
+          },
+          "backIconColor": {
+            "groupType": "group-item",
+            "item": {
+              "groupSlug": "designBackMedia",
+              "attrName": "module.advanced.backIconColor",
+              "label": "Icon Color",
+              "description": "Here you can define a custom color for your back side icon.",
+              "priority": 30,
+              "render": true,
+              "features": {
+                "sticky": false,
+                "responsive": false,
+                "hover": false
+              },
+              "component": {
+                "type": "field",
+                "name": "divi/color-picker",
+                "props": {
+                  "isAlpha": true
+                }
+              }
+            }
+          },
+          "backIconSize": {
+            "groupType": "group-item",
+            "item": {
+              "groupSlug": "designBackMedia",
+              "attrName": "module.advanced.backIconSize",
+              "label": "Icon Size",
+              "description": "Here you can define a custom size for your back side icon.",
+              "priority": 40,
+              "render": true,
+              "features": {
+                "sticky": false,
+                "responsive": true,
+                "hover": false
+              },
+              "component": {
+                "type": "field",
+                "name": "divi/range",
+                "props": {
+                  "min": 0,
+                  "max": 1000,
+                  "step": 1,
+                  "defaultUnit": "px"
+                }
+              }
+            }
+          },
+          "backImgHeight": {
+            "groupType": "group-item",
+            "item": {
+              "groupSlug": "designBackMedia",
+              "attrName": "module.advanced.backImgHeight",
+              "label": "Height",
+              "description": "Here you can define a custom height for your back side image/icon.",
+              "priority": 50,
+              "render": true,
+              "features": {
+                "sticky": false,
+                "responsive": true,
+                "hover": false
+              },
+              "component": {
+                "type": "field",
+                "name": "divi/range",
+                "props": {
+                  "min": 0,
+                  "max": 1000,
+                  "step": 1,
+                  "defaultUnit": "px"
+                }
+              }
+            }
+          },
+          "backImgWidth": {
+            "groupType": "group-item",
+            "item": {
+              "groupSlug": "designBackMedia",
+              "attrName": "module.advanced.backImgWidth",
+              "label": "Width",
+              "description": "Here you can define a custom width for your back side image/icon.",
+              "priority": 60,
+              "render": true,
+              "features": {
+                "sticky": false,
+                "responsive": true,
+                "hover": false
+              },
+              "component": {
+                "type": "field",
+                "name": "divi/range",
+                "props": {
+                  "min": 0,
+                  "max": 1000,
+                  "step": 1,
+                  "defaultUnit": "px"
+                }
+              }
+            }
+          },
+          "frontSubtitleSpacing": {
+            "groupType": "group-item",
+            "item": {
+              "groupSlug": "designFrontSubtitle",
+              "attrName": "module.advanced.frontSubtitleSpacing",
+              "label": "Spacing Top",
+              "description": "Here you can define a custom spacing at the top of the front card subtitle.",
+              "priority": 20,
+              "render": true,
+              "features": {
+                "sticky": false,
+                "responsive": true,
+                "hover": false
+              },
+              "component": {
+                "type": "field",
+                "name": "divi/range",
+                "props": {
+                  "min": 0,
+                  "max": 150,
+                  "step": 1,
+                  "defaultUnit": "px"
+                }
+              }
+            }
+          },
+          "backSubtitleSpacing": {
+            "groupType": "group-item",
+            "item": {
+              "groupSlug": "designBackSubtitle",
+              "attrName": "module.advanced.backSubtitleSpacing",
+              "label": "Spacing Top",
+              "description": "Here you can define a custom spacing at the top of the back card subtitle.",
+              "priority": 20,
+              "render": true,
+              "features": {
+                "sticky": false,
+                "responsive": true,
+                "hover": false
+              },
+              "component": {
+                "type": "field",
+                "name": "divi/range",
+                "props": {
+                  "min": 0,
+                  "max": 150,
+                  "step": 1,
+                  "defaultUnit": "px"
+                }
+              }
+            }
+          },
+          "frontDescSpacing": {
+            "groupType": "group-item",
+            "item": {
+              "groupSlug": "designFrontDescription",
+              "attrName": "module.advanced.frontDescSpacing",
+              "label": "Spacing Top",
+              "description": "Here you can define a custom spacing at the top of the front card description.",
+              "priority": 20,
+              "render": true,
+              "features": {
+                "sticky": false,
+                "responsive": true,
+                "hover": false
+              },
+              "component": {
+                "type": "field",
+                "name": "divi/range",
+                "props": {
+                  "min": 0,
+                  "max": 150,
+                  "step": 1,
+                  "defaultUnit": "px"
+                }
+              }
+            }
+          },
+          "backDescSpacing": {
+            "groupType": "group-item",
+            "item": {
+              "groupSlug": "designBackDescription",
+              "attrName": "module.advanced.backDescSpacing",
+              "label": "Spacing Top",
+              "description": "Here you can define a custom spacing at the top of the back card description.",
+              "priority": 20,
+              "render": true,
+              "features": {
+                "sticky": false,
+                "responsive": true,
+                "hover": false
+              },
+              "component": {
+                "type": "field",
+                "name": "divi/range",
+                "props": {
+                  "min": 0,
+                  "max": 150,
+                  "step": 1,
+                  "defaultUnit": "px"
+                }
+              }
+            }
+          },
+          "btnSpacing": {
+            "groupType": "group-item",
+            "item": {
+              "groupSlug": "designButton",
+              "attrName": "module.advanced.btnSpacing",
+              "label": "Spacing Top",
+              "description": "Here you can define a custom spacing at the top of the back card button.",
+              "priority": 10,
+              "render": true,
+              "features": {
+                "sticky": false,
+                "responsive": true,
+                "hover": false
+              },
+              "component": {
+                "type": "field",
+                "name": "divi/range",
+                "props": {
+                  "min": 0,
+                  "max": 150,
+                  "step": 1,
+                  "defaultUnit": "px"
+                }
+              }
+            }
+          }
+        },
+        "decoration": {
+          "animation": {},
+          "layout": {},
+          "background": {},
+          "border": {},
+          "boxShadow": {},
+          "filters": {},
+          "overflow": {},
+          "position": {},
+          "scroll": {},
+          "spacing": {},
+          "sizing": {},
+          "sticky": {},
+          "transform": {},
+          "transition": {},
+          "zIndex": {},
+          "disabledOn": {}
+        }
+      }
+    },
+    "front": {
+      "type": "object",
+      "selector": "{{selector}} .dtq-flipbox-front-card",
+      "default": {
+        "decoration": {
+          "background": {
+            "desktop": {
+              "value": {
+                "color": "#efefef"
+              }
+            }
+          }
+        }
+      },
+      "settings": {
+        "decoration": {
+          "background": {
+            "groupType": "group-item",
+            "item": {
+              "groupSlug": "designFront",
+              "priority": 50,
+              "render": true,
+              "attrName": "front.decoration.background",
+              "component": {
+                "name": "divi/background",
+                "type": "group",
+                "props": {
+                  "grouped": false,
+                  "fieldLabel": "Front Side"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "back": {
+      "type": "object",
+      "selector": "{{selector}} .dtq-flipbox-back-card",
+      "default": {
+        "decoration": {
+          "background": {
+            "desktop": {
+              "value": {
+                "color": "#efefef"
+              }
+            }
+          }
+        }
+      },
+      "settings": {
+        "decoration": {
+          "background": {
+            "groupType": "group-item",
+            "item": {
+              "groupSlug": "designBack",
+              "priority": 50,
+              "render": true,
+              "attrName": "back.decoration.background",
+              "component": {
+                "name": "divi/background",
+                "type": "group",
+                "props": {
+                  "grouped": false,
+                  "fieldLabel": "Back Side"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "frontMedia": {
+      "type": "object",
+      "selector": "{{selector}} .dtq-flipbox-figure-front",
+      "settings": {
+        "decoration": {
+          "background": {
+            "groupType": "group-item",
+            "item": {
+              "groupSlug": "designFrontMedia",
+              "priority": 70,
+              "render": true,
+              "attrName": "frontMedia.decoration.background",
+              "component": {
+                "name": "divi/background",
+                "type": "group",
+                "props": {
+                  "grouped": false,
+                  "fieldLabel": "Front Media"
+                }
+              }
+            }
+          },
+          "border": {
+            "groupType": "group-item",
+            "item": {
+              "groupSlug": "designFrontMedia",
+              "priority": 80,
+              "render": true,
+              "attrName": "frontMedia.decoration.border",
+              "component": {
+                "name": "divi/border",
+                "type": "group",
+                "props": {
+                  "grouped": false,
+                  "fieldLabel": "Front Media"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "backMedia": {
+      "type": "object",
+      "selector": "{{selector}} .dtq-flipbox-figure-back",
+      "settings": {
+        "decoration": {
+          "background": {
+            "groupType": "group-item",
+            "item": {
+              "groupSlug": "designBackMedia",
+              "priority": 70,
+              "render": true,
+              "attrName": "backMedia.decoration.background",
+              "component": {
+                "name": "divi/background",
+                "type": "group",
+                "props": {
+                  "grouped": false,
+                  "fieldLabel": "Back Media"
+                }
+              }
+            }
+          },
+          "border": {
+            "groupType": "group-item",
+            "item": {
+              "groupSlug": "designBackMedia",
+              "priority": 80,
+              "render": true,
+              "attrName": "backMedia.decoration.border",
+              "component": {
+                "name": "divi/border",
+                "type": "group",
+                "props": {
+                  "grouped": false,
+                  "fieldLabel": "Back Media"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "card": {
+      "type": "object",
+      "selector": "{{selector}} .dtq-flipbox-card",
+      "default": {
+        "decoration": {
+          "border": {
+            "desktop": {
+              "value": {
+                "radius": {
+                  "topLeft": "0px",
+                  "topRight": "0px",
+                  "bottomLeft": "0px",
+                  "bottomRight": "0px"
+                },
+                "styles": {
+                  "all": {
+                    "width": "0px",
+                    "color": "#333333",
+                    "style": "solid"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "settings": {
+        "decoration": {
+          "border": {
+            "groupType": "group-item",
+            "item": {
+              "groupSlug": "designBorder",
+              "priority": 10,
+              "render": true,
+              "attrName": "card.decoration.border",
+              "component": {
+                "name": "divi/border",
+                "type": "group",
+                "props": {
+                  "grouped": false,
+                  "fieldLabel": "Card"
+                }
+              }
+            }
+          },
+          "boxShadow": {
+            "groupType": "group-item",
+            "item": {
+              "groupSlug": "designBoxShadow",
+              "priority": 10,
+              "render": true,
+              "attrName": "card.decoration.boxShadow",
+              "component": {
+                "name": "divi/box-shadow",
+                "type": "group",
+                "props": {
+                  "grouped": false,
+                  "fieldLabel": "Card"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "frontImage": {
+      "type": "object",
+      "selector": "{{selector}} .dtq-flipbox-figure-front img",
+      "settings": {
+        "innerContent": {
+          "groupType": "group-item",
+          "item": {
+            "groupSlug": "contentFront",
+            "attrName": "frontImage.innerContent",
+            "label": "Upload Image",
+            "description": "Upload an image or type in the URL of the image you would like to display for the front side.",
+            "priority": 30,
+            "render": true,
+            "features": {
+              "sticky": false,
+              "responsive": false,
+              "hover": false,
+              "dynamicContent": true
+            },
+            "component": {
+              "type": "field",
+              "name": "divi/upload"
+            }
+          }
+        },
+        "advanced": {
+          "alt": {
+            "groupType": "group-item",
+            "item": {
+              "groupSlug": "contentFront",
+              "attrName": "frontImage.advanced.alt",
+              "label": "Image Alt Text",
+              "description": "Define the front side image alt text for your flip box.",
+              "priority": 40,
+              "render": true,
+              "features": {
+                "sticky": false,
+                "responsive": false,
+                "hover": false
+              },
+              "component": {
+                "type": "field",
+                "name": "divi/text"
+              }
+            }
+          }
+        }
+      }
+    },
+    "backImage": {
+      "type": "object",
+      "selector": "{{selector}} .dtq-flipbox-figure-back img",
+      "settings": {
+        "innerContent": {
+          "groupType": "group-item",
+          "item": {
+            "groupSlug": "contentBack",
+            "attrName": "backImage.innerContent",
+            "label": "Upload Image",
+            "description": "Upload an image or type in the URL of the image you would like to display for the back side.",
+            "priority": 30,
+            "render": true,
+            "features": {
+              "sticky": false,
+              "responsive": false,
+              "hover": false,
+              "dynamicContent": true
+            },
+            "component": {
+              "type": "field",
+              "name": "divi/upload"
+            }
+          }
+        },
+        "advanced": {
+          "alt": {
+            "groupType": "group-item",
+            "item": {
+              "groupSlug": "contentBack",
+              "attrName": "backImage.advanced.alt",
+              "label": "Image Alt Text",
+              "description": "Define the back side image alt text for your flip box.",
+              "priority": 40,
+              "render": true,
+              "features": {
+                "sticky": false,
+                "responsive": false,
+                "hover": false
+              },
+              "component": {
+                "type": "field",
+                "name": "divi/text"
+              }
+            }
+          }
+        }
+      }
+    },
+    "frontTitle": {
+      "type": "object",
+      "selector": "{{selector}} .dtq-flipbox-title-front",
+      "elementType": "heading",
+      "tagName": "h2",
+      "inlineEditor": "plainText",
+      "attributes": {
+        "class": "dtq-flipbox-title-front"
+      },
+      "childrenSanitizer": "et_core_esc_previously",
+      "default": {
+        "decoration": {
+          "font": {
+            "font": {
+              "desktop": {
+                "value": {
+                  "headingLevel": "h2",
+                  "size": "26px",
+                  "lineHeight": "1.5em"
+                }
+              }
+            }
+          }
+        }
+      },
+      "settings": {
+        "innerContent": {
+          "groupType": "group-item",
+          "item": {
+            "groupSlug": "contentFront",
+            "attrName": "frontTitle.innerContent",
+            "label": "Front Title",
+            "description": "Define the front side title for your flip box.",
+            "priority": 50,
+            "render": true,
+            "features": {
+              "sticky": false,
+              "responsive": false,
+              "hover": false,
+              "dynamicContent": true
+            },
+            "component": {
+              "type": "field",
+              "name": "divi/text"
+            }
+          }
+        },
+        "decoration": {
+          "font": {
+            "groupType": "group-item",
+            "item": {
+              "groupSlug": "designFrontTitle",
+              "priority": 10,
+              "render": true,
+              "component": {
+                "name": "divi/font",
+                "type": "group",
+                "props": {
+                  "grouped": false,
+                  "fieldLabel": "Front Title",
+                  "hideTextAlign": true
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "frontSubtitle": {
+      "type": "object",
+      "selector": "{{selector}} .dtq-flipbox-subtitle-front",
+      "elementType": "heading",
+      "tagName": "h4",
+      "inlineEditor": "plainText",
+      "attributes": {
+        "class": "dtq-flipbox-subtitle-front"
+      },
+      "childrenSanitizer": "et_core_esc_previously",
+      "default": {
+        "decoration": {
+          "font": {
+            "font": {
+              "desktop": {
+                "value": {
+                  "headingLevel": "h4",
+                  "size": "18px",
+                  "lineHeight": "1.5em"
+                }
+              }
+            }
+          }
+        }
+      },
+      "settings": {
+        "innerContent": {
+          "groupType": "group-item",
+          "item": {
+            "groupSlug": "contentFront",
+            "attrName": "frontSubtitle.innerContent",
+            "label": "Front Sub Title",
+            "description": "Define the front side sub-title for your flip box.",
+            "priority": 60,
+            "render": true,
+            "features": {
+              "sticky": false,
+              "responsive": false,
+              "hover": false,
+              "dynamicContent": true
+            },
+            "component": {
+              "type": "field",
+              "name": "divi/text"
+            }
+          }
+        },
+        "decoration": {
+          "font": {
+            "groupType": "group-item",
+            "item": {
+              "groupSlug": "designFrontSubtitle",
+              "priority": 10,
+              "render": true,
+              "component": {
+                "name": "divi/font",
+                "type": "group",
+                "props": {
+                  "grouped": false,
+                  "fieldLabel": "Front Subtitle",
+                  "hideTextAlign": true
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "frontDescription": {
+      "type": "object",
+      "selector": "{{selector}} .dtq-flipbox-desc-front",
+      "elementType": "richText",
+      "tagName": "div",
+      "inlineEditor": "richText",
+      "attributes": {
+        "class": "dtq-flipbox-desc-front"
+      },
+      "childrenSanitizer": "et_core_esc_previously",
+      "default": {
+        "decoration": {
+          "bodyFont": {
+            "body": {
+              "font": {
+                "desktop": {
+                  "value": {
+                    "size": "14px",
+                    "lineHeight": "1.6em"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "settings": {
+        "innerContent": {
+          "groupType": "group-item",
+          "item": {
+            "groupSlug": "contentFront",
+            "attrName": "frontDescription.innerContent",
+            "label": "Front Description",
+            "description": "Define the front side description text for your flip box.",
+            "priority": 70,
+            "render": true,
+            "features": {
+              "sticky": false,
+              "responsive": false,
+              "hover": false,
+              "dynamicContent": true
+            },
+            "component": {
+              "type": "field",
+              "name": "divi/richtext"
+            }
+          }
+        },
+        "decoration": {
+          "bodyFont": {
+            "groupType": "group-item",
+            "item": {
+              "groupSlug": "designFrontDescription",
+              "priority": 10,
+              "render": true,
+              "component": {
+                "name": "divi/font-body",
+                "type": "group",
+                "props": {
+                  "fieldLabel": "Front Description"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "backTitle": {
+      "type": "object",
+      "selector": "{{selector}} .dtq-flipbox-title-back",
+      "elementType": "heading",
+      "tagName": "h2",
+      "inlineEditor": "plainText",
+      "attributes": {
+        "class": "dtq-flipbox-title-back"
+      },
+      "childrenSanitizer": "et_core_esc_previously",
+      "default": {
+        "decoration": {
+          "font": {
+            "font": {
+              "desktop": {
+                "value": {
+                  "headingLevel": "h2",
+                  "size": "26px",
+                  "lineHeight": "1.5em"
+                }
+              }
+            }
+          }
+        }
+      },
+      "settings": {
+        "innerContent": {
+          "groupType": "group-item",
+          "item": {
+            "groupSlug": "contentBack",
+            "attrName": "backTitle.innerContent",
+            "label": "Back Title",
+            "description": "Define the back side title for your flip box.",
+            "priority": 50,
+            "render": true,
+            "features": {
+              "sticky": false,
+              "responsive": false,
+              "hover": false,
+              "dynamicContent": true
+            },
+            "component": {
+              "type": "field",
+              "name": "divi/text"
+            }
+          }
+        },
+        "decoration": {
+          "font": {
+            "groupType": "group-item",
+            "item": {
+              "groupSlug": "designBackTitle",
+              "priority": 10,
+              "render": true,
+              "component": {
+                "name": "divi/font",
+                "type": "group",
+                "props": {
+                  "grouped": false,
+                  "fieldLabel": "Back Title",
+                  "hideTextAlign": true
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "backSubtitle": {
+      "type": "object",
+      "selector": "{{selector}} .dtq-flipbox-subtitle-back",
+      "elementType": "heading",
+      "tagName": "h4",
+      "inlineEditor": "plainText",
+      "attributes": {
+        "class": "dtq-flipbox-subtitle-back"
+      },
+      "childrenSanitizer": "et_core_esc_previously",
+      "default": {
+        "decoration": {
+          "font": {
+            "font": {
+              "desktop": {
+                "value": {
+                  "headingLevel": "h4",
+                  "size": "18px",
+                  "lineHeight": "1.5em"
+                }
+              }
+            }
+          }
+        }
+      },
+      "settings": {
+        "innerContent": {
+          "groupType": "group-item",
+          "item": {
+            "groupSlug": "contentBack",
+            "attrName": "backSubtitle.innerContent",
+            "label": "Back Sub Title",
+            "description": "Define the back side sub-title for your flip box.",
+            "priority": 60,
+            "render": true,
+            "features": {
+              "sticky": false,
+              "responsive": false,
+              "hover": false,
+              "dynamicContent": true
+            },
+            "component": {
+              "type": "field",
+              "name": "divi/text"
+            }
+          }
+        },
+        "decoration": {
+          "font": {
+            "groupType": "group-item",
+            "item": {
+              "groupSlug": "designBackSubtitle",
+              "priority": 10,
+              "render": true,
+              "component": {
+                "name": "divi/font",
+                "type": "group",
+                "props": {
+                  "grouped": false,
+                  "fieldLabel": "Back Subtitle",
+                  "hideTextAlign": true
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "backDescription": {
+      "type": "object",
+      "selector": "{{selector}} .dtq-flipbox-desc-back",
+      "elementType": "richText",
+      "tagName": "div",
+      "inlineEditor": "richText",
+      "attributes": {
+        "class": "dtq-flipbox-desc-back"
+      },
+      "childrenSanitizer": "et_core_esc_previously",
+      "default": {
+        "decoration": {
+          "bodyFont": {
+            "body": {
+              "font": {
+                "desktop": {
+                  "value": {
+                    "size": "14px",
+                    "lineHeight": "1.6em"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "settings": {
+        "innerContent": {
+          "groupType": "group-item",
+          "item": {
+            "groupSlug": "contentBack",
+            "attrName": "backDescription.innerContent",
+            "label": "Back Description",
+            "description": "Define the back side description text for your flip box.",
+            "priority": 70,
+            "render": true,
+            "features": {
+              "sticky": false,
+              "responsive": false,
+              "hover": false,
+              "dynamicContent": true
+            },
+            "component": {
+              "type": "field",
+              "name": "divi/richtext"
+            }
+          }
+        },
+        "decoration": {
+          "bodyFont": {
+            "groupType": "group-item",
+            "item": {
+              "groupSlug": "designBackDescription",
+              "priority": 10,
+              "render": true,
+              "component": {
+                "name": "divi/font-body",
+                "type": "group",
+                "props": {
+                  "fieldLabel": "Back Description"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "button": {
+      "type": "object",
+      "selector": "{{selector}} .dtq-flipbox-btn",
+      "elementType": "button",
+      "tagName": "a",
+      "attributes": {
+        "class": "dtq-flipbox-btn"
+      },
+      "default": {
+        "innerContent": {
+          "desktop": {
+            "value": {
+              "text": "Click Here"
+            }
+          }
+        }
+      },
+      "settings": {
+        "innerContent": {
+          "groupType": "into-multiple-groups",
+          "groups": {
+            "text": {
+              "groupType": "group-item",
+              "item": {
+                "groupSlug": "contentBack",
+                "attrName": "button.innerContent",
+                "subName": "text",
+                "label": "Button Text",
+                "description": "Here you can define the button text.",
+                "priority": 90,
+                "render": true,
+                "features": {
+                  "sticky": false,
+                  "responsive": false,
+                  "hover": false,
+                  "dynamicContent": true
+                },
+                "component": {
+                  "type": "field",
+                  "name": "divi/text"
+                }
+              }
+            },
+            "link": {
+              "groupType": "group-item",
+              "item": {
+                "groupSlug": "contentBack",
+                "priority": 100,
+                "render": true,
+                "component": {
+                  "name": "divi/button-link",
+                  "type": "group",
+                  "props": {
+                    "grouped": false,
+                    "attrName": "button.innerContent",
+                    "fieldLabel": "Button"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "decoration": {
+          "button": {
+            "groupType": "group-item",
+            "item": {
+              "groupSlug": "designButton",
+              "attrName": "button.decoration.button",
+              "priority": 20,
+              "render": true,
+              "component": {
+                "name": "divi/button",
+                "type": "group"
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "customCssFields": {
+    "frontIcon": {
+      "subName": "frontIcon",
+      "selectorSuffix": " .dtq-flipbox-icon-front i"
+    },
+    "frontImg": {
+      "subName": "frontImg",
+      "selectorSuffix": " .dtq-flipbox-figure-front img"
+    },
+    "frontTitle": {
+      "subName": "frontTitle",
+      "selectorSuffix": " .dtq-flipbox-title-front"
+    },
+    "frontSubTitle": {
+      "subName": "frontSubTitle",
+      "selectorSuffix": " .dtq-flipbox-subtitle-front"
+    },
+    "frontDesc": {
+      "subName": "frontDesc",
+      "selectorSuffix": " .dtq-flipbox-desc-front"
+    },
+    "backIcon": {
+      "subName": "backIcon",
+      "selectorSuffix": " .dtq-flipbox-icon-back i"
+    },
+    "backImg": {
+      "subName": "backImg",
+      "selectorSuffix": " .dtq-flipbox-figure-back img"
+    },
+    "backTitle": {
+      "subName": "backTitle",
+      "selectorSuffix": " .dtq-flipbox-title-back"
+    },
+    "backSubTitle": {
+      "subName": "backSubTitle",
+      "selectorSuffix": " .dtq-flipbox-subtitle-back"
+    },
+    "backDesc": {
+      "subName": "backDesc",
+      "selectorSuffix": " .dtq-flipbox-desc-back"
+    },
+    "backBtn": {
+      "subName": "backBtn",
+      "selectorSuffix": " .dtq-flipbox-btn"
+    }
+  },
+  "settings": {
+    "content": "auto",
+    "design": "auto",
+    "advanced": "auto",
+    "groups": {
+      "contentFront": {
+        "panel": "content",
+        "priority": 10,
+        "groupName": "frontSide",
+        "component": {
+          "name": "divi/composite",
+          "props": {
+            "groupLabel": "Front Side"
+          }
+        }
+      },
+      "contentBack": {
+        "panel": "content",
+        "priority": 20,
+        "groupName": "backSide",
+        "component": {
+          "name": "divi/composite",
+          "props": {
+            "groupLabel": "Back Side"
+          }
+        }
+      },
+      "contentSettings": {
+        "panel": "content",
+        "priority": 30,
+        "groupName": "settings",
+        "component": {
+          "name": "divi/composite",
+          "props": {
+            "groupLabel": "Settings"
+          }
+        }
+      },
+      "designFront": {
+        "panel": "design",
+        "priority": 10,
+        "groupName": "frontSide",
+        "component": {
+          "name": "divi/composite",
+          "props": {
+            "groupLabel": "Front Side"
+          }
+        }
+      },
+      "designBack": {
+        "panel": "design",
+        "priority": 20,
+        "groupName": "backSide",
+        "component": {
+          "name": "divi/composite",
+          "props": {
+            "groupLabel": "Back Side"
+          }
+        }
+      },
+      "designFrontMedia": {
+        "panel": "design",
+        "priority": 30,
+        "groupName": "frontMedia",
+        "component": {
+          "name": "divi/composite",
+          "props": {
+            "groupLabel": "Front Media"
+          }
+        }
+      },
+      "designBackMedia": {
+        "panel": "design",
+        "priority": 40,
+        "groupName": "backMedia",
+        "component": {
+          "name": "divi/composite",
+          "props": {
+            "groupLabel": "Back Media"
+          }
+        }
+      },
+      "designFrontTitle": {
+        "panel": "design",
+        "priority": 50,
+        "groupName": "frontTitle",
+        "multiElements": true,
+        "component": {
+          "name": "divi/composite",
+          "props": {
+            "groupLabel": "Front Title",
+            "clipboardCategory": "style",
+            "presetGroup": "divi/font"
+          }
+        }
+      },
+      "designFrontSubtitle": {
+        "panel": "design",
+        "priority": 55,
+        "groupName": "frontSubtitle",
+        "multiElements": true,
+        "component": {
+          "name": "divi/composite",
+          "props": {
+            "groupLabel": "Front Subtitle",
+            "clipboardCategory": "style",
+            "presetGroup": "divi/font"
+          }
+        }
+      },
+      "designFrontDescription": {
+        "panel": "design",
+        "priority": 60,
+        "groupName": "frontDescription",
+        "multiElements": true,
+        "component": {
+          "name": "divi/composite",
+          "props": {
+            "groupLabel": "Front Description",
+            "clipboardCategory": "style",
+            "presetGroup": "divi/font-body"
+          }
+        }
+      },
+      "designBackTitle": {
+        "panel": "design",
+        "priority": 65,
+        "groupName": "backTitle",
+        "multiElements": true,
+        "component": {
+          "name": "divi/composite",
+          "props": {
+            "groupLabel": "Back Title",
+            "clipboardCategory": "style",
+            "presetGroup": "divi/font"
+          }
+        }
+      },
+      "designBackSubtitle": {
+        "panel": "design",
+        "priority": 70,
+        "groupName": "backSubtitle",
+        "multiElements": true,
+        "component": {
+          "name": "divi/composite",
+          "props": {
+            "groupLabel": "Back Subtitle",
+            "clipboardCategory": "style",
+            "presetGroup": "divi/font"
+          }
+        }
+      },
+      "designBackDescription": {
+        "panel": "design",
+        "priority": 75,
+        "groupName": "backDescription",
+        "multiElements": true,
+        "component": {
+          "name": "divi/composite",
+          "props": {
+            "groupLabel": "Back Description",
+            "clipboardCategory": "style",
+            "presetGroup": "divi/font-body"
+          }
+        }
+      },
+      "designButton": {
+        "panel": "design",
+        "priority": 80,
+        "groupName": "button",
+        "component": {
+          "name": "divi/composite",
+          "props": {
+            "groupLabel": "Button"
+          }
+        }
+      },
+      "designBorder": {
+        "panel": "design",
+        "priority": 85,
+        "groupName": "border",
+        "component": {
+          "name": "divi/composite",
+          "props": {
+            "groupLabel": "Border"
+          }
+        }
+      },
+      "designBoxShadow": {
+        "panel": "design",
+        "priority": 90,
+        "groupName": "boxShadow",
+        "component": {
+          "name": "divi/composite",
+          "props": {
+            "groupLabel": "Box Shadow"
+          }
+        }
+      }
+    }
+  }
+}

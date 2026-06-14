@@ -1,0 +1,952 @@
+{
+  "name": "divitorque/image-carousel-item",
+  "d4Shortcode": "ba_image_carousel_child",
+  "moduleClassName": "dtq_image_carousel_item",
+  "moduleOrderClassName": "dtq_image_carousel_item",
+  "title": "Image Carousel Item",
+  "titles": "Image Carousel Items",
+  "moduleIcon": "divitorque/image-carousel-item",
+  "category": "child-module",
+  "attributes": {
+    "module": {
+      "type": "object",
+      "selector": "{{selector}}",
+      "default": {
+        "advanced": {
+          "cardPreset": {
+            "desktop": {
+              "value": "custom"
+            }
+          },
+          "contentType": {
+            "desktop": {
+              "value": "normal"
+            }
+          },
+          "contentPosition": {
+            "desktop": {
+              "value": "bottom"
+            }
+          },
+          "contentAlignment": {
+            "desktop": {
+              "value": "left"
+            }
+          },
+          "contentWidth": {
+            "desktop": {
+              "value": "100%"
+            }
+          },
+          "contentPosX": {
+            "desktop": {
+              "value": "center"
+            }
+          },
+          "contentOffsetX": {
+            "desktop": {
+              "value": "0px"
+            }
+          },
+          "contentPosY": {
+            "desktop": {
+              "value": "center"
+            }
+          },
+          "contentOffsetY": {
+            "desktop": {
+              "value": "0px"
+            }
+          },
+          "imageHoverAnimation": {
+            "desktop": {
+              "value": "none"
+            }
+          },
+          "imageHeight": {
+            "desktop": {
+              "value": "auto"
+            }
+          },
+          "titleBottomSpacing": {
+            "desktop": {
+              "value": "5px"
+            }
+          },
+          "contentBgColor": {
+            "desktop": {
+              "value": "rgba(0,0,0,0)"
+            }
+          },
+          "useButton": {
+            "desktop": {
+              "value": "off"
+            }
+          },
+          "buttonTarget": {
+            "desktop": {
+              "value": "off"
+            }
+          },
+          "btnSpacingTop": {
+            "desktop": {
+              "value": "15px"
+            }
+          },
+          "buttonTextColor": { "desktop": { "value": "#2ea3f2" } },
+          "buttonBgColor": { "desktop": { "value": "rgba(0,0,0,0)" } },
+          "buttonFontSize": { "desktop": { "value": "14px" } },
+          "buttonBorderWidth": { "desktop": { "value": "2px" } },
+          "buttonBorderColor": { "desktop": { "value": "#2ea3f2" } },
+          "buttonRadius": { "desktop": { "value": "3px" } },
+          "buttonPadding": {
+            "desktop": {
+              "value": { "top": "8px", "right": "20px", "bottom": "8px", "left": "20px" }
+            }
+          },
+          "overlayOnHover": {
+            "desktop": {
+              "value": "off"
+            }
+          },
+          "overlayHoverSpeed": {
+            "desktop": {
+              "value": "500ms"
+            }
+          },
+          "overlayIcon": {
+            "desktop": {
+              "value": {
+                "unicode": "&#x55;",
+                "type": "divi",
+                "weight": "400"
+              }
+            }
+          },
+          "overlayIconColor": {
+            "desktop": {
+              "value": "#ffffff"
+            }
+          },
+          "overlayIconSize": {
+            "desktop": {
+              "value": "32px"
+            }
+          },
+          "overlayColor": {
+            "desktop": {
+              "value": "rgba(46,163,242,0.85)"
+            }
+          },
+          "overlayIconOpacity": {
+            "desktop": {
+              "value": "1"
+            }
+          }
+        }
+      },
+      "settings": {
+        "meta": {
+          "adminLabel": {}
+        },
+        "advanced": {
+          "htmlAttributes": {},
+          "cardPreset": {
+            "groupType": "group-item",
+            "item": {
+              "groupSlug": "slideSettings",
+              "attrName": "module.advanced.cardPreset",
+              "label": "Card Preset",
+              "description": "Pick a ready-made slide design. Choose Custom to lay out and style the content yourself.",
+              "priority": 5,
+              "render": true,
+              "features": { "sticky": false, "responsive": false, "hover": false },
+              "component": {
+                "type": "field",
+                "name": "divi/select",
+                "props": {
+                  "options": {
+                    "custom": { "label": "Custom (manual)" },
+                    "overlay": { "label": "Overlay Gradient" },
+                    "boxed": { "label": "Boxed Card" },
+                    "minimal": { "label": "Minimal" },
+                    "hover": { "label": "Hover Reveal" }
+                  }
+                }
+              }
+            }
+          },
+          "contentType": {
+            "groupType": "group-item",
+            "item": {
+              "groupSlug": "slideSettings",
+              "attrName": "module.advanced.contentType",
+              "label": "Content Position Type",
+              "description": "Choose whether the content sits in the normal flow or floats over the image.",
+              "priority": 10,
+              "render": true,
+              "features": { "sticky": false, "responsive": false, "hover": false },
+              "component": {
+                "type": "field",
+                "name": "divi/select",
+                "props": {
+                  "options": {
+                    "normal": { "label": "Normal" },
+                    "absolute": { "label": "Over Image" }
+                  }
+                }
+              }
+            }
+          },
+          "contentPosition": {
+            "groupType": "group-item",
+            "item": {
+              "groupSlug": "slideSettings",
+              "attrName": "module.advanced.contentPosition",
+              "label": "Content Position",
+              "description": "Place the content above or below the image (Normal type only).",
+              "priority": 20,
+              "render": true,
+              "features": { "sticky": false, "responsive": false, "hover": false },
+              "component": {
+                "type": "field",
+                "name": "divi/select",
+                "props": {
+                  "options": {
+                    "top": { "label": "Top" },
+                    "bottom": { "label": "Bottom" }
+                  }
+                }
+              }
+            }
+          },
+          "contentAlignment": {
+            "groupType": "group-item",
+            "item": {
+              "groupSlug": "slideSettings",
+              "attrName": "module.advanced.contentAlignment",
+              "label": "Content Text Alignment",
+              "description": "Align the slide texts to the left, right or center.",
+              "priority": 30,
+              "render": true,
+              "features": { "sticky": false, "responsive": false, "hover": false },
+              "component": {
+                "type": "field",
+                "name": "divi/select",
+                "props": {
+                  "options": {
+                    "left": { "label": "Left" },
+                    "center": { "label": "Center" },
+                    "right": { "label": "Right" }
+                  }
+                }
+              }
+            }
+          },
+          "contentWidth": {
+            "groupType": "group-item",
+            "item": {
+              "groupSlug": "slideSettings",
+              "attrName": "module.advanced.contentWidth",
+              "label": "Content Width",
+              "description": "Define a custom width for the content area.",
+              "priority": 32,
+              "render": true,
+              "features": { "sticky": false, "responsive": true, "hover": false },
+              "component": {
+                "type": "field",
+                "name": "divi/range",
+                "props": { "min": 0, "max": 100, "step": 1, "defaultUnit": "%", "allowedUnits": ["%", "px"] }
+              }
+            }
+          },
+          "contentPosX": {
+            "groupType": "group-item",
+            "item": {
+              "groupSlug": "slideSettings",
+              "attrName": "module.advanced.contentPosX",
+              "label": "Content Horizontal Placement",
+              "description": "Horizontal placement of the content when Over Image is selected.",
+              "priority": 33,
+              "render": true,
+              "features": { "sticky": false, "responsive": false, "hover": false },
+              "component": {
+                "type": "field",
+                "name": "divi/select",
+                "props": {
+                  "options": {
+                    "center": { "label": "Center" },
+                    "flex-start": { "label": "Left" },
+                    "flex-end": { "label": "Right" }
+                  }
+                }
+              }
+            }
+          },
+          "contentOffsetX": {
+            "groupType": "group-item",
+            "item": {
+              "groupSlug": "slideSettings",
+              "attrName": "module.advanced.contentOffsetX",
+              "label": "Content Horizontal Offset",
+              "description": "Offset the content horizontally (Over Image, left/right placement).",
+              "priority": 34,
+              "render": true,
+              "features": { "sticky": false, "responsive": true, "hover": false },
+              "component": {
+                "type": "field",
+                "name": "divi/range",
+                "props": { "min": 0, "max": 1000, "step": 1, "defaultUnit": "px" }
+              }
+            }
+          },
+          "contentPosY": {
+            "groupType": "group-item",
+            "item": {
+              "groupSlug": "slideSettings",
+              "attrName": "module.advanced.contentPosY",
+              "label": "Content Vertical Placement",
+              "description": "Vertical placement of the content when Over Image is selected.",
+              "priority": 35,
+              "render": true,
+              "features": { "sticky": false, "responsive": false, "hover": false },
+              "component": {
+                "type": "field",
+                "name": "divi/select",
+                "props": {
+                  "options": {
+                    "center": { "label": "Center" },
+                    "flex-start": { "label": "Top" },
+                    "flex-end": { "label": "Bottom" }
+                  }
+                }
+              }
+            }
+          },
+          "contentOffsetY": {
+            "groupType": "group-item",
+            "item": {
+              "groupSlug": "slideSettings",
+              "attrName": "module.advanced.contentOffsetY",
+              "label": "Content Vertical Offset",
+              "description": "Offset the content vertically (Over Image, top/bottom placement).",
+              "priority": 36,
+              "render": true,
+              "features": { "sticky": false, "responsive": true, "hover": false },
+              "component": {
+                "type": "field",
+                "name": "divi/range",
+                "props": { "min": 0, "max": 1000, "step": 1, "defaultUnit": "px" }
+              }
+            }
+          },
+          "imageHoverAnimation": {
+            "groupType": "group-item",
+            "item": {
+              "groupSlug": "slideSettings",
+              "attrName": "module.advanced.imageHoverAnimation",
+              "label": "Image Hover Animation",
+              "description": "Select the mouse hover animation for the image.",
+              "priority": 40,
+              "render": true,
+              "features": { "sticky": false, "responsive": false, "hover": false },
+              "component": {
+                "type": "field",
+                "name": "divi/select",
+                "props": {
+                  "options": {
+                    "none": { "label": "None" },
+                    "zoom-in": { "label": "Zoom In" },
+                    "zoom-out": { "label": "Zoom Out" },
+                    "pulse": { "label": "Pulse" },
+                    "bounce": { "label": "Bounce" },
+                    "flash": { "label": "Flash" },
+                    "rubberBand": { "label": "Rubber Band" },
+                    "shake": { "label": "Shake" },
+                    "swing": { "label": "Swing" },
+                    "tada": { "label": "Tada" },
+                    "wobble": { "label": "Wobble" },
+                    "jello": { "label": "Jello" },
+                    "heartBeat": { "label": "Heart Beat" },
+                    "bounceIn": { "label": "Bounce In" },
+                    "fadeIn": { "label": "Fade In" },
+                    "flip": { "label": "Flip" },
+                    "rotateIn": { "label": "Rotate In" },
+                    "slideInUp": { "label": "Slide In Up" },
+                    "slideInDown": { "label": "Slide In Down" }
+                  }
+                }
+              }
+            }
+          },
+          "useButton": {
+            "groupType": "group-item",
+            "item": {
+              "groupSlug": "slideContent",
+              "attrName": "module.advanced.useButton",
+              "label": "Show Button",
+              "description": "Enable to display a button inside the slide.",
+              "priority": 60,
+              "render": true,
+              "features": { "sticky": false, "responsive": false, "hover": false },
+              "component": { "type": "field", "name": "divi/toggle" }
+            }
+          },
+          "buttonText": {
+            "groupType": "group-item",
+            "item": {
+              "groupSlug": "slideContent",
+              "attrName": "module.advanced.buttonText",
+              "label": "Button Text",
+              "description": "The text shown on the button.",
+              "priority": 70,
+              "render": true,
+              "features": { "sticky": false, "responsive": false, "hover": false, "dynamicContent": true },
+              "component": { "type": "field", "name": "divi/text" }
+            }
+          },
+          "buttonLink": {
+            "groupType": "group-item",
+            "item": {
+              "groupSlug": "slideContent",
+              "attrName": "module.advanced.buttonLink",
+              "label": "Button Link URL",
+              "description": "Where the button should link to.",
+              "priority": 80,
+              "render": true,
+              "features": { "sticky": false, "responsive": false, "hover": false, "dynamicContent": true },
+              "component": { "type": "field", "name": "divi/text" }
+            }
+          },
+          "buttonTarget": {
+            "groupType": "group-item",
+            "item": {
+              "groupSlug": "slideContent",
+              "attrName": "module.advanced.buttonTarget",
+              "label": "Open Button Link in New Tab",
+              "priority": 90,
+              "render": true,
+              "features": { "sticky": false, "responsive": false, "hover": false },
+              "component": { "type": "field", "name": "divi/toggle" }
+            }
+          },
+          "buttonIcon": {
+            "groupType": "group-item",
+            "item": {
+              "groupSlug": "slideContent",
+              "attrName": "module.advanced.buttonIcon",
+              "label": "Button Icon",
+              "priority": 100,
+              "render": true,
+              "features": { "sticky": false, "responsive": false, "hover": false },
+              "component": { "type": "field", "name": "divi/icon-picker" }
+            }
+          },
+          "imageHeight": {
+            "groupType": "group-item",
+            "item": {
+              "groupSlug": "designImage",
+              "attrName": "module.advanced.imageHeight",
+              "label": "Image Height",
+              "description": "Set a fixed height for the image. Leave at auto for natural height.",
+              "priority": 10,
+              "render": true,
+              "features": { "sticky": false, "responsive": true, "hover": false },
+              "component": {
+                "type": "field",
+                "name": "divi/range",
+                "props": { "min": 0, "max": 1000, "step": 1, "defaultUnit": "px" }
+              }
+            }
+          },
+          "contentPadding": {
+            "groupType": "group-item",
+            "item": {
+              "groupSlug": "designContent",
+              "attrName": "module.advanced.contentPadding",
+              "label": "Content Padding",
+              "description": "Padding adds extra space to the inside of the content area.",
+              "priority": 10,
+              "render": true,
+              "features": { "sticky": false, "responsive": true, "hover": false },
+              "component": { "type": "field", "name": "divi/spacing" }
+            }
+          },
+          "contentBgColor": {
+            "groupType": "group-item",
+            "item": {
+              "groupSlug": "designContent",
+              "attrName": "module.advanced.contentBgColor",
+              "label": "Content Background",
+              "description": "Pick a background color for the content area.",
+              "priority": 20,
+              "render": true,
+              "features": { "sticky": false, "responsive": false, "hover": true },
+              "component": {
+                "type": "field",
+                "name": "divi/color-picker",
+                "props": { "isAlpha": true }
+              }
+            }
+          },
+          "titleBottomSpacing": {
+            "groupType": "group-item",
+            "item": {
+              "groupSlug": "designTitle",
+              "attrName": "module.advanced.titleBottomSpacing",
+              "label": "Title Spacing Bottom",
+              "description": "Set how much space the title takes at the bottom.",
+              "priority": 90,
+              "render": true,
+              "features": { "sticky": false, "responsive": true, "hover": false },
+              "component": {
+                "type": "field",
+                "name": "divi/range",
+                "props": { "min": 0, "max": 100, "step": 1, "defaultUnit": "px", "allowedUnits": ["px"] }
+              }
+            }
+          },
+          "btnSpacingTop": {
+            "groupType": "group-item",
+            "item": {
+              "groupSlug": "designButton",
+              "attrName": "module.advanced.btnSpacingTop",
+              "label": "Spacing Top",
+              "description": "Space above the button.",
+              "priority": 10,
+              "render": true,
+              "features": { "sticky": false, "responsive": true, "hover": false },
+              "component": {
+                "type": "field",
+                "name": "divi/range",
+                "props": { "min": 0, "max": 200, "step": 1, "defaultUnit": "px" }
+              }
+            }
+          },
+          "buttonTextColor": {
+            "groupType": "group-item",
+            "item": {
+              "groupSlug": "designButton",
+              "attrName": "module.advanced.buttonTextColor",
+              "label": "Text Color",
+              "priority": 20,
+              "render": true,
+              "features": { "sticky": false, "responsive": false, "hover": true },
+              "component": { "type": "field", "name": "divi/color-picker", "props": { "isAlpha": true } }
+            }
+          },
+          "buttonBgColor": {
+            "groupType": "group-item",
+            "item": {
+              "groupSlug": "designButton",
+              "attrName": "module.advanced.buttonBgColor",
+              "label": "Background Color",
+              "priority": 30,
+              "render": true,
+              "features": { "sticky": false, "responsive": false, "hover": true },
+              "component": { "type": "field", "name": "divi/color-picker", "props": { "isAlpha": true } }
+            }
+          },
+          "buttonFontSize": {
+            "groupType": "group-item",
+            "item": {
+              "groupSlug": "designButton",
+              "attrName": "module.advanced.buttonFontSize",
+              "label": "Text Size",
+              "priority": 40,
+              "render": true,
+              "features": { "sticky": false, "responsive": true, "hover": false },
+              "component": { "type": "field", "name": "divi/range", "props": { "min": 8, "max": 60, "step": 1, "defaultUnit": "px" } }
+            }
+          },
+          "buttonBorderWidth": {
+            "groupType": "group-item",
+            "item": {
+              "groupSlug": "designButton",
+              "attrName": "module.advanced.buttonBorderWidth",
+              "label": "Border Width",
+              "priority": 50,
+              "render": true,
+              "features": { "sticky": false, "responsive": false, "hover": false },
+              "component": { "type": "field", "name": "divi/range", "props": { "min": 0, "max": 20, "step": 1, "defaultUnit": "px" } }
+            }
+          },
+          "buttonBorderColor": {
+            "groupType": "group-item",
+            "item": {
+              "groupSlug": "designButton",
+              "attrName": "module.advanced.buttonBorderColor",
+              "label": "Border Color",
+              "priority": 60,
+              "render": true,
+              "features": { "sticky": false, "responsive": false, "hover": true },
+              "component": { "type": "field", "name": "divi/color-picker", "props": { "isAlpha": true } }
+            }
+          },
+          "buttonRadius": {
+            "groupType": "group-item",
+            "item": {
+              "groupSlug": "designButton",
+              "attrName": "module.advanced.buttonRadius",
+              "label": "Corner Radius",
+              "priority": 70,
+              "render": true,
+              "features": { "sticky": false, "responsive": false, "hover": false },
+              "component": { "type": "field", "name": "divi/range", "props": { "min": 0, "max": 100, "step": 1, "defaultUnit": "px" } }
+            }
+          },
+          "buttonPadding": {
+            "groupType": "group-item",
+            "item": {
+              "groupSlug": "designButton",
+              "attrName": "module.advanced.buttonPadding",
+              "label": "Padding",
+              "description": "Inner spacing of the button.",
+              "priority": 80,
+              "render": true,
+              "features": { "sticky": false, "responsive": true, "hover": false },
+              "component": { "type": "field", "name": "divi/spacing" }
+            }
+          },
+          "overlayOnHover": {
+            "groupType": "group-item",
+            "item": {
+              "groupSlug": "designOverlay",
+              "attrName": "module.advanced.overlayOnHover",
+              "label": "Overlay",
+              "description": "Enable an overlay on image hover.",
+              "priority": 10,
+              "render": true,
+              "features": { "sticky": false, "responsive": false, "hover": false },
+              "component": { "type": "field", "name": "divi/toggle" }
+            }
+          },
+          "overlayHoverSpeed": {
+            "groupType": "group-item",
+            "item": {
+              "groupSlug": "designOverlay",
+              "attrName": "module.advanced.overlayHoverSpeed",
+              "label": "Speed",
+              "description": "Set how long it takes for the overlay to appear.",
+              "priority": 20,
+              "render": true,
+              "features": { "sticky": false, "responsive": false, "hover": false },
+              "component": {
+                "type": "field",
+                "name": "divi/range",
+                "props": { "min": 0, "max": 5000, "step": 50, "defaultUnit": "ms", "allowedUnits": ["ms"] }
+              }
+            }
+          },
+          "overlayIcon": {
+            "groupType": "group-item",
+            "item": {
+              "groupSlug": "designOverlay",
+              "attrName": "module.advanced.overlayIcon",
+              "label": "Icon",
+              "description": "Select the overlay icon.",
+              "priority": 30,
+              "render": true,
+              "features": { "sticky": false, "responsive": false, "hover": false },
+              "component": { "type": "field", "name": "divi/icon-picker" }
+            }
+          },
+          "overlayIconColor": {
+            "groupType": "group-item",
+            "item": {
+              "groupSlug": "designOverlay",
+              "attrName": "module.advanced.overlayIconColor",
+              "label": "Icon Color",
+              "priority": 40,
+              "render": true,
+              "features": { "sticky": false, "responsive": false, "hover": true },
+              "component": {
+                "type": "field",
+                "name": "divi/color-picker",
+                "props": { "isAlpha": true }
+              }
+            }
+          },
+          "overlayIconSize": {
+            "groupType": "group-item",
+            "item": {
+              "groupSlug": "designOverlay",
+              "attrName": "module.advanced.overlayIconSize",
+              "label": "Icon Size",
+              "priority": 50,
+              "render": true,
+              "features": { "sticky": false, "responsive": false, "hover": false },
+              "component": {
+                "type": "field",
+                "name": "divi/range",
+                "props": { "min": 0, "max": 200, "step": 1, "defaultUnit": "px" }
+              }
+            }
+          },
+          "overlayColor": {
+            "groupType": "group-item",
+            "item": {
+              "groupSlug": "designOverlay",
+              "attrName": "module.advanced.overlayColor",
+              "label": "Overlay Color",
+              "priority": 60,
+              "render": true,
+              "features": { "sticky": false, "responsive": false, "hover": true },
+              "component": {
+                "type": "field",
+                "name": "divi/color-picker",
+                "props": { "isAlpha": true }
+              }
+            }
+          },
+          "overlayIconOpacity": {
+            "groupType": "group-item",
+            "item": {
+              "groupSlug": "designOverlay",
+              "attrName": "module.advanced.overlayIconOpacity",
+              "label": "Icon Opacity",
+              "description": "Opacity of the overlay icon (0 - 1).",
+              "priority": 70,
+              "render": true,
+              "features": { "sticky": false, "responsive": false, "hover": false },
+              "component": {
+                "type": "field",
+                "name": "divi/range",
+                "props": { "min": 0, "max": 1, "step": 0.02 }
+              }
+            }
+          }
+        },
+        "decoration": {
+          "animation": {},
+          "layout": {},
+          "background": {},
+          "border": {},
+          "boxShadow": {},
+          "filters": {},
+          "spacing": {},
+          "transform": {},
+          "transition": {},
+          "disabledOn": {}
+        }
+      }
+    },
+    "photo": {
+      "type": "object",
+      "selector": "{{selector}} .dtq-image-carousel-item figure img",
+      "default": {
+        "decoration": {
+          "border": {
+            "radius": {
+              "desktop": {
+                "value": { "topLeft": "0px", "topRight": "0px", "bottomLeft": "0px", "bottomRight": "0px" }
+              }
+            }
+          }
+        }
+      },
+      "settings": {
+        "innerContent": {
+          "groupType": "group-item",
+          "item": {
+            "groupSlug": "slideContent",
+            "attrName": "photo.innerContent",
+            "label": "Image",
+            "description": "Upload an image, or type in the URL to the image you would like to display in this slide.",
+            "priority": 10,
+            "render": true,
+            "features": { "sticky": false, "responsive": false, "hover": false },
+            "component": { "type": "field", "name": "divi/upload" }
+          }
+        },
+        "advanced": {
+          "alt": {
+            "groupType": "group-item",
+            "item": {
+              "groupSlug": "slideContent",
+              "attrName": "photo.advanced.alt",
+              "label": "Image Alt Text",
+              "description": "Define the HTML ALT text for the image here.",
+              "priority": 20,
+              "render": true,
+              "features": { "sticky": false, "responsive": false, "hover": false },
+              "component": { "type": "field", "name": "divi/text" }
+            }
+          }
+        },
+        "decoration": {
+          "border": {
+            "groupType": "group-item",
+            "item": {
+              "groupSlug": "designImage",
+              "priority": 90,
+              "render": true,
+              "component": {
+                "name": "divi/border",
+                "type": "group",
+                "props": { "grouped": false, "fieldLabel": "Image Border" }
+              }
+            }
+          }
+        }
+      }
+    },
+    "title": {
+      "type": "object",
+      "selector": "{{selector}} .dtq-image-carousel-item .dtq-image-title",
+      "elementType": "heading",
+      "tagName": "h3",
+      "inlineEditor": "plainText",
+      "attributes": { "class": "dtq-image-title" },
+      "childrenSanitizer": "et_core_esc_previously",
+      "default": {
+        "decoration": {
+          "font": { "font": { "desktop": { "value": { "size": "20px" } } } }
+        }
+      },
+      "settings": {
+        "innerContent": {
+          "groupType": "group-item",
+          "item": {
+            "groupSlug": "slideContent",
+            "attrName": "title.innerContent",
+            "label": "Title",
+            "description": "The slide title.",
+            "priority": 30,
+            "render": true,
+            "component": { "type": "field", "name": "divi/text" },
+            "features": { "sticky": false, "responsive": false, "hover": false, "dynamicContent": true }
+          }
+        },
+        "decoration": {
+          "font": {
+            "groupType": "group-item",
+            "item": {
+              "groupSlug": "designTitle",
+              "priority": 10,
+              "render": true,
+              "component": {
+                "name": "divi/font",
+                "type": "group",
+                "props": { "grouped": false, "fieldLabel": "Title" }
+              }
+            }
+          }
+        }
+      }
+    },
+    "subTitle": {
+      "type": "object",
+      "selector": "{{selector}} .dtq-image-carousel-item .dtq-image-subtitle",
+      "elementType": "heading",
+      "tagName": "h5",
+      "inlineEditor": "plainText",
+      "attributes": { "class": "dtq-image-subtitle" },
+      "childrenSanitizer": "et_core_esc_previously",
+      "default": {
+        "decoration": {
+          "font": { "font": { "desktop": { "value": { "size": "14px" } } } }
+        }
+      },
+      "settings": {
+        "innerContent": {
+          "groupType": "group-item",
+          "item": {
+            "groupSlug": "slideContent",
+            "attrName": "subTitle.innerContent",
+            "label": "Subtitle",
+            "description": "The slide subtitle.",
+            "priority": 40,
+            "render": true,
+            "component": { "type": "field", "name": "divi/text" },
+            "features": { "sticky": false, "responsive": false, "hover": false, "dynamicContent": true }
+          }
+        },
+        "decoration": {
+          "font": {
+            "groupType": "group-item",
+            "item": {
+              "groupSlug": "designSubtitle",
+              "priority": 10,
+              "render": true,
+              "component": {
+                "name": "divi/font",
+                "type": "group",
+                "props": { "grouped": false, "fieldLabel": "Subtitle" }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "customCssFields": {
+    "image": { "subName": "image", "selectorSuffix": " .dtq-image-carousel-item figure img" },
+    "title": { "subName": "title", "selectorSuffix": " .dtq-image-carousel-item .dtq-image-title" },
+    "subtitle": { "subName": "subtitle", "selectorSuffix": " .dtq-image-carousel-item .dtq-image-subtitle" },
+    "button": { "subName": "button", "selectorSuffix": " .dtq-btn-wrap .dtq-btn-img-carousel" }
+  },
+  "settings": {
+    "content": "auto",
+    "design": "auto",
+    "advanced": "auto",
+    "groups": {
+      "slideContent": {
+        "panel": "content",
+        "priority": 10,
+        "groupName": "slideContent",
+        "component": { "name": "divi/composite", "props": { "groupLabel": "Content" } }
+      },
+      "slideSettings": {
+        "panel": "content",
+        "priority": 20,
+        "groupName": "slideSettings",
+        "component": { "name": "divi/composite", "props": { "groupLabel": "Settings" } }
+      },
+      "designImage": {
+        "panel": "design",
+        "priority": 10,
+        "groupName": "image",
+        "component": { "name": "divi/composite", "props": { "groupLabel": "Image" } }
+      },
+      "designContent": {
+        "panel": "design",
+        "priority": 20,
+        "groupName": "designContent",
+        "component": { "name": "divi/composite", "props": { "groupLabel": "Content" } }
+      },
+      "designOverlay": {
+        "panel": "design",
+        "priority": 30,
+        "groupName": "overlay",
+        "component": { "name": "divi/composite", "props": { "groupLabel": "Overlay" } }
+      },
+      "designTitle": {
+        "panel": "design",
+        "priority": 40,
+        "groupName": "title",
+        "multiElements": true,
+        "component": {
+          "name": "divi/composite",
+          "props": { "groupLabel": "Title", "clipboardCategory": "style", "presetGroup": "divi/font" }
+        }
+      },
+      "designSubtitle": {
+        "panel": "design",
+        "priority": 50,
+        "groupName": "subtitle",
+        "multiElements": true,
+        "component": {
+          "name": "divi/composite",
+          "props": { "groupLabel": "Subtitle", "clipboardCategory": "style", "presetGroup": "divi/font" }
+        }
+      },
+      "designButton": {
+        "panel": "design",
+        "priority": 60,
+        "groupName": "designButton",
+        "component": { "name": "divi/composite", "props": { "groupLabel": "Button" } }
+      }
+    }
+  }
+}
