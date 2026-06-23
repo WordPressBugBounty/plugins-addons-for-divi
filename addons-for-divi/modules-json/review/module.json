@@ -1499,7 +1499,7 @@
     },
     "button": {
       "type": "object",
-      "selector": "{{selector}} .dtq-rating-btn",
+      "selector": "{{selector}} .et_pb_button.dtq-rating-btn",
       "elementType": "button",
       "tagName": "a",
       "attributes": {

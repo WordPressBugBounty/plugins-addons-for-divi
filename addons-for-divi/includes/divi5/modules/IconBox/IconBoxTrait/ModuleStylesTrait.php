@@ -71,20 +71,22 @@ trait ModuleStylesTrait
             'declaration' => 'position: absolute; z-index: 999;',
         ];
 
+        $opp_side = 'left' === $side ? 'right' : 'left';
         $out[] = [
             'atRules'     => false,
             'selector'    => $selector,
             'declaration' => $is_center_x
-                ? sprintf('%1$s: 50%%;', $side)
-                : sprintf('%1$s: %2$s;', $side, '' !== $offset_x ? $offset_x : '0'),
+                ? sprintf('%1$s: 50%%; %2$s: auto;', $side, $opp_side)
+                : sprintf('%1$s: %2$s; %3$s: auto;', $side, '' !== $offset_x ? $offset_x : '50%', $opp_side),
         ];
 
+        $opp_vert = 'top' === $vert ? 'bottom' : 'top';
         $out[] = [
             'atRules'     => false,
             'selector'    => $selector,
             'declaration' => $is_center_y
-                ? sprintf('%1$s: 50%%;', $vert)
-                : sprintf('%1$s: %2$s;', $vert, '' !== $offset_y ? $offset_y : '0'),
+                ? sprintf('%1$s: 50%%; %2$s: auto;', $vert, $opp_vert)
+                : sprintf('%1$s: %2$s; %3$s: auto;', $vert, '' !== $offset_y ? $offset_y : '50%', $opp_vert),
         ];
 
         $val_x = '0';

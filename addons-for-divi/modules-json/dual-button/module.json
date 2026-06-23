@@ -576,7 +576,7 @@
     },
     "btnA": {
       "type": "object",
-      "selector": "{{selector}} .btn-el--primary",
+      "selector": "{{selector}} .et_pb_button.btn-el--primary",
       "elementType": "button",
       "settings": {
         "decoration": {
@@ -627,7 +627,7 @@
     },
     "btnB": {
       "type": "object",
-      "selector": "{{selector}} .btn-el--secondary",
+      "selector": "{{selector}} .et_pb_button.btn-el--secondary",
       "elementType": "button",
       "settings": {
         "decoration": {

@@ -1502,7 +1502,7 @@
     },
     "button": {
       "type": "object",
-      "selector": "{{selector}} .dtq-btn-card",
+      "selector": "{{selector}} .et_pb_button.dtq-btn-card",
       "elementType": "button",
       "tagName": "a",
       "attributes": {

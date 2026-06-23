@@ -1961,7 +1961,7 @@
     },
     "button": {
       "type": "object",
-      "selector": "{{selector}} .dtq-flipbox-btn",
+      "selector": "{{selector}} .et_pb_button.dtq-flipbox-btn",
       "elementType": "button",
       "tagName": "a",
       "attributes": {

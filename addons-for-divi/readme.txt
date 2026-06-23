@@ -4,7 +4,7 @@ Tags: divi, divi builder, divi modules, page builder, divi theme
 Requires at least: 5.0
 Tested up to: 7.0
 Requires PHP: 7.4
-Stable tag: 4.5.0
+Stable tag: 4.5.1
 License: GPLv3
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 
@@ -116,6 +116,12 @@ No. Updates are backward compatible and won't break pages built with our modules
 4. Image Carousel
 
 == Changelog ==
+
+= Version 4.5.1 =
+* Fix: Icon Box — icon placement (absolute mode) no longer defaults to the top-left corner; position now defaults to center and switching corners (Left Top / Right Top / etc.) clears the opposing sides correctly.
+* Fix: Dual Button — text color, background color, and font size changes now apply correctly on the frontend; Divi's default button styles were overriding the custom selector.
+* Fix: Image Carousel and Logo Carousel — navigation arrow no longer appears doubled on hover (Swiper 12 SVG injection is now suppressed).
+* Fix: Flip Box, Info Box, Info Card, and Review — button styling (color, background, font) now applies correctly on the frontend (same selector specificity fix as Dual Button).
 
 = Version 4.5.0 =
 * Added: Thirteen more modules now run natively in the Divi 5 Builder — Image Carousel, Logo Carousel, Logo Grid, Skill Bar, Business Hours, Scroll Image, Review Box, Flip Card, Testimonial, Number Counter, Before & After Slider, Video Modal, and Animated Text. Every static DiviTorque module is now native in Divi 5, and your existing Divi 4 layouts migrate automatically with their styling intact.

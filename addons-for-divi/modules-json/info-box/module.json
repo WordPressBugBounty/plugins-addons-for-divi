@@ -1253,7 +1253,7 @@
     },
     "button": {
       "type": "object",
-      "selector": "{{selector}} .dtq-btn-info-box",
+      "selector": "{{selector}} .et_pb_button.dtq-btn-info-box",
       "elementType": "button",
       "attributes": {
         "class": "dtq-btn-info-box"

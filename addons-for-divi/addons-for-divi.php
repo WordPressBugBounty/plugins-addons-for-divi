@@ -5,7 +5,7 @@
  * Description: Enhance your Divi website with powerful addons and modules.
  * Author:      PlugPress
  * Author URI:  https://plugpress.io
- * Version:     4.5.0
+ * Version:     4.5.1
  * Requires at least: 5.0
  * Requires PHP: 7.4
  * License:     GPL3
@@ -21,7 +21,7 @@ if (!defined('WPINC')) {
 
 define('DIVI_TORQUE_LITE_FILE', __FILE__);
 define('DIVI_TORQUE_LITE_BASE', plugin_basename(__FILE__));
-define('DIVI_TORQUE_LITE_VERSION', '4.5.0');
+define('DIVI_TORQUE_LITE_VERSION', '4.5.1');
 define('DIVI_TORQUE_LITE_DIR', plugin_dir_path(__FILE__));
 define('DIVI_TORQUE_LITE_URL', plugin_dir_url(__FILE__));
 define('DIVI_TORQUE_LITE_ASSETS', trailingslashit(DIVI_TORQUE_LITE_URL . 'assets'));
