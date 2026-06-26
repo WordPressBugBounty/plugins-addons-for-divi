@@ -113,13 +113,15 @@ function ba_next_arrow_icon()
 	return '<span class="dtq-svg-iconset svg-baseline"><svg aria-hidden="true" class="dtq-svg-icon dtq-arrow-right-alt-svg" fill="currentColor" version="1.1" xmlns="http://www.w3.org/2000/svg" width="27" height="28" viewBox="0 0 27 28"><title>Continue</title><path d="M27 13.953c0 0.141-0.063 0.281-0.156 0.375l-6 5.531c-0.156 0.141-0.359 0.172-0.547 0.094-0.172-0.078-0.297-0.25-0.297-0.453v-3.5h-19.5c-0.281 0-0.5-0.219-0.5-0.5v-3c0-0.281 0.219-0.5 0.5-0.5h19.5v-3.5c0-0.203 0.109-0.375 0.297-0.453s0.391-0.047 0.547 0.078l6 5.469c0.094 0.094 0.156 0.219 0.156 0.359v0z"></path></svg></span>';
 }
 
-function dt_if_not_migrated()
-{
-	$not_migrated = get_option('ba_version');
-	if ($not_migrated) {
-		return true;
+if (!function_exists('dt_if_not_migrated')) {
+	function dt_if_not_migrated()
+	{
+		$not_migrated = get_option('ba_version');
+		if ($not_migrated) {
+			return true;
+		}
+		return false;
 	}
-	return false;
 }
 
 function dt_backend_helpers($helpers)
@@ -139,33 +141,37 @@ add_filter('et_fb_backend_helpers', 'dt_backend_helpers');
  *
  * @return string[] All handles marked needed so far.
  */
-function dtq_needed_icon_assets($add = null)
-{
-	static $needed = array();
-	if (null !== $add) {
-		$needed[$add] = true;
+if (!function_exists('dtq_needed_icon_assets')) {
+	function dtq_needed_icon_assets($add = null)
+	{
+		static $needed = array();
+		if (null !== $add) {
+			$needed[$add] = true;
+		}
+		return array_keys($needed);
 	}
-	return array_keys($needed);
 }
 
-function dtq_global_assets_list($global_list)
-{
+if (!function_exists('dtq_global_assets_list')) {
+	function dtq_global_assets_list($global_list)
+	{
 
-	$assets_prefix = et_get_dynamic_assets_path();
+		$assets_prefix = et_get_dynamic_assets_path();
 
-	$map = array(
-		'et_icons_fa'  => "{$assets_prefix}/css/icons_fa_all.css",
-		'et_icons_all' => "{$assets_prefix}/css/icons_all.css",
-	);
+		$map = array(
+			'et_icons_fa'  => "{$assets_prefix}/css/icons_fa_all.css",
+			'et_icons_all' => "{$assets_prefix}/css/icons_all.css",
+		);
 
-	$assets_list = array();
-	foreach (dtq_needed_icon_assets() as $handle) {
-		if (isset($map[$handle])) {
-			$assets_list[$handle] = array('css' => $map[$handle]);
+		$assets_list = array();
+		foreach (dtq_needed_icon_assets() as $handle) {
+			if (isset($map[$handle])) {
+				$assets_list[$handle] = array('css' => $map[$handle]);
+			}
 		}
-	}
 
-	return array_merge($global_list, $assets_list);
+		return array_merge($global_list, $assets_list);
+	}
 }
 
 /**
@@ -177,13 +183,15 @@ function dtq_global_assets_list($global_list)
  *
  * @param string $icon_data Icon value (unicode, optionally "||type||weight").
  */
-function dtq_inject_fa_icons($icon_data)
-{
-	$is_fa = function_exists('et_pb_maybe_fa_font_icon') && et_pb_maybe_fa_font_icon($icon_data);
-	dtq_needed_icon_assets($is_fa ? 'et_icons_fa' : 'et_icons_all');
+if (!function_exists('dtq_inject_fa_icons')) {
+	function dtq_inject_fa_icons($icon_data)
+	{
+		$is_fa = function_exists('et_pb_maybe_fa_font_icon') && et_pb_maybe_fa_font_icon($icon_data);
+		dtq_needed_icon_assets($is_fa ? 'et_icons_fa' : 'et_icons_all');
 
-	add_filter('et_global_assets_list', 'dtq_global_assets_list');
-	add_filter('et_late_global_assets_list', 'dtq_global_assets_list');
+		add_filter('et_global_assets_list', 'dtq_global_assets_list');
+		add_filter('et_late_global_assets_list', 'dtq_global_assets_list');
+	}
 }
 
 /**
@@ -197,18 +205,20 @@ function dtq_inject_fa_icons($icon_data)
  * every glyph resolves. The full font is a superset of the base one, so this
  * is safe for base glyphs too.
  */
-function dtq_print_full_icon_font()
-{
-	if (! in_array('et_icons_all', dtq_needed_icon_assets(), true)) {
-		return;
+if (!function_exists('dtq_print_full_icon_font')) {
+	function dtq_print_full_icon_font()
+	{
+		if (! in_array('et_icons_all', dtq_needed_icon_assets(), true)) {
+			return;
+		}
+
+		$font_url = get_template_directory_uri() . '/core/admin/fonts/modules/all/modules.woff';
+
+		printf(
+			'<style id="dtq-et-icons-all">@font-face{font-family:"ETmodules";font-display:swap;src:url("%s") format("woff");}</style>',
+			esc_url($font_url)
+		);
 	}
-
-	$font_url = get_template_directory_uri() . '/core/admin/fonts/modules/all/modules.woff';
-
-	printf(
-		'<style id="dtq-et-icons-all">@font-face{font-family:"ETmodules";font-display:swap;src:url("%s") format("woff");}</style>',
-		esc_url($font_url)
-	);
 }
 add_action('wp_footer', 'dtq_print_full_icon_font', 99);
 
@@ -226,14 +236,16 @@ add_action('wp_footer', 'dtq_print_full_icon_font', 99);
  *
  * @return string Unicode entity safe to print inside the icon <i>.
  */
-function dtq_resolve_icon_unicode($unicode)
-{
-	$unicode = (string) $unicode;
-	if (false !== strpos($unicode, '%%') && function_exists('et_pb_process_font_icon')) {
-		// et_pb_process_font_icon() returns the entity with the ampersand already
-		// escaped ("&amp;#xe0XX;"); decode once so the raw entity ("&#xe0XX;") is
-		// what lands inside the icon <i> and the browser renders the glyph.
-		return html_entity_decode(et_pb_process_font_icon($unicode));
+if (!function_exists('dtq_resolve_icon_unicode')) {
+	function dtq_resolve_icon_unicode($unicode)
+	{
+		$unicode = (string) $unicode;
+		if (false !== strpos($unicode, '%%') && function_exists('et_pb_process_font_icon')) {
+			// et_pb_process_font_icon() returns the entity with the ampersand already
+			// escaped ("&amp;#xe0XX;"); decode once so the raw entity ("&#xe0XX;") is
+			// what lands inside the icon <i> and the browser renders the glyph.
+			return html_entity_decode(et_pb_process_font_icon($unicode));
+		}
+		return $unicode;
 	}
-	return $unicode;
 }

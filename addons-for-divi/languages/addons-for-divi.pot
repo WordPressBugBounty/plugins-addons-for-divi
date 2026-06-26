@@ -6,8 +6,8 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language-Team: PlugPress <support@plugpress.io>\n"
-"POT-Creation-Date: 2026-06-08 13:34+0000\n"
+"Language-Team: PlugPress <support@divitorque.com>\n"
+"POT-Creation-Date: 2026-06-26 20:42+0000\n"
 "X-Poedit-Basepath: ..\n"
 "X-Poedit-KeywordsList: __;_e;_ex:1,2c;_n:1,2;_n_noop:1,2;_nx:1,2,4c;_nx_noop:1,2,3c;_x:1,2c;esc_attr__;esc_attr_e;esc_attr_x:1,2c;esc_html__;esc_html_e;esc_html_x:1,2c\n"
 "X-Poedit-SearchPath-0: .\n"
@@ -111,19 +111,19 @@ msgstr ""
 msgid "Awesome Gradient Heading"
 msgstr ""
 
-#: includes/rest-api.php:301
+#: includes/rest-api.php:382
 msgid "Invalid version specified."
 msgstr ""
 
-#: includes/rest-api.php:305
+#: includes/rest-api.php:386
 msgid "That version is already installed."
 msgstr ""
 
-#: includes/rest-api.php:324
+#: includes/rest-api.php:405
 msgid "Rollback failed."
 msgstr ""
 
-#: includes/rest-api.php:333
+#: includes/rest-api.php:414
 msgid "Rolled back to %s."
 msgstr ""
 
@@ -7097,4 +7097,24 @@ msgstr ""
 
 #: includes/modules/divi-4/VideoModal/VideoModal.php:454
 msgid "Here you can define the radius value for your text box border."
+msgstr ""
+
+#: includes/divi5/modules/ContactForm7/ContactForm7Trait/RenderCallbackTrait.php:126
+msgid "Please select a Contact Form 7."
+msgstr ""
+
+#: includes/divi5/modules/NewsTicker/NewsTickerTrait/RenderCallbackTrait.php:103
+msgid "No News Found"
+msgstr ""
+
+#: includes/divi5/modules/PostList/PostListTrait/RenderCallbackTrait.php:186
+msgid "No posts found."
+msgstr ""
+
+#: includes/divi5/modules/TwitterFeed/TwitterFeedTrait/RenderCallbackTrait.php:60, includes/divi5/modules/TwitterFeedCarousel/TwitterFeedCarouselTrait/RenderCallbackTrait.php:61
+msgid "No tweets found. Check the username and that your X API plan allows reading timelines."
+msgstr ""
+
+#: includes/divi5/modules/TwitterFeed/TwitterFeedTrait/RenderCallbackTrait.php:51, includes/divi5/modules/TwitterFeedCarousel/TwitterFeedCarouselTrait/RenderCallbackTrait.php:52
+msgid "Add your X (Twitter) handle and paid API credentials to display the feed."
 msgstr ""

@@ -4,7 +4,7 @@ Tags: divi, divi builder, divi modules, page builder, divi theme
 Requires at least: 5.0
 Tested up to: 7.0
 Requires PHP: 7.4
-Stable tag: 4.5.1
+Stable tag: 4.6.0
 License: GPLv3
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 
@@ -18,7 +18,7 @@ Divi Torque Lite adds 25+ free, beautifully designed modules to the Divi Builder
 
 = Now Divi 5 ready =
 
-Divi Torque is being rebuilt for the new Divi 5 Builder. As of 4.5.0, every static module runs natively in Divi 5 — Gradient Heading, Divider, Icon Box, Inline Notice, Dual Button, Info Box, Info Card, Team Member, Image Carousel, Logo Carousel, Logo Grid, Skill Bar, Business Hours, Scroll Image, Review Box, Flip Card, Testimonial, Number Counter, Before & After Slider, Video Modal, and Animated Text. Your existing Divi 4 layouts migrate automatically and keep working exactly as before.
+Divi Torque has been rebuilt for the new Divi 5 Builder. As of 4.6.0, **every** module runs natively in Divi 5 — the static modules (Gradient Heading, Divider, Icon Box, Inline Notice, Dual Button, Info Box, Info Card, Team Member, Image Carousel, Logo Carousel, Logo Grid, Skill Bar, Business Hours, Scroll Image, Review Box, Flip Card, Testimonial, Number Counter, Before & After Slider, Video Modal, Animated Text) plus the dynamic ones (News Ticker, Post List, Contact Form 7, X (Twitter) Feed, X (Twitter) Carousel). Your existing Divi 4 layouts migrate automatically and keep working exactly as before.
 
 = Why Divi Torque Lite? =
 
@@ -98,7 +98,7 @@ Yes. Divi Torque Lite extends Divi, so it requires the Divi Theme or the Divi Bu
 
 = Is Divi Torque Lite compatible with Divi 5? =
 
-Yes. As of version 4.5.0 every static module is native in the Divi 5 Builder, with the dynamic modules (Post List, Contact Form 7, News Ticker, Twitter Feed) arriving next. All existing Divi 4 modules continue to work in both Divi 4 and Divi 5.
+Yes. As of version 4.6.0 every module — static and dynamic (Post List, Contact Form 7, News Ticker, X (Twitter) Feed, X (Twitter) Carousel) — is native in the Divi 5 Builder. All existing Divi 4 modules and saved layouts continue to work in both Divi 4 and Divi 5.
 
 = Will these modules slow down my site? =
 
@@ -116,6 +116,12 @@ No. Updates are backward compatible and won't break pages built with our modules
 4. Image Carousel
 
 == Changelog ==
+
+= Version 4.6.0 =
+* Added: The remaining dynamic modules now run natively in the Divi 5 Builder — News Ticker, Post List, Contact Form 7, X (Twitter) Feed, and X (Twitter) Carousel. Every Divi Torque module is now native in Divi 5, and your existing Divi 4 layouts migrate automatically.
+* Added: X (Twitter) Feed and X (Twitter) Carousel now use the X (Twitter) API v2. Note: reading timelines requires a paid X API plan (Basic tier or higher) — the field descriptions explain this. API responses are cached to minimize calls.
+* Improved: X (Twitter) Carousel now uses the same lightweight Swiper engine as the other carousels (no extra slider library).
+* Compatibility: Fully backward compatible — all Divi 4 modules and saved layouts continue to work in both Divi 4 and Divi 5.
 
 = Version 4.5.1 =
 * Fix: Icon Box — icon placement (absolute mode) no longer defaults to the top-left corner; position now defaults to center and switching corners (Left Top / Right Top / etc.) clears the opposing sides correctly.

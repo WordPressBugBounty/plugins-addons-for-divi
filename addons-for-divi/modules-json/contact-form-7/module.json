@@ -1,0 +1,186 @@
+{
+  "name": "divitorque/contact-form-7",
+  "d4Shortcode": "ba_cf7_styler",
+  "moduleClassName": "dtq_cf7_styler",
+  "moduleOrderClassName": "dtq_cf7_styler",
+  "title": "Contact Form 7",
+  "titles": "Contact Form 7",
+  "moduleIcon": "divitorque/contact-form-7",
+  "category": "module",
+  "attributes": {
+    "module": {
+      "type": "object",
+      "selector": "{{selector}}",
+      "default": {
+        "advanced": {
+          "useFormHeader": { "desktop": { "value": "off" } },
+          "formHeaderTitle": { "desktop": { "value": "" } },
+          "formHeaderText": { "desktop": { "value": "" } },
+          "useIcon": { "desktop": { "value": "off" } },
+          "headerImg": { "desktop": { "value": "" } },
+          "headerIcon": { "desktop": { "value": { "unicode": "&#xe076;", "type": "divi", "weight": "400" } } },
+          "formId": { "desktop": { "value": "" } },
+          "crCustomStyles": { "desktop": { "value": "off" } },
+          "formBg": { "desktop": { "value": "" } },
+          "formPadding": { "desktop": { "value": "0px|0px|0px|0px" } },
+          "useFormButtonFullwidth": { "desktop": { "value": "off" } },
+          "buttonAlignment": { "desktop": { "value": "left" } },
+          "formHeaderBg": { "desktop": { "value": "" } },
+          "formHeaderPadding": { "desktop": { "value": "0px|0px|0px|0px" } },
+          "formHeaderBottom": { "desktop": { "value": "0px" } },
+          "formHeaderImgBg": { "desktop": { "value": "#efefef" } },
+          "formHeaderIconSize": { "desktop": { "value": "32px" } },
+          "formHeaderIconColor": { "desktop": { "value": "" } },
+          "formHeaderIconPadding": { "desktop": { "value": "15px|15px|15px|15px" } },
+          "headerTitleSpacing": { "desktop": { "value": "0px" } },
+          "formFieldHeight": { "desktop": { "value": "" } },
+          "formFieldPadding": { "desktop": { "value": "0px|15px|0px|15px" } },
+          "formBackgroundColor": { "desktop": { "value": "#f5f5f5" } },
+          "formFieldActiveColor": { "desktop": { "value": "" } },
+          "formFieldSpacing": { "desktop": { "value": "20px" } },
+          "formLabelSpacing": { "desktop": { "value": "7px" } },
+          "crSize": { "desktop": { "value": "20px" } },
+          "crBackgroundColor": { "desktop": { "value": "" } },
+          "crSelectedColor": { "desktop": { "value": "#222222" } },
+          "crBorderColor": { "desktop": { "value": "#222222" } },
+          "crBorderSize": { "desktop": { "value": "1px" } },
+          "crLabelColor": { "desktop": { "value": "" } },
+          "cf7MessageColor": { "desktop": { "value": "" } },
+          "cf7MessageBgColor": { "desktop": { "value": "" } },
+          "cf7BorderHighlightColor": { "desktop": { "value": "" } },
+          "cf7SuccessMessageColor": { "desktop": { "value": "" } },
+          "cf7SuccessMessageBgColor": { "desktop": { "value": "" } },
+          "cf7SuccessBorderColor": { "desktop": { "value": "" } },
+          "cf7ErrorMessageColor": { "desktop": { "value": "" } },
+          "cf7ErrorMessageBgColor": { "desktop": { "value": "" } },
+          "cf7ErrorBorderColor": { "desktop": { "value": "" } },
+          "cf7MessagePadding": { "desktop": { "value": "0px" } },
+          "cf7MessageMarginTop": { "desktop": { "value": "0px" } }
+        },
+        "meta": {}
+      },
+      "settings": {
+        "meta": { "adminLabel": {} },
+        "advanced": {
+          "text": {},
+          "link": {},
+          "htmlAttributes": {},
+          "formId": { "groupType": "group-item", "item": { "groupSlug": "general", "attrName": "module.advanced.formId", "label": "Form ID", "description": "Enter the Contact Form 7 form ID (e.g. 123).", "priority": 10, "render": true, "features": { "sticky": false, "responsive": false, "hover": false }, "component": { "type": "field", "name": "divi/text" } } },
+          "useFormHeader": { "groupType": "group-item", "item": { "groupSlug": "general", "attrName": "module.advanced.useFormHeader", "label": "Show Form Header", "priority": 20, "render": true, "features": { "sticky": false, "responsive": false, "hover": false }, "component": { "type": "field", "name": "divi/toggle" } } },
+          "formHeaderTitle": { "groupType": "group-item", "item": { "groupSlug": "general", "attrName": "module.advanced.formHeaderTitle", "label": "Header Title", "priority": 30, "render": true, "features": { "sticky": false, "responsive": false, "hover": false, "dynamicContent": true }, "component": { "type": "field", "name": "divi/text" } } },
+          "formHeaderText": { "groupType": "group-item", "item": { "groupSlug": "general", "attrName": "module.advanced.formHeaderText", "label": "Header Text", "priority": 40, "render": true, "features": { "sticky": false, "responsive": false, "hover": false, "dynamicContent": true }, "component": { "type": "field", "name": "divi/text" } } },
+          "useIcon": { "groupType": "group-item", "item": { "groupSlug": "general", "attrName": "module.advanced.useIcon", "label": "Use Icon", "priority": 50, "render": true, "features": { "sticky": false, "responsive": false, "hover": false }, "component": { "type": "field", "name": "divi/toggle" } } },
+          "headerImg": { "groupType": "group-item", "item": { "groupSlug": "general", "attrName": "module.advanced.headerImg", "label": "Header Image", "priority": 60, "render": true, "features": { "sticky": false, "responsive": false, "hover": false }, "component": { "type": "field", "name": "divi/upload" } } },
+          "headerIcon": { "groupType": "group-item", "item": { "groupSlug": "general", "attrName": "module.advanced.headerIcon", "label": "Header Icon", "priority": 70, "render": true, "features": { "sticky": false, "responsive": false, "hover": false }, "component": { "type": "field", "name": "divi/icon-picker" } } },
+          "crCustomStyles": { "groupType": "group-item", "item": { "groupSlug": "general", "attrName": "module.advanced.crCustomStyles", "label": "Custom Checkbox/Radio Styles", "priority": 80, "render": true, "features": { "sticky": false, "responsive": false, "hover": false }, "component": { "type": "field", "name": "divi/toggle" } } },
+
+          "formBg": { "groupType": "group-item", "item": { "groupSlug": "form", "attrName": "module.advanced.formBg", "label": "Form Background", "priority": 10, "render": true, "features": { "sticky": false, "responsive": false, "hover": false }, "component": { "type": "field", "name": "divi/color-picker", "props": { "isAlpha": true } } } },
+          "formPadding": { "groupType": "group-item", "item": { "groupSlug": "form", "attrName": "module.advanced.formPadding", "label": "Form Padding", "description": "Format: top|right|bottom|left.", "priority": 20, "render": true, "features": { "sticky": false, "responsive": false, "hover": false }, "component": { "type": "field", "name": "divi/text" } } },
+          "useFormButtonFullwidth": { "groupType": "group-item", "item": { "groupSlug": "form", "attrName": "module.advanced.useFormButtonFullwidth", "label": "Fullwidth Button", "priority": 30, "render": true, "features": { "sticky": false, "responsive": false, "hover": false }, "component": { "type": "field", "name": "divi/toggle" } } },
+          "buttonAlignment": { "groupType": "group-item", "item": { "groupSlug": "form", "attrName": "module.advanced.buttonAlignment", "label": "Button Alignment", "priority": 40, "render": true, "features": { "sticky": false, "responsive": false, "hover": false }, "component": { "type": "field", "name": "divi/select", "props": { "options": { "left": { "label": "Left" }, "center": { "label": "Center" }, "right": { "label": "Right" } } } } } },
+
+          "formHeaderBg": { "groupType": "group-item", "item": { "groupSlug": "formHeader", "attrName": "module.advanced.formHeaderBg", "label": "Header Background", "priority": 10, "render": true, "features": { "sticky": false, "responsive": false, "hover": false }, "component": { "type": "field", "name": "divi/color-picker", "props": { "isAlpha": true } } } },
+          "formHeaderPadding": { "groupType": "group-item", "item": { "groupSlug": "formHeader", "attrName": "module.advanced.formHeaderPadding", "label": "Header Padding", "description": "Format: top|right|bottom|left.", "priority": 20, "render": true, "features": { "sticky": false, "responsive": false, "hover": false }, "component": { "type": "field", "name": "divi/text" } } },
+          "formHeaderBottom": { "groupType": "group-item", "item": { "groupSlug": "formHeader", "attrName": "module.advanced.formHeaderBottom", "label": "Header Bottom Spacing", "priority": 30, "render": true, "features": { "sticky": false, "responsive": false, "hover": false }, "component": { "type": "field", "name": "divi/range", "props": { "min": 0, "max": 100, "step": 1, "defaultUnit": "px", "allowedUnits": ["px"] } } } },
+          "formHeaderImgBg": { "groupType": "group-item", "item": { "groupSlug": "formHeader", "attrName": "module.advanced.formHeaderImgBg", "label": "Icon/Image Background", "priority": 40, "render": true, "features": { "sticky": false, "responsive": false, "hover": false }, "component": { "type": "field", "name": "divi/color-picker", "props": { "isAlpha": true } } } },
+          "formHeaderIconSize": { "groupType": "group-item", "item": { "groupSlug": "formHeader", "attrName": "module.advanced.formHeaderIconSize", "label": "Icon Size", "priority": 50, "render": true, "features": { "sticky": false, "responsive": true, "hover": false }, "component": { "type": "field", "name": "divi/range", "props": { "min": 0, "max": 100, "step": 1, "defaultUnit": "px", "allowedUnits": ["px"] } } } },
+          "formHeaderIconColor": { "groupType": "group-item", "item": { "groupSlug": "formHeader", "attrName": "module.advanced.formHeaderIconColor", "label": "Icon Color", "priority": 60, "render": true, "features": { "sticky": false, "responsive": false, "hover": false }, "component": { "type": "field", "name": "divi/color-picker", "props": { "isAlpha": true } } } },
+          "formHeaderIconPadding": { "groupType": "group-item", "item": { "groupSlug": "formHeader", "attrName": "module.advanced.formHeaderIconPadding", "label": "Icon Padding", "description": "Format: top|right|bottom|left.", "priority": 70, "render": true, "features": { "sticky": false, "responsive": false, "hover": false }, "component": { "type": "field", "name": "divi/text" } } },
+          "headerTitleSpacing": { "groupType": "group-item", "item": { "groupSlug": "formHeader", "attrName": "module.advanced.headerTitleSpacing", "label": "Title Spacing Bottom", "priority": 80, "render": true, "features": { "sticky": false, "responsive": false, "hover": false }, "component": { "type": "field", "name": "divi/range", "props": { "min": 0, "max": 100, "step": 1, "defaultUnit": "px", "allowedUnits": ["px"] } } } },
+
+          "formFieldHeight": { "groupType": "group-item", "item": { "groupSlug": "formField", "attrName": "module.advanced.formFieldHeight", "label": "Field Height", "priority": 10, "render": true, "features": { "sticky": false, "responsive": true, "hover": false }, "component": { "type": "field", "name": "divi/range", "props": { "min": 0, "max": 100, "step": 1, "defaultUnit": "px", "allowedUnits": ["px"] } } } },
+          "formFieldPadding": { "groupType": "group-item", "item": { "groupSlug": "formField", "attrName": "module.advanced.formFieldPadding", "label": "Field Padding", "description": "Format: top|right|bottom|left.", "priority": 20, "render": true, "features": { "sticky": false, "responsive": false, "hover": false }, "component": { "type": "field", "name": "divi/text" } } },
+          "formBackgroundColor": { "groupType": "group-item", "item": { "groupSlug": "formField", "attrName": "module.advanced.formBackgroundColor", "label": "Field Background", "priority": 30, "render": true, "features": { "sticky": false, "responsive": false, "hover": false }, "component": { "type": "field", "name": "divi/color-picker", "props": { "isAlpha": true } } } },
+          "formFieldActiveColor": { "groupType": "group-item", "item": { "groupSlug": "formField", "attrName": "module.advanced.formFieldActiveColor", "label": "Active Border Color", "priority": 40, "render": true, "features": { "sticky": false, "responsive": false, "hover": false }, "component": { "type": "field", "name": "divi/color-picker", "props": { "isAlpha": true } } } },
+          "formFieldSpacing": { "groupType": "group-item", "item": { "groupSlug": "formField", "attrName": "module.advanced.formFieldSpacing", "label": "Field Spacing Bottom", "priority": 50, "render": true, "features": { "sticky": false, "responsive": true, "hover": false }, "component": { "type": "field", "name": "divi/range", "props": { "min": 0, "max": 200, "step": 1, "defaultUnit": "px", "allowedUnits": ["px"] } } } },
+          "formLabelSpacing": { "groupType": "group-item", "item": { "groupSlug": "formField", "attrName": "module.advanced.formLabelSpacing", "label": "Label Spacing Bottom", "priority": 60, "render": true, "features": { "sticky": false, "responsive": true, "hover": false }, "component": { "type": "field", "name": "divi/range", "props": { "min": 0, "max": 200, "step": 1, "defaultUnit": "px", "allowedUnits": ["px"] } } } },
+
+          "crSize": { "groupType": "group-item", "item": { "groupSlug": "radioCheckbox", "attrName": "module.advanced.crSize", "label": "Size", "priority": 10, "render": true, "features": { "sticky": false, "responsive": false, "hover": false }, "component": { "type": "field", "name": "divi/range", "props": { "min": 0, "max": 50, "step": 1, "defaultUnit": "px", "allowedUnits": ["px"] } } } },
+          "crBackgroundColor": { "groupType": "group-item", "item": { "groupSlug": "radioCheckbox", "attrName": "module.advanced.crBackgroundColor", "label": "Background Color", "priority": 20, "render": true, "features": { "sticky": false, "responsive": false, "hover": false }, "component": { "type": "field", "name": "divi/color-picker", "props": { "isAlpha": true } } } },
+          "crSelectedColor": { "groupType": "group-item", "item": { "groupSlug": "radioCheckbox", "attrName": "module.advanced.crSelectedColor", "label": "Selected Color", "priority": 30, "render": true, "features": { "sticky": false, "responsive": false, "hover": false }, "component": { "type": "field", "name": "divi/color-picker", "props": { "isAlpha": true } } } },
+          "crBorderColor": { "groupType": "group-item", "item": { "groupSlug": "radioCheckbox", "attrName": "module.advanced.crBorderColor", "label": "Border Color", "priority": 40, "render": true, "features": { "sticky": false, "responsive": false, "hover": false }, "component": { "type": "field", "name": "divi/color-picker", "props": { "isAlpha": true } } } },
+          "crBorderSize": { "groupType": "group-item", "item": { "groupSlug": "radioCheckbox", "attrName": "module.advanced.crBorderSize", "label": "Border Size", "priority": 50, "render": true, "features": { "sticky": false, "responsive": false, "hover": false }, "component": { "type": "field", "name": "divi/range", "props": { "min": 0, "max": 5, "step": 1, "defaultUnit": "px", "allowedUnits": ["px"] } } } },
+          "crLabelColor": { "groupType": "group-item", "item": { "groupSlug": "radioCheckbox", "attrName": "module.advanced.crLabelColor", "label": "Label Color", "priority": 60, "render": true, "features": { "sticky": false, "responsive": false, "hover": false }, "component": { "type": "field", "name": "divi/color-picker", "props": { "isAlpha": true } } } },
+
+          "cf7MessageColor": { "groupType": "group-item", "item": { "groupSlug": "sucErrMsg", "attrName": "module.advanced.cf7MessageColor", "label": "Message Text Color", "priority": 10, "render": true, "features": { "sticky": false, "responsive": false, "hover": false }, "component": { "type": "field", "name": "divi/color-picker", "props": { "isAlpha": true } } } },
+          "cf7MessageBgColor": { "groupType": "group-item", "item": { "groupSlug": "sucErrMsg", "attrName": "module.advanced.cf7MessageBgColor", "label": "Message Background", "priority": 20, "render": true, "features": { "sticky": false, "responsive": false, "hover": false }, "component": { "type": "field", "name": "divi/color-picker", "props": { "isAlpha": true } } } },
+          "cf7BorderHighlightColor": { "groupType": "group-item", "item": { "groupSlug": "sucErrMsg", "attrName": "module.advanced.cf7BorderHighlightColor", "label": "Border Highlight Color", "priority": 30, "render": true, "features": { "sticky": false, "responsive": false, "hover": false }, "component": { "type": "field", "name": "divi/color-picker", "props": { "isAlpha": true } } } },
+          "cf7SuccessMessageColor": { "groupType": "group-item", "item": { "groupSlug": "sucErrMsg", "attrName": "module.advanced.cf7SuccessMessageColor", "label": "Success Text Color", "priority": 40, "render": true, "features": { "sticky": false, "responsive": false, "hover": false }, "component": { "type": "field", "name": "divi/color-picker", "props": { "isAlpha": true } } } },
+          "cf7SuccessMessageBgColor": { "groupType": "group-item", "item": { "groupSlug": "sucErrMsg", "attrName": "module.advanced.cf7SuccessMessageBgColor", "label": "Success Background", "priority": 50, "render": true, "features": { "sticky": false, "responsive": false, "hover": false }, "component": { "type": "field", "name": "divi/color-picker", "props": { "isAlpha": true } } } },
+          "cf7SuccessBorderColor": { "groupType": "group-item", "item": { "groupSlug": "sucErrMsg", "attrName": "module.advanced.cf7SuccessBorderColor", "label": "Success Border Color", "priority": 60, "render": true, "features": { "sticky": false, "responsive": false, "hover": false }, "component": { "type": "field", "name": "divi/color-picker", "props": { "isAlpha": true } } } },
+          "cf7ErrorMessageColor": { "groupType": "group-item", "item": { "groupSlug": "sucErrMsg", "attrName": "module.advanced.cf7ErrorMessageColor", "label": "Error Text Color", "priority": 70, "render": true, "features": { "sticky": false, "responsive": false, "hover": false }, "component": { "type": "field", "name": "divi/color-picker", "props": { "isAlpha": true } } } },
+          "cf7ErrorMessageBgColor": { "groupType": "group-item", "item": { "groupSlug": "sucErrMsg", "attrName": "module.advanced.cf7ErrorMessageBgColor", "label": "Error Background", "priority": 80, "render": true, "features": { "sticky": false, "responsive": false, "hover": false }, "component": { "type": "field", "name": "divi/color-picker", "props": { "isAlpha": true } } } },
+          "cf7ErrorBorderColor": { "groupType": "group-item", "item": { "groupSlug": "sucErrMsg", "attrName": "module.advanced.cf7ErrorBorderColor", "label": "Error Border Color", "priority": 90, "render": true, "features": { "sticky": false, "responsive": false, "hover": false }, "component": { "type": "field", "name": "divi/color-picker", "props": { "isAlpha": true } } } },
+          "cf7MessagePadding": { "groupType": "group-item", "item": { "groupSlug": "sucErrMsg", "attrName": "module.advanced.cf7MessagePadding", "label": "Message Padding", "priority": 100, "render": true, "features": { "sticky": false, "responsive": false, "hover": false }, "component": { "type": "field", "name": "divi/range", "props": { "min": 0, "max": 50, "step": 1, "defaultUnit": "px", "allowedUnits": ["px"] } } } },
+          "cf7MessageMarginTop": { "groupType": "group-item", "item": { "groupSlug": "sucErrMsg", "attrName": "module.advanced.cf7MessageMarginTop", "label": "Message Margin Top", "priority": 110, "render": true, "features": { "sticky": false, "responsive": false, "hover": false }, "component": { "type": "field", "name": "divi/range", "props": { "min": 0, "max": 50, "step": 1, "defaultUnit": "px", "allowedUnits": ["px"] } } } }
+        },
+        "decoration": {
+          "background": {}, "spacing": {}, "border": {}, "boxShadow": {}, "filters": {}, "transform": {}, "animation": {}, "overflow": {}, "sizing": {}, "disabledOn": {}, "transition": {}, "position": {}, "zIndex": {}, "scroll": {}
+        }
+      }
+    },
+    "field": {
+      "type": "object",
+      "selector": "{{selector}} .dtq-cf7 .wpcf7 input:not([type=submit]), {{selector}} .dtq-cf7 .wpcf7 select, {{selector}} .dtq-cf7 .wpcf7 textarea",
+      "settings": {
+        "decoration": {
+          "font": { "groupType": "group-item", "item": { "groupSlug": "fieldText", "priority": 10, "render": true, "component": { "name": "divi/font", "type": "group", "props": { "grouped": false, "fieldLabel": "Field" } } } },
+          "border": { "groupType": "group-item", "item": { "groupSlug": "formField", "priority": 70, "render": true, "attrName": "field.decoration.border", "component": { "name": "divi/border", "type": "group", "props": { "grouped": false, "fieldLabel": "Field" } } } }
+        }
+      }
+    },
+    "label": {
+      "type": "object",
+      "selector": "{{selector}} .dtq-cf7 .wpcf7 label",
+      "settings": { "decoration": { "font": { "groupType": "group-item", "item": { "groupSlug": "fieldText", "priority": 20, "render": true, "component": { "name": "divi/font", "type": "group", "props": { "grouped": false, "fieldLabel": "Label" } } } } } }
+    },
+    "placeholder": {
+      "type": "object",
+      "selector": "{{selector}} .dtq-cf7 .wpcf7 input::placeholder, {{selector}} .dtq-cf7 .wpcf7 textarea::placeholder",
+      "settings": { "decoration": { "font": { "groupType": "group-item", "item": { "groupSlug": "fieldText", "priority": 30, "render": true, "component": { "name": "divi/font", "type": "group", "props": { "grouped": false, "fieldLabel": "Placeholder" } } } } } }
+    },
+    "headerTitle": {
+      "type": "object",
+      "selector": "{{selector}} .dtq-form-header-title",
+      "settings": { "decoration": { "font": { "groupType": "group-item", "item": { "groupSlug": "formHeaderText", "priority": 10, "render": true, "component": { "name": "divi/font", "type": "group", "props": { "grouped": false, "fieldLabel": "Title" } } } } } }
+    },
+    "headerText": {
+      "type": "object",
+      "selector": "{{selector}} .dtq-form-header-text",
+      "settings": { "decoration": { "font": { "groupType": "group-item", "item": { "groupSlug": "formHeaderText", "priority": 20, "render": true, "component": { "name": "divi/font", "type": "group", "props": { "grouped": false, "fieldLabel": "Text" } } } } } }
+    },
+    "submitButton": {
+      "type": "object",
+      "selector": "{{selector}} .wpcf7-form input[type=submit]",
+      "settings": {
+        "decoration": {
+          "font": { "groupType": "group-item", "item": { "groupSlug": "submitButton", "priority": 10, "render": true, "component": { "name": "divi/font", "type": "group", "props": { "grouped": false, "fieldLabel": "Button" } } } },
+          "border": { "groupType": "group-item", "item": { "groupSlug": "submitButton", "priority": 20, "render": true, "attrName": "submitButton.decoration.border", "component": { "name": "divi/border", "type": "group", "props": { "grouped": false, "fieldLabel": "Button Border" } } } },
+          "boxShadow": { "groupType": "group-item", "item": { "groupSlug": "submitButton", "priority": 30, "render": true, "attrName": "submitButton.decoration.boxShadow", "component": { "name": "divi/box-shadow", "type": "group", "props": { "grouped": false, "fieldLabel": "Button Box Shadow" } } } },
+          "spacing": { "groupType": "group-item", "item": { "groupSlug": "submitButton", "priority": 40, "render": true, "attrName": "submitButton.decoration.spacing", "component": { "name": "divi/spacing", "type": "group", "props": { "grouped": false, "fieldLabel": "Button Spacing" } } } }
+        }
+      }
+    }
+  },
+  "customCssFields": {
+    "formField": { "subName": "formField", "selectorSuffix": " .dtq-cf7 .wpcf7 input:not([type=submit])" },
+    "label": { "subName": "label", "selectorSuffix": " .dtq-cf7 .wpcf7 label" },
+    "submitButton": { "subName": "submitButton", "selectorSuffix": " .wpcf7-form input[type=submit]" }
+  },
+  "settings": {
+    "content": "auto",
+    "design": "auto",
+    "advanced": "auto",
+    "groups": {
+      "general": { "panel": "content", "priority": 10, "groupName": "general", "component": { "name": "divi/composite", "props": { "groupLabel": "Form" } } },
+      "formHeader": { "panel": "design", "priority": 10, "groupName": "formHeader", "component": { "name": "divi/composite", "props": { "groupLabel": "Form Header" } } },
+      "formHeaderText": { "panel": "design", "priority": 15, "groupName": "formHeaderText", "multiElements": true, "component": { "name": "divi/composite", "props": { "groupLabel": "Header Text", "presetGroup": "divi/font" } } },
+      "form": { "panel": "design", "priority": 20, "groupName": "form", "component": { "name": "divi/composite", "props": { "groupLabel": "Form" } } },
+      "formField": { "panel": "design", "priority": 30, "groupName": "formField", "multiElements": true, "component": { "name": "divi/composite", "props": { "groupLabel": "Form Field" } } },
+      "fieldText": { "panel": "design", "priority": 40, "groupName": "fieldText", "multiElements": true, "component": { "name": "divi/composite", "props": { "groupLabel": "Field Text", "presetGroup": "divi/font" } } },
+      "radioCheckbox": { "panel": "design", "priority": 50, "groupName": "radioCheckbox", "component": { "name": "divi/composite", "props": { "groupLabel": "Checkbox & Radio" } } },
+      "submitButton": { "panel": "design", "priority": 60, "groupName": "submitButton", "multiElements": true, "component": { "name": "divi/composite", "props": { "groupLabel": "Submit Button" } } },
+      "sucErrMsg": { "panel": "design", "priority": 70, "groupName": "sucErrMsg", "component": { "name": "divi/composite", "props": { "groupLabel": "Success / Error Message" } } }
+    }
+  }
+}

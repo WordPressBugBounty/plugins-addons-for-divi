@@ -110,6 +110,16 @@ class RestApi
                     ],
                 ],
             ],
+            // Post query for D5 dynamic modules (NewsTicker, …) — live VB
+            // preview only. The front end and saved layout render server-side
+            // in the module's RenderCallbackTrait.
+            '/posts' => [
+                'methods' => \WP_REST_Server::CREATABLE,
+                'callback' => [$this, 'get_posts'],
+                'permission_callback' => function () {
+                    return current_user_can('edit_posts');
+                },
+            ],
         ];
 
         foreach ($routes as $route => $args) {
@@ -139,6 +149,77 @@ class RestApi
     public function validate_string_param($param)
     {
         return is_string($param);
+    }
+
+    /**
+     * Query posts for D5 dynamic modules' Visual Builder preview.
+     *
+     * Returns a lightweight list ({ id, title, permalink, date }). Mirrors the
+     * WP_Query built in the modules' RenderCallbackTrait so the preview matches
+     * the rendered output.
+     *
+     * @param WP_REST_Request $request REST request.
+     * @return WP_REST_Response
+     */
+    public function get_posts(WP_REST_Request $request)
+    {
+        $post_type  = sanitize_text_field((string) $request->get_param('post_type'));
+        $post_type  = '' !== $post_type ? $post_type : 'post';
+        $categories = sanitize_text_field((string) $request->get_param('categories'));
+        $order_by   = sanitize_text_field((string) $request->get_param('order_by'));
+        $order_by   = '' !== $order_by ? $order_by : 'date';
+        $order      = sanitize_text_field((string) $request->get_param('order'));
+        $order      = '' !== $order ? $order : 'ASC';
+        $post_count = absint($request->get_param('post_count'));
+        $post_count = $post_count > 0 ? $post_count : 5;
+        $offset     = absint($request->get_param('offset'));
+        $exclude    = sanitize_text_field((string) $request->get_param('exclude_posts'));
+        $excerpt_l  = absint($request->get_param('excerpt_length'));
+        $excerpt_l  = $excerpt_l > 0 ? $excerpt_l : 150;
+        $only_image = sanitize_text_field((string) $request->get_param('only_with_image'));
+
+        $query_args = [
+            'posts_per_page' => $post_count,
+            'post_type'      => $post_type,
+            'post_status'    => 'publish',
+            'orderby'        => $order_by,
+            'order'          => $order,
+            'offset'         => $offset,
+        ];
+
+        if ('post' === $post_type && '' !== $categories) {
+            $query_args['cat'] = $categories;
+        }
+
+        if ('on' === $only_image) {
+            $query_args['meta_key'] = '_thumbnail_id';
+        }
+
+        if ('' !== $exclude) {
+            $ids = array_filter(array_map('absint', array_map('trim', explode(',', $exclude))));
+            if (!empty($ids)) {
+                $query_args['post__not_in'] = $ids;
+            }
+        }
+
+        $query = new \WP_Query($query_args);
+        $items = [];
+
+        foreach ($query->posts as $post) {
+            $items[] = [
+                'id'        => $post->ID,
+                'title'     => get_the_title($post),
+                'permalink' => get_permalink($post),
+                'date'      => get_the_date('', $post),
+                'author'    => get_the_author_meta('display_name', $post->post_author),
+                'thumbnail' => get_the_post_thumbnail_url($post, 'full') ?: '',
+                'excerpt'   => mb_strimwidth(wp_strip_all_tags(get_the_excerpt($post)), 0, $excerpt_l, '...'),
+            ];
+        }
+
+        wp_reset_postdata();
+
+        return new WP_REST_Response($items, 200);
     }
 
 

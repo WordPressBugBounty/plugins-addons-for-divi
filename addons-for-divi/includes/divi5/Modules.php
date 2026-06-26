@@ -49,6 +49,11 @@ $dtl_d5_modules = array(
     'compare_image'    => array('CompareImage', '\\DiviTorqueLite\\Modules\\CompareImage\\CompareImage'),
     'video_modal'      => array('VideoModal', '\\DiviTorqueLite\\Modules\\VideoModal\\VideoModal'),
     'animated_text'    => array('AnimatedText', '\\DiviTorqueLite\\Modules\\AnimatedText\\AnimatedText'),
+    'news_ticker'      => array('NewsTicker', '\\DiviTorqueLite\\Modules\\NewsTicker\\NewsTicker'),
+    'post_list'        => array('PostList', '\\DiviTorqueLite\\Modules\\PostList\\PostList'),
+    'contact_form_7'   => array('ContactForm7', '\\DiviTorqueLite\\Modules\\ContactForm7\\ContactForm7'),
+    'twitter_feed'     => array('TwitterFeed', '\\DiviTorqueLite\\Modules\\TwitterFeed\\TwitterFeed'),
+    'twitter_feed_carousel' => array('TwitterFeedCarousel', '\\DiviTorqueLite\\Modules\\TwitterFeedCarousel\\TwitterFeedCarousel'),
 );
 
 $dtl_d5_loaded = array();
@@ -104,6 +109,11 @@ add_filter(
             'divitorque/compare-image'    => 'compare-image/conversion-outline.json',
             'divitorque/video-modal'      => 'video-modal/conversion-outline.json',
             'divitorque/animated-text'    => 'animated-text/conversion-outline.json',
+            'divitorque/news-ticker'      => 'news-ticker/conversion-outline.json',
+            'divitorque/post-list'        => 'post-list/conversion-outline.json',
+            'divitorque/contact-form-7'   => 'contact-form-7/conversion-outline.json',
+            'divitorque/twitter-feed'     => 'twitter-feed/conversion-outline.json',
+            'divitorque/twitter-feed-carousel' => 'twitter-feed-carousel/conversion-outline.json',
         );
         if (isset($outlines[$module_name])) {
             return DIVI_TORQUE_LITE_MODULES_JSON_PATH . $outlines[$module_name];

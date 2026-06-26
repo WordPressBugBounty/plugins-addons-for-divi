@@ -1,0 +1,174 @@
+{
+  "name": "divitorque/twitter-feed",
+  "d4Shortcode": "ba_twitter_feed",
+  "moduleClassName": "dtq_twitter_feed",
+  "moduleOrderClassName": "dtq_twitter_feed",
+  "title": "X (Twitter) Feed",
+  "titles": "X (Twitter) Feeds",
+  "moduleIcon": "divitorque/twitter-feed",
+  "category": "module",
+  "attributes": {
+    "module": {
+      "type": "object",
+      "selector": "{{selector}}",
+      "default": {
+        "advanced": {
+          "userName": { "desktop": { "value": "" } },
+          "consumerKey": { "desktop": { "value": "" } },
+          "consumerSecret": { "desktop": { "value": "" } },
+          "sortBy": { "desktop": { "value": "recent-posts" } },
+          "tweetsLimit": { "desktop": { "value": "8" } },
+          "showTwitterIcon": { "desktop": { "value": "on" } },
+          "showUserImage": { "desktop": { "value": "on" } },
+          "showName": { "desktop": { "value": "on" } },
+          "showUserName": { "desktop": { "value": "off" } },
+          "showDate": { "desktop": { "value": "on" } },
+          "showFavorite": { "desktop": { "value": "on" } },
+          "showRetweet": { "desktop": { "value": "on" } },
+          "readMore": { "desktop": { "value": "on" } },
+          "readMoreText": { "desktop": { "value": "Read More" } },
+          "columnCount": { "desktop": { "value": "3" } },
+          "columnGapX": { "desktop": { "value": "20px" } },
+          "columnGapY": { "desktop": { "value": "20px" } },
+          "avatarPosition": { "desktop": { "value": "normal" } },
+          "avatarPlacement": { "desktop": { "value": "left_top" } },
+          "avatarOffsetX": { "desktop": { "value": "50%" } },
+          "avatarOffsetY": { "desktop": { "value": "0px" } },
+          "avatarSize": { "desktop": { "value": "50px" } },
+          "avatarSpacing": { "desktop": { "value": "15px" } },
+          "alignment": { "desktop": { "value": "left" } },
+          "twitterIconSize": { "desktop": { "value": "20px" } },
+          "contentPadding": { "desktop": { "value": "50px|50px|50px|50px" } },
+          "descriptionSpacing": { "desktop": { "value": "25px" } },
+          "footerAlignment": { "desktop": { "value": "space-between" } },
+          "footerPadding": { "desktop": { "value": "0px|50px|50px|50px" } },
+          "favoriteColor": { "desktop": { "value": "#000000" } },
+          "favoriteFontSize": { "desktop": { "value": "14px" } },
+          "favoriteIconColor": { "desktop": { "value": "#000000" } },
+          "favoriteIconSize": { "desktop": { "value": "14px" } },
+          "retweetColor": { "desktop": { "value": "#000000" } },
+          "retweetFontSize": { "desktop": { "value": "14px" } },
+          "retweetIconColor": { "desktop": { "value": "#000000" } },
+          "retweetIconSize": { "desktop": { "value": "14px" } }
+        },
+        "meta": {}
+      },
+      "settings": {
+        "meta": { "adminLabel": {} },
+        "advanced": {
+          "text": {}, "link": {}, "htmlAttributes": {},
+          "userName": { "groupType": "group-item", "item": { "groupSlug": "twitterFeed", "attrName": "module.advanced.userName", "label": "User Name", "description": "Your X/Twitter handle (the @ is optional).", "priority": 10, "render": true, "features": { "sticky": false, "responsive": false, "hover": false }, "component": { "type": "field", "name": "divi/text" } } },
+          "consumerKey": { "groupType": "group-item", "item": { "groupSlug": "twitterFeed", "attrName": "module.advanced.consumerKey", "label": "API Key (Consumer Key)", "description": "Requires a PAID X API plan (Basic tier or higher) — the free tier cannot read timelines. Create an app at developer.x.com and paste its API key here.", "priority": 20, "render": true, "features": { "sticky": false, "responsive": false, "hover": false }, "component": { "type": "field", "name": "divi/text" } } },
+          "consumerSecret": { "groupType": "group-item", "item": { "groupSlug": "twitterFeed", "attrName": "module.advanced.consumerSecret", "label": "API Key Secret (Consumer Secret)", "description": "The API key secret from the same X developer app.", "priority": 30, "render": true, "features": { "sticky": false, "responsive": false, "hover": false }, "component": { "type": "field", "name": "divi/text" } } },
+
+          "sortBy": { "groupType": "group-item", "item": { "groupSlug": "elements", "attrName": "module.advanced.sortBy", "label": "Sort By", "priority": 10, "render": true, "features": { "sticky": false, "responsive": false, "hover": false }, "component": { "type": "field", "name": "divi/select", "props": { "options": { "recent-posts": { "label": "Recent Posts" }, "old-posts": { "label": "Old Posts" }, "favorite_count": { "label": "Favorite" }, "retweet_count": { "label": "Retweet" } } } } } },
+          "tweetsLimit": { "groupType": "group-item", "item": { "groupSlug": "elements", "attrName": "module.advanced.tweetsLimit", "label": "Number of Tweets", "priority": 20, "render": true, "features": { "sticky": false, "responsive": false, "hover": false }, "component": { "type": "field", "name": "divi/range", "props": { "min": 3, "max": 24, "step": 1, "allowedUnits": [], "defaultUnit": "" } } } },
+          "showTwitterIcon": { "groupType": "group-item", "item": { "groupSlug": "elements", "attrName": "module.advanced.showTwitterIcon", "label": "Show X Logo", "priority": 30, "render": true, "features": { "sticky": false, "responsive": false, "hover": false }, "component": { "type": "field", "name": "divi/toggle" } } },
+          "showUserImage": { "groupType": "group-item", "item": { "groupSlug": "elements", "attrName": "module.advanced.showUserImage", "label": "Show User Image", "priority": 40, "render": true, "features": { "sticky": false, "responsive": false, "hover": false }, "component": { "type": "field", "name": "divi/toggle" } } },
+          "showName": { "groupType": "group-item", "item": { "groupSlug": "elements", "attrName": "module.advanced.showName", "label": "Show Name", "priority": 50, "render": true, "features": { "sticky": false, "responsive": false, "hover": false }, "component": { "type": "field", "name": "divi/toggle" } } },
+          "showUserName": { "groupType": "group-item", "item": { "groupSlug": "elements", "attrName": "module.advanced.showUserName", "label": "Show User Name", "priority": 60, "render": true, "features": { "sticky": false, "responsive": false, "hover": false }, "component": { "type": "field", "name": "divi/toggle" } } },
+          "showDate": { "groupType": "group-item", "item": { "groupSlug": "elements", "attrName": "module.advanced.showDate", "label": "Show Date", "priority": 70, "render": true, "features": { "sticky": false, "responsive": false, "hover": false }, "component": { "type": "field", "name": "divi/toggle" } } },
+          "showFavorite": { "groupType": "group-item", "item": { "groupSlug": "elements", "attrName": "module.advanced.showFavorite", "label": "Show Favorite", "priority": 80, "render": true, "features": { "sticky": false, "responsive": false, "hover": false }, "component": { "type": "field", "name": "divi/toggle" } } },
+          "showRetweet": { "groupType": "group-item", "item": { "groupSlug": "elements", "attrName": "module.advanced.showRetweet", "label": "Show Retweet", "priority": 90, "render": true, "features": { "sticky": false, "responsive": false, "hover": false }, "component": { "type": "field", "name": "divi/toggle" } } },
+          "readMore": { "groupType": "group-item", "item": { "groupSlug": "elements", "attrName": "module.advanced.readMore", "label": "Show Read More", "priority": 100, "render": true, "features": { "sticky": false, "responsive": false, "hover": false }, "component": { "type": "field", "name": "divi/toggle" } } },
+          "readMoreText": { "groupType": "group-item", "item": { "groupSlug": "elements", "attrName": "module.advanced.readMoreText", "label": "Read More Text", "priority": 110, "render": true, "features": { "sticky": false, "responsive": false, "hover": false }, "component": { "type": "field", "name": "divi/text" } } },
+
+          "columnCount": { "groupType": "group-item", "item": { "groupSlug": "gridSettings", "attrName": "module.advanced.columnCount", "label": "Columns", "priority": 10, "render": true, "features": { "sticky": false, "responsive": true, "hover": false }, "component": { "type": "field", "name": "divi/range", "props": { "min": 1, "max": 10, "step": 1, "allowedUnits": [], "defaultUnit": "" } } } },
+          "columnGapX": { "groupType": "group-item", "item": { "groupSlug": "gridSettings", "attrName": "module.advanced.columnGapX", "label": "Column Gap (Left/Right)", "priority": 20, "render": true, "features": { "sticky": false, "responsive": true, "hover": false }, "component": { "type": "field", "name": "divi/range", "props": { "min": 0, "max": 100, "step": 1, "defaultUnit": "px", "allowedUnits": ["px"] } } } },
+          "columnGapY": { "groupType": "group-item", "item": { "groupSlug": "gridSettings", "attrName": "module.advanced.columnGapY", "label": "Column Gap (Top/Bottom)", "priority": 30, "render": true, "features": { "sticky": false, "responsive": true, "hover": false }, "component": { "type": "field", "name": "divi/range", "props": { "min": 0, "max": 100, "step": 1, "defaultUnit": "px", "allowedUnits": ["px"] } } } },
+
+          "avatarPosition": { "groupType": "group-item", "item": { "groupSlug": "userAvatar", "attrName": "module.advanced.avatarPosition", "label": "Avatar Position", "priority": 10, "render": true, "features": { "sticky": false, "responsive": false, "hover": false }, "component": { "type": "field", "name": "divi/select", "props": { "options": { "normal": { "label": "Normal" }, "absolute": { "label": "Absolute" } } } } } },
+          "avatarPlacement": { "groupType": "group-item", "item": { "groupSlug": "userAvatar", "attrName": "module.advanced.avatarPlacement", "label": "Avatar Placement", "priority": 20, "render": true, "features": { "sticky": false, "responsive": false, "hover": false }, "component": { "type": "field", "name": "divi/select", "props": { "options": { "left_top": { "label": "Left Top" }, "left_bottom": { "label": "Left Bottom" }, "right_top": { "label": "Right Top" }, "right_bottom": { "label": "Right Bottom" } } } } } },
+          "avatarOffsetX": { "groupType": "group-item", "item": { "groupSlug": "userAvatar", "attrName": "module.advanced.avatarOffsetX", "label": "Avatar Offset X", "priority": 30, "render": true, "features": { "sticky": false, "responsive": false, "hover": false }, "component": { "type": "field", "name": "divi/range", "props": { "min": -600, "max": 600, "step": 1, "defaultUnit": "%", "allowedUnits": ["px", "%"] } } } },
+          "avatarOffsetY": { "groupType": "group-item", "item": { "groupSlug": "userAvatar", "attrName": "module.advanced.avatarOffsetY", "label": "Avatar Offset Y", "priority": 40, "render": true, "features": { "sticky": false, "responsive": false, "hover": false }, "component": { "type": "field", "name": "divi/range", "props": { "min": -600, "max": 600, "step": 1, "defaultUnit": "px", "allowedUnits": ["px", "%"] } } } },
+          "avatarSize": { "groupType": "group-item", "item": { "groupSlug": "userAvatar", "attrName": "module.advanced.avatarSize", "label": "Profile Image Size", "priority": 50, "render": true, "features": { "sticky": false, "responsive": false, "hover": false }, "component": { "type": "field", "name": "divi/range", "props": { "min": 0, "max": 100, "step": 1, "defaultUnit": "px", "allowedUnits": ["px"] } } } },
+          "avatarSpacing": { "groupType": "group-item", "item": { "groupSlug": "userAvatar", "attrName": "module.advanced.avatarSpacing", "label": "Avatar Spacing", "priority": 60, "render": true, "features": { "sticky": false, "responsive": false, "hover": false }, "component": { "type": "field", "name": "divi/range", "props": { "min": 0, "max": 200, "step": 1, "defaultUnit": "px", "allowedUnits": ["px"] } } } },
+
+          "alignment": { "groupType": "group-item", "item": { "groupSlug": "tweets", "attrName": "module.advanced.alignment", "label": "Alignment", "priority": 10, "render": true, "features": { "sticky": false, "responsive": false, "hover": false }, "component": { "type": "field", "name": "divi/select", "props": { "options": { "left": { "label": "Left" }, "center": { "label": "Center" }, "right": { "label": "Right" } } } } } },
+          "twitterIconSize": { "groupType": "group-item", "item": { "groupSlug": "tweets", "attrName": "module.advanced.twitterIconSize", "label": "X Logo Size", "priority": 20, "render": true, "features": { "sticky": false, "responsive": false, "hover": false }, "component": { "type": "field", "name": "divi/range", "props": { "min": 0, "max": 100, "step": 1, "defaultUnit": "px", "allowedUnits": ["px"] } } } },
+          "contentPadding": { "groupType": "group-item", "item": { "groupSlug": "tweets", "attrName": "module.advanced.contentPadding", "label": "Tweets Padding", "description": "Format: top|right|bottom|left.", "priority": 30, "render": true, "features": { "sticky": false, "responsive": false, "hover": false }, "component": { "type": "field", "name": "divi/text" } } },
+          "descriptionSpacing": { "groupType": "group-item", "item": { "groupSlug": "tweets", "attrName": "module.advanced.descriptionSpacing", "label": "Description Bottom Spacing", "priority": 40, "render": true, "features": { "sticky": false, "responsive": false, "hover": false }, "component": { "type": "field", "name": "divi/range", "props": { "min": 0, "max": 100, "step": 1, "defaultUnit": "px", "allowedUnits": ["px"] } } } },
+
+          "footerAlignment": { "groupType": "group-item", "item": { "groupSlug": "footer", "attrName": "module.advanced.footerAlignment", "label": "Footer Alignment", "priority": 10, "render": true, "features": { "sticky": false, "responsive": false, "hover": false }, "component": { "type": "field", "name": "divi/select", "props": { "options": { "flex-start": { "label": "Left" }, "flex-end": { "label": "Right" }, "center": { "label": "Center" }, "space-around": { "label": "Space Around" }, "space-between": { "label": "Space Between" } } } } } },
+          "footerPadding": { "groupType": "group-item", "item": { "groupSlug": "footer", "attrName": "module.advanced.footerPadding", "label": "Footer Padding", "description": "Format: top|right|bottom|left.", "priority": 20, "render": true, "features": { "sticky": false, "responsive": false, "hover": false }, "component": { "type": "field", "name": "divi/text" } } },
+          "favoriteColor": { "groupType": "group-item", "item": { "groupSlug": "footer", "attrName": "module.advanced.favoriteColor", "label": "Favorite Text Color", "priority": 30, "render": true, "features": { "sticky": false, "responsive": false, "hover": false }, "component": { "type": "field", "name": "divi/color-picker", "props": { "isAlpha": true } } } },
+          "favoriteFontSize": { "groupType": "group-item", "item": { "groupSlug": "footer", "attrName": "module.advanced.favoriteFontSize", "label": "Favorite Text Size", "priority": 40, "render": true, "features": { "sticky": false, "responsive": false, "hover": false }, "component": { "type": "field", "name": "divi/range", "props": { "min": 0, "max": 100, "step": 1, "defaultUnit": "px", "allowedUnits": ["px"] } } } },
+          "favoriteIconColor": { "groupType": "group-item", "item": { "groupSlug": "footer", "attrName": "module.advanced.favoriteIconColor", "label": "Favorite Icon Color", "priority": 50, "render": true, "features": { "sticky": false, "responsive": false, "hover": false }, "component": { "type": "field", "name": "divi/color-picker", "props": { "isAlpha": true } } } },
+          "favoriteIconSize": { "groupType": "group-item", "item": { "groupSlug": "footer", "attrName": "module.advanced.favoriteIconSize", "label": "Favorite Icon Size", "priority": 60, "render": true, "features": { "sticky": false, "responsive": false, "hover": false }, "component": { "type": "field", "name": "divi/range", "props": { "min": 0, "max": 100, "step": 1, "defaultUnit": "px", "allowedUnits": ["px"] } } } },
+          "retweetColor": { "groupType": "group-item", "item": { "groupSlug": "footer", "attrName": "module.advanced.retweetColor", "label": "Retweet Text Color", "priority": 70, "render": true, "features": { "sticky": false, "responsive": false, "hover": false }, "component": { "type": "field", "name": "divi/color-picker", "props": { "isAlpha": true } } } },
+          "retweetFontSize": { "groupType": "group-item", "item": { "groupSlug": "footer", "attrName": "module.advanced.retweetFontSize", "label": "Retweet Text Size", "priority": 80, "render": true, "features": { "sticky": false, "responsive": false, "hover": false }, "component": { "type": "field", "name": "divi/range", "props": { "min": 0, "max": 100, "step": 1, "defaultUnit": "px", "allowedUnits": ["px"] } } } },
+          "retweetIconColor": { "groupType": "group-item", "item": { "groupSlug": "footer", "attrName": "module.advanced.retweetIconColor", "label": "Retweet Icon Color", "priority": 90, "render": true, "features": { "sticky": false, "responsive": false, "hover": false }, "component": { "type": "field", "name": "divi/color-picker", "props": { "isAlpha": true } } } },
+          "retweetIconSize": { "groupType": "group-item", "item": { "groupSlug": "footer", "attrName": "module.advanced.retweetIconSize", "label": "Retweet Icon Size", "priority": 100, "render": true, "features": { "sticky": false, "responsive": false, "hover": false }, "component": { "type": "field", "name": "divi/range", "props": { "min": 0, "max": 100, "step": 1, "defaultUnit": "px", "allowedUnits": ["px"] } } } }
+        },
+        "decoration": {
+          "background": {}, "spacing": {}, "border": {}, "boxShadow": {}, "filters": {}, "transform": {}, "animation": {}, "overflow": {}, "sizing": {}, "disabledOn": {}, "transition": {}, "position": {}, "zIndex": {}, "scroll": {}
+        }
+      }
+    },
+    "tweetsItem": {
+      "type": "object",
+      "selector": "{{selector}} .dtq-twitter-grid-item-inner",
+      "settings": {
+        "decoration": {
+          "background": { "groupType": "group-item", "item": { "groupSlug": "tweets", "priority": 50, "render": true, "attrName": "tweetsItem.decoration.background", "component": { "name": "divi/background", "type": "group", "props": { "grouped": false, "fieldLabel": "Tweets Background" } } } },
+          "border": { "groupType": "group-item", "item": { "groupSlug": "tweets", "priority": 60, "render": true, "attrName": "tweetsItem.decoration.border", "component": { "name": "divi/border", "type": "group", "props": { "grouped": false, "fieldLabel": "Tweets Box" } } } },
+          "boxShadow": { "groupType": "group-item", "item": { "groupSlug": "tweets", "priority": 70, "render": true, "attrName": "tweetsItem.decoration.boxShadow", "component": { "name": "divi/box-shadow", "type": "group", "props": { "grouped": false, "fieldLabel": "Tweets Box Shadow" } } } }
+        }
+      }
+    },
+    "avatar": {
+      "type": "object",
+      "selector": "{{selector}} .dtq-twitter-grid-avatar",
+      "settings": {
+        "decoration": {
+          "border": { "groupType": "group-item", "item": { "groupSlug": "userAvatar", "priority": 70, "render": true, "attrName": "avatar.decoration.border", "component": { "name": "divi/border", "type": "group", "props": { "grouped": false, "fieldLabel": "Avatar" } } } },
+          "boxShadow": { "groupType": "group-item", "item": { "groupSlug": "userAvatar", "priority": 80, "render": true, "attrName": "avatar.decoration.boxShadow", "component": { "name": "divi/box-shadow", "type": "group", "props": { "grouped": false, "fieldLabel": "Avatar Box Shadow" } } } }
+        }
+      }
+    },
+    "nameFont": {
+      "type": "object",
+      "selector": "{{selector}} .dtq-twitter-grid-author-name",
+      "settings": { "decoration": { "font": { "groupType": "group-item", "item": { "groupSlug": "textFonts", "priority": 10, "render": true, "component": { "name": "divi/font", "type": "group", "props": { "grouped": false, "fieldLabel": "Name" } } } } } }
+    },
+    "usernameFont": {
+      "type": "object",
+      "selector": "{{selector}} .dtq-twitter-grid-username",
+      "settings": { "decoration": { "font": { "groupType": "group-item", "item": { "groupSlug": "textFonts", "priority": 20, "render": true, "component": { "name": "divi/font", "type": "group", "props": { "grouped": false, "fieldLabel": "User Name" } } } } } }
+    },
+    "descriptionFont": {
+      "type": "object",
+      "selector": "{{selector}} .dtq-twitter-grid-content p",
+      "settings": { "decoration": { "font": { "groupType": "group-item", "item": { "groupSlug": "textFonts", "priority": 30, "render": true, "component": { "name": "divi/font", "type": "group", "props": { "grouped": false, "fieldLabel": "Description" } } } } } }
+    },
+    "readmoreFont": {
+      "type": "object",
+      "selector": "{{selector}} .dtq-twitter-grid-content p a",
+      "settings": { "decoration": { "font": { "groupType": "group-item", "item": { "groupSlug": "textFonts", "priority": 40, "render": true, "component": { "name": "divi/font", "type": "group", "props": { "grouped": false, "fieldLabel": "Read More" } } } } } }
+    },
+    "dateFont": {
+      "type": "object",
+      "selector": "{{selector}} .dtq-twitter-grid-date",
+      "settings": { "decoration": { "font": { "groupType": "group-item", "item": { "groupSlug": "textFonts", "priority": 50, "render": true, "component": { "name": "divi/font", "type": "group", "props": { "grouped": false, "fieldLabel": "Date" } } } } } }
+    }
+  },
+  "customCssFields": {
+    "tweetItem": { "subName": "tweetItem", "selectorSuffix": " .dtq-twitter-grid-item-inner" },
+    "avatar": { "subName": "avatar", "selectorSuffix": " .dtq-twitter-grid-avatar" },
+    "content": { "subName": "content", "selectorSuffix": " .dtq-twitter-grid-content p" }
+  },
+  "settings": {
+    "content": "auto",
+    "design": "auto",
+    "advanced": "auto",
+    "groups": {
+      "twitterFeed": { "panel": "content", "priority": 10, "groupName": "twitterFeed", "component": { "name": "divi/composite", "props": { "groupLabel": "X Feed" } } },
+      "elements": { "panel": "content", "priority": 20, "groupName": "elements", "component": { "name": "divi/composite", "props": { "groupLabel": "Elements" } } },
+      "gridSettings": { "panel": "design", "priority": 10, "groupName": "gridSettings", "component": { "name": "divi/composite", "props": { "groupLabel": "Grid" } } },
+      "userAvatar": { "panel": "design", "priority": 20, "groupName": "userAvatar", "multiElements": true, "component": { "name": "divi/composite", "props": { "groupLabel": "User Avatar" } } },
+      "tweets": { "panel": "design", "priority": 30, "groupName": "tweets", "multiElements": true, "component": { "name": "divi/composite", "props": { "groupLabel": "Tweets" } } },
+      "textFonts": { "panel": "design", "priority": 40, "groupName": "textFonts", "multiElements": true, "component": { "name": "divi/composite", "props": { "groupLabel": "Text", "presetGroup": "divi/font" } } },
+      "footer": { "panel": "design", "priority": 50, "groupName": "footer", "component": { "name": "divi/composite", "props": { "groupLabel": "Footer" } } }
+    }
+  }
+}

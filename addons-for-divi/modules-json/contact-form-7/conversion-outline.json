@@ -1,0 +1,92 @@
+{
+  "advanced": {
+    "admin_label": "module.meta.adminLabel",
+    "animation": "module.decoration.animation",
+    "background": "module.decoration.background",
+    "borders": {
+      "default": "module.decoration.border",
+      "field": "field.decoration.border"
+    },
+    "box_shadow": {
+      "default": "module.decoration.boxShadow",
+      "submit_button": "submitButton.decoration.boxShadow"
+    },
+    "button": {
+      "submit_button": "submitButton.decoration.button"
+    },
+    "disabled_on": "module.decoration.disabledOn",
+    "filters": {
+      "default": "module.decoration.filters"
+    },
+    "fonts": {
+      "form_field_font": "field.decoration.font",
+      "labels": "label.decoration.font",
+      "placeholder": "placeholder.decoration.font",
+      "title": "headerTitle.decoration.font",
+      "text": "headerText.decoration.font"
+    },
+    "margin_padding": "module.decoration.spacing",
+    "max_width": "module.decoration.sizing",
+    "overflow": "module.decoration.overflow",
+    "scroll": "module.decoration.scroll",
+    "transform": "module.decoration.transform",
+    "transition": "module.decoration.transition",
+    "z_index": "module.decoration.zIndex"
+  },
+  "css": {
+    "before": "css.*.before",
+    "after": "css.*.after",
+    "main_element": "css.*.mainElement",
+    "form_id": "css.*.formField",
+    "cf7_labels": "css.*.label",
+    "cf7_submit": "css.*.submitButton"
+  },
+  "module": {
+    "form_id": "module.advanced.formId.*",
+    "use_form_header": "module.advanced.useFormHeader.*",
+    "form_header_title": "module.advanced.formHeaderTitle.*",
+    "form_header_text": "module.advanced.formHeaderText.*",
+    "use_icon": "module.advanced.useIcon.*",
+    "header_img": "module.advanced.headerImg.*",
+    "header_icon": "module.advanced.headerIcon.*",
+    "cr_custom_styles": "module.advanced.crCustomStyles.*",
+    "form_bg": "module.advanced.formBg.*",
+    "form_padding": "module.advanced.formPadding.*",
+    "use_form_button_fullwidth": "module.advanced.useFormButtonFullwidth.*",
+    "button_alignment": "module.advanced.buttonAlignment.*",
+    "form_header_bg": "module.advanced.formHeaderBg.*",
+    "form_header_padding": "module.advanced.formHeaderPadding.*",
+    "form_header_bottom": "module.advanced.formHeaderBottom.*",
+    "form_header_img_bg": "module.advanced.formHeaderImgBg.*",
+    "form_header_icon_size": "module.advanced.formHeaderIconSize.*",
+    "form_header_icon_color": "module.advanced.formHeaderIconColor.*",
+    "form_header_icon_padding": "module.advanced.formHeaderIconPadding.*",
+    "header_title_spacing": "module.advanced.headerTitleSpacing.*",
+    "form_field_height": "module.advanced.formFieldHeight.*",
+    "form_field_padding": "module.advanced.formFieldPadding.*",
+    "form_background_color": "module.advanced.formBackgroundColor.*",
+    "form_field_active_color": "module.advanced.formFieldActiveColor.*",
+    "form_field_spacing": "module.advanced.formFieldSpacing.*",
+    "form_label_spacing": "module.advanced.formLabelSpacing.*",
+    "cr_size": "module.advanced.crSize.*",
+    "cr_background_color": "module.advanced.crBackgroundColor.*",
+    "cr_selected_color": "module.advanced.crSelectedColor.*",
+    "cr_border_color": "module.advanced.crBorderColor.*",
+    "cr_border_size": "module.advanced.crBorderSize.*",
+    "cr_label_color": "module.advanced.crLabelColor.*",
+    "cf7_message_color": "module.advanced.cf7MessageColor.*",
+    "cf7_message_bg_color": "module.advanced.cf7MessageBgColor.*",
+    "cf7_border_highlight_color": "module.advanced.cf7BorderHighlightColor.*",
+    "cf7_success_message_color": "module.advanced.cf7SuccessMessageColor.*",
+    "cf7_success_message_bg_color": "module.advanced.cf7SuccessMessageBgColor.*",
+    "cf7_success_border_color": "module.advanced.cf7SuccessBorderColor.*",
+    "cf7_error_message_color": "module.advanced.cf7ErrorMessageColor.*",
+    "cf7_error_message_bg_color": "module.advanced.cf7ErrorMessageBgColor.*",
+    "cf7_error_border_color": "module.advanced.cf7ErrorBorderColor.*",
+    "cf7_message_padding": "module.advanced.cf7MessagePadding.*",
+    "cf7_message_margin_top": "module.advanced.cf7MessageMarginTop.*"
+  },
+  "deprecatedMap": [
+    "__cf7form"
+  ]
+}

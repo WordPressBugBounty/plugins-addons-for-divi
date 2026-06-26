@@ -1,0 +1,84 @@
+{
+  "advanced": {
+    "admin_label": "module.meta.adminLabel",
+    "animation": "module.decoration.animation",
+    "background": "module.decoration.background",
+    "borders": {
+      "default": "module.decoration.border",
+      "title": "title.decoration.border"
+    },
+    "box_shadow": {
+      "default": "module.decoration.boxShadow"
+    },
+    "disabled_on": "module.decoration.disabledOn",
+    "filters": {
+      "default": "module.decoration.filters"
+    },
+    "fonts": {
+      "title": "title.decoration.font",
+      "text": "text.decoration.font"
+    },
+    "margin_padding": "module.decoration.spacing",
+    "max_width": "module.decoration.sizing",
+    "overflow": "module.decoration.overflow",
+    "scroll": "module.decoration.scroll",
+    "transform": "module.decoration.transform",
+    "transition": "module.decoration.transition",
+    "z_index": "module.decoration.zIndex"
+  },
+  "css": {
+    "before": "css.*.before",
+    "after": "css.*.after",
+    "main_element": "css.*.mainElement",
+    "title": "css.*.title",
+    "item": "css.*.item",
+    "text": "css.*.text",
+    "bullet": "css.*.bullet"
+  },
+  "module": {
+    "use_title": "module.advanced.useTitle.*",
+    "title": "module.advanced.titleText.*",
+    "post_type": "module.advanced.postType.*",
+    "include_categories": "module.advanced.includeCategories.*",
+    "order_by": "module.advanced.orderBy.*",
+    "order": "module.advanced.order.*",
+    "news_count": "module.advanced.newsCount.*",
+    "exclude_posts": "module.advanced.excludePosts.*",
+    "post_offset": "module.advanced.postOffset.*",
+    "title_pos": "module.advanced.titlePosition.*",
+    "speed": "module.advanced.speed.*",
+    "slide_dir": "module.advanced.slideDirection.*",
+    "item_spacing": "module.advanced.itemSpacing.*",
+    "pause_on_hover": "module.advanced.pauseOnHover.*",
+    "use_bullet": "module.advanced.useBullet.*",
+    "bullet_color": "module.advanced.bulletColor.*",
+    "title_padding": "module.advanced.titlePadding.*"
+  },
+  "deprecatedMap": [
+    "__news",
+    "title_bg_color",
+    "title_bg_color_gradient_type",
+    "title_bg_color_gradient_direction",
+    "title_bg_color_gradient_direction_radial",
+    "title_bg_color_gradient_stops",
+    "title_bg_color_gradient_start",
+    "title_bg_color_gradient_end",
+    "title_bg_color_gradient_start_position",
+    "title_bg_color_gradient_end_position",
+    "title_bg_color_gradient_overlays_image",
+    "title_bg_image",
+    "title_bg_image_size",
+    "title_bg_image_position",
+    "title_bg_image_repeat",
+    "title_bg_image_blend",
+    "title_bg_enable_color",
+    "title_bg_enable_image",
+    "title_bg__hover_enabled",
+    "title_bg_color__hover",
+    "title_bg_color_gradient_start__hover",
+    "title_bg_color_gradient_end__hover",
+    "title_padding_tablet",
+    "title_padding_phone",
+    "title_padding_last_edited"
+  ]
+}
