@@ -1,0 +1,608 @@
+{
+  "name": "divitorque/accordion-item",
+  "moduleClassName": "dtq_accordion_item",
+  "moduleOrderClassName": "dtq_accordion_item",
+  "title": "Accordion Item",
+  "titles": "Accordion Items",
+  "moduleIcon": "divitorque/accordion-item",
+  "category": "child-module",
+  "attributes": {
+    "module": {
+      "type": "object",
+      "selector": "{{selector}}",
+      "default": {
+        "advanced": {
+          "openByDefault": {
+            "desktop": {
+              "value": "off"
+            }
+          },
+          "keepOpen": {
+            "desktop": {
+              "value": "off"
+            }
+          },
+          "disableItem": {
+            "desktop": {
+              "value": "off"
+            }
+          },
+          "headerMediaType": {
+            "desktop": {
+              "value": "none"
+            }
+          },
+          "flipH": {
+            "desktop": {
+              "value": "off"
+            }
+          },
+          "flipV": {
+            "desktop": {
+              "value": "off"
+            }
+          }
+        }
+      },
+      "settings": {
+        "meta": {
+          "adminLabel": {}
+        },
+        "advanced": {
+          "htmlAttributes": {},
+          "openByDefault": {
+            "groupType": "group-item",
+            "item": {
+              "groupSlug": "contentMain",
+              "attrName": "module.advanced.openByDefault",
+              "label": "Open By Default",
+              "description": "Show this item expanded when the page first loads.",
+              "priority": 30,
+              "render": true,
+              "features": {
+                "sticky": false,
+                "responsive": false,
+                "hover": false
+              },
+              "component": {
+                "type": "field",
+                "name": "divi/toggle"
+              }
+            }
+          },
+          "keepOpen": {
+            "groupType": "group-item",
+            "item": {
+              "groupSlug": "contentMain",
+              "attrName": "module.advanced.keepOpen",
+              "label": "Always Keep Open",
+              "description": "Lock this item open — it cannot be collapsed by the visitor.",
+              "priority": 35,
+              "render": true,
+              "features": {
+                "sticky": false,
+                "responsive": false,
+                "hover": false
+              },
+              "component": {
+                "type": "field",
+                "name": "divi/toggle"
+              }
+            }
+          },
+          "disableItem": {
+            "groupType": "group-item",
+            "item": {
+              "groupSlug": "contentMain",
+              "attrName": "module.advanced.disableItem",
+              "label": "Disable This Item",
+              "description": "Hide this item completely on the front end without deleting it.",
+              "priority": 40,
+              "render": true,
+              "features": {
+                "sticky": false,
+                "responsive": false,
+                "hover": false
+              },
+              "component": {
+                "type": "field",
+                "name": "divi/toggle"
+              }
+            }
+          },
+          "anchorId": {
+            "groupType": "group-item",
+            "item": {
+              "groupSlug": "contentMain",
+              "attrName": "module.advanced.anchorId",
+              "label": "Anchor ID",
+              "description": "Optional unique ID for deep-linking. Visiting yoursite.com/page#your-id opens and scrolls to this item.",
+              "priority": 50,
+              "render": true,
+              "features": {
+                "sticky": false,
+                "responsive": false,
+                "hover": false
+              },
+              "component": {
+                "type": "field",
+                "name": "divi/text"
+              }
+            }
+          },
+          "titleLink": {
+            "groupType": "group-item",
+            "item": {
+              "groupSlug": "contentMain",
+              "attrName": "module.advanced.titleLink",
+              "label": "Title Link URL",
+              "description": "Optional. Makes the title a clickable link (toggling still works from the rest of the header). Supports dynamic URLs.",
+              "priority": 18,
+              "render": true,
+              "features": {
+                "sticky": false,
+                "responsive": false,
+                "hover": false,
+                "dynamicContent": {
+                  "type": "url"
+                }
+              },
+              "component": {
+                "type": "field",
+                "name": "divi/text"
+              }
+            }
+          },
+          "headerMediaType": {
+            "groupType": "group-item",
+            "item": {
+              "groupSlug": "contentMedia",
+              "attrName": "module.advanced.headerMediaType",
+              "label": "Header Media",
+              "description": "Show an image in this item's header, beside the title.",
+              "priority": 10,
+              "render": true,
+              "features": {
+                "sticky": false,
+                "responsive": false,
+                "hover": false
+              },
+              "component": {
+                "type": "field",
+                "name": "divi/select",
+                "props": {
+                  "options": {
+                    "none": {
+                      "label": "None"
+                    },
+                    "icon": {
+                      "label": "Icon"
+                    },
+                    "image": {
+                      "label": "Image"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "headerIcon": {
+            "groupType": "group-item",
+            "item": {
+              "groupSlug": "contentMedia",
+              "attrName": "module.advanced.headerIcon",
+              "label": "Header Icon",
+              "description": "Icon shown in the item header.",
+              "priority": 15,
+              "render": true,
+              "features": {
+                "sticky": false,
+                "responsive": false,
+                "hover": false
+              },
+              "component": {
+                "type": "field",
+                "name": "divi/icon-picker"
+              }
+            }
+          },
+          "headerImage": {
+            "groupType": "group-item",
+            "item": {
+              "groupSlug": "contentMedia",
+              "attrName": "module.advanced.headerImage",
+              "label": "Header Image",
+              "description": "Image shown in the item header.",
+              "priority": 20,
+              "render": true,
+              "features": {
+                "sticky": false,
+                "responsive": false,
+                "hover": false,
+                "dynamicContent": {
+                  "type": "image"
+                }
+              },
+              "component": {
+                "type": "field",
+                "name": "divi/upload"
+              }
+            }
+          },
+          "headerImageSize": {
+            "groupType": "group-item",
+            "item": {
+              "groupSlug": "contentMedia",
+              "attrName": "module.advanced.headerImageSize",
+              "label": "Image Size",
+              "description": "Width/height of the square header image.",
+              "priority": 30,
+              "render": true,
+              "features": {
+                "sticky": false,
+                "responsive": false,
+                "hover": false
+              },
+              "component": {
+                "type": "field",
+                "name": "divi/range",
+                "props": {
+                  "min": 24,
+                  "max": 160,
+                  "step": 1,
+                  "defaultUnit": "px"
+                }
+              }
+            }
+          },
+          "focalX": {
+            "groupType": "group-item",
+            "item": {
+              "groupSlug": "contentMedia",
+              "attrName": "module.advanced.focalX",
+              "label": "Focal Point — Horizontal",
+              "description": "Horizontal focal point of the image (0% left, 100% right).",
+              "priority": 40,
+              "render": true,
+              "features": {
+                "sticky": false,
+                "responsive": false,
+                "hover": false
+              },
+              "component": {
+                "type": "field",
+                "name": "divi/range",
+                "props": {
+                  "min": 0,
+                  "max": 100,
+                  "step": 1,
+                  "defaultUnit": "%",
+                  "allowedUnits": [
+                    "%"
+                  ]
+                }
+              }
+            }
+          },
+          "focalY": {
+            "groupType": "group-item",
+            "item": {
+              "groupSlug": "contentMedia",
+              "attrName": "module.advanced.focalY",
+              "label": "Focal Point — Vertical",
+              "description": "Vertical focal point of the image (0% top, 100% bottom).",
+              "priority": 50,
+              "render": true,
+              "features": {
+                "sticky": false,
+                "responsive": false,
+                "hover": false
+              },
+              "component": {
+                "type": "field",
+                "name": "divi/range",
+                "props": {
+                  "min": 0,
+                  "max": 100,
+                  "step": 1,
+                  "defaultUnit": "%",
+                  "allowedUnits": [
+                    "%"
+                  ]
+                }
+              }
+            }
+          },
+          "flipH": {
+            "groupType": "group-item",
+            "item": {
+              "groupSlug": "contentMedia",
+              "attrName": "module.advanced.flipH",
+              "label": "Flip Horizontal",
+              "description": "Mirror the image left-to-right.",
+              "priority": 60,
+              "render": true,
+              "features": {
+                "sticky": false,
+                "responsive": false,
+                "hover": false
+              },
+              "component": {
+                "type": "field",
+                "name": "divi/toggle"
+              }
+            }
+          },
+          "flipV": {
+            "groupType": "group-item",
+            "item": {
+              "groupSlug": "contentMedia",
+              "attrName": "module.advanced.flipV",
+              "label": "Flip Vertical",
+              "description": "Mirror the image top-to-bottom.",
+              "priority": 70,
+              "render": true,
+              "features": {
+                "sticky": false,
+                "responsive": false,
+                "hover": false
+              },
+              "component": {
+                "type": "field",
+                "name": "divi/toggle"
+              }
+            }
+          }
+        },
+        "decoration": {
+          "animation": {},
+          "background": {},
+          "border": {},
+          "boxShadow": {},
+          "filters": {},
+          "spacing": {},
+          "transform": {},
+          "transition": {},
+          "disabledOn": {}
+        }
+      }
+    },
+    "title": {
+      "type": "object",
+      "selector": "{{selector}} .dtq-accordion__title-text",
+      "elementType": "heading",
+      "tagName": "h3",
+      "inlineEditor": "plainText",
+      "attributes": {
+        "class": "dtq-accordion__title-text"
+      },
+      "childrenSanitizer": "et_core_esc_previously",
+      "settings": {
+        "innerContent": {
+          "groupType": "group-item",
+          "item": {
+            "groupSlug": "contentMain",
+            "priority": 10,
+            "render": true,
+            "attrName": "title.innerContent",
+            "label": "Title",
+            "description": "The title shown on the accordion item header.",
+            "component": {
+              "type": "field",
+              "name": "divi/text"
+            },
+            "features": {
+              "sticky": false,
+              "responsive": false,
+              "hover": false,
+              "dynamicContent": true
+            }
+          }
+        }
+      }
+    },
+    "subtitle": {
+      "type": "object",
+      "selector": "{{selector}} .dtq-accordion__subtitle",
+      "elementType": "heading",
+      "tagName": "div",
+      "inlineEditor": "plainText",
+      "attributes": {
+        "class": "dtq-accordion__subtitle"
+      },
+      "childrenSanitizer": "et_core_esc_previously",
+      "settings": {
+        "innerContent": {
+          "groupType": "group-item",
+          "item": {
+            "groupSlug": "contentMain",
+            "priority": 15,
+            "render": true,
+            "attrName": "subtitle.innerContent",
+            "label": "Subtitle",
+            "description": "Optional small text shown under the title.",
+            "component": {
+              "type": "field",
+              "name": "divi/text"
+            },
+            "features": {
+              "sticky": false,
+              "responsive": false,
+              "hover": false,
+              "dynamicContent": true
+            }
+          }
+        }
+      }
+    },
+    "content": {
+      "type": "object",
+      "selector": "{{selector}} .dtq-accordion__content-inner",
+      "elementType": "content",
+      "attributes": {
+        "class": "dtq-accordion__content-inner"
+      },
+      "settings": {
+        "innerContent": {
+          "groupType": "group-item",
+          "item": {
+            "groupSlug": "contentMain",
+            "priority": 20,
+            "render": true,
+            "attrName": "content.innerContent",
+            "label": "Content",
+            "description": "The content revealed when this item is expanded.",
+            "component": {
+              "type": "field",
+              "name": "divi/richtext"
+            },
+            "features": {
+              "sticky": false,
+              "responsive": false,
+              "hover": false,
+              "dynamicContent": true
+            }
+          }
+        }
+      }
+    },
+    "readMore": {
+      "type": "object",
+      "selector": "{{selector}} .et_pb_button.dtq-accordion__readmore",
+      "elementType": "button",
+      "elementProps": {
+        "hasWrapper": true
+      },
+      "attributes": {
+        "class": "dtq-accordion__readmore"
+      },
+      "settings": {
+        "innerContent": {
+          "groupType": "into-multiple-groups",
+          "groups": {
+            "text": {
+              "groupType": "group-item",
+              "item": {
+                "groupSlug": "contentReadMore",
+                "label": "Read More Text",
+                "description": "Set text and a link to show a read-more button at the bottom of the content.",
+                "priority": 10,
+                "render": true,
+                "subName": "text",
+                "category": "basic_option",
+                "features": {
+                  "dynamicContent": {
+                    "type": "text"
+                  },
+                  "sticky": false,
+                  "preset": "content"
+                },
+                "component": {
+                  "name": "divi/text",
+                  "type": "field"
+                }
+              }
+            },
+            "link": {
+              "groupType": "group-item",
+              "item": {
+                "groupSlug": "contentReadMore",
+                "attrName": "readMore.innerContent",
+                "priority": 20,
+                "render": true,
+                "component": {
+                  "type": "group",
+                  "name": "divi/button-link",
+                  "props": {
+                    "grouped": false,
+                    "attrName": "readMore.innerContent",
+                    "fieldLabel": "Read More"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "decoration": {
+          "button": {
+            "groupType": "group-item",
+            "item": {
+              "groupSlug": "designReadMore",
+              "priority": 10,
+              "render": true,
+              "component": {
+                "name": "divi/button",
+                "type": "group"
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "customCssFields": {
+    "title": {
+      "subName": "title",
+      "selectorSuffix": " .dtq-accordion__title-text"
+    },
+    "subtitle": {
+      "subName": "subtitle",
+      "selectorSuffix": " .dtq-accordion__subtitle"
+    },
+    "content": {
+      "subName": "content",
+      "selectorSuffix": " .dtq-accordion__content-inner"
+    }
+  },
+  "settings": {
+    "content": "auto",
+    "design": "auto",
+    "advanced": "auto",
+    "groups": {
+      "contentMain": {
+        "panel": "content",
+        "priority": 10,
+        "groupName": "contentMain",
+        "component": {
+          "name": "divi/composite",
+          "props": {
+            "groupLabel": "Content"
+          }
+        }
+      },
+      "contentMedia": {
+        "panel": "content",
+        "priority": 20,
+        "groupName": "contentMedia",
+        "component": {
+          "name": "divi/composite",
+          "props": {
+            "groupLabel": "Header Image"
+          }
+        }
+      },
+      "contentReadMore": {
+        "panel": "content",
+        "priority": 30,
+        "groupName": "contentReadMore",
+        "component": {
+          "name": "divi/composite",
+          "props": {
+            "groupLabel": "Read More Button"
+          }
+        }
+      },
+      "designReadMore": {
+        "panel": "design",
+        "priority": 40,
+        "groupName": "designReadMore",
+        "component": {
+          "name": "divi/composite",
+          "props": {
+            "groupLabel": "Read More Button"
+          }
+        }
+      }
+    }
+  }
+}

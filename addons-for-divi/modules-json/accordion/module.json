@@ -1,0 +1,1139 @@
+{
+  "name": "divitorque/accordion",
+  "moduleClassName": "dtq_accordion",
+  "moduleOrderClassName": "dtq_accordion",
+  "title": "Accordion",
+  "titles": "Accordions",
+  "moduleIcon": "divitorque/accordion",
+  "category": "module",
+  "childModuleName": "divitorque/accordion-item",
+  "childModuleTitle": "Accordion Item",
+  "childrenName": [
+    "divitorque/accordion-item"
+  ],
+  "attributes": {
+    "module": {
+      "type": "object",
+      "selector": "{{selector}}",
+      "default": {
+        "advanced": {
+          "accordionStyle": {
+            "desktop": {
+              "value": "boxed"
+            }
+          },
+          "activator": {
+            "desktop": {
+              "value": "click"
+            }
+          },
+          "closeOthers": {
+            "desktop": {
+              "value": "on"
+            }
+          },
+          "initialDisplay": {
+            "desktop": {
+              "value": "first"
+            }
+          },
+          "showIcon": {
+            "desktop": {
+              "value": "on"
+            }
+          },
+          "scrollToTop": {
+            "desktop": {
+              "value": "off"
+            }
+          },
+          "scrollOnLoad": {
+            "desktop": {
+              "value": "off"
+            }
+          },
+          "contentCloseButton": {
+            "desktop": {
+              "value": "off"
+            }
+          },
+          "contentHeight": {
+            "desktop": {
+              "value": "auto"
+            }
+          },
+          "contentAnimation": {
+            "desktop": {
+              "value": "none"
+            }
+          },
+          "itemSpacing": {
+            "desktop": {
+              "value": "10px"
+            }
+          },
+          "iconStyle": {
+            "desktop": {
+              "value": "chevron"
+            }
+          },
+          "iconSource": {
+            "desktop": {
+              "value": "preset"
+            }
+          },
+          "iconShape": {
+            "desktop": {
+              "value": "none"
+            }
+          },
+          "iconPosition": {
+            "desktop": {
+              "value": "right"
+            }
+          }
+        }
+      },
+      "settings": {
+        "meta": {
+          "adminLabel": {}
+        },
+        "advanced": {
+          "htmlAttributes": {},
+          "accordionStyle": {
+            "groupType": "group-item",
+            "item": {
+              "groupSlug": "contentMain",
+              "attrName": "module.advanced.accordionStyle",
+              "label": "Style Preset",
+              "description": "Pick a ready-made accordion look. Each preset is fully overridable with the options below.",
+              "priority": 5,
+              "render": true,
+              "features": {
+                "sticky": false,
+                "responsive": false,
+                "hover": false
+              },
+              "component": {
+                "type": "field",
+                "name": "divi/select",
+                "props": {
+                  "options": {
+                    "boxed": {
+                      "label": "Boxed"
+                    },
+                    "separated": {
+                      "label": "Separated (Cards)"
+                    },
+                    "material": {
+                      "label": "Material"
+                    },
+                    "connected": {
+                      "label": "Connected"
+                    },
+                    "minimal": {
+                      "label": "Minimal"
+                    },
+                    "ghost": {
+                      "label": "Ghost"
+                    },
+                    "filled": {
+                      "label": "Filled"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "activator": {
+            "groupType": "group-item",
+            "item": {
+              "groupSlug": "contentMain",
+              "attrName": "module.advanced.activator",
+              "label": "Open On",
+              "description": "How items open: on click, on mouse hover, or automatically cycling (autoplay).",
+              "priority": 6,
+              "render": true,
+              "features": {
+                "sticky": false,
+                "responsive": false,
+                "hover": false
+              },
+              "component": {
+                "type": "field",
+                "name": "divi/select",
+                "props": {
+                  "options": {
+                    "click": {
+                      "label": "Click"
+                    },
+                    "hover": {
+                      "label": "Hover"
+                    },
+                    "autoplay": {
+                      "label": "Autoplay"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "autoplaySpeed": {
+            "groupType": "group-item",
+            "item": {
+              "groupSlug": "contentMain",
+              "attrName": "module.advanced.autoplaySpeed",
+              "label": "Autoplay Speed",
+              "description": "Milliseconds each item stays open before advancing.",
+              "priority": 8,
+              "render": true,
+              "features": {
+                "sticky": false,
+                "responsive": false,
+                "hover": false
+              },
+              "component": {
+                "type": "field",
+                "name": "divi/range",
+                "props": {
+                  "min": 1000,
+                  "max": 15000,
+                  "step": 250,
+                  "defaultUnit": "ms",
+                  "allowedUnits": [
+                    "ms"
+                  ]
+                }
+              }
+            }
+          },
+          "closeOthers": {
+            "groupType": "group-item",
+            "item": {
+              "groupSlug": "contentMain",
+              "attrName": "module.advanced.closeOthers",
+              "label": "Open Only One at a Time",
+              "description": "When enabled, opening one item closes the others. Turn off to allow multiple items open together.",
+              "priority": 10,
+              "render": true,
+              "features": {
+                "sticky": false,
+                "responsive": false,
+                "hover": false
+              },
+              "component": {
+                "type": "field",
+                "name": "divi/toggle"
+              }
+            }
+          },
+          "initialDisplay": {
+            "groupType": "group-item",
+            "item": {
+              "groupSlug": "contentMain",
+              "attrName": "module.advanced.initialDisplay",
+              "label": "Initially Open",
+              "description": "Which items are open when the page loads (per-item \"Open By Default\" / \"Always Keep Open\" still apply).",
+              "priority": 12,
+              "render": true,
+              "features": {
+                "sticky": false,
+                "responsive": false,
+                "hover": false
+              },
+              "component": {
+                "type": "field",
+                "name": "divi/select",
+                "props": {
+                  "options": {
+                    "first": {
+                      "label": "First Item"
+                    },
+                    "none": {
+                      "label": "None (all closed)"
+                    },
+                    "all": {
+                      "label": "All Items"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "scrollToTop": {
+            "groupType": "group-item",
+            "item": {
+              "groupSlug": "contentMain",
+              "attrName": "module.advanced.scrollToTop",
+              "label": "Scroll Item to Top on Open",
+              "description": "Smoothly scroll an item to the top of the screen when it opens.",
+              "priority": 25,
+              "render": true,
+              "features": {
+                "sticky": false,
+                "responsive": false,
+                "hover": false
+              },
+              "component": {
+                "type": "field",
+                "name": "divi/toggle"
+              }
+            }
+          },
+          "scrollOnLoad": {
+            "groupType": "group-item",
+            "item": {
+              "groupSlug": "contentMain",
+              "attrName": "module.advanced.scrollOnLoad",
+              "label": "Scroll to Opened Item on Load",
+              "description": "On page load, smoothly scroll to the first open item.",
+              "priority": 27,
+              "render": true,
+              "features": {
+                "sticky": false,
+                "responsive": false,
+                "hover": false
+              },
+              "component": {
+                "type": "field",
+                "name": "divi/toggle"
+              }
+            }
+          },
+          "contentCloseButton": {
+            "groupType": "group-item",
+            "item": {
+              "groupSlug": "contentMain",
+              "attrName": "module.advanced.contentCloseButton",
+              "label": "Show Close Button in Content",
+              "description": "Add a “Close” button at the bottom of each open item's content.",
+              "priority": 29,
+              "render": true,
+              "features": {
+                "sticky": false,
+                "responsive": false,
+                "hover": false
+              },
+              "component": {
+                "type": "field",
+                "name": "divi/toggle"
+              }
+            }
+          },
+          "showIcon": {
+            "groupType": "group-item",
+            "item": {
+              "groupSlug": "contentMain",
+              "attrName": "module.advanced.showIcon",
+              "label": "Show Toggle Icon",
+              "description": "Show the open/close indicator icon on each item title.",
+              "priority": 20,
+              "render": true,
+              "features": {
+                "sticky": false,
+                "responsive": false,
+                "hover": false
+              },
+              "component": {
+                "type": "field",
+                "name": "divi/toggle"
+              }
+            }
+          },
+          "itemSpacing": {
+            "groupType": "group-item",
+            "item": {
+              "groupSlug": "designItem",
+              "attrName": "module.advanced.itemSpacing",
+              "label": "Spacing Between Items",
+              "description": "Vertical gap between each accordion item.",
+              "priority": 10,
+              "render": true,
+              "features": {
+                "sticky": false,
+                "responsive": true,
+                "hover": false
+              },
+              "component": {
+                "type": "field",
+                "name": "divi/range",
+                "props": {
+                  "min": 0,
+                  "max": 100,
+                  "step": 1,
+                  "defaultUnit": "px"
+                }
+              }
+            }
+          },
+          "iconSource": {
+            "groupType": "group-item",
+            "item": {
+              "groupSlug": "designIcon",
+              "attrName": "module.advanced.iconSource",
+              "label": "Icon Source",
+              "description": "Use a built-in CSS icon, or pick any Divi / Font Awesome icon for the closed and open states.",
+              "priority": 5,
+              "render": true,
+              "features": {
+                "sticky": false,
+                "responsive": false,
+                "hover": false
+              },
+              "component": {
+                "type": "field",
+                "name": "divi/select",
+                "props": {
+                  "options": {
+                    "preset": {
+                      "label": "Built-in"
+                    },
+                    "custom": {
+                      "label": "Custom Icon"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "iconStyle": {
+            "groupType": "group-item",
+            "item": {
+              "groupSlug": "designIcon",
+              "attrName": "module.advanced.iconStyle",
+              "label": "Icon Type",
+              "description": "Choose the open/close indicator icon style.",
+              "priority": 10,
+              "render": true,
+              "features": {
+                "sticky": false,
+                "responsive": false,
+                "hover": false
+              },
+              "component": {
+                "type": "field",
+                "name": "divi/select",
+                "props": {
+                  "options": {
+                    "chevron": {
+                      "label": "Chevron"
+                    },
+                    "plus": {
+                      "label": "Plus / Minus"
+                    },
+                    "arrow": {
+                      "label": "Arrow"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "closedIcon": {
+            "groupType": "group-item",
+            "item": {
+              "groupSlug": "designIcon",
+              "attrName": "module.advanced.closedIcon",
+              "label": "Closed Icon",
+              "description": "Icon shown when the item is collapsed.",
+              "priority": 12,
+              "render": true,
+              "features": {
+                "sticky": false,
+                "responsive": false,
+                "hover": false
+              },
+              "component": {
+                "type": "field",
+                "name": "divi/icon-picker"
+              }
+            }
+          },
+          "openIcon": {
+            "groupType": "group-item",
+            "item": {
+              "groupSlug": "designIcon",
+              "attrName": "module.advanced.openIcon",
+              "label": "Open Icon",
+              "description": "Icon shown when the item is expanded.",
+              "priority": 13,
+              "render": true,
+              "features": {
+                "sticky": false,
+                "responsive": false,
+                "hover": false
+              },
+              "component": {
+                "type": "field",
+                "name": "divi/icon-picker"
+              }
+            }
+          },
+          "iconPosition": {
+            "groupType": "group-item",
+            "item": {
+              "groupSlug": "designIcon",
+              "attrName": "module.advanced.iconPosition",
+              "label": "Icon Position",
+              "description": "Place the toggle icon on the left or right of the title.",
+              "priority": 20,
+              "render": true,
+              "features": {
+                "sticky": false,
+                "responsive": false,
+                "hover": false
+              },
+              "component": {
+                "type": "field",
+                "name": "divi/select",
+                "props": {
+                  "options": {
+                    "right": {
+                      "label": "Right"
+                    },
+                    "left": {
+                      "label": "Left"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "iconSize": {
+            "groupType": "group-item",
+            "item": {
+              "groupSlug": "designIcon",
+              "attrName": "module.advanced.iconSize",
+              "label": "Icon Size",
+              "description": "Size of the toggle icon.",
+              "priority": 25,
+              "render": true,
+              "features": {
+                "sticky": false,
+                "responsive": false,
+                "hover": false
+              },
+              "component": {
+                "type": "field",
+                "name": "divi/range",
+                "props": {
+                  "min": 4,
+                  "max": 40,
+                  "step": 1,
+                  "defaultUnit": "px"
+                }
+              }
+            }
+          },
+          "iconColor": {
+            "groupType": "group-item",
+            "item": {
+              "groupSlug": "designIcon",
+              "attrName": "module.advanced.iconColor",
+              "label": "Icon Color",
+              "description": "Color of the toggle icon.",
+              "priority": 30,
+              "render": true,
+              "features": {
+                "sticky": false,
+                "responsive": false,
+                "hover": true
+              },
+              "component": {
+                "type": "field",
+                "name": "divi/color-picker",
+                "props": {
+                  "isAlpha": true
+                }
+              }
+            }
+          },
+          "titleBg": {
+            "groupType": "group-item",
+            "item": {
+              "groupSlug": "designHeader",
+              "attrName": "module.advanced.titleBg",
+              "label": "Header Background",
+              "description": "Background color of the item title bar.",
+              "priority": 10,
+              "render": true,
+              "features": {
+                "sticky": false,
+                "responsive": false,
+                "hover": true
+              },
+              "component": {
+                "type": "field",
+                "name": "divi/color-picker",
+                "props": {
+                  "isAlpha": true
+                }
+              }
+            }
+          },
+          "activeBg": {
+            "groupType": "group-item",
+            "item": {
+              "groupSlug": "designHeader",
+              "attrName": "module.advanced.activeBg",
+              "label": "Active Header Background",
+              "description": "Background color of the title bar when the item is open.",
+              "priority": 20,
+              "render": true,
+              "features": {
+                "sticky": false,
+                "responsive": false,
+                "hover": false
+              },
+              "component": {
+                "type": "field",
+                "name": "divi/color-picker",
+                "props": {
+                  "isAlpha": true
+                }
+              }
+            }
+          },
+          "activeColor": {
+            "groupType": "group-item",
+            "item": {
+              "groupSlug": "designHeader",
+              "attrName": "module.advanced.activeColor",
+              "label": "Active Title Color",
+              "description": "Title text color when the item is open.",
+              "priority": 30,
+              "render": true,
+              "features": {
+                "sticky": false,
+                "responsive": false,
+                "hover": false
+              },
+              "component": {
+                "type": "field",
+                "name": "divi/color-picker",
+                "props": {
+                  "isAlpha": true
+                }
+              }
+            }
+          },
+          "iconShape": {
+            "groupType": "group-item",
+            "item": {
+              "groupSlug": "designIcon",
+              "attrName": "module.advanced.iconShape",
+              "label": "Icon Background Shape",
+              "description": "Draw a shape behind the toggle icon.",
+              "priority": 35,
+              "render": true,
+              "features": {
+                "sticky": false,
+                "responsive": false,
+                "hover": false
+              },
+              "component": {
+                "type": "field",
+                "name": "divi/select",
+                "props": {
+                  "options": {
+                    "none": {
+                      "label": "None"
+                    },
+                    "circle": {
+                      "label": "Circle"
+                    },
+                    "square": {
+                      "label": "Square"
+                    },
+                    "rounded": {
+                      "label": "Rounded"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "iconBgColor": {
+            "groupType": "group-item",
+            "item": {
+              "groupSlug": "designIcon",
+              "attrName": "module.advanced.iconBgColor",
+              "label": "Icon Background Color",
+              "description": "Background color of the icon shape.",
+              "priority": 40,
+              "render": true,
+              "features": {
+                "sticky": false,
+                "responsive": false,
+                "hover": false
+              },
+              "component": {
+                "type": "field",
+                "name": "divi/color-picker",
+                "props": {
+                  "isAlpha": true
+                }
+              }
+            }
+          },
+          "contentHeight": {
+            "groupType": "group-item",
+            "item": {
+              "groupSlug": "designContent",
+              "attrName": "module.advanced.contentHeight",
+              "label": "Content Height",
+              "description": "Auto grows to fit; Fixed caps the height and scrolls.",
+              "priority": 30,
+              "render": true,
+              "features": {
+                "sticky": false,
+                "responsive": false,
+                "hover": false
+              },
+              "component": {
+                "type": "field",
+                "name": "divi/select",
+                "props": {
+                  "options": {
+                    "auto": {
+                      "label": "Auto"
+                    },
+                    "fixed": {
+                      "label": "Fixed"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "fixedHeight": {
+            "groupType": "group-item",
+            "item": {
+              "groupSlug": "designContent",
+              "attrName": "module.advanced.fixedHeight",
+              "label": "Fixed Content Height",
+              "description": "Maximum content height before it scrolls.",
+              "priority": 35,
+              "render": true,
+              "features": {
+                "sticky": false,
+                "responsive": false,
+                "hover": false
+              },
+              "component": {
+                "type": "field",
+                "name": "divi/range",
+                "props": {
+                  "min": 80,
+                  "max": 800,
+                  "step": 10,
+                  "defaultUnit": "px"
+                }
+              }
+            }
+          },
+          "contentAnimation": {
+            "groupType": "group-item",
+            "item": {
+              "groupSlug": "designContent",
+              "attrName": "module.advanced.contentAnimation",
+              "label": "Content Animation",
+              "description": "How the content animates in when an item opens.",
+              "priority": 40,
+              "render": true,
+              "features": {
+                "sticky": false,
+                "responsive": false,
+                "hover": false
+              },
+              "component": {
+                "type": "field",
+                "name": "divi/select",
+                "props": {
+                  "options": {
+                    "none": {
+                      "label": "None"
+                    },
+                    "fade": {
+                      "label": "Fade"
+                    },
+                    "slide-down": {
+                      "label": "Slide Down"
+                    },
+                    "slide-up": {
+                      "label": "Slide Up"
+                    },
+                    "slide-left": {
+                      "label": "Slide Left"
+                    },
+                    "slide-right": {
+                      "label": "Slide Right"
+                    },
+                    "zoom-in": {
+                      "label": "Zoom In"
+                    },
+                    "zoom-out": {
+                      "label": "Zoom Out"
+                    },
+                    "flip": {
+                      "label": "Flip"
+                    },
+                    "bounce": {
+                      "label": "Bounce"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "animDuration": {
+            "groupType": "group-item",
+            "item": {
+              "groupSlug": "designContent",
+              "attrName": "module.advanced.animDuration",
+              "label": "Animation Speed",
+              "description": "Duration of the content animation.",
+              "priority": 45,
+              "render": true,
+              "features": {
+                "sticky": false,
+                "responsive": false,
+                "hover": false
+              },
+              "component": {
+                "type": "field",
+                "name": "divi/range",
+                "props": {
+                  "min": 100,
+                  "max": 1500,
+                  "step": 50,
+                  "defaultUnit": "ms",
+                  "allowedUnits": [
+                    "ms"
+                  ]
+                }
+              }
+            }
+          }
+        },
+        "decoration": {
+          "animation": {},
+          "layout": {},
+          "background": {},
+          "border": {},
+          "boxShadow": {},
+          "filters": {},
+          "overflow": {},
+          "position": {},
+          "scroll": {},
+          "spacing": {},
+          "sizing": {},
+          "sticky": {},
+          "transform": {},
+          "transition": {},
+          "zIndex": {},
+          "disabledOn": {}
+        }
+      }
+    },
+    "title": {
+      "type": "object",
+      "selector": "{{selector}} .dtq-accordion__title-text",
+      "default": {
+        "decoration": {
+          "font": {
+            "font": {
+              "desktop": {
+                "value": {
+                  "size": "18px",
+                  "weight": "600",
+                  "lineHeight": "1.4em"
+                }
+              }
+            }
+          }
+        }
+      },
+      "settings": {
+        "decoration": {
+          "font": {
+            "groupType": "group-item",
+            "item": {
+              "groupSlug": "designTitle",
+              "priority": 10,
+              "render": true,
+              "component": {
+                "name": "divi/font",
+                "type": "group",
+                "props": {
+                  "grouped": false,
+                  "fieldLabel": "Title",
+                  "fields": {
+                    "headingLevel": {
+                      "render": false
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "spacing": {
+            "groupType": "group-item",
+            "item": {
+              "groupSlug": "designTitle",
+              "priority": 20,
+              "render": true,
+              "attrName": "title.decoration.spacing",
+              "component": {
+                "name": "divi/spacing",
+                "type": "group",
+                "props": {
+                  "grouped": false,
+                  "fieldLabel": "Title"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "subtitle": {
+      "type": "object",
+      "selector": "{{selector}} .dtq-accordion__subtitle",
+      "default": {
+        "decoration": {
+          "font": {
+            "font": {
+              "desktop": {
+                "value": {
+                  "size": "13px",
+                  "lineHeight": "1.3em"
+                }
+              }
+            }
+          }
+        }
+      },
+      "settings": {
+        "decoration": {
+          "font": {
+            "groupType": "group-item",
+            "item": {
+              "groupSlug": "designSubtitle",
+              "priority": 10,
+              "render": true,
+              "component": {
+                "name": "divi/font",
+                "type": "group",
+                "props": {
+                  "grouped": false,
+                  "fieldLabel": "Subtitle",
+                  "fields": {
+                    "headingLevel": {
+                      "render": false
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "content": {
+      "type": "object",
+      "selector": "{{selector}} .dtq-accordion__content-inner",
+      "settings": {
+        "decoration": {
+          "bodyFont": {
+            "groupType": "group-item",
+            "item": {
+              "groupSlug": "designContent",
+              "priority": 10,
+              "render": true,
+              "component": {
+                "name": "divi/font-body",
+                "type": "group",
+                "props": {
+                  "grouped": false,
+                  "fieldLabel": "Content",
+                  "hideTextAlign": true
+                }
+              }
+            }
+          },
+          "spacing": {
+            "groupType": "group-item",
+            "item": {
+              "groupSlug": "designContent",
+              "priority": 20,
+              "render": true,
+              "attrName": "content.decoration.spacing",
+              "component": {
+                "name": "divi/spacing",
+                "type": "group",
+                "props": {
+                  "grouped": false,
+                  "fieldLabel": "Content"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "item": {
+      "type": "object",
+      "selector": "{{selector}} .dtq-accordion__item",
+      "settings": {
+        "decoration": {
+          "background": {
+            "groupType": "group-item",
+            "item": {
+              "groupSlug": "designItem",
+              "priority": 20,
+              "render": true,
+              "attrName": "item.decoration.background",
+              "component": {
+                "name": "divi/background",
+                "type": "group",
+                "props": {
+                  "grouped": false,
+                  "fieldLabel": "Item"
+                }
+              }
+            }
+          },
+          "border": {
+            "groupType": "group-item",
+            "item": {
+              "groupSlug": "designItem",
+              "priority": 30,
+              "render": true,
+              "attrName": "item.decoration.border",
+              "component": {
+                "name": "divi/border",
+                "type": "group",
+                "props": {
+                  "grouped": false,
+                  "fieldLabel": "Item"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "customCssFields": {
+    "title": {
+      "subName": "title",
+      "selectorSuffix": " .dtq-accordion__title-text"
+    },
+    "subtitle": {
+      "subName": "subtitle",
+      "selectorSuffix": " .dtq-accordion__subtitle"
+    },
+    "content": {
+      "subName": "content",
+      "selectorSuffix": " .dtq-accordion__content-inner"
+    },
+    "item": {
+      "subName": "item",
+      "selectorSuffix": " .dtq-accordion__item"
+    }
+  },
+  "settings": {
+    "content": "auto",
+    "design": "auto",
+    "advanced": "auto",
+    "groups": {
+      "contentMain": {
+        "panel": "content",
+        "priority": 10,
+        "groupName": "contentMain",
+        "component": {
+          "name": "divi/composite",
+          "props": {
+            "groupLabel": "Layout & Behavior"
+          }
+        }
+      },
+      "designItem": {
+        "panel": "design",
+        "priority": 10,
+        "groupName": "designItem",
+        "component": {
+          "name": "divi/composite",
+          "props": {
+            "groupLabel": "Item Container"
+          }
+        }
+      },
+      "designHeader": {
+        "panel": "design",
+        "priority": 15,
+        "groupName": "designHeader",
+        "component": {
+          "name": "divi/composite",
+          "props": {
+            "groupLabel": "Title Bar & Active State"
+          }
+        }
+      },
+      "designIcon": {
+        "panel": "design",
+        "priority": 18,
+        "groupName": "designIcon",
+        "component": {
+          "name": "divi/composite",
+          "props": {
+            "groupLabel": "Toggle Icon"
+          }
+        }
+      },
+      "designTitle": {
+        "panel": "design",
+        "priority": 20,
+        "groupName": "designTitle",
+        "multiElements": true,
+        "component": {
+          "name": "divi/composite",
+          "props": {
+            "groupLabel": "Title Typography",
+            "clipboardCategory": "style",
+            "presetGroup": "divi/font"
+          }
+        }
+      },
+      "designSubtitle": {
+        "panel": "design",
+        "priority": 22,
+        "groupName": "designSubtitle",
+        "multiElements": true,
+        "component": {
+          "name": "divi/composite",
+          "props": {
+            "groupLabel": "Subtitle Typography",
+            "clipboardCategory": "style",
+            "presetGroup": "divi/font"
+          }
+        }
+      },
+      "designContent": {
+        "panel": "design",
+        "priority": 30,
+        "groupName": "designContent",
+        "multiElements": true,
+        "component": {
+          "name": "divi/composite",
+          "props": {
+            "groupLabel": "Content Typography",
+            "clipboardCategory": "style",
+            "presetGroup": "divi/font-body"
+          }
+        }
+      }
+    }
+  }
+}

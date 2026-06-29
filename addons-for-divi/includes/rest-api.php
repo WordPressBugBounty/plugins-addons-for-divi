@@ -120,6 +120,27 @@ class RestApi
                     return current_user_can('edit_posts');
                 },
             ],
+            // Richer post query for the Post Carousel VB preview (returns
+            // { posts: [ { …, thumbnail, excerpt, author{}, categories[] } ] }).
+            // The front end renders server-side in the module's
+            // RenderCallbackTrait; this is VB preview only.
+            '/carousel-posts' => [
+                'methods' => \WP_REST_Server::CREATABLE,
+                'callback' => [$this, 'get_carousel_posts'],
+                'permission_callback' => function () {
+                    return current_user_can('edit_posts');
+                },
+            ],
+            // Saved layouts / pages / posts list for the Modal Popup layout
+            // picker (VB only). The chosen item renders server-side in the
+            // module's RenderCallbackTrait::render_saved_layout().
+            '/layouts' => [
+                'methods' => \WP_REST_Server::READABLE,
+                'callback' => [$this, 'get_layouts'],
+                'permission_callback' => function () {
+                    return current_user_can('edit_posts');
+                },
+            ],
         ];
 
         foreach ($routes as $route => $args) {
@@ -128,8 +149,50 @@ class RestApi
     }
 
     /**
+     * Return published Divi Library layouts, pages and posts for the Modal
+     * Popup layout picker. Layouts are listed first (the primary use case).
+     *
+     * @return \WP_REST_Response List of { id, title, type }.
+     */
+    public function get_layouts()
+    {
+        $items = [];
+
+        $groups = [
+            ['type' => 'et_pb_layout', 'label' => 'Layout'],
+            ['type' => 'page', 'label' => 'Page'],
+            ['type' => 'post', 'label' => 'Post'],
+        ];
+
+        foreach ($groups as $group) {
+            if (!post_type_exists($group['type'])) {
+                continue;
+            }
+            $posts = get_posts(
+                [
+                    'post_type'      => $group['type'],
+                    'post_status'    => 'publish',
+                    'posts_per_page' => 100,
+                    'orderby'        => 'title',
+                    'order'          => 'ASC',
+                    'suppress_filters' => true,
+                ]
+            );
+            foreach ($posts as $post) {
+                $items[] = [
+                    'id'    => $post->ID,
+                    'title' => $post->post_title !== '' ? $post->post_title : sprintf('#%d', $post->ID),
+                    'type'  => $group['label'],
+                ];
+            }
+        }
+
+        return new \WP_REST_Response($items, 200);
+    }
+
+    /**
      * Get common arguments for plugin-related endpoints
-     * 
+     *
      * @return array Array of argument definitions
      */
     private function get_plugin_args()
@@ -220,6 +283,141 @@ class RestApi
         wp_reset_postdata();
 
         return new WP_REST_Response($items, 200);
+    }
+
+    /**
+     * Richer post query for the Post Carousel VB preview. Returns
+     * { posts: [ { id, title, excerpt, permalink, date, thumbnail,
+     * author{id,name,avatar,link}, categories[{id,name,link}] } ], total,
+     * total_pages }. Mirrors the WP_Query built in the module's
+     * RenderCallbackTrait so the live preview matches the rendered output.
+     *
+     * @param WP_REST_Request $request REST request.
+     * @return WP_REST_Response
+     */
+    public function get_carousel_posts(WP_REST_Request $request)
+    {
+        $post_type      = sanitize_text_field((string) $request->get_param('post_type')) ?: 'post';
+        $categories     = sanitize_text_field((string) $request->get_param('categories'));
+        $taxonomy       = sanitize_text_field((string) $request->get_param('taxonomy'));
+        $taxonomy_terms = sanitize_text_field((string) $request->get_param('taxonomy_terms'));
+        $order_by       = sanitize_text_field((string) $request->get_param('order_by')) ?: 'date';
+        $order          = sanitize_text_field((string) $request->get_param('order')) ?: 'DESC';
+        $post_count     = absint($request->get_param('post_count')) ?: 6;
+        $offset         = absint($request->get_param('offset'));
+        $include_posts  = sanitize_text_field((string) $request->get_param('include_posts'));
+        $exclude_posts  = sanitize_text_field((string) $request->get_param('exclude_posts'));
+        $date_format    = sanitize_text_field((string) $request->get_param('date_format')) ?: 'M d, Y';
+        $content_length = absint($request->get_param('content_length')) ?: 150;
+        $thumb_size     = sanitize_text_field((string) $request->get_param('thumb_size')) ?: 'full';
+
+        $query_args = [
+            'posts_per_page' => (int) $post_count,
+            'post_type'      => $post_type,
+            'post_status'    => ['publish'],
+            'orderby'        => $order_by,
+            'order'          => $order,
+            'offset'         => (int) $offset,
+        ];
+
+        // Category filter — comma-separated IDs OR slugs.
+        if ('' !== $categories) {
+            $terms = array_filter(array_map('trim', explode(',', $categories)));
+            if (!empty($terms)) {
+                if (ctype_digit((string) $terms[0])) {
+                    $query_args['category__in'] = array_map('intval', $terms);
+                } else {
+                    $query_args['category_name'] = implode(',', $terms);
+                }
+            }
+        }
+
+        // Custom taxonomy filter.
+        if ('' !== $taxonomy && '' !== $taxonomy_terms) {
+            $terms = array_filter(array_map('trim', explode(',', $taxonomy_terms)));
+            if (!empty($terms)) {
+                $field = ctype_digit((string) $terms[0]) ? 'term_id' : 'slug';
+                $query_args['tax_query'][] = [
+                    'taxonomy' => $taxonomy,
+                    'field'    => $field,
+                    'terms'    => $terms,
+                ];
+            }
+        }
+
+        if ('' !== $include_posts) {
+            $query_args['post__in'] = array_map('absint', array_filter(explode(',', $include_posts)));
+        }
+        if ('' !== $exclude_posts) {
+            $query_args['post__not_in'] = array_map('absint', array_filter(explode(',', $exclude_posts)));
+        }
+
+        $query = new \WP_Query($query_args);
+        $posts = [];
+
+        if ($query->have_posts()) {
+            while ($query->have_posts()) {
+                $query->the_post();
+
+                $post_id   = get_the_ID();
+                $thumb_id  = get_post_thumbnail_id($post_id);
+                $thumb_url = '';
+                if ($thumb_id) {
+                    $thumb_data = wp_get_attachment_image_src($thumb_id, $thumb_size);
+                    $thumb_url  = $thumb_data ? $thumb_data[0] : '';
+                }
+
+                $excerpt = get_the_excerpt();
+                if (empty($excerpt)) {
+                    $excerpt = get_the_content();
+                }
+                $excerpt = wp_strip_all_tags(strip_shortcodes($excerpt));
+                if ($content_length > 0 && mb_strlen($excerpt) > $content_length) {
+                    $excerpt = mb_substr($excerpt, 0, $content_length) . '...';
+                }
+
+                $categories_list = [];
+                $terms_list      = get_the_terms($post_id, 'category');
+                if ($terms_list && !is_wp_error($terms_list)) {
+                    foreach ($terms_list as $term) {
+                        $categories_list[] = [
+                            'id'   => $term->term_id,
+                            'name' => $term->name,
+                            'link' => get_term_link($term),
+                        ];
+                    }
+                }
+
+                $author_id = get_the_author_meta('ID');
+
+                $posts[] = [
+                    'id'         => $post_id,
+                    'title'      => get_the_title(),
+                    'excerpt'    => $excerpt,
+                    'permalink'  => get_the_permalink(),
+                    'date'       => get_the_date($date_format),
+                    'thumbnail'  => $thumb_url,
+                    'author'     => [
+                        'id'     => $author_id,
+                        'name'   => get_the_author(),
+                        'avatar' => get_avatar_url($author_id, ['size' => 52]),
+                        'link'   => get_author_posts_url($author_id),
+                    ],
+                    'categories' => $categories_list,
+                ];
+            }
+        }
+
+        wp_reset_postdata();
+
+        return new WP_REST_Response(
+            [
+                'posts'       => $posts,
+                'total'       => $query->found_posts,
+                'total_pages' => $query->max_num_pages,
+            ],
+            200
+        );
     }
 
 

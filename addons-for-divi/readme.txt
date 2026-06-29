@@ -4,7 +4,7 @@ Tags: divi, divi builder, divi modules, page builder, divi theme
 Requires at least: 5.0
 Tested up to: 7.0
 Requires PHP: 7.4
-Stable tag: 4.6.0
+Stable tag: 4.7.0
 License: GPLv3
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 
@@ -116,6 +116,17 @@ No. Updates are backward compatible and won't break pages built with our modules
 4. Image Carousel
 
 == Changelog ==
+
+= Version 4.7.0 =
+* Added: 8 new native Divi 5 modules — Accordion, Modal Popup, Tabs, Fancy Text, Table of Contents, Breadcrumbs, FAQ, and Post Carousel. Each is single-purpose, plug-and-play, and built natively for the Divi 5 Builder.
+* Added: Accordion includes style presets, custom open/close icons, click/hover/autoplay activators, scroll-to-item, content animations, and per-item header icons or images.
+* Added: Post Carousel ships 6 blog-card presets (Classic, Editorial, Overlay, Profile, Spotlight, Horizontal), a show/hide toggle for every element, and the lightweight Swiper engine.
+* Added: FAQ and Breadcrumbs output schema.org structured data (FAQPage / BreadcrumbList) for richer search results.
+* Added: Table of Contents auto-builds from page headings with smooth scroll, scroll-spy highlighting, and collapsible sections.
+* Compatibility: Fully backward compatible — all Divi 4 modules and saved layouts continue to work in both Divi 4 and Divi 5. The new modules are Divi 5-only.
+
+= Version 4.6.1 =
+* Fix: Dashboard header logo displayed oversized in some setups; the icon now renders at a fixed size.
 
 = Version 4.6.0 =
 * Added: The remaining dynamic modules now run natively in the Divi 5 Builder — News Ticker, Post List, Contact Form 7, X (Twitter) Feed, and X (Twitter) Carousel. Every Divi Torque module is now native in Divi 5, and your existing Divi 4 layouts migrate automatically.

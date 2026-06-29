@@ -54,6 +54,18 @@ $dtl_d5_modules = array(
     'contact_form_7'   => array('ContactForm7', '\\DiviTorqueLite\\Modules\\ContactForm7\\ContactForm7'),
     'twitter_feed'     => array('TwitterFeed', '\\DiviTorqueLite\\Modules\\TwitterFeed\\TwitterFeed'),
     'twitter_feed_carousel' => array('TwitterFeedCarousel', '\\DiviTorqueLite\\Modules\\TwitterFeedCarousel\\TwitterFeedCarousel'),
+    // Divi 5-only native modules (no D4 ancestor, no conversion outline).
+    'accordion'        => array('Accordion', '\\DiviTorqueLite\\Modules\\Accordion\\Accordion'),
+    'accordion_item'   => array('AccordionItem', '\\DiviTorqueLite\\Modules\\AccordionItem\\AccordionItem'),
+    'modal_popup'      => array('ModalPopup', '\\DiviTorqueLite\\Modules\\ModalPopup\\ModalPopup'),
+    'tabs'             => array('Tabs', '\\DiviTorqueLite\\Modules\\Tabs\\Tabs'),
+    'tab_item'         => array('TabItem', '\\DiviTorqueLite\\Modules\\TabItem\\TabItem'),
+    'fancy_text'       => array('FancyText', '\\DiviTorqueLite\\Modules\\FancyText\\FancyText'),
+    'table_of_contents' => array('TableOfContents', '\\DiviTorqueLite\\Modules\\TableOfContents\\TableOfContents'),
+    'breadcrumbs'      => array('Breadcrumbs', '\\DiviTorqueLite\\Modules\\Breadcrumbs\\Breadcrumbs'),
+    'faq'              => array('Faq', '\\DiviTorqueLite\\Modules\\Faq\\Faq'),
+    'faq_item'         => array('FaqItem', '\\DiviTorqueLite\\Modules\\FaqItem\\FaqItem'),
+    'post_carousel'    => array('PostCarousel', '\\DiviTorqueLite\\Modules\\PostCarousel\\PostCarousel'),
 );
 
 $dtl_d5_loaded = array();
