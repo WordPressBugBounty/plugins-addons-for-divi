@@ -34,14 +34,17 @@ class AssetsManager
 		$css_path = DIVI_TORQUE_LITE_ASSETS . 'css/';
 
 		// Main JS
+		// slick and counter-up are NOT global deps: frontend.js only calls them
+		// inside element-guarded `.each()` loops, and the carousel / number-counter
+		// modules enqueue them on demand. magnific-popup stays a hard dep because
+		// frontend.js calls `.magnificPopup()` directly (unguarded), so it must be
+		// present on every page until that init is refactored to be element-gated.
 		wp_enqueue_script(
 			'divi-torque-lite-frontend',
 			$js_path . 'frontend.js',
 			array(
 				'jquery',
 				'divi-torque-lite-magnific-popup',
-				'divi-torque-lite-slick',
-				'divi-torque-lite-counter-up',
 			),
 			$version,
 			true

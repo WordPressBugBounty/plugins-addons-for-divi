@@ -24,6 +24,7 @@
         "meta": { "adminLabel": {} },
         "advanced": {
           "htmlAttributes": {},
+          "text": {},
           "useTooltip": {
             "groupType": "group-item",
             "item": {

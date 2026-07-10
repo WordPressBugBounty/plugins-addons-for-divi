@@ -86,6 +86,7 @@
         },
         "advanced": {
           "htmlAttributes": {},
+          "text": {},
           "beforeLabel": {
             "groupType": "group-item",
             "item": {

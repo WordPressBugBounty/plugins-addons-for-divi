@@ -77,6 +77,7 @@
         "meta": { "adminLabel": {} },
         "advanced": {
           "htmlAttributes": {},
+          "text": {},
           "slideCount":      { "groupType": "group-item", "item": { "groupSlug": "carouselSettings", "attrName": "module.advanced.slideCount", "label": "Slides to Show", "description": "How many slides are visible at once. Lower this on tablet and phone for a better fit.", "priority": 10, "render": true, "features": { "sticky": false, "responsive": true, "hover": false }, "component": { "type": "field", "name": "divi/range", "props": { "min": 1, "max": 8, "step": 1, "defaultUnit": "" } } } },
           "slideToScroll":   { "groupType": "group-item", "item": { "groupSlug": "carouselSettings", "attrName": "module.advanced.slideToScroll", "label": "Slides to Scroll", "description": "How many slides move each time the carousel advances.", "priority": 20, "render": true, "features": { "sticky": false, "responsive": true, "hover": false }, "component": { "type": "field", "name": "divi/range", "props": { "min": 1, "max": 8, "step": 1, "defaultUnit": "" } } } },
           "slideSpacing":    { "groupType": "group-item", "item": { "groupSlug": "carouselSettings", "attrName": "module.advanced.slideSpacing", "label": "Gap Between Slides", "description": "Spacing between each slide.", "priority": 30, "render": true, "features": { "sticky": false, "responsive": false, "hover": false }, "component": { "type": "field", "name": "divi/range", "props": { "min": 0, "max": 100, "step": 1, "defaultUnit": "px" } } } },

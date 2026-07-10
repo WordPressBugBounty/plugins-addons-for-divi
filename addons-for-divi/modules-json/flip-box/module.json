@@ -189,6 +189,7 @@
         },
         "advanced": {
           "htmlAttributes": {},
+          "text": {},
           "frontMediaType": {
             "groupType": "group-item",
             "item": {

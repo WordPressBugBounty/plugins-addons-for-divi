@@ -29,6 +29,7 @@
         "meta": { "adminLabel": {} },
         "advanced": {
           "htmlAttributes": {},
+          "text": {},
           "isLink": {
             "groupType": "group-item",
             "item": {

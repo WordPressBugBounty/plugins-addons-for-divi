@@ -145,6 +145,7 @@
         },
         "advanced": {
           "htmlAttributes": {},
+          "text": {},
           "useImage": {
             "groupType": "group-item",
             "item": {

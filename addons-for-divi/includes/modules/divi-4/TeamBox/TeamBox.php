@@ -7,7 +7,7 @@ class DTQ_Advanced_Team extends Divi_Torque_Lite_Module
 
 		$this->slug = 'ba_advanced_team';
 		$this->vb_support = 'on';
-		$this->name = esc_html__('Team Box', 'addons-for-divi');
+		$this->name = esc_html__('Team Member', 'addons-for-divi');
 
 		$this->icon_path  	= $this->dtl_icon_path('team');
 

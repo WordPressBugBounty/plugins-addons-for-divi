@@ -160,6 +160,7 @@
         },
         "advanced": {
           "htmlAttributes": {},
+          "text": {},
           "activeElement": {
             "groupType": "group-item",
             "item": {

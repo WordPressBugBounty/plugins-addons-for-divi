@@ -161,6 +161,7 @@
         },
         "advanced": {
           "htmlAttributes": {},
+          "text": {},
           "mainFigure": {
             "groupType": "group-item",
             "item": {

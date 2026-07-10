@@ -3,8 +3,8 @@
   "d4Shortcode": "ba_testimonial",
   "moduleClassName": "dtq_testimonial",
   "moduleOrderClassName": "dtq_testimonial",
-  "title": "Testimonial",
-  "titles": "Testimonials",
+  "title": "Testimonial Card",
+  "titles": "Testimonial Cards",
   "moduleIcon": "divitorque/testimonial",
   "category": "module",
   "attributes": {
@@ -71,6 +71,7 @@
         },
         "advanced": {
           "htmlAttributes": {},
+          "text": {},
           "useRating": {
             "groupType": "group-item",
             "item": {

@@ -76,6 +76,7 @@
         },
         "advanced": {
           "htmlAttributes": {},
+          "text": {},
           "showIcon": {
             "groupType": "group-item",
             "item": {

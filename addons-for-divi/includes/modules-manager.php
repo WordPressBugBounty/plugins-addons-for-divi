@@ -96,6 +96,27 @@ class ModulesManager
      */
     private function dir_to_title($dir)
     {
+        // Canonical display names — mirror each module's registered $this->name so
+        // the admin list matches the builder (and avoids core-Divi name clashes).
+        $overrides = [
+            'BusinessHour'        => 'Business Hours',
+            'CompareImage'        => 'Before & After Slider',
+            'ContactForm7'        => 'Contact Form 7',
+            'Divider'             => 'Separator',
+            'DualButton'          => 'Dual Buttons',
+            'FlipBox'             => 'Flip Card',
+            'InfoCard'            => 'Image Card',
+            'InlineNotice'        => 'Alert Box',
+            'NumberCounter'       => 'Animated Counter',
+            'Review'              => 'Review Box',
+            'TeamBox'             => 'Team Member',
+            'Testimonial'         => 'Testimonial Card',
+            'TwitterFeed'         => 'X (Twitter) Feed',
+            'TwitterFeedCarousel' => 'X (Twitter) Carousel',
+        ];
+        if (isset($overrides[$dir])) {
+            return $overrides[$dir];
+        }
         return preg_replace('/(?<!^)([A-Z])/', ' $1', $dir);
     }
 

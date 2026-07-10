@@ -6,7 +6,7 @@ class DTQ_Testimonial extends Divi_Torque_Lite_Module
 
 		$this->vb_support = 'on';
 		$this->slug       = 'ba_testimonial';
-		$this->name       = esc_html__('Testimonial', 'addons-for-divi');
+		$this->name       = esc_html__('Testimonial Card', 'addons-for-divi');
 
 		$this->icon_path  	= $this->dtl_icon_path('testimonial');
 

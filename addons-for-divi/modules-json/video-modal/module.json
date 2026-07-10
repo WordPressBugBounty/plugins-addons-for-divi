@@ -126,6 +126,7 @@
         },
         "advanced": {
           "htmlAttributes": {},
+          "text": {},
           "useOverlay": {
             "groupType": "group-item",
             "item": {

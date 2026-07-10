@@ -81,6 +81,7 @@
         },
         "advanced": {
           "htmlAttributes": {},
+          "text": {},
           "useIcon": {
             "groupType": "group-item",
             "item": {

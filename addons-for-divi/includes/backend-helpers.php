@@ -185,7 +185,7 @@ class BackendHelpers
                 'ba_flipbox' => [
                     'front_media_type' => 'image',
                     'front_img' => DIVI_TORQUE_LITE_ASSETS . 'imgs/demo/dog1.jpg',
-                    'front_title' => __('Flip Box', 'addons-for-divi'),
+                    'front_title' => __('Flip Card', 'addons-for-divi'),
                     'front_description' => __('This is a flip box module', 'addons-for-divi'),
                     'front_padding' => '0px|0px|0px|0px',
                     'front_img_width' => '120px',

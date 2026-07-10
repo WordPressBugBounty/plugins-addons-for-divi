@@ -7,7 +7,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Language-Team: PlugPress <support@divitorque.com>\n"
-"POT-Creation-Date: 2026-06-27 14:01+0000\n"
+"POT-Creation-Date: 2026-07-08 20:48+0000\n"
 "X-Poedit-Basepath: ..\n"
 "X-Poedit-KeywordsList: __;_e;_ex:1,2c;_n:1,2;_n_noop:1,2;_nx:1,2,4c;_nx_noop:1,2,3c;_x:1,2c;esc_attr__;esc_attr_e;esc_attr_x:1,2c;esc_html__;esc_html_e;esc_html_x:1,2c\n"
 "X-Poedit-SearchPath-0: .\n"
@@ -99,8 +99,8 @@ msgstr ""
 msgid "View Demo"
 msgstr ""
 
-#: includes/backend-helpers.php:188
-msgid "Flip Box"
+#: includes/backend-helpers.php:188, includes/modules/divi-4/FlipBox/FlipBox.php:8, src/divi-4/modules/FlipBox/FlipBox.php:8
+msgid "Flip Card"
 msgstr ""
 
 #: includes/backend-helpers.php:189
@@ -111,19 +111,19 @@ msgstr ""
 msgid "Awesome Gradient Heading"
 msgstr ""
 
-#: includes/rest-api.php:382
+#: includes/rest-api.php:580
 msgid "Invalid version specified."
 msgstr ""
 
-#: includes/rest-api.php:386
+#: includes/rest-api.php:584
 msgid "That version is already installed."
 msgstr ""
 
-#: includes/rest-api.php:405
+#: includes/rest-api.php:603
 msgid "Rollback failed."
 msgstr ""
 
-#: includes/rest-api.php:414
+#: includes/rest-api.php:612
 msgid "Rolled back to %s."
 msgstr ""
 
@@ -243,11 +243,11 @@ msgstr ""
 msgid "Skill Bars"
 msgstr ""
 
-#: includes/deprecated/admin.php:319, includes/modules/divi-4/Testimonial/Testimonial.php:9, includes/modules/divi-4/Testimonial/Testimonial.php:162
+#: includes/deprecated/admin.php:319, includes/modules/divi-4/Testimonial/Testimonial.php:162
 msgid "Testimonial"
 msgstr ""
 
-#: includes/deprecated/admin.php:324, includes/modules/divi-4/TwitterFeed/TwitterFeed.php:10, includes/modules/divi-4/TwitterFeed/TwitterFeed.php:18, includes/modules/divi-4/TwitterFeedCarousel/TwitterFeedCarousel.php:18
+#: includes/deprecated/admin.php:324, includes/modules/divi-4/TwitterFeed/TwitterFeed.php:18, includes/modules/divi-4/TwitterFeedCarousel/TwitterFeedCarousel.php:18
 msgid "Twitter Feed"
 msgstr ""
 
@@ -3699,10 +3699,6 @@ msgstr ""
 msgid "Here you can control the corner radius of the secondary button. Enable the link icon to control all four corners at once, or disable to define custom values for each."
 msgstr ""
 
-#: includes/modules/divi-4/FlipBox/FlipBox.php:8, src/divi-4/modules/FlipBox/FlipBox.php:8
-msgid "Flip Card"
-msgstr ""
-
 #: includes/modules/divi-4/FlipBox/FlipBox.php:16, includes/modules/divi-4/FlipBox/FlipBox.php:23, src/divi-4/modules/FlipBox/FlipBox.php:16, src/divi-4/modules/FlipBox/FlipBox.php:23
 msgid "Front Side"
 msgstr ""
@@ -4696,7 +4692,7 @@ msgid "Button Spacing Top"
 msgstr ""
 
 #: includes/modules/divi-4/InfoCard/InfoCard.php:8
-msgid "Info Card"
+msgid "Image Card"
 msgstr ""
 
 #: includes/modules/divi-4/InfoCard/InfoCard.php:25, includes/modules/divi-4/InfoCard/InfoCard.php:576
@@ -4816,7 +4812,7 @@ msgid "Here you can control card content overflow on the X and Y axis. If set to
 msgstr ""
 
 #: includes/modules/divi-4/InlineNotice/InlineNotice.php:10
-msgid "Inline Notice"
+msgid "Alert Box"
 msgstr ""
 
 #: includes/modules/divi-4/InlineNotice/InlineNotice.php:24
@@ -5252,7 +5248,7 @@ msgid "Define custom padding for news ticker title."
 msgstr ""
 
 #: includes/modules/divi-4/NumberCounter/NumberCounter.php:10
-msgid "Number Counter"
+msgid "Animated Counter"
 msgstr ""
 
 #: includes/modules/divi-4/NumberCounter/NumberCounter.php:21
@@ -5920,7 +5916,7 @@ msgid "Bar Box Shadow"
 msgstr ""
 
 #: includes/modules/divi-4/TeamBox/TeamBox.php:10
-msgid "Team Box"
+msgid "Team Member"
 msgstr ""
 
 #: includes/modules/divi-4/TeamBox/TeamBox.php:18, includes/modules/divi-4/TeamBox/TeamBox.php:43
@@ -6201,6 +6197,10 @@ msgstr ""
 
 #: includes/modules/divi-4/TeamBox/TeamBox.php:536, includes/modules/divi-4/TeamBox/TeamBox.php:554
 msgid "Set how much space the element will take at the bottom."
+msgstr ""
+
+#: includes/modules/divi-4/Testimonial/Testimonial.php:9
+msgid "Testimonial Card"
 msgstr ""
 
 #: includes/modules/divi-4/Testimonial/Testimonial.php:24, includes/modules/divi-4/Testimonial/Testimonial.php:69
@@ -6571,6 +6571,10 @@ msgstr ""
 msgid "Define arrow offset left/right value."
 msgstr ""
 
+#: includes/modules/divi-4/TwitterFeed/TwitterFeed.php:10
+msgid "X (Twitter) Feed"
+msgstr ""
+
 #: includes/modules/divi-4/TwitterFeed/TwitterFeed.php:26, includes/modules/divi-4/TwitterFeed/TwitterFeed.php:631, includes/modules/divi-4/TwitterFeedCarousel/TwitterFeedCarousel.php:37, includes/modules/divi-4/TwitterFeedCarousel/TwitterFeedCarousel.php:571
 msgid "Tweets Box"
 msgstr ""
@@ -6896,7 +6900,7 @@ msgid "Avatar Box Shadow"
 msgstr ""
 
 #: includes/modules/divi-4/TwitterFeedCarousel/TwitterFeedCarousel.php:11
-msgid "Twitter Carousel"
+msgid "X (Twitter) Carousel"
 msgstr ""
 
 #: includes/modules/divi-4/TwitterFeedCarousel/TwitterFeedCarousel.php:19

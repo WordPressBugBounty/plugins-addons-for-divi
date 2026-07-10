@@ -4,7 +4,7 @@ Tags: divi, divi builder, divi modules, page builder, divi theme
 Requires at least: 5.0
 Tested up to: 7.0
 Requires PHP: 7.4
-Stable tag: 4.7.0
+Stable tag: 4.7.1
 License: GPLv3
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 
@@ -116,6 +116,10 @@ No. Updates are backward compatible and won't break pages built with our modules
 4. Image Carousel
 
 == Changelog ==
+
+= Version 4.7.1 =
+* Improved: Carousel (Swiper) and counter libraries now load only on pages that actually use those modules, reducing script weight everywhere else.
+* Fix: Module-level Text settings (Text Color, orientation, and text shadow) were dropped when converting Divi 4 modules to Divi 5, causing some modules — including Review Box — to lose their styling after being edited in Divi 5. The Text option is now preserved across the conversion for all affected modules.
 
 = Version 4.7.0 =
 * Added: 8 new native Divi 5 modules — Accordion, Modal Popup, Tabs, Fancy Text, Table of Contents, Breadcrumbs, FAQ, and Post Carousel. Each is single-purpose, plug-and-play, and built natively for the Divi 5 Builder.

@@ -7,7 +7,7 @@ class DTQ_InlineNotice extends Divi_Torque_Lite_Module
 
 		$this->slug       = 'ba_alert';
 		$this->vb_support = 'on';
-		$this->name       = esc_html__('Inline Notice', 'addons-for-divi');
+		$this->name       = esc_html__('Alert Box', 'addons-for-divi');
 
 		$this->icon_path  	= $this->dtl_icon_path('inline-notice');
 

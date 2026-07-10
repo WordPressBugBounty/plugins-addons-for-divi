@@ -5,7 +5,7 @@ class DTQ_Card extends Divi_Torque_Lite_Module
 	public function init()
 	{
 
-		$this->name       = esc_html__('Info Card', 'addons-for-divi');
+		$this->name       = esc_html__('Image Card', 'addons-for-divi');
 		$this->icon_path  	= $this->dtl_icon_path('info-box');
 
 		$this->slug       = 'ba_card';

@@ -81,6 +81,15 @@ class CarouselEngine
      */
     public static function build_swiper_config($advanced)
     {
+        // On-demand: every front-end carousel render funnels through here, so
+        // this is the single point that pulls in the Swiper library. Registered
+        // (not enqueued) in Modules.php, so pages without a carousel never load
+        // it. Guarded for non-WP/REST contexts.
+        if (function_exists('wp_enqueue_script')) {
+            wp_enqueue_style('divi-torque-lite-swiper');
+            wp_enqueue_script('divi-torque-lite-swiper');
+        }
+
         $val    = function ($key, $fallback) use ($advanced) {
             return $advanced[$key]['desktop']['value'] ?? $fallback;
         };

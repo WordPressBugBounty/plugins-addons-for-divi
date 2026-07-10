@@ -7,7 +7,7 @@ class DTQ_Number extends Divi_Torque_Lite_Module
 
 	public function init()
 	{
-		$this->name      = esc_html__('Number Counter', 'addons-for-divi');
+		$this->name      = esc_html__('Animated Counter', 'addons-for-divi');
 		$this->icon_path  	= $this->dtl_icon_path('number');
 		$this->settings_modal_toggles = array(
 			'general'  => array(

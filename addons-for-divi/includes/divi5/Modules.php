@@ -326,14 +326,19 @@ add_action(
             return file_exists($path) ? (string) filemtime($path) : DIVI_TORQUE_LITE_VERSION;
         };
 
-        // Swiper carousel library (front end).
-        wp_enqueue_style(
+        // Swiper carousel library (front end). Only *registered* here — the
+        // carousel modules enqueue it on demand from CarouselEngine when they
+        // actually render, so non-carousel pages never load the ~140KB bundle.
+        // The core frontend.js below stays global (it also drives accordions,
+        // tabs, modals, etc.) and references Swiper only inside its per-carousel
+        // loop, so it is safe to load without Swiper present.
+        wp_register_style(
             'divi-torque-lite-swiper',
             DIVI_TORQUE_LITE_ASSETS . 'libs/swiper/swiper-bundle.min.css',
             [],
             DIVI_TORQUE_LITE_VERSION
         );
-        wp_enqueue_script(
+        wp_register_script(
             'divi-torque-lite-swiper',
             DIVI_TORQUE_LITE_ASSETS . 'libs/swiper/swiper-bundle.min.js',
             [],
@@ -351,7 +356,7 @@ add_action(
         wp_enqueue_script(
             'divi-torque-lite-d5-frontend',
             $dist_url . 'frontend.js',
-            ['jquery', 'divi-torque-lite-swiper'],
+            ['jquery'],
             $ver('frontend.js'),
             true
         );

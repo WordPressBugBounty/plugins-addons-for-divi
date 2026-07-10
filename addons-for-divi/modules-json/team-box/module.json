@@ -3,8 +3,8 @@
   "d4Shortcode": "ba_advanced_team",
   "moduleClassName": "dtq_team_box",
   "moduleOrderClassName": "dtq_team_box",
-  "title": "Team Box",
-  "titles": "Team Boxes",
+  "title": "Team Member",
+  "titles": "Team Members",
   "moduleIcon": "divitorque/team-box",
   "category": "module",
   "attributes": {
@@ -195,6 +195,7 @@
         },
         "advanced": {
           "htmlAttributes": {},
+          "text": {},
           "contentOnHover": {
             "groupType": "group-item",
             "item": {

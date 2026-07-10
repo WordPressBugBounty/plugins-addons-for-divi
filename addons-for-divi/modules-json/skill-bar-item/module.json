@@ -28,6 +28,7 @@
         "meta": { "adminLabel": {} },
         "advanced": {
           "htmlAttributes": {},
+          "text": {},
           "useName": {
             "groupType": "group-item",
             "item": {

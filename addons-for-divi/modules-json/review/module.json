@@ -201,6 +201,7 @@
         },
         "advanced": {
           "htmlAttributes": {},
+          "text": {},
           "scale": {
             "groupType": "group-item",
             "item": {

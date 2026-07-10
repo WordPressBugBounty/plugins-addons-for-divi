@@ -42,6 +42,7 @@
         },
         "advanced": {
           "htmlAttributes": {},
+          "text": {},
           "animationType": {
             "groupType": "group-item",
             "item": {

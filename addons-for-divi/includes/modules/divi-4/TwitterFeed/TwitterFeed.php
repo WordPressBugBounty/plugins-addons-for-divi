@@ -7,7 +7,7 @@ class DTQ_Twitter_Feed extends Divi_Torque_Lite_Module
 	{
 
 		$this->vb_support = 'on';
-		$this->name       = esc_html__('Twitter Feed', 'addons-for-divi');
+		$this->name       = esc_html__('X (Twitter) Feed', 'addons-for-divi');
 		$this->slug       = 'ba_twitter_feed';
 
 		$this->icon_path  	= $this->dtl_icon_path('twitter');

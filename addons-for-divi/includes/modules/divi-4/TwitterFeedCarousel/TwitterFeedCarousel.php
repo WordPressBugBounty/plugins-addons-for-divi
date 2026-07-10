@@ -8,7 +8,7 @@ class DTQ_Twitter_Feed_Carousel extends Divi_Torque_Lite_Module
 
 		$this->vb_support = 'on';
 		$this->slug       = 'ba_twitter_feed_carousel';
-		$this->name       = esc_html__('Twitter Carousel', 'addons-for-divi');
+		$this->name       = esc_html__('X (Twitter) Carousel', 'addons-for-divi');
 
 		$this->icon_path  	= $this->dtl_icon_path('twitter');
 
