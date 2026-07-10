@@ -68,8 +68,22 @@ $dtl_d5_modules = array(
     'post_carousel'    => array('PostCarousel', '\\DiviTorqueLite\\Modules\\PostCarousel\\PostCarousel'),
 );
 
+// Honor Module Manager toggles: absent = enabled, 'disabled' = off,
+// *_item follows its parent. Read the option directly — plugin classes
+// aren't loaded yet at this point. When Pro is active it owns the saved
+// state (mirrors AdminHelper::get_modules()).
+$dtl_d5_saved = get_option(defined('DTP_VERSION') ? '_divitorque_modules' : '_divitorque_lite_modules', array());
+$dtl_d5_is_disabled = function ($slug) use ($dtl_d5_saved) {
+    $base = 'tab_item' === $slug ? 'tabs' : preg_replace('/_item$/', '', $slug);
+    $name = 'contact_form_7' === $base ? 'contact-form7' : str_replace('_', '-', $base);
+    return isset($dtl_d5_saved[$name]) && 'disabled' === $dtl_d5_saved[$name];
+};
+
 $dtl_d5_loaded = array();
 foreach ($dtl_d5_modules as $slug => $info) {
+    if ($dtl_d5_is_disabled($slug)) {
+        continue;
+    }
     $module_file = __DIR__ . '/modules/' . $info[0] . '/' . $info[0] . '.php';
     if (!file_exists($module_file)) {
         continue;

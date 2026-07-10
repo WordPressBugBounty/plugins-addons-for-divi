@@ -4,7 +4,7 @@ Tags: divi, divi builder, divi modules, page builder, divi theme
 Requires at least: 5.0
 Tested up to: 7.0
 Requires PHP: 7.4
-Stable tag: 4.7.1
+Stable tag: 4.8.0
 License: GPLv3
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 
@@ -116,6 +116,12 @@ No. Updates are backward compatible and won't break pages built with our modules
 4. Image Carousel
 
 == Changelog ==
+
+= Version 4.8.0 =
+* New: Completely redesigned dashboard — cleaner navigation, module icons, descriptions, demo and docs links (switch back anytime via "Switch to legacy dashboard" in the sidebar footer)
+* New: See exactly which pages use each module, right on the Modules screen
+* New: Accordion, Tabs, Modal Popup, Post Carousel, Table of Contents, Fancy Text, FAQ, and Breadcrumbs can now be toggled in the Module Manager
+* Fix: Disabling a module now actually removes it from the builder (both Divi 4 and Divi 5 — toggles previously didn't take effect)
 
 = Version 4.7.1 =
 * Improved: Carousel (Swiper) and counter libraries now load only on pages that actually use those modules, reducing script weight everywhere else.

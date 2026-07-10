@@ -1,0 +1,375 @@
+/**
+ * Divi Torque dashboard v2 — thin plugin styles on top of @plugpress/ui.
+ * Everything themes off the --pp-* tokens; keep this file small.
+ */
+
+/* ── wp-admin chrome fixes (our screens only — body gets .pp-scope) ── */
+body.pp-scope {
+    #wpcontent {
+        padding-left: 0;
+    }
+
+    #divitorque-root .wrap,
+    #divitorque-root {
+        margin: 0;
+    }
+}
+
+.divitorque-app {
+    min-height: calc(100vh - 32px);
+    background: var(--pp-canvas, #fafafa);
+}
+
+/* ── sidebar additions (AppNav is flat; we compose pp-nav ourselves) ── */
+.dt-brand__name {
+    font-weight: 600;
+    letter-spacing: -0.01em;
+}
+
+.dt-nav__group {
+    margin: 14px 10px 4px;
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    color: var(--pp-text-muted);
+
+    &:empty {
+        margin: 10px 0 0;
+        border-top: 1px solid var(--pp-border);
+    }
+}
+
+.dt-nav__footer {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    align-items: flex-start;
+}
+
+.dt-nav__footer-link {
+    background: none;
+    border: 0;
+    padding: 2px 0;
+    cursor: pointer;
+    font-size: 12px;
+    color: var(--pp-text-muted);
+    text-decoration: none;
+
+    &:hover {
+        color: var(--pp-text);
+    }
+}
+
+.dt-nav__legacy {
+    opacity: 0.8;
+}
+
+.dt-nav__upgrade {
+    width: 100%;
+    justify-content: center;
+}
+
+/* ── mesh module icon (ported from dt-website .modicon) ── */
+.dt-modicon {
+    width: 44px;
+    aspect-ratio: 1;
+    flex: 0 0 44px;
+    border-radius: 26%;
+    overflow: hidden;
+    display: grid;
+    place-items: center;
+    background:
+        radial-gradient(70% 65% at 26% 20%, var(--g1), transparent 60%),
+        radial-gradient(72% 70% at 82% 26%, var(--g2), transparent 60%),
+        radial-gradient(85% 85% at 55% 100%, var(--g3), transparent 62%),
+        radial-gradient(60% 50% at 32% 12%, rgba(255, 255, 255, 0.35), transparent 55%),
+        linear-gradient(150deg, var(--g1), var(--g2));
+
+    svg {
+        color: #fff;
+        display: block;
+        width: 56%;
+        height: 56%;
+    }
+}
+
+/* ── modules page ── */
+.dt-modfilters {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    justify-content: space-between;
+    margin: 4px 0 10px;
+
+    .pp-search {
+        flex: 1;
+        max-width: 340px;
+    }
+}
+
+.dt-modgrid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 12px;
+    margin-top: 14px;
+}
+
+.dt-modcard {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding: 14px;
+    background: var(--pp-surface);
+    border: 1px solid var(--pp-border);
+    border-radius: var(--pp-radius-lg, 10px);
+}
+
+.dt-modcard--locked {
+    opacity: 0.75;
+}
+
+.dt-modcard__main {
+    display: flex;
+    gap: 12px;
+    align-items: center;
+}
+
+.dt-modcard__text {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    min-width: 0;
+    flex: 1;
+}
+
+.dt-modcard__title {
+    display: inline-flex;
+    gap: 6px;
+    align-items: center;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+}
+
+.dt-modcard__desc {
+    font-size: 12px;
+    color: var(--pp-text-muted);
+    display: -webkit-box;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+.dt-modcard__meta {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    min-height: 20px;
+}
+
+.dt-modcard__usage {
+    background: none;
+    border: 0;
+    padding: 0;
+    cursor: pointer;
+}
+
+.dt-modcard__links {
+    display: inline-flex;
+    gap: 10px;
+    margin-left: auto;
+    font-size: 12px;
+
+    a {
+        color: var(--pp-text-muted);
+        text-decoration: none;
+
+        &:hover {
+            color: var(--pp-accent-text);
+        }
+    }
+}
+
+/* ── dashboard page ── */
+.pp-hero {
+    margin-bottom: 16px;
+}
+
+.pp-stat-grid {
+    margin-bottom: 16px;
+}
+
+.dt-callouts {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 12px;
+    margin-top: 16px;
+}
+
+/* ── form/page layout crumbs ── */
+.dt-settings-pane {
+    margin-top: 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+}
+
+.dt-inline-form {
+    display: flex;
+    gap: 8px;
+
+    .pp-control {
+        flex: 1;
+    }
+}
+
+.dt-form-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 12px 16px;
+}
+
+/* ── google reviews ── */
+.dt-places {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 12px;
+    margin-bottom: 16px;
+}
+
+.dt-place {
+    cursor: pointer;
+}
+
+.dt-place--active {
+    border-color: var(--pp-accent);
+    box-shadow: 0 0 0 1px var(--pp-accent);
+}
+
+.dt-place__meta {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+}
+
+.dt-review-author {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+
+    img {
+        border-radius: 50%;
+    }
+}
+
+/* ── dark mode ── */
+.dt-dm-layout {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 320px;
+    gap: 24px;
+    align-items: start;
+    margin-top: 16px;
+
+    @media (max-width: 960px) {
+        grid-template-columns: 1fr;
+    }
+
+    .dt-settings-pane {
+        margin-top: 0;
+    }
+}
+
+.dt-dm-preview {
+    position: sticky;
+    top: 46px;
+    border: 1px solid var(--pp-border);
+    border-radius: 10px;
+    overflow: hidden;
+    background: var(--pp-surface);
+
+    &__bar {
+        display: flex;
+        gap: 5px;
+        padding: 9px 12px;
+        border-bottom: 1px solid var(--pp-border);
+
+        i {
+            width: 9px;
+            height: 9px;
+            border-radius: 50%;
+            background: var(--pp-border);
+        }
+    }
+
+    &__body {
+        padding: 18px;
+        background: #fff;
+
+        h4 {
+            margin: 0 0 6px;
+        }
+
+        p {
+            margin: 0 0 8px;
+            font-size: 13px;
+        }
+    }
+}
+
+.dt-dm-presets {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    gap: 8px;
+}
+
+.dt-dm-preset {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 10px;
+    font-size: 12px;
+    background: var(--pp-surface);
+    border: 1px solid var(--pp-border);
+    border-radius: 8px;
+    cursor: pointer;
+
+    &--active {
+        border-color: var(--pp-accent);
+        box-shadow: 0 0 0 1px var(--pp-accent);
+    }
+
+    &__dots {
+        display: inline-flex;
+        gap: 2px;
+
+        i {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            border: 1px solid rgba(0, 0, 0, 0.12);
+        }
+    }
+}
+
+/* ── ai connection ── */
+.dt-ai-intro {
+    max-width: 62ch;
+    color: var(--pp-text-muted);
+    margin: 4px 0 8px;
+}
+
+.dt-ai-note {
+    font-size: 13px;
+    color: var(--pp-text-muted);
+    margin: 4px 0 8px;
+}
+
+/* ── foreign notice quarantine ── */
+.dt-foreign {
+    margin-bottom: 12px;
+
+    .dt-foreign__list .notice {
+        margin: 8px 0;
+    }
+}

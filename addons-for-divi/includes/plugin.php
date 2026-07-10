@@ -52,6 +52,10 @@ class PluginLoader
 
         AssetsManager::get_instance();
         RestApi::get_instance();
+        // Explicit require — composer classmaps includes/, and a stale map
+        // would silently skip a newly added class.
+        require_once DIVI_TORQUE_LITE_DIR . 'includes/module-usage.php';
+        Module_Usage::get_instance();
         Dashboard::get_instance();
 
         if (!get_option('divitorque_version')) {

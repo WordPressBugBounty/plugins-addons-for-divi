@@ -79,6 +79,38 @@ class ModulesManager
                 'child_directory' => $has_child ? $child_dir : '',
             ];
         }
+
+        // Native Divi 5-only free modules — no divi-4 directory, so the scan
+        // above can't find them. Same toggle option gates them; the D5 loader
+        // (includes/divi5/Modules.php) reads it too. Titles match the website
+        // catalog (assets/module-catalog.json).
+        $d5_only = [
+            'accordion'         => 'Accordion Pro',
+            'tabs'              => 'Tabs Pro',
+            'modal-popup'       => 'Modal Popup',
+            'post-carousel'     => 'Post Carousel',
+            'table-of-contents' => 'Table of Contents',
+            'fancy-text'        => 'Fancy Text',
+            'faq'               => 'FAQ',
+            'breadcrumbs'       => 'Breadcrumb Trail',
+        ];
+        foreach ($d5_only as $name => $title) {
+            if (!isset($this->discovered_modules[$name])) {
+                $this->discovered_modules[$name] = [
+                    'name'            => $name,
+                    'title'           => $title,
+                    'directory'       => '',
+                    'has_child'       => false,
+                    'child_directory' => '',
+                    'd5_only'         => true,
+                ];
+            }
+        }
+
+        // Website-catalog slug where it differs from the module name.
+        if (isset($this->discovered_modules['contact-form7'])) {
+            $this->discovered_modules['contact-form7']['catalog_slug'] = 'contact-form-7';
+        }
     }
 
     /**
@@ -148,8 +180,10 @@ class ModulesManager
         $saved_modules = AdminHelper::get_modules();
 
         foreach ($this->discovered_modules as $module_name => $module) {
-            // Check if module is enabled in database
-            if (!isset($saved_modules[$module_name])) {
+            // Skip disabled modules. (The old `isset` check was a no-op:
+            // AdminHelper::get_modules() merges defaults so every name is
+            // always set — disabled modules kept loading in D4.)
+            if (($saved_modules[$module_name] ?? $module_name) === 'disabled') {
                 continue;
             }
 

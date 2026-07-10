@@ -12,6 +12,13 @@ class Dashboard
     private $menu_slug = 'divitorque';
     private $capability = 'manage_options';
 
+    /**
+     * Dashboard UI mode. 'v2' (default) is the @plugpress/ui app under
+     * admin/; 'legacy' is the v1 SPA built by Mix into assets/admin. Legacy
+     * ships unchanged until its removal release.
+     */
+    const UI_OPTION = 'divitorque_lite_dashboard_ui';
+
     public static function get_instance()
     {
         if (!isset(self::$instance)) {
@@ -24,6 +31,24 @@ class Dashboard
     {
         add_action('admin_menu', [$this, 'add_menu']);
         add_action('admin_enqueue_scripts', [$this, 'admin_enqueue_scripts'], 100);
+        add_action('rest_api_init', [$this, 'register_switch_route']);
+        add_action('admin_init', [$this, 'handle_switch_link']);
+        add_filter('admin_body_class', [$this, 'body_class']);
+
+        if ($this->is_v2()) {
+            add_action('admin_notices', [$this, 'begin_notice_capture'], -9999);
+            add_action('admin_notices', [$this, 'end_notice_capture'], 9999);
+        }
+    }
+
+    public function is_v2()
+    {
+        return get_option(self::UI_OPTION, 'v2') !== 'legacy';
+    }
+
+    private function is_our_screen()
+    {
+        return isset($_GET['page']) && $_GET['page'] === $this->menu_slug && !AdminHelper::is_pro_installed(); // phpcs:ignore WordPress.Security.NonceVerification
     }
 
     public function add_menu()
@@ -66,21 +91,146 @@ class Dashboard
             [$this, 'render_app']
         );
 
-        // add_submenu_page(
-        //     $this->menu_slug,
-        //     __('Free vs Pro', 'divitorque'),
-        //     __('Free vs Pro', 'divitorque'),
-        //     $this->capability,
-        //     "{$this->menu_slug}&path=free-vs-pro",
-        //     [$this, 'render_app']
-        // );
+        if ($this->is_v2()) {
+            add_submenu_page(
+                $this->menu_slug,
+                __('Settings', 'divitorque'),
+                __('Settings', 'divitorque'),
+                $this->capability,
+                "{$this->menu_slug}&path=settings",
+                [$this, 'render_app']
+            );
+        }
     }
 
     public function render_app()
     {
+        if ($this->is_v2()) {
+            $this->enqueue_v2();
+            echo '<div id="divitorque-root"></div>';
+            return;
+        }
+
+        $this->render_try_v2_banner();
         $this->enqueue_scripts();
         echo '<div id="divitorque-root"></div>';
     }
+
+    /* ─── Dashboard v2 ─────────────────────────────────────────────── */
+
+    private function enqueue_v2()
+    {
+        $base = DIVI_TORQUE_LITE_URL . 'admin/build/';
+
+        wp_enqueue_style('divi-torque-lite-admin-v2', $base . 'index.css', [], DIVI_TORQUE_LITE_VERSION);
+
+        wp_enqueue_script(
+            'divi-torque-lite-admin-v2',
+            $base . 'index.js',
+            ['wp-api-fetch', 'wp-i18n'],
+            DIVI_TORQUE_LITE_VERSION,
+            true
+        );
+
+        wp_add_inline_script(
+            'divi-torque-lite-admin-v2',
+            'window.divitorqueData = ' . wp_json_encode($this->get_v2_data()) . ';',
+            'before'
+        );
+    }
+
+    private function get_v2_data()
+    {
+        return [
+            'root'        => esc_url_raw(get_rest_url()),
+            'nonce'       => wp_create_nonce('wp_rest'),
+            'ns'          => 'divitorque-lite/v1',
+            'version'     => DIVI_TORQUE_LITE_VERSION,
+            'adminUrl'    => esc_url_raw(admin_url()),
+            'isLite'      => true,
+            'docsUrl'     => 'https://divitorque.com/docs/',
+            'upgradeUrl'  => 'https://divitorque.com/pricing/?utm_source=divi-torque-lite&utm_medium=wp-admin&utm_campaign=upgrade-to-pro',
+            'rollbackUrl' => esc_url_raw(admin_url('admin.php?page=divitorque-rollback')),
+            'moduleInfo'  => ModulesManager::get_all_modules(),
+            'abilities'   => ['supported' => false],
+        ];
+    }
+
+    public function body_class($classes)
+    {
+        if ($this->is_v2() && $this->is_our_screen()) {
+            $classes .= ' pp-scope';
+        }
+        return $classes;
+    }
+
+    public function begin_notice_capture()
+    {
+        if (!$this->is_our_screen()) {
+            return;
+        }
+        ob_start();
+    }
+
+    public function end_notice_capture()
+    {
+        if (!$this->is_our_screen()) {
+            return;
+        }
+        $html = ob_get_clean();
+        echo '<div id="dtl-foreign-notices" style="display:none">' . $html . '</div>'; // phpcs:ignore WordPress.Security.EscapeOutput
+    }
+
+    /* ─── v1 ⇄ v2 switching ────────────────────────────────────────── */
+
+    public function register_switch_route()
+    {
+        register_rest_route('divitorque-lite/v1', '/switch_dashboard_ui', [
+            'methods'             => 'POST',
+            'callback'            => function ($request) {
+                $ui = $request->get_param('ui') === 'legacy' ? 'legacy' : 'v2';
+                update_option(self::UI_OPTION, $ui);
+                return rest_ensure_response(['ui' => $ui]);
+            },
+            'permission_callback' => function () {
+                return current_user_can($this->capability);
+            },
+        ]);
+    }
+
+    /** Nonce link on the legacy banner: admin.php?page=divitorque&dtl_ui=v2 */
+    public function handle_switch_link()
+    {
+        if (!isset($_GET['dtl_ui']) || !$this->is_our_screen()) {
+            return;
+        }
+        if (!current_user_can($this->capability)) {
+            return;
+        }
+        check_admin_referer('dtl_switch_ui');
+
+        update_option(self::UI_OPTION, $_GET['dtl_ui'] === 'legacy' ? 'legacy' : 'v2');
+        wp_safe_redirect(admin_url('admin.php?page=' . $this->menu_slug));
+        exit;
+    }
+
+    private function render_try_v2_banner()
+    {
+        $url = wp_nonce_url(admin_url('admin.php?page=' . $this->menu_slug . '&dtl_ui=v2'), 'dtl_switch_ui');
+        ?>
+        <div class="dtl-try-v2" style="margin:16px 20px 0 0;padding:12px 16px;display:flex;align-items:center;gap:12px;background:#fff;border:1px solid #dcdcde;border-left:4px solid #3979ff;border-radius:4px;">
+            <span style="flex:1;">
+                <strong><?php esc_html_e('The new Divi Torque dashboard is here.', 'divitorque'); ?></strong>
+                <?php esc_html_e('Cleaner, faster, and where new features land first. This legacy dashboard will be retired in an upcoming release.', 'divitorque'); ?>
+            </span>
+            <a class="button button-primary" href="<?php echo esc_url($url); ?>">
+                <?php esc_html_e('Try the new dashboard', 'divitorque'); ?>
+            </a>
+        </div>
+        <?php
+    }
+
+    /* ─── Legacy v1 enqueue — unchanged ────────────────────────────── */
 
     public function enqueue_scripts()
     {
@@ -154,10 +304,5 @@ class Dashboard
             'wp-data',
             'wp-dom-ready',
         ];
-    }
-
-    private function icon_url()
-    {
-        return 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAiIGhlaWdodD0iMjAiIHZpZXdCb3g9IjAgMCA1MDAgNTAwIiBmaWxsPSJub25lIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPjxwYXRoIGQ9Ik0yNTAgMEMzODguMDcxIDAgNTAwIDExMS45MjkgNTAwIDI1MEM1MDAgMzg4LjA3MSAzODguMDcxIDUwMCAyNTAgNTAwQzExMS45MjkgNTAwIDAgMzg4LjA3MSAwIDI1MEMwIDExMS45MjkgMTExLjkyOSAwIDI1MCAwWk0yNDguMTA5IDExMEMyMTkuOTUyIDExMCAxOTQuMDA0IDExOC4xNTUgMTcxLjkyIDEzMS43NDdDMTQ3LjA3NiAxNDcuNTE0IDEyNy4yIDE3MC4zNDkgMTE2LjE1OCAxOTcuNTMzQzExNC41MDIgMjAyLjQyNiAxMTEuNzQxIDIxMC41ODIgMTEwLjA4NSAyMTYuNTYyQzEwOS41MzMgMjE5LjI4MSAxMTEuNzQxIDIyMS45OTkgMTE0LjUwMiAyMjIuNTQzQzExNy44MTUgMjIzLjA4NyAxMjAuNTc1IDIyMS40NTYgMTIxLjEyNyAyMTguNzM3QzEyMS42NzkgMjE2LjU2MyAxMjMuMzM1IDIxMi4yMTUgMTIzLjMzNiAyMTEuNjdDMTI0LjQ0IDIwOC45NTEgMTI3LjIgMjA3LjMyIDEyOS45NjEgMjA4LjQwN0MxMzIuMTY5IDIwOS40OTUgMTMzLjgyNSAyMTEuNjcgMTMzLjgyNSAyMTMuODQ1QzEzMy4yNzMgMjE0LjM4OCAxMzMuMjczIDIxNC4zODggMTMzLjI3MyAyMTQuOTMyQzEzMS4wNjUgMjIzLjA4NyAxMjguODU3IDIzMi44NzMgMTI4LjMwNSAyNDIuMTE2QzEyNy43NTMgMjQ0LjgzNCAxMjkuOTYxIDI0Ny41NTMgMTMzLjI3MyAyNDcuNTUzQzEzNi4wMzQgMjQ4LjA5NiAxMzguNzk0IDI0NS4zNzggMTM4Ljc5NCAyNDIuNjZDMTM4Ljc5NCAyNDIuMTE2IDEzOS4zNDcgMjM3LjIyMiAxMzkuMzQ3IDIzNi42NzlDMTQxLjAwMyAyMjYuODkzIDE0My43NjQgMjE3LjEwNyAxNDcuNjI4IDIwNy44NjRDMTQ4LjE4IDIwNi4yMzMgMTQ5LjI4NCAyMDUuMTQ2IDE0OS44MzYgMjAzLjUxNUMxNTAuOTQgMjAxLjM0IDE1NC4yNTMgMjAwLjI1MiAxNTcuMDE0IDIwMS4zNEgxNTcuNTY1QzE2MC4zMjYgMjAyLjQyNyAxNjEuNDMgMjA1LjE0NiAxNjAuMzI2IDIwNy44NjRDMTU5Ljc3NCAyMDguNDA5IDE1Ni40NjEgMjE0LjM4OSAxNTQuMjUzIDIyMy42MzFDMTUzLjE0OSAyMjYuMzQ5IDE1NS4zNTggMjI5LjYxMiAxNTguNjcgMjMwLjE1NUMxNjEuNDMgMjMwLjY5OSAxNjMuNjM5IDIyOS4wNjggMTY0Ljc0MyAyMjYuMzVDMTY2Ljk1MSAyMTkuMjgyIDE3MC4yNjMgMjEyLjIxNCAxNzAuODE1IDIxMS4xMjZDMTc4LjU0NSAxOTUuOTAzIDE5MC42OTEgMTgzLjM5OCAyMDUuNTk4IDE3NS4yNDJDMjE3Ljc0NCAxNjguMTc0IDIzMi4wOTkgMTY0LjM2OSAyNDcuNTU4IDE2NC4zNjlDMjk1LjU5IDE2NC4zNjkgMzM0LjIzNyAyMDIuNDI3IDMzNC4yMzcgMjQ5LjcyOEMzMzQuMjM3IDI5My4yMjIgMzAxLjY2MyAzMjguNTYyIDI1OS43MDQgMzM0LjU0M1YyNDEuMDI4QzI1OS43MDQgMjI1LjgwNSAyNDcuNTU3IDIxMy44NDUgMjMyLjA5OSAyMTMuODQ1QzIxNi42NCAyMTMuODQ1IDIwNC40OTQgMjI1LjgwNSAyMDQuNDk0IDI0MS4wMjhWMzYyLjgxNUMyMDQuNDk0IDM3OC4wMzggMjE2LjY0IDM5MCAyMzIuMDk5IDM5MEgyNDcuNTU4QzMyNS45NTUgMzkwIDM5MCAzMjcuNDc1IDM5MCAyNTAuMjcxQzM5MCAxNzMuMDY4IDMyNi41MDcgMTEwIDI0OC4xMDkgMTEwWiIgZmlsbD0iI2E3YWFhZCIvPjwvc3ZnPg==';
     }
 }
