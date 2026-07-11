@@ -14,12 +14,66 @@ if (!defined('ABSPATH')) {
     exit;
 }
 
+if (!function_exists('divitorque_lite_d5_interface_path')) {
+    /**
+     * First existing Divi 5 DependencyInterface path, or '' if none.
+     *
+     * Checks the file ON DISK in every place Divi 5 can live — the Divi theme
+     * and the Divi Builder plugin. A disk check is load-order independent:
+     * plugins load alphabetically, so `addons-for-divi` runs before
+     * `divi-builder`, and a class_exists() probe would still be false at this
+     * point on a Builder-plugin site.
+     *
+     * @return string
+     */
+    function divitorque_lite_d5_interface_path() {
+        $rel   = 'includes/builder-5/server/Framework/DependencyManagement/Interfaces/DependencyInterface.php';
+        $paths = array(ABSPATH . 'wp-content/themes/Divi/' . $rel);
+        if (defined('WP_PLUGIN_DIR')) {
+            $paths[] = WP_PLUGIN_DIR . '/divi-builder/' . $rel;
+        }
+        foreach ($paths as $path) {
+            if (file_exists($path)) {
+                return $path;
+            }
+        }
+        return '';
+    }
+}
+
+if (!function_exists('divitorque_lite_d5_enabled')) {
+    /**
+     * Whether D5 code should run for this request.
+     *
+     * Default: enabled automatically when Divi 5 is detected on disk. Optional
+     * override: `define('DIVITORQUE_LITE_D5', true);` to force-enable.
+     *
+     * @return bool
+     */
+    function divitorque_lite_d5_enabled() {
+        if (defined('DIVITORQUE_LITE_D5') && DIVITORQUE_LITE_D5) {
+            return true;
+        }
+        if ('' !== divitorque_lite_d5_interface_path()) {
+            return true;
+        }
+        // Fallback: framework already loaded from a non-standard path.
+        return class_exists('\ET\Builder\VisualBuilder\Assets\PackageBuildManager');
+    }
+}
+
 // Auto-detect Divi 5. Without it, exit silently — D4 modules keep working.
-$dtl_d5_dependency_interface = ABSPATH . 'wp-content/themes/Divi/includes/builder-5/server/Framework/DependencyManagement/Interfaces/DependencyInterface.php';
-if (!file_exists($dtl_d5_dependency_interface)) {
+if (!divitorque_lite_d5_enabled()) {
     return;
 }
-require_once $dtl_d5_dependency_interface;
+
+// Load the DependencyInterface before any module class (which implements it)
+// is required — Divi's autoloader may not be active this early. When D5 was
+// detected only via the class fallback, rely on Divi's autoloader instead.
+$dtl_d5_dependency_interface = divitorque_lite_d5_interface_path();
+if ('' !== $dtl_d5_dependency_interface && file_exists($dtl_d5_dependency_interface)) {
+    require_once $dtl_d5_dependency_interface;
+}
 
 // slug => [ folder, fully-qualified class ]
 $dtl_d5_modules = array(
@@ -93,15 +147,39 @@ foreach ($dtl_d5_modules as $slug => $info) {
 }
 
 // Register modules in the D5 dependency tree.
-add_action(
-    'divi_module_library_modules_dependency_tree',
-    function ($dependency_tree) use ($dtl_d5_loaded) {
-        foreach ($dtl_d5_loaded as $class) {
+//
+// Registered as a static-method array callback (not a closure) on purpose:
+// Divi's D5 Readiness scan (PluginHooksCheck::_get_plugin_name()) attributes
+// hooks to plugins via Reflection, which cannot resolve closures — with a
+// closure here the plugin gets no credit for its D5 hooks and is wrongly
+// flagged as "using the Divi 4 framework".
+final class DTL_Divi5_Registrar {
+    /**
+     * Fully-qualified class names of the loaded D5 modules.
+     *
+     * @var string[]
+     */
+    public static $modules = array();
+
+    /**
+     * Add every loaded D5 module to Divi's dependency tree.
+     *
+     * @param object $dependency_tree Divi's DependencyTree instance.
+     */
+    public static function register_dependency_tree($dependency_tree) {
+        foreach (self::$modules as $class) {
             if (class_exists($class)) {
                 $dependency_tree->add_dependency(new $class());
             }
         }
     }
+}
+
+DTL_Divi5_Registrar::$modules = $dtl_d5_loaded;
+
+add_action(
+    'divi_module_library_modules_dependency_tree',
+    array('DTL_Divi5_Registrar', 'register_dependency_tree')
 );
 
 // Tell Divi 5 where each module's conversion-outline.json lives.
@@ -167,161 +245,162 @@ add_filter(
 
 /**
  * Enqueue D5 Visual Builder bundle inside the VB iframe.
+ *
+ * Named function (not a closure) on purpose — like DTL_Divi5_Registrar above,
+ * Divi's D5 Readiness scan can only attribute named/array callbacks to a
+ * plugin via Reflection.
  */
-add_action(
-    'divi_visual_builder_assets_before_enqueue_scripts',
-    function () {
-        if (!class_exists('\ET\Builder\VisualBuilder\Assets\PackageBuildManager')) {
-            return;
-        }
-
-        $dist_url = DIVI_TORQUE_LITE_DIST_URL . 'divi5/';
-        $dist_dir = DIVI_TORQUE_LITE_DIR . 'dist/divi5/';
-
-        // Cache-bust on the built file's mtime so a rebuilt bundle always
-        // loads in the builder (the static plugin version never changes
-        // between builds, which otherwise serves stale cached JS).
-        $ver = function ($file) use ($dist_dir) {
-            $path = $dist_dir . $file;
-            return file_exists($path) ? (string) filemtime($path) : DIVI_TORQUE_LITE_VERSION;
-        };
-
-        wp_enqueue_script('wp-api-fetch');
-
-        // Swiper carousel library — loaded in the VB iframe so carousel
-        // modules render a live preview (registered before the bundle so the
-        // bundle can depend on it).
-        \ET\Builder\VisualBuilder\Assets\PackageBuildManager::register_package_build([
-            'name'    => 'divi-torque-lite-swiper-vb-script',
-            'version' => DIVI_TORQUE_LITE_VERSION,
-            'script'  => [
-                'src'                => DIVI_TORQUE_LITE_ASSETS . 'libs/swiper/swiper-bundle.min.js',
-                'deps'               => [],
-                'enqueue_top_window' => false,
-                'enqueue_app_window' => true,
-            ],
-        ]);
-
-        \ET\Builder\VisualBuilder\Assets\PackageBuildManager::register_package_build([
-            'name'    => 'divi-torque-lite-swiper-vb-style',
-            'version' => DIVI_TORQUE_LITE_VERSION,
-            'style'   => [
-                'src'                => DIVI_TORQUE_LITE_ASSETS . 'libs/swiper/swiper-bundle.min.css',
-                'deps'               => [],
-                'enqueue_top_window' => false,
-                'enqueue_app_window' => true,
-            ],
-        ]);
-
-        // Popper + Tippy — loaded in the VB iframe so the Logo Grid tooltips
-        // render a live preview. Order matters: tippy v6 requires the Popper
-        // global, so popper is registered (and depended on) first.
-        \ET\Builder\VisualBuilder\Assets\PackageBuildManager::register_package_build([
-            'name'    => 'divi-torque-lite-popper-vb-script',
-            'version' => DIVI_TORQUE_LITE_VERSION,
-            'script'  => [
-                'src'                => DIVI_TORQUE_LITE_ASSETS . 'libs/popper/popper.min.js',
-                'deps'               => [],
-                'enqueue_top_window' => false,
-                'enqueue_app_window' => true,
-            ],
-        ]);
-
-        \ET\Builder\VisualBuilder\Assets\PackageBuildManager::register_package_build([
-            'name'    => 'divi-torque-lite-tippy-vb-script',
-            'version' => DIVI_TORQUE_LITE_VERSION,
-            'script'  => [
-                'src'                => DIVI_TORQUE_LITE_ASSETS . 'libs/tippy/tippy.min.js',
-                'deps'               => ['divi-torque-lite-popper-vb-script'],
-                'enqueue_top_window' => false,
-                'enqueue_app_window' => true,
-            ],
-        ]);
-
-        \ET\Builder\VisualBuilder\Assets\PackageBuildManager::register_package_build([
-            'name'    => 'divi-torque-lite-tippy-vb-style',
-            'version' => DIVI_TORQUE_LITE_VERSION,
-            'style'   => [
-                'src'                => DIVI_TORQUE_LITE_ASSETS . 'libs/tippy/tippy.min.css',
-                'deps'               => [],
-                'enqueue_top_window' => false,
-                'enqueue_app_window' => true,
-            ],
-        ]);
-
-        // Counter-up library (vanilla, window.counterUp) — loaded in the VB
-        // iframe so the Number Counter module renders a live count-up preview
-        // (registered before the bundle so the bundle can depend on it).
-        \ET\Builder\VisualBuilder\Assets\PackageBuildManager::register_package_build([
-            'name'    => 'divi-torque-lite-counter-up-vb-script',
-            'version' => DIVI_TORQUE_LITE_VERSION,
-            'script'  => [
-                'src'                => DIVI_TORQUE_LITE_ASSETS . 'libs/counter-up/counter-up.min.js',
-                'deps'               => [],
-                'enqueue_top_window' => false,
-                'enqueue_app_window' => true,
-            ],
-        ]);
-
-        // Animated Text's "typed" engine is now a self-contained vanilla
-        // implementation bundled in the D5 bundle (src/divi5/modules/
-        // animated-text/typing.js) — no external typed.js library, so nothing
-        // extra to load in the VB (the old window.Typed UMD global was fragile:
-        // an AMD/module environment made it register elsewhere and never set
-        // the global, so the preview silently never typed).
-        \ET\Builder\VisualBuilder\Assets\PackageBuildManager::register_package_build([
-            'name'    => 'divi-torque-lite-d5-bundle-script',
-            'version' => $ver('bundle.js'),
-            'script'  => [
-                'src'                => $dist_url . 'bundle.js',
-                'deps'               => ['divi-module-library', 'divi-vendor-wp-hooks', 'divi-torque-lite-swiper-vb-script', 'divi-torque-lite-tippy-vb-script', 'divi-torque-lite-counter-up-vb-script'],
-                'enqueue_top_window' => false,
-                'enqueue_app_window' => true,
-            ],
-        ]);
-
-        \ET\Builder\VisualBuilder\Assets\PackageBuildManager::register_package_build([
-            'name'    => 'divi-torque-lite-d5-bundle-style',
-            'version' => $ver('bundle.css'),
-            'style'   => [
-                'src'                => $dist_url . 'bundle.css',
-                'deps'               => [],
-                'enqueue_top_window' => false,
-                'enqueue_app_window' => true,
-            ],
-        ]);
-
-        // Branded "Divi Torque" inserter folder grouping all our modules.
-        // Two scripts with opposite footer timing (see custom-folder docs):
-        //  - register: in the footer, after divi-module-library initialises.
-        //  - assign:   before the footer, so the moduleMapping filter fires
-        //              before modules are registered.
-        \ET\Builder\VisualBuilder\Assets\PackageBuildManager::register_package_build([
-            'name'    => 'divi-torque-lite-folder-assign',
-            'version' => DIVI_TORQUE_LITE_VERSION,
-            'script'  => [
-                'src'                => DIVI_TORQUE_LITE_ASSETS . 'divi5/folder-assign.js',
-                'deps'               => ['lodash', 'divi-vendor-wp-hooks'],
-                'enqueue_top_window' => false,
-                'enqueue_app_window' => true,
-                'args'               => ['in_footer' => false],
-            ],
-        ]);
-
-        \ET\Builder\VisualBuilder\Assets\PackageBuildManager::register_package_build([
-            'name'    => 'divi-torque-lite-folder-register',
-            'version' => DIVI_TORQUE_LITE_VERSION,
-            'script'  => [
-                'src'                => DIVI_TORQUE_LITE_ASSETS . 'divi5/folder-register.js',
-                'deps'               => ['divi-module-library'],
-                'enqueue_top_window' => false,
-                'enqueue_app_window' => true,
-                'args'               => ['in_footer' => true],
-            ],
-        ]);
-
+function dtl_divi5_enqueue_vb_assets() {
+    if (!class_exists('\ET\Builder\VisualBuilder\Assets\PackageBuildManager')) {
+        return;
     }
-);
+
+    $dist_url = DIVI_TORQUE_LITE_DIST_URL . 'divi5/';
+    $dist_dir = DIVI_TORQUE_LITE_DIR . 'dist/divi5/';
+
+    // Cache-bust on the built file's mtime so a rebuilt bundle always
+    // loads in the builder (the static plugin version never changes
+    // between builds, which otherwise serves stale cached JS).
+    $ver = function ($file) use ($dist_dir) {
+        $path = $dist_dir . $file;
+        return file_exists($path) ? (string) filemtime($path) : DIVI_TORQUE_LITE_VERSION;
+    };
+
+    wp_enqueue_script('wp-api-fetch');
+
+    // Swiper carousel library — loaded in the VB iframe so carousel
+    // modules render a live preview (registered before the bundle so the
+    // bundle can depend on it).
+    \ET\Builder\VisualBuilder\Assets\PackageBuildManager::register_package_build([
+        'name'    => 'divi-torque-lite-swiper-vb-script',
+        'version' => DIVI_TORQUE_LITE_VERSION,
+        'script'  => [
+            'src'                => DIVI_TORQUE_LITE_ASSETS . 'libs/swiper/swiper-bundle.min.js',
+            'deps'               => [],
+            'enqueue_top_window' => false,
+            'enqueue_app_window' => true,
+        ],
+    ]);
+
+    \ET\Builder\VisualBuilder\Assets\PackageBuildManager::register_package_build([
+        'name'    => 'divi-torque-lite-swiper-vb-style',
+        'version' => DIVI_TORQUE_LITE_VERSION,
+        'style'   => [
+            'src'                => DIVI_TORQUE_LITE_ASSETS . 'libs/swiper/swiper-bundle.min.css',
+            'deps'               => [],
+            'enqueue_top_window' => false,
+            'enqueue_app_window' => true,
+        ],
+    ]);
+
+    // Popper + Tippy — loaded in the VB iframe so the Logo Grid tooltips
+    // render a live preview. Order matters: tippy v6 requires the Popper
+    // global, so popper is registered (and depended on) first.
+    \ET\Builder\VisualBuilder\Assets\PackageBuildManager::register_package_build([
+        'name'    => 'divi-torque-lite-popper-vb-script',
+        'version' => DIVI_TORQUE_LITE_VERSION,
+        'script'  => [
+            'src'                => DIVI_TORQUE_LITE_ASSETS . 'libs/popper/popper.min.js',
+            'deps'               => [],
+            'enqueue_top_window' => false,
+            'enqueue_app_window' => true,
+        ],
+    ]);
+
+    \ET\Builder\VisualBuilder\Assets\PackageBuildManager::register_package_build([
+        'name'    => 'divi-torque-lite-tippy-vb-script',
+        'version' => DIVI_TORQUE_LITE_VERSION,
+        'script'  => [
+            'src'                => DIVI_TORQUE_LITE_ASSETS . 'libs/tippy/tippy.min.js',
+            'deps'               => ['divi-torque-lite-popper-vb-script'],
+            'enqueue_top_window' => false,
+            'enqueue_app_window' => true,
+        ],
+    ]);
+
+    \ET\Builder\VisualBuilder\Assets\PackageBuildManager::register_package_build([
+        'name'    => 'divi-torque-lite-tippy-vb-style',
+        'version' => DIVI_TORQUE_LITE_VERSION,
+        'style'   => [
+            'src'                => DIVI_TORQUE_LITE_ASSETS . 'libs/tippy/tippy.min.css',
+            'deps'               => [],
+            'enqueue_top_window' => false,
+            'enqueue_app_window' => true,
+        ],
+    ]);
+
+    // Counter-up library (vanilla, window.counterUp) — loaded in the VB
+    // iframe so the Number Counter module renders a live count-up preview
+    // (registered before the bundle so the bundle can depend on it).
+    \ET\Builder\VisualBuilder\Assets\PackageBuildManager::register_package_build([
+        'name'    => 'divi-torque-lite-counter-up-vb-script',
+        'version' => DIVI_TORQUE_LITE_VERSION,
+        'script'  => [
+            'src'                => DIVI_TORQUE_LITE_ASSETS . 'libs/counter-up/counter-up.min.js',
+            'deps'               => [],
+            'enqueue_top_window' => false,
+            'enqueue_app_window' => true,
+        ],
+    ]);
+
+    // Animated Text's "typed" engine is now a self-contained vanilla
+    // implementation bundled in the D5 bundle (src/divi5/modules/
+    // animated-text/typing.js) — no external typed.js library, so nothing
+    // extra to load in the VB (the old window.Typed UMD global was fragile:
+    // an AMD/module environment made it register elsewhere and never set
+    // the global, so the preview silently never typed).
+    \ET\Builder\VisualBuilder\Assets\PackageBuildManager::register_package_build([
+        'name'    => 'divi-torque-lite-d5-bundle-script',
+        'version' => $ver('bundle.js'),
+        'script'  => [
+            'src'                => $dist_url . 'bundle.js',
+            'deps'               => ['divi-module-library', 'divi-vendor-wp-hooks', 'divi-torque-lite-swiper-vb-script', 'divi-torque-lite-tippy-vb-script', 'divi-torque-lite-counter-up-vb-script'],
+            'enqueue_top_window' => false,
+            'enqueue_app_window' => true,
+        ],
+    ]);
+
+    \ET\Builder\VisualBuilder\Assets\PackageBuildManager::register_package_build([
+        'name'    => 'divi-torque-lite-d5-bundle-style',
+        'version' => $ver('bundle.css'),
+        'style'   => [
+            'src'                => $dist_url . 'bundle.css',
+            'deps'               => [],
+            'enqueue_top_window' => false,
+            'enqueue_app_window' => true,
+        ],
+    ]);
+
+    // Branded "Divi Torque" inserter folder grouping all our modules.
+    // Two scripts with opposite footer timing (see custom-folder docs):
+    //  - register: in the footer, after divi-module-library initialises.
+    //  - assign:   before the footer, so the moduleMapping filter fires
+    //              before modules are registered.
+    \ET\Builder\VisualBuilder\Assets\PackageBuildManager::register_package_build([
+        'name'    => 'divi-torque-lite-folder-assign',
+        'version' => DIVI_TORQUE_LITE_VERSION,
+        'script'  => [
+            'src'                => DIVI_TORQUE_LITE_ASSETS . 'divi5/folder-assign.js',
+            'deps'               => ['lodash', 'divi-vendor-wp-hooks'],
+            'enqueue_top_window' => false,
+            'enqueue_app_window' => true,
+            'args'               => ['in_footer' => false],
+        ],
+    ]);
+
+    \ET\Builder\VisualBuilder\Assets\PackageBuildManager::register_package_build([
+        'name'    => 'divi-torque-lite-folder-register',
+        'version' => DIVI_TORQUE_LITE_VERSION,
+        'script'  => [
+            'src'                => DIVI_TORQUE_LITE_ASSETS . 'divi5/folder-register.js',
+            'deps'               => ['divi-module-library'],
+            'enqueue_top_window' => false,
+            'enqueue_app_window' => true,
+            'args'               => ['in_footer' => true],
+        ],
+    ]);
+}
+add_action('divi_visual_builder_assets_before_enqueue_scripts', 'dtl_divi5_enqueue_vb_assets');
 
 /**
  * Frontend assets for D5 modules — gated, fires only on non-admin requests.

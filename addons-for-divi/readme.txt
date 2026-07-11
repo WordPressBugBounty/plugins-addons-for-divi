@@ -4,7 +4,7 @@ Tags: divi, divi builder, divi modules, page builder, divi theme
 Requires at least: 5.0
 Tested up to: 7.0
 Requires PHP: 7.4
-Stable tag: 4.8.0
+Stable tag: 4.8.1
 License: GPLv3
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 
@@ -116,6 +116,9 @@ No. Updates are backward compatible and won't break pages built with our modules
 4. Image Carousel
 
 == Changelog ==
+
+= Version 4.8.1 =
+* Fix: Divi 5's readiness check no longer wrongly lists Divi Torque Lite as a "Divi 4 framework" plugin — its Divi 5 modules are now correctly detected whether Divi 5 runs from the Divi theme or the Divi Builder plugin
 
 = Version 4.8.0 =
 * New: Completely redesigned dashboard — cleaner navigation, module icons, descriptions, demo and docs links (switch back anytime via "Switch to legacy dashboard" in the sidebar footer)
