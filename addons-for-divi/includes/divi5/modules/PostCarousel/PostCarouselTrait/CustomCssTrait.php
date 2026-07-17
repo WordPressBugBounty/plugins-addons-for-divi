@@ -16,7 +16,7 @@ trait CustomCssTrait {
 	 */
 	public static function custom_css_fields() {
 		$module_metadata = \WP_Block_Type_Registry::get_instance()
-			->get_registered( 'dbp/post-carousel' );
+			->get_registered( 'divitorque/post-carousel' );
 
 		return $module_metadata->customCssFields ?? array();
 	}

@@ -1,10 +1,10 @@
 === Divi Torque Lite - Divi Modules for the Divi Builder & Theme ===
 Contributors: divipeople, plugpressco, badhonrocks
 Tags: divi, divi builder, divi modules, page builder, divi theme
-Requires at least: 5.0
+Requires at least: 7.0
 Tested up to: 7.0
 Requires PHP: 7.4
-Stable tag: 4.8.1
+Stable tag: 4.8.2
 License: GPLv3
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 
@@ -116,6 +116,12 @@ No. Updates are backward compatible and won't break pages built with our modules
 4. Image Carousel
 
 == Changelog ==
+
+= Version 4.8.2 =
+* Fix: News Ticker (and any other module toggled in the dashboard) no longer disappears from the Divi 5 builder when Divi Torque Pro is active — module on/off settings are now read from the right place regardless of plugin load order, and both plugins keep them in sync
+* Fix: Video Modal no longer navigates to YouTube/Vimeo alongside opening the popup when the popup script loads late (deferred or delayed JavaScript optimization)
+* Tweak: The module usage panel now labels Divi Library / Theme Builder layouts, reusable blocks and drafts, so it's clear where a "used" module is actually referenced
+* Tweak: WordPress 7.0 is now the minimum supported version
 
 = Version 4.8.1 =
 * Fix: Divi 5's readiness check no longer wrongly lists Divi Torque Lite as a "Divi 4 framework" plugin — its Divi 5 modules are now correctly detected whether Divi 5 runs from the Divi theme or the Divi Builder plugin

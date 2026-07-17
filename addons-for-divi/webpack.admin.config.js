@@ -19,7 +19,11 @@ module.exports = {
 
     output: {
         path: path.resolve(__dirname, 'admin/build'),
+        // Entry name stays stable (index.js) for the PHP enqueue; any lazy
+        // code-split chunks get a content hash so a rebuild never lets a stale
+        // cached chunk load against a fresh runtime.
         filename: '[name].js',
+        chunkFilename: '[name].[contenthash].js',
         clean: true,
     },
 

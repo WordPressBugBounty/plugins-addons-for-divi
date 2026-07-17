@@ -158,8 +158,12 @@ trait RenderCallbackTrait
             $video_link = str_replace('youtu.be/', 'youtube.com/watch?v=', $video_link);
         }
 
+        // The trigger must not be a navigating link: the video URL lives in
+        // data-video-url and frontend.js preventDefaults the click, so the
+        // browser can never follow it to YouTube/Vimeo if the popup script
+        // hasn't bound yet (deferred/optimized JS, load races).
         $children = sprintf(
-            '<div class="dtq-module dtq-video-popup">%1$s<div class="dtq-video-popup-wrap"><a class="dtq-video-popup-trigger dtq-popup-%2$s" data-order="%3$s" data-type="%2$s" href="%4$s"%5$s>%6$s%7$s</a></div>%8$s</div>',
+            '<div class="dtq-module dtq-video-popup">%1$s<div class="dtq-video-popup-wrap"><a class="dtq-video-popup-trigger dtq-popup-%2$s" role="button" data-order="%3$s" data-type="%2$s" data-video-url="%4$s" href="#"%5$s>%6$s%7$s</a></div>%8$s</div>',
             $inline_modal,
             esc_attr($type),
             esc_attr($order_number),

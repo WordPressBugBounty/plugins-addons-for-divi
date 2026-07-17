@@ -43,31 +43,31 @@ trait ModuleStylesTrait
 
         $overlay = $val('overlayColor');
         if ($overlay) {
-            $push($order_class . ' .dtq-modal__overlay', sprintf('background-color: %1$s;', $overlay));
+            $push($order_class . ' .dtq-modalpopup__overlay', sprintf('background-color: %1$s;', $overlay));
         }
         $blur = $val('overlayBlur');
         if ($blur) {
-            $push($order_class . ' .dtq-modal__overlay', sprintf('-webkit-backdrop-filter: blur(%1$s); backdrop-filter: blur(%1$s);', $blur));
+            $push($order_class . ' .dtq-modalpopup__overlay', sprintf('-webkit-backdrop-filter: blur(%1$s); backdrop-filter: blur(%1$s);', $blur));
         }
         $close_color = $val('closeColor');
         if ($close_color) {
-            $push($order_class . ' .dtq-modal__close', sprintf('color: %1$s;', $close_color));
+            $push($order_class . ' .dtq-modalpopup__close', sprintf('color: %1$s;', $close_color));
         }
         $close_size = $val('closeSize');
         if ($close_size) {
-            $push($order_class . ' .dtq-modal__close', sprintf('font-size: %1$s;', $close_size));
+            $push($order_class . ' .dtq-modalpopup__close', sprintf('font-size: %1$s;', $close_size));
         }
         $close_bg = $val('closeBg');
         if ($close_bg) {
-            $push($order_class . ' .dtq-modal__close', sprintf('background-color: %1$s;', $close_bg));
+            $push($order_class . ' .dtq-modalpopup__close', sprintf('background-color: %1$s;', $close_bg));
         }
         $max_width = $val('maxWidth');
         if ($max_width) {
-            $push($order_class . ' .dtq-modal__box', sprintf('max-width: %1$s;', $max_width));
+            $push($order_class . ' .dtq-modalpopup__box', sprintf('max-width: %1$s;', $max_width));
         }
         $dur = $val('animDuration');
         if ($dur) {
-            $push($order_class, sprintf('--dtq-modal-dur: %1$s;', $dur));
+            $push($order_class, sprintf('--dtq-modalpopup-dur: %1$s;', $dur));
         }
 
         return $styles;

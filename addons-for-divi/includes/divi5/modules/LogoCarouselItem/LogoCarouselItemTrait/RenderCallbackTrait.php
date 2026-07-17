@@ -52,7 +52,7 @@ trait RenderCallbackTrait
             esc_attr($css_class),
             esc_attr($font),
             esc_attr($wt),
-            $glyph
+            esc_html($glyph)
         );
     }
 

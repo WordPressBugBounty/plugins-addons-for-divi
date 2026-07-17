@@ -90,9 +90,9 @@ trait RenderCallbackTrait
                 return '';
             }
 
-            $tag = $attrs['title']['decoration']['font']['font']['desktop']['value']['headingLevel'] ?? 'h2';
+            $tag = $attrs['title']['decoration']['font']['font']['desktop']['value']['headingLevel'] ?? 'h1';
             if (!in_array($tag, ['h1', 'h2', 'h3', 'h4', 'h5', 'h6'], true)) {
-                $tag = 'h2';
+                $tag = 'h1';
             }
 
             return sprintf(

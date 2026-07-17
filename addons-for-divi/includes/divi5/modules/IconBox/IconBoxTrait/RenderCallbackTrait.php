@@ -92,7 +92,7 @@ trait RenderCallbackTrait
 
         return sprintf(
             '<div class="dtq-iconbox__badge">%1$s</div>',
-            et_core_esc_previously($badge_text)
+            esc_html($badge_text)
         );
     }
 

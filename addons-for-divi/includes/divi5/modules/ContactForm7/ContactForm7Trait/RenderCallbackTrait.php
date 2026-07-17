@@ -124,6 +124,8 @@ trait RenderCallbackTrait
         // CF7 form.
         if ('' === $form_id || '0' === (string) $form_id) {
             $form = esc_html__('Please select a Contact Form 7.', 'addons-for-divi');
+        } elseif (!class_exists('WPCF7')) {
+            $form = esc_html__('Contact Form 7 is not active.', 'addons-for-divi');
         } else {
             $form = do_shortcode(sprintf('[contact-form-7 id="%1$s"]', esc_attr($form_id)));
         }

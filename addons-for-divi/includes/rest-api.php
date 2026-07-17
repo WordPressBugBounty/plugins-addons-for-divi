@@ -322,7 +322,10 @@ class RestApi
 
         // Category filter — comma-separated IDs OR slugs.
         if ('' !== $categories) {
-            $terms = array_filter(array_map('trim', explode(',', $categories)));
+            // array_values: array_filter preserves keys, and $terms[0] below
+            // must be the first *surviving* element (",5" would otherwise
+            // leave it at key 1 → undefined index + wrong branch).
+            $terms = array_values(array_filter(array_map('trim', explode(',', $categories))));
             if (!empty($terms)) {
                 if (ctype_digit((string) $terms[0])) {
                     $query_args['category__in'] = array_map('intval', $terms);
@@ -334,7 +337,7 @@ class RestApi
 
         // Custom taxonomy filter.
         if ('' !== $taxonomy && '' !== $taxonomy_terms) {
-            $terms = array_filter(array_map('trim', explode(',', $taxonomy_terms)));
+            $terms = array_values(array_filter(array_map('trim', explode(',', $taxonomy_terms))));
             if (!empty($terms)) {
                 $field = ctype_digit((string) $terms[0]) ? 'term_id' : 'slug';
                 $query_args['tax_query'][] = [
@@ -446,7 +449,29 @@ class RestApi
     public function save_common_settings(WP_REST_Request $request)
     {
         $modules = $request->get_param('modules_settings');
-        update_option('_divitorque_lite_modules', $modules);
+
+        // Normalize to the only shape readers understand — [name => name|'disabled'] —
+        // instead of persisting the raw request payload.
+        $clean = [];
+        foreach ((array) $modules as $name => $value) {
+            $name = sanitize_key($name);
+            if ('' === $name) {
+                continue;
+            }
+            $clean[$name] = ('disabled' === $value) ? 'disabled' : $name;
+        }
+
+        // Mirror the readers (AdminHelper::get_modules, divi5/Modules.php):
+        // when Pro is active both plugins share the _divitorque_modules option.
+        // Keep the lite option in sync too, so the loader reads consistent
+        // state even if Pro is deactivated later (the D5 loader falls back to
+        // _divitorque_lite_modules when Pro is inactive).
+        if (AdminHelper::is_pro_installed()) {
+            update_option('_divitorque_modules', $clean);
+            update_option('_divitorque_lite_modules', $clean);
+        } else {
+            update_option('_divitorque_lite_modules', $clean);
+        }
         return ['success' => true];
     }
 

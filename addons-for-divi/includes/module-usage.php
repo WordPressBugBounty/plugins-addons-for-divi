@@ -10,7 +10,7 @@ namespace DiviTorqueLite;
 class Module_Usage
 {
     const TRANSIENT   = 'dtl_module_usage';
-    const TTL         = 12 * HOUR_IN_SECONDS;
+    const TTL         = HOUR_IN_SECONDS;
     const TIME_BUDGET = 5.0;
     const BATCH       = 200;
     const MAX_PAGES   = 20;
@@ -19,6 +19,9 @@ class Module_Usage
     const ALIASES = [
         'contact-form-7' => 'contact-form7',
     ];
+
+    /** Post types the scanner ignores — mirrored by the flush guard. */
+    const SKIP_TYPES = ['revision', 'attachment', 'nav_menu_item'];
 
     private static $instance;
 
@@ -33,6 +36,52 @@ class Module_Usage
     private function __construct()
     {
         add_action('rest_api_init', [$this, 'register_routes']);
+
+        // Keep the cache honest between the hourly expiries: bust it whenever
+        // builder content changes.
+        add_action('save_post', [$this, 'maybe_flush'], 10, 2);
+        add_action('trashed_post', [$this, 'flush_for_post'], 10, 1);
+        add_action('untrashed_post', [$this, 'flush_for_post'], 10, 1);
+        add_action('deleted_post', [$this, 'flush_for_post'], 10, 2);
+    }
+
+    /** save_post guard: skip revisions/autosaves, then flush on builder content. */
+    public function maybe_flush($post_id, $post)
+    {
+        if (wp_is_post_revision($post_id) || wp_is_post_autosave($post_id)) {
+            return;
+        }
+        $this->flush_if_builder_content($post);
+    }
+
+    /** trashed/untrashed/deleted — post object is passed on deleted_post only. */
+    public function flush_for_post($post_id, $post = null)
+    {
+        $post = $post ?: get_post($post_id);
+        if ($post) {
+            $this->flush_if_builder_content($post);
+        } else {
+            // Post already gone and unknowable — a cheap delete beats a stale count.
+            delete_transient(self::TRANSIENT);
+        }
+    }
+
+    private function flush_if_builder_content($post)
+    {
+        if (!$post || in_array($post->post_type, self::SKIP_TYPES, true)) {
+            return;
+        }
+        $content = (string) $post->post_content;
+
+        // Scan markers now, or builder-enabled (covers "module just removed").
+        $relevant = strpos($content, '[ba_') !== false
+            || strpos($content, 'wp:divitorque') !== false
+            || strpos($content, 'wp:divi/') !== false
+            || get_post_meta($post->ID, '_et_pb_use_builder', true) === 'on';
+
+        if ($relevant) {
+            delete_transient(self::TRANSIENT);
+        }
     }
 
     public function register_routes()
@@ -83,14 +132,20 @@ class Module_Usage
         global $wpdb;
 
         $started = microtime(true);
-        $map     = $this->identifier_map();
+
+        // Carry the map across the cursor-resumed polling requests so each
+        // poll doesn't re-glob the module.json files; dropped once complete.
+        $map = isset($state['map']) && is_array($state['map']) && $state['map']
+            ? $state['map']
+            : $this->identifier_map();
+        $state['map'] = $map;
 
         $like_ba = '%' . $wpdb->esc_like('[ba_') . '%';
         $like_d5 = '%' . $wpdb->esc_like('wp:divitorque/') . '%';
 
         while (microtime(true) - $started < self::TIME_BUDGET) {
             $rows = $wpdb->get_results($wpdb->prepare(
-                "SELECT ID, post_title, post_type, post_content FROM {$wpdb->posts}
+                "SELECT ID, post_title, post_type, post_status, post_content FROM {$wpdb->posts}
                  WHERE ID > %d
                    AND post_status IN ('publish', 'draft', 'private')
                    AND post_type NOT IN ('revision', 'attachment', 'nav_menu_item')
@@ -106,6 +161,7 @@ class Module_Usage
             if (!$rows) {
                 $state['complete']   = true;
                 $state['scanned_at'] = time();
+                unset($state['map']); // keep the final cached payload lean
                 break;
             }
 
@@ -136,9 +192,10 @@ class Module_Usage
                         $state['modules'][$name]['pages'][] = [
                             'id'        => (int) $row->ID,
                             'title'     => $row->post_title !== '' ? $row->post_title : __('(no title)', 'addons-for-divi'),
-                            'post_type' => $row->post_type,
-                            'edit_url'  => get_edit_post_link($row->ID, 'raw'),
-                            'view_url'  => get_permalink($row->ID),
+                            'post_type'   => $row->post_type,
+                            'post_status' => $row->post_status,
+                            'edit_url'    => get_edit_post_link($row->ID, 'raw'),
+                            'view_url'    => get_permalink($row->ID),
                         ];
                     }
                 }
@@ -150,6 +207,11 @@ class Module_Usage
 
     private function identifier_map()
     {
+        static $memo = null;
+        if (is_array($memo)) {
+            return $memo;
+        }
+
         $map     = [];
         $manager = [];
         foreach (ModulesManager::get_all_modules() as $module) {
@@ -182,6 +244,7 @@ class Module_Usage
             }
         }
 
-        return $map;
+        $memo = $map;
+        return $memo;
     }
 }

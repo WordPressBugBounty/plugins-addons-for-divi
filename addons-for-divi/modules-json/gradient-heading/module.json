@@ -120,14 +120,10 @@
                 "type": "field",
                 "name": "divi/checkboxes",
                 "props": {
-                  "options": {
-                    "linkTarget": {
-                      "label": "Open in new window"
-                    },
-                    "linkRel": {
-                      "label": "Add nofollow"
-                    }
-                  }
+                  "options": [
+                    { "value": "linkTarget", "label": "Open in new window" },
+                    { "value": "linkRel", "label": "Add nofollow" }
+                  ]
                 }
               }
             }

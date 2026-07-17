@@ -1,9 +1,7 @@
 import { useEffect, useState } from 'react';
 import {
-    Button,
     CalloutCard,
     CardGrid,
-    Hero,
     InfoCard,
     PageHeader,
     StatCard,
@@ -11,54 +9,49 @@ import {
     BookOpenIcon,
     GridIcon,
     LifeBuoyIcon,
-    RocketIcon,
     SparklesIcon,
 } from '@plugpress/ui';
-import catalog from '../../../assets/module-catalog.json';
 import { appData, get } from '../api';
+import { useModuleUsage } from '../hooks/use-module-usage';
+
+/** Fail-soft count fetcher — a dead endpoint shows "—", never breaks Home. */
+function useCount(fetcher, deps = []) {
+    const [count, setCount] = useState(null);
+    useEffect(() => {
+        let alive = true;
+        fetcher()
+            .then((n) => alive && setCount(n))
+            .catch(() => alive && setCount(null));
+        return () => {
+            alive = false;
+        };
+    }, deps); // eslint-disable-line react-hooks/exhaustive-deps
+    return count;
+}
 
 const dash = (n) => (n == null ? '—' : n);
 
 export default function Dashboard({ navigate }) {
     const moduleTotal = Object.keys(appData.moduleInfo || {}).length;
-    const proAvailable = Object.values(catalog.modules).filter((m) => m.pro).length;
-    const [enabled, setEnabled] = useState(null);
-
-    useEffect(() => {
-        let alive = true;
-        get('get_common_settings')
-            .then((res) => {
-                if (!alive) {
-                    return;
-                }
-                const s = res?.modules_settings || {};
-                setEnabled(
-                    Object.values(appData.moduleInfo || {}).filter((m) => s[m.name] !== 'disabled').length
-                );
-            })
-            .catch(() => {});
-        return () => {
-            alive = false;
-        };
-    }, []);
+    const modulesEnabled = useCount(() =>
+        get('get_common_settings').then((res) => {
+            const s = res?.modules_settings || {};
+            return Object.values(appData.moduleInfo || {}).filter((m) => s[m.name] !== 'disabled').length;
+        })
+    );
+    // Cached hourly server-side. The scan is cursor-resumed and may need
+    // several polls to finish — useModuleUsage pumps until complete, and we
+    // show "—" (not a misleading partial count) until it is.
+    const { usage, complete } = useModuleUsage();
+    const modulesInUse = complete ? Object.keys(usage).length : null;
 
     return (
         <>
             <PageHeader title="Dashboard" description="Everything Divi Torque adds to this site, at a glance." />
-            <Hero
-                eyebrow={`Divi Torque Lite v${appData.version || ''}`}
-                title="Welcome back"
-                description="Manage your free modules here — and see everything Pro adds."
-                actions={
-                    <Button href={appData.upgradeUrl} target="_blank" rel="noreferrer">
-                        Upgrade to Pro
-                    </Button>
-                }
-            />
             <StatGrid columns={3}>
-                <StatCard icon={<GridIcon />} label="Modules enabled" value={`${dash(enabled)} / ${moduleTotal}`} />
-                <StatCard icon={<SparklesIcon />} label="Pro modules available" value={proAvailable} />
-                <StatCard icon={<RocketIcon />} label="Pro features" value="Popups · Reviews · Dark Mode +" />
+                <StatCard icon={<GridIcon />} label="Modules enabled" value={`${dash(modulesEnabled)} / ${moduleTotal}`} />
+                <StatCard icon={<SparklesIcon />} label="Modules in use" value={dash(modulesInUse)} />
+                <StatCard icon={<BookOpenIcon />} label="Version" value={`v${appData.version || '—'}`} />
             </StatGrid>
             <CardGrid min={220}>
                 <InfoCard
@@ -66,14 +59,6 @@ export default function Dashboard({ navigate }) {
                     title="Modules"
                     description="Turn modules on or off and see where each one is used."
                     onClick={() => navigate('modules')}
-                    role="button"
-                    tabIndex={0}
-                />
-                <InfoCard
-                    icon={<SparklesIcon />}
-                    title="AI Connection"
-                    description="See how Pro connects AI agents like Claude Code."
-                    onClick={() => navigate('ai-connection')}
                     role="button"
                     tabIndex={0}
                 />
@@ -87,23 +72,22 @@ export default function Dashboard({ navigate }) {
             </CardGrid>
             <div className="dt-callouts">
                 <CalloutCard
-                    icon={<RocketIcon />}
-                    title="Unlock the full toolkit"
-                    description={`${proAvailable} more modules plus Popups, Submissions, Google Reviews, Mega Menu, Dark Mode, and SMTP.`}
-                    tone="accent"
-                    action={
-                        <a href={appData.upgradeUrl} target="_blank" rel="noreferrer">
-                            See pricing ↗
-                        </a>
-                    }
-                />
-                <CalloutCard
                     icon={<LifeBuoyIcon />}
                     title="Support"
                     description="Stuck on something? We answer fast."
                     action={
                         <a href="https://divitorque.com/support/" target="_blank" rel="noreferrer">
                             Get support ↗
+                        </a>
+                    }
+                />
+                <CalloutCard
+                    icon={<SparklesIcon />}
+                    title="What's new"
+                    description="See what shipped in the latest release."
+                    action={
+                        <a href="https://divitorque.com/changelog/" target="_blank" rel="noreferrer">
+                            Changelog ↗
                         </a>
                     }
                 />

@@ -91,16 +91,6 @@ class Dashboard
             [$this, 'render_app']
         );
 
-        if ($this->is_v2()) {
-            add_submenu_page(
-                $this->menu_slug,
-                __('Settings', 'divitorque'),
-                __('Settings', 'divitorque'),
-                $this->capability,
-                "{$this->menu_slug}&path=settings",
-                [$this, 'render_app']
-            );
-        }
     }
 
     public function render_app()
@@ -121,14 +111,21 @@ class Dashboard
     private function enqueue_v2()
     {
         $base = DIVI_TORQUE_LITE_URL . 'admin/build/';
+        $dir  = DIVI_TORQUE_LITE_DIR . 'admin/build/';
 
-        wp_enqueue_style('divi-torque-lite-admin-v2', $base . 'index.css', [], DIVI_TORQUE_LITE_VERSION);
+        // Version by file mtime so a rebuilt bundle always busts the browser/page
+        // cache, even within the same plugin version. A static ?ver lets a stale
+        // cached bundle load against a fresh runtime.
+        $css_ver = is_readable($dir . 'index.css') ? (string) filemtime($dir . 'index.css') : DIVI_TORQUE_LITE_VERSION;
+        $js_ver  = is_readable($dir . 'index.js') ? (string) filemtime($dir . 'index.js') : DIVI_TORQUE_LITE_VERSION;
+
+        wp_enqueue_style('divi-torque-lite-admin-v2', $base . 'index.css', [], $css_ver);
 
         wp_enqueue_script(
             'divi-torque-lite-admin-v2',
             $base . 'index.js',
             ['wp-api-fetch', 'wp-i18n'],
-            DIVI_TORQUE_LITE_VERSION,
+            $js_ver,
             true
         );
 
@@ -147,12 +144,10 @@ class Dashboard
             'ns'          => 'divitorque-lite/v1',
             'version'     => DIVI_TORQUE_LITE_VERSION,
             'adminUrl'    => esc_url_raw(admin_url()),
-            'isLite'      => true,
             'docsUrl'     => 'https://divitorque.com/docs/',
             'upgradeUrl'  => 'https://divitorque.com/pricing/?utm_source=divi-torque-lite&utm_medium=wp-admin&utm_campaign=upgrade-to-pro',
             'rollbackUrl' => esc_url_raw(admin_url('admin.php?page=divitorque-rollback')),
             'moduleInfo'  => ModulesManager::get_all_modules(),
-            'abilities'   => ['supported' => false],
         ];
     }
 

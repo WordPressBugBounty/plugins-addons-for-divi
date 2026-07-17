@@ -215,12 +215,13 @@ class ModulesManager
     }
 
     /**
-     * Check if module is active
+     * Check if module is active. (get_modules() merges defaults, so every
+     * name is always set — the old isset() check was always true.)
      */
     public static function is_module_active($module_name)
     {
         $saved_modules = AdminHelper::get_modules();
-        return isset($saved_modules[$module_name]);
+        return ($saved_modules[$module_name] ?? $module_name) !== 'disabled';
     }
 
     /**

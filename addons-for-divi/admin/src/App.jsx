@@ -2,8 +2,7 @@ import { useCallback, useEffect, useState } from 'react';
 import { AppShell, AppContent, WIDTH } from '@plugpress/ui';
 import { Sidebar } from './components/Sidebar';
 import { ForeignNotices } from './components/ForeignNotices';
-import { LockedPage } from './components/LockedPage';
-import { initialRoute, parseHash, syncQueryArg, TABS } from './routes';
+import { initialRoute, parseHash, syncQueryArg } from './routes';
 import Dashboard from './pages/Dashboard';
 import Modules from './pages/Modules';
 
@@ -20,6 +19,10 @@ export default function App() {
             const next = parseHash();
             if (next.tab) {
                 setRoute(next);
+            } else {
+                // Unknown/removed tab (stale bookmark like #/popups): normalize
+                // the hash to dashboard instead of leaving URL and view desynced.
+                window.location.hash = 'dashboard';
             }
         };
         window.addEventListener('hashchange', onHash);
@@ -34,21 +37,14 @@ export default function App() {
         window.location.hash = sub ? `${tab}/${sub}` : tab;
     }, []);
 
-    const tabDef = TABS.find((t) => t.value === route.tab);
-    const page = PAGES[route.tab];
+    const page = PAGES[route.tab] || PAGES.dashboard;
+    const Page = page.component;
 
     return (
         <AppShell variant="sidebar" nav={<Sidebar tab={route.tab} onNavigate={navigate} />}>
-            <AppContent width={tabDef?.locked ? WIDTH.content : page?.width || WIDTH.wide}>
+            <AppContent width={page.width || WIDTH.wide}>
                 <ForeignNotices />
-                {tabDef?.locked ? (
-                    <LockedPage tab={route.tab} />
-                ) : (
-                    (() => {
-                        const Page = (page || PAGES.dashboard).component;
-                        return <Page sub={route.sub} navigate={navigate} />;
-                    })()
-                )}
+                <Page sub={route.sub} navigate={navigate} />
             </AppContent>
         </AppShell>
     );

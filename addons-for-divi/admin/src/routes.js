@@ -1,18 +1,12 @@
 /**
  * Route table — Lite variant. Same shape as Pro's (hash tabs + WP `?path=`
- * bridge + sidebar nav map), but the Pro-only features render locked
- * upsell pages and there is no Labs.
+ * bridge + sidebar nav map), trimmed to the destinations Lite actually has —
+ * no locked upsell tabs. Upgrading is a single quiet link in the sidebar
+ * footer instead.
  */
 export const TABS = [
     { value: 'dashboard', path: '', group: null, label: 'Dashboard' },
     { value: 'modules', path: 'module-manager', group: null, label: 'Modules' },
-    { value: 'popups', path: 'popups', group: 'features', label: 'Popups', locked: true },
-    { value: 'submissions', path: 'form-submissions', group: 'features', label: 'Submissions', locked: true },
-    { value: 'google-reviews', path: 'google-reviews', group: 'features', label: 'Google Reviews', locked: true },
-    { value: 'mailer', path: 'divi-mailer', group: 'features', label: 'Mailer', locked: true },
-    { value: 'dark-mode', path: 'dark-mode', group: 'features', label: 'Dark Mode', locked: true },
-    { value: 'ai-connection', path: 'ai-connection', group: 'features', label: 'AI Connection', locked: true },
-    { value: 'settings', path: 'settings', group: 'bottom', label: 'Settings', locked: true },
 ];
 
 const byPath = Object.fromEntries(TABS.filter((t) => t.path !== null).map((t) => [t.path, t.value]));

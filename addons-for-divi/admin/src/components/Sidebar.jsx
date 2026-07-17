@@ -1,41 +1,31 @@
-import { Badge, Button, useConfirm, toast } from '@plugpress/ui';
+import { AppNav, Badge, useConfirm, toast, HomeIcon, GridIcon } from '@plugpress/ui';
 import { appData, post } from '../api';
 import { visibleTabs } from '../routes';
 import { BrandMark } from './icons';
 
 /**
- * Left rail — AppNav is flat (no groups), so this composes the same pp-nav
- * classes with a FEATURES group heading, plus the footer links (Account,
- * Docs, switch-to-legacy).
+ * Left rail — the DS AppNav with icons (same pattern as Pro/Waggle), trimmed
+ * to Lite's real destinations. No locked upsell tabs: upgrading is one quiet
+ * footer link.
  */
+const ICONS = {
+    dashboard: HomeIcon,
+    modules: GridIcon,
+};
+
+const navItem = (t) => {
+    const Icon = ICONS[t.value];
+    return {
+        value: t.value,
+        label: t.label,
+        icon: Icon ? <Icon /> : undefined,
+    };
+};
+
 export function Sidebar({ tab, onNavigate }) {
     const confirm = useConfirm();
 
-    const item = (t) => {
-        if (t.external) {
-            return (
-                <a key={t.value} className="pp-nav__item" href={t.external()}>
-                    <span className="pp-nav__label">{t.label}</span>
-                </a>
-            );
-        }
-        return (
-            <button
-                key={t.value}
-                type="button"
-                className="pp-nav__item"
-                aria-current={tab === t.value ? 'page' : undefined}
-                onClick={() => onNavigate(t.value)}
-            >
-                <span className="pp-nav__label">{t.label}</span>
-            </button>
-        );
-    };
-
-    const tabs = visibleTabs();
-    const top = tabs.filter((t) => t.group === null);
-    const features = tabs.filter((t) => t.group === 'features');
-    const bottom = tabs.filter((t) => t.group === 'bottom');
+    const items = visibleTabs().map(navItem);
 
     const switchToLegacy = async () => {
         const ok = await confirm({
@@ -56,51 +46,42 @@ export function Sidebar({ tab, onNavigate }) {
     };
 
     return (
-        <nav className="pp-nav" aria-label="Main">
-            <div className="pp-nav__brand">
-                <BrandMark size={24} />
-                <span className="dt-brand__name">Divi Torque</span>
-                {appData.version && <Badge>v{appData.version}</Badge>}
-            </div>
-            <div className="pp-nav__items">
-                {top.map(item)}
-                <div className="dt-nav__group" aria-hidden="true">
-                    Features
-                </div>
-                {features.map(item)}
-                <div className="dt-nav__group" aria-hidden="true" />
-                {bottom.map(item)}
-            </div>
-            <div className="pp-nav__footer dt-nav__footer">
-                {appData.isLite ? (
-                    <Button
-                        variant="primary"
-                        className="dt-nav__upgrade"
-                        href={appData.upgradeUrl}
-                        target="_blank"
-                        rel="noreferrer"
-                    >
-                        Upgrade to Pro
-                    </Button>
-                ) : (
-                    appData.accountUrl && (
-                        <a className="dt-nav__footer-link" href={appData.accountUrl}>
-                            Account
+        <AppNav
+            brand={
+                <>
+                    <BrandMark size={24} />
+                    <span className="dt-brand__name">Divi Torque</span>
+                    {appData.version && <Badge>v{appData.version}</Badge>}
+                </>
+            }
+            items={items}
+            value={tab}
+            onChange={onNavigate}
+            footer={
+                <div className="dt-nav__footer">
+                    {appData.upgradeUrl && (
+                        <a
+                            className="dt-nav__footer-link"
+                            href={appData.upgradeUrl}
+                            target="_blank"
+                            rel="noreferrer"
+                        >
+                            Upgrade to Pro ↗
                         </a>
-                    )
-                )}
-                <a className="dt-nav__footer-link" href={appData.docsUrl} target="_blank" rel="noreferrer">
-                    Docs ↗
-                </a>
-                {appData.isLite && appData.rollbackUrl && (
-                    <a className="dt-nav__footer-link" href={appData.rollbackUrl}>
-                        Rollback
+                    )}
+                    <a className="dt-nav__footer-link" href={appData.docsUrl} target="_blank" rel="noreferrer">
+                        Docs ↗
                     </a>
-                )}
-                <button type="button" className="dt-nav__footer-link dt-nav__legacy" onClick={switchToLegacy}>
-                    Switch to legacy dashboard
-                </button>
-            </div>
-        </nav>
+                    {appData.rollbackUrl && (
+                        <a className="dt-nav__footer-link" href={appData.rollbackUrl}>
+                            Rollback
+                        </a>
+                    )}
+                    <button type="button" className="dt-nav__footer-link dt-nav__legacy" onClick={switchToLegacy}>
+                        Switch to legacy dashboard
+                    </button>
+                </div>
+            }
+        />
     );
 }

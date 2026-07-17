@@ -49,10 +49,14 @@ trait RenderCallbackTrait
                     $cat       = $cats[0];
                     $ancestors = array_reverse(get_ancestors($cat->term_id, 'category'));
                     foreach ($ancestors as $aid) {
-                        $term     = get_term($aid, 'category');
-                        $crumbs[] = ['label' => $term->name, 'url' => get_term_link($term)];
+                        $term = get_term($aid, 'category');
+                        if ($term && !is_wp_error($term)) {
+                            $tlink    = get_term_link($term);
+                            $crumbs[] = ['label' => $term->name, 'url' => is_wp_error($tlink) ? '' : $tlink];
+                        }
                     }
-                    $crumbs[] = ['label' => $cat->name, 'url' => get_term_link($cat)];
+                    $clink    = get_term_link($cat);
+                    $crumbs[] = ['label' => $cat->name, 'url' => is_wp_error($clink) ? '' : $clink];
                 }
             } elseif ('page' !== $post_type) {
                 $pto = get_post_type_object($post_type);
@@ -73,8 +77,11 @@ trait RenderCallbackTrait
             $term = get_queried_object();
             if ($term && isset($term->taxonomy)) {
                 foreach (array_reverse(get_ancestors($term->term_id, $term->taxonomy)) as $aid) {
-                    $t        = get_term($aid, $term->taxonomy);
-                    $crumbs[] = ['label' => $t->name, 'url' => get_term_link($t)];
+                    $t = get_term($aid, $term->taxonomy);
+                    if ($t && !is_wp_error($t)) {
+                        $tl       = get_term_link($t);
+                        $crumbs[] = ['label' => $t->name, 'url' => is_wp_error($tl) ? '' : $tl];
+                    }
                 }
                 $crumbs[] = ['label' => $term->name, 'url' => ''];
             }

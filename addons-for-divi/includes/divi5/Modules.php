@@ -125,8 +125,17 @@ $dtl_d5_modules = array(
 // Honor Module Manager toggles: absent = enabled, 'disabled' = off,
 // *_item follows its parent. Read the option directly — plugin classes
 // aren't loaded yet at this point. When Pro is active it owns the saved
-// state (mirrors AdminHelper::get_modules()).
-$dtl_d5_saved = get_option(defined('DTP_VERSION') ? '_divitorque_modules' : '_divitorque_lite_modules', array());
+// state (mirrors AdminHelper::get_modules() / rest-api save_common_settings).
+//
+// "Pro active" can't be defined('DTP_VERSION') here: this file is included
+// at plugin-load time and addons-for-divi loads before divi-torque-pro
+// alphabetically, so Pro's constant isn't defined yet. Check the active
+// plugin lists instead (load-order safe), keeping the constant as a
+// fallback for non-standard directory names.
+$dtl_d5_pro_active = defined('DTP_VERSION')
+    || in_array('divi-torque-pro/divitorque.php', (array) get_option('active_plugins', array()), true)
+    || (is_multisite() && isset(((array) get_site_option('active_sitewide_plugins', array()))['divi-torque-pro/divitorque.php']));
+$dtl_d5_saved = get_option($dtl_d5_pro_active ? '_divitorque_modules' : '_divitorque_lite_modules', array());
 $dtl_d5_is_disabled = function ($slug) use ($dtl_d5_saved) {
     $base = 'tab_item' === $slug ? 'tabs' : preg_replace('/_item$/', '', $slug);
     $name = 'contact_form_7' === $base ? 'contact-form7' : str_replace('_', '-', $base);
@@ -404,54 +413,57 @@ add_action('divi_visual_builder_assets_before_enqueue_scripts', 'dtl_divi5_enque
 
 /**
  * Frontend assets for D5 modules — gated, fires only on non-admin requests.
+ * Skipped entirely when every module is toggled off ($dtl_d5_loaded empty).
  */
-add_action(
-    'wp_enqueue_scripts',
-    function () {
-        if (is_admin()) {
-            return;
+if (!empty($dtl_d5_loaded)) {
+    add_action(
+        'wp_enqueue_scripts',
+        function () {
+            if (is_admin()) {
+                return;
+            }
+
+            $dist_url = DIVI_TORQUE_LITE_DIST_URL . 'divi5/';
+            $dist_dir = DIVI_TORQUE_LITE_DIR . 'dist/divi5/';
+            $ver      = function ($file) use ($dist_dir) {
+                $path = $dist_dir . $file;
+                return file_exists($path) ? (string) filemtime($path) : DIVI_TORQUE_LITE_VERSION;
+            };
+
+            // Swiper carousel library (front end). Only *registered* here — the
+            // carousel modules enqueue it on demand from CarouselEngine when they
+            // actually render, so non-carousel pages never load the ~140KB bundle.
+            // The core frontend.js below stays global (it also drives accordions,
+            // tabs, modals, etc.) and references Swiper only inside its per-carousel
+            // loop, so it is safe to load without Swiper present.
+            wp_register_style(
+                'divi-torque-lite-swiper',
+                DIVI_TORQUE_LITE_ASSETS . 'libs/swiper/swiper-bundle.min.css',
+                [],
+                DIVI_TORQUE_LITE_VERSION
+            );
+            wp_register_script(
+                'divi-torque-lite-swiper',
+                DIVI_TORQUE_LITE_ASSETS . 'libs/swiper/swiper-bundle.min.js',
+                [],
+                DIVI_TORQUE_LITE_VERSION,
+                true
+            );
+
+            wp_enqueue_style(
+                'divi-torque-lite-d5-frontend',
+                $dist_url . 'bundle.css',
+                [],
+                $ver('bundle.css')
+            );
+
+            wp_enqueue_script(
+                'divi-torque-lite-d5-frontend',
+                $dist_url . 'frontend.js',
+                ['jquery'],
+                $ver('frontend.js'),
+                true
+            );
         }
-
-        $dist_url = DIVI_TORQUE_LITE_DIST_URL . 'divi5/';
-        $dist_dir = DIVI_TORQUE_LITE_DIR . 'dist/divi5/';
-        $ver      = function ($file) use ($dist_dir) {
-            $path = $dist_dir . $file;
-            return file_exists($path) ? (string) filemtime($path) : DIVI_TORQUE_LITE_VERSION;
-        };
-
-        // Swiper carousel library (front end). Only *registered* here — the
-        // carousel modules enqueue it on demand from CarouselEngine when they
-        // actually render, so non-carousel pages never load the ~140KB bundle.
-        // The core frontend.js below stays global (it also drives accordions,
-        // tabs, modals, etc.) and references Swiper only inside its per-carousel
-        // loop, so it is safe to load without Swiper present.
-        wp_register_style(
-            'divi-torque-lite-swiper',
-            DIVI_TORQUE_LITE_ASSETS . 'libs/swiper/swiper-bundle.min.css',
-            [],
-            DIVI_TORQUE_LITE_VERSION
-        );
-        wp_register_script(
-            'divi-torque-lite-swiper',
-            DIVI_TORQUE_LITE_ASSETS . 'libs/swiper/swiper-bundle.min.js',
-            [],
-            DIVI_TORQUE_LITE_VERSION,
-            true
-        );
-
-        wp_enqueue_style(
-            'divi-torque-lite-d5-frontend',
-            $dist_url . 'bundle.css',
-            [],
-            $ver('bundle.css')
-        );
-
-        wp_enqueue_script(
-            'divi-torque-lite-d5-frontend',
-            $dist_url . 'frontend.js',
-            ['jquery'],
-            $ver('frontend.js'),
-            true
-        );
-    }
-);
+    );
+}

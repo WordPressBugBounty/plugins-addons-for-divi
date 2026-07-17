@@ -54,7 +54,7 @@
     "alert_type": "module.advanced.alertType.*",
     "show_dismiss": "module.advanced.showDismiss.*",
     "align_items": "module.advanced.alignItems.*",
-    "header_level": "title.decoration.font.font.*.headingLevel",
+    "title_level": "title.decoration.font.font.*.headingLevel",
     "icon_size": "module.advanced.iconSize.*",
     "icon_color": "module.advanced.iconColor.*",
     "icon_spacing": "module.advanced.iconSpacing.*",
