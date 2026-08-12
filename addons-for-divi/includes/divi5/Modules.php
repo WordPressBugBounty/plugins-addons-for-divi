@@ -18,22 +18,39 @@ if (!function_exists('divitorque_lite_d5_interface_path')) {
     /**
      * First existing Divi 5 DependencyInterface path, or '' if none.
      *
-     * Checks the file ON DISK in every place Divi 5 can live — the Divi theme
-     * and the Divi Builder plugin. A disk check is load-order independent:
-     * plugins load alphabetically, so `addons-for-divi` runs before
-     * `divi-builder`, and a class_exists() probe would still be false at this
-     * point on a Builder-plugin site.
+     * Checks the file ON DISK in every place Divi 5 can live so detection is
+     * load-order independent (a class_exists() probe would still be false this
+     * early on a Builder-plugin site):
+     *   1. The active parent theme, by its real folder name and location —
+     *      resolves child themes, a renamed Divi folder, and the Extra theme.
+     *      get_option('template') + get_theme_root() read the DB / registered
+     *      theme roots and are available at plugins_loaded; get_template_directory()
+     *      is NOT (needs after_setup_theme), so it is deliberately avoided.
+     *   2. The Divi Builder plugin.
+     *   3. Fallbacks: a custom WP_CONTENT_DIR, then the legacy hardcoded default.
      *
      * @return string
      */
     function divitorque_lite_d5_interface_path() {
         $rel   = 'includes/builder-5/server/Framework/DependencyManagement/Interfaces/DependencyInterface.php';
-        $paths = array(ABSPATH . 'wp-content/themes/Divi/' . $rel);
+        $paths = array();
+
+        $template = get_option('template');
+        if ($template) {
+            $paths[] = trailingslashit(get_theme_root($template)) . $template . '/' . $rel;
+        }
+
         if (defined('WP_PLUGIN_DIR')) {
             $paths[] = WP_PLUGIN_DIR . '/divi-builder/' . $rel;
         }
+
+        if (defined('WP_CONTENT_DIR')) {
+            $paths[] = WP_CONTENT_DIR . '/themes/Divi/' . $rel;
+        }
+        $paths[] = ABSPATH . 'wp-content/themes/Divi/' . $rel;
+
         foreach ($paths as $path) {
-            if (file_exists($path)) {
+            if ($path && file_exists($path)) {
                 return $path;
             }
         }
@@ -120,6 +137,14 @@ $dtl_d5_modules = array(
     'faq'              => array('Faq', '\\DiviTorqueLite\\Modules\\Faq\\Faq'),
     'faq_item'         => array('FaqItem', '\\DiviTorqueLite\\Modules\\FaqItem\\FaqItem'),
     'post_carousel'    => array('PostCarousel', '\\DiviTorqueLite\\Modules\\PostCarousel\\PostCarousel'),
+    'cta_box'          => array('CtaBox', '\\DiviTorqueLite\\Modules\\CtaBox\\CtaBox'),
+    'creative_button'  => array('CreativeButton', '\\DiviTorqueLite\\Modules\\CreativeButton\\CreativeButton'),
+    'tooltip'          => array('Tooltip', '\\DiviTorqueLite\\Modules\\Tooltip\\Tooltip'),
+    'image_accordion'  => array('ImageAccordion', '\\DiviTorqueLite\\Modules\\ImageAccordion\\ImageAccordion'),
+    'image_accordion_item' => array('ImageAccordionItem', '\\DiviTorqueLite\\Modules\\ImageAccordionItem\\ImageAccordionItem'),
+    'svg_draw'         => array('SvgDraw', '\\DiviTorqueLite\\Modules\\SvgDraw\\SvgDraw'),
+    'code_snippet'     => array('CodeSnippet', '\\DiviTorqueLite\\Modules\\CodeSnippet\\CodeSnippet'),
+    'sticky_video'     => array('StickyVideo', '\\DiviTorqueLite\\Modules\\StickyVideo\\StickyVideo'),
 );
 
 // Honor Module Manager toggles: absent = enabled, 'disabled' = off,
@@ -291,6 +316,21 @@ function dtl_divi5_enqueue_vb_assets() {
         ],
     ]);
 
+    // Prism (builder). Unconditional here, unlike the front end: the builder
+    // has no way to know in advance whether the author is about to insert a
+    // Code Snippet, and a highlighter that only works after a reload is worse
+    // than one that is always there.
+    \ET\Builder\VisualBuilder\Assets\PackageBuildManager::register_package_build([
+        'name'    => 'divi-torque-lite-prism-vb-script',
+        'version' => DIVI_TORQUE_LITE_VERSION,
+        'script'  => [
+            'src'                => DIVI_TORQUE_LITE_ASSETS . 'libs/prism/prism.min.js',
+            'deps'               => [],
+            'enqueue_top_window' => false,
+            'enqueue_app_window' => true,
+        ],
+    ]);
+
     \ET\Builder\VisualBuilder\Assets\PackageBuildManager::register_package_build([
         'name'    => 'divi-torque-lite-swiper-vb-style',
         'version' => DIVI_TORQUE_LITE_VERSION,
@@ -448,6 +488,28 @@ if (!empty($dtl_d5_loaded)) {
                 [],
                 DIVI_TORQUE_LITE_VERSION,
                 true
+            );
+
+            // Prism (front end). Registered only — the Code Snippet render
+            // callback enqueues it, so a page without a snippet loads none of
+            // the ~53KB bundle. Same shape as Swiper above.
+            wp_register_script(
+                'divi-torque-lite-prism',
+                DIVI_TORQUE_LITE_ASSETS . 'libs/prism/prism.min.js',
+                [],
+                DIVI_TORQUE_LITE_VERSION,
+                true
+            );
+
+            // Manual mode, set BEFORE Prism parses. Left automatic, Prism runs
+            // its own DOMContentLoaded pass over every <pre><code
+            // class="language-*"> on the page — including code blocks in the
+            // visitor's own post content, which this module has nothing to do
+            // with and should not be restyling.
+            wp_add_inline_script(
+                'divi-torque-lite-prism',
+                'window.Prism = window.Prism || {}; window.Prism.manual = true;',
+                'before'
             );
 
             wp_enqueue_style(

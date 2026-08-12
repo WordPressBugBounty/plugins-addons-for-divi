@@ -166,7 +166,7 @@ trait RenderCallbackTrait
 
                 // Excerpt.
                 $excerpt = ('on' === $show_excerpt)
-                    ? sprintf('<p class="dtq-post-list-excerpt">%1$s</p>', esc_html(mb_strimwidth(get_the_excerpt(), 0, $excerpt_length > 0 ? $excerpt_length : 150, '...')))
+                    ? sprintf('<p class="dtq-post-list-excerpt">%1$s</p>', esc_html(dtq_strimwidth(get_the_excerpt(), 0, $excerpt_length > 0 ? $excerpt_length : 150, '...')))
                     : '';
 
                 $output .= sprintf(
@@ -221,7 +221,10 @@ trait RenderCallbackTrait
                 'classnamesFunction'  => [self::class, 'module_classnames'],
                 'stylesComponent'     => [self::class, 'module_styles'],
                 'scriptDataComponent' => [self::class, 'module_script_data'],
-                'children'            => $children,
+                'children'            => [
+                    $elements->style_components(['attrName' => 'module']),
+                    $children,
+                ],
             ]
         );
     }

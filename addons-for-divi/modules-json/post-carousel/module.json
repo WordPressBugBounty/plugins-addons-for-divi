@@ -3559,6 +3559,17 @@
             "groupLabel": "Pagination Dots"
           }
         }
+      },
+      "designLayout": {
+        "panel": "design",
+        "priority": 25,
+        "groupName": "designLayout",
+        "component": {
+          "name": "divi/composite",
+          "props": {
+            "groupLabel": "Layout & Cursor"
+          }
+        }
       }
     }
   },

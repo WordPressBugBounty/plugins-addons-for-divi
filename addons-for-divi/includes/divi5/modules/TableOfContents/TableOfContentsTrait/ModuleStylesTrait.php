@@ -58,6 +58,7 @@ trait ModuleStylesTrait {
 	public static function module_styles( $args ) {
 		$attrs       = $args['attrs'] ?? array();
 		$elements    = $args['elements'];
+		$settings    = $args['settings'] ?? array();
 		$order_class = $args['orderClass'] ?? '';
 
 		$advanced = $attrs['module']['advanced'] ?? array();
@@ -153,7 +154,18 @@ trait ModuleStylesTrait {
 		}
 
 		$all_styles = array(
-			$elements->style( array( 'attrName' => 'module' ) ),
+			// styleProps.disabledOn must be passed here as well as in styles.jsx,
+			// or "Disable On" is honoured in the builder and ignored on the front end.
+			$elements->style(
+				array(
+					'attrName'   => 'module',
+					'styleProps' => array(
+						'disabledOn' => array(
+							'disabledModuleVisibility' => $settings['disabledModuleVisibility'] ?? null,
+						),
+					),
+				)
+			),
 			$elements->style( array( 'attrName' => 'titleFont' ) ),
 			$elements->style( array( 'attrName' => 'linkFont' ) ),
 			$custom_styles,

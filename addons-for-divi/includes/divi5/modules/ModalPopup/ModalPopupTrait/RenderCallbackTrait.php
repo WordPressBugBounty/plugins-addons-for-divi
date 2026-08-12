@@ -135,11 +135,23 @@ trait RenderCallbackTrait
     }
 
     /**
+     * IDs currently being rendered, used as a re-entrancy guard.
+     *
+     * @var int[]
+     */
+    private static $rendering_layouts = [];
+
+    /**
      * Render a saved Divi Library layout (or a page/post) by ID for the popup.
      *
      * Restricted to published `et_pb_layout`, `page` or `post` content to avoid
      * exposing private/arbitrary posts. Runs the content through both the D4
      * shortcode and D5 block parsers so a layout built in either renders.
+     *
+     * Re-entrancy is guarded by an ID stack: a layout that contains a Modal Popup
+     * pointing back at itself (or a pair of layouts referencing each other) would
+     * otherwise recurse until the memory limit and take the whole page down — a
+     * fatal reachable purely by a content-editing mistake.
      *
      * @param int $id The layout/post ID.
      *
@@ -147,7 +159,13 @@ trait RenderCallbackTrait
      */
     private static function render_saved_layout($id)
     {
+        $id = (int) $id;
+
         if ($id <= 0) {
+            return '';
+        }
+
+        if (in_array($id, self::$rendering_layouts, true)) {
             return '';
         }
 
@@ -159,6 +177,12 @@ trait RenderCallbackTrait
             return '';
         }
 
-        return do_blocks(do_shortcode($post->post_content));
+        self::$rendering_layouts[] = $id;
+
+        try {
+            return do_blocks(do_shortcode($post->post_content));
+        } finally {
+            array_pop(self::$rendering_layouts);
+        }
     }
 }

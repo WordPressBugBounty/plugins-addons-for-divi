@@ -8,11 +8,12 @@ class BackendHelpers
     private function dummyData()
     {
         return array(
-            'title'    => _x('Your Title Goes Here', 'Modules dummy content', 'divitorque'),
-            'subtitle' => _x('Subtitle goes Here', 'divitorque'),
+            'title'    => _x('Your Title Goes Here', 'Modules dummy content', 'addons-for-divi'),
+            'subtitle' => _x('Subtitle goes Here', 'Modules dummy content', 'addons-for-divi'),
             'body'     => _x(
                 '<p>Edit or remove this text inline or in the module Content settings. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin accumsan ipsum placerat lectus placerat ultricies.</p>',
-                'divitorque'
+                'Modules dummy content',
+                'addons-for-divi'
             ),
             'text_color' => '#354559',
             'background_color' => '#3979ff',

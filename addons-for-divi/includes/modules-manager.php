@@ -93,6 +93,13 @@ class ModulesManager
             'fancy-text'        => 'Fancy Text',
             'faq'               => 'FAQ',
             'breadcrumbs'       => 'Breadcrumb Trail',
+            'cta-box'           => 'Call To Action',
+            'creative-button'   => 'Creative Button',
+            'tooltip'           => 'Tooltip',
+            'image-accordion'   => 'Image Accordion',
+            'svg-draw'          => 'SVG Draw',
+            'code-snippet'      => 'Code Snippet',
+            'sticky-video'      => 'Sticky Video',
         ];
         foreach ($d5_only as $name => $title) {
             if (!isset($this->discovered_modules[$name])) {
@@ -158,14 +165,6 @@ class ModulesManager
     public static function get_all_modules()
     {
         return array_values(self::get_instance()->discovered_modules);
-    }
-
-    /**
-     * Get all pro modules (for dashboard)
-     */
-    public static function get_all_pro_modules()
-    {
-        return [];
     }
 
     /**

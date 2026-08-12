@@ -7,7 +7,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Language-Team: PlugPress <support@divitorque.com>\n"
-"POT-Creation-Date: 2026-07-15 21:13+0000\n"
+"POT-Creation-Date: 2026-08-12 08:00+0000\n"
 "X-Poedit-Basepath: ..\n"
 "X-Poedit-KeywordsList: __;_e;_ex:1,2c;_n:1,2;_n_noop:1,2;_nx:1,2,4c;_nx_noop:1,2,3c;_x:1,2c;esc_attr__;esc_attr_e;esc_attr_x:1,2c;esc_html__;esc_html_e;esc_html_x:1,2c\n"
 "X-Poedit-SearchPath-0: .\n"
@@ -15,119 +15,224 @@ msgstr ""
 "X-Poedit-SourceCharset: UTF-8\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: includes/backend-helpers.php:27
-msgid "Monday"
+#: includes/backend-helpers.php:11
+msgctxt "Modules dummy content"
+msgid "Your Title Goes Here"
 msgstr ""
 
-#: includes/backend-helpers.php:27, includes/backend-helpers.php:28, includes/backend-helpers.php:29, includes/backend-helpers.php:30, includes/backend-helpers.php:31, includes/backend-helpers.php:32
-msgid "08:00 - 14:00"
+#: includes/backend-helpers.php:12
+msgctxt "Modules dummy content"
+msgid "Subtitle goes Here"
+msgstr ""
+
+#: includes/backend-helpers.php:13
+msgctxt "Modules dummy content"
+msgid "<p>Edit or remove this text inline or in the module Content settings. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin accumsan ipsum placerat lectus placerat ultricies.</p>"
 msgstr ""
 
 #: includes/backend-helpers.php:28
-msgid "Tuesday"
+msgid "Monday"
+msgstr ""
+
+#: includes/backend-helpers.php:28, includes/backend-helpers.php:29, includes/backend-helpers.php:30, includes/backend-helpers.php:31, includes/backend-helpers.php:32, includes/backend-helpers.php:33
+msgid "08:00 - 14:00"
 msgstr ""
 
 #: includes/backend-helpers.php:29
-msgid "Wednesday"
+msgid "Tuesday"
 msgstr ""
 
 #: includes/backend-helpers.php:30
-msgid "Thursday"
+msgid "Wednesday"
 msgstr ""
 
 #: includes/backend-helpers.php:31
-msgid "Friday"
+msgid "Thursday"
 msgstr ""
 
 #: includes/backend-helpers.php:32
+msgid "Friday"
+msgstr ""
+
+#: includes/backend-helpers.php:33
 msgid "Saturday"
 msgstr ""
 
-#: includes/backend-helpers.php:33
+#: includes/backend-helpers.php:34
 msgid "Sunday"
 msgstr ""
 
-#: includes/backend-helpers.php:33
+#: includes/backend-helpers.php:34
 msgid "Closed"
 msgstr ""
 
-#: includes/backend-helpers.php:102
+#: includes/backend-helpers.php:103
 msgid "HTML"
 msgstr ""
 
-#: includes/backend-helpers.php:103
+#: includes/backend-helpers.php:104
 msgid "CSS"
 msgstr ""
 
-#: includes/backend-helpers.php:104
+#: includes/backend-helpers.php:105
 msgid "JavaScript"
 msgstr ""
 
-#: includes/backend-helpers.php:105
+#: includes/backend-helpers.php:106
 msgid "PHP"
 msgstr ""
 
-#: includes/backend-helpers.php:106
+#: includes/backend-helpers.php:107
 msgid "Python"
 msgstr ""
 
-#: includes/backend-helpers.php:113
+#: includes/backend-helpers.php:114
 msgid "We can bring"
 msgstr ""
 
-#: includes/backend-helpers.php:119
+#: includes/backend-helpers.php:120
 msgid "to your business"
 msgstr ""
 
-#: includes/backend-helpers.php:130, includes/modules/divi-4/CompareImage/CompareImage.php:16
+#: includes/backend-helpers.php:131, includes/modules/divi-4/CompareImage/CompareImage.php:16
 msgid "Before"
 msgstr ""
 
-#: includes/backend-helpers.php:131, includes/modules/divi-4/CompareImage/CompareImage.php:17
+#: includes/backend-helpers.php:132, includes/modules/divi-4/CompareImage/CompareImage.php:17
 msgid "After"
 msgstr ""
 
-#: includes/backend-helpers.php:143
+#: includes/backend-helpers.php:144
 msgid "Work Hours"
 msgstr ""
 
-#: includes/backend-helpers.php:166
+#: includes/backend-helpers.php:167
 msgid "Get Started"
 msgstr ""
 
-#: includes/backend-helpers.php:167
+#: includes/backend-helpers.php:168
 msgid "View Demo"
 msgstr ""
 
-#: includes/backend-helpers.php:188, includes/modules/divi-4/FlipBox/FlipBox.php:8, src/divi-4/modules/FlipBox/FlipBox.php:8
+#: includes/backend-helpers.php:189, includes/modules/divi-4/FlipBox/FlipBox.php:8, src/divi-4/modules/FlipBox/FlipBox.php:8
 msgid "Flip Card"
 msgstr ""
 
-#: includes/backend-helpers.php:189
+#: includes/backend-helpers.php:190
 msgid "This is a flip box module"
 msgstr ""
 
-#: includes/backend-helpers.php:220
+#: includes/backend-helpers.php:221
 msgid "Awesome Gradient Heading"
+msgstr ""
+
+#: includes/dashboard.php:114, includes/dashboard.php:115
+msgid "Divi Torque"
+msgstr ""
+
+#: includes/dashboard.php:160
+msgid "Overview"
+msgstr ""
+
+#: includes/dashboard.php:164
+msgid "Modules"
+msgstr ""
+
+#: includes/dashboard.php:178
+msgid "Extensions"
+msgstr ""
+
+#: includes/dashboard.php:375
+msgid "The new Divi Torque dashboard is here."
+msgstr ""
+
+#: includes/dashboard.php:376
+msgid "Cleaner, faster, and where new features land first. This legacy dashboard will be retired in an upcoming release."
+msgstr ""
+
+#: includes/dashboard.php:379
+msgid "Try the new dashboard"
+msgstr ""
+
+#: includes/extensions-api.php:110
+msgid "That extension cannot be switched on or off."
+msgstr ""
+
+#: includes/extensions-manager.php:66, includes/extensions/share-my-post/admin.php:157, includes/extensions/share-my-post/admin.php:158, includes/extensions/share-my-post/admin.php:170, includes/extensions/share-my-post/admin.php:171
+msgid "Sharing Buttons"
+msgstr ""
+
+#: includes/extensions-manager.php:67
+msgid "Inline or floating share buttons."
+msgstr ""
+
+#: includes/extensions-manager.php:76
+msgid "Library Shortcode"
+msgstr ""
+
+#: includes/extensions-manager.php:77
+msgid "Shortcode for any Library layout."
+msgstr ""
+
+#: includes/extensions-manager.php:84
+msgid "Always on. Find the shortcode in the Divi Library list."
+msgstr ""
+
+#: includes/extensions-manager.php:85
+msgid "Replaced by the same feature in Divi Torque Pro."
 msgstr ""
 
 #: includes/module-usage.php:194
 msgid "(no title)"
 msgstr ""
 
-#: includes/rest-api.php:583
-msgid "Invalid version specified."
+#: includes/plugin.php:157
+msgid "Dashboard"
 msgstr ""
 
-#: includes/rest-api.php:587
-msgid "That version is already installed."
+#: includes/plugin.php:164, includes/plugin.php:176, includes/plugin.php:212
+msgid "Rollback"
 msgstr ""
 
-#: includes/rest-api.php:606
-msgid "Rollback failed."
+#: includes/plugin.php:175, includes/plugin.php:195
+msgid "Rollback Divi Torque Lite"
+msgstr ""
+
+#: includes/plugin.php:187
+msgid "You do not have permission to access this page."
+msgstr ""
+
+#. translators: %s: the currently installed plugin version number.
+#: includes/plugin.php:197
+msgid "Currently installed: %s"
+msgstr ""
+
+#: includes/plugin.php:200
+msgid "Choose a previous version published on WordPress.org. Your active state will be preserved."
+msgstr ""
+
+#: includes/plugin.php:204
+msgid "Version"
+msgstr ""
+
+#: includes/plugin.php:206
+msgid "Loading versions…"
 msgstr ""
 
 #: includes/rest-api.php:615
+msgid "Invalid version specified."
+msgstr ""
+
+#: includes/rest-api.php:619
+msgid "That version is already installed."
+msgstr ""
+
+#: includes/rest-api.php:638
+msgid "Rollback failed."
+msgstr ""
+
+#. translators: %s: the plugin version that was rolled back to.
+#: includes/rest-api.php:648
 msgid "Rolled back to %s."
 msgstr ""
 
@@ -403,75 +508,75 @@ msgstr ""
 msgid "Lite Shortcode"
 msgstr ""
 
-#: includes/deprecated/customizer/customizer.php:178, includes/modules/divi-4/Divider/Divider.php:486
+#: includes/deprecated/customizer/customizer.php:193, includes/modules/divi-4/Divider/Divider.php:486
 msgid "No Repeat"
 msgstr ""
 
-#: includes/deprecated/customizer/customizer.php:179
+#: includes/deprecated/customizer/customizer.php:194
 msgid "Tile"
 msgstr ""
 
-#: includes/deprecated/customizer/customizer.php:180
+#: includes/deprecated/customizer/customizer.php:195
 msgid "Tile Horizontally"
 msgstr ""
 
-#: includes/deprecated/customizer/customizer.php:181
+#: includes/deprecated/customizer/customizer.php:196
 msgid "Tile Vertically"
 msgstr ""
 
-#: includes/deprecated/customizer/customizer.php:184
+#: includes/deprecated/customizer/customizer.php:199
 msgid "Auto"
 msgstr ""
 
-#: includes/deprecated/customizer/customizer.php:185
+#: includes/deprecated/customizer/customizer.php:200
 msgid "Cover"
 msgstr ""
 
-#: includes/deprecated/customizer/customizer.php:186
+#: includes/deprecated/customizer/customizer.php:201
 msgid "Contain"
 msgstr ""
 
-#: includes/deprecated/customizer/customizer.php:189, includes/modules/base/BuilderModules.php:456, includes/modules/divi-4/Divider/Divider.php:517, includes/modules/divi-4/TeamBox/TeamBox.php:289, includes/modules/divi-4/Testimonial/Testimonial.php:451, includes/modules/divi-4/TwitterFeed/TwitterFeed.php:312
+#: includes/deprecated/customizer/customizer.php:204, includes/modules/base/BuilderModules.php:456, includes/modules/divi-4/Divider/Divider.php:517, includes/modules/divi-4/TeamBox/TeamBox.php:289, includes/modules/divi-4/Testimonial/Testimonial.php:451, includes/modules/divi-4/TwitterFeed/TwitterFeed.php:312
 msgid "Left Top"
 msgstr ""
 
-#: includes/deprecated/customizer/customizer.php:190, includes/modules/divi-4/Divider/Divider.php:518
+#: includes/deprecated/customizer/customizer.php:205, includes/modules/divi-4/Divider/Divider.php:518
 msgid "Left Center"
 msgstr ""
 
-#: includes/deprecated/customizer/customizer.php:191, includes/modules/base/BuilderModules.php:457, includes/modules/divi-4/Divider/Divider.php:519, includes/modules/divi-4/TeamBox/TeamBox.php:290, includes/modules/divi-4/Testimonial/Testimonial.php:452, includes/modules/divi-4/TwitterFeed/TwitterFeed.php:313
+#: includes/deprecated/customizer/customizer.php:206, includes/modules/base/BuilderModules.php:457, includes/modules/divi-4/Divider/Divider.php:519, includes/modules/divi-4/TeamBox/TeamBox.php:290, includes/modules/divi-4/Testimonial/Testimonial.php:452, includes/modules/divi-4/TwitterFeed/TwitterFeed.php:313
 msgid "Left Bottom"
 msgstr ""
 
-#: includes/deprecated/customizer/customizer.php:192, includes/modules/base/BuilderModules.php:458, includes/modules/divi-4/Divider/Divider.php:520, includes/modules/divi-4/TeamBox/TeamBox.php:291, includes/modules/divi-4/Testimonial/Testimonial.php:453, includes/modules/divi-4/TwitterFeed/TwitterFeed.php:314
+#: includes/deprecated/customizer/customizer.php:207, includes/modules/base/BuilderModules.php:458, includes/modules/divi-4/Divider/Divider.php:520, includes/modules/divi-4/TeamBox/TeamBox.php:291, includes/modules/divi-4/Testimonial/Testimonial.php:453, includes/modules/divi-4/TwitterFeed/TwitterFeed.php:314
 msgid "Right Top"
 msgstr ""
 
-#: includes/deprecated/customizer/customizer.php:193, includes/modules/divi-4/Divider/Divider.php:521
+#: includes/deprecated/customizer/customizer.php:208, includes/modules/divi-4/Divider/Divider.php:521
 msgid "Right Center"
 msgstr ""
 
-#: includes/deprecated/customizer/customizer.php:194, includes/modules/base/BuilderModules.php:459, includes/modules/divi-4/Divider/Divider.php:522, includes/modules/divi-4/TeamBox/TeamBox.php:292, includes/modules/divi-4/Testimonial/Testimonial.php:454, includes/modules/divi-4/TwitterFeed/TwitterFeed.php:315
+#: includes/deprecated/customizer/customizer.php:209, includes/modules/base/BuilderModules.php:459, includes/modules/divi-4/Divider/Divider.php:522, includes/modules/divi-4/TeamBox/TeamBox.php:292, includes/modules/divi-4/Testimonial/Testimonial.php:454, includes/modules/divi-4/TwitterFeed/TwitterFeed.php:315
 msgid "Right Bottom"
 msgstr ""
 
-#: includes/deprecated/customizer/customizer.php:195, includes/modules/divi-4/Divider/Divider.php:523
+#: includes/deprecated/customizer/customizer.php:210, includes/modules/divi-4/Divider/Divider.php:523
 msgid "Center Top"
 msgstr ""
 
-#: includes/deprecated/customizer/customizer.php:196, includes/modules/divi-4/Divider/Divider.php:524, includes/modules/divi-4/GradientHeading/GradientHeading.php:183, src/divi-4/modules/GradientHeading/GradientHeading.php:183
+#: includes/deprecated/customizer/customizer.php:211, includes/modules/divi-4/Divider/Divider.php:524, includes/modules/divi-4/GradientHeading/GradientHeading.php:183, src/divi-4/modules/GradientHeading/GradientHeading.php:183
 msgid "Center Center"
 msgstr ""
 
-#: includes/deprecated/customizer/customizer.php:197
+#: includes/deprecated/customizer/customizer.php:212
 msgid "Center Bottom"
 msgstr ""
 
-#: includes/deprecated/customizer/customizer.php:200
+#: includes/deprecated/customizer/customizer.php:215
 msgid "Fixed"
 msgstr ""
 
-#: includes/deprecated/customizer/customizer.php:201
+#: includes/deprecated/customizer/customizer.php:216
 msgid "Scroll"
 msgstr ""
 
@@ -489,6 +594,167 @@ msgstr ""
 
 #: includes/deprecated/metabox/popup-metabox.php:197, includes/deprecated/metabox/view/display-conditions.php:90
 msgid "Remove"
+msgstr ""
+
+#: includes/extensions/share-my-post/networks.php:64
+msgid "Facebook"
+msgstr ""
+
+#: includes/extensions/share-my-post/networks.php:70
+msgid "X"
+msgstr ""
+
+#: includes/extensions/share-my-post/networks.php:79
+msgid "LinkedIn"
+msgstr ""
+
+#: includes/extensions/share-my-post/networks.php:85
+msgid "WhatsApp"
+msgstr ""
+
+#: includes/extensions/share-my-post/networks.php:94
+msgid "Pinterest"
+msgstr ""
+
+#: includes/extensions/share-my-post/networks.php:100
+msgid "Telegram"
+msgstr ""
+
+#: includes/extensions/share-my-post/networks.php:106
+msgid "Reddit"
+msgstr ""
+
+#: includes/extensions/share-my-post/networks.php:112
+msgid "Tumblr"
+msgstr ""
+
+#: includes/extensions/share-my-post/networks.php:118
+msgid "VK"
+msgstr ""
+
+#: includes/extensions/share-my-post/networks.php:124
+msgid "Viber"
+msgstr ""
+
+#: includes/extensions/share-my-post/networks.php:134
+msgid "Mastodon"
+msgstr ""
+
+#: includes/extensions/share-my-post/networks.php:140
+msgid "Threads"
+msgstr ""
+
+#: includes/extensions/share-my-post/networks.php:146
+msgid "Bluesky"
+msgstr ""
+
+#: includes/extensions/share-my-post/networks.php:152
+msgid "Flipboard"
+msgstr ""
+
+#: includes/extensions/share-my-post/networks.php:158
+msgid "LINE"
+msgstr ""
+
+#: includes/extensions/share-my-post/networks.php:164
+msgid "WordPress"
+msgstr ""
+
+#: includes/extensions/share-my-post/networks.php:170
+msgid "Blogger"
+msgstr ""
+
+#: includes/extensions/share-my-post/networks.php:176
+msgid "Evernote"
+msgstr ""
+
+#: includes/extensions/share-my-post/networks.php:182
+msgid "Buffer"
+msgstr ""
+
+#: includes/extensions/share-my-post/networks.php:188
+msgid "Hacker News"
+msgstr ""
+
+#: includes/extensions/share-my-post/networks.php:194
+msgid "Xing"
+msgstr ""
+
+#: includes/extensions/share-my-post/networks.php:200
+msgid "Odnoklassniki"
+msgstr ""
+
+#: includes/extensions/share-my-post/networks.php:206
+msgid "Weibo"
+msgstr ""
+
+#: includes/extensions/share-my-post/networks.php:212
+msgid "Douban"
+msgstr ""
+
+#: includes/extensions/share-my-post/networks.php:218
+msgid "Qzone"
+msgstr ""
+
+#: includes/extensions/share-my-post/networks.php:224
+msgid "Naver"
+msgstr ""
+
+#: includes/extensions/share-my-post/networks.php:230
+msgid "Instapaper"
+msgstr ""
+
+#: includes/extensions/share-my-post/networks.php:236
+msgid "Diaspora"
+msgstr ""
+
+#: includes/extensions/share-my-post/networks.php:242
+msgid "Trello"
+msgstr ""
+
+#: includes/extensions/share-my-post/networks.php:248
+msgid "Email"
+msgstr ""
+
+#: includes/extensions/share-my-post/networks.php:254
+msgid "Text Message"
+msgstr ""
+
+#: includes/extensions/share-my-post/networks.php:260
+msgid "Copy Link"
+msgstr ""
+
+#: includes/extensions/share-my-post/networks.php:266
+msgid "Print"
+msgstr ""
+
+#: includes/extensions/share-my-post/networks.php:275
+msgid "Share"
+msgstr ""
+
+#: includes/extensions/share-my-post/render.php:69, includes/extensions/share-my-post/render.php:70, includes/extensions/share-my-post/render.php:177, includes/extensions/share-my-post/settings.php:68
+msgid "Share this post"
+msgstr ""
+
+#. translators: %s: social network name, e.g. Facebook.
+#: includes/extensions/share-my-post/render.php:168
+msgid "Share on %s"
+msgstr ""
+
+#: includes/extensions/share-my-post/render.php:175
+msgid "Print this post"
+msgstr ""
+
+#: includes/extensions/share-my-post/render.php:173
+msgid "Copy link to this post"
+msgstr ""
+
+#: includes/extensions/share-my-post/share-my-post.php:292
+msgid "Link copied"
+msgstr ""
+
+#: includes/extensions/share-my-post/share-my-post.php:293
+msgid "Could not copy the link"
 msgstr ""
 
 #: includes/modules/base/BuilderModules.php:35
@@ -1337,7 +1603,7 @@ msgstr ""
 msgid "Featured"
 msgstr ""
 
-#: includes/deprecated/customizer/options/blog-designer.php:401, includes/deprecated/customizer/options/blog-designer.php:1149, includes/modules/divi-4/BusinessHour/BusinessHour.php:25, includes/modules/divi-4/BusinessHour/BusinessHour.php:47, includes/modules/divi-4/BusinessHour/BusinessHour.php:84, includes/modules/divi-4/ContactForm7/ContactForm7.php:33, includes/modules/divi-4/ContactForm7/ContactForm7.php:714, includes/modules/divi-4/FlipBox/FlipBox.php:32, includes/modules/divi-4/FlipBox/FlipBox.php:47, includes/modules/divi-4/GradientHeading/GradientHeading.php:31, includes/modules/divi-4/IconBox/IconBox.php:25, includes/modules/divi-4/IconBox/IconBox.php:51, includes/modules/divi-4/IconBox/IconBox.php:123, includes/modules/divi-4/IconBox/IconBox.php:431, includes/modules/divi-4/ImageCarousel/ImageCarousel.php:37, includes/modules/divi-4/ImageCarousel/ImageCarousel.php:129, includes/modules/divi-4/ImageCarouselChild/ImageCarouselChild.php:28, includes/modules/divi-4/ImageCarouselChild/ImageCarouselChild.php:46, includes/modules/divi-4/ImageCarouselChild/ImageCarouselChild.php:86, includes/modules/divi-4/ImageCarouselChild/ImageCarouselChild.php:424, includes/modules/divi-4/InfoBox/InfoBox.php:27, includes/modules/divi-4/InfoBox/InfoBox.php:79, includes/modules/divi-4/InfoBox/InfoBox.php:154, includes/modules/divi-4/InfoBox/InfoBox.php:357, includes/modules/divi-4/InfoCard/InfoCard.php:34, includes/modules/divi-4/InfoCard/InfoCard.php:62, includes/modules/divi-4/InfoCard/InfoCard.php:517, includes/modules/divi-4/InlineNotice/InlineNotice.php:42, includes/modules/divi-4/InlineNotice/InlineNotice.php:102, includes/modules/divi-4/InlineNotice/InlineNotice.php:353, includes/modules/divi-4/NewsTicker/NewsTicker.php:33, includes/modules/divi-4/NewsTicker/NewsTicker.php:120, includes/modules/divi-4/NewsTicker/NewsTicker.php:287, includes/modules/divi-4/NewsTicker/NewsTicker.php:307, includes/modules/divi-4/NewsTicker/NewsTicker.php:346, includes/modules/divi-4/NumberCounter/NumberCounter.php:74, includes/modules/divi-4/NumberCounter/NumberCounter.php:297, includes/modules/divi-4/PostList/PostList.php:38, includes/modules/divi-4/PostList/PostList.php:82, includes/modules/divi-4/PostList/PostList.php:621, includes/modules/divi-4/Review/Review.php:27, includes/modules/divi-4/Review/Review.php:49, includes/modules/divi-4/Review/Review.php:553, includes/modules/divi-4/SkillBar/SkillBar.php:35, includes/modules/divi-4/SkillBar/SkillBar.php:47, includes/modules/divi-4/Testimonial/Testimonial.php:123, includes/modules/divi-4/Testimonial/Testimonial.php:1021, src/divi-4/modules/FlipBox/FlipBox.php:32, src/divi-4/modules/FlipBox/FlipBox.php:47, src/divi-4/modules/GradientHeading/GradientHeading.php:31, src/divi-4/modules/IconBox/IconBox.php:25, src/divi-4/modules/IconBox/IconBox.php:51, src/divi-4/modules/IconBox/IconBox.php:123, src/divi-4/modules/IconBox/IconBox.php:431, src/divi-4/modules/ImageCarousel/ImageCarousel.php:37, src/divi-4/modules/ImageCarousel/ImageCarousel.php:129
+#: includes/deprecated/customizer/options/blog-designer.php:401, includes/deprecated/customizer/options/blog-designer.php:1149, includes/modules/divi-4/BusinessHour/BusinessHour.php:25, includes/modules/divi-4/BusinessHour/BusinessHour.php:47, includes/modules/divi-4/BusinessHour/BusinessHour.php:84, includes/modules/divi-4/ContactForm7/ContactForm7.php:33, includes/modules/divi-4/ContactForm7/ContactForm7.php:714, includes/modules/divi-4/FlipBox/FlipBox.php:32, includes/modules/divi-4/FlipBox/FlipBox.php:47, includes/modules/divi-4/GradientHeading/GradientHeading.php:31, includes/modules/divi-4/IconBox/IconBox.php:25, includes/modules/divi-4/IconBox/IconBox.php:51, includes/modules/divi-4/IconBox/IconBox.php:123, includes/modules/divi-4/IconBox/IconBox.php:431, includes/modules/divi-4/ImageCarousel/ImageCarousel.php:37, includes/modules/divi-4/ImageCarousel/ImageCarousel.php:129, includes/modules/divi-4/ImageCarouselChild/ImageCarouselChild.php:28, includes/modules/divi-4/ImageCarouselChild/ImageCarouselChild.php:46, includes/modules/divi-4/ImageCarouselChild/ImageCarouselChild.php:86, includes/modules/divi-4/ImageCarouselChild/ImageCarouselChild.php:424, includes/modules/divi-4/InfoBox/InfoBox.php:27, includes/modules/divi-4/InfoBox/InfoBox.php:79, includes/modules/divi-4/InfoBox/InfoBox.php:154, includes/modules/divi-4/InfoBox/InfoBox.php:357, includes/modules/divi-4/InfoCard/InfoCard.php:34, includes/modules/divi-4/InfoCard/InfoCard.php:62, includes/modules/divi-4/InfoCard/InfoCard.php:517, includes/modules/divi-4/InlineNotice/InlineNotice.php:42, includes/modules/divi-4/InlineNotice/InlineNotice.php:102, includes/modules/divi-4/InlineNotice/InlineNotice.php:353, includes/modules/divi-4/NewsTicker/NewsTicker.php:33, includes/modules/divi-4/NewsTicker/NewsTicker.php:120, includes/modules/divi-4/NewsTicker/NewsTicker.php:287, includes/modules/divi-4/NewsTicker/NewsTicker.php:307, includes/modules/divi-4/NewsTicker/NewsTicker.php:346, includes/modules/divi-4/NumberCounter/NumberCounter.php:74, includes/modules/divi-4/NumberCounter/NumberCounter.php:297, includes/modules/divi-4/PostList/PostList.php:24, includes/modules/divi-4/PostList/PostList.php:38, includes/modules/divi-4/PostList/PostList.php:82, includes/modules/divi-4/PostList/PostList.php:621, includes/modules/divi-4/Review/Review.php:27, includes/modules/divi-4/Review/Review.php:49, includes/modules/divi-4/Review/Review.php:553, includes/modules/divi-4/SkillBar/SkillBar.php:35, includes/modules/divi-4/SkillBar/SkillBar.php:47, includes/modules/divi-4/Testimonial/Testimonial.php:123, includes/modules/divi-4/Testimonial/Testimonial.php:1021, src/divi-4/modules/FlipBox/FlipBox.php:32, src/divi-4/modules/FlipBox/FlipBox.php:47, src/divi-4/modules/GradientHeading/GradientHeading.php:31, src/divi-4/modules/IconBox/IconBox.php:25, src/divi-4/modules/IconBox/IconBox.php:51, src/divi-4/modules/IconBox/IconBox.php:123, src/divi-4/modules/IconBox/IconBox.php:431, src/divi-4/modules/ImageCarousel/ImageCarousel.php:37, src/divi-4/modules/ImageCarousel/ImageCarousel.php:129
 msgid "Title"
 msgstr ""
 
@@ -1345,7 +1611,7 @@ msgstr ""
 msgid "Meta"
 msgstr ""
 
-#: includes/deprecated/customizer/options/blog-designer.php:445, includes/deprecated/customizer/options/blog-designer.php:1322, includes/modules/divi-4/PostList/PostList.php:42
+#: includes/deprecated/customizer/options/blog-designer.php:445, includes/deprecated/customizer/options/blog-designer.php:1322, includes/modules/divi-4/PostList/PostList.php:25, includes/modules/divi-4/PostList/PostList.php:42
 msgid "Excerpt"
 msgstr ""
 
@@ -1881,6 +2147,26 @@ msgstr ""
 
 #: includes/deprecated/metabox/view/display-conditions.php:131
 msgid "Add new display condition"
+msgstr ""
+
+#: includes/divi5/modules/SharedCarousel/CarouselEngine.php:131
+msgid "Previous slide"
+msgstr ""
+
+#: includes/divi5/modules/SharedCarousel/CarouselEngine.php:132
+msgid "Next slide"
+msgstr ""
+
+#: includes/divi5/modules/SharedCarousel/CarouselEngine.php:133
+msgid "This is the first slide"
+msgstr ""
+
+#: includes/divi5/modules/SharedCarousel/CarouselEngine.php:134
+msgid "This is the last slide"
+msgstr ""
+
+#: includes/divi5/modules/SharedCarousel/CarouselEngine.php:135
+msgid "Go to slide {{index}}"
 msgstr ""
 
 #: includes/modules/divi-4/AnimatedText/AnimatedText.php:15, includes/modules/divi-4/BusinessHour/BusinessHour.php:18, includes/modules/divi-4/BusinessHourChild/BusinessHourChild.php:19, includes/modules/divi-4/Divider/Divider.php:17, includes/modules/divi-4/GradientHeading/GradientHeading.php:18, includes/modules/divi-4/IconBox/IconBox.php:17, includes/modules/divi-4/ImageCarouselChild/ImageCarouselChild.php:19, includes/modules/divi-4/ImageCarouselChild/ImageCarouselChild.php:27, includes/modules/divi-4/ImageCarouselChild/ImageCarouselChild.php:364, includes/modules/divi-4/InfoBox/InfoBox.php:18, includes/modules/divi-4/InfoBox/InfoBox.php:365, includes/modules/divi-4/InfoCard/InfoCard.php:18, includes/modules/divi-4/InlineNotice/InlineNotice.php:17, includes/modules/divi-4/LogoCarouselChild/LogoCarouselChild.php:19, includes/modules/divi-4/LogoGridChild/LogoGridChild.php:19, includes/modules/divi-4/NewsTicker/NewsTicker.php:17, includes/modules/divi-4/NumberCounter/NumberCounter.php:15, includes/modules/divi-4/PostList/PostList.php:642, includes/modules/divi-4/Review/Review.php:16, includes/modules/divi-4/Review/Review.php:22, includes/modules/divi-4/ScrollImage/ScrollImage.php:15, includes/modules/divi-4/SkillBar/SkillBar.php:21, includes/modules/divi-4/SkillBarChild/SkillBarChild.php:20, includes/modules/divi-4/TeamBox/TeamBox.php:17, includes/modules/divi-4/TeamBox/TeamBox.php:25, includes/modules/divi-4/TeamBox/TeamBox.php:574, includes/modules/divi-4/TeamBox/TeamBox.php:697, includes/modules/divi-4/Testimonial/Testimonial.php:16, includes/modules/divi-4/TwitterFeed/TwitterFeed.php:41, includes/modules/divi-4/TwitterFeedCarousel/TwitterFeedCarousel.php:52, includes/modules/divi-4/VideoModal/VideoModal.php:15, src/divi-4/modules/GradientHeading/GradientHeading.php:18, src/divi-4/modules/IconBox/IconBox.php:17
@@ -4351,7 +4637,7 @@ msgstr ""
 msgid "Navigation"
 msgstr ""
 
-#: includes/modules/divi-4/ImageCarousel/ImageCarousel.php:56, includes/modules/divi-4/LogoCarousel/LogoCarousel.php:52, src/divi-4/modules/ImageCarousel/ImageCarousel.php:56
+#: includes/modules/divi-4/ImageCarousel/ImageCarousel.php:56, includes/modules/divi-4/LogoCarousel/LogoCarousel.php:52, includes/divi5/modules/PostCarousel/PostCarouselTrait/RenderCallbackTrait.php:276, src/divi-4/modules/ImageCarousel/ImageCarousel.php:56
 msgid "Pagination"
 msgstr ""
 
@@ -5187,6 +5473,22 @@ msgstr ""
 msgid "Choose how much news you would like to display per module."
 msgstr ""
 
+#: includes/modules/divi-4/NewsTicker/NewsTicker.php:150
+msgid "Exclude news by IDs"
+msgstr ""
+
+#: includes/modules/divi-4/NewsTicker/NewsTicker.php:151
+msgid "eg. 10, 22, 19 etc. If this is used by IDs, Selected news will be ignored."
+msgstr ""
+
+#: includes/modules/divi-4/NewsTicker/NewsTicker.php:157
+msgid "News Offset"
+msgstr ""
+
+#: includes/modules/divi-4/NewsTicker/NewsTicker.php:158, includes/modules/divi-4/PostList/PostList.php:149
+msgid "Choose how many news you would like to skip. These news will not be shown."
+msgstr ""
+
 #: includes/modules/divi-4/NewsTicker/NewsTicker.php:173
 msgid "Title Position"
 msgstr ""
@@ -5377,10 +5679,6 @@ msgstr ""
 
 #: includes/modules/divi-4/PostList/PostList.php:148
 msgid "Post Offset"
-msgstr ""
-
-#: includes/modules/divi-4/PostList/PostList.php:149
-msgid "Choose how many news you would like to skip. These news will not be shown."
 msgstr ""
 
 #: includes/modules/divi-4/PostList/PostList.php:163
@@ -7107,6 +7405,40 @@ msgstr ""
 msgid "Here you can define the radius value for your text box border."
 msgstr ""
 
+#: includes/divi5/modules/AccordionItem/AccordionItemTrait/RenderCallbackTrait.php:164
+msgid "Close"
+msgstr ""
+
+#. translators: %s: the visitor's search query.
+#: includes/divi5/modules/Breadcrumbs/BreadcrumbsTrait/RenderCallbackTrait.php:93
+msgid "Search: %s"
+msgstr ""
+
+#: includes/divi5/modules/Breadcrumbs/BreadcrumbsTrait/RenderCallbackTrait.php:101
+msgid "404 Not Found"
+msgstr ""
+
+#: includes/divi5/modules/Breadcrumbs/BreadcrumbsTrait/RenderCallbackTrait.php:115
+msgid "Current Page"
+msgstr ""
+
+#: includes/divi5/modules/CodeSnippet/CodeSnippetTrait/RenderCallbackTrait.php:147
+msgid "Copy"
+msgstr ""
+
+#: includes/divi5/modules/CodeSnippet/CodeSnippetTrait/RenderCallbackTrait.php:148
+msgid "Copied"
+msgstr ""
+
+#. translators: %s: the snippet's file name.
+#: includes/divi5/modules/CodeSnippet/CodeSnippetTrait/RenderCallbackTrait.php:193
+msgid "Code sample: %s"
+msgstr ""
+
+#: includes/divi5/modules/CodeSnippet/CodeSnippetTrait/RenderCallbackTrait.php:194
+msgid "Code sample"
+msgstr ""
+
 #: includes/divi5/modules/ContactForm7/ContactForm7Trait/RenderCallbackTrait.php:128
 msgid "Contact Form 7 is not active."
 msgstr ""
@@ -7115,12 +7447,56 @@ msgstr ""
 msgid "Please select a Contact Form 7."
 msgstr ""
 
+#: includes/divi5/modules/InlineNotice/InlineNoticeTrait/RenderCallbackTrait.php:97
+msgid "Dismiss this notice"
+msgstr ""
+
 #: includes/divi5/modules/NewsTicker/NewsTickerTrait/RenderCallbackTrait.php:103
 msgid "No News Found"
 msgstr ""
 
+#: includes/divi5/modules/NewsTicker/NewsTickerTrait/RenderCallbackTrait.php:134
+msgid "Pause the scrolling news ticker"
+msgstr ""
+
+#: includes/divi5/modules/PostCarousel/PostCarouselTrait/RenderCallbackTrait.php:249
+msgid "&laquo; Older Entries"
+msgstr ""
+
+#: includes/divi5/modules/PostCarousel/PostCarouselTrait/RenderCallbackTrait.php:250
+msgid "Newer Entries &raquo;"
+msgstr ""
+
 #: includes/divi5/modules/PostList/PostListTrait/RenderCallbackTrait.php:186
 msgid "No posts found."
+msgstr ""
+
+#: includes/divi5/modules/SkillBarItem/SkillBarItemTrait/RenderCallbackTrait.php:73
+msgid "Skill level"
+msgstr ""
+
+#: includes/divi5/modules/StickyVideo/StickyVideoTrait/RenderCallbackTrait.php:273
+msgid "Embedded video"
+msgstr ""
+
+#: includes/divi5/modules/StickyVideo/StickyVideoTrait/RenderCallbackTrait.php:290
+msgid "Play video"
+msgstr ""
+
+#: includes/divi5/modules/StickyVideo/StickyVideoTrait/RenderCallbackTrait.php:299
+msgid "Close video"
+msgstr ""
+
+#: includes/divi5/modules/StickyVideo/StickyVideoTrait/RenderCallbackTrait.php:282
+msgid "Add a video URL, or choose a file for a self-hosted video."
+msgstr ""
+
+#: includes/divi5/modules/SvgDraw/SvgDrawTrait/RenderCallbackTrait.php:332
+msgid "Paste an SVG or choose one from the media library."
+msgstr ""
+
+#: includes/divi5/modules/TableOfContents/TableOfContentsTrait/RenderCallbackTrait.php:406
+msgid "Toggle table of contents"
 msgstr ""
 
 #: includes/divi5/modules/TwitterFeed/TwitterFeedTrait/RenderCallbackTrait.php:60, includes/divi5/modules/TwitterFeedCarousel/TwitterFeedCarouselTrait/RenderCallbackTrait.php:61

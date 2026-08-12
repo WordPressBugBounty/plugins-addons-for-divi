@@ -121,6 +121,21 @@ class CarouselEngine
             'observer'       => true,
             'observeParents' => true,
             'spaceBetween'   => $space,
+            // Swiper's a11y module labels the nav buttons, exposes the slide
+            // roles and announces slide changes in a live region. It was never
+            // enabled, so carousels shipped with unlabelled arrows and silent
+            // slide transitions. Keep in lockstep with the JS twin in
+            // src/divi5/shared/carousel/config.js.
+            'a11y'           => [
+                'enabled'                 => true,
+                'prevSlideMessage'        => esc_html__('Previous slide', 'addons-for-divi'),
+                'nextSlideMessage'        => esc_html__('Next slide', 'addons-for-divi'),
+                'firstSlideMessage'       => esc_html__('This is the first slide', 'addons-for-divi'),
+                'lastSlideMessage'        => esc_html__('This is the last slide', 'addons-for-divi'),
+                'paginationBulletMessage' => esc_html__('Go to slide {{index}}', 'addons-for-divi'),
+            ],
+            // Arrow-key control when the carousel has focus.
+            'keyboard'       => ['enabled' => true, 'onlyInViewport' => true],
         ];
 
         if ($is_vertical) {
@@ -213,7 +228,8 @@ class CarouselEngine
         $classes = ['dtq-swiper-carousel', $type_class, 'dtq-lightbox-off'];
         if ('on' === ($advanced['isCenter']['desktop']['value'] ?? 'off')) {
             $classes[] = 'dtq-centered';
-            $classes[] = 'dtq-centered--' . ($advanced['centerModeType']['desktop']['value'] ?? 'classic');
+            $center_type = $advanced['centerModeType']['desktop']['value'] ?? 'classic';
+            $classes[]   = 'dtq-centered--' . (in_array($center_type, ['classic', 'highlighted'], true) ? $center_type : 'classic');
         }
         if ('on' === ($advanced['isVertical']['desktop']['value'] ?? 'off')) {
             $classes[] = 'dtq-vertical';
@@ -237,11 +253,33 @@ class CarouselEngine
             $advanced = [];
         }
 
+        // Every value below is author-controlled and is interpolated straight into
+        // a CSS declaration, so each is sanitized by type first. Unsanitized, a
+        // colour of `red;}…` would escape its declaration and rewrite the page's
+        // styling; `navPos`/`navPosHz`/`navBorderStyle` are worse still because
+        // they land where a CSS *property name* is expected. Values that fail
+        // their check fall back to the module default instead of being emitted.
+        // Colours are resolved first so Divi global colours (`$variable(...)$`)
+        // become `var(--gcid-…)` rather than leaking the raw token into the CSS.
         $val   = function ($key, $fallback) use ($advanced) {
             return $advanced[$key]['desktop']['value'] ?? $fallback;
         };
+        $color = function ($key, $fallback) use ($advanced) {
+            return dtq_css_color(dtq_resolve_css_value($advanced[$key]['desktop']['value'] ?? ''), $fallback);
+        };
+        $len   = function ($key, $fallback) use ($advanced) {
+            return dtq_css_length(dtq_resolve_css_value($advanced[$key]['desktop']['value'] ?? ''), $fallback);
+        };
+        $enum  = function ($key, $fallback, array $allowed) use ($advanced) {
+            $value = $advanced[$key]['desktop']['value'] ?? $fallback;
+            return in_array($value, $allowed, true) ? $value : $fallback;
+        };
         $hover = function ($key) use ($advanced) {
-            return $advanced[$key]['desktop']['hover'] ?? null;
+            $raw = $advanced[$key]['desktop']['hover'] ?? null;
+            if (null === $raw || '' === $raw) {
+                return null;
+            }
+            return dtq_css_color(dtq_resolve_css_value($raw), 'inherit');
         };
 
         $styles = [];
@@ -252,18 +290,18 @@ class CarouselEngine
         $dtq = $order_class . ' .dtq-swiper-carousel';
 
         // Navigation arrows.
-        $nav_color        = $val('navColor', '#333333');
-        $nav_bg           = $val('navBg', '#dddddd');
-        $nav_height       = $val('navHeight', '40px');
-        $nav_width        = $val('navWidth', '40px');
-        $nav_icon_size    = $val('navIconSize', '30px');
-        $nav_radius       = $val('navRadius', '40px');
-        $nav_border_width = $val('navBorderWidth', '0px');
-        $nav_border_style = $val('navBorderStyle', 'solid');
-        $nav_border_color = $val('navBorderColor', '#333333');
-        $nav_skew         = $val('navSkew', '0deg');
-        $nav_pos_x        = $val('navPosX', '-15px');
-        $nav_pos_y        = $val('navPosY', '50%');
+        $nav_color        = $color('navColor', '#333333');
+        $nav_bg           = $color('navBg', '#dddddd');
+        $nav_height       = $len('navHeight', '40px');
+        $nav_width        = $len('navWidth', '40px');
+        $nav_icon_size    = $len('navIconSize', '30px');
+        $nav_radius       = $len('navRadius', '40px');
+        $nav_border_width = $len('navBorderWidth', '0px');
+        $nav_border_style = $enum('navBorderStyle', 'solid', ['none', 'hidden', 'solid', 'dashed', 'dotted', 'double', 'groove', 'ridge', 'inset', 'outset']);
+        $nav_border_color = $color('navBorderColor', '#333333');
+        $nav_skew         = $len('navSkew', '0deg');
+        $nav_pos_x        = $len('navPosX', '-15px');
+        $nav_pos_y        = $len('navPosY', '50%');
         $nav_height_int   = (int) $nav_height;
         $skew_int         = (int) $nav_skew;
         $skew_inner       = $skew_int < 0 ? abs($skew_int) : -abs($skew_int);
@@ -297,13 +335,13 @@ class CarouselEngine
         if ($hover('navBorderColor')) $push($dtq . ' > .swiper-button-prev:hover, ' . $dtq . ' > .swiper-button-next:hover', sprintf('border-color: %1$s;', $hover('navBorderColor')));
 
         // Pagination dots.
-        $pagi_bg        = $val('pagiBg', '#dddddd');
-        $pagi_bg_active = $val('pagiBgActive', '#333333');
-        $pagi_height    = $val('pagiHeight', '10px');
-        $pagi_width     = $val('pagiWidth', '10px');
-        $pagi_radius    = $val('pagiRadius', '10px');
-        $pagi_spacing   = $val('pagiSpacing', '10px');
-        $pagi_pos_y     = $val('pagiPosY', '10px');
+        $pagi_bg        = $color('pagiBg', '#dddddd');
+        $pagi_bg_active = $color('pagiBgActive', '#333333');
+        $pagi_height    = $len('pagiHeight', '10px');
+        $pagi_width     = $len('pagiWidth', '10px');
+        $pagi_radius    = $len('pagiRadius', '10px');
+        $pagi_spacing   = $len('pagiSpacing', '10px');
+        $pagi_pos_y     = $len('pagiPosY', '10px');
         $pagi_alignment = $val('pagiAlignment', 'center');
         $justify        = 'left' === $pagi_alignment ? 'flex-start' : ('right' === $pagi_alignment ? 'flex-end' : 'center');
 
@@ -317,12 +355,19 @@ class CarouselEngine
         );
         $active_decl = sprintf('background: %1$s;', $pagi_bg_active);
         if ($val('pagiWidthActive', '')) {
-            $active_decl .= sprintf(' width: %1$s;', $val('pagiWidthActive', ''));
+            $active_decl .= sprintf(' width: %1$s;', $len('pagiWidthActive', 'auto'));
         }
         $push($dtq . ' .swiper-pagination-bullet-active', $active_decl);
 
+        // Responsive spacing values are interpolated the same way the desktop ones
+        // are, so they need the same length check. Returns null when unset so the
+        // callers' `?:` fallbacks to the desktop value still work.
         $bp_raw  = function ($key, $bp) use ($advanced) {
-            return $advanced[$key][$bp]['value'] ?? null;
+            $raw = $advanced[$key][$bp]['value'] ?? null;
+            if (null === $raw || '' === $raw) {
+                return null;
+            }
+            return dtq_css_length($raw, '0px');
         };
         $push_at = function ($at_rule, $selector, $declaration) use (&$styles) {
             $styles[] = ['atRules' => $at_rule, 'selector' => $selector, 'declaration' => $declaration];
@@ -332,10 +377,10 @@ class CarouselEngine
 
         // Number pagination.
         if ('number' === $val('pagiType', 'dot')) {
-            $pagi_color        = $val('pagiColor', '#333333');
-            $pagi_color_hover  = $advanced['pagiColor']['desktop']['hover'] ?? null;
-            $pagi_text         = $val('pagiText', '16px');
-            $pagi_text_active  = $val('pagiTextActive', $pagi_bg_active);
+            $pagi_color        = $color('pagiColor', '#333333');
+            $pagi_color_hover  = $hover('pagiColor');
+            $pagi_text         = $len('pagiText', '16px');
+            $pagi_text_active  = $color('pagiTextActive', $pagi_bg_active);
             $push($dtq . ' .swiper-pagination-bullet', sprintf('background: transparent; width: auto; height: auto; border-radius: 0; font-size: %1$s; line-height: 1; color: %2$s;', $pagi_text, $pagi_color));
             $push($dtq . ' .swiper-pagination-bullet-active', sprintf('background: transparent; color: %1$s;', $pagi_text_active));
             if ($pagi_color_hover) $push($dtq . ' .swiper-pagination-bullet:hover', sprintf('color: %1$s;', $pagi_color_hover));
@@ -343,11 +388,13 @@ class CarouselEngine
 
         // Alongside navigation (CSS-positioned).
         if ('alongside' === $val('navType', 'overlay')) {
-            $nav_pos    = $val('navPos', 'bottom');
-            $nav_pos_hz = $val('navPosHz', 'right');
+            // These two are interpolated as CSS *property names*, so they must be
+            // an exact match from the allowed set — never a passed-through value.
+            $nav_pos    = $enum('navPos', 'bottom', ['top', 'bottom']);
+            $nav_pos_hz = $enum('navPosHz', 'right', ['left', 'right']);
             $nav_x_ctr  = 'on' === $val('navXCenter', 'off');
             $nav_w      = (int) $nav_width;
-            $nav_gap    = $val('navGap', '10px');
+            $nav_gap    = $len('navGap', '10px');
             $nav_gap_i  = (int) $nav_gap;
             $push($dtq . ' > .swiper-button-prev, ' . $dtq . ' > .swiper-button-next', sprintf('top: auto; margin-top: 0; %1$s: %2$s;', $nav_pos, $nav_pos_y));
             if ($nav_x_ctr) {
@@ -360,9 +407,26 @@ class CarouselEngine
             }
         }
 
+        // Variable slide width. With `slidesPerView: 'auto'` Swiper takes each
+        // slide's width from CSS, so the "Slide Width" option only has an effect
+        // once it is emitted here — without this the field rendered in the panel
+        // and did nothing.
+        if ('on' === $val('isVariableWidth', 'off')) {
+            $slide_width = $len('slideWidth', '');
+            if ('' !== $slide_width) {
+                $push($dtq . ' .swiper-slide', sprintf('width: %s;', $slide_width));
+                foreach (['tablet' => $tablet, 'phone' => $phone] as $bp => $at_rule) {
+                    $bp_width = $bp_raw('slideWidth', $bp);
+                    if (null !== $bp_width) {
+                        $push_at($at_rule, $dtq . ' .swiper-slide', sprintf('width: %s;', $bp_width));
+                    }
+                }
+            }
+        }
+
         // Carousel spacing top/bottom (pad the viewport).
-        $spacing_top    = $val('carouselSpacingTop', '0px');
-        $spacing_bottom = $val('carouselSpacingBottom', '0px');
+        $spacing_top    = $len('carouselSpacingTop', '0px');
+        $spacing_bottom = $len('carouselSpacingBottom', '0px');
         if ((int) $spacing_top || (int) $spacing_bottom) {
             $push($dtq . ' > .swiper', sprintf('padding-top: %1$s; padding-bottom: %2$s;', $spacing_top, $spacing_bottom));
             if ($bp_raw('carouselSpacingTop', 'tablet') || $bp_raw('carouselSpacingBottom', 'tablet')) {
@@ -373,9 +437,12 @@ class CarouselEngine
             }
         }
 
-        // Custom transition easing.
-        $css_transition = $val('cssTransition', '');
-        if ($css_transition) {
+        // Custom transition easing. Only a real timing function is allowed through
+        // — this lands inside a declaration, so an arbitrary string could close it.
+        $css_transition = trim((string) $val('cssTransition', ''));
+        if ('' !== $css_transition
+            && preg_match('/^(?:linear|ease|ease-in|ease-out|ease-in-out|step-start|step-end|cubic-bezier\(\s*[0-9.,\s-]+\)|steps\(\s*[0-9,a-z\s-]+\))$/i', $css_transition)
+        ) {
             $push($dtq . ' .swiper-wrapper', sprintf('transition-timing-function: %1$s !important;', $css_transition));
         }
 
@@ -386,7 +453,9 @@ class CarouselEngine
             $c_type      = $parts[0] ?? '';
             $c_icon      = $parts[1] ?? '';
             $uris        = self::cursor_data_uris();
-            if ('css' === $c_type) {
+            if ('css' === $c_type && preg_match('/^[a-z-]+$/', $c_icon)) {
+                // CSS cursor keywords are lowercase letters and hyphens only;
+                // anything else would break out of the declaration.
                 $push($dtq, sprintf('cursor: %1$s !important;', $c_icon));
             } elseif ('custom' === $c_type && isset($uris[$c_icon])) {
                 $push($dtq, sprintf("cursor: url('%1\$s'), auto !important;", $uris[$c_icon]));
@@ -395,7 +464,7 @@ class CarouselEngine
 
         // Center highlighted (scale the active slide).
         if ('on' === $val('isCenter', 'off') && 'highlighted' === $val('centerModeType', 'classic')) {
-            $animation_speed = $val('animationSpeed', '700ms');
+            $animation_speed = $len('animationSpeed', '700ms');
             $push($dtq . '.dtq-centered--highlighted .swiper-slide', sprintf('transform: scale(0.8); transition: transform %1$s;', $animation_speed));
             $push($dtq . '.dtq-centered--highlighted .swiper-slide-active', 'transform: scale(1);');
         }

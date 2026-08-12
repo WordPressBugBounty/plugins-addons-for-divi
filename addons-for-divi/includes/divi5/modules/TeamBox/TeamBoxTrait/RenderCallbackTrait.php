@@ -122,10 +122,28 @@ trait RenderCallbackTrait
         $photo_alt = $attrs['photo']['advanced']['alt']['desktop']['value'] ?? '';
         $photo     = '';
         if (!empty($photo_src)) {
+            // "Open Photo in Lightbox" was a declared option that emitted nothing.
+            // Use the same class/data hooks Review does (`.dtq-lightbox` +
+            // `data-mfp-src`), which src/divi5/frontend.js already binds magnific
+            // popup to, and load the library on the front end only.
+            $use_lightbox   = ($advanced['useLightbox']['desktop']['value'] ?? 'off') === 'on';
+            $lightbox_class = '';
+            $lightbox_data  = '';
+            if ($use_lightbox) {
+                $lightbox_class = ' dtq-lightbox';
+                $lightbox_data  = sprintf(' data-mfp-src="%s"', esc_url($photo_src));
+                if (function_exists('wp_enqueue_script')) {
+                    wp_enqueue_script('divi-torque-lite-magnific-popup');
+                    wp_enqueue_style('divi-torque-lite-magnific-popup');
+                }
+            }
+
             $photo = sprintf(
-                '<img class="dtq-swapped-img" src="%1$s" alt="%2$s"/>',
+                '<img class="dtq-swapped-img%3$s"%4$s src="%1$s" alt="%2$s"/>',
                 esc_url($photo_src),
-                esc_attr($photo_alt)
+                esc_attr($photo_alt),
+                esc_attr($lightbox_class),
+                $lightbox_data
             );
         }
 

@@ -147,6 +147,30 @@ trait ModuleStylesTrait
         $push($order_class . ' .dtq-info-box-icon i', sprintf('color: %1$s;', $icon_color));
         $push($order_class . ' .dtq-info-box-icon i', sprintf('font-size: %1$s;', $icon_size));
 
+        // Image hover overlay (designOverlay group). Mirrors the Image Card
+        // module; keep in lockstep with the JS twin in styles.jsx.
+        if (($advanced['useOverlay']['desktop']['value'] ?? 'off') === 'on') {
+            $overlay_color    = dtq_css_color(dtq_resolve_css_value($val('overlayColor', '#2EA3F2')), '#2EA3F2');
+            $overlay_icon_col = dtq_css_color(dtq_resolve_css_value($val('overlayIconColor', '#2EA3F2')), '#2EA3F2');
+            $overlay_icon_sz  = dtq_css_length($val('overlayIconSize', '32px'), '32px');
+            $overlay_icon_op  = dtq_css_length($val('overlayIconOpacity', '1'), '1');
+            $overlay_speed    = dtq_css_length($val('overlayHoverSpeed', '500ms'), '500ms');
+
+            $push(
+                $order_class . ' .dtq-overlay',
+                sprintf('background-color: %1$s; transition: all %2$s;', $overlay_color, $overlay_speed)
+            );
+            $push(
+                $order_class . ' .dtq-overlay .dtq-overlay-icon',
+                sprintf('color: %1$s; font-size: %2$s; opacity: %3$s;', $overlay_icon_col, $overlay_icon_sz, $overlay_icon_op)
+            );
+
+            // "Show overlay only on hover" off => keep it permanently visible.
+            if (($advanced['overlayOnHover']['desktop']['value'] ?? 'on') !== 'on') {
+                $push($order_class . ' .dtq-info-box-figure .dtq-overlay', 'opacity: 1;');
+            }
+        }
+
         // Video overlay.
         if (!empty($vo_icon_color)) {
             $push($order_class . ' .et_pb_video_overlay .et_pb_video_play', sprintf('color: %1$s;', $vo_icon_color));

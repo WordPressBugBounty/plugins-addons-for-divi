@@ -229,12 +229,17 @@ add_action('wp_footer', 'dtq_print_full_icon_font', 99);
  * "||type||weight") or as the legacy index format "%%NN%%". When a layout using
  * the legacy format is migrated to Divi 5, that "%%NN%%" string can survive into
  * the D5 icon object's `unicode` field and would otherwise render as raw glyphs.
- * Resolve it the same way Divi 4 did, via et_pb_process_font_icon(). Values that
- * are already a unicode entity are returned unchanged.
+ * Resolve it the same way Divi 4 did, via et_pb_process_font_icon().
+ *
+ * The result is escaped with esc_html() before it is returned: the stored value
+ * is a module attribute and therefore author-controlled, so printing it raw into
+ * the icon <i> would let crafted markup reach the DOM. esc_html() passes
+ * `$double_encode = false`, so an existing "&#xe0XX;" entity survives untouched
+ * and the browser still renders the glyph — the call is idempotent for entities.
  *
  * @param string $unicode Raw unicode value from the icon attribute.
  *
- * @return string Unicode entity safe to print inside the icon <i>.
+ * @return string Escaped unicode entity, safe to print inside the icon <i>.
  */
 if (!function_exists('dtq_resolve_icon_unicode')) {
 	function dtq_resolve_icon_unicode($unicode)
@@ -244,8 +249,216 @@ if (!function_exists('dtq_resolve_icon_unicode')) {
 			// et_pb_process_font_icon() returns the entity with the ampersand already
 			// escaped ("&amp;#xe0XX;"); decode once so the raw entity ("&#xe0XX;") is
 			// what lands inside the icon <i> and the browser renders the glyph.
-			return html_entity_decode(et_pb_process_font_icon($unicode));
+			$unicode = html_entity_decode(et_pb_process_font_icon($unicode));
 		}
-		return $unicode;
+		return esc_html($unicode);
+	}
+}
+
+/**
+ * mbstring-safe string helpers.
+ *
+ * mbstring is not guaranteed to be present — it is a non-default PHP extension
+ * and some shared hosts ship without it. Calling mb_* unguarded is a fatal on
+ * those hosts, which took the whole page down whenever a module truncated an
+ * excerpt. These wrappers fall back to the single-byte equivalents; the fallback
+ * can split a multi-byte character mid-sequence, which is cosmetically imperfect
+ * but far better than a white screen.
+ */
+if (!function_exists('dtq_strlen')) {
+	function dtq_strlen($string)
+	{
+		$string = (string) $string;
+		return function_exists('mb_strlen') ? mb_strlen($string) : strlen($string);
+	}
+}
+
+if (!function_exists('dtq_substr')) {
+	function dtq_substr($string, $start, $length = null)
+	{
+		$string = (string) $string;
+		if (function_exists('mb_substr')) {
+			return null === $length ? mb_substr($string, $start) : mb_substr($string, $start, $length);
+		}
+		return null === $length ? substr($string, $start) : substr($string, $start, $length);
+	}
+}
+
+if (!function_exists('dtq_strimwidth')) {
+	function dtq_strimwidth($string, $start, $width, $trim_marker = '')
+	{
+		$string = (string) $string;
+		if (function_exists('mb_strimwidth')) {
+			return mb_strimwidth($string, $start, $width, $trim_marker);
+		}
+		return dtq_strimwidth_fallback($string, $start, $width, $trim_marker);
+	}
+}
+
+/**
+ * Single-byte implementation of dtq_strimwidth().
+ *
+ * Split out from the wrapper so it stays reachable — and therefore testable —
+ * on hosts that DO have mbstring, where the wrapper always delegates. Matches
+ * mb_strimwidth(), including its quirk of returning the trim marker itself when
+ * $width is not larger than the marker.
+ */
+if (!function_exists('dtq_strimwidth_fallback')) {
+	function dtq_strimwidth_fallback($string, $start, $width, $trim_marker = '')
+	{
+		$slice = substr((string) $string, $start);
+		if (strlen($slice) <= $width) {
+			return $slice;
+		}
+		return substr($slice, 0, max(0, $width - strlen($trim_marker))) . $trim_marker;
+	}
+}
+
+/**
+ * Resolve a Divi `$variable(...)$` token (global colour / variable) to CSS.
+ *
+ * Divi 5 stores a global colour as an encoded `$variable({...})$` string. Style
+ * output that bypasses Divi's own resolver emits that token literally, so the
+ * colour renders as raw text instead of a colour. Run author-supplied values
+ * through this before sanitizing them.
+ *
+ * Returns the value unchanged when it holds no dynamic variable, or when Divi's
+ * resolver is unavailable.
+ *
+ * @param mixed $value Raw attribute value.
+ *
+ * @return mixed
+ */
+if (!function_exists('dtq_resolve_css_value')) {
+	function dtq_resolve_css_value($value)
+	{
+		if (is_string($value)
+			&& false !== strpos($value, '$variable(')
+			&& class_exists('\ET\Builder\Packages\StyleLibrary\Utils\Utils')
+		) {
+			return \ET\Builder\Packages\StyleLibrary\Utils\Utils::resolve_dynamic_variables_recursive($value);
+		}
+
+		return $value;
+	}
+}
+
+/**
+ * Sanitize a colour value destined for interpolation into a CSS declaration.
+ *
+ * Module colour attributes are author-controlled. Interpolating them into a
+ * stylesheet unchecked lets a value such as `#fff}</style><script>…` terminate
+ * the rule set (and, in an inline <style>, the element itself). Anything that is
+ * not recognisably a colour is replaced with the caller's fallback rather than
+ * emitted. Divi global colours arrive as `var(--gcid-…)` once resolved through
+ * StyleLibrary\Utils::resolve_dynamic_variables_recursive(), so `var()` is
+ * allowed through.
+ *
+ * @param mixed  $value    Raw attribute value.
+ * @param string $fallback Value to use when $value is not a valid colour.
+ *
+ * @return string A safe CSS colour token.
+ */
+if (!function_exists('dtq_css_color')) {
+	function dtq_css_color($value, $fallback = 'transparent')
+	{
+		$value = trim((string) $value);
+
+		if ('' === $value) {
+			return $fallback;
+		}
+
+		// #rgb, #rgba, #rrggbb, #rrggbbaa
+		if (preg_match('/^#(?:[0-9a-f]{3,4}|[0-9a-f]{6}|[0-9a-f]{8})$/i', $value)) {
+			return $value;
+		}
+
+		// rgb()/rgba()/hsl()/hsla() — digits, separators and units only.
+		if (preg_match('/^(?:rgba?|hsla?)\(\s*[0-9.,%\/\s-]+\)$/i', $value)) {
+			return $value;
+		}
+
+		// var(--custom-property) — how resolved global colours arrive.
+		if (preg_match('/^var\(\s*--[A-Za-z0-9_-]+\s*\)$/', $value)) {
+			return $value;
+		}
+
+		// Bare keywords: transparent, currentColor, inherit, red, …
+		if (preg_match('/^[A-Za-z]+$/', $value)) {
+			return $value;
+		}
+
+		return $fallback;
+	}
+}
+
+/**
+ * Turn a Divi spacing value into a sanitized CSS shorthand.
+ *
+ * Divi stores spacing either as a "top|right|bottom|left" string (the D4 shape,
+ * which survives conversion) or as an array with those keys. Each side is run
+ * through dtq_css_length() so a crafted value cannot terminate the declaration.
+ *
+ * @param mixed  $value   Raw spacing attribute value.
+ * @param string $default Value used for a side that is empty or unparseable.
+ *
+ * @return string Shorthand like "10px 0px 10px 0px", or '' when unusable.
+ */
+if (!function_exists('dtq_css_padding')) {
+	function dtq_css_padding($value, $default = '0px')
+	{
+		if (is_array($value)) {
+			$parts = array(
+				$value['top'] ?? '',
+				$value['right'] ?? '',
+				$value['bottom'] ?? '',
+				$value['left'] ?? '',
+			);
+		} elseif (is_string($value) && '' !== $value) {
+			$parts = explode('|', $value);
+		} else {
+			return '';
+		}
+
+		$sides = array();
+		for ($i = 0; $i < 4; $i++) {
+			$side    = isset($parts[$i]) ? trim((string) $parts[$i]) : '';
+			$sides[] = ('' === $side) ? $default : dtq_css_length($side, $default);
+		}
+
+		return implode(' ', $sides);
+	}
+}
+
+/**
+ * Sanitize a length value destined for interpolation into a CSS declaration.
+ *
+ * Same threat model as dtq_css_color(): a length such as `10px;}</style>…` would
+ * otherwise break out of the declaration. Accepts a plain number with an optional
+ * CSS unit, plus the `auto`/`inherit`/`initial`/`unset` keywords.
+ *
+ * @param mixed  $value    Raw attribute value.
+ * @param string $fallback Value to use when $value is not a valid length.
+ *
+ * @return string A safe CSS length token.
+ */
+if (!function_exists('dtq_css_length')) {
+	function dtq_css_length($value, $fallback = '0')
+	{
+		$value = trim((string) $value);
+
+		if ('' === $value) {
+			return $fallback;
+		}
+
+		if (preg_match('/^-?(?:\d+(?:\.\d+)?|\.\d+)(?:px|em|rem|%|vh|vw|vmin|vmax|pt|pc|ch|ex|cm|mm|in|q|s|ms|deg)?$/i', $value)) {
+			return $value;
+		}
+
+		if (preg_match('/^(?:auto|inherit|initial|unset)$/i', $value)) {
+			return $value;
+		}
+
+		return $fallback;
 	}
 }

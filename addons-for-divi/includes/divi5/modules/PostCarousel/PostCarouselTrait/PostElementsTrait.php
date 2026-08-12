@@ -51,7 +51,7 @@ trait PostElementsTrait {
 			'<%1$s class="dtq-post-title"><a href="%2$s">%3$s</a></%1$s>',
 			$tag,
 			$permalink,
-			$title
+			esc_html( $title )
 		);
 	}
 
@@ -67,8 +67,8 @@ trait PostElementsTrait {
 			$excerpt = get_the_content();
 		}
 		$excerpt = wp_strip_all_tags( strip_shortcodes( $excerpt ) );
-		if ( $content_length > 0 && mb_strlen( $excerpt ) > $content_length ) {
-			$excerpt = mb_substr( $excerpt, 0, $content_length ) . '&hellip;';
+		if ( $content_length > 0 && dtq_strlen( $excerpt ) > $content_length ) {
+			$excerpt = dtq_substr( $excerpt, 0, $content_length ) . '&hellip;';
 		}
 		return sprintf( '<div class="dtq-post-excerpt">%s</div>', esc_html( $excerpt ) );
 	}

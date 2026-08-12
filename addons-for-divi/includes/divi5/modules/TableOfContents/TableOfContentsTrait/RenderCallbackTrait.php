@@ -196,22 +196,40 @@ trait RenderCallbackTrait {
 			return '';
 		}
 
-		$pattern = '/<h([' . (int) $start . '-' . (int) $end . '])\b[^>]*>(.*?)<\/h\1>/is';
-		if ( ! preg_match_all( $pattern, (string) $rendered, $matches, PREG_SET_ORDER ) ) {
+		// Walk the FULL h2-h6 range, not just [start,end], then filter afterwards.
+		// add_heading_ids() slugifies across h2-h6 with its own $used map, so
+		// narrowing the range here would advance the duplicate counter differently
+		// and the two would disagree on suffixes ("-2") for repeated headings —
+		// leaving the rendered anchors pointing at ids that do not exist.
+		if ( ! preg_match_all( '/<h([2-6])\b([^>]*)>(.*?)<\/h\1>/is', (string) $rendered, $matches, PREG_SET_ORDER ) ) {
 			return '';
 		}
 
 		$used  = array();
 		$items = array();
 		foreach ( $matches as $h ) {
-			$text = trim( wp_strip_all_tags( $h[2] ) );
+			$level = (int) $h[1];
+			$text  = trim( wp_strip_all_tags( $h[3] ) );
 			if ( '' === $text ) {
 				continue;
 			}
+
+			// A heading that already carries an id keeps it and does not consume a
+			// slug — mirroring add_heading_ids(), so both stay in lockstep.
+			if ( preg_match( '/\sid\s*=\s*["\']([^"\']+)["\']/i', $h[2], $id_match ) ) {
+				$id = $id_match[1];
+			} else {
+				$id = self::slugify( $text, $used );
+			}
+
+			if ( $level < (int) $start || $level > (int) $end ) {
+				continue;
+			}
+
 			$items[] = array(
-				'level' => (int) $h[1],
+				'level' => $level,
 				'text'  => $text,
-				'id'    => self::slugify( $text, $used ),
+				'id'    => $id,
 			);
 		}
 
@@ -223,11 +241,45 @@ trait RenderCallbackTrait {
 	}
 
 	/**
+	 * Does the current singular post contain a Table of Contents module?
+	 *
+	 * Theme Builder placements render the module outside post content, where
+	 * has_block() cannot see it; those still work because the frontend JS assigns
+	 * heading ids client-side. The filter is the escape hatch for forcing
+	 * server-side ids in that case.
+	 *
+	 * @return bool
+	 */
+	private static function page_has_toc() {
+		$has_toc = false;
+		$post    = get_queried_object();
+
+		if ( $post instanceof \WP_Post && function_exists( 'has_block' ) ) {
+			$has_toc = has_block( 'divitorque/table-of-contents', $post );
+		}
+
+		/**
+		 * Filters whether heading ids should be injected on this request.
+		 *
+		 * @param bool $has_toc Whether a TOC module was detected in post content.
+		 */
+		return (bool) apply_filters( 'divitorque_toc_add_heading_ids', $has_toc );
+	}
+
+	/**
 	 * Add slugified ids to content headings that lack one, so the server-rendered
 	 * (no-JS / AMP) anchors resolve. Registered on `the_content`.
 	 */
 	public static function add_heading_ids( $content ) {
 		if ( is_admin() || ! is_singular() || '' === trim( (string) $content ) ) {
+			return $content;
+		}
+
+		// Only rewrite headings on pages that actually contain a Table of Contents.
+		// This filter is registered on plugin load, so without this gate every
+		// post and page on the site paid for a full regex pass over its content
+		// and had ids injected whether or not the module was used anywhere.
+		if ( ! self::page_has_toc() ) {
 			return $content;
 		}
 
@@ -351,7 +403,7 @@ trait RenderCallbackTrait {
 				? sprintf( '<span class="dtq-toc-title">%s</span>', esc_html( $title ) )
 				: '<span class="dtq-toc-title"></span>';
 			$toggle_html = 'on' === $collapsible
-				? '<button class="dtq-toc-toggle" type="button" aria-expanded="true" aria-label="' . esc_attr__( 'Toggle table of contents', 'divi-torque-lite' ) . '"><span class="dtq-toc-arrow"></span></button>'
+				? '<button class="dtq-toc-toggle" type="button" aria-expanded="true" aria-label="' . esc_attr__( 'Toggle table of contents', 'addons-for-divi' ) . '"><span class="dtq-toc-arrow"></span></button>'
 				: '';
 			$header_html = sprintf( '<div class="dtq-toc-header">%s%s</div>', $title_html, $toggle_html );
 		}

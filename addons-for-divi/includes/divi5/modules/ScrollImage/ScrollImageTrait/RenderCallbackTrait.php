@@ -131,7 +131,7 @@ trait RenderCallbackTrait
 
         if (!empty($image_src)) {
             $children = sprintf(
-                '<div class="dtq-module dtq-scroll-image" data-dir-hover="%5$s" data-dir-scroll="%6$s">%1$s<div class="scroll-figure-wrap">%2$s<img class="dtq-scroll-image-el" src="%3$s" alt="%4$s" /></div></div>',
+                '<div class="dtq-module dtq-scroll-image dtq-d5" data-dir-hover="%5$s" data-dir-scroll="%6$s">%1$s<div class="scroll-figure-wrap">%2$s<img class="dtq-scroll-image-el" src="%3$s" alt="%4$s" /></div></div>',
                 self::render_icon($advanced),
                 self::render_overlay($advanced),
                 esc_url($image_src),
@@ -140,7 +140,7 @@ trait RenderCallbackTrait
                 esc_attr('on_scroll' === $scroll_type ? $scroll_dir_scroll : 'none')
             );
         } else {
-            $children = '<div class="dtq-module dtq-scroll-image"></div>';
+            $children = '<div class="dtq-module dtq-scroll-image dtq-d5"></div>';
         }
 
         return Module::render(
@@ -155,7 +155,10 @@ trait RenderCallbackTrait
                 'scriptDataComponent' => [self::class, 'module_script_data'],
                 'orderIndex'          => $block->parsed_block['orderIndex'] ?? 0,
                 'storeInstance'       => $block->parsed_block['storeInstance'] ?? null,
-                'children'            => $children,
+                'children'            => [
+                    $elements->style_components(['attrName' => 'module']),
+                    $children,
+                ],
             ]
         );
     }

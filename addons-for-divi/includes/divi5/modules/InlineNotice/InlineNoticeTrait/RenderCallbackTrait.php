@@ -88,7 +88,14 @@ trait RenderCallbackTrait
         $show_dismiss = ($advanced['showDismiss']['desktop']['value'] ?? 'on') === 'on';
 
         if ($show_dismiss) {
-            return '<div class="dtq-alert-dismiss">✕</div>';
+            // A real <button> so it is focusable and operable by keyboard; the
+            // glyph is decorative and hidden from assistive tech, with the
+            // accessible name coming from aria-label. As a bare <div> this was
+            // mouse-only and announced as "✕" or nothing at all.
+            return sprintf(
+                '<button type="button" class="dtq-alert-dismiss" aria-label="%1$s"><span aria-hidden="true">✕</span></button>',
+                esc_attr__('Dismiss this notice', 'addons-for-divi')
+            );
         }
 
         return '';

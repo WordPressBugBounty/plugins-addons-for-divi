@@ -79,7 +79,8 @@ trait RenderCallbackTrait
                     dtq_inject_fa_icons($uni . '||' . $type . '||' . $weight);
                 }
 
-                // $uni is already an HTML entity; output raw (do not esc_html).
+                // dtq_resolve_icon_unicode() escapes its return value; entities
+                // such as "&#xe0XX;" survive intact so the glyph still renders.
                 $inner = sprintf(
                     '<i class="dtq-et-icon" style="font-family:\'%1$s\';font-weight:%2$s">%3$s</i>',
                     esc_attr($font),
@@ -99,6 +100,14 @@ trait RenderCallbackTrait
     /**
      * Emit gap, alignment, and connector CSS as an inline <style> block.
      *
+     * Every interpolated value is author-controlled, so each one is run through
+     * dtq_css_length()/dtq_css_color() first. Without that, a value such as
+     * `#fff}</style><script>…</script><style>{` would close the style element and
+     * execute; even a benign `}` or `;` would corrupt the whole rule set. Values
+     * that do not parse as a length/colour fall back to the module default rather
+     * than being emitted. Global colours are resolved to `var(--…)` beforehand so
+     * they survive the colour check.
+     *
      * @param array  $advanced    The `module.advanced` attrs array.
      * @param string $selector    The module order-class selector (e.g. ".dtq_dual_button_0").
      *
@@ -106,7 +115,7 @@ trait RenderCallbackTrait
      */
     public static function render_inline_styles($advanced, $selector)
     {
-        $button_gap    = $advanced['buttonGap']['desktop']['value']    ?? '40px';
+        $button_gap    = dtq_css_length(dtq_resolve_css_value($advanced['buttonGap']['desktop']['value'] ?? ''), '40px');
         $alignment     = $advanced['btnAlignment']['desktop']['value'] ?? 'left';
         $justify_map   = ['center' => 'center', 'right' => 'flex-end', 'left' => 'flex-start'];
         $justify       = $justify_map[$alignment] ?? 'flex-start';
@@ -119,13 +128,13 @@ trait RenderCallbackTrait
         ];
 
         if ('empty' !== $connector_type) {
-            $size         = $advanced['connectorSize']['desktop']['value']        ?? '30px';
-            $bg           = $advanced['connectorBg']['desktop']['value']          ?? 'transparent';
-            $text_color   = $advanced['connectorTextColor']['desktop']['value']   ?? '#333';
-            $text_size    = $advanced['connectorTextSize']['desktop']['value']    ?? '14px';
-            $radius       = $advanced['connectorRadius']['desktop']['value']      ?? '0px';
-            $border_width = $advanced['connectorBorderWidth']['desktop']['value'] ?? '0px';
-            $border_color = $advanced['connectorBorderColor']['desktop']['value'] ?? 'transparent';
+            $size         = dtq_css_length(dtq_resolve_css_value($advanced['connectorSize']['desktop']['value'] ?? ''), '30px');
+            $bg           = dtq_css_color(dtq_resolve_css_value($advanced['connectorBg']['desktop']['value'] ?? ''), 'transparent');
+            $text_color   = dtq_css_color(dtq_resolve_css_value($advanced['connectorTextColor']['desktop']['value'] ?? ''), '#333');
+            $text_size    = dtq_css_length(dtq_resolve_css_value($advanced['connectorTextSize']['desktop']['value'] ?? ''), '14px');
+            $radius       = dtq_css_length(dtq_resolve_css_value($advanced['connectorRadius']['desktop']['value'] ?? ''), '0px');
+            $border_width = dtq_css_length(dtq_resolve_css_value($advanced['connectorBorderWidth']['desktop']['value'] ?? ''), '0px');
+            $border_color = dtq_css_color(dtq_resolve_css_value($advanced['connectorBorderColor']['desktop']['value'] ?? ''), 'transparent');
 
             $rules[] = "$selector .dtq-btn__connector{"
                 . "width:$size;height:$size;background:$bg;color:$text_color;"
@@ -166,8 +175,11 @@ trait RenderCallbackTrait
 
         // Gap and alignment CSS is emitted inline because Style::add() only processes
         // items returned by $elements->style() — raw array pushes are silently dropped.
-        $order_class = $block->parsed_block['orderIndex'] !== null
-            ? sprintf('dtq_dual_button_%d', $block->parsed_block['orderIndex'])
+        // Guard the key: reading it unset emits a notice AND evaluates false,
+        // which silently dropped every gap/alignment/connector rule below.
+        $order_index = $block->parsed_block['orderIndex'] ?? null;
+        $order_class = null !== $order_index
+            ? sprintf('dtq_dual_button_%d', $order_index)
             : '';
         $custom_css  = '';
         if (!empty($order_class)) {

@@ -87,35 +87,27 @@ class AssetsManager
 		}
 
 		$version = DIVI_TORQUE_LITE_VERSION;
-		$manifest_path = DIVI_TORQUE_LITE_DIR . 'assets/mix-manifest.json';
 
-		if (file_exists($manifest_path)) {
-			$mj = file_get_contents($manifest_path);
-			$mj = json_decode($mj, true);
+		wp_enqueue_style('divi-torque-lite-bundle', DIVI_TORQUE_LITE_ASSETS . '/css/bundle.css', [], $version);
+		wp_enqueue_style('divi-torque-lite-modules-style', DIVI_TORQUE_LITE_ASSETS . '/css/modules-style.css', [], $version);
+		wp_enqueue_style('divi-torque-lite-slick-css', DIVI_TORQUE_LITE_ASSETS . '/libs/slick/slick.min.css', [], $version);
 
-			if (is_array($mj)) {
-				wp_enqueue_style('divi-torque-lite-bundle', DIVI_TORQUE_LITE_ASSETS . $mj['/css/bundle.css'], [], $version);
-				wp_enqueue_style('divi-torque-lite-modules-style', DIVI_TORQUE_LITE_ASSETS . $mj['/css/modules-style.css'], [], $version);
-				wp_enqueue_style('divi-torque-lite-slick-css', DIVI_TORQUE_LITE_ASSETS . '/libs/slick/slick.min.css', [], $version);
+		wp_enqueue_script(
+			'divi-torque-lite-bundle',
+			DIVI_TORQUE_LITE_ASSETS . '/js/bundle.js',
+			['react-dom', 'react', 'et_pb_media_library'],
+			$version,
+			true
+		);
 
-				wp_enqueue_script(
-					'divi-torque-lite-bundle',
-					DIVI_TORQUE_LITE_ASSETS . $mj['/js/bundle.js'],
-					['react-dom', 'react', 'et_pb_media_library'],
-					$version,
-					true
-				);
-
-				// Localize script
-				wp_localize_script(
-					'divi-torque-lite-bundle',
-					'diviTorqueLiteBuilder',
-					[
-						'ajax_url' => admin_url('admin-ajax.php'),
-					]
-				);
-			}
-		}
+		// Localize script
+		wp_localize_script(
+			'divi-torque-lite-bundle',
+			'diviTorqueLiteBuilder',
+			[
+				'ajax_url' => admin_url('admin-ajax.php'),
+			]
+		);
 	}
 
 	public function vendor_enqueue_scripts()

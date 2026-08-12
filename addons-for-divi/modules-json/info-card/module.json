@@ -42,16 +42,6 @@
               "value": "off"
             }
           },
-          "buttonUrl": {
-            "desktop": {
-              "value": ""
-            }
-          },
-          "buttonNewWindow": {
-            "desktop": {
-              "value": "off"
-            }
-          },
           "imagePosition": {
             "desktop": {
               "value": "top"
@@ -298,47 +288,6 @@
               "label": "Use Button",
               "description": "Here you can choose whether button should be used.",
               "priority": 10,
-              "render": true,
-              "features": {
-                "sticky": false,
-                "responsive": false,
-                "hover": false
-              },
-              "component": {
-                "type": "field",
-                "name": "divi/toggle"
-              }
-            }
-          },
-          "buttonUrl": {
-            "groupType": "group-item",
-            "item": {
-              "groupSlug": "contentButton",
-              "attrName": "module.advanced.buttonUrl",
-              "label": "Button Link",
-              "description": "Define the button link url for your button.",
-              "priority": 30,
-              "render": true,
-              "features": {
-                "sticky": false,
-                "responsive": false,
-                "hover": false,
-                "dynamicContent": true
-              },
-              "component": {
-                "type": "field",
-                "name": "divi/text"
-              }
-            }
-          },
-          "buttonNewWindow": {
-            "groupType": "group-item",
-            "item": {
-              "groupSlug": "contentButton",
-              "attrName": "module.advanced.buttonNewWindow",
-              "label": "Open Button link in new window",
-              "description": "Here you can choose whether button URL should be opened in new window.",
-              "priority": 40,
               "render": true,
               "features": {
                 "sticky": false,
@@ -1520,23 +1469,42 @@
       },
       "settings": {
         "innerContent": {
-          "groupType": "group-item",
-          "item": {
-            "groupSlug": "contentButton",
-            "attrName": "button.innerContent",
-            "label": "Button Text",
-            "description": "Define the button text for your button.",
-            "priority": 20,
-            "render": true,
-            "features": {
-              "sticky": false,
-              "responsive": false,
-              "hover": false,
-              "dynamicContent": true
+          "groupType": "into-multiple-groups",
+          "groups": {
+            "text": {
+              "groupType": "group-item",
+              "item": {
+                "groupSlug": "contentButton",
+                "attrName": "button.innerContent",
+                "subName": "text",
+                "label": "Button Text",
+                "description": "Define the button text for your button.",
+                "priority": 20,
+                "render": true,
+                "features": {
+                  "sticky": false,
+                  "responsive": false,
+                  "hover": false,
+                  "dynamicContent": true
+                },
+                "component": {
+                  "type": "field",
+                  "name": "divi/text"
+                }
+              }
             },
-            "component": {
-              "type": "field",
-              "name": "divi/text"
+            "link": {
+              "groupType": "group-item",
+              "item": {
+                "groupSlug": "contentButton",
+                "priority": 30,
+                "render": true,
+                "component": {
+                  "name": "divi/button-link",
+                  "type": "group",
+                  "props": { "grouped": false, "attrName": "button.innerContent", "fieldLabel": "Button" }
+                }
+              }
             }
           }
         },

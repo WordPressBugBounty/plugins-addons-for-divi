@@ -23,7 +23,22 @@ class Customizer
      */
     public function controls_helpers()
     {
-        require_once DIVI_TORQUE_LITE_DIR . 'includes/deprecated/customizer/customizer-sanitizes.php'; // phpcs:ignore
+        /*
+         * customizer-sanitizes.php has never existed — not in this tree, and
+         * not anywhere in git history. require_once on a missing file is a
+         * fatal that cannot be caught, and this runs on customize_register, so
+         * on any site that upgraded from 3.5.7 or earlier (the only sites that
+         * load this deprecated code at all) opening Appearance > Customize took
+         * the whole screen down.
+         *
+         * Guarded rather than deleted: if the file is ever restored it loads as
+         * originally intended.
+         */
+        $sanitizes = DIVI_TORQUE_LITE_DIR . 'includes/deprecated/customizer/customizer-sanitizes.php';
+
+        if (is_readable($sanitizes)) {
+            require_once $sanitizes; // phpcs:ignore
+        }
     }
 
     /**

@@ -89,7 +89,8 @@ trait RenderCallbackTrait
         }
 
         if (is_search()) {
-            $crumbs[] = ['label' => sprintf(__('Search: %s', 'divi-torque-lite'), get_search_query()), 'url' => ''];
+            /* translators: %s: the visitor's search query. */
+            $crumbs[] = ['label' => sprintf(__('Search: %s', 'addons-for-divi'), get_search_query()), 'url' => ''];
             return $crumbs;
         }
         if (is_author()) {
@@ -97,7 +98,7 @@ trait RenderCallbackTrait
             return $crumbs;
         }
         if (is_404()) {
-            $crumbs[] = ['label' => __('404 Not Found', 'divi-torque-lite'), 'url' => ''];
+            $crumbs[] = ['label' => __('404 Not Found', 'addons-for-divi'), 'url' => ''];
             return $crumbs;
         }
         if (is_post_type_archive()) {
@@ -111,7 +112,7 @@ trait RenderCallbackTrait
 
         // Visual Builder / unknown context fallback.
         $title    = get_the_title();
-        $crumbs[] = ['label' => '' !== $title ? $title : __('Current Page', 'divi-torque-lite'), 'url' => ''];
+        $crumbs[] = ['label' => '' !== $title ? $title : __('Current Page', 'addons-for-divi'), 'url' => ''];
         return $crumbs;
     }
 

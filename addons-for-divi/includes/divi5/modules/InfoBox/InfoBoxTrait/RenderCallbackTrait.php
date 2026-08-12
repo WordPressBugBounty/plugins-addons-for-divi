@@ -13,6 +13,7 @@ if (!defined('ABSPATH')) {
 }
 
 use ET\Builder\Packages\Module\Module;
+use DiviTorqueLite\Modules\Shared\ButtonElement;
 use ET\Builder\Packages\Module\Layout\Components\ModuleElements\ModuleElements;
 use WP_Block;
 
@@ -57,7 +58,7 @@ trait RenderCallbackTrait
         // Button.
         $button_html = '';
         if ($use_button) {
-            $button = $elements->render(['attrName' => 'button']);
+            $button = ButtonElement::render($attrs['button'] ?? [], 'dtq-btn-info-box');
             if (!empty($button)) {
                 $button_html = sprintf('<div class="dtq-info-box-btn">%1$s</div>', $button);
             }
@@ -102,6 +103,55 @@ trait RenderCallbackTrait
      *
      * @return string
      */
+    /**
+     * Render the image hover overlay.
+     *
+     * The whole `designOverlay` option group (useOverlay, overlayIcon, colours,
+     * size, opacity, speed) was declared in module.json but no `.dtq-overlay`
+     * was ever emitted, so none of it did anything. Mirrors the Image Card
+     * module, which implements the same feature (InfoCard render + module.scss).
+     *
+     * @param array $advanced The `module.advanced` attrs array.
+     *
+     * @return string
+     */
+    public static function render_overlay($advanced)
+    {
+        $use_overlay = ($advanced['useOverlay']['desktop']['value'] ?? 'off') === 'on';
+        if (!$use_overlay) {
+            return '';
+        }
+
+        $icon = $advanced['overlayIcon']['desktop']['value'] ?? '';
+        if (is_array($icon)) {
+            $uni  = $icon['unicode'] ?? '';
+            $type = $icon['type'] ?? 'divi';
+            $wt   = $icon['weight'] ?? '400';
+        } else {
+            $parts = explode('||', (string) $icon);
+            $uni   = $parts[0] ?? '';
+            $type  = $parts[1] ?? 'divi';
+            $wt    = $parts[2] ?? '400';
+        }
+
+        if ('' === $uni) {
+            // D4 still renders the overlay with an empty icon element.
+            return '<div class="dtq-overlay"><i class="dtq-overlay-icon"></i></div>';
+        }
+
+        $font = 'fa' === $type ? 'FontAwesome' : 'ETmodules';
+        if (function_exists('dtq_inject_fa_icons')) {
+            dtq_inject_fa_icons($uni . '||' . $type . '||' . $wt);
+        }
+
+        return sprintf(
+            '<div class="dtq-overlay"><i class="dtq-overlay-icon" style="font-family:\'%1$s\';font-weight:%2$s;">%3$s</i></div>',
+            esc_attr($font),
+            esc_attr($wt),
+            dtq_resolve_icon_unicode($uni)
+        );
+    }
+
     public static function render_figure($advanced, $main_figure)
     {
         if ('image' === $main_figure) {
@@ -110,7 +160,7 @@ trait RenderCallbackTrait
                 return '';
             }
 
-            return sprintf(
+            return self::render_overlay($advanced) . sprintf(
                 '<img class="dtq-info-box-img dtq-swapped-img" src="%1$s" alt=""/>',
                 esc_url($photo)
             );
@@ -137,8 +187,13 @@ trait RenderCallbackTrait
                 return '';
             }
 
-            if ('fa' === $type && function_exists('dtq_inject_fa_icons')) {
-                dtq_inject_fa_icons($uni);
+            if (function_exists('dtq_inject_fa_icons')) {
+                // Pass the full "unicode||type||weight" string: et_pb_maybe_fa_font_icon()
+                // detects FontAwesome by the "||" separator, so a bare unicode always
+                // registered et_icons_all and the FontAwesome @font-face never loaded —
+                // the glyph rendered as tofu. Calling it unconditionally also registers
+                // the full Divi icon font, which extended Divi glyphs need.
+                dtq_inject_fa_icons($uni . '||' . $type . '||' . $wt);
             }
 
             $font = 'fa' === $type ? 'FontAwesome' : 'ETmodules';

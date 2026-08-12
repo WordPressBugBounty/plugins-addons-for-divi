@@ -11,12 +11,12 @@ class BaPostHelper
 		$processed_overlay_icon = esc_attr(et_pb_process_font_icon($overlay_icon));
 		$overlay_icon           = !empty($processed_overlay_icon) ? $processed_overlay_icon : '';
 
-		$overlay_on_hover 		= $this->props['overlay_on_hover'];
+		$overlay_on_hover 		= isset($args['overlay_on_hover']) ? $args['overlay_on_hover'] : '';
 
 		$overlay = '';
 
 		if ('on' === $overlay_on_hover) {
-			dtq_inject_fa_icons($this->props['overlay_icon']);
+			dtq_inject_fa_icons($args['overlay_icon']);
 
 			$overlay = sprintf(
 				'<div class="dtq-overlay">
@@ -121,7 +121,7 @@ class BaPostHelper
 	public static function get_post_excerpt($length = '150')
 	{
 		$post_id = get_the_ID();
-		return mb_strimwidth(get_the_excerpt($post_id), 0, $length, '...');
+		return dtq_strimwidth(get_the_excerpt($post_id), 0, $length, '...');
 	}
 
 	public static function get_post_excerpt_html($length = '150')

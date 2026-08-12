@@ -23,11 +23,6 @@
               "value": "off"
             }
           },
-          "isNewWindow": {
-            "desktop": {
-              "value": "off"
-            }
-          },
           "useOverlay": {
             "desktop": {
               "value": "off"
@@ -264,68 +259,6 @@
               "label": "Use Button",
               "description": "Here you can choose whether button should be used.",
               "priority": 10,
-              "render": true,
-              "features": {
-                "sticky": false,
-                "responsive": false,
-                "hover": false
-              },
-              "component": {
-                "type": "field",
-                "name": "divi/toggle"
-              }
-            }
-          },
-          "buttonText": {
-            "groupType": "group-item",
-            "item": {
-              "groupSlug": "contentButton",
-              "attrName": "module.advanced.buttonText",
-              "label": "Button Text",
-              "description": "Define the button text for your info box.",
-              "priority": 20,
-              "render": true,
-              "features": {
-                "sticky": false,
-                "responsive": false,
-                "hover": false,
-                "dynamicContent": true
-              },
-              "component": {
-                "type": "field",
-                "name": "divi/text"
-              }
-            }
-          },
-          "buttonLink": {
-            "groupType": "group-item",
-            "item": {
-              "groupSlug": "contentButton",
-              "attrName": "module.advanced.buttonLink",
-              "label": "Button Link",
-              "description": "Define the button link url for your info box.",
-              "priority": 30,
-              "render": true,
-              "features": {
-                "sticky": false,
-                "responsive": false,
-                "hover": false,
-                "dynamicContent": true
-              },
-              "component": {
-                "type": "field",
-                "name": "divi/text"
-              }
-            }
-          },
-          "isNewWindow": {
-            "groupType": "group-item",
-            "item": {
-              "groupSlug": "contentButton",
-              "attrName": "module.advanced.isNewWindow",
-              "label": "Open Button link in new window",
-              "description": "Here you can choose whether button URL should be opened in new window.",
-              "priority": 40,
               "render": true,
               "features": {
                 "sticky": false,
@@ -1256,15 +1189,59 @@
       "type": "object",
       "selector": "{{selector}} .et_pb_button.dtq-btn-info-box",
       "elementType": "button",
+      "tagName": "a",
       "attributes": {
         "class": "dtq-btn-info-box"
       },
+      "default": {
+        "innerContent": {
+          "desktop": {
+            "value": {
+              "text": "Click Here",
+              "linkTarget": "off"
+            }
+          }
+        }
+      },
       "settings": {
+        "innerContent": {
+          "groupType": "into-multiple-groups",
+          "groups": {
+            "text": {
+              "groupType": "group-item",
+              "item": {
+                "groupSlug": "contentButton",
+                "attrName": "button.innerContent",
+                "subName": "text",
+                "label": "Button Text",
+                "description": "Define the button text for your info box.",
+                "priority": 20,
+                "render": true,
+                "features": { "sticky": false, "responsive": false, "hover": false, "dynamicContent": true },
+                "component": { "type": "field", "name": "divi/text" }
+              }
+            },
+            "link": {
+              "groupType": "group-item",
+              "item": {
+                "groupSlug": "contentButton",
+                "priority": 30,
+                "render": true,
+                "component": {
+                  "name": "divi/button-link",
+                  "type": "group",
+                  "props": { "grouped": false, "attrName": "button.innerContent", "fieldLabel": "Button" }
+                }
+              }
+            }
+          }
+        },
         "decoration": {
           "button": {
             "groupType": "group-item",
             "item": {
               "groupSlug": "designButton",
+              "attrName": "button.decoration.button",
               "priority": 20,
               "render": true,
               "component": {

@@ -13,6 +13,7 @@ if (!defined('ABSPATH')) {
 }
 
 use ET\Builder\Packages\Module\Module;
+use DiviTorqueLite\Modules\Shared\ButtonElement;
 use ET\Builder\Packages\Module\Layout\Components\ModuleElements\ModuleElements;
 use WP_Block;
 
@@ -162,7 +163,7 @@ trait RenderCallbackTrait
         if ($use_button) {
             $button_html = sprintf(
                 '<div class="dtq-rating-btn-wrap">%1$s</div>',
-                $elements->render(['attrName' => 'button'])
+                ButtonElement::render($attrs['button'] ?? [], 'dtq-btn-default dtq-rating-btn')
             );
         }
 

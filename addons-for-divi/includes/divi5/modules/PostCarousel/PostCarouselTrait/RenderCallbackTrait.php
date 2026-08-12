@@ -133,7 +133,11 @@ trait RenderCallbackTrait {
 
 				$post_id   = get_the_ID();
 				$permalink = esc_url( get_the_permalink() );
-				$title     = esc_html( get_the_title() );
+				// Kept raw here and escaped at each output site instead. Escaping
+				// up front double-escaped it: el_thumbnail() passes it to
+				// get_the_post_thumbnail()/esc_attr(), which escape again, so a
+				// title like "Bob's Guide" surfaced as "Bob&#039;s Guide".
+				$title     = get_the_title();
 
 				$cats_html = self::el_categories( $post_id, $show_categories, $show_first_cat );
 
@@ -242,8 +246,8 @@ trait RenderCallbackTrait {
 		$inner = '';
 
 		if ( 'prev_next' === $type ) {
-			$older = get_next_posts_link( __( '&laquo; Older Entries', 'divi-torque-lite' ), $max_num_pages );
-			$newer = get_previous_posts_link( __( 'Newer Entries &raquo;', 'divi-torque-lite' ) );
+			$older = get_next_posts_link( __( '&laquo; Older Entries', 'addons-for-divi' ), $max_num_pages );
+			$newer = get_previous_posts_link( __( 'Newer Entries &raquo;', 'addons-for-divi' ) );
 			$inner = (string) $older . (string) $newer;
 		} elseif ( 'numbers' === $type ) {
 			$paginate_args = array(
@@ -269,7 +273,7 @@ trait RenderCallbackTrait {
 
 		return sprintf(
 			'<nav class="dtq-pagination" role="navigation" aria-label="%s">%s</nav>',
-			esc_attr__( 'Pagination', 'divi-torque-lite' ),
+			esc_attr__( 'Pagination', 'addons-for-divi' ),
 			wp_kses_post( $inner )
 		);
 	}

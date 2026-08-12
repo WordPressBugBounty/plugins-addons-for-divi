@@ -13,6 +13,7 @@ if (!defined('ABSPATH')) {
 }
 
 use ET\Builder\Packages\Module\Module;
+use DiviTorqueLite\Modules\Shared\ButtonElement;
 
 trait RenderCallbackTrait
 {
@@ -123,11 +124,28 @@ trait RenderCallbackTrait
             }
         }
 
+        // The title is the control that opens the panel, so it must be reachable
+        // and announced: without role/tabindex/aria-expanded it was a plain <div>
+        // that only responded to a mouse click, leaving the accordion unusable by
+        // keyboard and silent to screen readers. role="button" + tabindex is used
+        // rather than a real <button> because the title contains a heading and an
+        // image, which are not valid inside a <button>. frontend.js handles
+        // Enter/Space and keeps aria-expanded in sync.
+        $panel_id = function_exists('wp_unique_id')
+            ? wp_unique_id('dtq-accordion-panel-')
+            : 'dtq-accordion-panel-' . (int) ($block->parsed_block['orderIndex'] ?? 0);
+
+        $keep_open       = ($attrs['module']['advanced']['keepOpen']['desktop']['value'] ?? 'off') === 'on';
+        $open_by_default = ($attrs['module']['advanced']['openByDefault']['desktop']['value'] ?? 'off') === 'on';
+        $is_open         = $open_by_default || $keep_open;
+
         $header_html = sprintf(
-            '<div class="dtq-accordion__title">%1$s<div class="dtq-accordion__heading">%2$s%3$s</div></div>',
+            '<div class="dtq-accordion__title" role="button" tabindex="0" aria-expanded="%4$s" aria-controls="%5$s">%1$s<div class="dtq-accordion__heading">%2$s%3$s</div></div>',
             $media_html,
             $title_el,
-            $subtitle_html
+            $subtitle_html,
+            $is_open ? 'true' : 'false',
+            esc_attr($panel_id)
         );
 
         // Optional read-more button (rendered only when it has text).
@@ -136,20 +154,21 @@ trait RenderCallbackTrait
         if ('' !== $readmore_text) {
             $readmore_html = sprintf(
                 '<div class="dtq-accordion__readmore-wrap">%1$s</div>',
-                $elements->render(['attrName' => 'readMore'])
+                ButtonElement::render($attrs['readMore'] ?? [], 'dtq-accordion__readmore')
             );
         }
 
         // Content + read-more + always-rendered close button (parent class controls its display).
         $close_html = sprintf(
             '<button type="button" class="dtq-accordion__close">%1$s</button>',
-            esc_html__('Close', 'divi-torque-lite')
+            esc_html__('Close', 'addons-for-divi')
         );
         $content_html = sprintf(
-            '<div class="dtq-accordion__content">%1$s%2$s%3$s</div>',
+            '<div class="dtq-accordion__content" id="%4$s" role="region">%1$s%2$s%3$s</div>',
             $elements->render(['attrName' => 'content']),
             $readmore_html,
-            $close_html
+            $close_html,
+            esc_attr($panel_id)
         );
 
         return Module::render(

@@ -58,9 +58,26 @@ trait RenderCallbackTrait
             );
         }
 
+        // Expose the bar as a progressbar. Without these the fill was purely
+        // visual: a screen reader got no value at all, and with "Hide Level" on
+        // there was not even a number in the text to fall back to. aria-valuenow
+        // needs a bare number, so strip the unit off the stored level ("30%").
+        $level_number = trim((string) $level);
+        $level_number = preg_match('/-?\d+(\.\d+)?/', $level_number, $m) ? $m[0] : '';
+
+        $progress_attrs = '';
+        if ('' !== $level_number) {
+            $progress_attrs = sprintf(
+                ' role="progressbar" aria-valuenow="%1$s" aria-valuemin="0" aria-valuemax="100"%2$s',
+                esc_attr($level_number),
+                $use_name ? '' : sprintf(' aria-label="%s"', esc_attr__('Skill level', 'addons-for-divi'))
+            );
+        }
+
         $item_html = sprintf(
-            '<div class="dtq-module dtq-child dtq-skillbar"><div class="dtq-skillbar__wrapper"><div class="dtq-skillbar__inner">%1$s</div></div></div>',
-            $inner_text
+            '<div class="dtq-module dtq-child dtq-skillbar"><div class="dtq-skillbar__wrapper"%2$s><div class="dtq-skillbar__inner">%1$s</div></div></div>',
+            $inner_text,
+            $progress_attrs
         );
 
         return Module::render(

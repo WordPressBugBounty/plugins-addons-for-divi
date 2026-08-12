@@ -222,7 +222,13 @@ trait RenderCallbackTrait
         }
 
         $children = sprintf(
-            '<div id="dtq-animated-text-%6$s" class="dtq-module dtq-animated-text dtq-front" %1$s data-type="%2$s"><%3$s class="dtq-animated-text-head">%4$s%5$s%7$s</%3$s></div>',
+            // `dtq-d5` marks this as the Divi 5 module. The D4 module renders an
+            // otherwise identical wrapper, and the D4 frontend script is enqueued
+            // site-wide, so without this marker it also picks up D5 markup and
+            // calls `new Typed(...)` — a ReferenceError, since the D5 module uses
+            // its own typing engine and never loads that library — and starts a
+            // second `slide` interval on top of ours.
+            '<div id="dtq-animated-text-%6$s" class="dtq-module dtq-animated-text dtq-front dtq-d5" %1$s data-type="%2$s"><%3$s class="dtq-animated-text-head">%4$s%5$s%7$s</%3$s></div>',
             $data_settings,
             esc_attr($animation_type),
             esc_attr($heading_level),

@@ -58,6 +58,17 @@ class PluginLoader
         Module_Usage::get_instance();
         Dashboard::get_instance();
 
+        // Share My Post extension. After Dashboard, which owns the parent menu
+        // its settings page attaches to. Same explicit-require reason as above.
+        require_once DIVI_TORQUE_LITE_DIR . 'includes/extensions/share-my-post/share-my-post.php';
+        Share_My_Post::get_instance();
+
+        // Extensions screen. After Share My Post, because the manifest reads its
+        // settings for the on/off state. Same explicit-require reason as above.
+        require_once DIVI_TORQUE_LITE_DIR . 'includes/extensions-manager.php';
+        require_once DIVI_TORQUE_LITE_DIR . 'includes/extensions-api.php';
+        Extensions_Api::get_instance();
+
         if (!get_option('divitorque_version')) {
             Divi_Library_Shortcode::get_instance();
         }
@@ -143,14 +154,14 @@ class PluginLoader
         $links[] = sprintf(
             '<a href="%s" target="_blank">%s</a>',
             esc_url_raw(self::get_url()),
-            __('Dashboard', 'divitorque')
+            __('Dashboard', 'addons-for-divi')
         );
 
         if (current_user_can('update_plugins')) {
             $links[] = sprintf(
                 '<a href="%s">%s</a>',
                 esc_url(admin_url('admin.php?page=divitorque-rollback')),
-                __('Rollback', 'divitorque')
+                __('Rollback', 'addons-for-divi')
             );
         }
 
@@ -161,8 +172,8 @@ class PluginLoader
     {
         add_submenu_page(
             'divitorque',
-            __('Rollback Divi Torque Lite', 'divitorque'),
-            __('Rollback', 'divitorque'),
+            __('Rollback Divi Torque Lite', 'addons-for-divi'),
+            __('Rollback', 'addons-for-divi'),
             'update_plugins',
             'divitorque-rollback',
             array($this, 'render_rollback_page')
@@ -173,7 +184,7 @@ class PluginLoader
     public function render_rollback_page()
     {
         if (!current_user_can('update_plugins')) {
-            wp_die(__('You do not have permission to access this page.', 'divitorque'));
+            wp_die(__('You do not have permission to access this page.', 'addons-for-divi'));
         }
 
         $rest_root  = esc_url_raw(rest_url('divitorque-lite/v1'));
@@ -181,23 +192,24 @@ class PluginLoader
         $current    = DIVI_TORQUE_LITE_VERSION;
         ?>
         <div class="wrap" style="max-width:560px;">
-            <h1><?php esc_html_e('Rollback Divi Torque Lite', 'divitorque'); ?></h1>
-            <p><?php printf(esc_html__('Currently installed: %s', 'divitorque'), '<code>' . esc_html($current) . '</code>'); ?></p>
+            <h1><?php esc_html_e('Rollback Divi Torque Lite', 'addons-for-divi'); ?></h1>
+            <?php /* translators: %s: the currently installed plugin version number. */ ?>
+            <p><?php printf(esc_html__('Currently installed: %s', 'addons-for-divi'), '<code>' . esc_html($current) . '</code>'); ?></p>
 
             <p class="description" style="margin:12px 0;">
-                <?php esc_html_e('Choose a previous version published on WordPress.org. Your active state will be preserved.', 'divitorque'); ?>
+                <?php esc_html_e('Choose a previous version published on WordPress.org. Your active state will be preserved.', 'addons-for-divi'); ?>
             </p>
 
             <p>
-                <label for="dtl-rollback-version"><strong><?php esc_html_e('Version', 'divitorque'); ?></strong></label><br>
+                <label for="dtl-rollback-version"><strong><?php esc_html_e('Version', 'addons-for-divi'); ?></strong></label><br>
                 <select id="dtl-rollback-version" style="min-width:240px;margin-top:6px;">
-                    <option value=""><?php esc_html_e('Loading versions…', 'divitorque'); ?></option>
+                    <option value=""><?php esc_html_e('Loading versions…', 'addons-for-divi'); ?></option>
                 </select>
             </p>
 
             <p>
                 <button type="button" class="button button-primary" id="dtl-rollback-btn" disabled>
-                    <?php esc_html_e('Rollback', 'divitorque'); ?>
+                    <?php esc_html_e('Rollback', 'addons-for-divi'); ?>
                 </button>
                 <span id="dtl-rollback-status" style="margin-left:12px;"></span>
             </p>

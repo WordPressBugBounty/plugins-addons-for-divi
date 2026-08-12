@@ -1,5 +1,5 @@
 {
-	"generated_from": "dt-website inc/icons.php",
+	"generated_from": "dt-website inc/icons.php @ e24e02f",
 	"generator": "scripts/sync-module-catalog.mjs — do not edit by hand",
 	"categories": {
 		"content": {
@@ -78,6 +78,7 @@
 		"icon-box": {
 			"label": "Icon Box",
 			"desc": "Pair icons with text to present services and features clearly.",
+			"desc_short": "Icon + text feature boxes.",
 			"cat": "content",
 			"pro": false,
 			"flagship": false,
@@ -93,6 +94,7 @@
 		"info-box": {
 			"label": "Feature Box",
 			"desc": "Highlight key information with icon-and-text boxes.",
+			"desc_short": "Key-info highlight boxes.",
 			"cat": "content",
 			"pro": false,
 			"flagship": false,
@@ -108,6 +110,7 @@
 		"dual-button": {
 			"label": "Dual Buttons",
 			"desc": "Offer two clear calls to action side by side.",
+			"desc_short": "Two CTAs side by side.",
 			"cat": "content",
 			"pro": false,
 			"flagship": false,
@@ -123,6 +126,7 @@
 		"gradient-heading": {
 			"label": "Gradient Heading",
 			"desc": "Add eye-catching gradient headings without touching CSS.",
+			"desc_short": "Gradient headings, no CSS.",
 			"cat": "content",
 			"pro": false,
 			"flagship": false,
@@ -138,6 +142,7 @@
 		"animated-text": {
 			"label": "Animated Text",
 			"desc": "Capture attention with dynamic text animations.",
+			"desc_short": "Dynamic text animations.",
 			"cat": "content",
 			"pro": false,
 			"flagship": false,
@@ -153,6 +158,7 @@
 		"inline-notice": {
 			"label": "Alert Box",
 			"desc": "Highlight important notes with ready-to-use boxes.",
+			"desc_short": "Ready-made alert boxes.",
 			"cat": "content",
 			"pro": false,
 			"flagship": false,
@@ -168,6 +174,7 @@
 		"divider": {
 			"label": "Separator",
 			"desc": "Add precise, customizable dividers between sections.",
+			"desc_short": "Custom section dividers.",
 			"cat": "content",
 			"pro": false,
 			"flagship": false,
@@ -183,6 +190,7 @@
 		"news-ticker": {
 			"label": "News Ticker",
 			"desc": "Display live updates and announcements.",
+			"desc_short": "Scrolling news ticker.",
 			"cat": "content",
 			"pro": false,
 			"flagship": false,
@@ -198,6 +206,7 @@
 		"image-carousel": {
 			"label": "Image Carousel",
 			"desc": "Build responsive image sliders with full controls.",
+			"desc_short": "Responsive image carousels.",
 			"cat": "media",
 			"pro": false,
 			"flagship": false,
@@ -213,6 +222,7 @@
 		"logo-carousel": {
 			"label": "Logo Carousel",
 			"desc": "Rotate client and partner logos elegantly.",
+			"desc_short": "Rotating logo showcase.",
 			"cat": "media",
 			"pro": false,
 			"flagship": false,
@@ -228,6 +238,7 @@
 		"logo-grid": {
 			"label": "Logo Grid",
 			"desc": "Display client, partner, or sponsor logos in a clean grid.",
+			"desc_short": "Clean logo grids.",
 			"cat": "media",
 			"pro": false,
 			"flagship": false,
@@ -243,6 +254,7 @@
 		"compare-image": {
 			"label": "Before & After Slider",
 			"desc": "Compare two images with an interactive slider.",
+			"desc_short": "Before/after image slider.",
 			"cat": "media",
 			"pro": false,
 			"flagship": false,
@@ -258,6 +270,7 @@
 		"scroll-image": {
 			"label": "Scroll Image",
 			"desc": "Add vertical or horizontal scrolling image effects.",
+			"desc_short": "Scrolling image effects.",
 			"cat": "media",
 			"pro": false,
 			"flagship": false,
@@ -273,6 +286,7 @@
 		"video-modal": {
 			"label": "Video Modal",
 			"desc": "Open videos in a sleek, responsive popup.",
+			"desc_short": "Videos in a popup.",
 			"cat": "media",
 			"pro": false,
 			"flagship": false,
@@ -288,6 +302,7 @@
 		"flip-box": {
 			"label": "Flip Card",
 			"desc": "Reveal extra content with an interactive flip.",
+			"desc_short": "Flip-to-reveal cards.",
 			"cat": "media",
 			"pro": false,
 			"flagship": false,
@@ -303,6 +318,7 @@
 		"testimonial": {
 			"label": "Testimonial Card",
 			"desc": "Showcase reviews and quotes to build trust.",
+			"desc_short": "Reviews and quote cards.",
 			"cat": "social",
 			"pro": false,
 			"flagship": false,
@@ -318,6 +334,7 @@
 		"review": {
 			"label": "Review Box",
 			"desc": "Highlight customer feedback to build credibility.",
+			"desc_short": "Customer feedback boxes.",
 			"cat": "social",
 			"pro": false,
 			"flagship": false,
@@ -333,6 +350,7 @@
 		"twitter-feed": {
 			"label": "X (Twitter) Feed",
 			"desc": "Show your latest X posts in a live feed.",
+			"desc_short": "Live X post feed.",
 			"cat": "social",
 			"pro": false,
 			"flagship": false,
@@ -348,6 +366,7 @@
 		"post-list": {
 			"label": "Post List",
 			"desc": "List blog posts and articles for easy browsing.",
+			"desc_short": "Simple blog post lists.",
 			"cat": "posts",
 			"pro": false,
 			"flagship": false,
@@ -363,6 +382,7 @@
 		"contact-form-7": {
 			"label": "Contact Form 7 Styler",
 			"desc": "Style Contact Form 7 forms to match your design.",
+			"desc_short": "Style Contact Form 7.",
 			"cat": "forms",
 			"pro": false,
 			"flagship": false,
@@ -378,6 +398,7 @@
 		"number-counter": {
 			"label": "Animated Counter",
 			"desc": "Animate statistics and key figures.",
+			"desc_short": "Animated stat counters.",
 			"cat": "commerce",
 			"pro": false,
 			"flagship": false,
@@ -393,6 +414,7 @@
 		"skill-bar": {
 			"label": "Skill Bar",
 			"desc": "Show proficiency levels with animated progress bars.",
+			"desc_short": "Animated progress bars.",
 			"cat": "commerce",
 			"pro": false,
 			"flagship": false,
@@ -408,6 +430,7 @@
 		"business-hour": {
 			"label": "Business Hours",
 			"desc": "Show opening times in a clear, tidy layout.",
+			"desc_short": "Tidy opening-hours tables.",
 			"cat": "commerce",
 			"pro": false,
 			"flagship": false,
@@ -423,6 +446,7 @@
 		"team-box": {
 			"label": "Team Member",
 			"desc": "Introduce team members with photos, bios, and social links.",
+			"desc_short": "Team member profiles.",
 			"cat": "commerce",
 			"pro": false,
 			"flagship": false,
@@ -438,6 +462,7 @@
 		"accordion": {
 			"label": "Accordion Pro",
 			"desc": "Organize content into collapsible, expandable panels.",
+			"desc_short": "Collapsible content panels.",
 			"cat": "content",
 			"pro": false,
 			"flagship": false,
@@ -453,6 +478,7 @@
 		"tabs": {
 			"label": "Tabs Pro",
 			"desc": "Split content into clean, switchable tabs.",
+			"desc_short": "Switchable content tabs.",
 			"cat": "content",
 			"pro": false,
 			"flagship": false,
@@ -468,6 +494,7 @@
 		"modal-popup": {
 			"label": "Modal Popup",
 			"desc": "Open any content in a click-triggered modal popup.",
+			"desc_short": "Click-triggered modals.",
 			"cat": "utility",
 			"pro": false,
 			"flagship": false,
@@ -483,6 +510,7 @@
 		"post-carousel": {
 			"label": "Post Carousel",
 			"desc": "Show your latest posts in a sliding carousel.",
+			"desc_short": "Sliding post carousel.",
 			"cat": "posts",
 			"pro": false,
 			"flagship": false,
@@ -498,6 +526,7 @@
 		"table-of-contents": {
 			"label": "Table of Contents",
 			"desc": "Auto-build a table of contents from your page headings.",
+			"desc_short": "Auto page table of contents.",
 			"cat": "content",
 			"pro": false,
 			"flagship": false,
@@ -513,6 +542,7 @@
 		"fancy-text": {
 			"label": "Fancy Text",
 			"desc": "Animate rotating, gradient, and typed text effects.",
+			"desc_short": "Rotating and typed text.",
 			"cat": "content",
 			"pro": false,
 			"flagship": false,
@@ -528,6 +558,7 @@
 		"faq": {
 			"label": "FAQ",
 			"desc": "Build FAQ sections with schema.org rich-result markup.",
+			"desc_short": "FAQs with schema markup.",
 			"cat": "content",
 			"pro": false,
 			"flagship": false,
@@ -543,6 +574,7 @@
 		"breadcrumbs": {
 			"label": "Breadcrumb Trail",
 			"desc": "Add a breadcrumb trail with schema.org markup.",
+			"desc_short": "Schema breadcrumb trails.",
 			"cat": "nav",
 			"pro": false,
 			"flagship": false,
@@ -558,6 +590,7 @@
 		"info-card": {
 			"label": "Image Card",
 			"desc": "Present features in a rich image card with icon and badge.",
+			"desc_short": "Rich image feature cards.",
 			"cat": "content",
 			"pro": false,
 			"flagship": false,
@@ -573,6 +606,7 @@
 		"twitter-feed-carousel": {
 			"label": "X (Twitter) Carousel",
 			"desc": "Show your latest X posts in a sliding carousel.",
+			"desc_short": "Sliding X post carousel.",
 			"cat": "social",
 			"pro": false,
 			"flagship": false,
@@ -585,9 +619,122 @@
 			"demo_url": "https://divitorque.com/features/twitter-feed-carousel/",
 			"docs_url": "https://divitorque.com/docs/twitter-feed-carousel/"
 		},
+		"cta-box": {
+			"label": "Call To Action",
+			"desc": "Pair a headline with one or two buttons to drive the next step.",
+			"desc_short": "Headline + button CTAs.",
+			"cat": "content",
+			"pro": false,
+			"flagship": false,
+			"glyph": "<rect x=\"2.5\" y=\"4.5\" width=\"19\" height=\"15\" rx=\"2\"/><path d=\"M7 8.5h10M9 12h6\"/><rect x=\"8\" y=\"14.6\" width=\"8\" height=\"3.2\" rx=\"1.6\" fill=\"currentColor\" stroke=\"none\"/>",
+			"grad": [
+				"#9C7CFF",
+				"#6E8BFF",
+				"#ECECFF"
+			],
+			"demo_url": null,
+			"docs_url": null
+		},
+		"creative-button": {
+			"label": "Creative Button",
+			"desc": "Buttons with eleven hover effects, all keyboard accessible.",
+			"desc_short": "Buttons with hover effects.",
+			"cat": "content",
+			"pro": false,
+			"flagship": false,
+			"glyph": "<rect x=\"2.5\" y=\"8.5\" width=\"19\" height=\"7\" rx=\"3.5\"/><path d=\"M6.5 8.5h4v7h-4a3.5 3.5 0 0 1 0-7z\" fill=\"currentColor\" stroke=\"none\"/><path d=\"M14 12h5\"/>",
+			"grad": [
+				"#FF6F91",
+				"#FF9E6B",
+				"#FFE6DC"
+			],
+			"demo_url": null,
+			"docs_url": null
+		},
+		"tooltip": {
+			"label": "Tooltip",
+			"desc": "Attach a styled tooltip to text, an icon, or an image.",
+			"desc_short": "Styled hover tooltips.",
+			"cat": "content",
+			"pro": false,
+			"flagship": false,
+			"glyph": "<rect x=\"3\" y=\"3.5\" width=\"18\" height=\"11\" rx=\"2\"/><path d=\"M7 7.5h10M7 11h6\"/><path d=\"m9.5 14.5 2.5 3.5 2.5-3.5\" fill=\"currentColor\" stroke=\"none\"/>",
+			"grad": [
+				"#22C3BE",
+				"#4F8BFF",
+				"#DBF5F1"
+			],
+			"demo_url": null,
+			"docs_url": null
+		},
+		"image-accordion": {
+			"label": "Image Accordion",
+			"desc": "Expanding image panels that open on hover or click.",
+			"desc_short": "Expanding image panels.",
+			"cat": "media",
+			"pro": false,
+			"flagship": false,
+			"glyph": "<rect x=\"2.5\" y=\"4.5\" width=\"4\" height=\"15\" rx=\"1.4\"/><rect x=\"8.5\" y=\"4.5\" width=\"7\" height=\"15\" rx=\"1.4\"/><rect x=\"17.5\" y=\"4.5\" width=\"4\" height=\"15\" rx=\"1.4\"/><circle cx=\"11\" cy=\"9\" r=\"1.2\" fill=\"currentColor\" stroke=\"none\"/>",
+			"grad": [
+				"#2FC684",
+				"#2FAFC6",
+				"#DAF6E7"
+			],
+			"demo_url": null,
+			"docs_url": null
+		},
+		"svg-draw": {
+			"label": "SVG Draw",
+			"desc": "Animate an SVG being drawn stroke by stroke as it scrolls in.",
+			"desc_short": "Stroke-drawn SVG on scroll.",
+			"cat": "media",
+			"pro": false,
+			"flagship": false,
+			"glyph": "<path d=\"M3 16c3-9 7-11 9-5s5 6 9-4\"/><path d=\"M3 20.5h8\" stroke-dasharray=\"0.1 3.4\"/><circle cx=\"12.6\" cy=\"10.4\" r=\"1.7\" fill=\"currentColor\" stroke=\"none\"/>",
+			"grad": [
+				"#5BA8FF",
+				"#8FC5FF",
+				"#FFFFFF"
+			],
+			"demo_url": null,
+			"docs_url": null
+		},
+		"code-snippet": {
+			"label": "Code Snippet",
+			"desc": "Syntax-highlighted code blocks with line numbers and copy.",
+			"desc_short": "Highlighted code blocks.",
+			"cat": "utility",
+			"pro": false,
+			"flagship": false,
+			"glyph": "<rect x=\"2.5\" y=\"4.5\" width=\"19\" height=\"15\" rx=\"2\"/><path d=\"m8.4 10.6-2.2 2.2 2.2 2.2M15.6 10.6l2.2 2.2-2.2 2.2M13 9.6l-2 6.4\"/>",
+			"grad": [
+				"#FF6F91",
+				"#FF9E6B",
+				"#FFE6DC"
+			],
+			"demo_url": null,
+			"docs_url": null
+		},
+		"sticky-video": {
+			"label": "Sticky Video",
+			"desc": "Video that docks to a corner when it scrolls out of view.",
+			"desc_short": "Corner-docking video.",
+			"cat": "media",
+			"pro": false,
+			"flagship": false,
+			"glyph": "<rect x=\"2.5\" y=\"4.5\" width=\"19\" height=\"12\" rx=\"2\"/><path d=\"m10 8.4 4.6 2.6-4.6 2.6z\" fill=\"currentColor\" stroke=\"none\"/><rect x=\"13.5\" y=\"15.5\" width=\"8\" height=\"5.5\" rx=\"1.2\"/>",
+			"grad": [
+				"#6E8BFF",
+				"#A77CFF",
+				"#E6E9FF"
+			],
+			"demo_url": null,
+			"docs_url": null
+		},
 		"filterable-gallery": {
 			"label": "Filterable Gallery",
 			"desc": "Portfolios with smooth, no-reload filtering.",
+			"desc_short": "Filterable portfolio grids.",
 			"cat": "media",
 			"pro": true,
 			"flagship": true,
@@ -603,6 +750,7 @@
 		"masonry-gallery": {
 			"label": "Masonry Gallery",
 			"desc": "Pinterest-style masonry image galleries.",
+			"desc_short": "Masonry image galleries.",
 			"cat": "media",
 			"pro": true,
 			"flagship": false,
@@ -618,6 +766,7 @@
 		"image-slider": {
 			"label": "Image Slider",
 			"desc": "Responsive image slideshows with captions, controls, and autoplay.",
+			"desc_short": "Full-featured slideshows.",
 			"cat": "media",
 			"pro": true,
 			"flagship": false,
@@ -633,6 +782,7 @@
 		"image-magnifier": {
 			"label": "Image Zoom",
 			"desc": "Zoom into image detail on hover.",
+			"desc_short": "Hover zoom for images.",
 			"cat": "media",
 			"pro": true,
 			"flagship": false,
@@ -648,6 +798,7 @@
 		"hotspots": {
 			"label": "Hotspots",
 			"desc": "Interactive pins and tooltips on images.",
+			"desc_short": "Interactive image pins.",
 			"cat": "media",
 			"pro": true,
 			"flagship": false,
@@ -663,6 +814,7 @@
 		"lottie": {
 			"label": "Lottie Animation",
 			"desc": "Lightweight, interactive Lottie animations.",
+			"desc_short": "Lightweight Lottie animations.",
 			"cat": "media",
 			"pro": true,
 			"flagship": false,
@@ -678,6 +830,7 @@
 		"random-image": {
 			"label": "Random Image",
 			"desc": "Show a different image on each page load.",
+			"desc_short": "Random image per page load.",
 			"cat": "media",
 			"pro": true,
 			"flagship": false,
@@ -693,6 +846,7 @@
 		"google-reviews": {
 			"label": "Google Reviews",
 			"desc": "Show real Google reviews, styled to match your site.",
+			"desc_short": "Real Google reviews on-site.",
 			"cat": "social",
 			"pro": true,
 			"flagship": true,
@@ -708,6 +862,7 @@
 		"yelp-reviews": {
 			"label": "Yelp Reviews",
 			"desc": "Turn your Yelp reviews into on-page social proof.",
+			"desc_short": "Yelp reviews as social proof.",
 			"cat": "social",
 			"pro": true,
 			"flagship": false,
@@ -723,6 +878,7 @@
 		"instagram-feed": {
 			"label": "Instagram Feed",
 			"desc": "A live, on-brand Instagram feed — no third-party plugin.",
+			"desc_short": "Live on-brand Instagram feed.",
 			"cat": "social",
 			"pro": true,
 			"flagship": true,
@@ -738,6 +894,7 @@
 		"instagram-chat": {
 			"label": "Instagram Chat",
 			"desc": "An Instagram click-to-chat button.",
+			"desc_short": "Instagram chat button.",
 			"cat": "social",
 			"pro": true,
 			"flagship": false,
@@ -753,6 +910,7 @@
 		"whatsapp-chat": {
 			"label": "WhatsApp Chat",
 			"desc": "A WhatsApp click-to-chat button.",
+			"desc_short": "WhatsApp chat button.",
 			"cat": "social",
 			"pro": true,
 			"flagship": false,
@@ -768,6 +926,7 @@
 		"telegram-chat": {
 			"label": "Telegram Chat",
 			"desc": "A Telegram click-to-chat button.",
+			"desc_short": "Telegram chat button.",
 			"cat": "social",
 			"pro": true,
 			"flagship": false,
@@ -783,6 +942,7 @@
 		"facebook-page": {
 			"label": "Facebook Page",
 			"desc": "Embed your Facebook page feed to grow followers on-site.",
+			"desc_short": "Embedded Facebook feed.",
 			"cat": "social",
 			"pro": true,
 			"flagship": false,
@@ -798,6 +958,7 @@
 		"social-share": {
 			"label": "Social Share",
 			"desc": "Let readers share any page in one click.",
+			"desc_short": "One-click page sharing.",
 			"cat": "social",
 			"pro": true,
 			"flagship": false,
@@ -813,6 +974,7 @@
 		"testimonial-slider": {
 			"label": "Testimonial Slider",
 			"desc": "Rotate customer testimonials in an auto-playing slider.",
+			"desc_short": "Auto-playing testimonials.",
 			"cat": "social",
 			"pro": true,
 			"flagship": false,
@@ -828,6 +990,7 @@
 		"basic-list": {
 			"label": "Styled List",
 			"desc": "Styled bullet and numbered lists.",
+			"desc_short": "Styled bullet lists.",
 			"cat": "content",
 			"pro": true,
 			"flagship": false,
@@ -843,6 +1006,7 @@
 		"checkmark-list": {
 			"label": "Checkmark List",
 			"desc": "Tick-marked feature and benefit lists.",
+			"desc_short": "Tick-marked benefit lists.",
 			"cat": "content",
 			"pro": true,
 			"flagship": false,
@@ -858,6 +1022,7 @@
 		"icon-list": {
 			"label": "Icon List",
 			"desc": "Lists with a custom icon on every item.",
+			"desc_short": "Custom-icon lists.",
 			"cat": "content",
 			"pro": true,
 			"flagship": false,
@@ -873,6 +1038,7 @@
 		"content-toggle": {
 			"label": "Content Switcher",
 			"desc": "Let visitors toggle between two views — like monthly vs yearly pricing.",
+			"desc_short": "Two-view content switcher.",
 			"cat": "content",
 			"pro": true,
 			"flagship": false,
@@ -888,6 +1054,7 @@
 		"heading": {
 			"label": "Smart Heading",
 			"desc": "Style headings down to the last detail — gradients, spacing, and more.",
+			"desc_short": "Fine-grained heading styles.",
 			"cat": "content",
 			"pro": true,
 			"flagship": false,
@@ -903,6 +1070,7 @@
 		"inline-svg": {
 			"label": "Inline SVG",
 			"desc": "Embed and recolor SVG graphics that stay crisp at any size.",
+			"desc_short": "Crisp recolorable SVGs.",
 			"cat": "content",
 			"pro": true,
 			"flagship": false,
@@ -918,6 +1086,7 @@
 		"horizontal-timeline": {
 			"label": "Horizontal Timeline",
 			"desc": "Lay out events on a horizontal timeline.",
+			"desc_short": "Horizontal event timelines.",
 			"cat": "content",
 			"pro": true,
 			"flagship": false,
@@ -933,6 +1102,7 @@
 		"timeline": {
 			"label": "Timeline",
 			"desc": "Tell a story on a vertical timeline.",
+			"desc_short": "Vertical story timelines.",
 			"cat": "content",
 			"pro": true,
 			"flagship": false,
@@ -948,6 +1118,7 @@
 		"post-grid": {
 			"label": "Post Grid",
 			"desc": "Dynamic post grids with filtering.",
+			"desc_short": "Filterable post grids.",
 			"cat": "posts",
 			"pro": true,
 			"flagship": false,
@@ -963,6 +1134,7 @@
 		"related-posts": {
 			"label": "Related Posts",
 			"desc": "Keep readers on-site with automatic related-post blocks.",
+			"desc_short": "Automatic related posts.",
 			"cat": "posts",
 			"pro": true,
 			"flagship": false,
@@ -978,6 +1150,7 @@
 		"fluent-forms": {
 			"label": "Fluent Forms Styler",
 			"desc": "Style Fluent Forms to match your design.",
+			"desc_short": "Style Fluent Forms.",
 			"cat": "forms",
 			"pro": true,
 			"flagship": false,
@@ -993,6 +1166,7 @@
 		"gravity-forms": {
 			"label": "Gravity Forms Styler",
 			"desc": "Style Gravity Forms to match your design.",
+			"desc_short": "Style Gravity Forms.",
 			"cat": "forms",
 			"pro": true,
 			"flagship": false,
@@ -1008,6 +1182,7 @@
 		"ajax-search": {
 			"label": "Ajax Search",
 			"desc": "Instant, live search results as visitors type.",
+			"desc_short": "Live search-as-you-type.",
 			"cat": "nav",
 			"pro": true,
 			"flagship": false,
@@ -1023,6 +1198,7 @@
 		"nav-menu": {
 			"label": "Menu Maker",
 			"desc": "Design custom navigation menus visually inside Divi.",
+			"desc_short": "Visual custom nav menus.",
 			"cat": "nav",
 			"pro": true,
 			"flagship": false,
@@ -1038,6 +1214,7 @@
 		"countdown": {
 			"label": "Evergreen Countdown",
 			"desc": "Evergreen and fixed-date countdown timers.",
+			"desc_short": "Evergreen countdown timers.",
 			"cat": "commerce",
 			"pro": true,
 			"flagship": false,
@@ -1053,6 +1230,7 @@
 		"pricing-table": {
 			"label": "Pricing Cards",
 			"desc": "Compare plans side by side in conversion-ready pricing tables.",
+			"desc_short": "Side-by-side pricing tables.",
 			"cat": "commerce",
 			"pro": true,
 			"flagship": false,
@@ -1068,6 +1246,7 @@
 		"restro-menu": {
 			"label": "Restaurant Menu",
 			"desc": "Menu-style price lists for restaurants and services.",
+			"desc_short": "Menu-style price lists.",
 			"cat": "commerce",
 			"pro": true,
 			"flagship": false,
@@ -1083,6 +1262,7 @@
 		"blurb": {
 			"label": "Advanced Blurb",
 			"desc": "Pair an icon or image with a heading and text — the classic blurb, upgraded.",
+			"desc_short": "The classic blurb, upgraded.",
 			"cat": "content",
 			"pro": true,
 			"flagship": false,
@@ -1098,6 +1278,7 @@
 		"circle-info": {
 			"label": "Circle Info",
 			"desc": "Show stats or steps inside an animated circular graphic.",
+			"desc_short": "Animated circular stats.",
 			"cat": "content",
 			"pro": true,
 			"flagship": false,
@@ -1113,6 +1294,7 @@
 		"stats-grid": {
 			"label": "Stats Grid",
 			"desc": "A grid of animated stats and KPIs.",
+			"desc_short": "Animated KPI grids.",
 			"cat": "commerce",
 			"pro": true,
 			"flagship": false,
@@ -1128,6 +1310,7 @@
 		"star-rating": {
 			"label": "Star Rating",
 			"desc": "Add a star rating to any product, service, or review.",
+			"desc_short": "Star ratings anywhere.",
 			"cat": "commerce",
 			"pro": true,
 			"flagship": false,
@@ -1143,6 +1326,7 @@
 		"table-maker": {
 			"label": "Table Maker",
 			"desc": "Build clean, responsive data tables.",
+			"desc_short": "Responsive data tables.",
 			"cat": "commerce",
 			"pro": true,
 			"flagship": false,
@@ -1160,6 +1344,7 @@
 		"popup-maker": {
 			"label": "Popup Maker",
 			"desc": "Convert visitors with popups that fire on scroll, exit, time, or click.",
+			"desc_short": "Popups that convert.",
 			"cat": "utility",
 			"pro": false,
 			"flagship": false,
@@ -1175,6 +1360,7 @@
 		"mega-menu": {
 			"label": "Mega Menu",
 			"desc": "Turn a plain Divi menu into a full navigation experience — any module inside.",
+			"desc_short": "Mega menus with any module.",
 			"cat": "nav",
 			"pro": false,
 			"flagship": false,
@@ -1190,6 +1376,7 @@
 		"dark-mode": {
 			"label": "Dark Mode",
 			"desc": "Give every visitor a one-click dark mode, on-brand across your whole Divi site.",
+			"desc_short": "One-click dark mode.",
 			"cat": "utility",
 			"pro": false,
 			"flagship": false,
@@ -1205,6 +1392,7 @@
 		"mailer": {
 			"label": "SMTP Mailer",
 			"desc": "Stop WordPress email landing in spam — route it through reliable SMTP.",
+			"desc_short": "Reliable SMTP email.",
 			"cat": "utility",
 			"pro": false,
 			"flagship": false,
@@ -1220,6 +1408,7 @@
 		"maintenance-mode": {
 			"label": "Maintenance Mode",
 			"desc": "Hide work-in-progress behind a branded coming-soon page in minutes.",
+			"desc_short": "Branded coming-soon page.",
 			"cat": "utility",
 			"pro": false,
 			"flagship": false,

@@ -4,6 +4,7 @@
   "titles": "Tables of Contents",
   "moduleIcon": "divitorque/table-of-contents",
   "moduleClassName": "dtq_table_of_contents",
+  "moduleOrderClassName": "dtq_table_of_contents",
   "category": "module",
   "attributes": {
     "module": {

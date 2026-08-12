@@ -126,10 +126,19 @@ trait RenderCallbackTrait
             $title_html = sprintf('<div class="dtq-news-title">%1$s</div>', esc_html($title_text));
         }
 
+        // WCAG 2.2.2 (Pause, Stop, Hide): the ticker scrolls automatically and
+        // indefinitely, so it must offer a way to stop it. frontend.js toggles
+        // `.dtq-news-tricker--paused`, which halts the CSS animation.
+        $pause_html = sprintf(
+            '<button type="button" class="dtq-news-pause" aria-pressed="false" aria-label="%1$s"><span class="dtq-news-pause__icon" aria-hidden="true"></span></button>',
+            esc_attr__('Pause the scrolling news ticker', 'addons-for-divi')
+        );
+
         $children = sprintf(
-            '<div class="dtq-module dtq-news-tricker">%1$s<div class="dtq-news-container"><ul class="dtq-news-wrap">%2$s</ul></div></div>',
+            '<div class="dtq-module dtq-news-tricker">%1$s<div class="dtq-news-container"><ul class="dtq-news-wrap">%2$s</ul></div>%3$s</div>',
             $title_html,
-            self::render_news($attrs)
+            self::render_news($attrs),
+            $pause_html
         );
 
         return Module::render(
@@ -144,7 +153,10 @@ trait RenderCallbackTrait
                 'classnamesFunction'  => [self::class, 'module_classnames'],
                 'stylesComponent'     => [self::class, 'module_styles'],
                 'scriptDataComponent' => [self::class, 'module_script_data'],
-                'children'            => $children,
+                'children'            => [
+                    $elements->style_components(['attrName' => 'module']),
+                    $children,
+                ],
             ]
         );
     }

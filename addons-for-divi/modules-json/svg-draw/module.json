@@ -1,0 +1,418 @@
+{
+  "name": "divitorque/svg-draw",
+  "title": "SVG Draw",
+  "titles": "SVG Draws",
+  "moduleIcon": "divitorque/svg-draw",
+  "moduleClassName": "dtq_svg_draw",
+  "moduleOrderClassName": "dtq_svg_draw",
+  "category": "module",
+  "attributes": {
+    "module": {
+      "type": "object",
+      "selector": "{{selector}}",
+      "default": {
+        "advanced": {
+          "source": { "desktop": { "value": "code" } },
+          "decorative": { "desktop": { "value": "on" } },
+          "trigger": { "desktop": { "value": "viewport" } },
+          "viewportOffset": { "desktop": { "value": "15%" } },
+          "repeat": { "desktop": { "value": "off" } },
+          "drawDuration": { "desktop": { "value": "1500ms" } },
+          "drawDelay": { "desktop": { "value": "0ms" } },
+          "stagger": { "desktop": { "value": "150ms" } },
+          "easing": { "desktop": { "value": "ease-in-out" } },
+          "strokeWidth": { "desktop": { "value": "2px" } },
+          "fillMode": { "desktop": { "value": "none" } },
+          "includeShapes": { "desktop": { "value": "off" } },
+          "svgWidth": { "desktop": { "value": "100%" } },
+          "align": { "desktop": { "value": "center" } }
+        }
+      },
+      "settings": {
+        "meta": { "adminLabel": {} },
+        "advanced": {
+          "htmlAttributes": {},
+          "source": {
+            "groupType": "group-item",
+            "item": {
+              "groupSlug": "contentSvg",
+              "attrName": "module.advanced.source",
+              "label": "SVG Source",
+              "priority": 10,
+              "render": true,
+              "features": { "sticky": false, "responsive": false, "hover": false },
+              "component": {
+                "type": "field",
+                "name": "divi/select",
+                "props": {
+                  "options": {
+                    "code": { "label": "Paste code" },
+                    "file": { "label": "Media library file" }
+                  }
+                }
+              }
+            }
+          },
+          "svgCode": {
+            "groupType": "group-item",
+            "item": {
+              "groupSlug": "contentSvg",
+              "attrName": "module.advanced.svgCode",
+              "label": "SVG Code",
+              "description": "Paste the whole <svg> element. It is sanitised before it reaches the page — scripts, event handlers and external references are removed.",
+              "priority": 20,
+              "render": true,
+              "features": { "sticky": false, "responsive": false, "hover": false, "dynamicContent": false },
+              "component": { "type": "field", "name": "divi/textarea" }
+            }
+          },
+          "svgFile": {
+            "groupType": "group-item",
+            "item": {
+              "groupSlug": "contentSvg",
+              "attrName": "module.advanced.svgFile",
+              "label": "SVG File",
+              "description": "Must be a file in this site's media library. Files hosted elsewhere are not fetched.",
+              "priority": 30,
+              "render": true,
+              "features": { "sticky": false, "responsive": false, "hover": false },
+              "component": { "type": "field", "name": "divi/upload", "props": { "dataType": "svg" } }
+            }
+          },
+          "decorative": {
+            "groupType": "group-item",
+            "item": {
+              "groupSlug": "contentSvg",
+              "attrName": "module.advanced.decorative",
+              "label": "Decorative",
+              "description": "On means screen readers skip it, which is right for ornament. Turn it off and give it a label when the drawing carries meaning.",
+              "priority": 40,
+              "render": true,
+              "features": { "sticky": false, "responsive": false, "hover": false },
+              "component": { "type": "field", "name": "divi/toggle" }
+            }
+          },
+          "svgLabel": {
+            "groupType": "group-item",
+            "item": {
+              "groupSlug": "contentSvg",
+              "attrName": "module.advanced.svgLabel",
+              "label": "Accessible Label",
+              "description": "What the drawing conveys, for someone who cannot see it.",
+              "priority": 50,
+              "render": true,
+              "features": { "sticky": false, "responsive": false, "hover": false },
+              "component": { "type": "field", "name": "divi/text" }
+            }
+          },
+          "trigger": {
+            "groupType": "group-item",
+            "item": {
+              "groupSlug": "contentAnimation",
+              "attrName": "module.advanced.trigger",
+              "label": "Draw On",
+              "description": "Scroll into view, page load, or hover. Hover needs no JavaScript at all.",
+              "priority": 10,
+              "render": true,
+              "features": { "sticky": false, "responsive": false, "hover": false },
+              "component": {
+                "type": "field",
+                "name": "divi/select",
+                "props": {
+                  "options": {
+                    "viewport": { "label": "Scroll into view" },
+                    "load": { "label": "Page load" },
+                    "hover": { "label": "Hover" }
+                  }
+                }
+              }
+            }
+          },
+          "viewportOffset": {
+            "groupType": "group-item",
+            "item": {
+              "groupSlug": "contentAnimation",
+              "attrName": "module.advanced.viewportOffset",
+              "label": "Viewport Offset",
+              "description": "How far into the viewport the drawing must travel before it starts.",
+              "priority": 20,
+              "render": true,
+              "features": { "sticky": false, "responsive": false, "hover": false },
+              "component": {
+                "type": "field",
+                "name": "divi/range",
+                "props": { "min": 0, "max": 50, "step": 1, "defaultUnit": "%" }
+              }
+            }
+          },
+          "repeat": {
+            "groupType": "group-item",
+            "item": {
+              "groupSlug": "contentAnimation",
+              "attrName": "module.advanced.repeat",
+              "label": "Redraw Each Time",
+              "description": "Draw again whenever it re-enters the viewport, rather than once.",
+              "priority": 30,
+              "render": true,
+              "features": { "sticky": false, "responsive": false, "hover": false },
+              "component": { "type": "field", "name": "divi/toggle" }
+            }
+          },
+          "drawDuration": {
+            "groupType": "group-item",
+            "item": {
+              "groupSlug": "designAnimation",
+              "attrName": "module.advanced.drawDuration",
+              "label": "Draw Duration",
+              "description": "Skipped entirely for visitors who have asked for reduced motion — they see the finished drawing.",
+              "priority": 10,
+              "render": true,
+              "features": { "sticky": false, "responsive": false, "hover": false },
+              "component": {
+                "type": "field",
+                "name": "divi/range",
+                "props": { "min": 100, "max": 8000, "step": 100, "defaultUnit": "ms", "validUnits": ["ms", "s"] }
+              }
+            }
+          },
+          "drawDelay": {
+            "groupType": "group-item",
+            "item": {
+              "groupSlug": "designAnimation",
+              "attrName": "module.advanced.drawDelay",
+              "label": "Start Delay",
+              "priority": 20,
+              "render": true,
+              "features": { "sticky": false, "responsive": false, "hover": false },
+              "component": {
+                "type": "field",
+                "name": "divi/range",
+                "props": { "min": 0, "max": 5000, "step": 50, "defaultUnit": "ms", "validUnits": ["ms", "s"] }
+              }
+            }
+          },
+          "stagger": {
+            "groupType": "group-item",
+            "item": {
+              "groupSlug": "designAnimation",
+              "attrName": "module.advanced.stagger",
+              "label": "Stagger Between Strokes",
+              "description": "Each stroke waits this much longer than the one before it, so the drawing appears line by line.",
+              "priority": 30,
+              "render": true,
+              "features": { "sticky": false, "responsive": false, "hover": false },
+              "component": {
+                "type": "field",
+                "name": "divi/range",
+                "props": { "min": 0, "max": 2000, "step": 25, "defaultUnit": "ms", "validUnits": ["ms", "s"] }
+              }
+            }
+          },
+          "easing": {
+            "groupType": "group-item",
+            "item": {
+              "groupSlug": "designAnimation",
+              "attrName": "module.advanced.easing",
+              "label": "Easing",
+              "priority": 40,
+              "render": true,
+              "features": { "sticky": false, "responsive": false, "hover": false },
+              "component": {
+                "type": "field",
+                "name": "divi/select",
+                "props": {
+                  "options": {
+                    "ease": { "label": "Ease" },
+                    "ease-in": { "label": "Ease In" },
+                    "ease-out": { "label": "Ease Out" },
+                    "ease-in-out": { "label": "Ease In Out" },
+                    "linear": { "label": "Linear" }
+                  }
+                }
+              }
+            }
+          },
+          "strokeColor": {
+            "groupType": "group-item",
+            "item": {
+              "groupSlug": "designStroke",
+              "attrName": "module.advanced.strokeColor",
+              "label": "Stroke Color",
+              "description": "Leave empty to keep the colours already in the SVG.",
+              "priority": 10,
+              "render": true,
+              "features": { "sticky": false, "responsive": false, "hover": false },
+              "component": { "type": "field", "name": "divi/color-picker", "props": { "isAlpha": true } }
+            }
+          },
+          "strokeWidth": {
+            "groupType": "group-item",
+            "item": {
+              "groupSlug": "designStroke",
+              "attrName": "module.advanced.strokeWidth",
+              "label": "Stroke Width",
+              "priority": 20,
+              "render": true,
+              "features": { "sticky": false, "responsive": false, "hover": false },
+              "component": {
+                "type": "field",
+                "name": "divi/range",
+                "props": { "min": 0, "max": 20, "step": 0.5, "defaultUnit": "px" }
+              }
+            }
+          },
+          "includeShapes": {
+            "groupType": "group-item",
+            "item": {
+              "groupSlug": "designStroke",
+              "attrName": "module.advanced.includeShapes",
+              "label": "Also Draw Circles And Rectangles",
+              "description": "Off by default: pathLength on a circle or rect is unreliable in older Safari, so those shapes simply appear rather than draw.",
+              "priority": 30,
+              "render": true,
+              "features": { "sticky": false, "responsive": false, "hover": false },
+              "component": { "type": "field", "name": "divi/toggle" }
+            }
+          },
+          "fillMode": {
+            "groupType": "group-item",
+            "item": {
+              "groupSlug": "designFill",
+              "attrName": "module.advanced.fillMode",
+              "label": "Fill",
+              "description": "Whether the shapes gain a fill once the outline has finished drawing.",
+              "priority": 10,
+              "render": true,
+              "features": { "sticky": false, "responsive": false, "hover": false },
+              "component": {
+                "type": "field",
+                "name": "divi/select",
+                "props": {
+                  "options": {
+                    "none": { "label": "Outline only" },
+                    "after": { "label": "Fill after drawing" }
+                  }
+                }
+              }
+            }
+          },
+          "fillColor": {
+            "groupType": "group-item",
+            "item": {
+              "groupSlug": "designFill",
+              "attrName": "module.advanced.fillColor",
+              "label": "Fill Color",
+              "priority": 20,
+              "render": true,
+              "features": { "sticky": false, "responsive": false, "hover": false },
+              "component": { "type": "field", "name": "divi/color-picker", "props": { "isAlpha": true } }
+            }
+          },
+          "svgWidth": {
+            "groupType": "group-item",
+            "item": {
+              "groupSlug": "designLayout",
+              "attrName": "module.advanced.svgWidth",
+              "label": "Width",
+              "priority": 10,
+              "render": true,
+              "features": { "sticky": false, "responsive": true, "hover": false },
+              "component": {
+                "type": "field",
+                "name": "divi/range",
+                "props": { "min": 10, "max": 100, "step": 1, "defaultUnit": "%" }
+              }
+            }
+          },
+          "align": {
+            "groupType": "group-item",
+            "item": {
+              "groupSlug": "designLayout",
+              "attrName": "module.advanced.align",
+              "label": "Alignment",
+              "priority": 20,
+              "render": true,
+              "features": { "sticky": false, "responsive": false, "hover": false },
+              "component": {
+                "type": "field",
+                "name": "divi/select",
+                "props": {
+                  "options": {
+                    "left": { "label": "Left" },
+                    "center": { "label": "Center" },
+                    "right": { "label": "Right" }
+                  }
+                }
+              }
+            }
+          },
+          "text": {}
+        },
+        "decoration": {
+          "animation": {},
+          "background": {},
+          "border": {},
+          "boxShadow": {},
+          "disabledOn": {},
+          "filters": {},
+          "overflow": {},
+          "position": {},
+          "scroll": {},
+          "sizing": {},
+          "spacing": {},
+          "sticky": {},
+          "transform": {},
+          "transition": {},
+          "zIndex": {}
+        }
+      }
+    }
+  },
+  "customCssFields": {
+    "canvas": { "subName": "canvas", "selectorSuffix": " .dtq-svg-draw__canvas" },
+    "svg": { "subName": "svg", "selectorSuffix": " .dtq-svg-draw__canvas svg" }
+  },
+  "settings": {
+    "content": "auto",
+    "design": "auto",
+    "advanced": "auto",
+    "groups": {
+      "contentSvg": {
+        "panel": "content",
+        "priority": 10,
+        "groupName": "contentSvg",
+        "component": { "name": "divi/composite", "props": { "groupLabel": "SVG" } }
+      },
+      "contentAnimation": {
+        "panel": "content",
+        "priority": 20,
+        "groupName": "contentAnimation",
+        "component": { "name": "divi/composite", "props": { "groupLabel": "Animation" } }
+      },
+      "designAnimation": {
+        "panel": "design",
+        "priority": 10,
+        "groupName": "designAnimation",
+        "component": { "name": "divi/composite", "props": { "groupLabel": "Timing" } }
+      },
+      "designStroke": {
+        "panel": "design",
+        "priority": 20,
+        "groupName": "designStroke",
+        "component": { "name": "divi/composite", "props": { "groupLabel": "Stroke" } }
+      },
+      "designFill": {
+        "panel": "design",
+        "priority": 30,
+        "groupName": "designFill",
+        "component": { "name": "divi/composite", "props": { "groupLabel": "Fill" } }
+      },
+      "designLayout": {
+        "panel": "design",
+        "priority": 40,
+        "groupName": "designLayout",
+        "component": { "name": "divi/composite", "props": { "groupLabel": "Layout" } }
+      }
+    }
+  }
+}

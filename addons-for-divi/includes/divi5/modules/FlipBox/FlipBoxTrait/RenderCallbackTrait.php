@@ -13,6 +13,7 @@ if (!defined('ABSPATH')) {
 }
 
 use ET\Builder\Packages\Module\Module;
+use DiviTorqueLite\Modules\Shared\ButtonElement;
 use ET\Builder\Packages\Module\Layout\Components\ModuleElements\ModuleElements;
 use WP_Block;
 
@@ -188,7 +189,7 @@ trait RenderCallbackTrait
         if ($use_button) {
             $button_html = sprintf(
                 '<div class="dtq-flipbox-btn-wrap">%1$s</div>',
-                $elements->render(['attrName' => 'button'])
+                ButtonElement::render($attrs['button'] ?? [], 'dtq-flipbox-btn')
             );
         }
 
@@ -209,8 +210,12 @@ trait RenderCallbackTrait
             $button_html
         );
 
+        // tabindex makes the card focusable so the flip can be triggered by
+        // keyboard: the animation is CSS-driven off :hover, and module.scss now
+        // pairs every one of those rules with :focus-within. Without a focusable
+        // element the back side was unreachable without a mouse.
         $children = sprintf(
-            '<div class="dtq-module dtq-flipbox %1$s"><div class="dtq-flipbox-inner"><div class="dtq-flipbox-card-container">%2$s%3$s<div class="dtq-flank"></div></div></div></div>',
+            '<div class="dtq-module dtq-flipbox %1$s"><div class="dtq-flipbox-inner"><div class="dtq-flipbox-card-container" tabindex="0">%2$s%3$s<div class="dtq-flank"></div></div></div></div>',
             esc_attr(implode(' ', $classes)),
             $front_card,
             $back_card

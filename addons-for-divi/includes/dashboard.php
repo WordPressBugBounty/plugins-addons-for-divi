@@ -14,7 +14,8 @@ class Dashboard
 
     /**
      * Dashboard UI mode. 'v2' (default) is the @plugpress/ui app under
-     * admin/; 'legacy' is the v1 SPA built by Mix into assets/admin. Legacy
+     * admin/; 'legacy' is the v1 SPA built by webpack.config.js into
+     * assets/admin. Legacy
      * ships unchanged until its removal release.
      */
     const UI_OPTION = 'divitorque_lite_dashboard_ui';
@@ -30,10 +31,11 @@ class Dashboard
     public function __construct()
     {
         add_action('admin_menu', [$this, 'add_menu']);
-        add_action('admin_enqueue_scripts', [$this, 'admin_enqueue_scripts'], 100);
+        add_action('admin_head', [$this, 'print_menu_separator_css']);
         add_action('rest_api_init', [$this, 'register_switch_route']);
         add_action('admin_init', [$this, 'handle_switch_link']);
         add_filter('admin_body_class', [$this, 'body_class']);
+        add_filter('submenu_file', [$this, 'highlight_submenu'], 10, 2);
 
         if ($this->is_v2()) {
             add_action('admin_notices', [$this, 'begin_notice_capture'], -9999);
@@ -46,9 +48,54 @@ class Dashboard
         return get_option(self::UI_OPTION, 'v2') !== 'legacy';
     }
 
+    /**
+     * Whether Pro's v2 dashboard is active. When it is, Pro owns EVERY app
+     * screen (one dashboard, never two): extension pages render inside Pro's
+     * bundle, and Lite must not enqueue, scope, or notice-capture anything.
+     *
+     * @return bool
+     */
+    public function pro_owns_dashboard()
+    {
+        return class_exists('\DiviTorque\Dashboard')
+            && \DiviTorque\Dashboard::get_instance()->is_v2();
+    }
+
     private function is_our_screen()
     {
-        return isset($_GET['page']) && $_GET['page'] === $this->menu_slug && !AdminHelper::is_pro_installed(); // phpcs:ignore WordPress.Security.NonceVerification
+        // phpcs:ignore WordPress.Security.NonceVerification
+        $page = isset($_GET['page']) ? $_GET['page'] : '';
+
+        if ($this->pro_owns_dashboard()) {
+            return false;
+        }
+
+        // Extension pages are ours whether or not Pro is active — they have no
+        // Pro counterpart. Without this the page would render without the
+        // `pp-scope` body class and @plugpress/ui would be completely unstyled.
+        if (Share_My_Post_Admin::SLUG === $page) {
+            return true;
+        }
+
+        return $page === $this->menu_slug && !AdminHelper::is_pro_installed();
+    }
+
+    /**
+     * Render a standalone extension settings page inside the v2 app.
+     *
+     * Extensions register their own top-level slug rather than
+     * `divitorque&path=…`, because with Pro active that slug routes to Pro's
+     * dashboard, whose bundle has no route for them. Booting the app with an
+     * explicit `initialPath` is what makes the same bundle serve both.
+     *
+     * @param string $path Route to open, e.g. 'share-my-post'.
+     *
+     * @return void
+     */
+    public function render_extension_page($path)
+    {
+        $this->enqueue_v2($path);
+        echo '<div id="divitorque-root"></div>';
     }
 
     public function add_menu()
@@ -64,8 +111,8 @@ class Dashboard
 ');
 
         add_menu_page(
-            __('Divi Torque', 'divitorque'),
-            __('Divi Torque', 'divitorque'),
+            __('Divi Torque', 'addons-for-divi'),
+            __('Divi Torque', 'addons-for-divi'),
             $this->capability,
             $this->menu_slug,
             [$this, 'render_app'],
@@ -73,24 +120,125 @@ class Dashboard
             130
         );
 
-        add_submenu_page(
-            $this->menu_slug,
-            __('Dashboard', 'divitorque'),
-            __('Dashboard', 'divitorque'),
-            $this->capability,
-            $this->menu_slug,
-            array($this, 'render_app')
-        );
+        foreach ($this->v2_submenus() as $item) {
+            if (isset($item['slug'])) {
+                $slug     = $item['slug'];
+                $callback = null;
+            } elseif ('' === $item['path']) {
+                $slug     = $this->menu_slug;
+                $callback = [$this, 'render_app'];
+            } else {
+                $slug     = "{$this->menu_slug}&path={$item['path']}";
+                $callback = [$this, 'render_app'];
+            }
 
-        add_submenu_page(
-            $this->menu_slug,
-            __('Modules', 'divitorque'),
-            __('Modules', 'divitorque'),
-            $this->capability,
-            "{$this->menu_slug}&path=module-manager",
-            [$this, 'render_app']
-        );
+            add_submenu_page(
+                $this->menu_slug,
+                $item['label'],
+                $item['label'],
+                $this->capability,
+                $slug,
+                $callback
+            );
+        }
+    }
 
+    /**
+     * Dashboard v2 submenu map — one entry per app destination, mirroring
+     * admin/src/routes.js. The WP menu is the complete vertical map of the
+     * app; the app's own topbar carries the same destinations horizontally.
+     * (Sharing Buttons registers its own slug in share-my-post/admin.php.)
+     *
+     * In legacy mode only the two v1 destinations exist.
+     *
+     * @return array[]
+     */
+    private function v2_submenus()
+    {
+        $items = [
+            [
+                'label' => __('Overview', 'addons-for-divi'),
+                'path'  => '',
+            ],
+            [
+                'label' => __('Modules', 'addons-for-divi'),
+                'path'  => 'module-manager',
+            ],
+        ];
+
+        if ($this->is_v2()) {
+            $items[] = [
+                'label' => '',
+                'path'  => null,
+                'slug'  => 'divitorque-lite-sep-1',
+            ];
+            // Sharing Buttons registers its own slug at admin_menu 20, landing
+            // after Extensions — together they form the extensions group.
+            $items[] = [
+                'label' => __('Extensions', 'addons-for-divi'),
+                'path'  => 'extensions',
+            ];
+        }
+
+        return $items;
+    }
+
+    /**
+     * Group separators: the dummy `divitorque-lite-sep-N` submenu entries
+     * render as thin unclickable rules. The menu is printed on every admin
+     * screen, so this rides admin_head globally.
+     *
+     * @return void
+     */
+    public function print_menu_separator_css()
+    {
+        if (!$this->is_v2() || AdminHelper::is_pro_installed()) {
+            return;
+        }
+
+        echo '<style>#adminmenu .wp-submenu a[href*="divitorque-lite-sep-"]{pointer-events:none;cursor:default;height:1px;padding:0;margin:6px 12px;overflow:hidden;background:rgba(255,255,255,.2);font-size:0;line-height:1px;}</style>';
+    }
+
+    /**
+     * Highlight the submenu entry matching the app's `?path=` arg.
+     *
+     * The v2 slugs embed the path ("divitorque&path=extensions") but WP only
+     * auto-highlights the entry whose slug equals $plugin_page ('divitorque'),
+     * so every deep link lit up "Dashboard". Map the request back to the
+     * registered slug; the Sharing Buttons route maps to the extension's own
+     * registered submenu.
+     *
+     * @param string|null $submenu_file Submenu file WP computed.
+     * @param string      $parent_file  Parent menu file.
+     *
+     * @return string|null
+     */
+    public function highlight_submenu($submenu_file, $parent_file)
+    {
+        // phpcs:ignore WordPress.Security.NonceVerification
+        $page = isset($_GET['page']) ? $_GET['page'] : '';
+
+        if (!$this->is_v2() || $page !== $this->menu_slug || AdminHelper::is_pro_installed()) {
+            return $submenu_file;
+        }
+
+        $path = isset($_GET['path']) ? sanitize_key(wp_unslash($_GET['path'])) : ''; // phpcs:ignore WordPress.Security.NonceVerification
+
+        if ('' === $path) {
+            return $submenu_file;
+        }
+
+        if ('share-my-post' === $path) {
+            return Share_My_Post_Admin::SLUG;
+        }
+
+        foreach ($this->v2_submenus() as $item) {
+            if ($item['path'] === $path) {
+                return "{$this->menu_slug}&path={$path}";
+            }
+        }
+
+        return $submenu_file;
     }
 
     public function render_app()
@@ -108,7 +256,7 @@ class Dashboard
 
     /* ─── Dashboard v2 ─────────────────────────────────────────────── */
 
-    private function enqueue_v2()
+    private function enqueue_v2($initial_path = '')
     {
         $base = DIVI_TORQUE_LITE_URL . 'admin/build/';
         $dir  = DIVI_TORQUE_LITE_DIR . 'admin/build/';
@@ -131,14 +279,23 @@ class Dashboard
 
         wp_add_inline_script(
             'divi-torque-lite-admin-v2',
-            'window.divitorqueData = ' . wp_json_encode($this->get_v2_data()) . ';',
+            'window.divitorqueData = ' . wp_json_encode($this->get_v2_data($initial_path)) . ';',
             'before'
         );
     }
 
-    private function get_v2_data()
+    private function get_v2_data($initial_path = '')
     {
         return [
+            // Set only on extension pages, which have their own WP menu slug and
+            // so cannot use the `?path=` bridge the dashboard tabs use.
+            'initialPath'   => $initial_path,
+            // The app hides the dashboard/module routes when Pro owns them, so
+            // an extension page opened under Pro shows only itself.
+            'proActive'     => AdminHelper::is_pro_installed(),
+            // Extension pages' REST namespace + server data — same shape Pro's
+            // boot data carries, fed by the same filter.
+            'extensions'    => apply_filters('divitorque/dashboard_extensions', []),
             'root'        => esc_url_raw(get_rest_url()),
             'nonce'       => wp_create_nonce('wp_rest'),
             'ns'          => 'divitorque-lite/v1',
@@ -213,13 +370,13 @@ class Dashboard
     {
         $url = wp_nonce_url(admin_url('admin.php?page=' . $this->menu_slug . '&dtl_ui=v2'), 'dtl_switch_ui');
         ?>
-        <div class="dtl-try-v2" style="margin:16px 20px 0 0;padding:12px 16px;display:flex;align-items:center;gap:12px;background:#fff;border:1px solid #dcdcde;border-left:4px solid #3979ff;border-radius:4px;">
+        <div class="notice notice-info dtl-try-v2" style="display:flex;align-items:center;gap:12px;padding:12px 16px;">
             <span style="flex:1;">
-                <strong><?php esc_html_e('The new Divi Torque dashboard is here.', 'divitorque'); ?></strong>
-                <?php esc_html_e('Cleaner, faster, and where new features land first. This legacy dashboard will be retired in an upcoming release.', 'divitorque'); ?>
+                <strong><?php esc_html_e('The new Divi Torque dashboard is here.', 'addons-for-divi'); ?></strong>
+                <?php esc_html_e('Cleaner, faster, and where new features land first. This legacy dashboard will be retired in an upcoming release.', 'addons-for-divi'); ?>
             </span>
             <a class="button button-primary" href="<?php echo esc_url($url); ?>">
-                <?php esc_html_e('Try the new dashboard', 'divitorque'); ?>
+                <?php esc_html_e('Try the new dashboard', 'addons-for-divi'); ?>
             </a>
         </div>
         <?php
@@ -229,19 +386,9 @@ class Dashboard
 
     public function enqueue_scripts()
     {
-        $manifest_path = DIVI_TORQUE_LITE_DIR . 'assets/mix-manifest.json';
-        if (!file_exists($manifest_path)) {
-            return;
-        }
-
-        $manifest = json_decode(file_get_contents($manifest_path), true);
-        if (!$manifest) {
-            return;
-        }
-
         $assets_url = DIVI_TORQUE_LITE_URL . 'assets';
-        $dashboard_js = $assets_url . $manifest['/admin/js/dashboard.js'];
-        $dashboard_css = $assets_url . $manifest['/admin/css/dashboard.css'];
+        $dashboard_js = $assets_url . '/admin/js/dashboard.js';
+        $dashboard_css = $assets_url . '/admin/css/dashboard.css';
 
         wp_enqueue_script(
             'divi-torque-lite-dashboard',
@@ -265,7 +412,6 @@ class Dashboard
             'assetsPath'        => esc_url_raw($assets_url),
             'version'           => DIVI_TORQUE_LITE_VERSION,
             'module_info'       => ModulesManager::get_all_modules(),
-            'pro_module_info'   => ModulesManager::get_all_pro_modules(),
             'module_icon_path'  => DIVI_TORQUE_LITE_URL . 'assets/imgs/icons',
             'isProInstalled'    => AdminHelper::is_pro_installed(),
             'upgradeLink'       => 'https://divitorque.com/pricing-lifetime/?utm_source=divi-torque-lite&utm_medium=wp-admin&utm_campaign=upgrade-to-pro&utm_content=menu-button',
@@ -273,16 +419,6 @@ class Dashboard
         ];
 
         wp_localize_script('divi-torque-lite-dashboard', 'diviTorqueLite', $localize);
-    }
-
-    public function admin_enqueue_scripts()
-    {
-        wp_enqueue_style(
-            'divi-torque-lite-admin',
-            DIVI_TORQUE_LITE_URL . 'assets/admin/css/admin.css',
-            [],
-            DIVI_TORQUE_LITE_VERSION
-        );
     }
 
     public function wp_deps()

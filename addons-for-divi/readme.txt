@@ -1,71 +1,112 @@
-=== Divi Torque Lite - Divi Modules for the Divi Builder & Theme ===
+=== Divi Torque Lite – Divi 5 Modules & Addons for the Divi Builder & Divi Theme ===
 Contributors: divipeople, plugpressco, badhonrocks
 Tags: divi, divi builder, divi modules, page builder, divi theme
 Requires at least: 7.0
 Tested up to: 7.0
 Requires PHP: 7.4
-Stable tag: 4.8.2
+Stable tag: 4.9.0
 License: GPLv3
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 
-Supercharge the Divi Builder with 25+ free, lightweight modules — Icon Box, Carousel, Testimonials, Gradient Heading, and more.
+41 free Divi modules built natively for Divi 5, including Accordion, Tabs, Tooltip, Image Accordion, Sticky Video, Modal Popup, and more.
 
 == Description ==
 
-Divi Torque Lite adds 25+ free, beautifully designed modules to the Divi Builder — so you can build richer pages without writing code or slowing your site down. Each module is fully responsive, easy to customize, and made to feel native to Divi.
+Divi Torque Lite is a free addon for the Divi Builder that adds **41 modules, every one built natively for Divi 5** — no shortcode wrappers, no legacy compatibility layer. Each module does one job well, is fully responsive, and feels like a built-in part of Divi. It works with the Divi Theme or the Divi Builder plugin, and your existing Divi 4 layouts convert automatically. It is the free foundation of Divi Torque, the professional infrastructure for Divi. Build with native modules and ship accessible, fast-loading sites.
 
 **[View Demos](https://divitorque.com/features/?utm_campaign=lite-readme&utm_source=wp.org&utm_medium=textlink-features) · [Get Pro](https://divitorque.com/pricing/?utm_campaign=lite-readme&utm_source=wp.org&utm_medium=textlink-pro) · [Documentation](https://divitorque.com/docs/?utm_campaign=lite-readme&utm_source=wp.org&utm_medium=textlink-docs)**
 
-= Now Divi 5 ready =
+= Built natively for Divi 5 =
 
-Divi Torque has been rebuilt for the new Divi 5 Builder. As of 4.6.0, **every** module runs natively in Divi 5 — the static modules (Gradient Heading, Divider, Icon Box, Inline Notice, Dual Button, Info Box, Info Card, Team Member, Image Carousel, Logo Carousel, Logo Grid, Skill Bar, Business Hours, Scroll Image, Review Box, Flip Card, Testimonial, Number Counter, Before & After Slider, Video Modal, Animated Text) plus the dynamic ones (News Ticker, Post List, Contact Form 7, X (Twitter) Feed, X (Twitter) Carousel). Your existing Divi 4 layouts migrate automatically and keep working exactly as before.
+Divi Torque Lite modules are true Divi 5 modules — rebuilt on the Divi 5 framework for fast live editing and clean front-end output, not loaded through a Divi 4 compatibility layer. 26 modules work in both Divi 4 and Divi 5. The 15 newest are built exclusively for Divi 5, including Tooltip, Image Accordion, Sticky Video, Code Snippet, Creative Button, Modal Popup, and Table of Contents. When you move a site from Divi 4 to Divi 5, your saved layouts migrate automatically and keep their styling.
 
 = Why Divi Torque Lite? =
 
+* **Single-purpose modules** — Every module does one thing well, with focused settings instead of a wall of options. Drop it in, tweak, done.
 * **Fully customizable** — Extensive design options on every module so you can match your brand pixel for pixel.
-* **Lightweight & fast** — Clean, optimized code with no bloat, built for fast loading and smooth live editing.
+* **Lightweight & fast** — Scripts and styles load only on pages that actually use a module; carousel and counter libraries are enqueued on demand.
 * **Module Manager** — Enable only the modules you use and disable the rest to keep your site lean.
 * **Expert support** — A responsive support team ready to help via the forum, live chat, or contact form.
 
-= 25+ Free Divi Modules =
+= 41 Free Divi Modules =
 
-* [Icon Box](https://divitorque.com/features/icon-box) — Pair icons with text to present services and features clearly.
-* [Contact Form 7 Styler](https://divitorque.com/features/contact-form-7) — Style Contact Form 7 forms to match your design.
-* [Separator](https://divitorque.com/features/separator) — Add precise, customizable dividers between sections.
-* [Skill Bar](https://divitorque.com/features/skill-bar) — Show proficiency levels with animated progress bars.
-* [Logo Grid](https://divitorque.com/features/logo-grid) — Display client, partner, or sponsor logos in a clean grid.
-* [Person](https://divitorque.com/features/person) — Introduce team members with photos, bios, and social links.
-* [Testimonial](https://divitorque.com/features/testimonial) — Showcase reviews and quotes to build trust.
-* [Info Box](https://divitorque.com/features/info-box) — Highlight key information with icon-and-text boxes.
-* [Info Card](https://divitorque.com/features/info-card) — Present details in an engaging card layout.
-* [Dual Button](https://divitorque.com/features/dual-button) — Offer two clear calls to action side by side.
-* [Before & After Slider](https://divitorque.com/features/before-after-slider) — Compare two images with an interactive slider.
-* [Image Carousel](https://divitorque.com/features/image-carousel) — Build responsive image sliders with full controls.
-* [Logo Carousel](https://divitorque.com/features/logo-carousel) — Rotate client and partner logos elegantly.
-* [Number Counter](https://divitorque.com/features/number) — Animate statistics and key figures.
-* [Video Modal](https://divitorque.com/features/video-modal) — Open videos in a sleek, responsive popup.
-* [Scroll Image](https://divitorque.com/features/scroll-image) — Add vertical or horizontal scrolling image effects.
-* [News Ticker](https://divitorque.com/features/news-ticker) — Display live updates and announcements.
-* [Post List](https://divitorque.com/features/post-list) — List blog posts and articles for easy browsing.
-* [Review Box](https://divitorque.com/features/review-box) — Highlight customer feedback to build credibility.
-* [Flip Card](https://divitorque.com/features/flip-card) — Reveal extra content with an interactive flip.
-* [Animated Text](https://divitorque.com/features/animated-text) — Capture attention with dynamic text animations.
-* [Business Hours](https://divitorque.com/features/business-hours) — Show opening times in a clear, tidy layout.
-* [Gradient Heading](https://divitorque.com/features/gradient-heading) — Apply striking gradient effects to headings.
-* [Inline Notice](https://divitorque.com/features/inline-notice) — Highlight important notes with ready-to-use boxes.
+Click any module name to see a live demo.
+
+**Content & Typography**
+
+* [Accordion Pro](https://divitorque.com/features/accordion/) — Collapsible content with style presets, custom icons, and click, hover, or autoplay activators.
+* [Tabs Pro](https://divitorque.com/features/tabs/) — Organize related content into clean, switchable tabbed sections.
+* [Table of Contents](https://divitorque.com/features/table-of-contents/) — Auto-builds from your page headings with smooth scroll and scroll-spy highlighting.
+* [FAQ](https://divitorque.com/features/faq/) — Question-and-answer lists with FAQPage schema built in for rich search results.
+* [Icon Box](https://divitorque.com/features/icon-box/) — Pair icons with text to present services and features clearly.
+* [Feature Box](https://divitorque.com/features/info-box/) — Highlight key information with icon-and-text feature boxes.
+* [Image Card](https://divitorque.com/docs/info-card/) — Present details in an engaging image-plus-text card layout.
+* [Dual Buttons](https://divitorque.com/features/dual-button/) — Offer two clear calls to action side by side.
+* [Gradient Heading](https://divitorque.com/features/gradient-heading/) — Apply striking gradient effects to headings.
+* [Animated Text](https://divitorque.com/features/animated-text/) — Capture attention with dynamic text animations.
+* [Fancy Text](https://divitorque.com/features/fancy-text/) — Rotate through words and phrases with eye-catching text effects.
+* [Alert Box](https://divitorque.com/features/alert-box/) — Highlight important notes with ready-to-use notice boxes.
+* [Separator](https://divitorque.com/features/separator/) — Add precise, customizable dividers between sections.
+* [News Ticker](https://divitorque.com/features/news-ticker/) — Display live updates and announcements in a scrolling strip.
+* [Tooltip](https://divitorque.com/features/tooltip/) — Attach styled, keyboard-friendly tooltips to text, icons, or images.
+* [Call To Action](https://divitorque.com/features/cta-box/) — Pair a headline with up to two buttons in three flexible layouts.
+* [Creative Button](https://divitorque.com/features/creative-button/) — Buttons with ten hover effects that also run on keyboard focus.
+* [Code Snippet](https://divitorque.com/features/code-snippet/) — Publish syntax-highlighted code with line numbers and a copy button.
+
+**Media & Galleries**
+
+* [Image Carousel](https://divitorque.com/features/image-carousel/) — Build responsive image sliders with full navigation controls.
+* [Logo Carousel](https://divitorque.com/features/logo-carousel/) — Rotate client and partner logos elegantly.
+* [Logo Grid](https://divitorque.com/features/logo-grid/) — Display client, partner, or sponsor logos in a clean grid.
+* [Before & After Slider](https://divitorque.com/docs/compare-image/) — Compare two images with an interactive drag slider.
+* [Scroll Image](https://divitorque.com/features/scroll-image/) — Reveal tall images and screenshots with a scrolling hover effect.
+* [Video Modal](https://divitorque.com/features/video-modal/) — Open YouTube and Vimeo videos in a sleek, responsive popup.
+* [Flip Card](https://divitorque.com/features/flip-box/) — Reveal extra content with an interactive flip animation.
+* [Image Accordion](https://divitorque.com/features/image-accordion/) — Expanding image panels for services, teams, and portfolios.
+* [Sticky Video](https://divitorque.com/features/sticky-video/) — Video that docks to a corner and keeps playing as visitors scroll.
+* [SVG Draw](https://divitorque.com/features/svg-draw/) — Animate any SVG being drawn stroke by stroke on scroll.
+
+**Social Proof & Feeds**
+
+* [Testimonial Card](https://divitorque.com/features/testimonial/) — Showcase quotes and reviews to build trust.
+* [Review Box](https://divitorque.com/features/review-box/) — Highlight customer ratings and feedback to build credibility.
+* [X (Twitter) Feed](https://divitorque.com/features/twitter-feed/) — Embed your latest posts from X in a styled feed.
+* [X (Twitter) Carousel](https://divitorque.com/features/twitter-feed-carousel/) — Slide through your X posts in a compact carousel.
+
+**Blog & Posts**
+
+* [Post List](https://divitorque.com/features/post-list/) — List blog posts and articles for easy browsing.
+* [Post Carousel](https://divitorque.com/features/post-carousel/) — Slide through posts with six ready-made blog-card presets.
+
+**Forms, Navigation & Popups**
+
+* [Contact Form 7 Styler](https://divitorque.com/features/contact-form-7/) — Style Contact Form 7 forms visually to match your design.
+* [Breadcrumb Trail](https://divitorque.com/features/breadcrumbs/) — Add navigation breadcrumbs with BreadcrumbList schema built in.
+* [Modal Popup](https://divitorque.com/features/modal-popup/) — Open images, videos, or any content in a clean popup window.
+
+**Business & Numbers**
+
+* [Animated Counter](https://divitorque.com/features/number-counter/) — Animate statistics and key figures as they scroll into view.
+* [Skill Bar](https://divitorque.com/features/skill-bar/) — Show proficiency levels with animated progress bars.
+* [Business Hours](https://divitorque.com/features/business-hour/) — Show opening times in a clear, tidy layout.
+* [Team Member](https://divitorque.com/features/team-box/) — Introduce your team with photos, bios, and social links.
+
+= Free Extension: Divi Library Shortcode =
+
+Every saved Divi Library layout gets its own shortcode — `[divi_library_shortcode id="123"]` — shown right in the Divi Library list. Use it to render any saved layout in widgets, other plugins, or anywhere shortcodes work.
 
 = Go Further with Divi Torque Pro =
 
-Pro unlocks 50+ advanced modules and extensions, including:
+Divi Torque Pro grows the library to 70+ modules and extensions across Free and Pro, adding advanced modules like:
 
-* [Post Grid](https://divitorque.com/features/post-grid) & [Post Carousel](https://divitorque.com/features/post-carousel) — Dynamic blog and portfolio layouts.
-* [Filterable Gallery](https://divitorque.com/features/filterable-gallery) & [Masonry Gallery](https://divitorque.com/features/masonry-gallery) — Stunning, filterable image grids.
-* [Ajax Search](https://divitorque.com/features/ajax-search) — Instant, live search results.
-* [Lottie Animation](https://divitorque.com/features/lottie-animation) — Lightweight interactive animations.
-* [Timeline](https://divitorque.com/features/timeline) & [Horizontal Timeline](https://divitorque.com/features/horizontal-timeline) — Tell stories step by step.
-* [Pricing Table](https://divitorque.com/features/pricing-table) & [Star Rating](https://divitorque.com/features/star-rating) — Convert visitors with clear, trusted layouts.
-* [Gravity Forms](https://divitorque.com/features/gravity-forms) & [Fluent Forms](https://divitorque.com/features/fluent-forms) stylers — Beautiful, on-brand forms.
-* [WhatsApp](https://divitorque.com/features/whatsapp-chat), [Telegram](https://divitorque.com/features/telegram-chat) & [Instagram](https://divitorque.com/features/instagram-chat) chat — Connect with visitors instantly.
+* [Post Grid](https://divitorque.com/features/post-grid/) — Dynamic blog and portfolio grid layouts.
+* [Filterable Gallery](https://divitorque.com/features/filterable-gallery/) & [Masonry Gallery](https://divitorque.com/features/masonry-gallery/) — Stunning, filterable image grids.
+* [Ajax Search](https://divitorque.com/features/ajax-search/) — Instant, live search results.
+* [Lottie Animation](https://divitorque.com/docs/lottie/) — Lightweight interactive animations.
+* [Timeline](https://divitorque.com/features/timeline/) & [Horizontal Timeline](https://divitorque.com/features/horizontal-timeline/) — Tell stories step by step.
+* [Pricing Cards](https://divitorque.com/features/pricing-table/) & [Star Rating](https://divitorque.com/features/star-rating/) — Convert visitors with clear, trusted layouts.
+* [Gravity Forms](https://divitorque.com/features/gravity-forms/) & [Fluent Forms](https://divitorque.com/features/fluent-forms/) stylers — Beautiful, on-brand forms.
+* [WhatsApp](https://divitorque.com/features/whatsapp-chat/), [Telegram](https://divitorque.com/features/telegram-chat/) & [Instagram](https://divitorque.com/features/instagram-chat/) chat — Connect with visitors instantly.
 
 [Explore all Pro modules →](https://divitorque.com/pricing/?utm_campaign=lite-readme&utm_source=wp.org&utm_medium=textlink-pro)
 
@@ -75,14 +116,14 @@ Divi Torque Lite extends Divi. You'll need the [Divi Theme](https://www.elegantt
 
 = Connect with us =
 
-Need a hand? [Contact our support team](https://divitorque.com/contact-us/?utm_campaign=lite-readme&utm_source=wp.org&utm_medium=textlink-contact) or [follow @PlugPressHQ on X](https://x.com/PlugPressHQ) for updates.
+Need a hand? [Contact our support team](https://divitorque.com/contact/?utm_campaign=lite-readme&utm_source=wp.org&utm_medium=textlink-contact) or [follow @PlugPressHQ on X](https://x.com/PlugPressHQ) for updates.
 
 == Installation ==
 
 1. In your WordPress dashboard, go to **Plugins → Add New** and search for "Divi Torque Lite". Or upload the plugin folder to `/wp-content/plugins/`.
 2. Activate the plugin through the **Plugins** screen.
 3. Make sure the [Divi Theme or Divi Builder](https://www.elegantthemes.com/) is active.
-4. Open any page in the Divi Builder — the new modules appear in the module list.
+4. Open any page in the Divi Builder — the new modules appear in the module list under the "Divi Torque" folder.
 
 For setup guides and tutorials, visit our [Knowledge Base](https://divitorque.com/docs/?utm_campaign=lite-readme&utm_source=wp.org&utm_medium=textlink-docs).
 
@@ -90,19 +131,23 @@ For setup guides and tutorials, visit our [Knowledge Base](https://divitorque.co
 
 = Is Divi Torque Lite free? =
 
-Yes. All of Divi Torque Lite's modules are free, and always will be. A Pro version is available if you need more advanced modules and extensions.
+Yes. All 41 of Divi Torque Lite's modules are free, and always will be. A Pro version is available if you need more advanced modules and extensions.
 
-= Do I need the Divi Theme or Builder? =
+= Do I need the Divi Theme or Divi Builder? =
 
 Yes. Divi Torque Lite extends Divi, so it requires the Divi Theme or the Divi Builder plugin to be installed and active.
 
 = Is Divi Torque Lite compatible with Divi 5? =
 
-Yes. As of version 4.6.0 every module — static and dynamic (Post List, Contact Form 7, News Ticker, X (Twitter) Feed, X (Twitter) Carousel) — is native in the Divi 5 Builder. All existing Divi 4 modules and saved layouts continue to work in both Divi 4 and Divi 5.
+Yes. All 41 modules run natively in Divi 5. They are built on the Divi 5 framework, not loaded through a Divi 4 compatibility layer. Existing Divi 4 layouts convert automatically, and 26 of the modules keep working in Divi 4 as well.
 
 = Will these modules slow down my site? =
 
-No. The modules are built with clean, optimized code and load only what they need. You can also use the built-in Module Manager to disable any modules you don't use.
+No. Scripts and styles load only on pages that actually use a module — the carousel and counter libraries, for example, are enqueued on demand. You can also use the built-in Module Manager to disable any modules you don't use.
+
+= What can I build with Divi Torque Lite? =
+
+Business sites, landing pages, portfolios, and blogs. Typical uses: testimonial and review sections, logo walls, before-and-after comparisons, FAQ and documentation pages with a table of contents, team pages, video popups, and styled Contact Form 7 forms — all inside the Divi Builder, without custom code.
 
 = Will updating break my existing pages? =
 
@@ -110,12 +155,23 @@ No. Updates are backward compatible and won't break pages built with our modules
 
 == Screenshots ==
 
-1. Testimonial Module
-2. Review Card
-3. Pricing Menu
-4. Image Carousel
+1. Review Box module
+2. Testimonial Card module
+3. Image Carousel module
 
 == Changelog ==
+
+= Version 4.9.0 =
+* New: Tooltip module. Styled, keyboard-accessible tooltips for text, icons, and images.
+* New: Call To Action module. Headline, supporting copy, and up to two buttons in three layouts.
+* New: Creative Button module. Ten hover effects, every one keyboard accessible.
+* New: Image Accordion module. Expanding image panels with per-panel focal point control.
+* New: Sticky Video module. Corner-docking video with a privacy-friendly click-to-load facade.
+* New: Code Snippet module. Syntax highlighting for 13 languages with line numbers and one-click copy.
+* New: SVG Draw module. Draws SVG strokes on scroll, load, or hover. Honors reduced motion.
+* Fix: Tooltip text stays readable when themes set their own paragraph colors.
+* Fix: Sticky Video plays with a single click and the poster hides correctly.
+* Fix: Code Snippet no longer collapses to a single line on the front end.
 
 = Version 4.8.2 =
 * Fix: News Ticker (and any other module toggled in the dashboard) no longer disappears from the Divi 5 builder when Divi Torque Pro is active — module on/off settings are now read from the right place regardless of plugin load order, and both plugins keep them in sync
@@ -283,11 +339,11 @@ No. Updates are backward compatible and won't break pages built with our modules
 
 == Upgrade Notice ==
 
-= v4.4.0 =
-Seven more modules now run natively in Divi 5 (Divider, Icon Box, Inline Notice, Dual Button, Info Box, Info Card, Team Member). Existing Divi 4 layouts are unaffected and migrate automatically.
+= 4.9.0 =
+Seven new free modules built natively for Divi 5: Tooltip, Call To Action, Creative Button, Image Accordion, Sticky Video, Code Snippet, and SVG Draw. Plus three module fixes.
 
-= v4.3.0 =
-Adds native Divi 5 support for the Gradient Heading module. Fully backward compatible — Divi 4 sites and existing layouts are unaffected.
+= 4.8.2 =
+Fixes disabled modules disappearing from the Divi 5 builder when Divi Torque Pro is active, and a Video Modal navigation glitch with deferred JavaScript. WordPress 7.0 is now the minimum supported version.
 
 = v4.2.2 =
 Important security update (CVE-2026-4275). Please update immediately.

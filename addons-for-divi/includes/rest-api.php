@@ -276,7 +276,7 @@ class RestApi
                 'date'      => get_the_date('', $post),
                 'author'    => get_the_author_meta('display_name', $post->post_author),
                 'thumbnail' => get_the_post_thumbnail_url($post, 'full') ?: '',
-                'excerpt'   => mb_strimwidth(wp_strip_all_tags(get_the_excerpt($post)), 0, $excerpt_l, '...'),
+                'excerpt'   => dtq_strimwidth(wp_strip_all_tags(get_the_excerpt($post)), 0, $excerpt_l, '...'),
             ];
         }
 
@@ -375,8 +375,8 @@ class RestApi
                     $excerpt = get_the_content();
                 }
                 $excerpt = wp_strip_all_tags(strip_shortcodes($excerpt));
-                if ($content_length > 0 && mb_strlen($excerpt) > $content_length) {
-                    $excerpt = mb_substr($excerpt, 0, $content_length) . '...';
+                if ($content_length > 0 && dtq_strlen($excerpt) > $content_length) {
+                    $excerpt = dtq_substr($excerpt, 0, $content_length) . '...';
                 }
 
                 $categories_list = [];
@@ -446,12 +446,16 @@ class RestApi
         return AdminHelper::get_options();
     }
 
-    public function save_common_settings(WP_REST_Request $request)
+    /**
+     * Normalize a modules_settings payload to the only shape the readers
+     * (AdminHelper::get_modules, divi5/Modules.php) understand:
+     * [name => name|'disabled'].
+     *
+     * @param mixed $modules Raw request payload.
+     * @return array<string,string>
+     */
+    public static function normalize_modules_settings($modules)
     {
-        $modules = $request->get_param('modules_settings');
-
-        // Normalize to the only shape readers understand — [name => name|'disabled'] —
-        // instead of persisting the raw request payload.
         $clean = [];
         foreach ((array) $modules as $name => $value) {
             $name = sanitize_key($name);
@@ -460,6 +464,12 @@ class RestApi
             }
             $clean[$name] = ('disabled' === $value) ? 'disabled' : $name;
         }
+        return $clean;
+    }
+
+    public function save_common_settings(WP_REST_Request $request)
+    {
+        $clean = self::normalize_modules_settings($request->get_param('modules_settings'));
 
         // Mirror the readers (AdminHelper::get_modules, divi5/Modules.php):
         // when Pro is active both plugins share the _divitorque_modules option.
@@ -634,6 +644,7 @@ class RestApi
 
         return [
             'success' => true,
+            /* translators: %s: the plugin version that was rolled back to. */
             'message' => sprintf(__('Rolled back to %s.', 'addons-for-divi'), $version),
             'version' => $version,
         ];

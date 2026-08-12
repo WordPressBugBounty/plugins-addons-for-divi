@@ -11,7 +11,10 @@
 			name: 'divi-torque',
 			path: '',
 			title: 'Divi Torque',
-			icon: '',
+			// Must be a name Divi's icon library knows: it resolves icons through
+			// the `divi.iconLibrary.icon.map` filter and renders null for anything
+			// unregistered, which is what left this folder icon-less.
+			icon: 'divi/folder',
 			category: 'module',
 		} );
 	} else {

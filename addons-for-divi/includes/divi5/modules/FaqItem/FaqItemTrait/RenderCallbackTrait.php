@@ -39,11 +39,30 @@ trait RenderCallbackTrait
         $question = $elements->render(['attrName' => 'question', 'tagName' => 'h3']);
         $answer   = $elements->render(['attrName' => 'answer']);
 
+        // Same control semantics as the Accordion Item (this module reuses the
+        // `.dtq-accordion__*` markup and the shared frontend.js handler): without
+        // role/tabindex/aria-expanded the question was a plain <div> that only
+        // answered to a mouse click, so FAQs were keyboard-inoperable and silent
+        // to screen readers.
+        $panel_id = function_exists('wp_unique_id')
+            ? wp_unique_id('dtq-faq-panel-')
+            : 'dtq-faq-panel-' . (int) ($block->parsed_block['orderIndex'] ?? 0);
+
+        $keep_open       = ($attrs['module']['advanced']['keepOpen']['desktop']['value'] ?? 'off') === 'on';
+        $open_by_default = ($attrs['module']['advanced']['openByDefault']['desktop']['value'] ?? 'off') === 'on';
+        $is_open         = $open_by_default || $keep_open;
+
         $header_html = sprintf(
-            '<div class="dtq-accordion__title"><div class="dtq-accordion__heading">%1$s</div></div>',
-            $question
+            '<div class="dtq-accordion__title" role="button" tabindex="0" aria-expanded="%2$s" aria-controls="%3$s"><div class="dtq-accordion__heading">%1$s</div></div>',
+            $question,
+            $is_open ? 'true' : 'false',
+            esc_attr($panel_id)
         );
-        $content_html = sprintf('<div class="dtq-accordion__content">%1$s</div>', $answer);
+        $content_html = sprintf(
+            '<div class="dtq-accordion__content" id="%2$s" role="region">%1$s</div>',
+            $answer,
+            esc_attr($panel_id)
+        );
 
         return Module::render(
             [

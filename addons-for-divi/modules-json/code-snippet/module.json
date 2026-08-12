@@ -1,0 +1,403 @@
+{
+  "name": "divitorque/code-snippet",
+  "title": "Code Snippet",
+  "titles": "Code Snippets",
+  "moduleIcon": "divitorque/code-snippet",
+  "moduleClassName": "dtq_code_snippet",
+  "moduleOrderClassName": "dtq_code_snippet",
+  "category": "module",
+  "attributes": {
+    "module": {
+      "type": "object",
+      "selector": "{{selector}}",
+      "default": {
+        "advanced": {
+          "language": { "desktop": { "value": "php" } },
+          "showLineNumbers": { "desktop": { "value": "on" } },
+          "startLine": { "desktop": { "value": "1" } },
+          "wrapLines": { "desktop": { "value": "off" } },
+          "showHeader": { "desktop": { "value": "on" } },
+          "showLanguageLabel": { "desktop": { "value": "on" } },
+          "showCopy": { "desktop": { "value": "on" } },
+          "copyLabel": { "desktop": { "value": "Copy" } },
+          "copiedLabel": { "desktop": { "value": "Copied" } },
+          "theme": { "desktop": { "value": "dark" } },
+          "maxHeight": { "desktop": { "value": "0px" } },
+          "radius": { "desktop": { "value": "6px" } }
+        }
+      },
+      "settings": {
+        "meta": { "adminLabel": {} },
+        "advanced": {
+          "htmlAttributes": {},
+          "code": {
+            "groupType": "group-item",
+            "item": {
+              "groupSlug": "contentCode",
+              "attrName": "module.advanced.code",
+              "label": "Code",
+              "description": "Pasted as-is. It is escaped before it reaches the page, so it is displayed, never executed.",
+              "priority": 10,
+              "render": true,
+              "features": { "sticky": false, "responsive": false, "hover": false, "dynamicContent": false },
+              "component": { "type": "field", "name": "divi/textarea" }
+            }
+          },
+          "language": {
+            "groupType": "group-item",
+            "item": {
+              "groupSlug": "contentCode",
+              "attrName": "module.advanced.language",
+              "label": "Language",
+              "description": "Only the languages bundled with the plugin are offered — nothing is fetched at runtime.",
+              "priority": 20,
+              "render": true,
+              "features": { "sticky": false, "responsive": false, "hover": false },
+              "component": {
+                "type": "field",
+                "name": "divi/select",
+                "props": {
+                  "options": {
+                    "none": { "label": "Plain text" },
+                    "markup": { "label": "HTML / XML" },
+                    "css": { "label": "CSS" },
+                    "javascript": { "label": "JavaScript" },
+                    "typescript": { "label": "TypeScript" },
+                    "jsx": { "label": "JSX" },
+                    "php": { "label": "PHP" },
+                    "python": { "label": "Python" },
+                    "bash": { "label": "Shell" },
+                    "json": { "label": "JSON" },
+                    "sql": { "label": "SQL" },
+                    "yaml": { "label": "YAML" },
+                    "markdown": { "label": "Markdown" }
+                  }
+                }
+              }
+            }
+          },
+          "showLineNumbers": {
+            "groupType": "group-item",
+            "item": {
+              "groupSlug": "contentCode",
+              "attrName": "module.advanced.showLineNumbers",
+              "label": "Line Numbers",
+              "priority": 30,
+              "render": true,
+              "features": { "sticky": false, "responsive": false, "hover": false },
+              "component": { "type": "field", "name": "divi/toggle" }
+            }
+          },
+          "startLine": {
+            "groupType": "group-item",
+            "item": {
+              "groupSlug": "contentCode",
+              "attrName": "module.advanced.startLine",
+              "label": "First Line Number",
+              "description": "Useful when the snippet is an extract from a longer file.",
+              "priority": 40,
+              "render": true,
+              "features": { "sticky": false, "responsive": false, "hover": false },
+              "component": {
+                "type": "field",
+                "name": "divi/range",
+                "props": { "min": 1, "max": 9999, "step": 1, "defaultUnit": "" }
+              }
+            }
+          },
+          "highlightLines": {
+            "groupType": "group-item",
+            "item": {
+              "groupSlug": "contentCode",
+              "attrName": "module.advanced.highlightLines",
+              "label": "Highlight Lines",
+              "description": "Line numbers to draw attention to, e.g. 3 or 5-9 or 2,7-9.",
+              "priority": 50,
+              "render": true,
+              "features": { "sticky": false, "responsive": false, "hover": false },
+              "component": { "type": "field", "name": "divi/text" }
+            }
+          },
+          "wrapLines": {
+            "groupType": "group-item",
+            "item": {
+              "groupSlug": "contentCode",
+              "attrName": "module.advanced.wrapLines",
+              "label": "Wrap Long Lines",
+              "description": "Off means long lines scroll sideways, which keeps the line numbers honest.",
+              "priority": 60,
+              "render": true,
+              "features": { "sticky": false, "responsive": false, "hover": false },
+              "component": { "type": "field", "name": "divi/toggle" }
+            }
+          },
+          "showHeader": {
+            "groupType": "group-item",
+            "item": {
+              "groupSlug": "contentHeader",
+              "attrName": "module.advanced.showHeader",
+              "label": "Show Header",
+              "priority": 10,
+              "render": true,
+              "features": { "sticky": false, "responsive": false, "hover": false },
+              "component": { "type": "field", "name": "divi/toggle" }
+            }
+          },
+          "fileName": {
+            "groupType": "group-item",
+            "item": {
+              "groupSlug": "contentHeader",
+              "attrName": "module.advanced.fileName",
+              "label": "File Name",
+              "description": "Shown on the left of the header. Leave empty to omit it.",
+              "priority": 20,
+              "render": true,
+              "features": { "sticky": false, "responsive": false, "hover": false },
+              "component": { "type": "field", "name": "divi/text" }
+            }
+          },
+          "showLanguageLabel": {
+            "groupType": "group-item",
+            "item": {
+              "groupSlug": "contentHeader",
+              "attrName": "module.advanced.showLanguageLabel",
+              "label": "Show Language",
+              "priority": 30,
+              "render": true,
+              "features": { "sticky": false, "responsive": false, "hover": false },
+              "component": { "type": "field", "name": "divi/toggle" }
+            }
+          },
+          "showCopy": {
+            "groupType": "group-item",
+            "item": {
+              "groupSlug": "contentHeader",
+              "attrName": "module.advanced.showCopy",
+              "label": "Copy Button",
+              "priority": 40,
+              "render": true,
+              "features": { "sticky": false, "responsive": false, "hover": false },
+              "component": { "type": "field", "name": "divi/toggle" }
+            }
+          },
+          "copyLabel": {
+            "groupType": "group-item",
+            "item": {
+              "groupSlug": "contentHeader",
+              "attrName": "module.advanced.copyLabel",
+              "label": "Copy Button Text",
+              "priority": 50,
+              "render": true,
+              "features": { "sticky": false, "responsive": false, "hover": false },
+              "component": { "type": "field", "name": "divi/text" }
+            }
+          },
+          "copiedLabel": {
+            "groupType": "group-item",
+            "item": {
+              "groupSlug": "contentHeader",
+              "attrName": "module.advanced.copiedLabel",
+              "label": "Confirmation Text",
+              "description": "Shown briefly after a successful copy, and announced to screen readers.",
+              "priority": 60,
+              "render": true,
+              "features": { "sticky": false, "responsive": false, "hover": false },
+              "component": { "type": "field", "name": "divi/text" }
+            }
+          },
+          "theme": {
+            "groupType": "group-item",
+            "item": {
+              "groupSlug": "designTheme",
+              "attrName": "module.advanced.theme",
+              "label": "Theme",
+              "description": "Colour schemes defined by this plugin, not Prism — so they follow your palette rather than shipping a second stylesheet.",
+              "priority": 10,
+              "render": true,
+              "features": { "sticky": false, "responsive": false, "hover": false },
+              "component": {
+                "type": "field",
+                "name": "divi/select",
+                "props": {
+                  "options": {
+                    "dark": { "label": "Dark" },
+                    "light": { "label": "Light" },
+                    "midnight": { "label": "Midnight" },
+                    "paper": { "label": "Paper" }
+                  }
+                }
+              }
+            }
+          },
+          "maxHeight": {
+            "groupType": "group-item",
+            "item": {
+              "groupSlug": "designTheme",
+              "attrName": "module.advanced.maxHeight",
+              "label": "Max Height",
+              "description": "Zero means no limit. Above it, the block scrolls.",
+              "priority": 20,
+              "render": true,
+              "features": { "sticky": false, "responsive": true, "hover": false },
+              "component": {
+                "type": "field",
+                "name": "divi/range",
+                "props": { "min": 0, "max": 1200, "step": 10, "defaultUnit": "px" }
+              }
+            }
+          },
+          "radius": {
+            "groupType": "group-item",
+            "item": {
+              "groupSlug": "designTheme",
+              "attrName": "module.advanced.radius",
+              "label": "Corner Radius",
+              "priority": 30,
+              "render": true,
+              "features": { "sticky": false, "responsive": false, "hover": false },
+              "component": {
+                "type": "field",
+                "name": "divi/range",
+                "props": { "min": 0, "max": 40, "step": 1, "defaultUnit": "px" }
+              }
+            }
+          },
+          "bgColor": {
+            "groupType": "group-item",
+            "item": {
+              "groupSlug": "designTheme",
+              "attrName": "module.advanced.bgColor",
+              "label": "Background",
+              "description": "Overrides the theme's background. Leave empty to keep it.",
+              "priority": 40,
+              "render": true,
+              "features": { "sticky": false, "responsive": false, "hover": false },
+              "component": { "type": "field", "name": "divi/color-picker", "props": { "isAlpha": true } }
+            }
+          },
+          "textColor": {
+            "groupType": "group-item",
+            "item": {
+              "groupSlug": "designTheme",
+              "attrName": "module.advanced.textColor",
+              "label": "Base Text Color",
+              "priority": 50,
+              "render": true,
+              "features": { "sticky": false, "responsive": false, "hover": false },
+              "component": { "type": "field", "name": "divi/color-picker", "props": { "isAlpha": true } }
+            }
+          },
+          "headerBg": {
+            "groupType": "group-item",
+            "item": {
+              "groupSlug": "designHeader",
+              "attrName": "module.advanced.headerBg",
+              "label": "Header Background",
+              "priority": 10,
+              "render": true,
+              "features": { "sticky": false, "responsive": false, "hover": false },
+              "component": { "type": "field", "name": "divi/color-picker", "props": { "isAlpha": true } }
+            }
+          },
+          "headerColor": {
+            "groupType": "group-item",
+            "item": {
+              "groupSlug": "designHeader",
+              "attrName": "module.advanced.headerColor",
+              "label": "Header Text Color",
+              "priority": 20,
+              "render": true,
+              "features": { "sticky": false, "responsive": false, "hover": false },
+              "component": { "type": "field", "name": "divi/color-picker", "props": { "isAlpha": true } }
+            }
+          },
+          "text": {}
+        },
+        "decoration": {
+          "animation": {},
+          "background": {},
+          "border": {},
+          "boxShadow": {},
+          "disabledOn": {},
+          "filters": {},
+          "overflow": {},
+          "position": {},
+          "scroll": {},
+          "sizing": {},
+          "spacing": {},
+          "sticky": {},
+          "transform": {},
+          "transition": {},
+          "zIndex": {}
+        }
+      }
+    },
+    "codeText": {
+      "type": "object",
+      "selector": "{{selector}} .dtq-code-snippet__pre",
+      "settings": {
+        "decoration": {
+          "bodyFont": {
+            "groupType": "group-item",
+            "item": {
+              "groupSlug": "designCode",
+              "priority": 10,
+              "render": true,
+              "component": {
+                "name": "divi/font-body",
+                "type": "group",
+                "props": { "grouped": false, "fieldLabel": "Code" }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "customCssFields": {
+    "header": { "subName": "header", "selectorSuffix": " .dtq-code-snippet__header" },
+    "pre": { "subName": "pre", "selectorSuffix": " .dtq-code-snippet__pre" },
+    "copy": { "subName": "copy", "selectorSuffix": " .dtq-code-snippet__copy" }
+  },
+  "settings": {
+    "content": "auto",
+    "design": "auto",
+    "advanced": "auto",
+    "groups": {
+      "contentCode": {
+        "panel": "content",
+        "priority": 10,
+        "groupName": "contentCode",
+        "component": { "name": "divi/composite", "props": { "groupLabel": "Code" } }
+      },
+      "contentHeader": {
+        "panel": "content",
+        "priority": 20,
+        "groupName": "contentHeader",
+        "component": { "name": "divi/composite", "props": { "groupLabel": "Header" } }
+      },
+      "designTheme": {
+        "panel": "design",
+        "priority": 10,
+        "groupName": "designTheme",
+        "component": { "name": "divi/composite", "props": { "groupLabel": "Theme" } }
+      },
+      "designHeader": {
+        "panel": "design",
+        "priority": 20,
+        "groupName": "designHeader",
+        "component": { "name": "divi/composite", "props": { "groupLabel": "Header" } }
+      },
+      "designCode": {
+        "panel": "design",
+        "priority": 30,
+        "groupName": "designCode",
+        "multiElements": true,
+        "component": {
+          "name": "divi/composite",
+          "props": { "groupLabel": "Code Text", "clipboardCategory": "style", "presetGroup": "divi/font-body" }
+        }
+      }
+    }
+  }
+}

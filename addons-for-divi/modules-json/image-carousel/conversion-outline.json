@@ -91,7 +91,8 @@
     "pagi_width": "module.advanced.pagiWidth.*",
     "pagi_width_active": "module.advanced.pagiWidthActive.*",
     "pagi_pos_y": "module.advanced.pagiPosY.*",
-    "pagi_spacing": "module.advanced.pagiSpacing.*"
+    "pagi_spacing": "module.advanced.pagiSpacing.*",
+    "is_equal_height": "module.advanced.isEqualHeight.*"
   },
   "valueExpansionFunctionMap": {
     "icon_left": "convertFontIcon",

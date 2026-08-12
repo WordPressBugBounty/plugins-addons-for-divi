@@ -59,12 +59,20 @@ trait RenderCallbackTrait
             if ('' === $title) {
                 $title = sprintf('Tab %d', $index + 1);
             }
-            $active = 0 === $index ? ' dtq-tabs__nav-item--active' : '';
+            $is_active = 0 === $index;
+            $active    = $is_active ? ' dtq-tabs__nav-item--active' : '';
+            // Roving tabindex: only the selected tab is in the tab order; the
+            // rest are reached with the arrow keys (handled in frontend.js).
+            // aria-controls / aria-labelledby are wired up there too, because the
+            // panels are rendered by the child modules and their ids are not
+            // known here.
             $nav_items .= sprintf(
-                '<li class="dtq-tabs__nav-item%1$s" role="tab" tabindex="0" data-dtq-index="%2$d">%3$s</li>',
+                '<li class="dtq-tabs__nav-item%1$s" role="tab" tabindex="%4$s" aria-selected="%5$s" data-dtq-index="%2$d">%3$s</li>',
                 $active,
                 (int) $index,
-                esc_html(wp_strip_all_tags($title))
+                esc_html(wp_strip_all_tags($title)),
+                $is_active ? '0' : '-1',
+                $is_active ? 'true' : 'false'
             );
             $index++;
         }
