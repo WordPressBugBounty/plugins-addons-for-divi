@@ -7,6 +7,7 @@
   "titles": "Image Cards",
   "moduleIcon": "divitorque/info-card",
   "category": "module",
+  "folder": "divi-torque-lite",
   "attributes": {
     "module": {
       "type": "object",

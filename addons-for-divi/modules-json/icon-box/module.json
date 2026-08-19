@@ -7,6 +7,7 @@
   "titles": "Icon Boxes",
   "moduleIcon": "divitorque/icon-box",
   "category": "module",
+  "folder": "divi-torque-lite",
   "attributes": {
     "module": {
       "type": "object",

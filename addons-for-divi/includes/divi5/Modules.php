@@ -420,23 +420,15 @@ function dtl_divi5_enqueue_vb_assets() {
         ],
     ]);
 
-    // Branded "Divi Torque" inserter folder grouping all our modules.
-    // Two scripts with opposite footer timing (see custom-folder docs):
-    //  - register: in the footer, after divi-module-library initialises.
-    //  - assign:   before the footer, so the moduleMapping filter fires
-    //              before modules are registered.
-    \ET\Builder\VisualBuilder\Assets\PackageBuildManager::register_package_build([
-        'name'    => 'divi-torque-lite-folder-assign',
-        'version' => DIVI_TORQUE_LITE_VERSION,
-        'script'  => [
-            'src'                => DIVI_TORQUE_LITE_ASSETS . 'divi5/folder-assign.js',
-            'deps'               => ['lodash', 'divi-vendor-wp-hooks'],
-            'enqueue_top_window' => false,
-            'enqueue_app_window' => true,
-            'args'               => ['in_footer' => false],
-        ],
-    ]);
-
+    // Branded "Divi Torque Lite" inserter folder grouping all our modules.
+    //
+    // Registration only. Folder MEMBERSHIP is declared per module via the
+    // `folder` key in each module.json, not through the
+    // `divi.moduleLibrary.moduleMapping` filter: Divi applies that filter once,
+    // over a static map built from its own bundled core modules, before any
+    // third-party module has registered. A callback there never sees a
+    // divitorque/* entry and assigns nothing. The old folder-assign.js did
+    // exactly that and placed zero of our 50 modules.
     \ET\Builder\VisualBuilder\Assets\PackageBuildManager::register_package_build([
         'name'    => 'divi-torque-lite-folder-register',
         'version' => DIVI_TORQUE_LITE_VERSION,
@@ -450,6 +442,46 @@ function dtl_divi5_enqueue_vb_assets() {
     ]);
 }
 add_action('divi_visual_builder_assets_before_enqueue_scripts', 'dtl_divi5_enqueue_vb_assets');
+
+/**
+ * Load the Divi icon fonts into the Visual Builder app window.
+ *
+ * The app window is a separate document, so the @font-face that
+ * dtq_print_full_icon_font() prints at wp_footer never reaches it. Our 14 D5
+ * edit components render icons as <i style="font-family:ETmodules|FontAwesome">,
+ * and nothing in Divi's builder chrome loads FontAwesome — so without this every
+ * FA icon is an empty box in the builder even when the front end is correct.
+ *
+ * Declared unconditionally here, unlike on the front end: in the builder the
+ * user is actively picking icons from a picker that offers both sets, so there
+ * is no "which font did this page use" to detect yet.
+ *
+ * Carried on our own inline-only handle rather than appended to the D5 bundle
+ * style, so it does not break if that handle is ever renamed or split. Divi
+ * itself uses this exact register(false) + enqueue + add_inline_style shape to
+ * get FontAwesome into the Theme Builder admin screen.
+ *
+ * The hook name is composed at runtime from a window prefix
+ * (PackageBuildManager::enqueue_styles()), so grepping Divi for the literal
+ * string finds nothing — it is real, and it fires only for the app window.
+ */
+function dtl_divi5_enqueue_vb_icon_fonts()
+{
+    if (!function_exists('dtq_icon_font_css')) {
+        return;
+    }
+
+    $css = dtq_icon_font_css(['et_icons_all', 'et_icons_fa']);
+
+    if ('' === $css) {
+        return;
+    }
+
+    wp_register_style('divi-torque-lite-icon-fonts', false, [], DIVI_TORQUE_LITE_VERSION);
+    wp_enqueue_style('divi-torque-lite-icon-fonts');
+    wp_add_inline_style('divi-torque-lite-icon-fonts', $css);
+}
+add_action('divi_visual_builder_assets_before_enqueue_app_window_styles', 'dtl_divi5_enqueue_vb_icon_fonts');
 
 /**
  * Frontend assets for D5 modules — gated, fires only on non-admin requests.

@@ -6,6 +6,7 @@
   "titles": "Tabs Pro",
   "moduleIcon": "divitorque/tabs",
   "category": "module",
+  "folder": "divi-torque-lite",
   "childModuleName": "divitorque/tab-item",
   "childModuleTitle": "Tab",
   "childrenName": [

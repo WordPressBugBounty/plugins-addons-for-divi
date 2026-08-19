@@ -6,6 +6,7 @@
   "moduleClassName": "dtq_tooltip",
   "moduleOrderClassName": "dtq_tooltip",
   "category": "module",
+  "folder": "divi-torque-lite",
   "attributes": {
     "module": {
       "type": "object",

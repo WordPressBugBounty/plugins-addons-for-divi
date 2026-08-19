@@ -4,7 +4,9 @@
     "animation": "module.decoration.animation",
     "background": "module.decoration.background",
     "borders": {
-      "default": "module.decoration.border"
+      "default": "module.decoration.border",
+      "carousel": "module.advanced.legacyCarouselBorder",
+      "image": "image.decoration.border"
     },
     "box_shadow": {
       "default": "module.decoration.boxShadow"
@@ -54,7 +56,7 @@
     "center_padding": "module.advanced.centerPadding.*",
     "left_border_radius": "module.advanced.legacyNavRadiusLeft.*",
     "right_border_radius": "module.advanced.legacyNavRadiusRight.*",
-    "pagi_radius": "module.advanced.legacyPagiRadius.*",
+    "pagi_radius": "module.advanced.pagiRadius.*",
     "use_both_side_spacing": "module.advanced.legacyBothSideSpacing.*",
     "wait_for_animate": "module.advanced.legacyWaitForAnimate.*",
     "is_autoplay": "module.advanced.isAutoplay.*",
@@ -92,7 +94,8 @@
     "pagi_width_active": "module.advanced.pagiWidthActive.*",
     "pagi_pos_y": "module.advanced.pagiPosY.*",
     "pagi_spacing": "module.advanced.pagiSpacing.*",
-    "is_equal_height": "module.advanced.isEqualHeight.*"
+    "is_equal_height": "module.advanced.isEqualHeight.*",
+    "use_lightbox": "module.advanced.legacyUseLightbox.*"
   },
   "valueExpansionFunctionMap": {
     "icon_left": "convertFontIcon",

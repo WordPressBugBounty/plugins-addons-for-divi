@@ -6,6 +6,7 @@
   "titles": "Fancy Texts",
   "moduleIcon": "divitorque/fancy-text",
   "category": "module",
+  "folder": "divi-torque-lite",
   "attributes": {
     "module": {
       "type": "object",

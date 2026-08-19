@@ -55,8 +55,10 @@ trait RenderCallbackTrait
      */
     protected static function list_icon_glyph($icon_value)
     {
+        $empty = ['glyph' => '', 'font' => 'ETmodules', 'weight' => '400'];
+
         if (empty($icon_value)) {
-            return '';
+            return $empty;
         }
 
         if (is_array($icon_value)) {
@@ -71,14 +73,23 @@ trait RenderCallbackTrait
         }
 
         if (empty($uni)) {
-            return '';
+            return $empty;
         }
 
         if (function_exists('dtq_inject_fa_icons')) {
             dtq_inject_fa_icons($uni . '||' . $type . '||' . $wt);
         }
 
-        return function_exists('dtq_resolve_icon_unicode') ? dtq_resolve_icon_unicode($uni) : $uni;
+        // The font has to travel with the glyph. This module marks its icon up
+        // as a bare .dtq-et-font-icon, and that class hard-sets ETmodules — so a
+        // FontAwesome pick used to request the FA font correctly and then get
+        // drawn in the Divi font anyway, producing the wrong glyph. Every other
+        // module emits font-family inline on the icon element; do the same here.
+        return [
+            'glyph'  => function_exists('dtq_resolve_icon_unicode') ? dtq_resolve_icon_unicode($uni) : $uni,
+            'font'   => 'fa' === $type ? 'FontAwesome' : 'ETmodules',
+            'weight' => $wt,
+        ];
     }
 
     /**
@@ -148,8 +159,13 @@ trait RenderCallbackTrait
                             esc_url(get_the_post_thumbnail_url())
                         );
                     }
-                } elseif ('on' === $show_icon && '' !== $glyph) {
-                    $figure = sprintf('<div class="dtq-post-list-icon"><i class="dtq-et-font-icon">%1$s</i></div>', $glyph);
+                } elseif ('on' === $show_icon && '' !== $glyph['glyph']) {
+                    $figure = sprintf(
+                        '<div class="dtq-post-list-icon"><i class="dtq-et-font-icon" style="font-family:\'%2$s\';font-weight:%3$s">%1$s</i></div>',
+                        $glyph['glyph'],
+                        esc_attr($glyph['font']),
+                        esc_attr($glyph['weight'])
+                    );
                 }
 
                 // Meta (author + date).

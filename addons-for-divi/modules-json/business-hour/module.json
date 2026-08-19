@@ -7,6 +7,7 @@
   "titles": "Business Hours",
   "moduleIcon": "divitorque/business-hour",
   "category": "module",
+  "folder": "divi-torque-lite",
   "childModuleName": "divitorque/business-hour-item",
   "childModuleTitle": "Business Hour Item",
   "childrenName": [

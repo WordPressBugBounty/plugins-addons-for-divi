@@ -6,6 +6,7 @@
   "titles": "FAQs",
   "moduleIcon": "divitorque/faq",
   "category": "module",
+  "folder": "divi-torque-lite",
   "childModuleName": "divitorque/faq-item",
   "childModuleTitle": "FAQ Item",
   "childrenName": [

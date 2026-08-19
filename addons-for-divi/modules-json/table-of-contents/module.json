@@ -6,6 +6,7 @@
   "moduleClassName": "dtq_table_of_contents",
   "moduleOrderClassName": "dtq_table_of_contents",
   "category": "module",
+  "folder": "divi-torque-lite",
   "attributes": {
     "module": {
       "type": "object",

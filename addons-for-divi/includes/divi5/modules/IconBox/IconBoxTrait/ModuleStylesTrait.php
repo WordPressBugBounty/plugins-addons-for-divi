@@ -209,6 +209,21 @@ trait ModuleStylesTrait
             ];
         }
 
+        // Icon padding applies to both modes. It lands on .dtq-iconbox__icon,
+        // which is inline-flex and so hugs its content — with a background and a
+        // radius but no padding you get a shape tight to the glyph instead of a
+        // chip, and an icon chip is the most common Icon Box design there is.
+        // module.json puts no useImage condition on the control, so it reads as
+        // universal; it used to be emitted in the image branch only.
+        $icon_pad_css = self::dtq_spacing($icon_padding);
+        if ('' !== $icon_pad_css) {
+            $styles[] = [
+                'atRules'     => false,
+                'selector'    => $order_class . ' .dtq-iconbox__icon',
+                'declaration' => sprintf('padding: %1$s;', $icon_pad_css),
+            ];
+        }
+
         if (!$use_image) {
             // Icon font.
             $icon_attr   = $advanced['icon']['desktop']['value'] ?? [];
@@ -222,14 +237,6 @@ trait ModuleStylesTrait
             ];
         } else {
             // Image icon.
-            $icon_pad_css = self::dtq_spacing($icon_padding);
-            if ('' !== $icon_pad_css) {
-                $styles[] = [
-                    'atRules'     => false,
-                    'selector'    => $order_class . ' .dtq-iconbox__icon',
-                    'declaration' => sprintf('padding: %1$s;', $icon_pad_css),
-                ];
-            }
             $styles[] = [
                 'atRules'     => false,
                 'selector'    => $order_class . ' .dtq-iconbox__icon img',
@@ -337,6 +344,19 @@ trait ModuleStylesTrait
                 ];
             }
 
+            // Icon padding — iconPadding. Both modes, same as the static block.
+            $val = $bp('iconPadding');
+            if (null !== $val) {
+                $pad_css = self::dtq_spacing($val);
+                if ('' !== $pad_css) {
+                    $styles[] = [
+                        'atRules'     => $at_rule,
+                        'selector'    => $order_class . ' .dtq-iconbox__icon',
+                        'declaration' => sprintf('padding: %1$s;', $pad_css),
+                    ];
+                }
+            }
+
             if (!$use_image) {
                 // Icon font size — iconSize (font icon branch).
                 $val = $bp('iconSize');
@@ -348,18 +368,6 @@ trait ModuleStylesTrait
                     ];
                 }
             } else {
-                // Image icon padding — iconPadding (image branch).
-                $val = $bp('iconPadding');
-                if (null !== $val) {
-                    $pad_css = self::dtq_spacing($val);
-                    if ('' !== $pad_css) {
-                        $styles[] = [
-                            'atRules'     => $at_rule,
-                            'selector'    => $order_class . ' .dtq-iconbox__icon',
-                            'declaration' => sprintf('padding: %1$s;', $pad_css),
-                        ];
-                    }
-                }
                 // Image icon size — iconSize (image width branch).
                 $val = $bp('iconSize');
                 if (null !== $val) {

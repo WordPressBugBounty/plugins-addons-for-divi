@@ -7,6 +7,7 @@
   "titles": "Alert Boxes",
   "moduleIcon": "divitorque/inline-notice",
   "category": "module",
+  "folder": "divi-torque-lite",
   "attributes": {
     "module": {
       "type": "object",

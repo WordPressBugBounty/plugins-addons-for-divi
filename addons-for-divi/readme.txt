@@ -1,10 +1,10 @@
-=== Divi Torque Lite – Divi 5 Modules & Addons for the Divi Builder & Divi Theme ===
+=== Divi Torque Lite ===
 Contributors: divipeople, plugpressco, badhonrocks
 Tags: divi, divi builder, divi modules, page builder, divi theme
 Requires at least: 7.0
 Tested up to: 7.0
 Requires PHP: 7.4
-Stable tag: 4.9.0
+Stable tag: 4.10.0
 License: GPLv3
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 
@@ -160,6 +160,17 @@ No. Updates are backward compatible and won't break pages built with our modules
 3. Image Carousel module
 
 == Changelog ==
+
+= Version 4.10.0 =
+* Fix: FontAwesome icons rendered as empty boxes in every Divi 5 module, on the front end and in the Visual Builder. Divi 5 never loads the FontAwesome font for a third-party module, so Divi Torque now declares it itself.
+* Fix: Icon Box — Icon Padding had no effect on a font icon, which made an icon chip (background + padding + rounded corners) impossible to build. It applied to uploaded images only.
+* Fix: Post List — a FontAwesome list icon was drawn in the Divi icon font, so it came out as the wrong glyph.
+* Fix: Dual Button — the per-button icon never appeared. The icon now renders, including its colour and placement.
+* Fix: Icon Box — the five Absolute Position fields now hide unless Icon Placement is set to Absolute, instead of sitting there doing nothing.
+* Fix: Image Carousel — removed the stray chevron Divi core slides into the item button on hover, which also shifted its padding.
+* Fix: Contact Form 7 — added the missing Layout design group.
+* Improved: Carousels — reworked settings taxonomy and preset pools across the carousel modules, with the navigation and pagination settings now carried through Divi 4 to Divi 5 migration.
+* Improved: Dashboard settings screens refined, with a live preview beside each settings form.
 
 = Version 4.9.0 =
 * New: Tooltip module. Styled, keyboard-accessible tooltips for text, icons, and images.
@@ -338,6 +349,9 @@ No. Updates are backward compatible and won't break pages built with our modules
 * Public beta release
 
 == Upgrade Notice ==
+
+= 4.10.0 =
+Icon fixes across Divi 5 modules: FontAwesome icons now render everywhere, plus fixes for Icon Box, Post List, Dual Button, Image Carousel, and Contact Form 7. Carousel settings now migrate fully from Divi 4 to Divi 5.
 
 = 4.9.0 =
 Seven new free modules built natively for Divi 5: Tooltip, Call To Action, Creative Button, Image Accordion, Sticky Video, Code Snippet, and SVG Draw. Plus three module fixes.

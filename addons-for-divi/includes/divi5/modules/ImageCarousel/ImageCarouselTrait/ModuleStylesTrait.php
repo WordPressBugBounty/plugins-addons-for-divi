@@ -46,6 +46,7 @@ trait ModuleStylesTrait
                     ],
                 ]
             ),
+            $elements->style(['attrName' => 'image']),
         ];
 
         if (!empty($custom_styles)) {

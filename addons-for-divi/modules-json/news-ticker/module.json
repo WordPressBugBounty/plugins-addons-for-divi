@@ -7,6 +7,7 @@
   "titles": "News Tickers",
   "moduleIcon": "divitorque/news-ticker",
   "category": "module",
+  "folder": "divi-torque-lite",
   "attributes": {
     "module": {
       "type": "object",

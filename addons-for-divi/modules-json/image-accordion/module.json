@@ -6,6 +6,7 @@
   "moduleClassName": "dtq_image_accordion",
   "moduleOrderClassName": "dtq_image_accordion",
   "category": "module",
+  "folder": "divi-torque-lite",
   "childModuleName": "divitorque/image-accordion-item",
   "childModuleTitle": "Image Accordion Panel",
   "childrenName": ["divitorque/image-accordion-item"],

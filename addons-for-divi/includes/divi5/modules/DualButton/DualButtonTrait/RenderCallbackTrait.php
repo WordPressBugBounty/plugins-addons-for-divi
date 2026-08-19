@@ -17,23 +17,74 @@ use ET\Builder\Packages\Module\Module;
 trait RenderCallbackTrait
 {
     /**
+     * Build the data-icon attributes for a button.
+     *
+     * btnA/btnB carry Divi's own `divi/button` group, so Divi generates the icon
+     * CSS for them — and that CSS is `content: attr(data-icon)`. The glyph lives
+     * in the markup, not the stylesheet. This anchor is hand-built rather than
+     * produced by Divi's ButtonComponent, so it never carried the attribute and
+     * the icon had nowhere to come from: every button-icon setting looked dead
+     * while the CSS for it was sitting right there in the page.
+     *
+     * Mirrors ButtonComponent's own resolution, including the tablet and phone
+     * variants its responsive rules read.
+     *
+     * @param array $button_attr The btnA/btnB `decoration.button` attr array.
+     *
+     * @return string Ready-to-print attribute string, empty when there is no icon.
+     */
+    protected static function button_icon_attrs($button_attr)
+    {
+        if (!class_exists('\ET\Builder\Packages\IconLibrary\IconFont\Utils')) {
+            return '';
+        }
+
+        $out = '';
+
+        foreach (['desktop' => 'data-icon', 'tablet' => 'data-icon-tablet', 'phone' => 'data-icon-phone'] as $breakpoint => $attr_name) {
+            $settings = $button_attr[$breakpoint]['value']['icon']['settings'] ?? null;
+
+            // Only a well-formed icon value produces an attribute. Divi core
+            // fatals on a malformed one (a responsive-wrapped scalar where it
+            // expects a string) rather than ignoring it, so do not pass junk on.
+            if (empty($settings) || !is_array($settings)) {
+                continue;
+            }
+
+            $glyph = \ET\Builder\Packages\IconLibrary\IconFont\Utils::escape_font_icon(
+                \ET\Builder\Packages\IconLibrary\IconFont\Utils::process_font_icon($settings)
+            );
+
+            if ('' === $glyph || null === $glyph) {
+                continue;
+            }
+
+            $out .= sprintf(' %1$s="%2$s"', $attr_name, esc_attr($glyph));
+        }
+
+        return $out;
+    }
+
+    /**
      * Render a single button anchor.
      *
-     * @param string $text     Button text.
-     * @param string $link     Button URL.
-     * @param string $target   Link target (`_self`|`_blank`).
-     * @param string $modifier Button modifier class (`primary`|`secondary`).
+     * @param string $text        Button text.
+     * @param string $link        Button URL.
+     * @param string $target      Link target (`_self`|`_blank`).
+     * @param string $modifier    Button modifier class (`primary`|`secondary`).
+     * @param array  $button_attr The button's `decoration.button` attr array.
      *
      * @return string
      */
-    public static function render_button($text, $link, $target, $modifier)
+    public static function render_button($text, $link, $target, $modifier, $button_attr = [])
     {
         return sprintf(
-            '<a class="et_pb_button btn-el btn-el--%1$s" href="%2$s" target="%3$s">%4$s</a>',
+            '<a class="et_pb_button btn-el btn-el--%1$s" href="%2$s" target="%3$s"%5$s>%4$s</a>',
             esc_attr($modifier),
             esc_url($link),
             esc_attr($target),
-            et_core_esc_previously($text)
+            et_core_esc_previously($text),
+            self::button_icon_attrs($button_attr)
         );
     }
 
@@ -191,9 +242,9 @@ trait RenderCallbackTrait
                 '<div class="dtq-btn-wrap">%1$s%2$s</div>' .
                 '<div class="dtq-btn-wrap">%3$s</div>' .
             '</div>',
-            self::render_button($btn_a_text, $btn_a_link, $btn_a_target, 'primary'),
+            self::render_button($btn_a_text, $btn_a_link, $btn_a_target, 'primary', $attrs['btnA']['decoration']['button'] ?? []),
             self::render_connector($advanced),
-            self::render_button($btn_b_text, $btn_b_link, $btn_b_target, 'secondary')
+            self::render_button($btn_b_text, $btn_b_link, $btn_b_target, 'secondary', $attrs['btnB']['decoration']['button'] ?? [])
         );
 
         return Module::render(

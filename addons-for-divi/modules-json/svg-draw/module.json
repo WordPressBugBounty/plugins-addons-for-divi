@@ -6,6 +6,7 @@
   "moduleClassName": "dtq_svg_draw",
   "moduleOrderClassName": "dtq_svg_draw",
   "category": "module",
+  "folder": "divi-torque-lite",
   "attributes": {
     "module": {
       "type": "object",

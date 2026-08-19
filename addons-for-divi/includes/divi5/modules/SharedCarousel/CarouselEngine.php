@@ -64,6 +64,13 @@ class CarouselEngine
             $type    = $parts[1] ?? 'divi';
             $weight  = $parts[2] ?? '400';
         }
+        // A layout migrated from Divi 4 carries the legacy `%%24%%` icon form,
+        // which html_entity_decode leaves untouched, so the arrow renders as
+        // literal text. Resolve it to a real glyph first.
+        if ('' !== $unicode && function_exists('dtq_resolve_icon_unicode')) {
+            $unicode = dtq_resolve_icon_unicode($unicode);
+        }
+
         $char = '' !== $unicode ? html_entity_decode($unicode, ENT_QUOTES, 'UTF-8') : $fallback;
         return [
             'char'   => $char,
@@ -121,6 +128,10 @@ class CarouselEngine
             'observer'       => true,
             'observeParents' => true,
             'spaceBetween'   => $space,
+            // With fewer slides than fit the viewport there is nothing to page
+            // through, so Swiper disables its controls and dragging instead of
+            // rendering dead arrows and a single bullet.
+            'watchOverflow'  => true,
             // Swiper's a11y module labels the nav buttons, exposes the slide
             // roles and announces slide changes in a live region. It was never
             // enabled, so carousels shipped with unlabelled arrows and silent
@@ -180,6 +191,10 @@ class CarouselEngine
             $config['autoplay'] = [
                 'delay'                => self::to_int($val('autoplaySpeed', '2000ms'), 2000),
                 'disableOnInteraction' => false,
+                // Moving content that cannot be paused is a WCAG 2.2.2 problem.
+                // Hovering is the one pause affordance available without adding
+                // a visible control, so it is on by default.
+                'pauseOnMouseEnter'    => true,
             ];
         }
 

@@ -7,6 +7,7 @@
   "titles": "X (Twitter) Feeds",
   "moduleIcon": "divitorque/twitter-feed",
   "category": "module",
+  "folder": "divi-torque-lite",
   "attributes": {
     "module": {
       "type": "object",

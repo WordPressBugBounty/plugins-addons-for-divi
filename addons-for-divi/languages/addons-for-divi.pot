@@ -7,7 +7,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Language-Team: PlugPress <support@divitorque.com>\n"
-"POT-Creation-Date: 2026-08-12 08:00+0000\n"
+"POT-Creation-Date: 2026-08-18 03:51+0000\n"
 "X-Poedit-Basepath: ..\n"
 "X-Poedit-KeywordsList: __;_e;_ex:1,2c;_n:1,2;_n_noop:1,2;_nx:1,2,4c;_nx_noop:1,2,3c;_x:1,2c;esc_attr__;esc_attr_e;esc_attr_x:1,2c;esc_html__;esc_html_e;esc_html_x:1,2c\n"
 "X-Poedit-SearchPath-0: .\n"
@@ -126,32 +126,20 @@ msgstr ""
 msgid "Awesome Gradient Heading"
 msgstr ""
 
-#: includes/dashboard.php:114, includes/dashboard.php:115
+#: includes/dashboard.php:109, includes/dashboard.php:110
 msgid "Divi Torque"
 msgstr ""
 
-#: includes/dashboard.php:160
+#: includes/dashboard.php:155
 msgid "Overview"
 msgstr ""
 
-#: includes/dashboard.php:164
+#: includes/dashboard.php:159
 msgid "Modules"
 msgstr ""
 
-#: includes/dashboard.php:178
+#: includes/dashboard.php:173
 msgid "Extensions"
-msgstr ""
-
-#: includes/dashboard.php:375
-msgid "The new Divi Torque dashboard is here."
-msgstr ""
-
-#: includes/dashboard.php:376
-msgid "Cleaner, faster, and where new features land first. This legacy dashboard will be retired in an upcoming release."
-msgstr ""
-
-#: includes/dashboard.php:379
-msgid "Try the new dashboard"
 msgstr ""
 
 #: includes/extensions-api.php:110
@@ -2149,23 +2137,23 @@ msgstr ""
 msgid "Add new display condition"
 msgstr ""
 
-#: includes/divi5/modules/SharedCarousel/CarouselEngine.php:131
+#: includes/divi5/modules/SharedCarousel/CarouselEngine.php:142
 msgid "Previous slide"
 msgstr ""
 
-#: includes/divi5/modules/SharedCarousel/CarouselEngine.php:132
+#: includes/divi5/modules/SharedCarousel/CarouselEngine.php:143
 msgid "Next slide"
 msgstr ""
 
-#: includes/divi5/modules/SharedCarousel/CarouselEngine.php:133
+#: includes/divi5/modules/SharedCarousel/CarouselEngine.php:144
 msgid "This is the first slide"
 msgstr ""
 
-#: includes/divi5/modules/SharedCarousel/CarouselEngine.php:134
+#: includes/divi5/modules/SharedCarousel/CarouselEngine.php:145
 msgid "This is the last slide"
 msgstr ""
 
-#: includes/divi5/modules/SharedCarousel/CarouselEngine.php:135
+#: includes/divi5/modules/SharedCarousel/CarouselEngine.php:146
 msgid "Go to slide {{index}}"
 msgstr ""
 
@@ -7467,7 +7455,7 @@ msgstr ""
 msgid "Newer Entries &raquo;"
 msgstr ""
 
-#: includes/divi5/modules/PostList/PostListTrait/RenderCallbackTrait.php:186
+#: includes/divi5/modules/PostList/PostListTrait/RenderCallbackTrait.php:202
 msgid "No posts found."
 msgstr ""
 

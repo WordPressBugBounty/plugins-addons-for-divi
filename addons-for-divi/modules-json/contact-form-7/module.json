@@ -7,6 +7,7 @@
   "titles": "Contact Form 7",
   "moduleIcon": "divitorque/contact-form-7",
   "category": "module",
+  "folder": "divi-torque-lite",
   "attributes": {
     "module": {
       "type": "object",
@@ -115,7 +116,7 @@
           "cf7MessageMarginTop": { "groupType": "group-item", "item": { "groupSlug": "sucErrMsg", "attrName": "module.advanced.cf7MessageMarginTop", "label": "Message Margin Top", "priority": 110, "render": true, "features": { "sticky": false, "responsive": false, "hover": false }, "component": { "type": "field", "name": "divi/range", "props": { "min": 0, "max": 50, "step": 1, "defaultUnit": "px", "allowedUnits": ["px"] } } } }
         },
         "decoration": {
-          "background": {}, "spacing": {}, "border": {}, "boxShadow": {}, "filters": {}, "transform": {}, "animation": {}, "overflow": {}, "sizing": {}, "disabledOn": {}, "transition": {}, "position": {}, "zIndex": {}, "scroll": {}
+          "layout": {}, "background": {}, "spacing": {}, "border": {}, "boxShadow": {}, "filters": {}, "transform": {}, "animation": {}, "overflow": {}, "sizing": {}, "disabledOn": {}, "transition": {}, "position": {}, "zIndex": {}, "scroll": {}
         }
       }
     },

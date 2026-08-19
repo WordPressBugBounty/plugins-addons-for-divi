@@ -6,6 +6,7 @@
   "titles": "Accordion Pro",
   "moduleIcon": "divitorque/accordion",
   "category": "module",
+  "folder": "divi-torque-lite",
   "childModuleName": "divitorque/accordion-item",
   "childModuleTitle": "Accordion Item",
   "childrenName": [

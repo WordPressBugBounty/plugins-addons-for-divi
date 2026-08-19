@@ -36,11 +36,6 @@ class Dashboard
         add_action('admin_init', [$this, 'handle_switch_link']);
         add_filter('admin_body_class', [$this, 'body_class']);
         add_filter('submenu_file', [$this, 'highlight_submenu'], 10, 2);
-
-        if ($this->is_v2()) {
-            add_action('admin_notices', [$this, 'begin_notice_capture'], -9999);
-            add_action('admin_notices', [$this, 'end_notice_capture'], 9999);
-        }
     }
 
     public function is_v2()
@@ -51,7 +46,7 @@ class Dashboard
     /**
      * Whether Pro's v2 dashboard is active. When it is, Pro owns EVERY app
      * screen (one dashboard, never two): extension pages render inside Pro's
-     * bundle, and Lite must not enqueue, scope, or notice-capture anything.
+     * bundle, and Lite must not enqueue or scope anything.
      *
      * @return bool
      */
@@ -73,8 +68,12 @@ class Dashboard
         // Extension pages are ours whether or not Pro is active — they have no
         // Pro counterpart. Without this the page would render without the
         // `pp-scope` body class and @plugpress/ui would be completely unstyled.
-        if (Share_My_Post_Admin::SLUG === $page) {
-            return true;
+        // Iterate the filter (like Pro does) so any future Lite extension is
+        // covered without touching this method.
+        foreach (apply_filters('divitorque/dashboard_extensions', []) as $ext) {
+            if (!empty($ext['slug']) && $ext['slug'] === $page) {
+                return true;
+            }
         }
 
         return $page === $this->menu_slug && !AdminHelper::is_pro_installed();
@@ -145,8 +144,8 @@ class Dashboard
 
     /**
      * Dashboard v2 submenu map — one entry per app destination, mirroring
-     * admin/src/routes.js. The WP menu is the complete vertical map of the
-     * app; the app's own topbar carries the same destinations horizontally.
+     * the PageDefs in admin/src/index.js. The WP menu is the app's ONLY
+     * navigation; the app's top bar carries brand, versions and docs.
      * (Sharing Buttons registers its own slug in share-my-post/admin.php.)
      *
      * In legacy mode only the two v1 destinations exist.
@@ -249,7 +248,6 @@ class Dashboard
             return;
         }
 
-        $this->render_try_v2_banner();
         $this->enqueue_scripts();
         echo '<div id="divitorque-root"></div>';
     }
@@ -316,23 +314,6 @@ class Dashboard
         return $classes;
     }
 
-    public function begin_notice_capture()
-    {
-        if (!$this->is_our_screen()) {
-            return;
-        }
-        ob_start();
-    }
-
-    public function end_notice_capture()
-    {
-        if (!$this->is_our_screen()) {
-            return;
-        }
-        $html = ob_get_clean();
-        echo '<div id="dtl-foreign-notices" style="display:none">' . $html . '</div>'; // phpcs:ignore WordPress.Security.EscapeOutput
-    }
-
     /* ─── v1 ⇄ v2 switching ────────────────────────────────────────── */
 
     public function register_switch_route()
@@ -364,22 +345,6 @@ class Dashboard
         update_option(self::UI_OPTION, $_GET['dtl_ui'] === 'legacy' ? 'legacy' : 'v2');
         wp_safe_redirect(admin_url('admin.php?page=' . $this->menu_slug));
         exit;
-    }
-
-    private function render_try_v2_banner()
-    {
-        $url = wp_nonce_url(admin_url('admin.php?page=' . $this->menu_slug . '&dtl_ui=v2'), 'dtl_switch_ui');
-        ?>
-        <div class="notice notice-info dtl-try-v2" style="display:flex;align-items:center;gap:12px;padding:12px 16px;">
-            <span style="flex:1;">
-                <strong><?php esc_html_e('The new Divi Torque dashboard is here.', 'addons-for-divi'); ?></strong>
-                <?php esc_html_e('Cleaner, faster, and where new features land first. This legacy dashboard will be retired in an upcoming release.', 'addons-for-divi'); ?>
-            </span>
-            <a class="button button-primary" href="<?php echo esc_url($url); ?>">
-                <?php esc_html_e('Try the new dashboard', 'addons-for-divi'); ?>
-            </a>
-        </div>
-        <?php
     }
 
     /* ─── Legacy v1 enqueue — unchanged ────────────────────────────── */

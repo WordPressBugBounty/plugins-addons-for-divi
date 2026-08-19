@@ -181,6 +181,15 @@ if (!function_exists('dtq_global_assets_list')) {
  * Divi icon font (icons_all) — otherwise only the small base set renders and
  * extended glyphs (e.g. warning) fall back to a literal letter.
  *
+ * Pass the full "unicode||type||weight" string: et_pb_maybe_fa_font_icon()
+ * detects FontAwesome by the "||" separator, so a bare unicode is always read
+ * as a Divi icon and the FA font is never requested.
+ *
+ * The two filters below are DIVI 4 ONLY. Divi 4's Dynamic Assets still calls
+ * them, so they must stay. Divi 5 never fires them and has no third-party
+ * equivalent — see dtq_print_full_icon_font(), which is what actually delivers
+ * the font there.
+ *
  * @param string $icon_data Icon value (unicode, optionally "||type||weight").
  */
 if (!function_exists('dtq_inject_fa_icons')) {
@@ -195,29 +204,159 @@ if (!function_exists('dtq_inject_fa_icons')) {
 }
 
 /**
- * Ensure the COMPLETE Divi icon font is available on the front end.
+ * Locate Divi on disk and on the web, whichever way it is installed.
  *
- * Divi's "Dynamic Icons" performance feature only ships the small subset of
- * glyphs it detects in the page content, and its detector does not see icons
- * stored in our D5 module attributes. So extended Divi icons (warning, star,
- * heart, …) have no glyph and fall back to a literal letter. When one of our
- * modules has rendered a Divi icon, register the full ETmodules @font-face so
- * every glyph resolves. The full font is a superset of the base one, so this
- * is safe for base glyphs too.
+ * Divi 5 ships two ways: as the Divi (or Extra) theme, and as the Divi Builder
+ * plugin sitting under any third-party theme. get_template_directory_uri() is
+ * only correct for the first. Under the Builder plugin it returns the ACTIVE
+ * THEME, so a Divi-relative asset URL built from it 404s.
+ *
+ * That is worse than it sounds for @font-face: our rule prints at wp_footer 99,
+ * after Divi's own, and for a given family the last matching rule wins. A rule
+ * pointing at a 404 therefore *overrides* Divi's working font and breaks icons
+ * that would otherwise have rendered. Hence the file_exists() checks in
+ * dtq_icon_font_face() — we would rather emit nothing than emit a broken face.
+ *
+ * Mirrors Divi's own resolver, DynamicAssetsUtils::get_dynamic_assets_path().
+ *
+ * @return array{dir:string,uri:string} Divi root as a filesystem path and a URL.
+ */
+if (!function_exists('dtq_divi_root')) {
+	function dtq_divi_root()
+	{
+		if (
+			function_exists('et_is_builder_plugin_active') && et_is_builder_plugin_active()
+			&& defined('ET_BUILDER_PLUGIN_DIR') && defined('ET_BUILDER_PLUGIN_URI')
+		) {
+			return array(
+				'dir' => untrailingslashit(ET_BUILDER_PLUGIN_DIR),
+				'uri' => untrailingslashit(ET_BUILDER_PLUGIN_URI),
+			);
+		}
+
+		return array(
+			'dir' => untrailingslashit(get_template_directory()),
+			'uri' => untrailingslashit(get_template_directory_uri()),
+		);
+	}
+}
+
+/**
+ * Build one @font-face rule for a Divi-bundled icon font.
+ *
+ * Probes woff2 then woff and emits only the formats that actually exist, so the
+ * same call works for FontAwesome (ships woff2 + woff) and for ETmodules (ships
+ * woff, no woff2). Returns an empty string when no file is found, which is what
+ * keeps a wrong Divi root from producing a face that shadows a working one.
+ *
+ * @param string $family Font family name to declare.
+ * @param array  $root   Divi root from dtq_divi_root().
+ * @param string $rel    Path below the Divi root, without extension.
+ * @param int    $weight font-weight for this face.
+ *
+ * @return string One @font-face rule, or '' if the font files are missing.
+ */
+if (!function_exists('dtq_icon_font_face')) {
+	function dtq_icon_font_face($family, $root, $rel, $weight)
+	{
+		$sources = array();
+
+		foreach (array('woff2', 'woff') as $format) {
+			if (file_exists($root['dir'] . $rel . '.' . $format)) {
+				$sources[] = sprintf(
+					'url("%1$s") format("%2$s")',
+					esc_url($root['uri'] . $rel . '.' . $format),
+					$format
+				);
+			}
+		}
+
+		if (empty($sources)) {
+			return '';
+		}
+
+		return sprintf(
+			'@font-face{font-family:"%1$s";font-style:normal;font-weight:%2$d;font-display:swap;src:%3$s;}',
+			$family,
+			(int) $weight,
+			implode(',', $sources)
+		);
+	}
+}
+
+/**
+ * Ensure the icon fonts our modules just rendered are actually available.
+ *
+ * Two separate problems, one cure.
+ *
+ * ETmodules: Divi's "Dynamic Icons" feature only ships the subset of glyphs it
+ * detects in page content, and its detector does not see icons stored in our D5
+ * module attributes. Extended Divi icons (warning, star, heart, …) then have no
+ * glyph and fall back to a literal letter.
+ *
+ * FontAwesome: worse. dtq_inject_fa_icons() asks for the FA stylesheet through
+ * et_global_assets_list / et_late_global_assets_list, and under Divi 5 NEITHER
+ * FILTER EVER FIRES — verified by instrumenting both, plus their Divi 5
+ * replacements (divi_frontend_assets_dynamic_assets_[late_]global_assets_list),
+ * on a real front-end render. Divi 5 gates FA on $feature_state->use_fa_icons,
+ * set from DynamicAssetsUtils::get_font_icon_modules(), a hard-coded list of
+ * divi/* module names with no filter on it. A third-party module can never
+ * enter that list, so Divi will never load FA on our behalf and every FA icon
+ * renders as an empty box. There is no hook to fix this upstream; declare the
+ * faces ourselves.
+ *
+ * @param string[] $handles Handles to declare (et_icons_all|et_icons_fa).
+ *
+ * @return string The @font-face rules, or '' when none could be built.
+ */
+if (!function_exists('dtq_icon_font_css')) {
+	function dtq_icon_font_css($handles)
+	{
+		$root = dtq_divi_root();
+		$css  = '';
+
+		if (in_array('et_icons_all', (array) $handles, true)) {
+			$css .= dtq_icon_font_face('ETmodules', $root, '/core/admin/fonts/modules/all/modules', 400);
+		}
+
+		if (in_array('et_icons_fa', (array) $handles, true)) {
+			// The three faces Divi's own icons_fa_all.css declares. Regular and
+			// Brands share weight 400 but cover disjoint codepoints, so both are
+			// needed and neither shadows the other.
+			$fa_faces = array(
+				array('fa-regular-400', 400),
+				array('fa-solid-900', 900),
+				array('fa-brands-400', 400),
+			);
+
+			foreach ($fa_faces as $face) {
+				$css .= dtq_icon_font_face('FontAwesome', $root, '/core/admin/fonts/fontawesome/' . $face[0], $face[1]);
+			}
+		}
+
+		return $css;
+	}
+}
+
+/**
+ * Print the icon fonts this request's modules actually rendered.
+ *
+ * Runs at wp_footer because dtq_needed_icon_assets() is only populated while
+ * modules render, which is long after wp_head. Emits nothing on a page with no
+ * icons, so the cost on the rest of the site is zero.
  */
 if (!function_exists('dtq_print_full_icon_font')) {
 	function dtq_print_full_icon_font()
 	{
-		if (! in_array('et_icons_all', dtq_needed_icon_assets(), true)) {
+		$css = dtq_icon_font_css(dtq_needed_icon_assets());
+
+		if ('' === $css) {
 			return;
 		}
 
-		$font_url = get_template_directory_uri() . '/core/admin/fonts/modules/all/modules.woff';
-
-		printf(
-			'<style id="dtq-et-icons-all">@font-face{font-family:"ETmodules";font-display:swap;src:url("%s") format("woff");}</style>',
-			esc_url($font_url)
-		);
+		// Element id kept from when this only handled ETmodules; changing it
+		// would break any site targeting it from custom CSS.
+		printf('<style id="dtq-et-icons-all">%s</style>', $css);
 	}
 }
 add_action('wp_footer', 'dtq_print_full_icon_font', 99);

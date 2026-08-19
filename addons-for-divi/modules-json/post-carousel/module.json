@@ -5,6 +5,7 @@
   "moduleIcon": "divitorque/post-carousel",
   "moduleClassName": "dtq_post_carousel",
   "category": "module",
+  "folder": "divi-torque-lite",
   "attributes": {
     "module": {
       "type": "object",
@@ -1989,7 +1990,7 @@
           "slideCount": {
             "groupType": "group-item",
             "item": {
-              "groupSlug": "carouselSettings",
+              "groupSlug": "contentLayout",
               "attrName": "module.advanced.slideCount",
               "label": "Slides to Show",
               "description": "How many slides are visible at once. Lower this on tablet and phone for a better fit.",
@@ -2015,7 +2016,7 @@
           "slideToScroll": {
             "groupType": "group-item",
             "item": {
-              "groupSlug": "carouselSettings",
+              "groupSlug": "contentLayout",
               "attrName": "module.advanced.slideToScroll",
               "label": "Slides to Scroll",
               "description": "How many slides move each time the carousel advances.",
@@ -2041,7 +2042,7 @@
           "slideSpacing": {
             "groupType": "group-item",
             "item": {
-              "groupSlug": "carouselSettings",
+              "groupSlug": "contentLayout",
               "attrName": "module.advanced.slideSpacing",
               "label": "Gap Between Slides",
               "description": "Spacing between each slide.",
@@ -2067,11 +2068,11 @@
           "isVariableWidth": {
             "groupType": "group-item",
             "item": {
-              "groupSlug": "carouselSettings",
+              "groupSlug": "contentLayout",
               "attrName": "module.advanced.isVariableWidth",
               "label": "Variable Slide Width",
               "description": "Let each slide keep its own width instead of an equal share. Useful for mixed-size images.",
-              "priority": 40,
+              "priority": 50,
               "render": true,
               "features": {
                 "sticky": false,
@@ -2087,11 +2088,11 @@
           "slideWidth": {
             "groupType": "group-item",
             "item": {
-              "groupSlug": "carouselSettings",
+              "groupSlug": "contentLayout",
               "attrName": "module.advanced.slideWidth",
               "label": "Slide Width",
               "description": "Fixed width used for each slide when Variable Slide Width is on.",
-              "priority": 50,
+              "priority": 60,
               "render": true,
               "features": {
                 "sticky": false,
@@ -2113,11 +2114,11 @@
           "isAutoplay": {
             "groupType": "group-item",
             "item": {
-              "groupSlug": "carouselSettings",
+              "groupSlug": "contentMotion",
               "attrName": "module.advanced.isAutoplay",
               "label": "Autoplay",
               "description": "Automatically advance the carousel.",
-              "priority": 60,
+              "priority": 10,
               "render": true,
               "features": {
                 "sticky": false,
@@ -2133,11 +2134,11 @@
           "autoplaySpeed": {
             "groupType": "group-item",
             "item": {
-              "groupSlug": "carouselSettings",
+              "groupSlug": "contentMotion",
               "attrName": "module.advanced.autoplaySpeed",
               "label": "Autoplay Delay",
               "description": "How long each slide stays before advancing.",
-              "priority": 70,
+              "priority": 20,
               "render": true,
               "features": {
                 "sticky": false,
@@ -2162,11 +2163,11 @@
           "animationSpeed": {
             "groupType": "group-item",
             "item": {
-              "groupSlug": "carouselSettings",
+              "groupSlug": "contentMotion",
               "attrName": "module.advanced.animationSpeed",
               "label": "Transition Speed",
               "description": "How fast the slide animation plays.",
-              "priority": 80,
+              "priority": 30,
               "render": true,
               "features": {
                 "sticky": false,
@@ -2191,11 +2192,11 @@
           "isInfinite": {
             "groupType": "group-item",
             "item": {
-              "groupSlug": "carouselSettings",
+              "groupSlug": "contentMotion",
               "attrName": "module.advanced.isInfinite",
               "label": "Infinite Loop",
               "description": "Loop back to the first slide after the last one.",
-              "priority": 90,
+              "priority": 50,
               "render": true,
               "features": {
                 "sticky": false,
@@ -2211,11 +2212,11 @@
           "isSwipe": {
             "groupType": "group-item",
             "item": {
-              "groupSlug": "carouselSettings",
+              "groupSlug": "contentInteraction",
               "attrName": "module.advanced.isSwipe",
               "label": "Drag / Swipe",
               "description": "Allow visitors to drag or swipe between slides.",
-              "priority": 100,
+              "priority": 10,
               "render": true,
               "features": {
                 "sticky": false,
@@ -2231,11 +2232,11 @@
           "isCenter": {
             "groupType": "group-item",
             "item": {
-              "groupSlug": "carouselSettings",
+              "groupSlug": "contentInteraction",
               "attrName": "module.advanced.isCenter",
               "label": "Center Active Slide",
               "description": "Keep the active slide centered, with a peek of the slides on each side.",
-              "priority": 110,
+              "priority": 20,
               "render": true,
               "features": {
                 "sticky": false,
@@ -2251,11 +2252,11 @@
           "isVertical": {
             "groupType": "group-item",
             "item": {
-              "groupSlug": "carouselSettings",
+              "groupSlug": "contentLayout",
               "attrName": "module.advanced.isVertical",
               "label": "Vertical Direction",
               "description": "Slide up/down instead of left/right.",
-              "priority": 120,
+              "priority": 40,
               "render": true,
               "features": {
                 "sticky": false,
@@ -2271,11 +2272,11 @@
           "useNav": {
             "groupType": "group-item",
             "item": {
-              "groupSlug": "carouselSettings",
+              "groupSlug": "contentControls",
               "attrName": "module.advanced.useNav",
               "label": "Show Arrows",
               "description": "Show the previous / next navigation arrows.",
-              "priority": 130,
+              "priority": 10,
               "render": true,
               "features": {
                 "sticky": false,
@@ -2291,11 +2292,11 @@
           "usePagi": {
             "groupType": "group-item",
             "item": {
-              "groupSlug": "carouselSettings",
+              "groupSlug": "contentControls",
               "attrName": "module.advanced.usePagi",
               "label": "Show Dots",
               "description": "Show the pagination dots below the carousel.",
-              "priority": 140,
+              "priority": 50,
               "render": true,
               "features": {
                 "sticky": false,
@@ -2311,11 +2312,11 @@
           "cssTransition": {
             "groupType": "group-item",
             "item": {
-              "groupSlug": "carouselSettings",
+              "groupSlug": "contentMotion",
               "attrName": "module.advanced.cssTransition",
               "label": "Transition Easing",
               "description": "Easing curve for the slide animation.",
-              "priority": 85,
+              "priority": 40,
               "render": true,
               "features": {
                 "sticky": false,
@@ -2350,11 +2351,11 @@
           "centerModeType": {
             "groupType": "group-item",
             "item": {
-              "groupSlug": "carouselSettings",
+              "groupSlug": "contentInteraction",
               "attrName": "module.advanced.centerModeType",
               "label": "Center Mode Style",
               "description": "Highlighted scales the active slide up and dims the rest.",
-              "priority": 111,
+              "priority": 30,
               "render": true,
               "features": {
                 "sticky": false,
@@ -2380,11 +2381,11 @@
           "centerPadding": {
             "groupType": "group-item",
             "item": {
-              "groupSlug": "carouselSettings",
+              "groupSlug": "contentInteraction",
               "attrName": "module.advanced.centerPadding",
               "label": "Center Peek",
               "description": "How much of the neighbouring slides peeks in (classic center mode).",
-              "priority": 112,
+              "priority": 40,
               "render": true,
               "features": {
                 "sticky": false,
@@ -2406,11 +2407,11 @@
           "navType": {
             "groupType": "group-item",
             "item": {
-              "groupSlug": "designNav",
+              "groupSlug": "contentControls",
               "attrName": "module.advanced.navType",
               "label": "Arrow Layout",
               "description": "Overlay sits the arrows over the slides; Alongside places them side by side.",
-              "priority": 3,
+              "priority": 20,
               "render": true,
               "features": {
                 "sticky": false,
@@ -2436,10 +2437,10 @@
           "navPos": {
             "groupType": "group-item",
             "item": {
-              "groupSlug": "designNav",
+              "groupSlug": "designArrowPosition",
               "attrName": "module.advanced.navPos",
               "label": "Arrows Vertical Edge",
-              "priority": 122,
+              "priority": 30,
               "render": true,
               "features": {
                 "sticky": false,
@@ -2465,10 +2466,10 @@
           "navPosHz": {
             "groupType": "group-item",
             "item": {
-              "groupSlug": "designNav",
+              "groupSlug": "designArrowPosition",
               "attrName": "module.advanced.navPosHz",
               "label": "Arrows Horizontal Edge",
-              "priority": 124,
+              "priority": 40,
               "render": true,
               "features": {
                 "sticky": false,
@@ -2494,10 +2495,10 @@
           "navGap": {
             "groupType": "group-item",
             "item": {
-              "groupSlug": "designNav",
+              "groupSlug": "designArrowPosition",
               "attrName": "module.advanced.navGap",
               "label": "Gap Between Arrows",
-              "priority": 126,
+              "priority": 50,
               "render": true,
               "features": {
                 "sticky": false,
@@ -2519,11 +2520,11 @@
           "navXCenter": {
             "groupType": "group-item",
             "item": {
-              "groupSlug": "designNav",
+              "groupSlug": "designArrowPosition",
               "attrName": "module.advanced.navXCenter",
               "label": "Center the Arrows",
               "description": "Place both arrows together at the horizontal center.",
-              "priority": 128,
+              "priority": 60,
               "render": true,
               "features": {
                 "sticky": false,
@@ -2539,10 +2540,10 @@
           "pagiType": {
             "groupType": "group-item",
             "item": {
-              "groupSlug": "designPagi",
+              "groupSlug": "contentControls",
               "attrName": "module.advanced.pagiType",
               "label": "Pagination Style",
-              "priority": 5,
+              "priority": 60,
               "render": true,
               "features": {
                 "sticky": false,
@@ -2568,10 +2569,10 @@
           "pagiColor": {
             "groupType": "group-item",
             "item": {
-              "groupSlug": "designPagi",
+              "groupSlug": "designDotsNumber",
               "attrName": "module.advanced.pagiColor",
               "label": "Number Color",
-              "priority": 92,
+              "priority": 10,
               "render": true,
               "features": {
                 "sticky": false,
@@ -2590,10 +2591,10 @@
           "pagiText": {
             "groupType": "group-item",
             "item": {
-              "groupSlug": "designPagi",
+              "groupSlug": "designDotsNumber",
               "attrName": "module.advanced.pagiText",
               "label": "Number Size",
-              "priority": 94,
+              "priority": 20,
               "render": true,
               "features": {
                 "sticky": false,
@@ -2615,10 +2616,10 @@
           "pagiTextActive": {
             "groupType": "group-item",
             "item": {
-              "groupSlug": "designPagi",
+              "groupSlug": "designDotsNumber",
               "attrName": "module.advanced.pagiTextActive",
               "label": "Active Number Color",
-              "priority": 96,
+              "priority": 30,
               "render": true,
               "features": {
                 "sticky": false,
@@ -2637,7 +2638,7 @@
           "carouselSpacingTop": {
             "groupType": "group-item",
             "item": {
-              "groupSlug": "designLayout",
+              "groupSlug": "designSpacing",
               "attrName": "module.advanced.carouselSpacingTop",
               "label": "Spacing Top",
               "priority": 10,
@@ -2662,7 +2663,7 @@
           "carouselSpacingBottom": {
             "groupType": "group-item",
             "item": {
-              "groupSlug": "designLayout",
+              "groupSlug": "designSpacing",
               "attrName": "module.advanced.carouselSpacingBottom",
               "label": "Spacing Bottom",
               "priority": 20,
@@ -2687,11 +2688,11 @@
           "customCursor": {
             "groupType": "group-item",
             "item": {
-              "groupSlug": "designLayout",
+              "groupSlug": "contentInteraction",
               "attrName": "module.advanced.customCursor",
               "label": "Custom Cursor",
               "description": "Use a custom cursor when hovering the carousel.",
-              "priority": 30,
+              "priority": 50,
               "render": true,
               "features": {
                 "sticky": false,
@@ -2707,10 +2708,10 @@
           "cursorName": {
             "groupType": "group-item",
             "item": {
-              "groupSlug": "designLayout",
+              "groupSlug": "contentInteraction",
               "attrName": "module.advanced.cursorName",
               "label": "Cursor Style",
-              "priority": 40,
+              "priority": 60,
               "render": true,
               "features": {
                 "sticky": false,
@@ -2748,10 +2749,10 @@
           "iconLeft": {
             "groupType": "group-item",
             "item": {
-              "groupSlug": "designNav",
+              "groupSlug": "contentControls",
               "attrName": "module.advanced.iconLeft",
               "label": "Previous Arrow Icon",
-              "priority": 5,
+              "priority": 30,
               "render": true,
               "features": {
                 "sticky": false,
@@ -2767,10 +2768,10 @@
           "iconRight": {
             "groupType": "group-item",
             "item": {
-              "groupSlug": "designNav",
+              "groupSlug": "contentControls",
               "attrName": "module.advanced.iconRight",
               "label": "Next Arrow Icon",
-              "priority": 6,
+              "priority": 40,
               "render": true,
               "features": {
                 "sticky": false,
@@ -2786,7 +2787,7 @@
           "navColor": {
             "groupType": "group-item",
             "item": {
-              "groupSlug": "designNav",
+              "groupSlug": "designArrowStyle",
               "attrName": "module.advanced.navColor",
               "label": "Arrow Icon Color",
               "priority": 10,
@@ -2808,7 +2809,7 @@
           "navBg": {
             "groupType": "group-item",
             "item": {
-              "groupSlug": "designNav",
+              "groupSlug": "designArrowStyle",
               "attrName": "module.advanced.navBg",
               "label": "Arrow Background",
               "priority": 20,
@@ -2830,7 +2831,7 @@
           "navHeight": {
             "groupType": "group-item",
             "item": {
-              "groupSlug": "designNav",
+              "groupSlug": "designArrowStyle",
               "attrName": "module.advanced.navHeight",
               "label": "Arrow Height",
               "priority": 30,
@@ -2855,7 +2856,7 @@
           "navWidth": {
             "groupType": "group-item",
             "item": {
-              "groupSlug": "designNav",
+              "groupSlug": "designArrowStyle",
               "attrName": "module.advanced.navWidth",
               "label": "Arrow Width",
               "priority": 40,
@@ -2880,7 +2881,7 @@
           "navIconSize": {
             "groupType": "group-item",
             "item": {
-              "groupSlug": "designNav",
+              "groupSlug": "designArrowStyle",
               "attrName": "module.advanced.navIconSize",
               "label": "Arrow Icon Size",
               "priority": 50,
@@ -2905,7 +2906,7 @@
           "navRadius": {
             "groupType": "group-item",
             "item": {
-              "groupSlug": "designNav",
+              "groupSlug": "designArrowStyle",
               "attrName": "module.advanced.navRadius",
               "label": "Arrow Corner Radius",
               "description": "Set to half the height/width for a circle.",
@@ -2931,7 +2932,7 @@
           "navSkew": {
             "groupType": "group-item",
             "item": {
-              "groupSlug": "designNav",
+              "groupSlug": "designArrowStyle",
               "attrName": "module.advanced.navSkew",
               "label": "Arrow Skew",
               "priority": 70,
@@ -2959,10 +2960,10 @@
           "navBorderWidth": {
             "groupType": "group-item",
             "item": {
-              "groupSlug": "designNav",
+              "groupSlug": "designArrowBorder",
               "attrName": "module.advanced.navBorderWidth",
               "label": "Arrow Border Width",
-              "priority": 80,
+              "priority": 10,
               "render": true,
               "features": {
                 "sticky": false,
@@ -2984,10 +2985,10 @@
           "navBorderColor": {
             "groupType": "group-item",
             "item": {
-              "groupSlug": "designNav",
+              "groupSlug": "designArrowBorder",
               "attrName": "module.advanced.navBorderColor",
               "label": "Arrow Border Color",
-              "priority": 90,
+              "priority": 20,
               "render": true,
               "features": {
                 "sticky": false,
@@ -3006,10 +3007,10 @@
           "navBorderStyle": {
             "groupType": "group-item",
             "item": {
-              "groupSlug": "designNav",
+              "groupSlug": "designArrowBorder",
               "attrName": "module.advanced.navBorderStyle",
               "label": "Arrow Border Style",
-              "priority": 100,
+              "priority": 30,
               "render": true,
               "features": {
                 "sticky": false,
@@ -3044,11 +3045,11 @@
           "navPosX": {
             "groupType": "group-item",
             "item": {
-              "groupSlug": "designNav",
+              "groupSlug": "designArrowPosition",
               "attrName": "module.advanced.navPosX",
               "label": "Arrow Horizontal Offset",
               "description": "Move the arrows in or out from the carousel edges.",
-              "priority": 110,
+              "priority": 10,
               "render": true,
               "features": {
                 "sticky": false,
@@ -3070,10 +3071,10 @@
           "navPosY": {
             "groupType": "group-item",
             "item": {
-              "groupSlug": "designNav",
+              "groupSlug": "designArrowPosition",
               "attrName": "module.advanced.navPosY",
               "label": "Arrow Vertical Position",
-              "priority": 120,
+              "priority": 20,
               "render": true,
               "features": {
                 "sticky": false,
@@ -3099,7 +3100,7 @@
           "pagiAlignment": {
             "groupType": "group-item",
             "item": {
-              "groupSlug": "designPagi",
+              "groupSlug": "designDotsPosition",
               "attrName": "module.advanced.pagiAlignment",
               "label": "Alignment",
               "priority": 10,
@@ -3131,10 +3132,10 @@
           "pagiBg": {
             "groupType": "group-item",
             "item": {
-              "groupSlug": "designPagi",
+              "groupSlug": "designDots",
               "attrName": "module.advanced.pagiBg",
               "label": "Dot Color",
-              "priority": 20,
+              "priority": 10,
               "render": true,
               "features": {
                 "sticky": false,
@@ -3153,10 +3154,10 @@
           "pagiBgActive": {
             "groupType": "group-item",
             "item": {
-              "groupSlug": "designPagi",
+              "groupSlug": "designDots",
               "attrName": "module.advanced.pagiBgActive",
               "label": "Active Dot Color",
-              "priority": 30,
+              "priority": 20,
               "render": true,
               "features": {
                 "sticky": false,
@@ -3175,10 +3176,10 @@
           "pagiHeight": {
             "groupType": "group-item",
             "item": {
-              "groupSlug": "designPagi",
+              "groupSlug": "designDots",
               "attrName": "module.advanced.pagiHeight",
               "label": "Dot Height",
-              "priority": 40,
+              "priority": 30,
               "render": true,
               "features": {
                 "sticky": false,
@@ -3200,10 +3201,10 @@
           "pagiWidth": {
             "groupType": "group-item",
             "item": {
-              "groupSlug": "designPagi",
+              "groupSlug": "designDots",
               "attrName": "module.advanced.pagiWidth",
               "label": "Dot Width",
-              "priority": 50,
+              "priority": 40,
               "render": true,
               "features": {
                 "sticky": false,
@@ -3225,11 +3226,11 @@
           "pagiWidthActive": {
             "groupType": "group-item",
             "item": {
-              "groupSlug": "designPagi",
+              "groupSlug": "designDots",
               "attrName": "module.advanced.pagiWidthActive",
               "label": "Active Dot Width",
               "description": "Optionally widen the active dot for a pill style.",
-              "priority": 60,
+              "priority": 50,
               "render": true,
               "features": {
                 "sticky": false,
@@ -3251,10 +3252,10 @@
           "pagiRadius": {
             "groupType": "group-item",
             "item": {
-              "groupSlug": "designPagi",
+              "groupSlug": "designDots",
               "attrName": "module.advanced.pagiRadius",
               "label": "Dot Corner Radius",
-              "priority": 70,
+              "priority": 60,
               "render": true,
               "features": {
                 "sticky": false,
@@ -3276,10 +3277,10 @@
           "pagiSpacing": {
             "groupType": "group-item",
             "item": {
-              "groupSlug": "designPagi",
+              "groupSlug": "designDotsPosition",
               "attrName": "module.advanced.pagiSpacing",
               "label": "Dot Spacing",
-              "priority": 80,
+              "priority": 30,
               "render": true,
               "features": {
                 "sticky": false,
@@ -3301,11 +3302,11 @@
           "pagiPosY": {
             "groupType": "group-item",
             "item": {
-              "groupSlug": "designPagi",
+              "groupSlug": "designDotsPosition",
               "attrName": "module.advanced.pagiPosY",
               "label": "Dots Spacing Top",
               "description": "Gap between the carousel and the dots.",
-              "priority": 90,
+              "priority": 20,
               "render": true,
               "features": {
                 "sticky": false,
@@ -3527,47 +3528,134 @@
           }
         }
       },
-      "carouselSettings": {
+      "contentLayout": {
         "panel": "content",
         "priority": 10,
-        "groupName": "carouselSettings",
+        "groupName": "contentLayout",
         "component": {
           "name": "divi/composite",
           "props": {
-            "groupLabel": "Carousel Settings"
+            "groupLabel": "Slides"
           }
         }
       },
-      "designNav": {
+      "contentMotion": {
+        "panel": "content",
+        "priority": 11,
+        "groupName": "contentMotion",
+        "component": {
+          "name": "divi/composite",
+          "props": {
+            "groupLabel": "Autoplay & Motion"
+          }
+        }
+      },
+      "contentInteraction": {
+        "panel": "content",
+        "priority": 12,
+        "groupName": "contentInteraction",
+        "component": {
+          "name": "divi/composite",
+          "props": {
+            "groupLabel": "Interaction"
+          }
+        }
+      },
+      "contentControls": {
+        "panel": "content",
+        "priority": 13,
+        "groupName": "contentControls",
+        "component": {
+          "name": "divi/composite",
+          "props": {
+            "groupLabel": "Arrows & Dots"
+          }
+        }
+      },
+      "designArrowStyle": {
         "panel": "design",
         "priority": 10,
-        "groupName": "designNav",
+        "groupName": "designArrowStyle",
         "component": {
           "name": "divi/composite",
           "props": {
-            "groupLabel": "Navigation Arrows"
+            "groupLabel": "Arrow Style",
+            "presetGroup": "divi/button",
+            "clipboardCategory": "style"
           }
         }
       },
-      "designPagi": {
+      "designArrowBorder": {
+        "panel": "design",
+        "priority": 11,
+        "groupName": "designArrowBorder",
+        "component": {
+          "name": "divi/composite",
+          "props": {
+            "groupLabel": "Arrow Border",
+            "presetGroup": "divi/border",
+            "clipboardCategory": "style"
+          }
+        }
+      },
+      "designArrowPosition": {
+        "panel": "design",
+        "priority": 12,
+        "groupName": "designArrowPosition",
+        "component": {
+          "name": "divi/composite",
+          "props": {
+            "groupLabel": "Arrow Position"
+          }
+        }
+      },
+      "designDots": {
         "panel": "design",
         "priority": 20,
-        "groupName": "designPagi",
+        "groupName": "designDots",
         "component": {
           "name": "divi/composite",
           "props": {
-            "groupLabel": "Pagination Dots"
+            "groupLabel": "Dot Style",
+            "presetGroup": "divi/border",
+            "clipboardCategory": "style"
           }
         }
       },
-      "designLayout": {
+      "designDotsNumber": {
         "panel": "design",
-        "priority": 25,
-        "groupName": "designLayout",
+        "priority": 21,
+        "groupName": "designDotsNumber",
         "component": {
           "name": "divi/composite",
           "props": {
-            "groupLabel": "Layout & Cursor"
+            "groupLabel": "Number Style",
+            "presetGroup": "divi/font",
+            "clipboardCategory": "style"
+          }
+        }
+      },
+      "designDotsPosition": {
+        "panel": "design",
+        "priority": 22,
+        "groupName": "designDotsPosition",
+        "component": {
+          "name": "divi/composite",
+          "props": {
+            "groupLabel": "Dot Position"
+          }
+        }
+      },
+      "designSpacing": {
+        "panel": "design",
+        "priority": 30,
+        "groupName": "designSpacing",
+        "component": {
+          "name": "divi/composite",
+          "props": {
+            "groupLabel": "Carousel Spacing",
+            "presetGroup": "divi/spacing",
+            "clipboardCategory": "style"
           }
         }
       }

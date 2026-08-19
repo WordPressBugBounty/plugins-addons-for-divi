@@ -7,6 +7,7 @@
   "titles": "Post Lists",
   "moduleIcon": "divitorque/post-list",
   "category": "module",
+  "folder": "divi-torque-lite",
   "attributes": {
     "module": {
       "type": "object",
