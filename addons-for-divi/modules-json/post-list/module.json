@@ -16,7 +16,7 @@
         "advanced": {
           "postType": { "desktop": { "value": "post" } },
           "orderBy": { "desktop": { "value": "date" } },
-          "order": { "desktop": { "value": "ASC" } },
+          "order": { "desktop": { "value": "DESC" } },
           "postsNumber": { "desktop": { "value": "6" } },
           "excludePosts": { "desktop": { "value": "" } },
           "includeCategories": { "desktop": { "value": "" } },

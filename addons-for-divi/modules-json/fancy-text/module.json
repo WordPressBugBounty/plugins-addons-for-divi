@@ -108,7 +108,7 @@
               "groupSlug": "contentMain",
               "attrName": "module.advanced.rotateStrings",
               "label": "Rotating Words",
-              "description": "One word/phrase per line — they cycle in place.",
+              "description": "One word or phrase per line, or separated by a pipe. They cycle in place.",
               "priority": 25,
               "render": true,
               "features": {

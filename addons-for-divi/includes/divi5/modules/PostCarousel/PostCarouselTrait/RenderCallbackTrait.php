@@ -45,7 +45,11 @@ trait RenderCallbackTrait {
 		$taxonomy        = $get( 'module.advanced.customTaxonomy', '' );
 		$taxonomy_terms  = $get( 'module.advanced.customTaxonomyTerms', '' );
 		$order_by        = $get( 'module.advanced.orderBy', 'date' );
-		$order           = $get( 'module.advanced.order', 'ASC' );
+		// Newest first, matching WP_Query and divi/blog. Must stay in step with
+		// the `order` default in module.json: a saved layout falls back to this
+		// value while a fresh one takes the JSON default, so the two disagreeing
+		// means the same module orders differently depending on its age.
+		$order           = $get( 'module.advanced.order', 'DESC' );
 		$post_count      = (int) ( $get( 'module.advanced.postCount', '6' ) ?: 6 );
 		$offset_number   = (int) $get( 'module.advanced.offsetNumber', '0' );
 		$include_posts   = $get( 'module.advanced.includePosts', '' );

@@ -45,9 +45,16 @@ trait RenderCallbackTrait
         $after   = $val('afterText', '');
 
         // Rotating words.
+        //
+        // Pipes split as well as newlines. The builder control is a textarea, so
+        // a person typing into it produces newlines — but layout packs, child
+        // themes and imports write the attribute directly and reach for a pipe.
+        // Splitting on newlines alone turned "a|b|c" into one long "rotating"
+        // word with no error anywhere, which reads as a broken font rather than
+        // a data problem. Mirrored in fancyStrings() in wrapper-class.js.
         $strings = array_values(array_filter(array_map(
             'trim',
-            preg_split('/\r\n|\r|\n/', (string) $val('rotateStrings', ''))
+            preg_split('/\r\n|\r|\n|\|/', (string) $val('rotateStrings', ''))
         ), function ($s) {
             return '' !== $s;
         }));

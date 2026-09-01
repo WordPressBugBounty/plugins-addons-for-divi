@@ -643,8 +643,8 @@
               "groupSlug": "designContent",
               "attrName": "module.advanced.contentBgColor",
               "label": "Content Background",
-              "description": "Pick a background color for the content area.",
-              "priority": 30,
+              "description": "Background color for the content area. This paints on top of the module Background, so set it to transparent if you want the module Background to show through.",
+              "priority": 5,
               "render": true,
               "features": {
                 "sticky": false,

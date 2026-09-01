@@ -19,7 +19,7 @@
           "postType": { "desktop": { "value": "post" } },
           "includeCategories": { "desktop": { "value": "" } },
           "orderBy": { "desktop": { "value": "date" } },
-          "order": { "desktop": { "value": "ASC" } },
+          "order": { "desktop": { "value": "DESC" } },
           "newsCount": { "desktop": { "value": "5" } },
           "excludePosts": { "desktop": { "value": "" } },
           "postOffset": { "desktop": { "value": "0" } },

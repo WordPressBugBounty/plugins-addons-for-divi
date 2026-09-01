@@ -24,7 +24,7 @@
           },
           "order": {
             "desktop": {
-              "value": "ASC"
+              "value": "DESC"
             }
           },
           "postCount": {

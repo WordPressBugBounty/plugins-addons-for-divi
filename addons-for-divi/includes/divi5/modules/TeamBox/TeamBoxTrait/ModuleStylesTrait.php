@@ -208,6 +208,19 @@ trait ModuleStylesTrait
         $push($order_class . ' .dtq-team-social .dtq-icon:hover svg', sprintf('fill: %1$s!important;', $link_color_hover));
 
         // Content background.
+        //
+        // Emitted unconditionally, and the white default is deliberate.
+        // `.dtq-team-content` sits inside the module wrapper, so this paints
+        // over the standard Divi Background: an author who sets only that one
+        // sees no change at all, which is what a 2026-08-25 support ticket
+        // reported.
+        //
+        // The tempting fix is to emit this only when the author picked a
+        // colour. Do not. #ffffff is also the D4 default
+        // (includes/modules/divi-4/TeamBox/TeamBox.php, custom_background_fields),
+        // so making it conditional would repaint every migrated and D5-native
+        // team box already in the wild. The field description in module.json
+        // carries the explanation instead.
         $content_bg       = $val('contentBgColor', '#ffffff');
         $content_bg_hover = $hover('contentBgColor', $content_bg);
         $push($order_class . ' .dtq-team-content', sprintf('background-color: %1$s;', $content_bg));

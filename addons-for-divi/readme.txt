@@ -1,24 +1,28 @@
 === Divi Torque Lite ===
 Contributors: divipeople, plugpressco, badhonrocks
-Tags: divi, divi builder, divi modules, page builder, divi theme
+Tags: divi, divi 5, divi modules, divi builder, divi carousel
 Requires at least: 7.0
 Tested up to: 7.0
 Requires PHP: 7.4
-Stable tag: 4.10.0
+Stable tag: 4.11.0
 License: GPLv3
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 
-41 free Divi modules built natively for Divi 5, including Accordion, Tabs, Tooltip, Image Accordion, Sticky Video, Modal Popup, and more.
+41 free Divi 5 modules: Image Carousel, Logo Carousel, Accordion, Tabs, Modal Popup, Tooltip, and more. Built natively for the Divi 5 Builder.
 
 == Description ==
 
-Divi Torque Lite is a free addon for the Divi Builder that adds **41 modules, every one built natively for Divi 5** — no shortcode wrappers, no legacy compatibility layer. Each module does one job well, is fully responsive, and feels like a built-in part of Divi. It works with the Divi Theme or the Divi Builder plugin, and your existing Divi 4 layouts convert automatically. It is the free foundation of Divi Torque, the professional infrastructure for Divi. Build with native modules and ship accessible, fast-loading sites.
+Divi Torque Lite is a free Divi 5 addon that adds **41 Divi modules, every one built natively for Divi 5** — no shortcode wrappers, no legacy compatibility layer. You get four Divi carousel modules (Image Carousel, Logo Carousel, Post Carousel, and X Carousel), plus accordions, tabs, popups, tooltips, and more. Each module does one job well, is fully responsive, and feels like a built-in part of Divi. It works with the Divi Theme or the Divi Builder plugin, and your existing Divi 4 layouts convert automatically. It is the free foundation of Divi Torque, the professional infrastructure for Divi. Build with native Divi 5 modules and ship accessible, fast-loading sites.
 
 **[View Demos](https://divitorque.com/features/?utm_campaign=lite-readme&utm_source=wp.org&utm_medium=textlink-features) · [Get Pro](https://divitorque.com/pricing/?utm_campaign=lite-readme&utm_source=wp.org&utm_medium=textlink-pro) · [Documentation](https://divitorque.com/docs/?utm_campaign=lite-readme&utm_source=wp.org&utm_medium=textlink-docs)**
 
 = Built natively for Divi 5 =
 
 Divi Torque Lite modules are true Divi 5 modules — rebuilt on the Divi 5 framework for fast live editing and clean front-end output, not loaded through a Divi 4 compatibility layer. 26 modules work in both Divi 4 and Divi 5. The 15 newest are built exclusively for Divi 5, including Tooltip, Image Accordion, Sticky Video, Code Snippet, Creative Button, Modal Popup, and Table of Contents. When you move a site from Divi 4 to Divi 5, your saved layouts migrate automatically and keep their styling.
+
+= Divi 5 Carousel Modules =
+
+Four carousel modules ship free, all running natively in Divi 5: **Image Carousel** for responsive image sliders, **Logo Carousel** for client and partner logos, **Post Carousel** with six ready-made card presets, and **X (Twitter) Carousel** for social proof. Autoplay, loop, navigation arrows, pagination dots, and per-breakpoint slide counts are built into each one. The slider library loads only on pages that actually use a carousel, so the rest of your site stays fast.
 
 = Why Divi Torque Lite? =
 
@@ -28,7 +32,7 @@ Divi Torque Lite modules are true Divi 5 modules — rebuilt on the Divi 5 frame
 * **Module Manager** — Enable only the modules you use and disable the rest to keep your site lean.
 * **Expert support** — A responsive support team ready to help via the forum, live chat, or contact form.
 
-= 41 Free Divi Modules =
+= 41 Free Divi 5 Modules =
 
 Click any module name to see a live demo.
 
@@ -97,7 +101,7 @@ Every saved Divi Library layout gets its own shortcode — `[divi_library_shortc
 
 = Go Further with Divi Torque Pro =
 
-Divi Torque Pro grows the library to 70+ modules and extensions across Free and Pro, adding advanced modules like:
+Divi Torque Pro grows the library to 98 modules and 6 extensions across Free and Pro, adding advanced modules like:
 
 * [Post Grid](https://divitorque.com/features/post-grid/) — Dynamic blog and portfolio grid layouts.
 * [Filterable Gallery](https://divitorque.com/features/filterable-gallery/) & [Masonry Gallery](https://divitorque.com/features/masonry-gallery/) — Stunning, filterable image grids.
@@ -141,6 +145,10 @@ Yes. Divi Torque Lite extends Divi, so it requires the Divi Theme or the Divi Bu
 
 Yes. All 41 modules run natively in Divi 5. They are built on the Divi 5 framework, not loaded through a Divi 4 compatibility layer. Existing Divi 4 layouts convert automatically, and 26 of the modules keep working in Divi 4 as well.
 
+= Does it include a Divi carousel module? =
+
+Yes, four of them. Image Carousel, Logo Carousel, Post Carousel, and X (Twitter) Carousel all ship free and run natively in Divi 5, with autoplay, loop, arrows, dots, and per-breakpoint slide counts. The slider library loads only on pages that use a carousel.
+
 = Will these modules slow down my site? =
 
 No. Scripts and styles load only on pages that actually use a module — the carousel and counter libraries, for example, are enqueued on demand. You can also use the built-in Module Manager to disable any modules you don't use.
@@ -160,6 +168,11 @@ No. Updates are backward compatible and won't break pages built with our modules
 3. Image Carousel module
 
 == Changelog ==
+
+= Version 4.11.0 =
+* Fix: Post Carousel, Post List and News Ticker showed the oldest posts first. All three now default to newest first, matching WordPress and the Divi Blog module. An existing layout that never set the order explicitly will start showing newest first; the Order setting is still there if you want chronological order back.
+* Fix: Fancy Text rotated nothing when the rotating strings were separated by pipes instead of line breaks. It rendered the whole string as a single item, which looked like a broken web font rather than a settings problem. Pipes and line breaks both work now.
+* Improved: Team Box — the Content Background field now explains that it paints on top of the module Background, so setting only the module Background appears to do nothing. Set Content Background to transparent to let the module Background show through.
 
 = Version 4.10.0 =
 * Fix: FontAwesome icons rendered as empty boxes in every Divi 5 module, on the front end and in the Visual Builder. Divi 5 never loads the FontAwesome font for a third-party module, so Divi Torque now declares it itself.
@@ -349,6 +362,9 @@ No. Updates are backward compatible and won't break pages built with our modules
 * Public beta release
 
 == Upgrade Notice ==
+
+= 4.11.0 =
+Post Carousel, Post List and News Ticker now show newest posts first instead of oldest. Fancy Text accepts pipe-separated rotating strings. Team Box Content Background is now explained in the builder.
 
 = 4.10.0 =
 Icon fixes across Divi 5 modules: FontAwesome icons now render everywhere, plus fixes for Icon Box, Post List, Dual Button, Image Carousel, and Contact Form 7. Carousel settings now migrate fully from Divi 4 to Divi 5.

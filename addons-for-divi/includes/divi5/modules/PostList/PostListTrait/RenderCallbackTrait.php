@@ -105,7 +105,9 @@ trait RenderCallbackTrait
         $post_type      = self::get_attr($attrs, 'module.advanced.postType', 'post');
         $categories     = self::get_attr($attrs, 'module.advanced.includeCategories', '');
         $order_by       = self::get_attr($attrs, 'module.advanced.orderBy', 'date');
-        $order          = self::get_attr($attrs, 'module.advanced.order', 'ASC');
+        // Newest first, matching WP_Query and divi/blog. Keep in step with the
+        // `order` default in module.json — see the note in PostCarousel.
+        $order          = self::get_attr($attrs, 'module.advanced.order', 'DESC');
         $posts_number   = (int) self::get_attr($attrs, 'module.advanced.postsNumber', '6');
         $offset         = (int) self::get_attr($attrs, 'module.advanced.postOffset', '0');
         $exclude        = self::get_attr($attrs, 'module.advanced.excludePosts', '');
