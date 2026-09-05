@@ -12,6 +12,7 @@ if (!defined('ABSPATH')) {
     exit;
 }
 
+use DiviTorqueLite\Modules\Shared\DynamicValue;
 use ET\Builder\Packages\Module\Module;
 use ET\Builder\Packages\Module\Layout\Components\ModuleElements\ModuleElements;
 use WP_Block;
@@ -64,7 +65,11 @@ trait RenderCallbackTrait
         $is_empty = true;
 
         foreach ($links as $item) {
-            $value = $advanced[$item['type']]['desktop']['value'] ?? '';
+            // Nine social URLs, all dynamic-content capable, read by a loop
+            // variable -- a name-based sweep cannot see them. Resolving here
+            // also repairs the empty() gate below: an unresolved structure is
+            // a non-empty array, so a blank dynamic value used to render.
+            $value = DynamicValue::resolve($advanced[$item['type']]['desktop']['value'] ?? '');
 
             if (empty($value)) {
                 continue;
@@ -240,7 +245,14 @@ trait RenderCallbackTrait
                 'scriptDataComponent' => [self::class, 'module_script_data'],
                 'orderIndex'          => $block->parsed_block['orderIndex'] ?? 0,
                 'storeInstance'       => $block->parsed_block['storeInstance'] ?? null,
-                'children'            => $children,
+                'children'            => [
+                    // Background pattern/mask and the box-shadow overlay are DOM,
+                    // not CSS. Without this call Divi renders them in the builder
+                    // and nowhere else, so the options silently do nothing on the
+                    // front end.
+                    $elements->style_components(['attrName' => 'module']),
+                    $children,
+                ],
             ]
         );
     }

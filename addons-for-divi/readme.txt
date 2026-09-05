@@ -4,7 +4,7 @@ Tags: divi, divi 5, divi modules, divi builder, divi carousel
 Requires at least: 7.0
 Tested up to: 7.0
 Requires PHP: 7.4
-Stable tag: 4.11.0
+Stable tag: 4.11.1
 License: GPLv3
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 
@@ -168,6 +168,14 @@ No. Updates are backward compatible and won't break pages built with our modules
 3. Image Carousel module
 
 == Changelog ==
+
+= Version 4.11.1 =
+* Fix: A dynamic content value inside a Divi 5 module could take the whole page down with a fatal error. Dynamic values now resolve correctly on the front end.
+* Fix: Background Pattern and Background Mask showed in the Visual Builder but never printed on the front end on 15 modules.
+* Fix: Three Divi 4 settings were dropped when a layout migrated to Divi 5, and nine modules lost the Advanced tab Custom CSS box on migration. All of them carry across now.
+* Fix: Accessibility. Animations respect the reduced motion preference, tab panels can be reached by keyboard, collapsed accordion panels leave the tab order, and the modal dialog announces its name and traps focus in the right dialog.
+* Fix: A style rule in the legacy dashboard was missing a dash.
+* Improved: The dashboard is rebuilt on the latest shared design system.
 
 = Version 4.11.0 =
 * Fix: Post Carousel, Post List and News Ticker showed the oldest posts first. All three now default to newest first, matching WordPress and the Divi Blog module. An existing layout that never set the order explicitly will start showing newest first; the Order setting is still there if you want chronological order back.
@@ -362,6 +370,9 @@ No. Updates are backward compatible and won't break pages built with our modules
 * Public beta release
 
 == Upgrade Notice ==
+
+= 4.11.1 =
+Fixes a fatal error from dynamic content in Divi 5 modules, restores Background Pattern and Mask on the front end for 15 modules, carries more settings across Divi 4 to Divi 5 migration, and improves keyboard and reduced motion accessibility.
 
 = 4.11.0 =
 Post Carousel, Post List and News Ticker now show newest posts first instead of oldest. Fancy Text accepts pipe-separated rotating strings. Team Box Content Background is now explained in the builder.

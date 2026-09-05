@@ -12,6 +12,7 @@ if (!defined('ABSPATH')) {
     exit;
 }
 
+use DiviTorqueLite\Modules\Shared\DynamicValue;
 use ET\Builder\Packages\Module\Module;
 use ET\Builder\Packages\Module\Layout\Components\ModuleElements\ModuleElements;
 use WP_Block;
@@ -79,8 +80,8 @@ trait RenderCallbackTrait
         $icon_placement    = $advanced['iconPlacement']['desktop']['value'] ?? 'background';
         $use_custom_icon   = $advanced['useCustomIcon']['desktop']['value'] ?? 'off';
         $selected_icon     = $advanced['selectedIcon']['desktop']['value'] ?? '5';
-        $website_url       = $advanced['websiteUrl']['desktop']['value'] ?? '';
-        $company_url       = $advanced['companyUrl']['desktop']['value'] ?? '';
+        $website_url       = DynamicValue::resolve($advanced['websiteUrl']['desktop']['value'] ?? '');
+        $company_url       = DynamicValue::resolve($advanced['companyUrl']['desktop']['value'] ?? '');
         $link_target       = ('on' === ($advanced['linkNewWindow']['desktop']['value'] ?? 'off')) ? '_blank' : '_self';
 
         // The D5 upload field stores the image as an object (`{ src, ... }`);
@@ -201,7 +202,14 @@ trait RenderCallbackTrait
                 'scriptDataComponent' => [self::class, 'module_script_data'],
                 'orderIndex'          => $block->parsed_block['orderIndex'] ?? 0,
                 'storeInstance'       => $block->parsed_block['storeInstance'] ?? null,
-                'children'            => $children,
+                'children'            => [
+                    // Background pattern/mask and the box-shadow overlay are DOM,
+                    // not CSS. Without this call Divi renders them in the builder
+                    // and nowhere else, so the options silently do nothing on the
+                    // front end.
+                    $elements->style_components(['attrName' => 'module']),
+                    $children,
+                ],
             ]
         );
     }

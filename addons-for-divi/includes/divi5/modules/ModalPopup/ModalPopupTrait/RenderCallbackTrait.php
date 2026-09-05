@@ -12,6 +12,7 @@ if (!defined('ABSPATH')) {
     exit;
 }
 
+use DiviTorqueLite\Modules\Shared\DynamicValue;
 use ET\Builder\Packages\Module\Module;
 
 trait RenderCallbackTrait
@@ -72,10 +73,19 @@ trait RenderCallbackTrait
         // initModals' delegated click). Avoids the Divi button element's <a href>.
         $trigger_label = $attrs['triggerText']['innerContent']['desktop']['value'] ?? 'Open Popup';
         $trigger_html  = sprintf(
-            '<button type="button" class="dtq-modalpopup__trigger">%1$s</button>',
+            '<button type="button" class="dtq-modalpopup__trigger" aria-haspopup="dialog" aria-expanded="false">%1$s</button>',
             esc_html($trigger_label)
         );
         $title_html   = $elements->render(['attrName' => 'title', 'tagName' => 'h3']);
+
+        // A role="dialog" with no accessible name is announced as just "dialog".
+        // The title goes through $elements->render(), so it carries no id for
+        // aria-labelledby to point at -- name the dialog with the title TEXT
+        // instead, which is what Pro's Popup Maker does. Fall back to the
+        // trigger label so the dialog is named even with no title set.
+        $title_text   = DynamicValue::resolve($attrs['title']['innerContent']['desktop']['value'] ?? '');
+        $title_text   = is_string($title_text) ? trim(wp_strip_all_tags($title_text)) : '';
+        $dialog_label = '' !== $title_text ? $title_text : $trigger_label;
 
         if ('layout' === $content_type) {
             $layout_id    = (int) ($advanced['layoutId']['desktop']['value'] ?? 0);
@@ -92,10 +102,11 @@ trait RenderCallbackTrait
             : '';
 
         $box_html = sprintf(
-            '<div class="dtq-modalpopup__box" role="dialog" aria-modal="true">%1$s%2$s%3$s</div>',
+            '<div class="dtq-modalpopup__box" role="dialog" aria-modal="true" aria-label="%4$s">%1$s%2$s%3$s</div>',
             $close_html,
             $title_html,
-            $content_html
+            $content_html,
+            esc_attr($dialog_label)
         );
 
         $overlay_html = sprintf(

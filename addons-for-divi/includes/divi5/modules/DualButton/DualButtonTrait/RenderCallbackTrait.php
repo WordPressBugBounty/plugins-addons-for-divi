@@ -12,6 +12,7 @@ if (!defined('ABSPATH')) {
     exit;
 }
 
+use DiviTorqueLite\Modules\Shared\DynamicValue;
 use ET\Builder\Packages\Module\Module;
 
 trait RenderCallbackTrait
@@ -216,12 +217,12 @@ trait RenderCallbackTrait
     {
         $advanced = $attrs['module']['advanced'] ?? [];
 
-        $btn_a_text   = $advanced['btnAText']['desktop']['value'] ?? 'Button 1';
-        $btn_a_link   = $advanced['btnALink']['desktop']['value'] ?? '#';
+        $btn_a_text   = DynamicValue::resolve($advanced['btnAText']['desktop']['value'] ?? 'Button 1');
+        $btn_a_link   = DynamicValue::resolve($advanced['btnALink']['desktop']['value'] ?? '#');
         $btn_a_target = $advanced['btnALinkTarget']['desktop']['value'] ?? '_self';
 
-        $btn_b_text   = $advanced['btnBText']['desktop']['value'] ?? 'Button 2';
-        $btn_b_link   = $advanced['btnBLink']['desktop']['value'] ?? '#';
+        $btn_b_text   = DynamicValue::resolve($advanced['btnBText']['desktop']['value'] ?? 'Button 2');
+        $btn_b_link   = DynamicValue::resolve($advanced['btnBLink']['desktop']['value'] ?? '#');
         $btn_b_target = $advanced['btnBLinkTarget']['desktop']['value'] ?? '_self';
 
         // Gap and alignment CSS is emitted inline because Style::add() only processes
@@ -259,7 +260,14 @@ trait RenderCallbackTrait
                 'scriptDataComponent' => [self::class, 'module_script_data'],
                 'orderIndex'          => $block->parsed_block['orderIndex'] ?? 0,
                 'storeInstance'       => $block->parsed_block['storeInstance'] ?? null,
-                'children'            => $children,
+                'children'            => [
+                    // Background pattern/mask and the box-shadow overlay are DOM,
+                    // not CSS. Without this call Divi renders them in the builder
+                    // and nowhere else, so the options silently do nothing on the
+                    // front end.
+                    $elements->style_components(['attrName' => 'module']),
+                    $children,
+                ],
             ]
         );
     }

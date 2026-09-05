@@ -12,6 +12,7 @@ if (!defined('ABSPATH')) {
     exit;
 }
 
+use DiviTorqueLite\Modules\Shared\DynamicValue;
 use ET\Builder\Packages\Module\Module;
 use ET\Builder\Packages\Module\Layout\Components\ModuleElements\ModuleElements;
 use WP_Block;
@@ -61,7 +62,7 @@ trait RenderCallbackTrait
             return '';
         }
 
-        $image     = $advanced['image']['desktop']['value'] ?? '';
+        $image     = DynamicValue::resolve($advanced['image']['desktop']['value'] ?? '');
         $image_alt = $advanced['imageAlt']['desktop']['value'] ?? '';
 
         if ($image) {
@@ -147,7 +148,14 @@ trait RenderCallbackTrait
                 'scriptDataComponent' => [self::class, 'module_script_data'],
                 'orderIndex'          => $block->parsed_block['orderIndex'] ?? 0,
                 'storeInstance'       => $block->parsed_block['storeInstance'] ?? null,
-                'children'            => $children,
+                'children'            => [
+                    // Background pattern/mask and the box-shadow overlay are DOM,
+                    // not CSS. Without this call Divi renders them in the builder
+                    // and nowhere else, so the options silently do nothing on the
+                    // front end.
+                    $elements->style_components(['attrName' => 'module']),
+                    $children,
+                ],
             ]
         );
     }

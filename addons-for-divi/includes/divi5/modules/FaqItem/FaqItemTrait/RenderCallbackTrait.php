@@ -52,16 +52,22 @@ trait RenderCallbackTrait
         $open_by_default = ($attrs['module']['advanced']['openByDefault']['desktop']['value'] ?? 'off') === 'on';
         $is_open         = $open_by_default || $keep_open;
 
+        // An unnamed role="region" is announced as bare "region" and still
+        // counts as a landmark -- one per question. Name it after the question.
+        $header_id = $panel_id . '-header';
+
         $header_html = sprintf(
-            '<div class="dtq-accordion__title" role="button" tabindex="0" aria-expanded="%2$s" aria-controls="%3$s"><div class="dtq-accordion__heading">%1$s</div></div>',
+            '<div class="dtq-accordion__title" id="%4$s" role="button" tabindex="0" aria-expanded="%2$s" aria-controls="%3$s"><div class="dtq-accordion__heading">%1$s</div></div>',
             $question,
             $is_open ? 'true' : 'false',
-            esc_attr($panel_id)
+            esc_attr($panel_id),
+            esc_attr($header_id)
         );
         $content_html = sprintf(
-            '<div class="dtq-accordion__content" id="%2$s" role="region">%1$s</div>',
+            '<div class="dtq-accordion__content" id="%2$s" role="region" aria-labelledby="%3$s">%1$s</div>',
             $answer,
-            esc_attr($panel_id)
+            esc_attr($panel_id),
+            esc_attr($header_id)
         );
 
         return Module::render(

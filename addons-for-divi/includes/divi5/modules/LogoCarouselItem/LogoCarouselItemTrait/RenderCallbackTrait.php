@@ -12,6 +12,7 @@ if (!defined('ABSPATH')) {
     exit;
 }
 
+use DiviTorqueLite\Modules\Shared\DynamicValue;
 use ET\Builder\Packages\Module\Module;
 
 trait RenderCallbackTrait
@@ -94,7 +95,7 @@ trait RenderCallbackTrait
             $legacy        = explode('|', (string) ($advanced['linkOptions']['desktop']['value'] ?? ''));
             $legacy_target = ($legacy[0] ?? 'off') === 'on';
             $legacy_nf     = ($legacy[1] ?? 'off') === 'on';
-            $url           = $advanced['linkUrl']['desktop']['value'] ?? '';
+            $url           = DynamicValue::resolve($advanced['linkUrl']['desktop']['value'] ?? '');
             $target        = (($advanced['linkTarget']['desktop']['value'] ?? 'off') === 'on' || $legacy_target) ? ' target="_blank"' : '';
             $nofollow      = (($advanced['linkNofollow']['desktop']['value'] ?? 'off') === 'on' || $legacy_nf) ? ' rel="nofollow"' : '';
             $logo     = sprintf('<a href="%1$s"%2$s%3$s>%4$s</a>', esc_url($url ?: '#'), $target, $nofollow, $img);

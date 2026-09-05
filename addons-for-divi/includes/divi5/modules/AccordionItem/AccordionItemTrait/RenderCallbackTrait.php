@@ -139,13 +139,19 @@ trait RenderCallbackTrait
         $open_by_default = ($attrs['module']['advanced']['openByDefault']['desktop']['value'] ?? 'off') === 'on';
         $is_open         = $open_by_default || $keep_open;
 
+        // The panel below is a role="region", and an unnamed region is announced
+        // as bare "region" while still counting as a landmark -- one per item.
+        // Name it after the title that controls it.
+        $header_id = $panel_id . '-header';
+
         $header_html = sprintf(
-            '<div class="dtq-accordion__title" role="button" tabindex="0" aria-expanded="%4$s" aria-controls="%5$s">%1$s<div class="dtq-accordion__heading">%2$s%3$s</div></div>',
+            '<div class="dtq-accordion__title" id="%6$s" role="button" tabindex="0" aria-expanded="%4$s" aria-controls="%5$s">%1$s<div class="dtq-accordion__heading">%2$s%3$s</div></div>',
             $media_html,
             $title_el,
             $subtitle_html,
             $is_open ? 'true' : 'false',
-            esc_attr($panel_id)
+            esc_attr($panel_id),
+            esc_attr($header_id)
         );
 
         // Optional read-more button (rendered only when it has text).
@@ -164,11 +170,12 @@ trait RenderCallbackTrait
             esc_html__('Close', 'addons-for-divi')
         );
         $content_html = sprintf(
-            '<div class="dtq-accordion__content" id="%4$s" role="region">%1$s%2$s%3$s</div>',
+            '<div class="dtq-accordion__content" id="%4$s" role="region" aria-labelledby="%5$s">%1$s%2$s%3$s</div>',
             $elements->render(['attrName' => 'content']),
             $readmore_html,
             $close_html,
-            esc_attr($panel_id)
+            esc_attr($panel_id),
+            esc_attr($header_id)
         );
 
         return Module::render(

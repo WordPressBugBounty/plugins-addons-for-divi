@@ -12,6 +12,7 @@ if (!defined('ABSPATH')) {
     exit;
 }
 
+use DiviTorqueLite\Modules\Shared\DynamicValue;
 use ET\Builder\Packages\Module\Module;
 use ET\Builder\Packages\Module\Layout\Components\ModuleElements\ModuleElements;
 use WP_Block;
@@ -32,7 +33,7 @@ trait RenderCallbackTrait
         $show_icon  = ($advanced['showIcon']['desktop']['value'] ?? 'off') === 'on';
         $use_image  = ($advanced['useImage']['desktop']['value'] ?? 'off') === 'on';
         $icon_value = $advanced['icon']['desktop']['value'] ?? '';
-        $icon_image = $advanced['iconImage']['desktop']['value'] ?? '';
+        $icon_image = DynamicValue::resolve($advanced['iconImage']['desktop']['value'] ?? '');
 
         if (!$show_icon) {
             return '';

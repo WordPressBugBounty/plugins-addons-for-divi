@@ -12,6 +12,7 @@ if (!defined('ABSPATH')) {
     exit;
 }
 
+use DiviTorqueLite\Modules\Shared\DynamicValue;
 use ET\Builder\Packages\Module\Module;
 
 trait RenderCallbackTrait
@@ -117,8 +118,8 @@ trait RenderCallbackTrait
         // Button.
         $button = '';
         if ('on' === $use_button) {
-            $button_text   = $advanced['buttonText']['desktop']['value'] ?? 'Click Here';
-            $button_link   = $advanced['buttonLink']['desktop']['value'] ?? '';
+            $button_text   = DynamicValue::resolve($advanced['buttonText']['desktop']['value'] ?? 'Click Here');
+            $button_link   = DynamicValue::resolve($advanced['buttonLink']['desktop']['value'] ?? '');
             $button_target = ($advanced['buttonTarget']['desktop']['value'] ?? 'off') === 'on' ? ' target="_blank"' : '';
             $button_icon   = $advanced['buttonIcon']['desktop']['value'] ?? '';
             $button_glyph  = self::render_icon($button_icon, 'dtq-btn-icon');

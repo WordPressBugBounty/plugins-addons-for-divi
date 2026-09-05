@@ -35,6 +35,7 @@
   "css": {
     "before": "css.*.before",
     "after": "css.*.after",
+    "free_form": "css.*.freeForm",
     "main_element": "css.*.mainElement",
     "tweet_item": "css.*.tweetItem",
     "avatar": "css.*.avatar",

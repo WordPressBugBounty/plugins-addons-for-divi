@@ -1,5 +1,5 @@
 {
-	"generated_from": "dt-website inc/icons.php @ d9df3e4",
+	"generated_from": "dt-website inc/icons.php @ 4598311",
 	"generator": "scripts/sync-module-catalog.mjs — do not edit by hand",
 	"categories": {
 		"content": {
@@ -1707,6 +1707,38 @@
 			],
 			"demo_url": null,
 			"docs_url": "https://divitorque.com/docs/site-launch-audit/"
+		},
+		"accessibility-inspector": {
+			"label": "Accessibility Inspector",
+			"desc": "Flags structural accessibility problems in your pages: autoplay carousels with no pause, missing alt text, skipped headings and unlabelled controls.",
+			"desc_short": "Structural accessibility checks.",
+			"cat": "utility",
+			"pro": true,
+			"flagship": false,
+			"glyph": "<circle cx=\"16\" cy=\"4\" r=\"1\"/><path d=\"m18 19 1-7-6 1\"/><path d=\"m5 8 3-3 5.5 3-2.36 3.5\"/><path d=\"M4.24 14.5a5 5 0 0 0 6.88 6\"/><path d=\"M13.76 17.5a5 5 0 0 0-6.88-6\"/>",
+			"grad": [
+				"#2FC684",
+				"#2FAFC6",
+				"#DAF6E7"
+			],
+			"demo_url": null,
+			"docs_url": "https://divitorque.com/docs/accessibility-inspector/"
+		},
+		"performance-inspector": {
+			"label": "Performance Inspector",
+			"desc": "Measures the real asset weight of each page and flags unused modules, oversized bundles and stale feed caches.",
+			"desc_short": "Real asset weight, per page.",
+			"cat": "utility",
+			"pro": true,
+			"flagship": false,
+			"glyph": "<path d=\"m12 14 4-4\"/><path d=\"M3.34 19a10 10 0 1 1 17.32 0\"/>",
+			"grad": [
+				"#FF8A5B",
+				"#FF5FA2",
+				"#FFD9C2"
+			],
+			"demo_url": null,
+			"docs_url": "https://divitorque.com/docs/performance-inspector/"
 		},
 		"sharing-buttons": {
 			"label": "Sharing Buttons",

@@ -28,6 +28,7 @@
   "css": {
     "after": "css.*.after",
     "before": "css.*.before",
+    "free_form": "css.*.freeForm",
     "main_element": "css.*.mainElement",
     "nav_prev": "css.*.navPrev",
     "nav_next": "css.*.navNext",

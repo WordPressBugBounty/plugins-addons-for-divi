@@ -181,9 +181,11 @@
           "border": {},
           "boxShadow": {},
           "filters": {},
+          "sizing": {},
           "spacing": {},
           "transform": {},
           "transition": {},
+          "zIndex": {},
           "disabledOn": {}
         }
       }

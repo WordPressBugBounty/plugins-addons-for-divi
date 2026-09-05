@@ -12,6 +12,7 @@ if (!defined('ABSPATH')) {
     exit;
 }
 
+use DiviTorqueLite\Modules\Shared\DynamicValue;
 use ET\Builder\Packages\Module\Module;
 use ET\Builder\Packages\Module\Layout\Components\ModuleElements\ModuleElements;
 use WP_Block;
@@ -30,7 +31,7 @@ trait RenderCallbackTrait
     {
         $use_image  = ($advanced['useImage']['desktop']['value'] ?? 'off') === 'on';
         $icon_value = $advanced['icon']['desktop']['value'] ?? '';
-        $icon_image = $advanced['iconImage']['desktop']['value'] ?? '';
+        $icon_image = DynamicValue::resolve($advanced['iconImage']['desktop']['value'] ?? '');
         $image_alt  = $advanced['imageAlt']['desktop']['value'] ?? '';
 
         $inner = '';
@@ -84,7 +85,7 @@ trait RenderCallbackTrait
      */
     public static function render_badge($advanced)
     {
-        $badge_text = $advanced['badgeText']['desktop']['value'] ?? '';
+        $badge_text = DynamicValue::resolve($advanced['badgeText']['desktop']['value'] ?? '');
 
         if (empty($badge_text)) {
             return '';
@@ -145,7 +146,14 @@ trait RenderCallbackTrait
                 'scriptDataComponent' => [self::class, 'module_script_data'],
                 'orderIndex'          => $block->parsed_block['orderIndex'] ?? 0,
                 'storeInstance'       => $block->parsed_block['storeInstance'] ?? null,
-                'children'            => $children,
+                'children'            => [
+                    // Background pattern/mask and the box-shadow overlay are DOM,
+                    // not CSS. Without this call Divi renders them in the builder
+                    // and nowhere else, so the options silently do nothing on the
+                    // front end.
+                    $elements->style_components(['attrName' => 'module']),
+                    $children,
+                ],
             ]
         );
     }

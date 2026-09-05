@@ -12,6 +12,7 @@ if (!defined('ABSPATH')) {
     exit;
 }
 
+use DiviTorqueLite\Modules\Shared\DynamicValue;
 use ET\Builder\Packages\Module\Module;
 
 trait RenderCallbackTrait
@@ -38,7 +39,7 @@ trait RenderCallbackTrait
         $advanced = $attrs['module']['advanced'] ?? [];
 
         $use_tooltip       = ($advanced['useTooltip']['desktop']['value'] ?? 'off') === 'on';
-        $tooltip_text      = $advanced['tooltipText']['desktop']['value'] ?? 'Tooltip!';
+        $tooltip_text      = DynamicValue::resolve($advanced['tooltipText']['desktop']['value'] ?? 'Tooltip!');
         $tooltip_position  = $advanced['tooltipPosition']['desktop']['value'] ?? 'top';
         $tooltip_animation = $advanced['tooltipAnimation']['desktop']['value'] ?? 'scale';
         $tooltip_theme     = $advanced['tooltipTheme']['desktop']['value'] ?? 'dark';

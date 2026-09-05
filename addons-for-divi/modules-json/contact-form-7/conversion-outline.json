@@ -36,6 +36,7 @@
   "css": {
     "before": "css.*.before",
     "after": "css.*.after",
+    "free_form": "css.*.freeForm",
     "main_element": "css.*.mainElement",
     "form_id": "css.*.formField",
     "cf7_labels": "css.*.label",

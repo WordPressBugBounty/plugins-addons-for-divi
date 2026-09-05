@@ -155,6 +155,7 @@
       "selector": "{{selector}} .wpcf7-form input[type=submit]",
       "settings": {
         "decoration": {
+          "button": { "groupType": "group-item", "item": { "groupSlug": "submitButton", "attrName": "submitButton.decoration.button", "priority": 5, "render": true, "component": { "name": "divi/button", "type": "group" } } },
           "font": { "groupType": "group-item", "item": { "groupSlug": "submitButton", "priority": 10, "render": true, "component": { "name": "divi/font", "type": "group", "props": { "grouped": false, "fieldLabel": "Button" } } } },
           "border": { "groupType": "group-item", "item": { "groupSlug": "submitButton", "priority": 20, "render": true, "attrName": "submitButton.decoration.border", "component": { "name": "divi/border", "type": "group", "props": { "grouped": false, "fieldLabel": "Button Border" } } } },
           "boxShadow": { "groupType": "group-item", "item": { "groupSlug": "submitButton", "priority": 30, "render": true, "attrName": "submitButton.decoration.boxShadow", "component": { "name": "divi/box-shadow", "type": "group", "props": { "grouped": false, "fieldLabel": "Button Box Shadow" } } } },

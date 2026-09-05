@@ -12,6 +12,7 @@ if (!defined('ABSPATH')) {
     exit;
 }
 
+use DiviTorqueLite\Modules\Shared\DynamicValue;
 use ET\Builder\Packages\Module\Module;
 
 trait RenderCallbackTrait
@@ -121,7 +122,7 @@ trait RenderCallbackTrait
     public static function render_callback($attrs, $content, $block, $elements)
     {
         $use_title  = self::get_attr($attrs, 'module.advanced.useTitle', 'on');
-        $title_text = self::get_attr($attrs, 'module.advanced.titleText', '');
+        $title_text = DynamicValue::resolve(self::get_attr($attrs, 'module.advanced.titleText', ''));
 
         $title_html = '';
         if ('on' === $use_title) {

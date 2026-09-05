@@ -27,6 +27,7 @@
   "css": {
     "after": "css.*.after",
     "before": "css.*.before",
+    "free_form": "css.*.freeForm",
     "main_element": "css.*.mainElement",
     "image": "css.*.image",
     "title": "css.*.title",

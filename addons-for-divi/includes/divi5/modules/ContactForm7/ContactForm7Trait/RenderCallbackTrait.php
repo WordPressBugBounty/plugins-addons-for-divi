@@ -12,6 +12,7 @@ if (!defined('ABSPATH')) {
     exit;
 }
 
+use DiviTorqueLite\Modules\Shared\DynamicValue;
 use ET\Builder\Packages\Module\Module;
 
 trait RenderCallbackTrait
@@ -92,8 +93,8 @@ trait RenderCallbackTrait
         $use_header  = self::get_attr($attrs, 'module.advanced.useFormHeader', 'off');
         $use_icon    = self::get_attr($attrs, 'module.advanced.useIcon', 'off');
         $header_img  = self::get_attr($attrs, 'module.advanced.headerImg', '');
-        $title       = self::get_attr($attrs, 'module.advanced.formHeaderTitle', '');
-        $text        = self::get_attr($attrs, 'module.advanced.formHeaderText', '');
+        $title       = DynamicValue::resolve(self::get_attr($attrs, 'module.advanced.formHeaderTitle', ''));
+        $text        = DynamicValue::resolve(self::get_attr($attrs, 'module.advanced.formHeaderText', ''));
         $cr_styles   = self::get_attr($attrs, 'module.advanced.crCustomStyles', 'off');
         $fullwidth   = self::get_attr($attrs, 'module.advanced.useFormButtonFullwidth', 'off');
         $btn_align   = 'on' === $fullwidth ? 'fullwidth' : self::get_attr($attrs, 'module.advanced.buttonAlignment', 'left');
