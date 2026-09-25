@@ -2,9 +2,9 @@
 Contributors: divipeople, plugpressco, badhonrocks
 Tags: divi, divi 5, divi modules, divi builder, divi carousel
 Requires at least: 7.0
-Tested up to: 7.0
+Tested up to: 7.1
 Requires PHP: 7.4
-Stable tag: 4.11.1
+Stable tag: 4.12.0
 License: GPLv3
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 
@@ -168,6 +168,17 @@ No. Updates are backward compatible and won't break pages built with our modules
 3. Image Carousel module
 
 == Changelog ==
+
+= Version 4.12.0 =
+* New: A short welcome tour after activation shows what Divi Torque Lite adds, where to find the modules in the Visual Builder, how an AI agent can build Divi pages for you, and what Pro includes. You can skip it, and reopen it any time from the dashboard.
+* New: Icon Box can place the icon to the left or right of the title and text in Divi 5.
+* Fix: Image Carousel slides could shrink to zero width on phones when Variable Slide Width had a phone value such as calc(). Slides to Show can no longer be set to 0. If a carousel still looks empty on phones after updating, clear Divi's static CSS cache under Divi > Theme Options > Builder > Advanced.
+* Fix: Divi 4 carousels no longer break when a caching or optimization plugin delays scripts.
+* Fix: The last image in an Image Accordion was taller than the others.
+* Fix: Before and After Slider started twice when Divi Torque Pro was also active, which left a dead handle.
+* Fix: Breadcrumbs now apply the tablet and phone alignment and the link hover color, skip the breadcrumb schema when the trail is empty, and output the schema more safely.
+* Fix: Twitter Feed no longer contacts the X API on every page view when the keys or username are wrong.
+* Fix: Dynamic content in a Gradient Heading, Testimonial, Creative Button label, Animated Text prefix or suffix, or a module image now resolves correctly instead of printing nothing or stopping the page.
 
 = Version 4.11.1 =
 * Fix: A dynamic content value inside a Divi 5 module could take the whole page down with a fatal error. Dynamic values now resolve correctly on the front end.
@@ -370,6 +381,9 @@ No. Updates are backward compatible and won't break pages built with our modules
 * Public beta release
 
 == Upgrade Notice ==
+
+= 4.12.0 =
+Adds a welcome tour and Left/Right icon placement for Icon Box. Fixes Image Carousel on phones, the Image Accordion last image height, a double Before and After Slider with Pro active, Breadcrumbs styling and schema, Twitter Feed API calls on every page view, and dynamic content in several modules.
 
 = 4.11.1 =
 Fixes a fatal error from dynamic content in Divi 5 modules, restores Background Pattern and Mask on the front end for 15 modules, carries more settings across Divi 4 to Divi 5 migration, and improves keyboard and reduced motion accessibility.

@@ -34,7 +34,8 @@ trait RenderCallbackTrait
      */
     public static function render_callback($attrs, $content, $block, $elements)
     {
-        $title_value = $attrs['title']['innerContent']['desktop']['value'] ?? '';
+        // Printed below, so resolve a dynamic-content binding first (#86).
+        $title_value = DynamicValue::resolve($attrs['title']['innerContent']['desktop']['value'] ?? '');
 
         $tag = $attrs['title']['decoration']['font']['font']['desktop']['value']['headingLevel'] ?? '';
         if (empty($tag)) {

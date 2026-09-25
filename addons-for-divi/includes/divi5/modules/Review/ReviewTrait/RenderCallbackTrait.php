@@ -16,6 +16,7 @@ use ET\Builder\Packages\Module\Module;
 use DiviTorqueLite\Modules\Shared\ButtonElement;
 use ET\Builder\Packages\Module\Layout\Components\ModuleElements\ModuleElements;
 use WP_Block;
+use DiviTorqueLite\Modules\Shared\DynamicValue;
 
 trait RenderCallbackTrait
 {
@@ -84,7 +85,8 @@ trait RenderCallbackTrait
 
         // The D5 upload field stores the image as an object (`{ src, ... }`);
         // accept both that and a plain URL string.
-        $image_val = $attrs['image']['innerContent']['desktop']['value'] ?? '';
+        // A dynamic image is a structure with no src until resolved (#86).
+        $image_val = DynamicValue::resolve($attrs['image']['innerContent']['desktop']['value'] ?? '');
         $image_src = is_array($image_val) ? ($image_val['src'] ?? '') : $image_val;
         $image_alt = $attrs['image']['advanced']['alt']['desktop']['value'] ?? '';
 

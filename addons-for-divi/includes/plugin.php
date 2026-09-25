@@ -81,7 +81,7 @@ class PluginLoader
     /**
      * Handles plugin activation tasks
      */
-    public function activation()
+    public function activation($network_wide = false)
     {
         // Deprecated related
         if (get_option('divitorque_version') && version_compare(get_option('divitorque_version'), '3.5.7', '<=')) {
@@ -102,6 +102,12 @@ class PluginLoader
 
         // Set the version
         update_option('divitorque_lite_version', DIVI_TORQUE_LITE_VERSION);
+
+        // Queue the one-time welcome tour redirect. Dashboard::maybe_redirect_to_onboarding()
+        // consumes it and decides (bulk activation, Pro present, tour already done).
+        if (!(defined('WP_CLI') && WP_CLI) && !$network_wide) {
+            set_transient(Dashboard::ONBOARDING_TRANSIENT, 1, MINUTE_IN_SECONDS);
+        }
 
         self::init();
     }

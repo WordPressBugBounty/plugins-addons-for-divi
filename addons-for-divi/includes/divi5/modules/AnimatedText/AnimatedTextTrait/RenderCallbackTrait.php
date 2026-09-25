@@ -14,6 +14,7 @@ if (!defined('ABSPATH')) {
 
 use ET\Builder\Packages\Module\Module;
 use WP_Block;
+use DiviTorqueLite\Modules\Shared\DynamicValue;
 
 trait RenderCallbackTrait
 {
@@ -184,7 +185,7 @@ trait RenderCallbackTrait
         if ('' !== $prefix) {
             $prefix_html = sprintf(
                 '<div class="dtq-animated-text-prefix"><span>%1$s</span>%2$s</div>',
-                esc_html($prefix),
+                esc_html(DynamicValue::resolve($prefix)),
                 $nbsp
             );
         }
@@ -192,7 +193,7 @@ trait RenderCallbackTrait
         if ('' !== $suffix) {
             $suffix_html = sprintf(
                 '<div class="dtq-animated-text-suffix">%2$s<span>%1$s</span></div>',
-                esc_html($suffix),
+                esc_html(DynamicValue::resolve($suffix)),
                 $nbsp
             );
         }

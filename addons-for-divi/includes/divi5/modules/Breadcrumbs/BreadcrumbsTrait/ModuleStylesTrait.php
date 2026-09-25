@@ -31,27 +31,43 @@ trait ModuleStylesTrait
             $advanced = [];
         }
         $styles = [];
-        $push   = function ($selector, $declaration) use (&$styles) {
-            $styles[] = ['selector' => $selector, 'declaration' => $declaration];
+        $push   = function ($selector, $declaration, $at_rules = false) use (&$styles) {
+            $styles[] = ['atRules' => $at_rules, 'selector' => $selector, 'declaration' => $declaration];
         };
-        $val = function ($key) use ($advanced) {
-            $v = $advanced[$key]['desktop']['value'] ?? null;
-            return (null !== $v && '' !== $v) ? $v : null;
+        // Author-controlled values land inside a declaration, so only a real
+        // colour (or nothing) gets through.
+        $color = function ($value) {
+            $clean = dtq_css_color($value, '');
+            return '' !== $clean ? $clean : null;
         };
 
-        $align = $val('alignment');
-        if ($align) {
-            $push($order_class . ' .dtq-breadcrumbs', sprintf('text-align: %1$s;', $align));
+        // Alignment is responsive: desktop, then tablet/phone at Divi's breakpoints.
+        $breakpoints = [
+            'desktop' => false,
+            'tablet'  => '@media only screen and (max-width: 980px)',
+            'phone'   => '@media only screen and (max-width: 767px)',
+        ];
+        foreach ($breakpoints as $bp => $at_rules) {
+            $align = $advanced['alignment'][$bp]['value'] ?? null;
+            if (in_array($align, ['left', 'center', 'right', 'justify'], true)) {
+                $push($order_class . ' .dtq-breadcrumbs', sprintf('text-align: %1$s;', $align), $at_rules);
+            }
         }
-        $link = $val('linkColor');
+
+        $link = $color($advanced['linkColor']['desktop']['value'] ?? null);
         if ($link) {
             $push($order_class . ' .dtq-breadcrumbs__link', sprintf('color: %1$s;', $link));
         }
-        $current = $val('currentColor');
+        // linkColor declares hover; D5 stores it beside the value.
+        $link_hover = $color($advanced['linkColor']['desktop']['hover'] ?? null);
+        if ($link_hover) {
+            $push($order_class . ' .dtq-breadcrumbs__link:hover', sprintf('color: %1$s;', $link_hover));
+        }
+        $current = $color($advanced['currentColor']['desktop']['value'] ?? null);
         if ($current) {
             $push($order_class . ' .dtq-breadcrumbs__current', sprintf('color: %1$s;', $current));
         }
-        $sep = $val('separatorColor');
+        $sep = $color($advanced['separatorColor']['desktop']['value'] ?? null);
         if ($sep) {
             $push($order_class . ' .dtq-breadcrumbs__sep', sprintf('color: %1$s;', $sep));
         }

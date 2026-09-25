@@ -115,14 +115,22 @@ class TwitterApi
             return [];
         }
 
-        $cache_key = 'dtq_tw_v2_' . md5($username . '|' . $limit);
+        // Credentials are part of the key, so fixing a bad key takes effect at
+        // once instead of waiting out a cached failure.
+        $cache_key = 'dtq_tw_v2_' . md5($username . '|' . $limit . '|' . $key);
         $cached    = get_transient($cache_key);
         if (is_array($cached)) {
             return $cached;
         }
 
+        // Failures are cached too, briefly: with bad credentials or a wrong
+        // handle, every page view would otherwise fire up to two blocking
+        // 15-second requests at a rate-limited, paid API.
+        $fail_ttl = (int) apply_filters('divitorque_twitter_failure_ttl', 10 * MINUTE_IN_SECONDS);
+
         $bearer = self::get_bearer($key, $secret);
         if ('' === $bearer) {
+            set_transient($cache_key, [], $fail_ttl);
             return [];
         }
 
@@ -134,6 +142,7 @@ class TwitterApi
         $user = $user_data['data'] ?? [];
         $uid  = $user['id'] ?? '';
         if ('' === $uid) {
+            set_transient($cache_key, [], $fail_ttl);
             return [];
         }
 
@@ -166,7 +175,8 @@ class TwitterApi
             ];
         }
 
-        $ttl = (int) apply_filters('divitorque_twitter_cache_ttl', HOUR_IN_SECONDS);
+        // An empty result is usually a failed request; retry it sooner.
+        $ttl = $items ? (int) apply_filters('divitorque_twitter_cache_ttl', HOUR_IN_SECONDS) : $fail_ttl;
         set_transient($cache_key, $items, $ttl);
 
         return $items;

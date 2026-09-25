@@ -20,6 +20,20 @@ class Dashboard
      */
     const UI_OPTION = 'divitorque_lite_dashboard_ui';
 
+    /**
+     * First-run onboarding. The transient is set on activation and consumed by
+     * the next admin_init; the user meta marks a finished or skipped tour so
+     * the wizard never forces itself on anyone twice.
+     */
+    const ONBOARDING_TRANSIENT = 'divitorque_lite_do_onboarding';
+    const ONBOARDING_META      = 'divitorque_lite_onboarding_done';
+
+    /**
+     * Pro discount shown on the onboarding's last step, in percent. divitorque.com
+     * applies it at checkout, so this is display only; 0 hides the line.
+     */
+    const PRO_DISCOUNT = 40;
+
     public static function get_instance()
     {
         if (!isset(self::$instance)) {
@@ -34,6 +48,7 @@ class Dashboard
         add_action('admin_head', [$this, 'print_menu_separator_css']);
         add_action('rest_api_init', [$this, 'register_switch_route']);
         add_action('admin_init', [$this, 'handle_switch_link']);
+        add_action('admin_init', [$this, 'maybe_redirect_to_onboarding']);
         add_filter('admin_body_class', [$this, 'body_class']);
         add_filter('submenu_file', [$this, 'highlight_submenu'], 10, 2);
     }
@@ -303,6 +318,18 @@ class Dashboard
             'upgradeUrl'  => 'https://divitorque.com/pricing/?utm_source=divi-torque-lite&utm_medium=wp-admin&utm_campaign=upgrade-to-pro',
             'rollbackUrl' => esc_url_raw(admin_url('admin.php?page=divitorque-rollback')),
             'moduleInfo'  => ModulesManager::get_all_modules(),
+            // Welcome tour (admin/src/pages/Onboarding.jsx).
+            'isDivi5'            => function_exists('divitorque_lite_d5_enabled') && divitorque_lite_d5_enabled(),
+            'onboardingDone'     => self::onboarding_done(),
+            // Lite's own extensions (the catalog lists only the marketed ones).
+            'freeExtensions'     => class_exists(__NAMESPACE__ . '\Extensions_Manager')
+                ? count(array_filter(Extensions_Manager::all(), function ($ext) {
+                    return empty($ext['locked']);
+                }))
+                : 0,
+            'proDiscountPercent' => (int) self::PRO_DISCOUNT,
+            'pricingUrl'         => 'https://divitorque.com/pricing/?utm_source=divi-torque-lite&utm_medium=wp-admin&utm_campaign=onboarding',
+            'saddleUrl'          => 'https://saddle.to/?utm_source=divi-torque-lite&utm_medium=wp-admin&utm_campaign=onboarding',
         ];
     }
 
@@ -345,6 +372,62 @@ class Dashboard
         update_option(self::UI_OPTION, $_GET['dtl_ui'] === 'legacy' ? 'legacy' : 'v2');
         wp_safe_redirect(admin_url('admin.php?page=' . $this->menu_slug));
         exit;
+    }
+
+    /**
+     * Send the admin who just activated Lite to the welcome tour, once.
+     *
+     * The transient is deleted before any other check, so a skipped redirect
+     * (bulk activation, Pro present, tour already done) is never retried on a
+     * later page load.
+     */
+    public function maybe_redirect_to_onboarding()
+    {
+        if (!get_transient(self::ONBOARDING_TRANSIENT)) {
+            return;
+        }
+        delete_transient(self::ONBOARDING_TRANSIENT);
+
+        if (!self::should_redirect_to_onboarding()) {
+            return;
+        }
+
+        wp_safe_redirect(admin_url('admin.php?page=' . $this->menu_slug . '&path=welcome'));
+        exit;
+    }
+
+    /**
+     * Whether the current request may be taken over by the onboarding redirect.
+     *
+     * @return bool
+     */
+    public static function should_redirect_to_onboarding()
+    {
+        // phpcs:ignore WordPress.Security.NonceVerification
+        if (isset($_GET['activate-multi'])) {
+            return false;
+        }
+        if (wp_doing_ajax() || wp_doing_cron() || (defined('WP_CLI') && WP_CLI) || is_network_admin()) {
+            return false;
+        }
+        if (!current_user_can('manage_options') || AdminHelper::is_pro_installed()) {
+            return false;
+        }
+        if (get_option(self::UI_OPTION, 'v2') === 'legacy') {
+            return false;
+        }
+
+        return !self::onboarding_done();
+    }
+
+    /**
+     * Whether the current user finished or skipped the welcome tour.
+     *
+     * @return bool
+     */
+    public static function onboarding_done()
+    {
+        return (bool) get_user_meta(get_current_user_id(), self::ONBOARDING_META, true);
     }
 
     /* ─── Legacy v1 enqueue — unchanged ────────────────────────────── */

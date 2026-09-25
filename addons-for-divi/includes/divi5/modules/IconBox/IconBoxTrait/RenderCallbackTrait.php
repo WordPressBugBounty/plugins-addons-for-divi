@@ -100,12 +100,21 @@ trait RenderCallbackTrait
     /**
      * Server-side render for the IconBox module.
      *
-     * Mirrors the D4 markup and the VB edit component:
+     * `normal` and `absolute` mirror the D4 markup and the VB edit component
+     * exactly:
      *   <div class="dtq-module dtq-iconbox">
      *     [badge] [absolute icon]
      *     <div class="dtq-iconbox-inner dtq-bg-support">
      *       [normal icon] [title] [description]
      *     </div>
+     *   </div>
+     *
+     * `left`/`right` are a deliberate D5-only extension (D4 never had this
+     * placement). They reuse the same markup but wrap title+description in a
+     * `.dtq-iconbox__content` column so the icon can sit beside it in a flex
+     * row (see edit.jsx for the matching VB markup):
+     *   <div class="dtq-iconbox-inner dtq-bg-support dtq-iconbox--left|right">
+     *     [icon] <div class="dtq-iconbox__content">[title][description]</div>
      *   </div>
      *
      * @param array          $attrs    Block attributes.
@@ -125,13 +134,19 @@ trait RenderCallbackTrait
         $title       = $elements->render(['attrName' => 'title']);
         $description = $elements->render(['attrName' => 'description']);
 
+        $is_row      = 'left' === $placement || 'right' === $placement;
+        $inner_class = 'dtq-iconbox-inner dtq-bg-support' . ($is_row ? ' dtq-iconbox--' . $placement : '');
+        $content     = $is_row
+            ? sprintf('<div class="dtq-iconbox__content">%1$s%2$s</div>', $title, $description)
+            : $title . $description;
+
         $children = sprintf(
-            '<div class="dtq-module dtq-iconbox">%1$s%2$s<div class="dtq-iconbox-inner dtq-bg-support">%3$s%4$s%5$s</div></div>',
+            '<div class="dtq-module dtq-iconbox">%1$s%2$s<div class="%3$s">%4$s%5$s</div></div>',
             $badge,
             'absolute' === $placement ? $icon : '',
+            esc_attr($inner_class),
             'absolute' !== $placement ? $icon : '',
-            $title,
-            $description
+            $content
         );
 
         return Module::render(

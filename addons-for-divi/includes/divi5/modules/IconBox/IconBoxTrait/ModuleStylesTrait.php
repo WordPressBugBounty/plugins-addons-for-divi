@@ -163,12 +163,18 @@ trait ModuleStylesTrait
             ];
         }
 
-        // Icon bottom spacing (normal placement only).
+        // Icon spacing: bottom margin when stacked (normal), row gap when beside content (left/right).
         if ('normal' === $placement) {
             $styles[] = [
                 'atRules'     => false,
                 'selector'    => $order_class . ' .dtq-iconbox__icon-wrap',
                 'declaration' => sprintf('margin-bottom: %1$s;', $icon_spacing),
+            ];
+        } elseif ('left' === $placement || 'right' === $placement) {
+            $styles[] = [
+                'atRules'     => false,
+                'selector'    => $order_class . ' .dtq-iconbox-inner',
+                'declaration' => sprintf('gap: %1$s;', $icon_spacing),
             ];
         }
 
@@ -311,7 +317,7 @@ trait ModuleStylesTrait
                 return $val;
             };
 
-            // Icon bottom spacing (normal placement only) — iconSpacing.
+            // Icon spacing (normal → margin-bottom, left/right → gap) — iconSpacing.
             if ('normal' === $placement) {
                 $val = $bp('iconSpacing');
                 if (null !== $val) {
@@ -319,6 +325,15 @@ trait ModuleStylesTrait
                         'atRules'     => $at_rule,
                         'selector'    => $order_class . ' .dtq-iconbox__icon-wrap',
                         'declaration' => sprintf('margin-bottom: %1$s;', $val),
+                    ];
+                }
+            } elseif ('left' === $placement || 'right' === $placement) {
+                $val = $bp('iconSpacing');
+                if (null !== $val) {
+                    $styles[] = [
+                        'atRules'     => $at_rule,
+                        'selector'    => $order_class . ' .dtq-iconbox-inner',
+                        'declaration' => sprintf('gap: %1$s;', $val),
                     ];
                 }
             }

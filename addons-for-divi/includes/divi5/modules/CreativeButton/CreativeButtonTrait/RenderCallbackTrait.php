@@ -16,6 +16,7 @@ use ET\Builder\Packages\Module\Module;
 use DiviTorqueLite\Modules\Shared\ButtonElement;
 use ET\Builder\Packages\Module\Layout\Components\ModuleElements\ModuleElements;
 use WP_Block;
+use DiviTorqueLite\Modules\Shared\DynamicValue;
 
 trait RenderCallbackTrait
 {
@@ -110,7 +111,7 @@ trait RenderCallbackTrait
                 // move it independently of the anchor.
                 'children' => sprintf(
                     '<span class="dtq-creative-btn__label">%s</span>',
-                    et_core_esc_previously((string) ($attrs['button']['innerContent']['desktop']['value']['text'] ?? ''))
+                    et_core_esc_previously((string) DynamicValue::resolve($attrs['button']['innerContent']['desktop']['value']['text'] ?? ''))
                 ),
             ]
         );

@@ -102,7 +102,7 @@ trait RenderCallbackTrait
         $video           = self::upload_src($advanced['video']['desktop']['value'] ?? '');
         $custom_icon     = self::upload_src($advanced['customPlayIcon']['desktop']['value'] ?? '');
 
-        $image_src = self::upload_src($attrs['image']['innerContent']['desktop']['value'] ?? '');
+        $image_src = self::upload_src(DynamicValue::resolve($attrs['image']['innerContent']['desktop']['value'] ?? ''));
         $image_alt = $attrs['image']['advanced']['alt']['desktop']['value'] ?? '';
 
         // Per-instance order number (matches the order class suffix).

@@ -61,12 +61,13 @@ trait RenderCallbackTrait
             } elseif ('page' !== $post_type) {
                 $pto = get_post_type_object($post_type);
                 if ($pto && !empty($pto->has_archive)) {
-                    $crumbs[] = ['label' => $pto->labels->name, 'url' => get_post_type_archive_link($post_type)];
+                    // Can be false (e.g. rewrite disabled); '' renders as plain text.
+                    $crumbs[] = ['label' => $pto->labels->name, 'url' => (string) get_post_type_archive_link($post_type)];
                 }
             }
 
             foreach (array_reverse(get_post_ancestors($post_id)) as $aid) {
-                $crumbs[] = ['label' => get_the_title($aid), 'url' => get_permalink($aid)];
+                $crumbs[] = ['label' => get_the_title($aid), 'url' => (string) get_permalink($aid)];
             }
 
             $crumbs[] = ['label' => get_the_title($post_id), 'url' => ''];
@@ -164,7 +165,8 @@ trait RenderCallbackTrait
             }
         }
 
-        $schema_html = $schema ? self::schema_json($trail) : '';
+        // No trail, no schema: an empty itemListElement is invalid structured data.
+        $schema_html = ($schema && !empty($trail)) ? self::schema_json($trail) : '';
 
         $nav_html = sprintf(
             '<nav class="dtq-breadcrumbs" aria-label="Breadcrumb">%1$s</nav>%2$s',
@@ -224,7 +226,8 @@ trait RenderCallbackTrait
 
         return sprintf(
             '<script type="application/ld+json">%1$s</script>',
-            wp_json_encode($data, JSON_UNESCAPED_SLASHES)
+            // HEX_TAG/HEX_AMP: a title containing </script> must not end the element.
+            wp_json_encode($data, JSON_UNESCAPED_SLASHES | JSON_HEX_TAG | JSON_HEX_AMP)
         );
     }
 }

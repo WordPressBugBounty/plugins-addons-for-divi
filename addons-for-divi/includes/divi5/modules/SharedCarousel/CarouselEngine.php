@@ -105,9 +105,11 @@ class CarouselEngine
             return (null === $raw || '' === $raw) ? $fallback : self::to_int($raw, $fallback);
         };
 
-        $slide_count   = self::to_int($val('slideCount', '3'), 3);
-        $tablet_count  = $bp_int('slideCount', 'tablet', $slide_count);
-        $phone_count   = $bp_int('slideCount', 'phone', $tablet_count);
+        // A count of 0 (possible from converted/imported layouts; the field's
+        // own minimum is 1) makes Swiper size slides as Infinity and they vanish.
+        $slide_count   = max(1, self::to_int($val('slideCount', '3'), 3));
+        $tablet_count  = max(1, $bp_int('slideCount', 'tablet', $slide_count));
+        $phone_count   = max(1, $bp_int('slideCount', 'phone', $tablet_count));
         $slide_scroll  = self::to_int($val('slideToScroll', '1'), 1);
         $space         = self::to_int($val('slideSpacing', '10px'), 10);
         $is_infinite   = 'on' === $val('isInfinite', 'on');
@@ -375,14 +377,17 @@ class CarouselEngine
         $push($dtq . ' .swiper-pagination-bullet-active', $active_decl);
 
         // Responsive spacing values are interpolated the same way the desktop ones
-        // are, so they need the same length check. Returns null when unset so the
-        // callers' `?:` fallbacks to the desktop value still work.
+        // are, so they need the same length check. Returns null when unset or not
+        // a plain length, so the callers' `?:` fallbacks to the desktop value
+        // still work. Never fall back to 0px: a phone Slide Width of calc()/var()
+        // became `width: 0px` and collapsed every slide on phones.
         $bp_raw  = function ($key, $bp) use ($advanced) {
             $raw = $advanced[$key][$bp]['value'] ?? null;
             if (null === $raw || '' === $raw) {
                 return null;
             }
-            return dtq_css_length($raw, '0px');
+            $length = dtq_css_length(dtq_resolve_css_value($raw), '');
+            return '' === $length ? null : $length;
         };
         $push_at = function ($at_rule, $selector, $declaration) use (&$styles) {
             $styles[] = ['atRules' => $at_rule, 'selector' => $selector, 'declaration' => $declaration];

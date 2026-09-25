@@ -254,8 +254,8 @@
             "item": {
               "groupSlug": "designIcon",
               "attrName": "module.advanced.iconPlacement",
-              "label": "Icon Position",
-              "description": "Select icon position. By selecting absolute position icon can be placed any where on the icon box.",
+              "label": "Icon Placement",
+              "description": "Choose how the icon is placed. Normal keeps it in flow above the content, Left/Right places it beside the title and description, and Absolute lets you position it anywhere using the Absolute Position controls below.",
               "priority": 10,
               "render": true,
               "features": {
@@ -273,6 +273,12 @@
                     },
                     "absolute": {
                       "label": "Absolute"
+                    },
+                    "left": {
+                      "label": "Left"
+                    },
+                    "right": {
+                      "label": "Right"
                     }
                   }
                 }
@@ -428,8 +434,8 @@
             "item": {
               "groupSlug": "designIcon",
               "attrName": "module.advanced.iconSpacing",
-              "label": "Icon Bottom Spacing",
-              "description": "Here you can define a custom spacing at the bottom of the icon.",
+              "label": "Icon Spacing",
+              "description": "Here you can define a custom spacing between the icon and the content.",
               "priority": 80,
               "render": true,
               "features": {
@@ -480,8 +486,8 @@
             "item": {
               "groupSlug": "designIconPlacement",
               "attrName": "module.advanced.iconPosition",
-              "label": "Icon Position",
-              "description": "Select icon placement.",
+              "label": "Absolute Position",
+              "description": "Corner to pin the icon to. Only applies when Icon Placement is set to Absolute.",
               "priority": 10,
               "render": true,
               "features": {
@@ -1240,7 +1246,7 @@
         "component": {
           "name": "divi/composite",
           "props": {
-            "groupLabel": "Icon Placement"
+            "groupLabel": "Absolute Position"
           }
         }
       },

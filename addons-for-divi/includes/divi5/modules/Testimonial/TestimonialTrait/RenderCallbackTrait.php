@@ -86,7 +86,7 @@ trait RenderCallbackTrait
 
         // The D5 upload field stores the image as an object (`{ src, ... }`);
         // accept both that and a plain URL string (the migrated D4 value).
-        $image_val = $attrs['image']['innerContent']['desktop']['value'] ?? '';
+        $image_val = DynamicValue::resolve($attrs['image']['innerContent']['desktop']['value'] ?? '');
         $image_src = is_array($image_val) ? ($image_val['src'] ?? '') : $image_val;
         $image_alt = $attrs['image']['advanced']['alt']['desktop']['value'] ?? '';
 
@@ -171,7 +171,8 @@ trait RenderCallbackTrait
         $review_html = sprintf(
             '<div class="dtq-testimonial-review">%1$s%2$s</div>',
             $render_quote_icon('dtq-icon-default', '_default'),
-            ('' !== $testimonial_val) ? sprintf('<p>%1$s</p>', $testimonial_val) : ''
+            // Gate on the raw value, print the resolved one (#86).
+            ('' !== $testimonial_val) ? sprintf('<p>%1$s</p>', DynamicValue::resolve($testimonial_val)) : ''
         );
 
         $children = sprintf(

@@ -64,6 +64,13 @@ class RestApi
                 'callback' => [$this, 'save_common_settings'],
                 'permission_callback' => [$this, 'get_permissions_check'],
             ],
+            // Welcome tour finished or skipped: stop the activation redirect
+            // for this user. Per user, so each admin gets the tour once.
+            '/onboarding/done' => [
+                'methods' => \WP_REST_Server::CREATABLE,
+                'callback' => [$this, 'mark_onboarding_done'],
+                'permission_callback' => [$this, 'get_permissions_check'],
+            ],
             '/check_plugin_installed_and_active' => [
                 'methods' => \WP_REST_Server::EDITABLE,
                 'callback' => [$this, 'check_plugin_installed_and_active'],
@@ -483,6 +490,13 @@ class RestApi
             update_option('_divitorque_lite_modules', $clean);
         }
         return ['success' => true];
+    }
+
+    public function mark_onboarding_done()
+    {
+        update_user_meta(get_current_user_id(), Dashboard::ONBOARDING_META, 1);
+
+        return new WP_REST_Response(['done' => true], 200);
     }
 
     public function check_plugin_installed_and_active(WP_REST_Request $request)

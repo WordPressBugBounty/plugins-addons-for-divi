@@ -66,7 +66,10 @@ trait RenderCallbackTrait
         }
 
         // Optional subtitle.
-        $subtitle_val  = trim((string) ($attrs['subtitle']['innerContent']['desktop']['value'] ?? ''));
+        // Gate only: $elements->render() resolves the value itself. Don't cast a
+        // dynamic-content structure to string ("Array to string conversion").
+        $subtitle_raw  = $attrs['subtitle']['innerContent']['desktop']['value'] ?? '';
+        $subtitle_val  = is_array($subtitle_raw) ? $subtitle_raw : trim((string) $subtitle_raw);
         $subtitle_html = '' !== $subtitle_val ? $elements->render(['attrName' => 'subtitle']) : '';
 
         // Optional header media (icon or image with focal point + flip).
