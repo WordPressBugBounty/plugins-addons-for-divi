@@ -2875,6 +2875,24 @@ class Divi_Torque_Lite_Module extends ET_Builder_Module
 
 		$carousel_options = sprintf('data-settings="%1$s"', htmlspecialchars(wp_json_encode($settings), ENT_QUOTES, 'UTF-8'));
 
+		// slick prints at the end of the page, so until it runs every slide
+		// renders stacked at full size: the carousel flashes tall, then
+		// collapses. frontend.css lays the first slides out in a row at slick's
+		// widths until it starts, from these per-breakpoint counts. They mirror
+		// slick: a breakpoint without its own count uses the desktop one.
+		// Vertical and variable-width carousels size slides another way and
+		// keep the stack. Inline, because Divi can defer module CSS past the
+		// first paint.
+		if ('on' !== $is_vertical && 'on' !== $is_variable_width) {
+			$desktop_count     = max(1, intval($slide_count));
+			$carousel_options .= sprintf(
+				' style="--dtq-slides:%1$d;--dtq-slides-tablet:%2$d;--dtq-slides-phone:%3$d"',
+				$desktop_count,
+				isset($tablet['settings']['slidesToShow']) ? max(1, $tablet['settings']['slidesToShow']) : $desktop_count,
+				isset($phone['settings']['slidesToShow']) ? max(1, $phone['settings']['slidesToShow']) : $desktop_count
+			);
+		}
+
 		return $carousel_options;
 	}
 

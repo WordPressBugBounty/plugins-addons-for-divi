@@ -63,11 +63,21 @@ class Dashboard
      * screen (one dashboard, never two): extension pages render inside Pro's
      * bundle, and Lite must not enqueue or scope anything.
      *
+     * Older Pro builds still in the wild have a DiviTorque\Dashboard without
+     * the methods this relies on: is_v2() arrived in Pro 1.12.0 and
+     * render_extension_page() in 2.0.0. is_our_screen() runs on
+     * admin_body_class, so calling a missing method fatals every wp-admin
+     * screen (Pro 1.4.1 + Lite 4.9.0+). Without both, Pro cannot host Lite's
+     * screens, so Lite keeps its own.
+     *
      * @return bool
      */
     public function pro_owns_dashboard()
     {
         return class_exists('\DiviTorque\Dashboard')
+            && method_exists('\DiviTorque\Dashboard', 'get_instance')
+            && method_exists('\DiviTorque\Dashboard', 'is_v2')
+            && method_exists('\DiviTorque\Dashboard', 'render_extension_page')
             && \DiviTorque\Dashboard::get_instance()->is_v2();
     }
 
