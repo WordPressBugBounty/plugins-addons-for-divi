@@ -18,13 +18,6 @@ use WP_Block;
 
 trait RenderCallbackTrait
 {
-    const SOURCES    = ['youtube', 'vimeo', 'self'];
-    const POSITIONS  = ['bottom-right', 'bottom-left', 'top-right', 'top-left'];
-    const ANIMATIONS = ['slide', 'fade', 'none'];
-    const RATIOS     = ['16:9', '4:3', '1:1', '21:9'];
-    const DISABLE_ON = ['none', 'phone', 'tablet-phone'];
-    const STICK_ON   = ['played', 'always'];
-    const CLOSE_ACTIONS = ['unstick', 'stop'];
 
     /**
      * Normalise an upload value.

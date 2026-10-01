@@ -222,7 +222,6 @@ class Metabox
 				});
 
 				$('.dtq-popup-holder').on('click', '.dtq-popup-remove', function() {
-					console.log('removed');
 					$parent = $(this).parent('.row');
 					$parent.remove();
 					return false;

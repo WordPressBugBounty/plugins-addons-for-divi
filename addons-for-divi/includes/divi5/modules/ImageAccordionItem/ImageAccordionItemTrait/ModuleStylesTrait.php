@@ -17,13 +17,6 @@ use ET\Builder\Packages\Module\Options\Css\CssStyle;
 
 trait ModuleStylesTrait
 {
-    /**
-     * How the panel image fills its box.
-     *
-     * Interpolated where CSS expects an object-fit keyword, so matched against
-     * a list rather than pattern-checked.
-     */
-    const FITS = ['cover', 'contain'];
 
     /**
      * Build the panel's custom properties.

@@ -29,6 +29,19 @@ class ImageAccordionItem implements DependencyInterface
     use ImageAccordionItemTrait\ModuleScriptDataTrait;
     use ImageAccordionItemTrait\CustomCssTrait;
 
+    // Constants live in the class, not in the traits that read them: PHP
+    // before 8.2 cannot declare a constant in a trait, and doing so stopped
+    // every page of a Divi 5 site on PHP 7.4 to 8.1 with a fatal error.
+    // self:: inside the traits resolves to this class.
+
+    /**
+     * How the panel image fills its box.
+     *
+     * Interpolated where CSS expects an object-fit keyword, so matched against
+     * a list rather than pattern-checked.
+     */
+    const FITS = ['cover', 'contain'];
+
     /**
      * Load and register the module with Divi 5.
      *

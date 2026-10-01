@@ -29,6 +29,25 @@ class CodeSnippet implements DependencyInterface
     use CodeSnippetTrait\ModuleScriptDataTrait;
     use CodeSnippetTrait\CustomCssTrait;
 
+    // Constants live in the class, not in the traits that read them: PHP
+    // before 8.2 cannot declare a constant in a trait, and doing so stopped
+    // every page of a Divi 5 site on PHP 7.4 to 8.1 with a fatal error.
+    // self:: inside the traits resolves to this class.
+
+    /**
+     * Languages bundled in assets/libs/prism.
+     *
+     * The value lands in a `language-*` class Prism reads, so it is matched
+     * against this list rather than passed through — and this is also exactly
+     * what is bundled, since there is no autoloader to fetch anything else.
+     */
+    const LANGUAGES = [
+        'none', 'markup', 'css', 'javascript', 'typescript', 'jsx', 'php',
+        'python', 'bash', 'json', 'sql', 'yaml', 'markdown',
+    ];
+
+    const THEMES = ['dark', 'light', 'midnight', 'paper'];
+
     /**
      * Load and register the module with Divi 5.
      *

@@ -18,29 +18,6 @@ use WP_Block;
 
 trait RenderCallbackTrait
 {
-    /**
-     * Placements tippy understands.
-     *
-     * The chosen value is emitted as configuration, so it is matched against
-     * this list rather than passed through.
-     */
-    const PLACEMENTS = [
-        'top', 'top-start', 'top-end',
-        'right', 'right-start', 'right-end',
-        'bottom', 'bottom-start', 'bottom-end',
-        'left', 'left-start', 'left-end',
-    ];
-
-    /**
-     * Only two animations ship. tippy's UMD injects its own core CSS, which
-     * covers `fade`, and assets/libs/tippy/tippy.min.css is 394 bytes holding
-     * exactly one animation — `scale`.
-     */
-    const ANIMATIONS = ['fade', 'scale'];
-
-    const TRIGGER_TYPES = ['text', 'icon', 'image'];
-
-    const ALIGNMENTS = ['left', 'center', 'right'];
 
     /**
      * Turn a millisecond-ish attribute value into a number.

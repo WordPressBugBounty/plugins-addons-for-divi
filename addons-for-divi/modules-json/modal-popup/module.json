@@ -293,7 +293,7 @@
               "groupSlug": "contentBehavior",
               "attrName": "module.advanced.openOn",
               "label": "Open Popup On",
-              "description": "Open when the trigger is clicked, or automatically on page load.",
+              "description": "What opens the popup. A link to this module's CSS ID (for example a menu item linking to #booking) also opens it. Links Only hides the trigger button.",
               "priority": 5,
               "render": true,
               "features": {
@@ -311,6 +311,9 @@
                     },
                     "load": {
                       "label": "Page Load"
+                    },
+                    "link": {
+                      "label": "Links Only"
                     }
                   }
                 }

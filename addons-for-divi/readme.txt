@@ -4,7 +4,7 @@ Tags: divi, divi 5, divi modules, divi builder, divi carousel
 Requires at least: 7.0
 Tested up to: 7.1
 Requires PHP: 7.4
-Stable tag: 4.12.1
+Stable tag: 4.13.0
 License: GPLv3
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 
@@ -176,6 +176,17 @@ Updates are made to keep existing pages working. We still recommend a backup bef
 3. Image Carousel module
 
 == Changelog ==
+
+= Version 4.13.0 =
+* Fix: Divi 5 sites on PHP 7.4, 8.0 or 8.1 showed a critical error on every page after updating to Lite 4.9.0 or later. Lite works on PHP 7.4 and later again.
+* New: Image Carousel has an Image Height option under Variable Slide Width. Every image gets the same height and each slide keeps its image's own width, so portrait and landscape images share one row.
+* New: Modal Popup opens from any link to its CSS ID, such as a menu item that links to #booking. Links from another page open it on arrival. A new Open Popup On choice, Links Only, hides the trigger button.
+* Fix: In Divi 5, an Autoplay Delay of 0 still paused 2 seconds on every slide, and a Gap Between Slides of 0 still left 10px. Both now use 0, so a carousel can scroll continuously.
+* Fix: An autoplaying carousel with slides of different widths now moves at one steady speed.
+* Fix: Image Carousel and Logo Carousel no longer leave a 30px gap below them on tablets and phones in Divi 5.
+* Fix: An open Modal Popup's dimmed background now covers menus and the site header.
+* Fix: On Divi 5 pages with a Number Counter, the counter did not animate and the modules after it (Image Accordion, SVG Draw, Code Snippet, Sticky Video and the News Ticker controls) did not start.
+* Improvement: The Variable Slide Width description in Image, Logo and Post Carousel now says what the setting does.
 
 = Version 4.12.1 =
 * Fix: With Divi Torque Pro 1.11 or older active, every wp-admin page showed a critical error after updating to Lite 4.9.0 or later. With Pro 1.12, the Sharing Buttons page did. Lite now leaves its screens to Pro only when that Pro version can show them.
@@ -393,6 +404,9 @@ Updates are made to keep existing pages working. We still recommend a backup bef
 * Public beta release
 
 == Upgrade Notice ==
+
+= 4.13.0 =
+Fixes a critical error on every page for Divi 5 sites on PHP 7.4 to 8.1. Adds Image Height to Image Carousel and menu-link opening to Modal Popup. Fixes Autoplay Delay 0 and Gap 0 in Divi 5 carousels, a gap under carousels on phones, and Divi 5 modules that did not start on pages with a Number Counter.
 
 = 4.12.1 =
 Fixes a critical error on every wp-admin page when an older Divi Torque Pro is active, and stops Divi 4 carousels showing every slide at full size while the page loads.

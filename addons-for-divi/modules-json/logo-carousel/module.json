@@ -491,7 +491,7 @@
               "groupSlug": "contentLayout",
               "attrName": "module.advanced.isVariableWidth",
               "label": "Variable Slide Width",
-              "description": "Let each slide keep its own width instead of an equal share. Useful for mixed-size images.",
+              "description": "Give every slide the same set width (Slide Width) instead of an equal share of the row.",
               "priority": 50,
               "render": true,
               "features": {

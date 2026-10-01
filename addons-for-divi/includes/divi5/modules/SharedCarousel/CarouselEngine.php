@@ -38,7 +38,12 @@ class CarouselEngine
             return $fallback;
         }
         $n = (int) $val;
-        return ($n > 0 || '0' === (string) $val) ? $n : $fallback;
+        // Divi saves lengths and durations with their unit ("0ms", "0px"), so
+        // a zero has to be recognised with a unit too. Matching only a bare "0"
+        // turned Autoplay Delay 0 into 2000ms and Gap Between Slides 0 into
+        // 10px on the front end, while the builder (config.js) kept the 0.
+        $is_zero = 1 === preg_match('/^\s*0+(?:\.0*)?\s*[a-z%]*\s*$/i', (string) $val);
+        return ($n > 0 || $is_zero) ? $n : $fallback;
     }
 
     /**
@@ -432,8 +437,24 @@ class CarouselEngine
         // once it is emitted here — without this the field rendered in the panel
         // and did nothing.
         if ('on' === $val('isVariableWidth', 'off')) {
-            $slide_width = $len('slideWidth', '');
-            if ('' !== $slide_width) {
+            $slide_width  = $len('slideWidth', '');
+            $image_height = $len('imageHeight', '');
+            // 0 counts as unset: a 0px image height would hide the whole carousel.
+            if ((float) $image_height > 0) {
+                // One height for every image, and each slide as wide as its
+                // image, so portrait and landscape images share a row. The text
+                // block is held to the image width so a long title cannot
+                // stretch its slide. Keep in lockstep with styles.js.
+                $push($dtq . ' .swiper-slide', 'width: auto;');
+                $push($dtq . ' .swiper-slide img', sprintf('height: %s; width: auto; max-width: none;', $image_height));
+                $push($dtq . ' .swiper-slide .content', 'width: 0; min-width: 100%;');
+                foreach (['tablet' => $tablet, 'phone' => $phone] as $bp => $at_rule) {
+                    $bp_height = $bp_raw('imageHeight', $bp);
+                    if ((float) $bp_height > 0) {
+                        $push_at($at_rule, $dtq . ' .swiper-slide img', sprintf('height: %s;', $bp_height));
+                    }
+                }
+            } elseif ('' !== $slide_width) {
                 $push($dtq . ' .swiper-slide', sprintf('width: %s;', $slide_width));
                 foreach (['tablet' => $tablet, 'phone' => $phone] as $bp => $at_rule) {
                     $bp_width = $bp_raw('slideWidth', $bp);

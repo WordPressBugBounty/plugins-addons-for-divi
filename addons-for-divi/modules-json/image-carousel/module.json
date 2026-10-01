@@ -385,7 +385,7 @@
               "groupSlug": "contentLayout",
               "attrName": "module.advanced.isVariableWidth",
               "label": "Variable Slide Width",
-              "description": "Let each slide keep its own width instead of an equal share. Useful for mixed-size images.",
+              "description": "Give slides a set width instead of an equal share of the row. Set Image Height to let each slide take its image's own width.",
               "priority": 50,
               "render": true,
               "features": {
@@ -396,6 +396,32 @@
               "component": {
                 "type": "field",
                 "name": "divi/toggle"
+              }
+            }
+          },
+          "imageHeight": {
+            "groupType": "group-item",
+            "item": {
+              "groupSlug": "contentLayout",
+              "attrName": "module.advanced.imageHeight",
+              "label": "Image Height",
+              "description": "Gives every image this height. Each slide then takes its image's own width, so images of different sizes line up in one row. Leave empty to use Slide Width.",
+              "priority": 55,
+              "render": true,
+              "features": {
+                "sticky": false,
+                "responsive": true,
+                "hover": false
+              },
+              "component": {
+                "type": "field",
+                "name": "divi/range",
+                "props": {
+                  "min": 0,
+                  "max": 1000,
+                  "step": 1,
+                  "defaultUnit": "px"
+                }
               }
             }
           },

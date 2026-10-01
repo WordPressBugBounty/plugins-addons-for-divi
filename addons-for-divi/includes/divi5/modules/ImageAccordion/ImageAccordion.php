@@ -29,6 +29,21 @@ class ImageAccordion implements DependencyInterface
     use ImageAccordionTrait\ModuleScriptDataTrait;
     use ImageAccordionTrait\CustomCssTrait;
 
+    // Constants live in the class, not in the traits that read them: PHP
+    // before 8.2 cannot declare a constant in a trait, and doing so stopped
+    // every page of a Divi 5 site on PHP 7.4 to 8.1 with a fatal error.
+    // self:: inside the traits resolves to this class.
+
+    const DIRECTIONS = ['horizontal', 'vertical'];
+
+    const ACTIVATORS = ['hover', 'click'];
+
+    const STACK_ON   = ['none', 'tablet', 'phone'];
+
+    const REVEALS    = ['always', 'active'];
+
+    const POSITIONS  = ['top', 'center', 'bottom'];
+
     /**
      * Load and register the module with Divi 5.
      *

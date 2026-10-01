@@ -18,19 +18,6 @@ use WP_Block;
 
 trait RenderCallbackTrait
 {
-    /**
-     * Languages bundled in assets/libs/prism.
-     *
-     * The value lands in a `language-*` class Prism reads, so it is matched
-     * against this list rather than passed through — and this is also exactly
-     * what is bundled, since there is no autoloader to fetch anything else.
-     */
-    const LANGUAGES = [
-        'none', 'markup', 'css', 'javascript', 'typescript', 'jsx', 'php',
-        'python', 'bash', 'json', 'sql', 'yaml', 'markdown',
-    ];
-
-    const THEMES = ['dark', 'light', 'midnight', 'paper'];
 
     /**
      * Build the wrapper class list.

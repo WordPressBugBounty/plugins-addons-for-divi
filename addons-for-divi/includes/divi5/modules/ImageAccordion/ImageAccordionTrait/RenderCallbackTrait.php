@@ -18,11 +18,6 @@ use WP_Block;
 
 trait RenderCallbackTrait
 {
-    const DIRECTIONS = ['horizontal', 'vertical'];
-    const ACTIVATORS = ['hover', 'click'];
-    const STACK_ON   = ['none', 'tablet', 'phone'];
-    const REVEALS    = ['always', 'active'];
-    const POSITIONS  = ['top', 'center', 'bottom'];
 
     /**
      * Build the wrapper class list.

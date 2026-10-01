@@ -29,6 +29,25 @@ class StickyVideo implements DependencyInterface
     use StickyVideoTrait\ModuleScriptDataTrait;
     use StickyVideoTrait\CustomCssTrait;
 
+    // Constants live in the class, not in the traits that read them: PHP
+    // before 8.2 cannot declare a constant in a trait, and doing so stopped
+    // every page of a Divi 5 site on PHP 7.4 to 8.1 with a fatal error.
+    // self:: inside the traits resolves to this class.
+
+    const SOURCES    = ['youtube', 'vimeo', 'self'];
+
+    const POSITIONS  = ['bottom-right', 'bottom-left', 'top-right', 'top-left'];
+
+    const ANIMATIONS = ['slide', 'fade', 'none'];
+
+    const RATIOS     = ['16:9', '4:3', '1:1', '21:9'];
+
+    const DISABLE_ON = ['none', 'phone', 'tablet-phone'];
+
+    const STICK_ON   = ['played', 'always'];
+
+    const CLOSE_ACTIONS = ['unstick', 'stop'];
+
     /**
      * Load and register the module with Divi 5.
      *

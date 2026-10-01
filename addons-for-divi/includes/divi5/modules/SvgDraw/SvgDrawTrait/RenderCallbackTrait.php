@@ -18,18 +18,6 @@ use WP_Block;
 
 trait RenderCallbackTrait
 {
-    const TRIGGERS   = ['viewport', 'load', 'hover'];
-    const FILL_MODES = ['none', 'after'];
-    const ALIGNMENTS = ['left', 'center', 'right'];
-
-    /**
-     * Elements that can be stroke-drawn.
-     *
-     * Circles, ellipses and rects are opt-in: pathLength on them is unreliable
-     * in older Safari, where they would simply appear instead of drawing.
-     */
-    const DRAWABLE       = ['path', 'line', 'polyline', 'polygon'];
-    const DRAWABLE_SHAPES = ['circle', 'ellipse', 'rect'];
 
     /**
      * Read an SVG out of the media library.

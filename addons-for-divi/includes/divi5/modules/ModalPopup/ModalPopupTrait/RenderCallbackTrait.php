@@ -116,12 +116,19 @@ trait RenderCallbackTrait
             $box_html
         );
 
+        // "Links Only": the popup opens from links to the module's CSS ID (a
+        // menu item, say), so no button is printed. frontend.js handles those
+        // links for every Open On choice.
+        $trigger_wrap = 'link' === $open_on
+            ? ''
+            : sprintf('<div class="dtq-modalpopup__trigger-wrap">%1$s</div>', $trigger_html);
+
         $modal_html = sprintf(
-            '<div class="%1$s" data-dtq-open-on="%2$s" data-dtq-load-delay="%3$s"><div class="dtq-modalpopup__trigger-wrap">%4$s</div>%5$s</div>',
+            '<div class="%1$s" data-dtq-open-on="%2$s" data-dtq-load-delay="%3$s">%4$s%5$s</div>',
             esc_attr($wrapper_class),
             esc_attr($open_on),
             esc_attr($load_delay),
-            $trigger_html,
+            $trigger_wrap,
             $overlay_html
         );
 

@@ -17,22 +17,6 @@ use ET\Builder\Packages\Module\Options\Css\CssStyle;
 
 trait ModuleStylesTrait
 {
-    /**
-     * Easing curves offered by the Effect Easing field.
-     *
-     * This value is interpolated where CSS expects a timing function, so it is
-     * matched against the list rather than pattern-checked — the same treatment
-     * navBorderStyle gets in CarouselEngine, and for the same reason.
-     */
-    const EASINGS = [
-        'ease',
-        'ease-in',
-        'ease-out',
-        'ease-in-out',
-        'linear',
-        'cubic-bezier(0.4, 0, 0.2, 1)',
-        'cubic-bezier(0.34, 1.56, 0.64, 1)',
-    ];
 
     /**
      * Build the module's custom properties.

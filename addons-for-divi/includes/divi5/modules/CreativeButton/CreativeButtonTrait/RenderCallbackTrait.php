@@ -20,27 +20,6 @@ use DiviTorqueLite\Modules\Shared\DynamicValue;
 
 trait RenderCallbackTrait
 {
-    /**
-     * Hover effects this module ships.
-     *
-     * The chosen value lands in a class name, so it is matched against this
-     * list rather than trusted.
-     */
-    const EFFECTS = [
-        'none',
-        'fill-up',
-        'fill-left',
-        'fill-diagonal',
-        'sweep-in',
-        'shutter-h',
-        'shutter-v',
-        'radial-out',
-        'border-draw',
-        'shine',
-        'text-slide-up',
-    ];
-
-    const ALIGNMENTS = ['left', 'center', 'right'];
 
     /**
      * Build the wrapper class list.

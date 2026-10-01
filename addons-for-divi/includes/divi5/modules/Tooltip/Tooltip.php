@@ -29,6 +29,35 @@ class Tooltip implements DependencyInterface
     use TooltipTrait\ModuleScriptDataTrait;
     use TooltipTrait\CustomCssTrait;
 
+    // Constants live in the class, not in the traits that read them: PHP
+    // before 8.2 cannot declare a constant in a trait, and doing so stopped
+    // every page of a Divi 5 site on PHP 7.4 to 8.1 with a fatal error.
+    // self:: inside the traits resolves to this class.
+
+    /**
+     * Placements tippy understands.
+     *
+     * The chosen value is emitted as configuration, so it is matched against
+     * this list rather than passed through.
+     */
+    const PLACEMENTS = [
+        'top', 'top-start', 'top-end',
+        'right', 'right-start', 'right-end',
+        'bottom', 'bottom-start', 'bottom-end',
+        'left', 'left-start', 'left-end',
+    ];
+
+    /**
+     * Only two animations ship. tippy's UMD injects its own core CSS, which
+     * covers `fade`, and assets/libs/tippy/tippy.min.css is 394 bytes holding
+     * exactly one animation — `scale`.
+     */
+    const ANIMATIONS = ['fade', 'scale'];
+
+    const TRIGGER_TYPES = ['text', 'icon', 'image'];
+
+    const ALIGNMENTS = ['left', 'center', 'right'];
+
     /**
      * Load and register the module with Divi 5.
      *

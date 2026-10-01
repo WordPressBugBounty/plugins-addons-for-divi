@@ -29,6 +29,27 @@ class SvgDraw implements DependencyInterface
     use SvgDrawTrait\ModuleScriptDataTrait;
     use SvgDrawTrait\CustomCssTrait;
 
+    // Constants live in the class, not in the traits that read them: PHP
+    // before 8.2 cannot declare a constant in a trait, and doing so stopped
+    // every page of a Divi 5 site on PHP 7.4 to 8.1 with a fatal error.
+    // self:: inside the traits resolves to this class.
+
+    const TRIGGERS   = ['viewport', 'load', 'hover'];
+
+    const FILL_MODES = ['none', 'after'];
+
+    const ALIGNMENTS = ['left', 'center', 'right'];
+
+    /**
+     * Elements that can be stroke-drawn.
+     *
+     * Circles, ellipses and rects are opt-in: pathLength on them is unreliable
+     * in older Safari, where they would simply appear instead of drawing.
+     */
+    const DRAWABLE       = ['path', 'line', 'polyline', 'polygon'];
+
+    const DRAWABLE_SHAPES = ['circle', 'ellipse', 'rect'];
+
     /**
      * Load and register the module with Divi 5.
      *
