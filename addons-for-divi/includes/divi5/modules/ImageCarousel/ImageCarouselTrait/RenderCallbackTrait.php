@@ -40,14 +40,18 @@ trait RenderCallbackTrait
 
         $nav_html  = $show_nav ? (CarouselEngine::render_arrow($advanced, 'prev') . CarouselEngine::render_arrow($advanced, 'next')) : '';
         $pagi_html = $show_pagi ? '<div class="swiper-pagination"></div>' : '';
+        $controls  = CarouselEngine::render_controls($advanced);
 
         $carousel = sprintf(
-            '<div class="%1$s"><div class="swiper" data-swiper-config="%2$s"><div class="swiper-wrapper">%3$s</div></div>%4$s%5$s</div>',
+            '<div class="%1$s"><div class="swiper"%6$s data-swiper-init="lite" data-swiper-config="%2$s"><div class="swiper-wrapper">%3$s</div>%7$s</div>%4$s%5$s%8$s</div>',
             esc_attr(implode(' ', $classes)),
             esc_attr(wp_json_encode($config)),
             $content,
             $nav_html,
-            $pagi_html
+            $pagi_html,
+            CarouselEngine::pre_init_style($config),
+            $controls['inner'],
+            $controls['after']
         );
 
         return Module::render(

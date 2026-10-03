@@ -214,16 +214,20 @@ trait RenderCallbackTrait {
 		$wrap_cls  = CarouselEngine::base_wrapper_classes( $advanced, 'dtq-post-carousel' );
 		$nav_html  = $show_nav ? ( CarouselEngine::render_arrow( $advanced, 'prev' ) . CarouselEngine::render_arrow( $advanced, 'next' ) ) : '';
 		$pagi_html = $show_pagi ? '<div class="swiper-pagination"></div>' : '';
+		$controls  = CarouselEngine::render_controls( $advanced );
 
 		$children = sprintf(
-			'%s<div class="%s"><div class="%s"><div class="swiper" data-swiper-config="%s"><div class="swiper-wrapper">%s</div></div>%s%s</div>%s</div>',
+			'%s<div class="%s"><div class="%s"><div class="swiper"%s data-swiper-init="lite" data-swiper-config="%s"><div class="swiper-wrapper">%s</div>%s</div>%s%s%s</div>%s</div>',
 			$style_components,
 			esc_attr( implode( ' ', $classes ) ),
 			esc_attr( implode( ' ', $wrap_cls ) ),
+			CarouselEngine::pre_init_style( $built['config'] ),
 			esc_attr( wp_json_encode( $built['config'] ) ),
 			$posts_html,
+			$controls['inner'],
 			$nav_html,
 			$pagi_html,
+			$controls['after'],
 			$pagination_html
 		);
 

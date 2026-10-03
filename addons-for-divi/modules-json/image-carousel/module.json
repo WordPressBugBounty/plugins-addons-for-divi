@@ -34,6 +34,11 @@
               "value": "15px"
             }
           },
+          "gridRows": {
+            "desktop": {
+              "value": "1"
+            }
+          },
           "isVariableWidth": {
             "desktop": {
               "value": "off"
@@ -47,6 +52,21 @@
           "isAutoplay": {
             "desktop": {
               "value": "on"
+            }
+          },
+          "autoplayMode": {
+            "desktop": {
+              "value": "step"
+            }
+          },
+          "scrollSpeed": {
+            "desktop": {
+              "value": "60px"
+            }
+          },
+          "reverseDirection": {
+            "desktop": {
+              "value": "off"
             }
           },
           "autoplaySpeed": {
@@ -64,9 +84,69 @@
               "value": "on"
             }
           },
+          "pauseOnHover": {
+            "desktop": {
+              "value": "on"
+            }
+          },
+          "endBehavior": {
+            "desktop": {
+              "value": "restart"
+            }
+          },
+          "stopOnInteraction": {
+            "desktop": {
+              "value": "off"
+            }
+          },
+          "effect": {
+            "desktop": {
+              "value": "slide"
+            }
+          },
+          "coverflowRotate": {
+            "desktop": {
+              "value": "50deg"
+            }
+          },
+          "coverflowDepth": {
+            "desktop": {
+              "value": "100px"
+            }
+          },
+          "coverflowStretch": {
+            "desktop": {
+              "value": "0px"
+            }
+          },
+          "slideShadows": {
+            "desktop": {
+              "value": "on"
+            }
+          },
           "isSwipe": {
             "desktop": {
               "value": "on"
+            }
+          },
+          "freeScroll": {
+            "desktop": {
+              "value": "off"
+            }
+          },
+          "freeScrollSnap": {
+            "desktop": {
+              "value": "off"
+            }
+          },
+          "mousewheel": {
+            "desktop": {
+              "value": "off"
+            }
+          },
+          "enableZoom": {
+            "desktop": {
+              "value": "off"
             }
           },
           "isCenter": {
@@ -87,6 +167,71 @@
           "usePagi": {
             "desktop": {
               "value": "off"
+            }
+          },
+          "showScrollbar": {
+            "desktop": {
+              "value": "off"
+            }
+          },
+          "showPauseButton": {
+            "desktop": {
+              "value": "off"
+            }
+          },
+          "pausePosition": {
+            "desktop": {
+              "value": "top-right"
+            }
+          },
+          "showAutoplayProgress": {
+            "desktop": {
+              "value": "off"
+            }
+          },
+          "showThumbs": {
+            "desktop": {
+              "value": "off"
+            }
+          },
+          "thumbCount": {
+            "desktop": {
+              "value": "6"
+            }
+          },
+          "thumbGap": {
+            "desktop": {
+              "value": "8px"
+            }
+          },
+          "thumbHeight": {
+            "desktop": {
+              "value": "80px"
+            }
+          },
+          "thumbRadius": {
+            "desktop": {
+              "value": "4px"
+            }
+          },
+          "thumbOpacity": {
+            "desktop": {
+              "value": "50%"
+            }
+          },
+          "thumbActiveBorderColor": {
+            "desktop": {
+              "value": "#2ea3f2"
+            }
+          },
+          "thumbActiveBorderWidth": {
+            "desktop": {
+              "value": "2px"
+            }
+          },
+          "thumbSpacingTop": {
+            "desktop": {
+              "value": "10px"
             }
           },
           "navType": {
@@ -157,6 +302,16 @@
           "cursorName": {
             "desktop": {
               "value": "css_grab"
+            }
+          },
+          "parallaxCaptions": {
+            "desktop": {
+              "value": "off"
+            }
+          },
+          "parallaxAmount": {
+            "desktop": {
+              "value": "60px"
             }
           },
           "centerModeType": {
@@ -379,6 +534,32 @@
               }
             }
           },
+          "gridRows": {
+            "groupType": "group-item",
+            "item": {
+              "groupSlug": "contentLayout",
+              "attrName": "module.advanced.gridRows",
+              "label": "Rows",
+              "description": "Stack the slides in this many rows that scroll together, like a gallery wall. More than one row turns off the loop, Continuous Scroll and the effects.",
+              "priority": 35,
+              "render": true,
+              "features": {
+                "sticky": false,
+                "responsive": false,
+                "hover": false
+              },
+              "component": {
+                "type": "field",
+                "name": "divi/range",
+                "props": {
+                  "min": 1,
+                  "max": 4,
+                  "step": 1,
+                  "defaultUnit": ""
+                }
+              }
+            }
+          },
           "isVariableWidth": {
             "groupType": "group-item",
             "item": {
@@ -405,7 +586,7 @@
               "groupSlug": "contentLayout",
               "attrName": "module.advanced.imageHeight",
               "label": "Image Height",
-              "description": "Gives every image this height. Each slide then takes its image's own width, so images of different sizes line up in one row. Leave empty to use Slide Width.",
+              "description": "Gives every image this height. With Variable Slide Width each slide then takes its image's own width, so images of different sizes line up in one row; leave empty to use Slide Width. Otherwise every image is cropped to this height, so slides of different shapes line up evenly.",
               "priority": 55,
               "render": true,
               "features": {
@@ -459,6 +640,85 @@
               "label": "Autoplay",
               "description": "Automatically advance the carousel.",
               "priority": 10,
+              "render": true,
+              "features": {
+                "sticky": false,
+                "responsive": false,
+                "hover": false
+              },
+              "component": {
+                "type": "field",
+                "name": "divi/toggle"
+              }
+            }
+          },
+          "autoplayMode": {
+            "groupType": "group-item",
+            "item": {
+              "groupSlug": "contentMotion",
+              "attrName": "module.advanced.autoplayMode",
+              "label": "Autoplay Style",
+              "description": "Slide by Slide pauses on each slide. Continuous Scroll moves the slides at a steady speed without stopping, like a film strip. It loops on its own and hides the arrows and dots.",
+              "priority": 15,
+              "render": true,
+              "features": {
+                "sticky": false,
+                "responsive": false,
+                "hover": false
+              },
+              "component": {
+                "type": "field",
+                "name": "divi/select",
+                "props": {
+                  "options": {
+                    "step": {
+                      "label": "Slide by Slide"
+                    },
+                    "continuous": {
+                      "label": "Continuous Scroll"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "scrollSpeed": {
+            "groupType": "group-item",
+            "item": {
+              "groupSlug": "contentMotion",
+              "attrName": "module.advanced.scrollSpeed",
+              "label": "Scroll Speed",
+              "description": "How far the slides travel each second, in pixels. 40 to 80 reads as a calm film strip.",
+              "priority": 25,
+              "render": true,
+              "features": {
+                "sticky": false,
+                "responsive": false,
+                "hover": false
+              },
+              "component": {
+                "type": "field",
+                "name": "divi/range",
+                "props": {
+                  "min": 10,
+                  "max": 400,
+                  "step": 5,
+                  "defaultUnit": "px",
+                  "allowedUnits": [
+                    "px"
+                  ]
+                }
+              }
+            }
+          },
+          "reverseDirection": {
+            "groupType": "group-item",
+            "item": {
+              "groupSlug": "contentMotion",
+              "attrName": "module.advanced.reverseDirection",
+              "label": "Reverse Direction",
+              "description": "Move the slides the other way: left to right, or top to bottom when vertical.",
+              "priority": 28,
               "render": true,
               "features": {
                 "sticky": false,
@@ -549,6 +809,228 @@
               }
             }
           },
+          "pauseOnHover": {
+            "groupType": "group-item",
+            "item": {
+              "groupSlug": "contentMotion",
+              "attrName": "module.advanced.pauseOnHover",
+              "label": "Pause on Hover",
+              "description": "Stop the motion while the pointer is over the carousel. Keyboard focus inside the carousel always pauses it.",
+              "priority": 60,
+              "render": true,
+              "features": {
+                "sticky": false,
+                "responsive": false,
+                "hover": false
+              },
+              "component": {
+                "type": "field",
+                "name": "divi/toggle"
+              }
+            }
+          },
+          "endBehavior": {
+            "groupType": "group-item",
+            "item": {
+              "groupSlug": "contentMotion",
+              "attrName": "module.advanced.endBehavior",
+              "label": "At the Last Slide",
+              "description": "What happens after the last slide when Infinite Loop is off. Return to Start: autoplay goes back to the first slide. Return to Start, Arrows Too: the arrows and swiping also wrap around. Stop on the Last Slide: autoplay ends there.",
+              "priority": 55,
+              "render": true,
+              "features": {
+                "sticky": false,
+                "responsive": false,
+                "hover": false
+              },
+              "component": {
+                "type": "field",
+                "name": "divi/select",
+                "props": {
+                  "options": {
+                    "restart": {
+                      "label": "Return to Start"
+                    },
+                    "rewind": {
+                      "label": "Return to Start, Arrows Too"
+                    },
+                    "stop": {
+                      "label": "Stop on the Last Slide"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "stopOnInteraction": {
+            "groupType": "group-item",
+            "item": {
+              "groupSlug": "contentMotion",
+              "attrName": "module.advanced.stopOnInteraction",
+              "label": "Stop After Interaction",
+              "description": "Stop autoplay for good once a visitor drags, clicks an arrow or dot, or uses the keyboard. The pause button starts it again.",
+              "priority": 70,
+              "render": true,
+              "features": {
+                "sticky": false,
+                "responsive": false,
+                "hover": false
+              },
+              "component": {
+                "type": "field",
+                "name": "divi/toggle"
+              }
+            }
+          },
+          "effect": {
+            "groupType": "group-item",
+            "item": {
+              "groupSlug": "contentEffect",
+              "attrName": "module.advanced.effect",
+              "label": "Effect",
+              "description": "How one slide gives way to the next. Fade, Cards, Flip and Cube show one slide at a time. Coverflow centers the active slide and tilts the others. Continuous Scroll needs Slide.",
+              "priority": 10,
+              "render": true,
+              "features": {
+                "sticky": false,
+                "responsive": false,
+                "hover": false
+              },
+              "component": {
+                "type": "field",
+                "name": "divi/select",
+                "props": {
+                  "options": {
+                    "slide": {
+                      "label": "Slide"
+                    },
+                    "fade": {
+                      "label": "Fade"
+                    },
+                    "coverflow": {
+                      "label": "Coverflow"
+                    },
+                    "cards": {
+                      "label": "Cards"
+                    },
+                    "flip": {
+                      "label": "Flip"
+                    },
+                    "cube": {
+                      "label": "Cube"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "coverflowRotate": {
+            "groupType": "group-item",
+            "item": {
+              "groupSlug": "contentEffect",
+              "attrName": "module.advanced.coverflowRotate",
+              "label": "Coverflow Tilt",
+              "description": "How far the side slides turn away.",
+              "priority": 20,
+              "render": true,
+              "features": {
+                "sticky": false,
+                "responsive": false,
+                "hover": false
+              },
+              "component": {
+                "type": "field",
+                "name": "divi/range",
+                "props": {
+                  "min": 0,
+                  "max": 90,
+                  "step": 1,
+                  "defaultUnit": "deg",
+                  "allowedUnits": [
+                    "deg"
+                  ]
+                }
+              }
+            }
+          },
+          "coverflowDepth": {
+            "groupType": "group-item",
+            "item": {
+              "groupSlug": "contentEffect",
+              "attrName": "module.advanced.coverflowDepth",
+              "label": "Coverflow Depth",
+              "description": "How far the side slides sit behind the active one.",
+              "priority": 30,
+              "render": true,
+              "features": {
+                "sticky": false,
+                "responsive": false,
+                "hover": false
+              },
+              "component": {
+                "type": "field",
+                "name": "divi/range",
+                "props": {
+                  "min": 0,
+                  "max": 500,
+                  "step": 10,
+                  "defaultUnit": "px",
+                  "allowedUnits": [
+                    "px"
+                  ]
+                }
+              }
+            }
+          },
+          "coverflowStretch": {
+            "groupType": "group-item",
+            "item": {
+              "groupSlug": "contentEffect",
+              "attrName": "module.advanced.coverflowStretch",
+              "label": "Coverflow Spacing",
+              "description": "Pull the side slides closer (negative) or push them apart (positive).",
+              "priority": 40,
+              "render": true,
+              "features": {
+                "sticky": false,
+                "responsive": false,
+                "hover": false
+              },
+              "component": {
+                "type": "field",
+                "name": "divi/range",
+                "props": {
+                  "min": -200,
+                  "max": 200,
+                  "step": 5,
+                  "defaultUnit": "px",
+                  "allowedUnits": [
+                    "px"
+                  ]
+                }
+              }
+            }
+          },
+          "slideShadows": {
+            "groupType": "group-item",
+            "item": {
+              "groupSlug": "contentEffect",
+              "attrName": "module.advanced.slideShadows",
+              "label": "Slide Shadows",
+              "description": "Shade the slides as they turn.",
+              "priority": 50,
+              "render": true,
+              "features": {
+                "sticky": false,
+                "responsive": false,
+                "hover": false
+              },
+              "component": {
+                "type": "field",
+                "name": "divi/toggle"
+              }
+            }
+          },
           "isSwipe": {
             "groupType": "group-item",
             "item": {
@@ -561,6 +1043,86 @@
               "features": {
                 "sticky": false,
                 "responsive": true,
+                "hover": false
+              },
+              "component": {
+                "type": "field",
+                "name": "divi/toggle"
+              }
+            }
+          },
+          "freeScroll": {
+            "groupType": "group-item",
+            "item": {
+              "groupSlug": "contentInteraction",
+              "attrName": "module.advanced.freeScroll",
+              "label": "Free Scroll",
+              "description": "Drag or flick the slides and they glide to a stop with momentum, instead of moving one slide at a time.",
+              "priority": 12,
+              "render": true,
+              "features": {
+                "sticky": false,
+                "responsive": false,
+                "hover": false
+              },
+              "component": {
+                "type": "field",
+                "name": "divi/toggle"
+              }
+            }
+          },
+          "freeScrollSnap": {
+            "groupType": "group-item",
+            "item": {
+              "groupSlug": "contentInteraction",
+              "attrName": "module.advanced.freeScrollSnap",
+              "label": "Snap to Slides",
+              "description": "After a free scroll, settle on the nearest slide edge.",
+              "priority": 14,
+              "render": true,
+              "features": {
+                "sticky": false,
+                "responsive": false,
+                "hover": false
+              },
+              "component": {
+                "type": "field",
+                "name": "divi/toggle"
+              }
+            }
+          },
+          "mousewheel": {
+            "groupType": "group-item",
+            "item": {
+              "groupSlug": "contentInteraction",
+              "attrName": "module.advanced.mousewheel",
+              "label": "Mouse Wheel",
+              "description": "Scroll the slides with a trackpad or a horizontal mouse wheel. Scrolling up and down still scrolls the page.",
+              "priority": 16,
+              "render": true,
+              "features": {
+                "sticky": false,
+                "responsive": false,
+                "hover": false
+              },
+              "component": {
+                "type": "field",
+                "name": "divi/toggle"
+              }
+            }
+          },
+          "enableZoom": {
+            "groupType": "group-item",
+            "item": {
+              "groupSlug": "contentInteraction",
+              "attrName": "module.advanced.enableZoom",
+              "label": "Pinch to Zoom",
+              "description": "Pinch or double-tap an image to zoom in, up to three times. On a computer, double-click.",
+              "priority": 18,
+              "render": true,
+              "features": {
+                "sticky": false,
+                "responsive": false,
                 "hover": false
               },
               "component": {
@@ -900,8 +1462,349 @@
                     },
                     "number": {
                       "label": "Numbers"
+                    },
+                    "progressbar": {
+                      "label": "Progress Bar"
+                    },
+                    "dynamic": {
+                      "label": "Dynamic Dots"
                     }
                   }
+                }
+              }
+            }
+          },
+          "showScrollbar": {
+            "groupType": "group-item",
+            "item": {
+              "groupSlug": "contentControls",
+              "attrName": "module.advanced.showScrollbar",
+              "label": "Draggable Scrollbar",
+              "description": "Show a scrollbar under the slides that visitors can drag.",
+              "priority": 70,
+              "render": true,
+              "features": {
+                "sticky": false,
+                "responsive": false,
+                "hover": false
+              },
+              "component": {
+                "type": "field",
+                "name": "divi/toggle"
+              }
+            }
+          },
+          "showPauseButton": {
+            "groupType": "group-item",
+            "item": {
+              "groupSlug": "contentControls",
+              "attrName": "module.advanced.showPauseButton",
+              "label": "Pause Button",
+              "description": "Show a pause and play button on the slides, so visitors can stop the motion.",
+              "priority": 80,
+              "render": true,
+              "features": {
+                "sticky": false,
+                "responsive": false,
+                "hover": false
+              },
+              "component": {
+                "type": "field",
+                "name": "divi/toggle"
+              }
+            }
+          },
+          "pausePosition": {
+            "groupType": "group-item",
+            "item": {
+              "groupSlug": "contentControls",
+              "attrName": "module.advanced.pausePosition",
+              "label": "Pause Button Position",
+              "description": "Which corner of the slides the pause button sits in.",
+              "priority": 85,
+              "render": true,
+              "features": {
+                "sticky": false,
+                "responsive": false,
+                "hover": false
+              },
+              "component": {
+                "type": "field",
+                "name": "divi/select",
+                "props": {
+                  "options": {
+                    "top-right": {
+                      "label": "Top Right"
+                    },
+                    "top-left": {
+                      "label": "Top Left"
+                    },
+                    "bottom-right": {
+                      "label": "Bottom Right"
+                    },
+                    "bottom-left": {
+                      "label": "Bottom Left"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "showAutoplayProgress": {
+            "groupType": "group-item",
+            "item": {
+              "groupSlug": "contentControls",
+              "attrName": "module.advanced.showAutoplayProgress",
+              "label": "Autoplay Progress Bar",
+              "description": "A thin bar along the bottom of the slides that fills until the next slide.",
+              "priority": 90,
+              "render": true,
+              "features": {
+                "sticky": false,
+                "responsive": false,
+                "hover": false
+              },
+              "component": {
+                "type": "field",
+                "name": "divi/toggle"
+              }
+            }
+          },
+          "showThumbs": {
+            "groupType": "group-item",
+            "item": {
+              "groupSlug": "contentThumbs",
+              "attrName": "module.advanced.showThumbs",
+              "label": "Show Thumbnails",
+              "description": "Show a strip of small images under the carousel. Clicking one shows that slide, and the current slide is highlighted.",
+              "priority": 10,
+              "render": true,
+              "features": {
+                "sticky": false,
+                "responsive": false,
+                "hover": false
+              },
+              "component": {
+                "type": "field",
+                "name": "divi/toggle"
+              }
+            }
+          },
+          "thumbCount": {
+            "groupType": "group-item",
+            "item": {
+              "groupSlug": "contentThumbs",
+              "attrName": "module.advanced.thumbCount",
+              "label": "Thumbnails to Show",
+              "description": "How many thumbnails fit across the strip.",
+              "priority": 20,
+              "render": true,
+              "features": {
+                "sticky": false,
+                "responsive": true,
+                "hover": false
+              },
+              "component": {
+                "type": "field",
+                "name": "divi/range",
+                "props": {
+                  "min": 2,
+                  "max": 12,
+                  "step": 1,
+                  "defaultUnit": ""
+                }
+              }
+            }
+          },
+          "thumbGap": {
+            "groupType": "group-item",
+            "item": {
+              "groupSlug": "contentThumbs",
+              "attrName": "module.advanced.thumbGap",
+              "label": "Thumbnail Gap",
+              "description": "Space between thumbnails.",
+              "priority": 30,
+              "render": true,
+              "features": {
+                "sticky": false,
+                "responsive": false,
+                "hover": false
+              },
+              "component": {
+                "type": "field",
+                "name": "divi/range",
+                "props": {
+                  "min": 0,
+                  "max": 50,
+                  "step": 1,
+                  "defaultUnit": "px",
+                  "allowedUnits": [
+                    "px"
+                  ]
+                }
+              }
+            }
+          },
+          "thumbHeight": {
+            "groupType": "group-item",
+            "item": {
+              "groupSlug": "designThumbs",
+              "attrName": "module.advanced.thumbHeight",
+              "label": "Thumbnail Height",
+              "priority": 10,
+              "render": true,
+              "features": {
+                "sticky": false,
+                "responsive": true,
+                "hover": false
+              },
+              "component": {
+                "type": "field",
+                "name": "divi/range",
+                "props": {
+                  "min": 30,
+                  "max": 300,
+                  "step": 1,
+                  "defaultUnit": "px",
+                  "allowedUnits": [
+                    "px"
+                  ]
+                }
+              }
+            }
+          },
+          "thumbRadius": {
+            "groupType": "group-item",
+            "item": {
+              "groupSlug": "designThumbs",
+              "attrName": "module.advanced.thumbRadius",
+              "label": "Thumbnail Corner Radius",
+              "priority": 20,
+              "render": true,
+              "features": {
+                "sticky": false,
+                "responsive": false,
+                "hover": false
+              },
+              "component": {
+                "type": "field",
+                "name": "divi/range",
+                "props": {
+                  "min": 0,
+                  "max": 50,
+                  "step": 1,
+                  "defaultUnit": "px",
+                  "allowedUnits": [
+                    "px"
+                  ]
+                }
+              }
+            }
+          },
+          "thumbOpacity": {
+            "groupType": "group-item",
+            "item": {
+              "groupSlug": "designThumbs",
+              "attrName": "module.advanced.thumbOpacity",
+              "label": "Inactive Thumbnail Opacity",
+              "description": "How faded the thumbnails other than the current slide look.",
+              "priority": 30,
+              "render": true,
+              "features": {
+                "sticky": false,
+                "responsive": false,
+                "hover": false
+              },
+              "component": {
+                "type": "field",
+                "name": "divi/range",
+                "props": {
+                  "min": 10,
+                  "max": 100,
+                  "step": 5,
+                  "defaultUnit": "%",
+                  "allowedUnits": [
+                    "%"
+                  ]
+                }
+              }
+            }
+          },
+          "thumbActiveBorderColor": {
+            "groupType": "group-item",
+            "item": {
+              "groupSlug": "designThumbs",
+              "attrName": "module.advanced.thumbActiveBorderColor",
+              "label": "Active Thumbnail Border Color",
+              "priority": 40,
+              "render": true,
+              "features": {
+                "sticky": false,
+                "responsive": false,
+                "hover": false
+              },
+              "component": {
+                "type": "field",
+                "name": "divi/color-picker",
+                "props": {
+                  "isAlpha": true
+                }
+              }
+            }
+          },
+          "thumbActiveBorderWidth": {
+            "groupType": "group-item",
+            "item": {
+              "groupSlug": "designThumbs",
+              "attrName": "module.advanced.thumbActiveBorderWidth",
+              "label": "Active Thumbnail Border Width",
+              "priority": 50,
+              "render": true,
+              "features": {
+                "sticky": false,
+                "responsive": false,
+                "hover": false
+              },
+              "component": {
+                "type": "field",
+                "name": "divi/range",
+                "props": {
+                  "min": 0,
+                  "max": 10,
+                  "step": 1,
+                  "defaultUnit": "px",
+                  "allowedUnits": [
+                    "px"
+                  ]
+                }
+              }
+            }
+          },
+          "thumbSpacingTop": {
+            "groupType": "group-item",
+            "item": {
+              "groupSlug": "designThumbs",
+              "attrName": "module.advanced.thumbSpacingTop",
+              "label": "Thumbnail Spacing Top",
+              "description": "Space between the carousel and the thumbnail strip.",
+              "priority": 60,
+              "render": true,
+              "features": {
+                "sticky": false,
+                "responsive": false,
+                "hover": false
+              },
+              "component": {
+                "type": "field",
+                "name": "divi/range",
+                "props": {
+                  "min": 0,
+                  "max": 100,
+                  "step": 1,
+                  "defaultUnit": "px",
+                  "allowedUnits": [
+                    "px"
+                  ]
                 }
               }
             }
@@ -1082,6 +1985,55 @@
                       "label": "Burger"
                     }
                   }
+                }
+              }
+            }
+          },
+          "parallaxCaptions": {
+            "groupType": "group-item",
+            "item": {
+              "groupSlug": "contentInteraction",
+              "attrName": "module.advanced.parallaxCaptions",
+              "label": "Parallax Captions",
+              "description": "Move each slide's title and caption a little slower than its image as the slides change.",
+              "priority": 70,
+              "render": true,
+              "features": {
+                "sticky": false,
+                "responsive": false,
+                "hover": false
+              },
+              "component": {
+                "type": "field",
+                "name": "divi/toggle"
+              }
+            }
+          },
+          "parallaxAmount": {
+            "groupType": "group-item",
+            "item": {
+              "groupSlug": "contentInteraction",
+              "attrName": "module.advanced.parallaxAmount",
+              "label": "Parallax Distance",
+              "description": "How far the caption lags behind its image.",
+              "priority": 75,
+              "render": true,
+              "features": {
+                "sticky": false,
+                "responsive": false,
+                "hover": false
+              },
+              "component": {
+                "type": "field",
+                "name": "divi/range",
+                "props": {
+                  "min": 0,
+                  "max": 200,
+                  "step": 5,
+                  "defaultUnit": "px",
+                  "allowedUnits": [
+                    "px"
+                  ]
                 }
               }
             }
@@ -1761,6 +2713,17 @@
           }
         }
       },
+      "contentEffect": {
+        "panel": "content",
+        "priority": 25,
+        "groupName": "contentEffect",
+        "component": {
+          "name": "divi/composite",
+          "props": {
+            "groupLabel": "Transition Effect"
+          }
+        }
+      },
       "contentInteraction": {
         "panel": "content",
         "priority": 30,
@@ -1779,7 +2742,18 @@
         "component": {
           "name": "divi/composite",
           "props": {
-            "groupLabel": "Arrows & Dots"
+            "groupLabel": "Controls"
+          }
+        }
+      },
+      "contentThumbs": {
+        "panel": "content",
+        "priority": 50,
+        "groupName": "contentThumbs",
+        "component": {
+          "name": "divi/composite",
+          "props": {
+            "groupLabel": "Thumbnails"
           }
         }
       },
@@ -1867,6 +2841,19 @@
           "name": "divi/composite",
           "props": {
             "groupLabel": "Dot Position"
+          }
+        }
+      },
+      "designThumbs": {
+        "panel": "design",
+        "priority": 65,
+        "groupName": "designThumbs",
+        "component": {
+          "name": "divi/composite",
+          "props": {
+            "groupLabel": "Thumbnail Style",
+            "presetGroup": "divi/border",
+            "clipboardCategory": "style"
           }
         }
       },

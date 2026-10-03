@@ -47,6 +47,116 @@ class CarouselEngine
     }
 
     /**
+     * Parse a leading signed integer ("-20px" is -20), mirroring config.js
+     * num(). For values that may be negative, where to_int() would fall back.
+     *
+     * @param mixed $val      Raw value.
+     * @param int   $fallback Fallback integer.
+     *
+     * @return int
+     */
+    public static function to_signed_int($val, $fallback)
+    {
+        if (null === $val || '' === $val) {
+            return $fallback;
+        }
+        return 1 === preg_match('/^\s*([+-]?\d+)/', (string) $val, $m) ? (int) $m[1] : $fallback;
+    }
+
+    /**
+     * The carousel's transition effect, or 'slide' for anything unknown.
+     * Mirrors carouselEffect() in config.js.
+     *
+     * @param array $advanced The module advanced attrs.
+     *
+     * @return string
+     */
+    public static function effect($advanced)
+    {
+        $effect = $advanced['effect']['desktop']['value'] ?? 'slide';
+        return in_array($effect, ['slide', 'fade', 'coverflow', 'cards', 'flip', 'cube'], true) ? $effect : 'slide';
+    }
+
+    /**
+     * Does this carousel run Continuous Scroll? Needs autoplay and the plain
+     * slide effect. Mirrors isContinuous() in config.js.
+     *
+     * @param array $advanced The module advanced attrs.
+     *
+     * @return bool
+     */
+    public static function is_continuous($advanced)
+    {
+        return 'on' === ($advanced['isAutoplay']['desktop']['value'] ?? 'on')
+            && 'continuous' === ($advanced['autoplayMode']['desktop']['value'] ?? 'step')
+            && 'slide' === self::effect($advanced)
+            && self::grid_rows($advanced) <= 1;
+    }
+
+    /**
+     * Rows of slides (Swiper grid), 1 to 4. Only a horizontal, fixed-width
+     * carousel with the slide effect can stack rows; anything else gets 1.
+     * Mirrors gridRows() in config.js.
+     *
+     * @param array $advanced The module advanced attrs.
+     *
+     * @return int
+     */
+    public static function grid_rows($advanced)
+    {
+        if ('slide' !== self::effect($advanced)
+            || 'on' === ($advanced['isVertical']['desktop']['value'] ?? 'off')
+            || 'on' === ($advanced['isVariableWidth']['desktop']['value'] ?? 'off')
+        ) {
+            return 1;
+        }
+        return min(4, max(1, self::to_int($advanced['gridRows']['desktop']['value'] ?? '1', 1)));
+    }
+
+    /**
+     * The parent carousel's `module.advanced` attrs, for a slide's render.
+     * Pinch to Zoom and Parallax Captions change the slide markup, so the
+     * slide needs to know how its carousel is set. Defaults and presets are
+     * folded in through Divi's own get_all_attrs().
+     *
+     * @param object $block The slide's parsed block.
+     *
+     * @return array
+     */
+    public static function parent_advanced($block)
+    {
+        $store = '\ET\Builder\FrontEnd\BlockParser\BlockParserStore';
+        if (!is_object($block) || empty($block->parsed_block['id']) || !class_exists($store) || !method_exists($store, 'get_parent')) {
+            return [];
+        }
+        $parent = $store::get_parent($block->parsed_block['id'], $block->parsed_block['storeInstance'] ?? null);
+        if (!$parent) {
+            return [];
+        }
+        $utils = '\ET\Builder\Packages\ModuleUtils\ModuleUtils';
+        $attrs = (class_exists($utils) && method_exists($utils, 'get_all_attrs')) ? $utils::get_all_attrs($parent) : ($parent->attrs ?? []);
+        $advanced = $attrs['module']['advanced'] ?? [];
+        return is_array($advanced) ? $advanced : [];
+    }
+
+    /**
+     * Slide markup options that come from the parent carousel.
+     *
+     * @param array $parent The parent's `module.advanced` attrs.
+     *
+     * @return array ['zoom' => bool, 'parallax' => int|null] Parallax is the caption offset in px, or null.
+     */
+    public static function slide_options($parent)
+    {
+        $continuous = self::is_continuous($parent);
+        $zoom       = !$continuous && 'on' === ($parent['enableZoom']['desktop']['value'] ?? 'off');
+        $parallax   = (!$continuous && 'on' === ($parent['parallaxCaptions']['desktop']['value'] ?? 'off'))
+            ? max(0, self::to_int($parent['parallaxAmount']['desktop']['value'] ?? '60px', 60))
+            : null;
+        return ['zoom' => $zoom, 'parallax' => $parallax];
+    }
+
+    /**
      * Resolve a Divi icon value to its glyph char + font.
      *
      * @param mixed  $icon     Icon value (object or "unicode||type||weight").
@@ -123,12 +233,24 @@ class CarouselEngine
         $is_vertical   = 'on' === $val('isVertical', 'off');
         $is_variable   = 'on' === $val('isVariableWidth', 'off');
         $is_autoplay   = 'on' === $val('isAutoplay', 'on');
-        $show_nav      = 'off' !== $val('useNav', 'on');
-        $show_pagi     = 'on' === $val('usePagi', 'off');
+        // Continuous Scroll: the runtime moves the track at a steady speed
+        // itself (runtime.js), so Swiper's loop, autoplay, arrows, dots and
+        // keyboard paging are all off. Swiper still lays the slides out and
+        // handles dragging. It needs the plain slide effect.
+        $effect        = self::effect($advanced);
+        // Fade, Cards, Flip and Cube stack or turn single slides.
+        $single_view   = in_array($effect, ['fade', 'cards', 'flip', 'cube'], true);
+        $continuous    = self::is_continuous($advanced);
+        $reverse       = 'on' === $val('reverseDirection', 'off');
+        $pause_hover   = 'off' !== $val('pauseOnHover', 'on');
+        $stop_interact = 'on' === $val('stopOnInteraction', 'off');
+        $end_behavior  = $val('endBehavior', 'restart');
+        $show_nav      = !$continuous && 'off' !== $val('useNav', 'on');
+        $show_pagi     = !$continuous && 'on' === $val('usePagi', 'off');
 
         $config = [
             'speed'          => self::to_int($val('animationSpeed', '700ms'), 700),
-            'loop'           => $is_infinite,
+            'loop'           => $is_infinite && !$continuous,
             'grabCursor'     => true,
             'simulateTouch'  => $is_swipe,
             'allowTouchMove' => $is_swipe,
@@ -154,6 +276,13 @@ class CarouselEngine
             ],
             // Arrow-key control when the carousel has focus.
             'keyboard'       => ['enabled' => true, 'onlyInViewport' => true],
+            // Whole-pixel slide sizes and positions. Fractional widths left
+            // images a half pixel off their grid, which reads as a soft edge
+            // and a shimmer while the track moves.
+            'roundLengths'        => true,
+            // Per-slide progress and visibility classes (parallax captions,
+            // the thumbnail strip, the a11y module's visible set).
+            'watchSlidesProgress' => true,
         ];
 
         if ($is_vertical) {
@@ -169,11 +298,27 @@ class CarouselEngine
             ];
         }
 
-        if ($slide_scroll > 1 && !$is_vertical && !$is_variable) {
+        if ($slide_scroll > 1 && !$is_vertical && !$is_variable && !$continuous) {
             $config['slidesPerGroup'] = $slide_scroll;
         }
 
-        if ($is_center && !$is_vertical) {
+        if ($continuous) {
+            // Arrow keys would page a track the runtime is moving; the pause
+            // button and focus pause are the keyboard controls here.
+            $config['keyboard'] = ['enabled' => false];
+            // A film strip is thrown, not paged: a drag glides to a stop with
+            // momentum instead of snapping to the nearest slide, and the strip
+            // picks up again from there.
+            $config['freeMode'] = [
+                'enabled'        => true,
+                'momentum'       => true,
+                'momentumRatio'  => 0.6,
+                'momentumBounce' => false,
+                'sticky'         => false,
+            ];
+        }
+
+        if ($is_center && !$is_vertical && !$continuous) {
             $config['centeredSlides'] = true;
             $center_mode_type = $val('centerModeType', 'classic');
             $center_padding   = self::to_int($val('centerPadding', '0px'), 0);
@@ -188,24 +333,185 @@ class CarouselEngine
         }
 
         if ($show_pagi) {
-            $config['pagination'] = ['el' => '.swiper-pagination', 'clickable' => true];
-            if ('number' === $val('pagiType', 'dot')) {
-                $config['dtqPagiType'] = 'number';
+            $pagi_type = $val('pagiType', 'dot');
+            if ('progressbar' === $pagi_type) {
+                $config['pagination'] = ['el' => '.swiper-pagination', 'type' => 'progressbar'];
+            } else {
+                $config['pagination'] = ['el' => '.swiper-pagination', 'clickable' => true];
+                if ('number' === $pagi_type) {
+                    $config['dtqPagiType'] = 'number';
+                } elseif ('dynamic' === $pagi_type) {
+                    // A long row of dots shrinks to the few around the active one.
+                    $config['pagination']['dynamicBullets']     = true;
+                    $config['pagination']['dynamicMainBullets'] = 1;
+                }
             }
         }
 
-        if ($is_autoplay) {
-            $config['autoplay'] = [
-                'delay'                => self::to_int($val('autoplaySpeed', '2000ms'), 2000),
-                'disableOnInteraction' => false,
-                // Moving content that cannot be paused is a WCAG 2.2.2 problem.
-                // Hovering is the one pause affordance available without adding
-                // a visible control, so it is on by default.
-                'pauseOnMouseEnter'    => true,
+        if (!$continuous && !$is_vertical && 'on' === $val('showScrollbar', 'off')) {
+            $config['scrollbar'] = ['el' => '.swiper-scrollbar', 'draggable' => true, 'snapOnRelease' => true, 'hide' => false];
+        }
+
+        // Transition effects.
+        if ('slide' !== $effect) {
+            $config['effect'] = $effect;
+            $slide_shadows    = 'off' !== $val('slideShadows', 'on');
+            if ($single_view) {
+                $config['slidesPerView'] = 1;
+                $config['spaceBetween']  = 0;
+                unset($config['breakpoints'], $config['slidesPerGroup'], $config['centeredSlides'], $config['slidesOffsetBefore'], $config['slidesOffsetAfter']);
+            }
+            if ('fade' === $effect) {
+                $config['fadeEffect'] = ['crossFade' => true];
+            } elseif ('cards' === $effect) {
+                $config['cardsEffect'] = ['slideShadows' => $slide_shadows, 'rotate' => true, 'perSlideOffset' => 8, 'perSlideRotate' => 2];
+            } elseif ('flip' === $effect) {
+                $config['flipEffect'] = ['slideShadows' => $slide_shadows, 'limitRotation' => true];
+            } elseif ('cube' === $effect) {
+                $config['cubeEffect'] = ['slideShadows' => $slide_shadows, 'shadow' => $slide_shadows, 'shadowOffset' => 20, 'shadowScale' => 0.94];
+            } elseif ('coverflow' === $effect) {
+                // Coverflow is built around a centered active slide.
+                $config['centeredSlides'] = true;
+                unset($config['slidesOffsetBefore'], $config['slidesOffsetAfter']);
+                $config['coverflowEffect'] = [
+                    'rotate'       => self::to_signed_int($val('coverflowRotate', '50deg'), 50),
+                    'depth'        => self::to_signed_int($val('coverflowDepth', '100px'), 100),
+                    'stretch'      => self::to_signed_int($val('coverflowStretch', '0px'), 0),
+                    'modifier'     => 1,
+                    'slideShadows' => $slide_shadows,
+                ];
+            }
+        }
+
+        // Gallery options.
+        $rows = self::grid_rows($advanced);
+        if ($rows > 1) {
+            // Row fill keeps the slides' natural height (column fill needs a
+            // fixed carousel height). Swiper's loop cannot run on a
+            // row-filled grid, and a grid has no single slide to center.
+            $config['grid'] = ['rows' => $rows, 'fill' => 'row'];
+            $config['loop'] = false;
+            unset($config['centeredSlides'], $config['slidesOffsetBefore'], $config['slidesOffsetAfter']);
+        }
+        if (!$continuous && 'on' === $val('enableZoom', 'off')) {
+            $config['zoom'] = ['maxRatio' => 3, 'toggle' => true];
+        }
+        if (!$continuous && 'on' === $val('parallaxCaptions', 'off')) {
+            $config['parallax'] = true;
+        }
+        if (!$continuous && 'on' === $val('showThumbs', 'off')) {
+            // Built by the runtime from the slides' own images (runtime.js).
+            $thumbs        = max(1, self::to_int($val('thumbCount', '6'), 6));
+            $thumbs_tablet = max(1, $bp_int('thumbCount', 'tablet', $thumbs));
+            $config['dtqThumbs'] = [
+                'count'  => $thumbs,
+                'tablet' => $thumbs_tablet,
+                'phone'  => max(1, $bp_int('thumbCount', 'phone', $thumbs_tablet)),
+                'gap'    => max(0, self::to_int($val('thumbGap', '8px'), 8)),
             ];
         }
 
+        // Free Scroll and Mouse Wheel (Slide by Slide; Continuous Scroll
+        // always glides and leaves the wheel to the page). Free scroll moves
+        // a track, so it needs the plain slide effect.
+        if (!$continuous && 'slide' === $effect && 'on' === $val('freeScroll', 'off')) {
+            $config['freeMode'] = [
+                'enabled'        => true,
+                'momentum'       => true,
+                'momentumRatio'  => 1,
+                'momentumBounce' => true,
+                'sticky'         => 'on' === $val('freeScrollSnap', 'off'),
+            ];
+        }
+        if (!$continuous && 'on' === $val('mousewheel', 'off')) {
+            // forceToAxis: a horizontal carousel only takes horizontal wheel
+            // and trackpad movement, so scrolling down the page is never
+            // captured. releaseOnEdges hands the wheel back at either end.
+            $config['mousewheel'] = ['enabled' => true, 'forceToAxis' => true, 'releaseOnEdges' => true, 'sensitivity' => 1];
+            if ($is_vertical) {
+                // A looping vertical carousel has no end to release at.
+                $config['loop'] = false;
+            }
+        }
+
+        // At the last slide, when the loop is off. "restart" is Swiper's
+        // default: autoplay returns to the first slide, the arrows stop.
+        if (!$is_infinite && !$continuous && 'rewind' === $end_behavior) {
+            $config['rewind'] = true;
+        }
+
+        if ($is_autoplay && !$continuous) {
+            $config['autoplay'] = [
+                'delay'                => self::to_int($val('autoplaySpeed', '2000ms'), 2000),
+                // Hover, keyboard focus, off-screen and the pause button are
+                // all held by the shared runtime (runtime.js), which owns
+                // pausing. Swiper's own hover pause cannot see those other
+                // reasons and would restart autoplay underneath them.
+                'pauseOnMouseEnter'    => false,
+                // Stop After Interaction is a runtime hold, so the pause
+                // button can start autoplay again.
+                'disableOnInteraction' => false,
+                'reverseDirection'     => $reverse,
+                'stopOnLastSlide'      => !$is_infinite && 'stop' === $end_behavior,
+            ];
+        }
+
+        // Settings the runtime reads (stripped before Swiper sees the config).
+        $config['dtqMotion'] = $continuous
+            ? [
+                'mode'              => 'continuous',
+                'pauseOnHover'      => $pause_hover,
+                // Pixels per second. A floor of 10 keeps a stored 0 from
+                // stopping the strip (and from a zero-length loop).
+                'pxPerSec'          => max(10, self::to_int($val('scrollSpeed', '60px'), 60)),
+                'reverse'           => $reverse,
+                'stopOnInteraction' => $stop_interact,
+            ]
+            : [
+                'mode'              => 'step',
+                // Moving content that cannot be paused is a WCAG 2.2.2
+                // problem; hovering pauses it by default.
+                'pauseOnHover'      => $pause_hover,
+                'stopOnInteraction' => $stop_interact,
+            ];
+
         return ['config' => $config, 'show_nav' => $show_nav, 'show_pagi' => $show_pagi];
+    }
+
+    /**
+     * Inline custom properties that lay the slides out before Swiper starts.
+     *
+     * Read from the built config, so the counts are the ones Swiper will use.
+     * Returns an empty string for layouts the pre-init row cannot predict
+     * (vertical, variable width, centered, effects other than slide, rows).
+     * The rules live in src/divi5/shared/carousel/carousel.scss.
+     *
+     * @param array $config A config from build_swiper_config().
+     *
+     * @return string A leading-space ` style="..."` attribute, or ''.
+     */
+    public static function pre_init_style($config)
+    {
+        if (!is_array($config)
+            || !isset($config['slidesPerView'])
+            || !is_int($config['slidesPerView'])
+            || isset($config['direction'])
+            || !empty($config['centeredSlides'])
+            || (isset($config['effect']) && 'slide' !== $config['effect'])
+            || isset($config['grid'])
+        ) {
+            return '';
+        }
+
+        $phone   = max(1, (int) $config['slidesPerView']);
+        $tablet  = max(1, (int) ($config['breakpoints'][768]['slidesPerView'] ?? $phone));
+        $desktop = max(1, (int) ($config['breakpoints'][981]['slidesPerView'] ?? $tablet));
+        $gap     = max(0, (int) ($config['spaceBetween'] ?? 0));
+
+        return sprintf(
+            ' style="%s"',
+            esc_attr(sprintf('--dtq-slides:%1$d;--dtq-slides-tablet:%2$d;--dtq-slides-phone:%3$d;--dtq-gap:%4$dpx', $desktop, $tablet, $phone, $gap))
+        );
     }
 
     /**
@@ -237,6 +543,52 @@ class CarouselEngine
     }
 
     /**
+     * Markup for the optional controls: the pause button and autoplay progress
+     * bar sit inside `.swiper` (over the slides), the scrollbar after it.
+     * Mirrors renderCarouselControls() in renderArrows.jsx; the runtime
+     * (runtime.js) wires them up.
+     *
+     * @param array $advanced The module advanced attrs.
+     *
+     * @return array ['inner' => string, 'after' => string]
+     */
+    public static function render_controls($advanced)
+    {
+        $val        = function ($key, $fallback) use ($advanced) {
+            return $advanced[$key]['desktop']['value'] ?? $fallback;
+        };
+        $autoplay   = 'on' === $val('isAutoplay', 'on');
+        $continuous = self::is_continuous($advanced);
+        $vertical   = 'on' === $val('isVertical', 'off');
+
+        $inner = '';
+        if ($autoplay && 'on' === $val('showPauseButton', 'off')) {
+            $position = $val('pausePosition', 'top-right');
+            if (!in_array($position, ['top-right', 'top-left', 'bottom-right', 'bottom-left'], true)) {
+                $position = 'top-right';
+            }
+            $pause = esc_html__('Pause the carousel', 'addons-for-divi');
+            $inner .= sprintf(
+                '<button type="button" class="dtq-carousel-pause dtq-carousel-pause--%1$s" aria-pressed="false" aria-label="%2$s" data-label-pause="%2$s" data-label-play="%3$s"><span class="dtq-carousel-pause__icon" aria-hidden="true"></span></button>',
+                esc_attr($position),
+                esc_attr($pause),
+                esc_attr(esc_html__('Play the carousel', 'addons-for-divi'))
+            );
+        }
+        if ($autoplay && !$continuous && 'on' === $val('showAutoplayProgress', 'off')) {
+            $inner .= '<div class="dtq-carousel-progress" aria-hidden="true"><span class="dtq-carousel-progress__bar"></span></div>';
+        }
+
+        $after = (!$continuous && !$vertical && 'on' === $val('showScrollbar', 'off')) ? '<div class="swiper-scrollbar"></div>' : '';
+        if (!$continuous && 'on' === $val('showThumbs', 'off')) {
+            // Filled by the runtime from the slides' images.
+            $after .= '<div class="swiper dtq-carousel-thumbs"><div class="swiper-wrapper"></div></div>';
+        }
+
+        return ['inner' => $inner, 'after' => $after];
+    }
+
+    /**
      * Base wrapper classes for a carousel module. Modules append their own
      * (e.g. logo carousel appends its logoHover class).
      *
@@ -247,8 +599,19 @@ class CarouselEngine
      */
     public static function base_wrapper_classes($advanced, $type_class)
     {
-        $classes = ['dtq-swiper-carousel', $type_class, 'dtq-lightbox-off'];
-        if ('on' === ($advanced['isCenter']['desktop']['value'] ?? 'off')) {
+        $classes    = ['dtq-swiper-carousel', $type_class, 'dtq-lightbox-off'];
+        $continuous = self::is_continuous($advanced);
+        $effect     = self::effect($advanced);
+        if ($continuous) {
+            $classes[] = 'dtq-autoplay--continuous';
+        }
+        if ('slide' !== $effect) {
+            $classes[] = 'dtq-effect--' . $effect;
+        }
+        if (self::grid_rows($advanced) > 1) {
+            $classes[] = 'dtq-grid';
+        }
+        if ('on' === ($advanced['isCenter']['desktop']['value'] ?? 'off') && !$continuous && 'slide' === $effect && self::grid_rows($advanced) <= 1) {
             $classes[] = 'dtq-centered';
             $center_type = $advanced['centerModeType']['desktop']['value'] ?? 'classic';
             $classes[]   = 'dtq-centered--' . (in_array($center_type, ['classic', 'highlighted'], true) ? $center_type : 'classic');
@@ -411,6 +774,65 @@ class CarouselEngine
             if ($pagi_color_hover) $push($dtq . ' .swiper-pagination-bullet:hover', sprintf('color: %1$s;', $pagi_color_hover));
         }
 
+        // Progress bar and dynamic dots pagination.
+        $pagi_type = $val('pagiType', 'dot');
+        if ('progressbar' === $pagi_type) {
+            $push(
+                $dtq . ' > .swiper-pagination.swiper-pagination-progressbar',
+                sprintf('display: block; height: %1$s; background: %2$s; border-radius: %3$s; overflow: hidden;', $pagi_height, $pagi_bg, $pagi_radius)
+            );
+            $push($dtq . ' > .swiper-pagination .swiper-pagination-progressbar-fill', sprintf('background: %1$s; border-radius: %2$s;', $pagi_bg_active, $pagi_radius));
+        } elseif ('dynamic' === $pagi_type) {
+            // Swiper sizes and offsets dynamic bullets from their outer width,
+            // so the spacing has to be margin (not the flex gap) and the row a
+            // plain line.
+            $push(
+                $dtq . ' > .swiper-pagination.swiper-pagination-bullets-dynamic',
+                'display: block; left: 50%; transform: translateX(-50%); white-space: nowrap; overflow: hidden; font-size: 0;'
+            );
+            $push(
+                $dtq . ' > .swiper-pagination-bullets-dynamic .swiper-pagination-bullet',
+                sprintf('display: inline-block; position: relative; margin: 0 calc(%1$s / 2);', $pagi_spacing)
+            );
+        }
+
+        // Draggable scrollbar.
+        if ('on' === $val('showScrollbar', 'off')) {
+            $push(
+                $dtq . ' > .swiper-scrollbar',
+                sprintf('position: relative; left: auto; right: auto; top: auto; bottom: auto; width: 100%%; height: %1$s; margin-top: %2$s; background: %3$s; border-radius: %4$s;', $pagi_height, $pagi_pos_y, $pagi_bg, $pagi_radius)
+            );
+            $push($dtq . ' > .swiper-scrollbar .swiper-scrollbar-drag', sprintf('background: %1$s; border-radius: %2$s;', $pagi_bg_active, $pagi_radius));
+        }
+
+        // Autoplay progress bar.
+        if ('on' === $val('showAutoplayProgress', 'off')) {
+            $push($dtq . ' .dtq-carousel-progress', sprintf('background: %1$s;', $pagi_bg));
+            $push($dtq . ' .dtq-carousel-progress__bar', sprintf('background: %1$s;', $pagi_bg_active));
+        }
+
+        // Pause button (takes the arrow style).
+        if ('on' === $val('showPauseButton', 'off')) {
+            $push(
+                $dtq . ' .dtq-carousel-pause',
+                sprintf(
+                    'width: %1$s; height: %2$s; background: %3$s; color: %4$s; border: %5$s %6$s %7$s; border-radius: %8$s; font-size: calc(%9$s / 2);',
+                    $nav_width,
+                    $nav_height,
+                    $nav_bg,
+                    $nav_color,
+                    $nav_border_width,
+                    $nav_border_style,
+                    $nav_border_color,
+                    $nav_radius,
+                    $nav_icon_size
+                )
+            );
+            if ($hover('navColor')) $push($dtq . ' .dtq-carousel-pause:hover', sprintf('color: %1$s;', $hover('navColor')));
+            if ($hover('navBg')) $push($dtq . ' .dtq-carousel-pause:hover', sprintf('background: %1$s;', $hover('navBg')));
+            if ($hover('navBorderColor')) $push($dtq . ' .dtq-carousel-pause:hover', sprintf('border-color: %1$s;', $hover('navBorderColor')));
+        }
+
         // Alongside navigation (CSS-positioned).
         if ('alongside' === $val('navType', 'overlay')) {
             // These two are interpolated as CSS *property names*, so they must be
@@ -465,6 +887,48 @@ class CarouselEngine
             }
         }
 
+        // Image Height without Variable Slide Width: every image is cropped to
+        // one height, so slides of different shapes (and effects, which show
+        // whole slides) line up evenly. Keep in lockstep with styles.js.
+        if ('on' !== $val('isVariableWidth', 'off')) {
+            $effect_image_height = $len('imageHeight', '');
+            if ((float) $effect_image_height > 0) {
+                $push($dtq . ' .swiper-slide .dtq-figure img', sprintf('height: %s; width: 100%%; max-width: 100%%; object-fit: cover;', $effect_image_height));
+                foreach (['tablet' => $tablet, 'phone' => $phone] as $bp => $at_rule) {
+                    $bp_height = $bp_raw('imageHeight', $bp);
+                    if ((float) $bp_height > 0) {
+                        $push_at($at_rule, $dtq . ' .swiper-slide .dtq-figure img', sprintf('height: %s;', $bp_height));
+                    }
+                }
+            }
+        }
+
+        // Thumbnail strip. Prefixed with the wrapper's child combinator so the
+        // slide rules above (variable width, image height) never reach the
+        // thumbnails. Keep in lockstep with styles.js.
+        if ('on' === $val('showThumbs', 'off') && !self::is_continuous($advanced)) {
+            $thumbs  = $dtq . ' > .dtq-carousel-thumbs';
+            $opacity = min(1, max(0.1, self::to_int($val('thumbOpacity', '50%'), 50) / 100));
+            $push($thumbs, sprintf('height: %1$s; margin-top: %2$s;', $len('thumbHeight', '80px'), $len('thumbSpacingTop', '10px')));
+            foreach (['tablet' => $tablet, 'phone' => $phone] as $bp => $at_rule) {
+                $bp_height = $bp_raw('thumbHeight', $bp);
+                if ((float) $bp_height > 0) {
+                    $push_at($at_rule, $thumbs, sprintf('height: %s;', $bp_height));
+                }
+            }
+            $push(
+                $thumbs . ' .swiper-slide',
+                sprintf(
+                    'height: 100%%; margin-bottom: 0; overflow: hidden; cursor: pointer; box-sizing: border-box; opacity: %1$s; border: %2$s solid transparent; border-radius: %3$s; transition: opacity 0.2s, border-color 0.2s;',
+                    rtrim(rtrim(number_format($opacity, 2, '.', ''), '0'), '.'),
+                    $len('thumbActiveBorderWidth', '2px'),
+                    $len('thumbRadius', '4px')
+                )
+            );
+            $push($thumbs . ' .swiper-slide-thumb-active', sprintf('opacity: 1; border-color: %1$s;', $color('thumbActiveBorderColor', '#2ea3f2')));
+            $push($thumbs . ' .swiper-slide img', 'display: block; width: 100%; height: 100%; max-width: none; object-fit: cover;');
+        }
+
         // Carousel spacing top/bottom (pad the viewport).
         $spacing_top    = $len('carouselSpacingTop', '0px');
         $spacing_bottom = $len('carouselSpacingBottom', '0px');
@@ -480,8 +944,13 @@ class CarouselEngine
 
         // Custom transition easing. Only a real timing function is allowed through
         // — this lands inside a declaration, so an arbitrary string could close it.
+        // Not in Continuous Scroll: there the only wrapper transition is the
+        // glide after a drag, which needs an ease-out (carousel.scss), and an
+        // ease-in-out made it speed up before it slowed down.
+        $continuous     = self::is_continuous($advanced);
         $css_transition = trim((string) $val('cssTransition', ''));
-        if ('' !== $css_transition
+        if (!$continuous
+            && '' !== $css_transition
             && preg_match('/^(?:linear|ease|ease-in|ease-out|ease-in-out|step-start|step-end|cubic-bezier\(\s*[0-9.,\s-]+\)|steps\(\s*[0-9,a-z\s-]+\))$/i', $css_transition)
         ) {
             $push($dtq . ' .swiper-wrapper', sprintf('transition-timing-function: %1$s !important;', $css_transition));

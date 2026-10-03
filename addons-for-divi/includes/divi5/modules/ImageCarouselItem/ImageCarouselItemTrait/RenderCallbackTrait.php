@@ -13,6 +13,7 @@ if (!defined('ABSPATH')) {
 }
 
 use DiviTorqueLite\Modules\Shared\DynamicValue;
+use DiviTorqueLite\Modules\SharedCarousel\CarouselEngine;
 use ET\Builder\Packages\Module\Module;
 
 trait RenderCallbackTrait
@@ -91,12 +92,17 @@ trait RenderCallbackTrait
         $photo_src = is_array($photo_val) ? ($photo_val['src'] ?? '') : $photo_val;
         $photo_alt = $attrs['photo']['advanced']['alt']['desktop']['value'] ?? '';
         $img       = '';
+        // Pinch to Zoom and Parallax Captions are set on the carousel.
+        $slide_opts = CarouselEngine::slide_options(CarouselEngine::parent_advanced($block));
         if (!empty($photo_src)) {
             $img = sprintf(
                 '<img class="dtq-swapped-img" src="%1$s" alt="%2$s"/>',
                 esc_url($photo_src),
                 esc_attr($photo_alt)
             );
+            if ($slide_opts['zoom']) {
+                $img = '<div class="swiper-zoom-container">' . $img . '</div>';
+            }
         }
 
         // Overlay.
@@ -137,12 +143,13 @@ trait RenderCallbackTrait
         $content_block = '';
         if ('' !== $title_text || '' !== $sub_text) {
             $content_block = sprintf(
-                '<div class="content content--%1$s content--%2$s"><div class="content-inner">%3$s%4$s%5$s</div></div>',
+                '<div class="content content--%1$s content--%2$s"%6$s><div class="content-inner">%3$s%4$s%5$s</div></div>',
                 esc_attr($content_alignment),
                 esc_attr($content_type),
                 $title,
                 $sub_title,
-                $button
+                $button,
+                null === $slide_opts['parallax'] ? '' : sprintf(' data-swiper-parallax="-%d"', $slide_opts['parallax'])
             );
         }
 

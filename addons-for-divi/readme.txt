@@ -4,7 +4,7 @@ Tags: divi, divi 5, divi modules, divi builder, divi carousel
 Requires at least: 7.0
 Tested up to: 7.1
 Requires PHP: 7.4
-Stable tag: 4.13.0
+Stable tag: 4.14.1
 License: GPLv3
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 
@@ -28,7 +28,7 @@ You can turn off any module you do not need in the Module Manager. After you act
 
 = Carousels and Sliders =
 
-* **Image Carousel**: A Divi image carousel with arrows, dots, autoplay, and a separate slide count for desktop, tablet, and phone.
+* **Image Carousel**: A Divi image carousel with arrows, dots, and autoplay, or a strip that scrolls continuously like a film. Add thumbnails, pinch to zoom, rows, and Fade, Coverflow, Cards, Flip or Cube effects, with a separate slide count for desktop, tablet, and phone.
 * **Logo Carousel**: Show client or partner logos in a sliding strip.
 * **Post Carousel**: Slide through your blog posts with six ready-made card designs.
 * **X (Twitter) Carousel**: Show your latest X posts in a carousel.
@@ -151,7 +151,7 @@ Yes. All 41 modules are native Divi 5 modules. 26 of them also work in Divi 4.
 
 = Does it include a Divi carousel? =
 
-Yes, four: Image Carousel, Logo Carousel, Post Carousel, and X (Twitter) Carousel. Each has autoplay, loop, arrows, dots, and a slide count for each screen size.
+Yes, four: Image Carousel, Logo Carousel, Post Carousel, and X (Twitter) Carousel. Each has autoplay, loop, arrows, dots, and a slide count for each screen size. The Image Carousel can also scroll continuously without stopping between slides: set its Autoplay Style to Continuous Scroll.
 
 = Does it include a filterable gallery? =
 
@@ -176,6 +176,22 @@ Updates are made to keep existing pages working. We still recommend a backup bef
 3. Image Carousel module
 
 == Changelog ==
+
+= Version 4.14.1 =
+* Fix: On sites with an image lazy-loading plugin, Image Carousel thumbnails and the repeating slides of Continuous Scroll could stay blank. They now show their images.
+
+= Version 4.14.0 =
+* New: Image Carousel has a Continuous Scroll autoplay style. The slides move at a steady speed without stopping, like a film strip. They pause the moment the pointer moves over them and continue from the same spot.
+* New: Image Carousel pause and play button, autoplay progress bar, Progress Bar and Dynamic Dots pagination, and a draggable scrollbar.
+* New: Image Carousel can scroll freely with momentum and follow a trackpad or horizontal mouse wheel. Scrolling up and down still scrolls the page.
+* New: Image Carousel transition effects: Fade, Coverflow, Cards, Flip and Cube.
+* New: Image Carousel thumbnail strip, pinch to zoom, rows, and parallax captions.
+* New: Image Carousel settings for what happens at the last slide, and to stop autoplay once a visitor interacts.
+* Improvement: Image Height also works without Variable Slide Width. Every image gets that height, cropped to fit, so images of different shapes line up.
+* Improvement: Divi 5 carousels pause while scrolled out of view and while a link inside them has keyboard focus, use whole-pixel slide widths, and show their first slides in a row while the page loads.
+* Fix: Divi 5 Image Carousel and Logo Carousel no longer leave extra space under the slides on desktop.
+* Fix: A looping carousel with too few slides for its layout (centered, scrolling several slides at a time, or the Cards effect) no longer repeats or blanks slides. The loop turns off instead.
+* Fix: With Divi Torque Pro active, Divi Torque Lite carousels keep their own behavior whichever plugin's scripts load first.
 
 = Version 4.13.0 =
 * Fix: Divi 5 sites on PHP 7.4, 8.0 or 8.1 showed a critical error on every page after updating to Lite 4.9.0 or later. Lite works on PHP 7.4 and later again.
@@ -404,6 +420,12 @@ Updates are made to keep existing pages working. We still recommend a backup bef
 * Public beta release
 
 == Upgrade Notice ==
+
+= 4.14.1 =
+Fixes blank Image Carousel thumbnails and Continuous Scroll slides on sites that use an image lazy-loading plugin.
+
+= 4.14.0 =
+Adds Continuous Scroll to the Image Carousel, plus a pause button, progress bars, free scroll, mouse wheel, transition effects, thumbnails, pinch to zoom and rows. Fixes extra space under Divi 5 carousels on desktop and looping carousels with too few slides.
 
 = 4.13.0 =
 Fixes a critical error on every page for Divi 5 sites on PHP 7.4 to 8.1. Adds Image Height to Image Carousel and menu-link opening to Modal Popup. Fixes Autoplay Delay 0 and Gap 0 in Divi 5 carousels, a gap under carousels on phones, and Divi 5 modules that did not start on pages with a Number Counter.

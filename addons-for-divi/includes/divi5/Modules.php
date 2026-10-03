@@ -522,6 +522,23 @@ if (!empty($dtl_d5_loaded)) {
                 true
             );
 
+            // The carousels enqueue Swiper while they render, which is after
+            // <head> has printed, so its stylesheet landed in the footer and
+            // the slides painted unstyled first. When the post itself holds a
+            // carousel, load the stylesheet in <head> instead. Theme Builder
+            // layouts still get it from the render-time enqueue.
+            if (is_singular()) {
+                $dtl_post = get_post();
+                if ($dtl_post) {
+                    foreach (['image-carousel', 'logo-carousel', 'post-carousel', 'twitter-feed-carousel'] as $dtl_carousel) {
+                        if (has_block('divitorque/' . $dtl_carousel, $dtl_post)) {
+                            wp_enqueue_style('divi-torque-lite-swiper');
+                            break;
+                        }
+                    }
+                }
+            }
+
             // Prism (front end). Registered only — the Code Snippet render
             // callback enqueues it, so a page without a snippet loads none of
             // the ~53KB bundle. Same shape as Swiper above.
