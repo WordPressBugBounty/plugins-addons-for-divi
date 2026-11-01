@@ -14,8 +14,8 @@
       "btn_b": "btnB.decoration.boxShadow"
     },
     "button": {
-      "btn_a": "btnA.decoration.button",
-      "btn_b": "btnB.decoration.button"
+      "btn_a": "btnA",
+      "btn_b": "btnB"
     },
     "disabled_on": "module.decoration.disabledOn",
     "filters": {

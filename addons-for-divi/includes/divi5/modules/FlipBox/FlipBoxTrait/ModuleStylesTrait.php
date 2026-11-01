@@ -18,33 +18,74 @@ use ET\Builder\Packages\Module\Options\Css\CssStyle;
 trait ModuleStylesTrait
 {
     /**
-     * Convert a D4 padding string ("t|r|b|l") or D5 spacing object to a CSS
-     * padding shorthand.
+     * The sides a padding value sets, as side => CSS value. Sides left empty
+     * are absent, so the caller can fill them from a larger breakpoint or the
+     * default instead of forcing 0px.
      *
-     * @param string|array $val Pipe-delimited padding value or spacing object.
+     * Accepts the D5 spacing object {top,right,bottom,left}, the D4 string
+     * "top|right|bottom|left", and the raw field edit {side, value} that the
+     * builder saved before the padding fields got Divi's spacing handler
+     * (pages edited on 2.4.1 and earlier hold that shape).
+     *
+     * @param string|array $val Padding value.
+     * @return array
+     */
+    public static function dtq_pad_sides($val)
+    {
+        $names = ['top', 'right', 'bottom', 'left'];
+
+        if (is_array($val)) {
+            $parts = [];
+            foreach ($names as $name) {
+                $parts[] = $val[$name] ?? '';
+            }
+            // Raw field edit {side, value}: use it unless that side is set too.
+            $side  = $val['side'] ?? null;
+            $index = is_string($side) ? array_search($side, $names, true) : false;
+            if (false !== $index && '' === $parts[$index] && is_scalar($val['value'] ?? null)) {
+                $parts[$index] = $val['value'];
+            }
+        } else {
+            $parts = array_pad(explode('|', (string) $val), 4, '');
+        }
+
+        $sides = [];
+        foreach ($names as $i => $name) {
+            $part = is_scalar($parts[$i]) ? trim((string) $parts[$i]) : '';
+            if ('' !== $part) {
+                $sides[$name] = $part;
+            }
+        }
+        return $sides;
+    }
+
+    /**
+     * CSS padding shorthand for one breakpoint. Each side comes from the
+     * nearest breakpoint that sets it (phone, then tablet, then desktop),
+     * then from the default, the way Divi's own spacing inherits.
+     *
+     * @param array  $advanced   The `module.advanced` attrs array.
+     * @param string $key        Attribute key, e.g. "frontPadding".
+     * @param string $breakpoint desktop, tablet or phone.
+     * @param string $default    Default value, "top|right|bottom|left".
      * @return string
      */
-    public static function dtq_pad($val)
+    public static function dtq_pad_at($advanced, $key, $breakpoint, $default)
     {
-        if (empty($val)) {
-            return '';
+        $sides = self::dtq_pad_sides($default);
+        foreach (['desktop', 'tablet', 'phone'] as $bp) {
+            $sides = array_merge($sides, self::dtq_pad_sides($advanced[$key][$bp]['value'] ?? ''));
+            if ($bp === $breakpoint) {
+                break;
+            }
         }
-        // D5 spacing object {top,right,bottom,left} (the migrated/native format).
-        if (is_array($val)) {
-            return sprintf(
-                '%1$s %2$s %3$s %4$s',
-                $val['top'] ?? '0px',
-                $val['right'] ?? '0px',
-                $val['bottom'] ?? '0px',
-                $val['left'] ?? '0px'
-            );
-        }
-        // Legacy D4 pipe-delimited string "top|right|bottom|left".
-        $parts = explode('|', (string) $val);
-        if (4 === count($parts)) {
-            return sprintf('%1$s %2$s %3$s %4$s', $parts[0], $parts[1], $parts[2], $parts[3]);
-        }
-        return (string) $val;
+        return sprintf(
+            '%1$s %2$s %3$s %4$s',
+            $sides['top'] ?? '0px',
+            $sides['right'] ?? '0px',
+            $sides['bottom'] ?? '0px',
+            $sides['left'] ?? '0px'
+        );
     }
 
     /**
@@ -137,7 +178,13 @@ trait ModuleStylesTrait
         // differs from the next-larger breakpoint (review precedent).
         // ------------------------------------------------------------------
 
-        $pad = [self::class, 'dtq_pad'];
+        // Padding resolves side by side across breakpoints (dtq_pad_at), so a
+        // padding entry reads its own value instead of the plain fallback.
+        $pad_at = function ($key, $def) use ($advanced) {
+            return function ($breakpoint) use ($advanced, $key, $def) {
+                return self::dtq_pad_at($advanced, $key, $breakpoint, $def);
+            };
+        };
 
         $entries = [];
 
@@ -160,19 +207,21 @@ trait ModuleStylesTrait
                 },
             ];
             $entries[] = [
-                'key'   => $side . 'Padding',
-                'def'   => '30px|30px|30px|30px',
-                'when'  => true,
-                'rules' => function ($v) use ($order_class, $side, $pad) {
-                    return [[$order_class . " .dtq-flipbox-{$side}-card", sprintf('padding: %s;', call_user_func($pad, $v))]];
+                'key'     => $side . 'Padding',
+                'def'     => '30px|30px|30px|30px',
+                'when'    => true,
+                'resolve' => $pad_at($side . 'Padding', '30px|30px|30px|30px'),
+                'rules'   => function ($v) use ($order_class, $side) {
+                    return [[$order_class . " .dtq-flipbox-{$side}-card", sprintf('padding: %s;', $v)]];
                 },
             ];
             $entries[] = [
-                'key'   => $side . 'CtPadding',
-                'def'   => '0px|0px|0px|0px',
-                'when'  => true,
-                'rules' => function ($v) use ($order_class, $side, $pad) {
-                    return [[$order_class . " .dtq-flipbox-{$side}-card .dtq-flipbox-content-wrap", sprintf('padding: %s;', call_user_func($pad, $v))]];
+                'key'     => $side . 'CtPadding',
+                'def'     => '0px|0px|0px|0px',
+                'when'    => true,
+                'resolve' => $pad_at($side . 'CtPadding', '0px|0px|0px|0px'),
+                'rules'   => function ($v) use ($order_class, $side) {
+                    return [[$order_class . " .dtq-flipbox-{$side}-card .dtq-flipbox-content-wrap", sprintf('padding: %s;', $v)]];
                 },
             ];
             $entries[] = [
@@ -188,7 +237,7 @@ trait ModuleStylesTrait
                 'def'   => '',
                 'when'  => !empty($val($side . 'ImgWidth', '')),
                 'rules' => function ($v) use ($order_class, $side) {
-                    return [[$order_class . " .dtq-flipbox-figure-{$side}", sprintf('width: %1$s; max-width: %1$s; flex: %1$s;', $v)]];
+                    return [[$order_class . " .dtq-flipbox-figure-{$side}", sprintf('width: %1$s; max-width: %1$s; flex: 0 0 %1$s;', $v)]];
                 },
             ];
             $entries[] = [
@@ -203,11 +252,12 @@ trait ModuleStylesTrait
                 },
             ];
             $entries[] = [
-                'key'   => $side . 'ImgPadding',
-                'def'   => '0px|0px|0px|0px',
-                'when'  => true,
-                'rules' => function ($v) use ($order_class, $side, $pad) {
-                    return [[$order_class . " .dtq-flipbox-figure-{$side} img", sprintf('padding: %s;', call_user_func($pad, $v))]];
+                'key'     => $side . 'ImgPadding',
+                'def'     => '0px|0px|0px|0px',
+                'when'    => true,
+                'resolve' => $pad_at($side . 'ImgPadding', '0px|0px|0px|0px'),
+                'rules'   => function ($v) use ($order_class, $side) {
+                    return [[$order_class . " .dtq-flipbox-figure-{$side} img", sprintf('padding: %s;', $v)]];
                 },
             ];
             $entries[] = [
@@ -277,18 +327,24 @@ trait ModuleStylesTrait
             'phone'  => '@media only screen and (max-width: 767px)',
         ];
 
+        $value_at = function ($entry, $breakpoint) use ($bp_val) {
+            return isset($entry['resolve'])
+                ? $entry['resolve']($breakpoint)
+                : $bp_val($entry['key'], $breakpoint, $entry['def']);
+        };
+
         foreach ($entries as $entry) {
             if (!$entry['when']) {
                 continue;
             }
-            foreach ($entry['rules']($bp_val($entry['key'], 'desktop', $entry['def'])) as $rule) {
+            foreach ($entry['rules']($value_at($entry, 'desktop')) as $rule) {
                 $push($rule[0], $rule[1]);
             }
             foreach (['tablet', 'phone'] as $breakpoint) {
                 if (!$bp_changed($entry['key'], $breakpoint)) {
                     continue;
                 }
-                foreach ($entry['rules']($bp_val($entry['key'], $breakpoint, $entry['def'])) as $rule) {
+                foreach ($entry['rules']($value_at($entry, $breakpoint)) as $rule) {
                     $push($rule[0], $rule[1], $at_rules[$breakpoint]);
                 }
             }

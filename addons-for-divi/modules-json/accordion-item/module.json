@@ -479,46 +479,40 @@
       },
       "settings": {
         "innerContent": {
-          "groupType": "into-multiple-groups",
-          "groups": {
-            "text": {
-              "groupType": "group-item",
-              "item": {
-                "groupSlug": "contentReadMore",
-                "label": "Read More Text",
-                "description": "Set text and a link to show a read-more button at the bottom of the content.",
-                "priority": 10,
-                "render": true,
-                "subName": "text",
-                "category": "basic_option",
-                "features": {
-                  "dynamicContent": {
-                    "type": "text"
-                  },
-                  "sticky": false,
-                  "preset": "content"
+          "groupType": "group-items",
+          "items": {
+            "readMoreText": {
+              "groupSlug": "contentReadMore",
+              "label": "Read More Text",
+              "description": "Set text and a link to show a read-more button at the bottom of the content.",
+              "priority": 10,
+              "render": true,
+              "subName": "text",
+              "category": "basic_option",
+              "features": {
+                "dynamicContent": {
+                  "type": "text"
                 },
-                "component": {
-                  "name": "divi/text",
-                  "type": "field"
-                }
+                "sticky": false,
+                "preset": "content"
+              },
+              "component": {
+                "name": "divi/text",
+                "type": "field"
               }
             },
-            "link": {
-              "groupType": "group-item",
-              "item": {
-                "groupSlug": "contentReadMore",
-                "attrName": "readMore.innerContent",
-                "priority": 20,
-                "render": true,
-                "component": {
-                  "type": "group",
-                  "name": "divi/button-link",
-                  "props": {
-                    "grouped": false,
-                    "attrName": "readMore.innerContent",
-                    "fieldLabel": "Read More"
-                  }
+            "readMoreLink": {
+              "groupSlug": "contentReadMore",
+              "attrName": "readMore.innerContent",
+              "priority": 20,
+              "render": true,
+              "component": {
+                "type": "group",
+                "name": "divi/button-link",
+                "props": {
+                  "grouped": false,
+                  "attrName": "readMore.innerContent",
+                  "fieldLabel": "Read More"
                 }
               }
             }

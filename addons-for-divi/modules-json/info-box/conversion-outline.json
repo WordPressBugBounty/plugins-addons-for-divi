@@ -11,7 +11,7 @@
       "default": "module.decoration.boxShadow"
     },
     "button": {
-      "button": "button.decoration.button"
+      "button": "button"
     },
     "disabled_on": "module.decoration.disabledOn",
     "filters": {

@@ -228,33 +228,27 @@
       },
       "settings": {
         "innerContent": {
-          "groupType": "into-multiple-groups",
-          "groups": {
-            "text": {
-              "groupType": "group-item",
-              "item": {
-                "groupSlug": "contentPanel",
-                "attrName": "button.innerContent",
-                "subName": "text",
-                "label": "Button Text",
-                "description": "Leave empty for no button.",
-                "priority": 60,
-                "render": true,
-                "features": { "sticky": false, "responsive": false, "hover": false, "dynamicContent": true },
-                "component": { "type": "field", "name": "divi/text" }
-              }
+          "groupType": "group-items",
+          "items": {
+            "buttonText": {
+              "groupSlug": "contentPanel",
+              "attrName": "button.innerContent",
+              "subName": "text",
+              "label": "Button Text",
+              "description": "Leave empty for no button.",
+              "priority": 60,
+              "render": true,
+              "features": { "sticky": false, "responsive": false, "hover": false, "dynamicContent": true },
+              "component": { "type": "field", "name": "divi/text" }
             },
-            "link": {
-              "groupType": "group-item",
-              "item": {
-                "groupSlug": "contentPanel",
-                "priority": 70,
-                "render": true,
-                "component": {
-                  "name": "divi/button-link",
-                  "type": "group",
-                  "props": { "grouped": false, "attrName": "button.innerContent", "fieldLabel": "Button" }
-                }
+            "buttonLink": {
+              "groupSlug": "contentPanel",
+              "priority": 70,
+              "render": true,
+              "component": {
+                "name": "divi/button-link",
+                "type": "group",
+                "props": { "grouped": false, "attrName": "button.innerContent", "fieldLabel": "Button" }
               }
             }
           }
@@ -264,10 +258,9 @@
             "groupType": "group-item",
             "item": {
               "groupSlug": "designItemButton",
-              "attrName": "button.decoration.button",
               "priority": 10,
               "render": true,
-              "component": { "name": "divi/button", "type": "group" }
+              "component": { "name": "divi/button", "type": "group", "props": { "attrName": "button" } }
             }
           }
         }

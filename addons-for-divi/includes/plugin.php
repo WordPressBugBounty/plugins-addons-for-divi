@@ -56,6 +56,8 @@ class PluginLoader
         // would silently skip a newly added class.
         require_once DIVI_TORQUE_LITE_DIR . 'includes/module-usage.php';
         Module_Usage::get_instance();
+        require_once DIVI_TORQUE_LITE_DIR . 'includes/recommended-plugins.php';
+        Recommended_Plugins::get_instance();
         Dashboard::get_instance();
 
         // Share My Post extension. After Dashboard, which owns the parent menu

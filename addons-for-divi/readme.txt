@@ -4,7 +4,7 @@ Tags: divi, divi 5, divi modules, divi builder, divi carousel
 Requires at least: 7.0
 Tested up to: 7.1
 Requires PHP: 7.4
-Stable tag: 4.14.1
+Stable tag: 4.15.0
 License: GPLv3
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 
@@ -176,6 +176,28 @@ Updates are made to keep existing pages working. We still recommend a backup bef
 3. Image Carousel module
 
 == Changelog ==
+
+= Version 4.15.0 =
+* New: The Divi Torque overview page recommends Saddle and Saddle Analytics, two free plugins from WordPress.org, with a one-click install. Nothing installs until you click, the page shows what each plugin needs to run, and you can hide the recommendations.
+* New: The welcome tour can install Saddle for you if you choose to manage your site with AI.
+* Fix: Clicking the button on a Flip Card no longer turns the card away and leaves an empty box, including when you come back to the page. This also fixes the Advanced Flip Card in Divi Torque Pro.
+* Fix: A Flip Card no longer stays flipped after you click it. Keyboard users still see the back side when they tab to the card.
+
+= Version 4.14.3 =
+* Fix: In Divi 5, a Feature Box with Image Overlay turned on no longer stops the page from loading.
+* Fix: Image Width on Feature Box and Flip Card sets the exact width again in Divi 5, as it did in Divi 4. Pages moved from Divi 4 get their original layout back.
+* Fix: Business Hours Day Width and Time Width keep the width you set in Divi 5.
+* Fix: Image Carousel, Logo Carousel, Post Carousel and X (Twitter) Carousel now use the tablet and phone values of Slides to Scroll, Drag / Swipe, Show Arrows and Show Dots. Before, only the desktop value was used.
+* Fix: Carousel page numbers and dots wrap onto a second line on narrow screens instead of running off the edge.
+* Fix: The Button Text field shows in the Divi 5 builder for Creative Button, Call To Action, Feature Box, Image Card, Review Box, Flip Card, Accordion Pro Read More and Image Accordion items, so the button label can be changed.
+* Fix: Flip Card padding changed in the Divi 5 builder keeps the other sides instead of setting them to zero.
+* Fix: Flip Card shows Use 3D Animation only for the Flip animation, and its image fields only when Media Type is Image.
+
+= Version 4.14.2 =
+* Fix: Button style changes made in the Divi 5 builder now show on the button. They were saved where the module did not read them. This affected Flip Card, Creative Button, Call To Action, Contact Form 7 Styler, Image Accordion, Feature Box, Image Card and Review Box.
+* Fix: Button styles on Divi 4 pages now carry over when the page moves to Divi 5. This includes Dual Buttons.
+* Fix: Flip Card in Divi 5 shows one Border group and one Box Shadow group instead of two of each.
+* Tweak: Flip Card no longer shows a Text group in Divi 4 or Divi 5. Its settings had no effect on the card. Use the Front Side and Back Side alignment and the text groups instead.
 
 = Version 4.14.1 =
 * Fix: On sites with an image lazy-loading plugin, Image Carousel thumbnails and the repeating slides of Continuous Scroll could stay blank. They now show their images.
@@ -420,6 +442,9 @@ Updates are made to keep existing pages working. We still recommend a backup bef
 * Public beta release
 
 == Upgrade Notice ==
+
+= 4.15.0 =
+Fixes Flip Cards that vanished after a button click, plus Divi 5 fixes for button text and styles, carousel phone settings and Feature Box. Adds optional one-click installs for Saddle and Saddle Analytics.
 
 = 4.14.1 =
 Fixes blank Image Carousel thumbnails and Continuous Scroll slides on sites that use an image lazy-loading plugin.

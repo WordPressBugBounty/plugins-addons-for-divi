@@ -33,6 +33,13 @@ trait ModuleStylesTrait
             return $styles;
         }
 
+        // Desktop value or fallback. The overlay block below was ported from
+        // the Image Card module and calls this; without it, any Feature Box
+        // with Image Overlay on was a fatal error that took down the page.
+        $val = function ($key, $fallback) use ($advanced) {
+            return $advanced[$key]['desktop']['value'] ?? $fallback;
+        };
+
         $main_figure       = $advanced['mainFigure']['desktop']['value']         ?? 'image';
         $figure_placement  = $advanced['figurePlacement']['desktop']['value']    ?? 'top';
         $equalize_content  = $advanced['equalizeContent']['desktop']['value']    ?? 'off';
@@ -101,7 +108,7 @@ trait ModuleStylesTrait
         // Media image sizing.
         if ('image' === $main_figure) {
             $push($order_class . ' .dtq-info-box .dtq-info-box-figure', sprintf('width: %1$s !important;', $image_width));
-            $push($order_class . ' .dtq-info-box .dtq-info-box-figure', sprintf('flex: %1$s !important;', $image_width));
+            $push($order_class . ' .dtq-info-box .dtq-info-box-figure', sprintf('flex: 0 0 %1$s !important;', $image_width));
 
             if ('off' === $equalize_content) {
                 if ('top' !== $figure_placement && 'auto' !== $image_height) {
@@ -222,7 +229,7 @@ trait ModuleStylesTrait
                 $r_image_width = $bp_value('imageWidth', $breakpoint);
                 if (null !== $r_image_width) {
                     $push_media($at_rule, $order_class . ' .dtq-info-box .dtq-info-box-figure', sprintf('width: %1$s !important;', $r_image_width));
-                    $push_media($at_rule, $order_class . ' .dtq-info-box .dtq-info-box-figure', sprintf('flex: %1$s !important;', $r_image_width));
+                    $push_media($at_rule, $order_class . ' .dtq-info-box .dtq-info-box-figure', sprintf('flex: 0 0 %1$s !important;', $r_image_width));
                 }
 
                 // Image height (only in the same branch desktop emits it).

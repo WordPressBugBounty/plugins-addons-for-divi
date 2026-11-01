@@ -340,6 +340,8 @@ class Dashboard
             'proDiscountPercent' => (int) self::PRO_DISCOUNT,
             'pricingUrl'         => 'https://divitorque.com/pricing/?utm_source=divi-torque-lite&utm_medium=wp-admin&utm_campaign=onboarding',
             'saddleUrl'          => 'https://saddle.to/?utm_source=divi-torque-lite&utm_medium=wp-admin&utm_campaign=onboarding',
+            // Saddle + Saddle Analytics offer (Overview band, welcome tour).
+            'recommended'        => Recommended_Plugins::boot_data(),
         ];
     }
 

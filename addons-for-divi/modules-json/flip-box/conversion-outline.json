@@ -12,7 +12,7 @@
       "card": "card.decoration.boxShadow"
     },
     "button": {
-      "back_btn": "button.decoration.button"
+      "back_btn": "button"
     },
     "disabled_on": "module.decoration.disabledOn",
     "filters": {

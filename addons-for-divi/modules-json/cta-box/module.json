@@ -473,44 +473,38 @@
       },
       "settings": {
         "innerContent": {
-          "groupType": "into-multiple-groups",
-          "groups": {
-            "text": {
-              "groupType": "group-item",
-              "item": {
-                "groupSlug": "contentButtons",
-                "attrName": "btnA.innerContent",
-                "subName": "text",
-                "label": "Primary Button Text",
-                "description": "Label for the main action. Clear the field to hide the button.",
-                "priority": 10,
-                "render": true,
-                "features": {
-                  "sticky": false,
-                  "responsive": false,
-                  "hover": false,
-                  "dynamicContent": true
-                },
-                "component": {
-                  "type": "field",
-                  "name": "divi/text"
-                }
+          "groupType": "group-items",
+          "items": {
+            "btnAText": {
+              "groupSlug": "contentButtons",
+              "attrName": "btnA.innerContent",
+              "subName": "text",
+              "label": "Primary Button Text",
+              "description": "Label for the main action. Clear the field to hide the button.",
+              "priority": 10,
+              "render": true,
+              "features": {
+                "sticky": false,
+                "responsive": false,
+                "hover": false,
+                "dynamicContent": true
+              },
+              "component": {
+                "type": "field",
+                "name": "divi/text"
               }
             },
-            "link": {
-              "groupType": "group-item",
-              "item": {
-                "groupSlug": "contentButtons",
-                "priority": 20,
-                "render": true,
-                "component": {
-                  "name": "divi/button-link",
-                  "type": "group",
-                  "props": {
-                    "grouped": false,
-                    "attrName": "btnA.innerContent",
-                    "fieldLabel": "Primary Button"
-                  }
+            "btnALink": {
+              "groupSlug": "contentButtons",
+              "priority": 20,
+              "render": true,
+              "component": {
+                "name": "divi/button-link",
+                "type": "group",
+                "props": {
+                  "grouped": false,
+                  "attrName": "btnA.innerContent",
+                  "fieldLabel": "Primary Button"
                 }
               }
             }
@@ -521,12 +515,14 @@
             "groupType": "group-item",
             "item": {
               "groupSlug": "designPrimaryButton",
-              "attrName": "btnA.decoration.button",
               "priority": 10,
               "render": true,
               "component": {
                 "name": "divi/button",
-                "type": "group"
+                "type": "group",
+                "props": {
+                  "attrName": "btnA"
+                }
               }
             }
           }
@@ -552,44 +548,38 @@
       },
       "settings": {
         "innerContent": {
-          "groupType": "into-multiple-groups",
-          "groups": {
-            "text": {
-              "groupType": "group-item",
-              "item": {
-                "groupSlug": "contentButtons",
-                "attrName": "btnB.innerContent",
-                "subName": "text",
-                "label": "Secondary Button Text",
-                "description": "Label for the secondary action.",
-                "priority": 50,
-                "render": true,
-                "features": {
-                  "sticky": false,
-                  "responsive": false,
-                  "hover": false,
-                  "dynamicContent": true
-                },
-                "component": {
-                  "type": "field",
-                  "name": "divi/text"
-                }
+          "groupType": "group-items",
+          "items": {
+            "btnBText": {
+              "groupSlug": "contentButtons",
+              "attrName": "btnB.innerContent",
+              "subName": "text",
+              "label": "Secondary Button Text",
+              "description": "Label for the secondary action.",
+              "priority": 50,
+              "render": true,
+              "features": {
+                "sticky": false,
+                "responsive": false,
+                "hover": false,
+                "dynamicContent": true
+              },
+              "component": {
+                "type": "field",
+                "name": "divi/text"
               }
             },
-            "link": {
-              "groupType": "group-item",
-              "item": {
-                "groupSlug": "contentButtons",
-                "priority": 60,
-                "render": true,
-                "component": {
-                  "name": "divi/button-link",
-                  "type": "group",
-                  "props": {
-                    "grouped": false,
-                    "attrName": "btnB.innerContent",
-                    "fieldLabel": "Secondary Button"
-                  }
+            "btnBLink": {
+              "groupSlug": "contentButtons",
+              "priority": 60,
+              "render": true,
+              "component": {
+                "name": "divi/button-link",
+                "type": "group",
+                "props": {
+                  "grouped": false,
+                  "attrName": "btnB.innerContent",
+                  "fieldLabel": "Secondary Button"
                 }
               }
             }
@@ -600,12 +590,14 @@
             "groupType": "group-item",
             "item": {
               "groupSlug": "designSecondaryButton",
-              "attrName": "btnB.decoration.button",
               "priority": 10,
               "render": true,
               "component": {
                 "name": "divi/button",
-                "type": "group"
+                "type": "group",
+                "props": {
+                  "attrName": "btnB"
+                }
               }
             }
           }

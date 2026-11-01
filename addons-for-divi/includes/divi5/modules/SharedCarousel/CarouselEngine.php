@@ -78,6 +78,51 @@ class CarouselEngine
     }
 
     /**
+     * A setting's value on each device. An unset tablet value falls back to
+     * desktop and an unset phone value to tablet, the chain Divi shows in the
+     * builder. Mirrors atEachDevice() in config.js.
+     *
+     * @param array  $advanced The module advanced attrs.
+     * @param string $key      Attribute name.
+     * @param mixed  $fallback Desktop default.
+     *
+     * @return array ['desktop' => mixed, 'tablet' => mixed, 'phone' => mixed]
+     */
+    public static function at_each_device($advanced, $key, $fallback)
+    {
+        $at = function ($bp) use ($advanced, $key) {
+            $raw = $advanced[$key][$bp]['value'] ?? null;
+            return (null === $raw || '' === $raw) ? null : $raw;
+        };
+        $desktop = $at('desktop') ?? $fallback;
+        $tablet  = $at('tablet') ?? $desktop;
+        $phone   = $at('phone') ?? $tablet;
+        return ['desktop' => $desktop, 'tablet' => $tablet, 'phone' => $phone];
+    }
+
+    /**
+     * Whether the arrows and the dots show on each device. Continuous Scroll
+     * has neither. The markup is rendered when any device shows them; the
+     * styles hide them where they are off. Mirrors controlsAtEachDevice().
+     *
+     * @param array $advanced The module advanced attrs.
+     *
+     * @return array ['nav' => bool[], 'pagi' => bool[]] keyed by device.
+     */
+    public static function controls_at_each_device($advanced)
+    {
+        $continuous = self::is_continuous($advanced);
+        $nav        = self::at_each_device($advanced, 'useNav', 'on');
+        $pagi       = self::at_each_device($advanced, 'usePagi', 'off');
+        $out        = ['nav' => [], 'pagi' => []];
+        foreach (['desktop', 'tablet', 'phone'] as $device) {
+            $out['nav'][$device]  = !$continuous && 'off' !== $nav[$device];
+            $out['pagi'][$device] = !$continuous && 'on' === $pagi[$device];
+        }
+        return $out;
+    }
+
+    /**
      * Does this carousel run Continuous Scroll? Needs autoplay and the plain
      * slide effect. Mirrors isContinuous() in config.js.
      *
@@ -226,9 +271,19 @@ class CarouselEngine
         $tablet_count  = max(1, $bp_int('slideCount', 'tablet', $slide_count));
         $phone_count   = max(1, $bp_int('slideCount', 'phone', $tablet_count));
         $slide_scroll  = self::to_int($val('slideToScroll', '1'), 1);
+        $tablet_scroll = $bp_int('slideToScroll', 'tablet', $slide_scroll);
+        $phone_scroll  = $bp_int('slideToScroll', 'phone', $tablet_scroll);
         $space         = self::to_int($val('slideSpacing', '10px'), 10);
         $is_infinite   = 'on' === $val('isInfinite', 'on');
-        $is_swipe      = 'on' === $val('isSwipe', 'on');
+        // Drag / Swipe per device: Swiper's base value is the phone one, and
+        // the tablet and desktop values ride on the breakpoints when they differ.
+        $swipe_at      = self::at_each_device($advanced, 'isSwipe', 'on');
+        $swipe         = [
+            'desktop' => 'on' === $swipe_at['desktop'],
+            'tablet'  => 'on' === $swipe_at['tablet'],
+            'phone'   => 'on' === $swipe_at['phone'],
+        ];
+        $is_swipe      = $swipe['phone'];
         $is_center     = 'on' === $val('isCenter', 'off');
         $is_vertical   = 'on' === $val('isVertical', 'off');
         $is_variable   = 'on' === $val('isVariableWidth', 'off');
@@ -245,8 +300,9 @@ class CarouselEngine
         $pause_hover   = 'off' !== $val('pauseOnHover', 'on');
         $stop_interact = 'on' === $val('stopOnInteraction', 'off');
         $end_behavior  = $val('endBehavior', 'restart');
-        $show_nav      = !$continuous && 'off' !== $val('useNav', 'on');
-        $show_pagi     = !$continuous && 'on' === $val('usePagi', 'off');
+        $controls      = self::controls_at_each_device($advanced);
+        $show_nav      = in_array(true, $controls['nav'], true);
+        $show_pagi     = in_array(true, $controls['pagi'], true);
 
         $config = [
             'speed'          => self::to_int($val('animationSpeed', '700ms'), 700),
@@ -298,8 +354,16 @@ class CarouselEngine
             ];
         }
 
-        if ($slide_scroll > 1 && !$is_vertical && !$is_variable && !$continuous) {
-            $config['slidesPerGroup'] = $slide_scroll;
+        if (!$is_vertical && !$is_variable && !$continuous) {
+            if ($tablet_scroll !== $slide_scroll || $phone_scroll !== $slide_scroll) {
+                // Slides to Scroll per device. A phone showing one post at a
+                // time with a desktop value of 2 skipped every second post.
+                $config['slidesPerGroup']                    = max(1, $phone_scroll);
+                $config['breakpoints'][768]['slidesPerGroup'] = max(1, $tablet_scroll);
+                $config['breakpoints'][981]['slidesPerGroup'] = max(1, $slide_scroll);
+            } elseif ($slide_scroll > 1) {
+                $config['slidesPerGroup'] = $slide_scroll;
+            }
         }
 
         if ($continuous) {
@@ -454,6 +518,12 @@ class CarouselEngine
                 'reverseDirection'     => $reverse,
                 'stopOnLastSlide'      => !$is_infinite && 'stop' === $end_behavior,
             ];
+        }
+
+        if ($swipe['tablet'] !== $swipe['phone'] || $swipe['desktop'] !== $swipe['phone']) {
+            foreach ([768 => $swipe['tablet'], 981 => $swipe['desktop']] as $bp => $on) {
+                $config['breakpoints'][$bp] = array_merge($config['breakpoints'][$bp] ?? [], ['simulateTouch' => $on, 'allowTouchMove' => $on]);
+            }
         }
 
         // Settings the runtime reads (stripped before Swiper sees the config).
@@ -732,7 +802,7 @@ class CarouselEngine
 
         $push(
             $dtq . ' > .swiper-pagination',
-            sprintf('position: relative; display: flex; justify-content: %1$s; align-items: center; gap: %2$s; margin-top: %3$s; width: 100%%; bottom: auto; left: auto; transform: none;', $justify, $pagi_spacing, $pagi_pos_y)
+            sprintf('position: relative; display: flex; flex-wrap: wrap; justify-content: %1$s; align-items: center; gap: %2$s; margin-top: %3$s; width: 100%%; bottom: auto; left: auto; transform: none;', $justify, $pagi_spacing, $pagi_pos_y)
         );
         $push(
             $dtq . ' .swiper-pagination-bullet',
@@ -977,6 +1047,31 @@ class CarouselEngine
             $animation_speed = $len('animationSpeed', '700ms');
             $push($dtq . '.dtq-centered--highlighted .swiper-slide', sprintf('transform: scale(0.8); transition: transform %1$s;', $animation_speed));
             $push($dtq . '.dtq-centered--highlighted .swiper-slide-active', 'transform: scale(1);');
+        }
+
+        // Arrows and dots per device. Show Arrows / Show Dots have a value per
+        // device. The markup is rendered when any device shows them; this
+        // hides them where they are off. Ranges are exact so a device rule
+        // never leaks into the next one.
+        $device_query = [
+            'desktop' => '@media only screen and (min-width: 981px)',
+            'tablet'  => '@media only screen and (min-width: 768px) and (max-width: 980px)',
+            'phone'   => '@media only screen and (max-width: 767px)',
+        ];
+        $controls = self::controls_at_each_device($advanced);
+        $targets  = [
+            'nav'  => $dtq . ' > .swiper-button-prev, ' . $dtq . ' > .swiper-button-next',
+            'pagi' => $dtq . ' > .swiper-pagination',
+        ];
+        foreach ($targets as $control => $selector) {
+            if (!in_array(true, $controls[$control], true)) {
+                continue;
+            }
+            foreach ($device_query as $device => $query) {
+                if (!$controls[$control][$device]) {
+                    $push_at($query, $selector, 'display: none !important;');
+                }
+            }
         }
 
         return $styles;

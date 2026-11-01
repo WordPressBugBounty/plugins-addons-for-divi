@@ -107,9 +107,9 @@ trait ModuleStylesTrait
         foreach ($widths as $w) {
             list($key, $selector) = $w;
             if ('auto' !== $val($key, 'auto')) {
-                $push($selector, sprintf('flex: %1$s;', $val($key, 'auto')));
+                $push($selector, sprintf('flex: 0 0 %1$s;', $val($key, 'auto')));
                 $responsive($key, $selector, function ($v) {
-                    return sprintf('flex: %1$s;', $v);
+                    return sprintf('flex: 0 0 %1$s;', $v);
                 });
             }
         }

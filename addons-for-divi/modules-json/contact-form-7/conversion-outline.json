@@ -12,7 +12,7 @@
       "submit_button": "submitButton.decoration.boxShadow"
     },
     "button": {
-      "submit_button": "submitButton.decoration.button"
+      "submit_button": "submitButton"
     },
     "disabled_on": "module.decoration.disabledOn",
     "filters": {
