@@ -85,9 +85,20 @@ trait ModuleStylesTrait {
 
 		$advanced = $attrs['module']['advanced'] ?? array();
 
-		$image_height        = self::get_responsive_value( $advanced['imageHeight'] ?? array(), 'desktop', 'auto' );
-		$image_height_tablet = self::get_responsive_value( $advanced['imageHeight'] ?? array(), 'tablet', $image_height );
-		$image_height_phone  = self::get_responsive_value( $advanced['imageHeight'] ?? array(), 'phone', $image_height_tablet );
+		// Image height cascades like Divi's own responsive values: phone falls
+		// back to tablet, tablet to desktop. Each value lands in a stylesheet,
+		// so it is unit-normalised (matching styles.jsx withUnit) and sanitized.
+		$image_height_attr   = $advanced['imageHeight'] ?? array();
+		$image_height_at     = static function ( $device, $fallback ) use ( $image_height_attr ) {
+			$raw = is_array( $image_height_attr ) ? ( $image_height_attr[ $device ]['value'] ?? '' ) : '';
+			if ( '' === $raw || null === $raw ) {
+				return $fallback;
+			}
+			return dtq_css_length( dtq_resolve_css_value( self::with_unit( $raw ) ), $fallback );
+		};
+		$image_height        = $image_height_at( 'desktop', 'auto' );
+		$image_height_tablet = $image_height_at( 'tablet', $image_height );
+		$image_height_phone  = $image_height_at( 'phone', $image_height_tablet );
 		$image_width         = self::get_responsive_value( $advanced['imageWidth'] ?? array(), 'desktop', '' );
 		$image_size          = self::get_responsive_value( $advanced['imageSize'] ?? array(), 'desktop', 'cover' );
 
@@ -113,13 +124,16 @@ trait ModuleStylesTrait {
 			'selector'    => "{$order_class} .dtq-post-thumb img",
 			'declaration' => "object-fit:{$object_fit};width:{$img_width_val};height:{$image_height};",
 		);
+		// Divi prints atRules verbatim before the rule block, so it must be the
+		// whole at-rule. A bare `max-width: 980px` produced invalid CSS and the
+		// tablet/phone heights never applied (#76).
 		$custom_styles[] = array(
-			'atRules'     => 'max-width: 980px',
+			'atRules'     => '@media only screen and (max-width: 980px)',
 			'selector'    => "{$order_class} .dtq-post-thumb img",
 			'declaration' => "height:{$image_height_tablet};",
 		);
 		$custom_styles[] = array(
-			'atRules'     => 'max-width: 767px',
+			'atRules'     => '@media only screen and (max-width: 767px)',
 			'selector'    => "{$order_class} .dtq-post-thumb img",
 			'declaration' => "height:{$image_height_phone};",
 		);

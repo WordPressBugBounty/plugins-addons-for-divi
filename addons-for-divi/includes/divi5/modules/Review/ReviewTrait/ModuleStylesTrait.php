@@ -14,39 +14,10 @@ if (!defined('ABSPATH')) {
 
 use ET\Builder\FrontEnd\Module\Style;
 use ET\Builder\Packages\Module\Options\Css\CssStyle;
+use DiviTorqueLite\Modules\Shared\Spacing;
 
 trait ModuleStylesTrait
 {
-    /**
-     * Convert a D4 padding string ("t|r|b|l") or D5 spacing object to a CSS
-     * padding shorthand.
-     *
-     * @param string|array $val Pipe-delimited padding value or spacing object.
-     * @return string
-     */
-    public static function dtq_pad($val)
-    {
-        if (empty($val)) {
-            return '';
-        }
-        // D5 spacing object {top,right,bottom,left} (the migrated/native format).
-        if (is_array($val)) {
-            return sprintf(
-                '%1$s %2$s %3$s %4$s',
-                $val['top'] ?? '0px',
-                $val['right'] ?? '0px',
-                $val['bottom'] ?? '0px',
-                $val['left'] ?? '0px'
-            );
-        }
-        // Legacy D4 pipe-delimited string "top|right|bottom|left".
-        $parts = explode('|', (string) $val);
-        if (4 === count($parts)) {
-            return sprintf('%1$s %2$s %3$s %4$s', $parts[0], $parts[1], $parts[2], $parts[3]);
-        }
-        return (string) $val;
-    }
-
     /**
      * Build the flat custom-style declarations that mirror the D4 render_css()
      * `ET_Builder_Element::set_style()` calls. Keep this in lockstep with the
@@ -69,10 +40,8 @@ trait ModuleStylesTrait
         $img_pos             = $val('imgPos', 'top');
         $img_height          = $val('imgHeight', '');
         $img_width           = $val('imgWidth', '50%');
-        $img_padding         = $val('imgPadding', '0px|0px|0px|0px');
         $title_bottom        = $val('titleBottomSpacing', '0px');
         $content_align       = $val('contentAlignment', 'left');
-        $content_padding     = $val('contentPadding', '15px|0px|0px|0px');
         $rating_bottom       = $val('ratingBottomSpacing', '10px');
         $star_size           = $val('starSize', '23px');
         $star_spacing        = $val('starSpacing', '0px');
@@ -113,7 +82,19 @@ trait ModuleStylesTrait
         }
 
         // Image padding.
-        $push($order_class . ' .dtq-rating-figure img', sprintf('padding: %s;', self::dtq_pad($img_padding)));
+        // Spacing fields (image, content and badge padding) read every stored
+        // shape and fill missing sides from the larger breakpoint, then the
+        // default (Shared\Spacing).
+        $spacing_defaults = [
+            'imgPadding'     => '0px|0px|0px|0px',
+            'contentPadding' => '15px|0px|0px|0px',
+            'badgePadding'   => '5px|15px|5px|15px',
+        ];
+        $pad_css = function ($key, $breakpoint) use ($advanced, $spacing_defaults) {
+            return Spacing::css('padding', $advanced[$key] ?? null, $breakpoint, $spacing_defaults[$key]);
+        };
+
+        $push($order_class . ' .dtq-rating-figure img', $pad_css('imgPadding', 'desktop'));
 
         // Title bottom spacing.
         $push($order_class . ' .dtq-rating-star-title', sprintf('padding-bottom: %s;', $title_bottom));
@@ -123,7 +104,7 @@ trait ModuleStylesTrait
         $push($order_class . ' .dtq-ratings', sprintf('justify-content: %s;', $content_align));
 
         // Content padding.
-        $push($order_class . ' .dtq-review-content', sprintf('padding: %s;', self::dtq_pad($content_padding)));
+        $push($order_class . ' .dtq-review-content', $pad_css('contentPadding', 'desktop'));
 
         // Rating bottom spacing.
         $push($order_class . ' .dtq-ratings', sprintf('padding-bottom: %s;', $rating_bottom));
@@ -171,7 +152,6 @@ trait ModuleStylesTrait
         $badge_pos      = $val('badgePosition', 'right_top');
         $badge_offset_x = $val('badgeOffsetX', '15px');
         $badge_offset_y = $val('badgeOffsetY', '15px');
-        $badge_padding  = $val('badgePadding', '5px|15px|5px|15px');
         $badge_bg       = $val('badgeBgColor', '#ffffff');
         $badge_center_x = $val('badgeIsCenterX', 'off');
         $badge_center_y = $val('badgeIsCenterY', 'off');
@@ -179,7 +159,7 @@ trait ModuleStylesTrait
         $pos_x          = $pos_parts[0] ?? 'right';
         $pos_y          = $pos_parts[1] ?? 'top';
 
-        $badge_decl = function ($off_x, $off_y, $pad_val) use ($pos_x, $pos_y, $badge_center_x, $badge_center_y, $badge_bg) {
+        $badge_decl = function ($off_x, $off_y, $breakpoint) use ($pos_x, $pos_y, $badge_center_x, $badge_center_y, $badge_bg, $pad_css) {
             $x_val = ('on' === $badge_center_x) ? '50%' : $off_x;
             $y_val = ('on' === $badge_center_y) ? '50%' : $off_y;
             $tx    = '0';
@@ -191,18 +171,18 @@ trait ModuleStylesTrait
                 $ty = ('top' === $pos_y) ? '-50%' : '50%';
             }
             return sprintf(
-                'position: absolute; z-index: 999; %1$s: %2$s; %3$s: %4$s; transform: translateX(%5$s) translateY(%6$s); padding: %7$s; background-color: %8$s;',
+                'position: absolute; z-index: 999; %1$s: %2$s; %3$s: %4$s; transform: translateX(%5$s) translateY(%6$s); %7$s background-color: %8$s;',
                 $pos_x,
                 $x_val,
                 $pos_y,
                 $y_val,
                 $tx,
                 $ty,
-                self::dtq_pad($pad_val),
+                $pad_css('badgePadding', $breakpoint),
                 $badge_bg
             );
         };
-        $push($order_class . ' .dtq-review-badge', $badge_decl($badge_offset_x, $badge_offset_y, $badge_padding));
+        $push($order_class . ' .dtq-review-badge', $badge_decl($badge_offset_x, $badge_offset_y, 'desktop'));
 
         // ------------------------------------------------------------------
         // Responsive (tablet/phone) output. Purely additive: the desktop
@@ -267,7 +247,7 @@ trait ModuleStylesTrait
 
             // Image padding.
             if ($bp_changed('imgPadding', $breakpoint)) {
-                $push($order_class . ' .dtq-rating-figure img', sprintf('padding: %s;', self::dtq_pad($bp_val('imgPadding', $breakpoint, $img_padding))), $at_rule);
+                $push($order_class . ' .dtq-rating-figure img', $pad_css('imgPadding', $breakpoint), $at_rule);
             }
 
             // Title bottom spacing.
@@ -284,7 +264,7 @@ trait ModuleStylesTrait
 
             // Content padding.
             if ($bp_changed('contentPadding', $breakpoint)) {
-                $push($order_class . ' .dtq-review-content', sprintf('padding: %s;', self::dtq_pad($bp_val('contentPadding', $breakpoint, $content_padding))), $at_rule);
+                $push($order_class . ' .dtq-review-content', $pad_css('contentPadding', $breakpoint), $at_rule);
             }
 
             // Rating bottom spacing.
@@ -317,7 +297,7 @@ trait ModuleStylesTrait
                     $badge_decl(
                         $bp_val('badgeOffsetX', $breakpoint, $badge_offset_x),
                         $bp_val('badgeOffsetY', $breakpoint, $badge_offset_y),
-                        $bp_val('badgePadding', $breakpoint, $badge_padding)
+                        $breakpoint
                     ),
                     $at_rule
                 );

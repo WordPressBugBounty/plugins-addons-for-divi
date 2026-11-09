@@ -45,7 +45,12 @@ trait ModuleStylesTrait
         $tablet_at = '@media only screen and (max-width: 980px)';
         $phone_at  = '@media only screen and (max-width: 767px)';
 
-        $selector = $order_class . ' .dtq-accordion__item';
+        // The class is repeated on purpose (specificity 0,5,0): items are Divi
+        // modules, and on desktop Divi's `.et_pb_gutters3 .et_pb_column_4_4
+        // .et_block_column .et_pb_module { margin-bottom: 2.75% }` (0,4,0)
+        // otherwise beats the module's own Spacing Between Items. No
+        // !important, so a margin set on one item still wins.
+        $selector = $order_class . ' ' . str_repeat('.dtq-accordion__item', 4);
         $push($selector, sprintf('margin-bottom: %1$s;', $val('itemSpacing', '10px')));
 
         $tablet = $advanced['itemSpacing']['tablet']['value'] ?? null;

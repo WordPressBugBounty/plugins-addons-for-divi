@@ -99,12 +99,35 @@ class DynamicValue
      */
     protected static function resolve_legacy_token($value)
     {
+        // Divi's own resolver understands every token type it writes (content,
+        // shortcode, color, loop context), so it goes first.
+        $divi = '\ET\Builder\Packages\Module\Layout\Components\DynamicData\DynamicData';
+        if (class_exists($divi) && method_exists($divi, 'get_processed_dynamic_data')) {
+            try {
+                $resolved = $divi::get_processed_dynamic_data($value);
+                if (is_string($resolved) && false === strpos($resolved, '$variable(')) {
+                    return $resolved;
+                }
+            } catch (\Throwable $e) {
+                // Fall through to the local parser.
+            }
+        }
+
         return preg_replace_callback(
             '/\$variable\((.*?)\)\$/s',
             function ($matches) {
                 $decoded = json_decode(html_entity_decode($matches[1], ENT_QUOTES), true);
                 if (!is_array($decoded)) {
                     return '';
+                }
+                // Divi 5 writes {"type":"content","value":{"name":...}}: the
+                // source sits under `value`. Reading `name` at the top level
+                // turned every such token into an empty string.
+                if (isset($decoded['value']) && is_array($decoded['value'])) {
+                    if (isset($decoded['type']) && 'content' !== $decoded['type']) {
+                        return '';
+                    }
+                    $decoded = $decoded['value'];
                 }
                 $resolved = self::resolve_structure($decoded);
                 return is_string($resolved) ? $resolved : '';

@@ -13,6 +13,7 @@ if (!defined('ABSPATH')) {
 }
 
 use DiviTorqueLite\Modules\Shared\DynamicValue;
+use DiviTorqueLite\Modules\Shared\TextValue;
 use ET\Builder\Packages\Module\Module;
 use ET\Builder\Packages\Module\Layout\Components\ModuleElements\ModuleElements;
 use WP_Block;
@@ -135,9 +136,11 @@ trait RenderCallbackTrait
         };
 
         // Reviewer name/title — rendered through elements->render (dynamic
-        // content) and wrapped in the optional D4 link.
+        // content) and wrapped in the optional D4 link. A value that is only
+        // whitespace or empty markup counts as empty, or the wrapper prints
+        // with its bottom padding and nothing in it (#112).
         $name_html = '';
-        if ('' !== $name_val) {
+        if (TextValue::visible($name_val)) {
             $name_inner = $elements->render(['attrName' => 'name']);
             $name_html  = !empty($website_url)
                 ? sprintf('<a href="%1$s" target="%2$s">%3$s</a>', esc_url($website_url), esc_attr($link_target), $name_inner)
@@ -145,7 +148,7 @@ trait RenderCallbackTrait
         }
 
         $title_html = '';
-        if ('' !== $title_val) {
+        if (TextValue::visible($title_val)) {
             $title_inner = $elements->render(['attrName' => 'title']);
             $title_html  = !empty($company_url)
                 ? sprintf('<a href="%1$s" target="%2$s">%3$s</a>', esc_url($company_url), esc_attr($link_target), $title_inner)

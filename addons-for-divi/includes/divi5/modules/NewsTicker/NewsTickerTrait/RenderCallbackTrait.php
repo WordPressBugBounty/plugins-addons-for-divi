@@ -13,6 +13,7 @@ if (!defined('ABSPATH')) {
 }
 
 use DiviTorqueLite\Modules\Shared\DynamicValue;
+use DiviTorqueLite\Modules\Shared\TextValue;
 use ET\Builder\Packages\Module\Module;
 
 trait RenderCallbackTrait
@@ -124,8 +125,11 @@ trait RenderCallbackTrait
         $use_title  = self::get_attr($attrs, 'module.advanced.useTitle', 'on');
         $title_text = DynamicValue::resolve(self::get_attr($attrs, 'module.advanced.titleText', ''));
 
+        // A cleared Title Text printed an empty title box, which keeps its
+        // padding and background (#112). The builder showed "Breaking News"
+        // in the same case (#91). Both now leave the box out.
         $title_html = '';
-        if ('on' === $use_title) {
+        if ('on' === $use_title && TextValue::visible($title_text)) {
             $title_html = sprintf('<div class="dtq-news-title">%1$s</div>', esc_html($title_text));
         }
 

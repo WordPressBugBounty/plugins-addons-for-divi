@@ -160,6 +160,13 @@ trait RenderCallbackTrait
      * than being emitted. Global colours are resolved to `var(--…)` beforehand so
      * they survive the colour check.
      *
+     * Button Gap and Button Alignment are responsive fields. The builder has
+     * always emitted their tablet and phone values (styles.jsx), but this method
+     * printed the desktop rules only, so a gap or alignment set for tablet or
+     * phone showed while editing and vanished on the published page. The media
+     * queries below match styles.jsx, and a breakpoint is emitted only when its
+     * value differs from the next larger one.
+     *
      * @param array  $advanced    The `module.advanced` attrs array.
      * @param string $selector    The module order-class selector (e.g. ".dtq_dual_button_0").
      *
@@ -168,9 +175,7 @@ trait RenderCallbackTrait
     public static function render_inline_styles($advanced, $selector)
     {
         $button_gap    = dtq_css_length(dtq_resolve_css_value($advanced['buttonGap']['desktop']['value'] ?? ''), '40px');
-        $alignment     = $advanced['btnAlignment']['desktop']['value'] ?? 'left';
-        $justify_map   = ['center' => 'center', 'right' => 'flex-end', 'left' => 'flex-start'];
-        $justify       = $justify_map[$alignment] ?? 'flex-start';
+        $justify       = self::dtq_alignment_to_justify($advanced['btnAlignment']['desktop']['value'] ?? 'left');
         $connector_type = $advanced['connectorType']['desktop']['value'] ?? 'empty';
 
         $rules = [
@@ -194,7 +199,68 @@ trait RenderCallbackTrait
                 . "box-shadow:0 0 0 $border_width $border_color}";
         }
 
+        $breakpoints = [
+            'tablet' => '@media only screen and (max-width: 980px)',
+            'phone'  => '@media only screen and (max-width: 767px)',
+        ];
+
+        foreach ($breakpoints as $breakpoint => $at_rule) {
+            $responsive = [];
+
+            // An unparseable gap is skipped rather than replaced with the
+            // default: the breakpoint then inherits the larger one, the same as
+            // an unset value.
+            $gap = self::dtq_responsive_value($advanced, 'buttonGap', $breakpoint);
+            $gap = null !== $gap ? dtq_css_length(dtq_resolve_css_value($gap), '') : '';
+            if ('' !== $gap) {
+                $responsive[] = "$selector .btn-el--primary{margin-right:calc($gap / 2)}";
+                $responsive[] = "$selector .btn-el--secondary{margin-left:calc($gap / 2)}";
+            }
+
+            // Mapped to a fixed keyword, so the raw value never reaches the CSS.
+            $alignment = self::dtq_responsive_value($advanced, 'btnAlignment', $breakpoint);
+            if (null !== $alignment && '' !== $alignment) {
+                $responsive[] = "$selector .dtq-dual-btn{justify-content:" . self::dtq_alignment_to_justify($alignment) . '}';
+            }
+
+            if ($responsive) {
+                $rules[] = $at_rule . '{' . implode('', $responsive) . '}';
+            }
+        }
+
         return '<style>' . implode('', $rules) . '</style>';
+    }
+
+    /**
+     * The module's order class, exactly as Divi prints it on the wrapper.
+     *
+     * The inline <style> is scoped to this class, so it has to be the one on the
+     * element. A class hand-built from `orderIndex` misses the Theme Builder
+     * suffix (`_tb_header`, `_tb_body`, `_tb_footer`): a Dual Button in a
+     * Theme Builder template lost its gap and alignment, and its rules landed on
+     * the Dual Button with the same index in the post content instead. The
+     * hand-built form stays as the fallback for when Divi's helper is missing.
+     *
+     * @param \WP_Block $block Parsed block.
+     *
+     * @return string Class name without the leading dot, or '' when unknown.
+     */
+    protected static function order_class_name($block)
+    {
+        $id    = $block->parsed_block['id'] ?? null;
+        $utils = '\ET\Builder\Packages\ModuleUtils\ModuleUtils';
+
+        if ($id && class_exists($utils) && method_exists($utils, 'get_module_order_class_name')) {
+            $name = $utils::get_module_order_class_name($id, $block->parsed_block['storeInstance'] ?? null);
+
+            if (is_string($name) && '' !== $name) {
+                return $name;
+            }
+        }
+
+        $order_index = $block->parsed_block['orderIndex'] ?? null;
+
+        return null !== $order_index ? sprintf('dtq_dual_button_%d', $order_index) : '';
     }
 
     /**
@@ -225,14 +291,9 @@ trait RenderCallbackTrait
         $btn_b_link   = DynamicValue::resolve($advanced['btnBLink']['desktop']['value'] ?? '#');
         $btn_b_target = $advanced['btnBLinkTarget']['desktop']['value'] ?? '_self';
 
-        // Gap and alignment CSS is emitted inline because Style::add() only processes
-        // items returned by $elements->style() — raw array pushes are silently dropped.
-        // Guard the key: reading it unset emits a notice AND evaluates false,
-        // which silently dropped every gap/alignment/connector rule below.
-        $order_index = $block->parsed_block['orderIndex'] ?? null;
-        $order_class = null !== $order_index
-            ? sprintf('dtq_dual_button_%d', $order_index)
-            : '';
+        // Gap, alignment and connector CSS is printed as an inline <style>, every
+        // value sanitized, scoped to the order class Divi puts on the wrapper.
+        $order_class = self::order_class_name($block);
         $custom_css  = '';
         if (!empty($order_class)) {
             $custom_css = self::render_inline_styles($advanced, '.' . $order_class);

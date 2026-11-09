@@ -64,7 +64,7 @@ trait ModuleStylesTrait {
 		$advanced = $attrs['module']['advanced'] ?? array();
 
 		$title_spacing = self::with_unit( self::get_responsive_value( $advanced['titleSpacing'] ?? array(), 'desktop', '15px' ) );
-		$item_spacing  = self::with_unit( self::get_responsive_value( $advanced['itemSpacing'] ?? array(), 'desktop', '8px' ) );
+		$item_spacing  = self::with_unit( self::get_responsive_value( $advanced['itemSpacing'] ?? array(), 'desktop', '6px' ) );
 		$level_indent  = self::with_unit( self::get_responsive_value( $advanced['levelIndent'] ?? array(), 'desktop', '16px' ) );
 		$link_color    = self::get_responsive_value( $advanced['linkColor'] ?? array(), 'desktop', '' );
 		$active_color  = self::get_responsive_value( $advanced['activeColor'] ?? array(), 'desktop', '#2ea3f2' );

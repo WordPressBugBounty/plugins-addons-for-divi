@@ -871,7 +871,7 @@
     },
     "triggerText": {
       "type": "object",
-      "selector": "{{selector}} .dtq-modalpopup__trigger",
+      "selector": "{{selector}} .dtq-modalpopup .dtq-modalpopup__trigger",
       "default": {
         "innerContent": {
           "desktop": {
@@ -900,6 +900,101 @@
             "component": {
               "name": "divi/text",
               "type": "field"
+            }
+          }
+        },
+        "decoration": {
+          "font": {
+            "groupType": "group-item",
+            "item": {
+              "groupSlug": "designTriggerText",
+              "priority": 10,
+              "render": true,
+              "attrName": "triggerText.decoration.font",
+              "component": {
+                "name": "divi/font",
+                "type": "group",
+                "props": {
+                  "grouped": false,
+                  "fieldLabel": "Trigger",
+                  "fields": {
+                    "headingLevel": {
+                      "render": false
+                    },
+                    "textAlign": {
+                      "render": false
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "background": {
+            "groupType": "group-item",
+            "item": {
+              "groupSlug": "designTrigger",
+              "priority": 10,
+              "render": true,
+              "attrName": "triggerText.decoration.background",
+              "component": {
+                "name": "divi/background",
+                "type": "group",
+                "props": {
+                  "grouped": false,
+                  "fieldLabel": "Trigger"
+                }
+              }
+            }
+          },
+          "border": {
+            "groupType": "group-item",
+            "item": {
+              "groupSlug": "designTrigger",
+              "priority": 20,
+              "render": true,
+              "attrName": "triggerText.decoration.border",
+              "component": {
+                "name": "divi/border",
+                "type": "group",
+                "props": {
+                  "grouped": false,
+                  "fieldLabel": "Trigger"
+                }
+              }
+            }
+          },
+          "boxShadow": {
+            "groupType": "group-item",
+            "item": {
+              "groupSlug": "designTrigger",
+              "priority": 30,
+              "render": true,
+              "attrName": "triggerText.decoration.boxShadow",
+              "component": {
+                "name": "divi/box-shadow",
+                "type": "group",
+                "props": {
+                  "grouped": false,
+                  "fieldLabel": "Trigger"
+                }
+              }
+            }
+          },
+          "spacing": {
+            "groupType": "group-item",
+            "item": {
+              "groupSlug": "designTrigger",
+              "priority": 40,
+              "render": true,
+              "attrName": "triggerText.decoration.spacing",
+              "component": {
+                "name": "divi/spacing",
+                "type": "group",
+                "props": {
+                  "grouped": false,
+                  "fieldLabel": "Trigger"
+                }
+              }
             }
           }
         }
@@ -959,6 +1054,31 @@
           "name": "divi/composite",
           "props": {
             "groupLabel": "Behavior"
+          }
+        }
+      },
+      "designTrigger": {
+        "panel": "design",
+        "priority": 10,
+        "groupName": "designTrigger",
+        "component": {
+          "name": "divi/composite",
+          "props": {
+            "groupLabel": "Trigger Button"
+          }
+        }
+      },
+      "designTriggerText": {
+        "panel": "design",
+        "priority": 15,
+        "groupName": "designTriggerText",
+        "multiElements": true,
+        "component": {
+          "name": "divi/composite",
+          "props": {
+            "groupLabel": "Trigger Text",
+            "clipboardCategory": "style",
+            "presetGroup": "divi/font"
           }
         }
       },

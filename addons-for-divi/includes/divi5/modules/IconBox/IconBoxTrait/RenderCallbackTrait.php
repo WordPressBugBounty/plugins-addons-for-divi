@@ -13,6 +13,7 @@ if (!defined('ABSPATH')) {
 }
 
 use DiviTorqueLite\Modules\Shared\DynamicValue;
+use DiviTorqueLite\Modules\Shared\TextValue;
 use ET\Builder\Packages\Module\Module;
 use ET\Builder\Packages\Module\Layout\Components\ModuleElements\ModuleElements;
 use WP_Block;
@@ -132,7 +133,12 @@ trait RenderCallbackTrait
         $badge       = self::render_badge($advanced);
         $icon        = self::render_icon($advanced);
         $title       = $elements->render(['attrName' => 'title']);
-        $description = $elements->render(['attrName' => 'description']);
+        // Divi skips an empty string itself, but a cleared rich text field can
+        // leave "<p></p>" or "<p>&nbsp;</p>", which printed an empty
+        // .dtq-iconbox__desc that kept its margin (#112).
+        $description = TextValue::any_visible($attrs['description']['innerContent'] ?? [])
+            ? $elements->render(['attrName' => 'description'])
+            : '';
 
         $is_row      = 'left' === $placement || 'right' === $placement;
         $inner_class = 'dtq-iconbox-inner dtq-bg-support' . ($is_row ? ' dtq-iconbox--' . $placement : '');

@@ -12,6 +12,7 @@ if (!defined('ABSPATH')) {
     exit;
 }
 
+use DiviTorqueLite\Modules\Shared\TextValue;
 use ET\Builder\Packages\Module\Module;
 
 trait RenderCallbackTrait
@@ -36,8 +37,11 @@ trait RenderCallbackTrait
     {
         $show_title = ($attrs['module']['advanced']['showTitle']['desktop']['value'] ?? 'on') === 'on';
 
+        // An empty title box still took its 25px Title Spacing (and any title
+        // padding or border) with nothing to show (#112). Divi 4 printed it
+        // too; skip it unless the title has visible text.
         $title_html = '';
-        if ($show_title) {
+        if ($show_title && TextValue::any_visible($attrs['title']['innerContent'] ?? [])) {
             $title_html = sprintf(
                 '<div class="dtq-business-hour-title">%1$s</div>',
                 $elements->render(['attrName' => 'title'])

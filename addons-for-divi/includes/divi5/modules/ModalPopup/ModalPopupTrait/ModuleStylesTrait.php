@@ -101,6 +101,7 @@ trait ModuleStylesTrait
                     ],
                 ]
             ),
+            $elements->style(['attrName' => 'triggerText']),
             $elements->style(['attrName' => 'box']),
             $elements->style(['attrName' => 'title']),
             $elements->style(['attrName' => 'content']),

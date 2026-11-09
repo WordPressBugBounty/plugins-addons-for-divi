@@ -101,7 +101,7 @@
           },
           "imgPadding": {
             "desktop": {
-              "value": "0px|0px|0px|0px"
+              "value": { "top": "0px", "right": "0px", "bottom": "0px", "left": "0px" }
             }
           },
           "btnSpacingTop": {
@@ -121,7 +121,7 @@
           },
           "contentPadding": {
             "desktop": {
-              "value": "15px|0px|0px|0px"
+              "value": { "top": "15px", "right": "0px", "bottom": "0px", "left": "0px" }
             }
           },
           "overlayOnHover": {
@@ -186,7 +186,7 @@
           },
           "badgePadding": {
             "desktop": {
-              "value": "5px|15px|5px|15px"
+              "value": { "top": "5px", "right": "15px", "bottom": "5px", "left": "15px" }
             }
           },
           "badgeBgColor": {

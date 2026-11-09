@@ -130,7 +130,7 @@
           },
           "badgePadding": {
             "desktop": {
-              "value": "5px|15px|5px|15px"
+              "value": { "top": "5px", "right": "15px", "bottom": "5px", "left": "15px" }
             }
           },
           "badgeBg": {

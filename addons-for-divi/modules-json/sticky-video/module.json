@@ -194,13 +194,16 @@
               "groupSlug": "contentVideo",
               "attrName": "module.advanced.poster",
               "label": "Poster Image",
-              "description": "Shown until the visitor presses play. Nothing is requested from the video host before that.",
+              "description": "Shown before the video plays. Nothing loads from the video host until then. Leave empty for a dark frame.",
               "priority": 40,
               "render": true,
               "features": {
                 "sticky": false,
                 "responsive": false,
-                "hover": false
+                "hover": false,
+                "dynamicContent": {
+                  "type": "image"
+                }
               },
               "component": {
                 "type": "field",

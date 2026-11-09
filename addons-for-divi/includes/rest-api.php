@@ -247,6 +247,10 @@ class RestApi
         $excerpt_l  = absint($request->get_param('excerpt_length'));
         $excerpt_l  = $excerpt_l > 0 ? $excerpt_l : 150;
         $only_image = sanitize_text_field((string) $request->get_param('only_with_image'));
+        // The Post List preview sends its Date Format so the builder shows the
+        // date the published list prints (get_the_time() with that format).
+        // Without one, the site's date format, as before.
+        $date_fmt   = sanitize_text_field((string) $request->get_param('date_format'));
 
         $query_args = [
             'posts_per_page' => $post_count,
@@ -280,9 +284,11 @@ class RestApi
                 'id'        => $post->ID,
                 'title'     => get_the_title($post),
                 'permalink' => get_permalink($post),
-                'date'      => get_the_date('', $post),
+                'date'      => '' !== $date_fmt ? get_the_time($date_fmt, $post) : get_the_date('', $post),
                 'author'    => get_the_author_meta('display_name', $post->post_author),
-                'thumbnail' => get_the_post_thumbnail_url($post, 'full') ?: '',
+                // Default size, as the Post List render calls it (it used to
+                // preview the full-size file).
+                'thumbnail' => get_the_post_thumbnail_url($post) ?: '',
                 'excerpt'   => dtq_strimwidth(wp_strip_all_tags(get_the_excerpt($post)), 0, $excerpt_l, '...'),
             ];
         }
@@ -495,6 +501,8 @@ class RestApi
     public function mark_onboarding_done()
     {
         update_user_meta(get_current_user_id(), Dashboard::ONBOARDING_META, 1);
+        // Finished or skipped once is enough for the whole site.
+        delete_option(Dashboard::SETUP_OPTION);
 
         return new WP_REST_Response(['done' => true], 200);
     }

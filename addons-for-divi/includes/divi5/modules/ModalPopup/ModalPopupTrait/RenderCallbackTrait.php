@@ -73,7 +73,8 @@ trait RenderCallbackTrait
         // initModals' delegated click). Avoids the Divi button element's <a href>.
         $trigger_label = $attrs['triggerText']['innerContent']['desktop']['value'] ?? 'Open Popup';
         $trigger_html  = sprintf(
-            '<button type="button" class="dtq-modalpopup__trigger" aria-haspopup="dialog" aria-expanded="false">%1$s</button>',
+            '<button type="button" class="%1$s" aria-haspopup="dialog" aria-expanded="false">%2$s</button>',
+            esc_attr(self::trigger_class($attrs)),
             esc_html($trigger_label)
         );
         $title_html   = $elements->render(['attrName' => 'title', 'tagName' => 'h3']);
@@ -150,6 +151,73 @@ trait RenderCallbackTrait
                 ],
             ]
         );
+    }
+
+    /**
+     * Class list for the trigger button.
+     *
+     * PHP twin of src/divi5/modules/modal-popup/trigger-class.js; the two must
+     * agree or the builder and the published page hover differently.
+     *
+     * The stylesheet's hover flourish (a darker indigo, an indigo glow and a
+     * 1px lift) belongs to the default indigo look. Once the author gives the
+     * trigger a background of their own, `--custom-bg` switches it off and
+     * hover follows the Design tab only.
+     *
+     * @param array $attrs Block attributes.
+     *
+     * @return string
+     */
+    public static function trigger_class($attrs)
+    {
+        $classes = 'dtq-modalpopup__trigger';
+
+        if (self::has_custom_trigger_background($attrs)) {
+            $classes .= ' dtq-modalpopup__trigger--custom-bg';
+        }
+
+        return $classes;
+    }
+
+    /**
+     * Whether the author set a trigger background, at any breakpoint or state.
+     *
+     * Only what paints from CSS counts: a color, an enabled gradient or an
+     * image.
+     *
+     * @param array $attrs Block attributes.
+     *
+     * @return bool
+     */
+    public static function has_custom_trigger_background($attrs)
+    {
+        $background = $attrs['triggerText']['decoration']['background'] ?? [];
+
+        if (!is_array($background)) {
+            return false;
+        }
+
+        foreach ($background as $states) {
+            if (!is_array($states)) {
+                continue;
+            }
+
+            foreach ($states as $value) {
+                if (!is_array($value)) {
+                    continue;
+                }
+
+                $color    = is_string($value['color'] ?? null) ? trim($value['color']) : '';
+                $gradient = 'on' === ($value['gradient']['enabled'] ?? null);
+                $image    = is_string($value['image']['url'] ?? null) && '' !== trim($value['image']['url']);
+
+                if ('' !== $color || $gradient || $image) {
+                    return true;
+                }
+            }
+        }
+
+        return false;
     }
 
     /**

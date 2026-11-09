@@ -14,39 +14,10 @@ if (!defined('ABSPATH')) {
 
 use ET\Builder\FrontEnd\Module\Style;
 use ET\Builder\Packages\Module\Options\Css\CssStyle;
+use DiviTorqueLite\Modules\Shared\Spacing;
 
 trait ModuleStylesTrait
 {
-    /**
-     * Convert a D4 padding string ("t|r|b|l") or D5 spacing object to a CSS
-     * padding shorthand.
-     *
-     * @param string|array $val Pipe-delimited padding value or spacing object.
-     * @return string
-     */
-    public static function dtq_pad($val)
-    {
-        if (empty($val)) {
-            return '';
-        }
-        // D5 spacing object {top,right,bottom,left} (the migrated/native format).
-        if (is_array($val)) {
-            return sprintf(
-                '%1$s %2$s %3$s %4$s',
-                $val['top'] ?? '0px',
-                $val['right'] ?? '0px',
-                $val['bottom'] ?? '0px',
-                $val['left'] ?? '0px'
-            );
-        }
-        // Legacy D4 pipe-delimited string "top|right|bottom|left".
-        $parts = explode('|', (string) $val);
-        if (4 === count($parts)) {
-            return sprintf('%1$s %2$s %3$s %4$s', $parts[0], $parts[1], $parts[2], $parts[3]);
-        }
-        return (string) $val;
-    }
-
     /**
      * Build the flat custom-style declarations that mirror the D4 apply_css()
      * `ET_Builder_Element::set_style()` calls. Keep this in lockstep with the
@@ -69,7 +40,6 @@ trait ModuleStylesTrait
         $show_label      = $val('showLabel', 'always');
         $handle_style    = $val('handleStyle', 'handle-1');
         $handle_color    = $val('handleColor', '#ffffff');
-        $label_padding   = $val('labelPadding', '5px|20px|5px|20px');
         $label_height    = $val('labelHeight', '');
         $label_width     = $val('labelWidth', '');
 
@@ -113,7 +83,12 @@ trait ModuleStylesTrait
         if (!empty($label_width) && 'initial' !== $label_width) {
             $push($label_box_selector, sprintf('width: %s;', $label_width));
         }
-        $push($label_box_selector, sprintf('padding: %s;', self::dtq_pad($label_padding)));
+        // Label padding reads every stored shape and fills unset sides from
+        // the larger breakpoint, then the default (Shared\Spacing).
+        $label_pad_css = function ($breakpoint) use ($advanced) {
+            return Spacing::css('padding', $advanced['labelPadding'] ?? null, $breakpoint, '5px|20px|5px|20px');
+        };
+        $push($label_box_selector, $label_pad_css('desktop'));
 
         // Label visibility (show on module hover only).
         if ('on_hover' === $show_label) {
@@ -179,7 +154,7 @@ trait ModuleStylesTrait
             $at_rule = $at_rules[$breakpoint];
 
             if ($bp_changed('labelPadding', $breakpoint)) {
-                $push($label_box_selector, sprintf('padding: %s;', self::dtq_pad($bp_val('labelPadding', $breakpoint, $label_padding))), $at_rule);
+                $push($label_box_selector, $label_pad_css($breakpoint), $at_rule);
             }
             if ($bp_changed('labelHeight', $breakpoint)) {
                 $bp_h = $bp_val('labelHeight', $breakpoint, $label_height);

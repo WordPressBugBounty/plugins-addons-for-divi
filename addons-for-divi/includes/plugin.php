@@ -37,6 +37,7 @@ class PluginLoader
     public function __construct()
     {
         register_activation_hook(DIVI_TORQUE_LITE_FILE, array($this, 'activation'));
+        register_deactivation_hook(DIVI_TORQUE_LITE_FILE, array($this, 'deactivation'));
         add_action('init', array($this, 'load_textdomain'));
         add_action('plugins_loaded', array($this, 'hooks_init'));
     }
@@ -85,6 +86,13 @@ class PluginLoader
      */
     public function activation($network_wide = false)
     {
+        // A fresh install (no earlier Lite on this site) gets the welcome tour on
+        // every Divi Torque screen until someone finishes or skips it. Updates
+        // and reactivations never do: the version option survives deactivation.
+        if (false === get_option('divitorque_lite_version')) {
+            update_option(Dashboard::SETUP_OPTION, 1);
+        }
+
         // Deprecated related
         if (get_option('divitorque_version') && version_compare(get_option('divitorque_version'), '3.5.7', '<=')) {
             require_once DIVI_TORQUE_LITE_DIR . 'includes/deprecated.php';
@@ -112,6 +120,16 @@ class PluginLoader
         }
 
         self::init();
+    }
+
+    /**
+     * Handles plugin deactivation tasks
+     */
+    public function deactivation()
+    {
+        // The weekly PlugPress Insight update waits too; any PlugPress plugin
+        // still active schedules it again on admin_init while site info is shared.
+        wp_clear_scheduled_hook('plugpress_insight_weekly');
     }
 
     /**

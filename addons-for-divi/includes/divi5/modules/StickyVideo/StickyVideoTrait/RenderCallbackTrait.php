@@ -12,6 +12,7 @@ if (!defined('ABSPATH')) {
     exit;
 }
 
+use DiviTorqueLite\Modules\Shared\DynamicValue;
 use ET\Builder\Packages\Module\Module;
 use ET\Builder\Packages\Module\Layout\Components\ModuleElements\ModuleElements;
 use WP_Block;
@@ -36,6 +37,39 @@ trait RenderCallbackTrait
         }
 
         return (string) $value;
+    }
+
+    /**
+     * Resolve and validate the Poster Image URL.
+     *
+     * PHP twin of posterSrc() in src/divi5/modules/sticky-video/poster.js.
+     *
+     * The poster is the author's own image, so it never contacts the video
+     * host. A dynamic-content binding (the post's featured image, say) is
+     * resolved through DynamicValue, as the other image fields in Lite are.
+     * Only web URLs survive: a value with any scheme other than http or https
+     * (javascript:, data:) is dropped rather than printed.
+     *
+     * @param mixed $value Raw `module.advanced.poster` value.
+     *
+     * @return string Empty when there is no usable poster.
+     */
+    public static function poster_src($value)
+    {
+        $src = DynamicValue::resolve(self::upload_src(DynamicValue::resolve($value)));
+        $src = is_string($src) ? trim($src) : '';
+
+        if ('' === $src) {
+            return '';
+        }
+
+        if (preg_match('/^([a-z][a-z0-9+.\-]*):/i', $src, $matches)
+            && !in_array(strtolower($matches[1]), ['http', 'https'], true)
+        ) {
+            return '';
+        }
+
+        return $src;
     }
 
     /**
@@ -275,14 +309,14 @@ trait RenderCallbackTrait
                 esc_html__('Add a video URL, or choose a file for a self-hosted video.', 'addons-for-divi')
             );
         } else {
-            $poster = self::upload_src($advanced['poster']['desktop']['value'] ?? '');
+            $poster = self::poster_src($advanced['poster']['desktop']['value'] ?? '');
 
             $facade = sprintf(
                 '<button type="button" class="dtq-sticky-video__facade" aria-label="%1$s">%2$s'
                     . '<span class="dtq-sticky-video__play" aria-hidden="true"></span></button>',
                 esc_attr__('Play video', 'addons-for-divi'),
                 '' !== $poster
-                    ? sprintf('<img src="%s" alt="" loading="lazy" decoding="async" />', esc_url($poster))
+                    ? sprintf('<img src="%s" alt="" loading="lazy" decoding="async" />', esc_url($poster, ['http', 'https']))
                     : ''
             );
 

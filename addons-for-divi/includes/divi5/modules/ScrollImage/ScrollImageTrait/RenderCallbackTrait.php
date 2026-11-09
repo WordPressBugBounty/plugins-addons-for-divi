@@ -20,6 +20,26 @@ use WP_Block;
 trait RenderCallbackTrait
 {
     /**
+     * Normalize an upload value to its URL.
+     *
+     * An upload can arrive as a plain URL or as an image object (`{ src }`, or
+     * `{ url }` from some upload fields). The icon image used to be passed
+     * straight to esc_url(), which on an object printed a broken src and
+     * raised an "Array to string conversion" notice.
+     *
+     * @param mixed $value Upload attr value (already through DynamicValue).
+     * @return string
+     */
+    public static function image_url($value)
+    {
+        if (is_array($value)) {
+            $value = $value['src'] ?? ($value['url'] ?? '');
+        }
+
+        return is_string($value) ? $value : '';
+    }
+
+    /**
      * Render the direction icon (or icon image) markup.
      *
      * Mirrors the D4 `render_icon()` output (the font icon is rendered via an
@@ -33,7 +53,7 @@ trait RenderCallbackTrait
         $show_icon  = ($advanced['showIcon']['desktop']['value'] ?? 'off') === 'on';
         $use_image  = ($advanced['useImage']['desktop']['value'] ?? 'off') === 'on';
         $icon_value = $advanced['icon']['desktop']['value'] ?? '';
-        $icon_image = DynamicValue::resolve($advanced['iconImage']['desktop']['value'] ?? '');
+        $icon_image = self::image_url(DynamicValue::resolve($advanced['iconImage']['desktop']['value'] ?? ''));
 
         if (!$show_icon) {
             return '';

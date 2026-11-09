@@ -14,38 +14,10 @@ if (!defined('ABSPATH')) {
 
 use ET\Builder\FrontEnd\Module\Style;
 use ET\Builder\Packages\Module\Options\Css\CssStyle;
+use DiviTorqueLite\Modules\Shared\Spacing;
 
 trait ModuleStylesTrait
 {
-    /**
-     * Convert a padding value to a CSS shorthand.
-     *
-     * Accepts BOTH the legacy pipe-string ("a|b|c|d") and the D5 spacing
-     * object ({top,right,bottom,left}) that D4->D5 migration produces for
-     * convertSpacing fields (item_padding, title_padding).
-     *
-     * @param mixed $val Padding value.
-     *
-     * @return string
-     */
-    public static function pad_value($val)
-    {
-        if (empty($val)) {
-            return $val;
-        }
-        if (is_array($val)) {
-            return sprintf(
-                '%1$s %2$s %3$s %4$s',
-                !empty($val['top']) ? $val['top'] : '0px',
-                !empty($val['right']) ? $val['right'] : '0px',
-                !empty($val['bottom']) ? $val['bottom'] : '0px',
-                !empty($val['left']) ? $val['left'] : '0px'
-            );
-        }
-        $parts = explode('|', (string) $val);
-        return count($parts) === 4 ? implode(' ', $parts) : $val;
-    }
-
     /**
      * Build the Business Hours parent declarations, mirroring styles.jsx.
      *
@@ -121,20 +93,36 @@ trait ModuleStylesTrait
         });
 
         // Item padding (+responsive). D4 selector: %%order_class%% .ba_business_hour_child .dtq-business-hour-child.
+        // Spacing fields read every stored shape and fill unset sides from
+        // the larger breakpoint, then the default (Shared\Spacing).
+        $pad_css = function ($key, $breakpoint) use ($advanced) {
+            return Spacing::css('padding', $advanced[$key] ?? null, $breakpoint, '0px|0px|0px|0px', '!important');
+        };
+        $pad_responsive = function ($key, $selector) use ($advanced, $push, $pad_css, $tablet_at, $phone_at) {
+            if (Spacing::has($advanced[$key] ?? null, 'tablet')) {
+                $push($selector, $pad_css($key, 'tablet'), $tablet_at);
+            }
+            if (Spacing::has($advanced[$key] ?? null, 'phone')) {
+                $push($selector, $pad_css($key, 'phone'), $phone_at);
+            }
+        };
+
         $item_pad_sel = $order_class . ' .dtq_business_hour_item .dtq-business-hour-child';
-        $push($item_pad_sel, sprintf('padding: %1$s!important;', self::pad_value($val('itemPadding', '0px|0px|0px|0px'))));
-        $responsive('itemPadding', $item_pad_sel, function ($v) {
-            return sprintf('padding: %1$s!important;', self::pad_value($v));
-        });
+        $push($item_pad_sel, $pad_css('itemPadding', 'desktop'));
+        $pad_responsive('itemPadding', $item_pad_sel);
 
         // Title padding (+responsive).
-        $push($order_class . ' .dtq-business-hour-title', sprintf('padding: %1$s!important;', self::pad_value($val('titlePadding', '0px|0px|0px|0px'))));
-        $responsive('titlePadding', $order_class . ' .dtq-business-hour-title', function ($v) {
-            return sprintf('padding: %1$s!important;', self::pad_value($v));
-        });
+        $push($order_class . ' .dtq-business-hour-title', $pad_css('titlePadding', 'desktop'));
+        $pad_responsive('titlePadding', $order_class . ' .dtq-business-hour-title');
 
-        // Item spacing bottom (D4 emits the desktop value only).
-        $push($order_class . ' .dtq_business_hour_item', sprintf('margin-bottom: %1$s!important;', $val('itemSpacing', '25px')));
+        // Item spacing bottom (+responsive). Item Spacing is a responsive field,
+        // but D4 and D5 both emitted the desktop value only, so a tablet or
+        // phone value did nothing anywhere (#111).
+        $item_sel = $order_class . ' .dtq_business_hour_item';
+        $push($item_sel, sprintf('margin-bottom: %1$s!important;', $val('itemSpacing', '25px')));
+        $responsive('itemSpacing', $item_sel, function ($v) {
+            return sprintf('margin-bottom: %1$s!important;', $v);
+        });
 
         // Item divider.
         if ('on' === $val('showDivider', 'off')) {
@@ -142,7 +130,14 @@ trait ModuleStylesTrait
             $divider_weight = $val('dividerWeight', '1px');
             $divider_height = $val('dividerHeight', '10px');
 
-            $push($order_class . ' .dtq_business_hour_item', sprintf('padding-bottom: %1$s!important;', $val('itemSpacing', '25px')));
+            // D4 parity: with the divider on, Item Spacing is also added above
+            // the line, so the line sits midway between two rows and the rows
+            // are two Item Spacings apart. Without the divider there is no
+            // padding and the gap is exactly one Item Spacing.
+            $push($item_sel, sprintf('padding-bottom: %1$s!important;', $val('itemSpacing', '25px')));
+            $responsive('itemSpacing', $item_sel, function ($v) {
+                return sprintf('padding-bottom: %1$s!important;', $v);
+            });
 
             if ('#' === substr((string) $divider_color, 0, 1)) {
                 $divider_color = self::hex_to_rgb($divider_color);

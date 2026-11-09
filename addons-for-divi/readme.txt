@@ -4,7 +4,7 @@ Tags: divi, divi 5, divi modules, divi builder, divi carousel
 Requires at least: 7.0
 Tested up to: 7.1
 Requires PHP: 7.4
-Stable tag: 4.15.0
+Stable tag: 4.16.0
 License: GPLv3
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 
@@ -104,7 +104,7 @@ When you move a site from Divi 4 to Divi 5, Divi converts your saved layouts. We
 
 = Divi Torque Pro =
 
-Divi Torque Pro adds 57 more modules, for 98 in total. It includes a Divi filterable gallery, a masonry gallery, a timeline, pricing tables, a testimonial slider, a post grid, Ajax search, and Lottie animations.
+Divi Torque Pro adds 62 more modules, for 103 in total. It includes a Divi filterable gallery, a masonry gallery, a timeline, pricing tables, a testimonial slider, a post grid, Ajax search, and Lottie animations.
 
 [See what Pro includes](https://divitorque.com/pricing/?utm_campaign=lite-readme&utm_source=wp.org&utm_medium=textlink-pro)
 
@@ -169,6 +169,18 @@ Slider and counter scripts load only on pages that use them. You can also turn o
 
 Updates are made to keep existing pages working. We still recommend a backup before any update. If you need to, you can roll back to an earlier version from the Divi Torque dashboard.
 
+== External services ==
+
+Divi Torque Lite sends no usage data unless you choose to. It can send data to PlugPress Console (`console.plugpress.io`), run by PlugPress, which makes Divi Torque, only after you click:
+
+* **Allow** on the card on the Divi Torque Overview and the Plugins screen: the name and email of the account that clicked it (for support), your site address and title, WordPress and PHP versions, language, timezone, theme, your plugins with their versions, and a random id for your site. After that, once a week while sharing is on, and only when something changed. **No thanks** sends nothing. Turn it off with **Stop sharing site info** under Divi Torque Lite on the Plugins screen.
+* **Divi Torque news** ticked on that card, or **Subscribe** on the news card: the email address you typed, for Divi Torque news. You confirm it by email first. PlugPress Console passes it to the PlugPress newsletter and does not keep it.
+* **Send and deactivate** when you turn the plugin off: the reason you picked, what you typed, your email only if you tick **Email me back**, the plugin's version, your site's random id, and your WordPress and PHP versions and language. It never sends your site address. **Skip** sends nothing.
+
+Add `define( 'PLUGPRESS_INSIGHT', false );` to `wp-config.php` to remove the card and the form. See the [PlugPress Privacy Policy](https://plugpress.io/privacy/).
+
+The X (Twitter) Feed and X (Twitter) Carousel modules connect to the X API (`api.twitter.com`), run by X Corp., only on pages that use one of them with the API key and secret you entered in the module. Your site sends the key and secret to get an access token, then the X username you entered to load that account's posts. Posts are cached for an hour. See the [X Terms of Service](https://x.com/en/tos) and [X Privacy Policy](https://x.com/en/privacy).
+
 == Screenshots ==
 
 1. Review Box module
@@ -176,6 +188,28 @@ Updates are made to keep existing pages working. We still recommend a backup bef
 3. Image Carousel module
 
 == Changelog ==
+
+= Version 4.16.0 =
+* Improved: The welcome tour now has five steps. Switch modules on or off right in the tour, choose the optional Saddle and Saddle Analytics installs (unticked until you tick them), and see the current Divi Torque Pro offer. Skip it from the first step.
+* New: Optional usage sharing with PlugPress: a card on the Divi Torque overview and a short question when you deactivate. Nothing is sent unless you choose to. See External services.
+* New: Modal Popup has Design tab settings for the trigger button and trigger text. Existing popups keep their look.
+* New: Sticky Video Poster Image accepts dynamic content.
+* Fix: Padding fields in Divi 5 keep their value. Changing one side no longer wipes the setting, and pages edited before this update get back the side you set. This affected Business Hours, Before & After Slider, Separator, Icon Box, Image Carousel slides, Feature Box, Image Card, Review Box, Team Member and Testimonial Card.
+* Fix: Settings that show or hide other settings now do so in the Divi 5 builder for Dual Buttons, Animated Counter, Call To Action and Tooltip.
+* Fix: Post Carousel tablet and phone Image Height apply on the page.
+* Fix: Dual Buttons tablet and phone gap and alignment apply on the page.
+* Fix: Accordion Pro and FAQ Spacing Between Items applies on desktop. Tabs Pro and FAQ tablet and phone settings take effect.
+* Fix: Table of Contents links always reach their heading, including headings in other languages, repeated headings and headings with their own ID. Pages without a Table of Contents are left unchanged.
+* Fix: Table of Contents shows its background pattern and mask.
+* Fix: Call To Action overlay covers the whole box and follows its rounded corners.
+* Fix: Testimonial Card Bubble Border Radius accepts a single value.
+* Fix: Business Hours Item Spacing applies on tablet and phone.
+* Fix: Empty titles and descriptions no longer leave a blank gap.
+* Fix: Gradient Heading keeps the new tab and nofollow link choices of pages moved from Divi 4.
+* Fix: Dynamic content inside a text value, such as the post title, now shows on the page instead of disappearing (Divi 5).
+* Fix: The Divi 5 builder preview matches the page for FAQ answers, Accordion Pro Read More and title links, Feature Box YouTube and Vimeo videos, Image Card images, Post List, Separator heading level, Scroll Image icon and a cleared Fancy Text.
+* Tweak: The Divi Torque overview shows the current Divi Torque Pro offer, which you can close.
+* Tweak: The Modules screen lists the Divi Torque Pro WooCommerce modules under their own category.
 
 = Version 4.15.0 =
 * New: The Divi Torque overview page recommends Saddle and Saddle Analytics, two free plugins from WordPress.org, with a one-click install. Nothing installs until you click, the page shows what each plugin needs to run, and you can hide the recommendations.
@@ -442,6 +476,9 @@ Updates are made to keep existing pages working. We still recommend a backup bef
 * Public beta release
 
 == Upgrade Notice ==
+
+= 4.16.0 =
+Fixes Divi 5 padding fields that lost their value, Table of Contents links, tablet and phone settings in several modules, and builder previews. Adds a five-step welcome tour and optional usage sharing.
 
 = 4.15.0 =
 Fixes Flip Cards that vanished after a button click, plus Divi 5 fixes for button text and styles, carousel phone settings and Feature Box. Adds optional one-click installs for Saddle and Saddle Analytics.

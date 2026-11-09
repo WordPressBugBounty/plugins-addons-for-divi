@@ -14,38 +14,10 @@ if (!defined('ABSPATH')) {
 
 use ET\Builder\FrontEnd\Module\Style;
 use ET\Builder\Packages\Module\Options\Css\CssStyle;
+use DiviTorqueLite\Modules\Shared\Spacing;
 
 trait ModuleStylesTrait
 {
-    /**
-     * Convert a D4 padding string ("t|r|b|l") to a CSS padding shorthand.
-     *
-     * @param string $val Pipe-delimited padding value.
-     * @return string
-     */
-    public static function dtq_pad($val)
-    {
-        if (empty($val)) {
-            return '';
-        }
-        // D5 spacing object {top,right,bottom,left} (the migrated/native format).
-        if (is_array($val)) {
-            return sprintf(
-                '%1$s %2$s %3$s %4$s',
-                $val['top'] ?? '0px',
-                $val['right'] ?? '0px',
-                $val['bottom'] ?? '0px',
-                $val['left'] ?? '0px'
-            );
-        }
-        // Legacy D4 pipe-delimited string "top|right|bottom|left".
-        $parts = explode('|', (string) $val);
-        if (4 === count($parts)) {
-            return sprintf('%1$s %2$s %3$s %4$s', $parts[0], $parts[1], $parts[2], $parts[3]);
-        }
-        return (string) $val;
-    }
-
     /**
      * Build the flat custom-style declarations that mirror the D4 render_css()
      * `ET_Builder_Element::set_style()` calls.
@@ -72,9 +44,18 @@ trait ModuleStylesTrait
         $image_width      = $val('imageWidth', 'auto');
         $custom_height    = $val('customHeight', 'on');
         $image_height     = $val('imageHeight', '300px');
-        $icon_padding     = $val('iconPadding', '25px|25px|25px|25px');
-        $image_padding    = $val('imagePadding', '0px|0px|0px|0px');
-        $content_padding  = $val('contentPadding', '25px|25px|25px|25px');
+        // Spacing fields (content, icon, image and badge padding) read every
+        // stored shape and fill missing sides from the larger breakpoint,
+        // then the default (Shared\Spacing).
+        $spacing_defaults = [
+            'iconPadding'    => '25px|25px|25px|25px',
+            'imagePadding'   => '0px|0px|0px|0px',
+            'contentPadding' => '25px|25px|25px|25px',
+            'badgePadding'   => '5px|15px|5px|15px',
+        ];
+        $pad_css = function ($key, $breakpoint) use ($advanced, $spacing_defaults) {
+            return Spacing::css('padding', $advanced[$key] ?? null, $breakpoint, $spacing_defaults[$key]);
+        };
         $btn_spacing_top  = $val('btnSpacingTop', '10px');
         $title_bottom     = $val('titleBottomSpacing', '10px');
 
@@ -114,9 +95,9 @@ trait ModuleStylesTrait
         $push($order_class . ' .dtq-card-title', sprintf('padding-bottom: %s;', $title_bottom));
 
         if ('on' === $use_icon) {
-            $push($order_class . ' .dtq-card .dtq-card-icon', sprintf('padding: %s;', self::dtq_pad($icon_padding)));
+            $push($order_class . ' .dtq-card .dtq-card-icon', $pad_css('iconPadding', 'desktop'));
         } else {
-            $push($order_class . ' .dtq-card-figure img', sprintf('padding: %s;', self::dtq_pad($image_padding)));
+            $push($order_class . ' .dtq-card-figure img', $pad_css('imagePadding', 'desktop'));
             if ('on' === $custom_height) {
                 $push($order_class . ' .dtq-card-figure', sprintf('height: %s;', $image_height));
             }
@@ -124,7 +105,7 @@ trait ModuleStylesTrait
         }
 
         // Content padding.
-        $push($order_class . ' .dtq-card-content', sprintf('padding: %s;', self::dtq_pad($content_padding)));
+        $push($order_class . ' .dtq-card-content', $pad_css('contentPadding', 'desktop'));
 
         // Icon color + size.
         $push($order_class . ' .dtq-card-icon i', sprintf('color: %1$s; font-size: %2$s;', $icon_color, $icon_size));
@@ -151,7 +132,6 @@ trait ModuleStylesTrait
         $badge_pos      = $val('badgePosition', 'right_top');
         $badge_offset_x = $val('badgeOffsetX', '15px');
         $badge_offset_y = $val('badgeOffsetY', '15px');
-        $badge_padding  = $val('badgePadding', '5px|15px|5px|15px');
         $badge_bg       = $val('badgeBgColor', '#ffffff');
         $badge_center_x = $val('badgeIsCenterX', 'off');
         $badge_center_y = $val('badgeIsCenterY', 'off');
@@ -160,7 +140,7 @@ trait ModuleStylesTrait
         $pos_y          = $pos_parts[1] ?? 'top';
 
         // Mirror D4 get_absolute_element_styles() centering + translate logic.
-        $badge_axis_decl = function ($off_x, $off_y) use ($pos_x, $pos_y, $badge_center_x, $badge_center_y, $badge_padding, $badge_bg) {
+        $badge_axis_decl = function ($off_x, $off_y) use ($pos_x, $pos_y, $badge_center_x, $badge_center_y, $pad_css, $badge_bg) {
             $x_val = ('on' === $badge_center_x) ? '50%' : $off_x;
             $y_val = ('on' === $badge_center_y) ? '50%' : $off_y;
             $tx    = '0';
@@ -172,14 +152,14 @@ trait ModuleStylesTrait
                 $ty = ('top' === $pos_y) ? '-50%' : '50%';
             }
             return sprintf(
-                'position: absolute; z-index: 999; %1$s: %2$s; %3$s: %4$s; transform: translateX(%5$s) translateY(%6$s); padding: %7$s; background-color: %8$s;',
+                'position: absolute; z-index: 999; %1$s: %2$s; %3$s: %4$s; transform: translateX(%5$s) translateY(%6$s); %7$s background-color: %8$s;',
                 $pos_x,
                 $x_val,
                 $pos_y,
                 $y_val,
                 $tx,
                 $ty,
-                self::dtq_pad($badge_padding),
+                $pad_css('badgePadding', 'desktop'),
                 $badge_bg
             );
         };
@@ -261,13 +241,11 @@ trait ModuleStylesTrait
             // Image/Icon padding, height, width (mirror desktop useIcon branch).
             if ('on' === $use_icon) {
                 if ($bp_changed('iconPadding', $breakpoint)) {
-                    $bp_icon_pad = $bp_val('iconPadding', $breakpoint, $icon_padding);
-                    $push_media($at_rule, $order_class . ' .dtq-card .dtq-card-icon', sprintf('padding: %s;', self::dtq_pad($bp_icon_pad)));
+                    $push_media($at_rule, $order_class . ' .dtq-card .dtq-card-icon', $pad_css('iconPadding', $breakpoint));
                 }
             } else {
                 if ($bp_changed('imagePadding', $breakpoint)) {
-                    $bp_image_pad = $bp_val('imagePadding', $breakpoint, $image_padding);
-                    $push_media($at_rule, $order_class . ' .dtq-card-figure img', sprintf('padding: %s;', self::dtq_pad($bp_image_pad)));
+                    $push_media($at_rule, $order_class . ' .dtq-card-figure img', $pad_css('imagePadding', $breakpoint));
                 }
                 if ('on' === $custom_height && $bp_changed('imageHeight', $breakpoint)) {
                     $bp_image_height = $bp_val('imageHeight', $breakpoint, $image_height);
@@ -284,8 +262,7 @@ trait ModuleStylesTrait
 
             // Content padding.
             if ($bp_changed('contentPadding', $breakpoint)) {
-                $bp_content_pad = $bp_val('contentPadding', $breakpoint, $content_padding);
-                $push_media($at_rule, $order_class . ' .dtq-card-content', sprintf('padding: %s;', self::dtq_pad($bp_content_pad)));
+                $push_media($at_rule, $order_class . ' .dtq-card-content', $pad_css('contentPadding', $breakpoint));
             }
 
             // Icon size (rebuild color + size declaration; color is non-responsive).
@@ -301,7 +278,6 @@ trait ModuleStylesTrait
             ) {
                 $bp_badge_x   = $bp_val('badgeOffsetX', $breakpoint, $badge_offset_x);
                 $bp_badge_y   = $bp_val('badgeOffsetY', $breakpoint, $badge_offset_y);
-                $bp_badge_pad = $bp_val('badgePadding', $breakpoint, $badge_padding);
                 $x_val        = ('on' === $badge_center_x) ? '50%' : $bp_badge_x;
                 $y_val        = ('on' === $badge_center_y) ? '50%' : $bp_badge_y;
                 $tx           = '0';
@@ -316,14 +292,14 @@ trait ModuleStylesTrait
                     $at_rule,
                     $order_class . ' .dtq-card-badge',
                     sprintf(
-                        'position: absolute; z-index: 999; %1$s: %2$s; %3$s: %4$s; transform: translateX(%5$s) translateY(%6$s); padding: %7$s; background-color: %8$s;',
+                        'position: absolute; z-index: 999; %1$s: %2$s; %3$s: %4$s; transform: translateX(%5$s) translateY(%6$s); %7$s background-color: %8$s;',
                         $pos_x,
                         $x_val,
                         $pos_y,
                         $y_val,
                         $tx,
                         $ty,
-                        self::dtq_pad($bp_badge_pad),
+                        $pad_css('badgePadding', $breakpoint),
                         $badge_bg
                     )
                 );

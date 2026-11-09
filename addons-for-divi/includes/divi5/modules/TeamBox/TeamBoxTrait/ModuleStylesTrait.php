@@ -14,39 +14,10 @@ if (!defined('ABSPATH')) {
 
 use ET\Builder\FrontEnd\Module\Style;
 use ET\Builder\Packages\Module\Options\Css\CssStyle;
+use DiviTorqueLite\Modules\Shared\Spacing;
 
 trait ModuleStylesTrait
 {
-    /**
-     * Convert a spacing field value to a CSS padding/margin shorthand.
-     *
-     * After a D4->D5 migration, `convertSpacing` fields arrive as a D5 spacing
-     * object `['top'=>..,'right'=>..,'bottom'=>..,'left'=>..]`, whereas legacy
-     * data is the old pipe-string `"top|right|bottom|left"`. Accept both so the
-     * styler never does an "Array to string conversion" on the object form.
-     *
-     * @param mixed $val The raw spacing value (object array or pipe-string).
-     *
-     * @return string The `top right bottom left` shorthand, or '' if empty.
-     */
-    public static function dtq_spacing($val)
-    {
-        if (empty($val)) {
-            return '';
-        }
-        if (is_array($val)) {
-            return sprintf(
-                '%s %s %s %s',
-                $val['top'] ?? '0px',
-                $val['right'] ?? '0px',
-                $val['bottom'] ?? '0px',
-                $val['left'] ?? '0px'
-            );
-        }
-        $p = explode('|', (string) $val);
-        return 4 === count($p) ? implode(' ', $p) : (string) $val;
-    }
-
     /**
      * Build the dynamic custom style array from flat advanced attrs.
      *
@@ -226,14 +197,12 @@ trait ModuleStylesTrait
         $push($order_class . ' .dtq-team-content', sprintf('background-color: %1$s;', $content_bg));
         $push($order_class . ':hover .dtq-team-content', sprintf('background-color: %1$s;', $content_bg_hover));
 
-        // Content padding. Accept both the D5 spacing object and a pipe-string.
-        $padding = $advanced['contentPadding']['desktop']['value'] ?? null;
-        $padding_css = self::dtq_spacing($padding);
+        // Content padding. Spacing fields read every stored shape and fill
+        // missing sides from the larger breakpoint, then the default, which
+        // Divi also merges into the attrs before this runs (Shared\Spacing).
+        $padding_css = Spacing::css('padding', $advanced['contentPadding'] ?? null, 'desktop', '20px|20px|20px|20px');
         if ('' !== $padding_css) {
-            $push(
-                $order_class . ' .dtq-team-content',
-                sprintf('padding: %1$s;', $padding_css)
-            );
+            $push($order_class . ' .dtq-team-content', $padding_css);
         }
 
         // Overlay.
@@ -349,16 +318,11 @@ trait ModuleStylesTrait
                 }
             }
 
-            // contentPadding -> .dtq-team-content { padding }. Accept both the
-            // D5 spacing object and a pipe-string at this breakpoint.
+            // contentPadding -> .dtq-team-content { padding }.
             if (null !== $bp_raw('contentPadding', $bp)) {
-                $bp_padding_css = self::dtq_spacing($bp_val('contentPadding', $bp));
+                $bp_padding_css = Spacing::css('padding', $advanced['contentPadding'] ?? null, $bp, '20px|20px|20px|20px');
                 if ('' !== $bp_padding_css) {
-                    $push_at(
-                        $at_rule,
-                        $order_class . ' .dtq-team-content',
-                        sprintf('padding: %1$s;', $bp_padding_css)
-                    );
+                    $push_at($at_rule, $order_class . ' .dtq-team-content', $bp_padding_css);
                 }
             }
         }

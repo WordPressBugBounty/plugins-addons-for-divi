@@ -14,80 +14,10 @@ if (!defined('ABSPATH')) {
 
 use ET\Builder\FrontEnd\Module\Style;
 use ET\Builder\Packages\Module\Options\Css\CssStyle;
+use DiviTorqueLite\Modules\Shared\Spacing;
 
 trait ModuleStylesTrait
 {
-    /**
-     * The sides a padding value sets, as side => CSS value. Sides left empty
-     * are absent, so the caller can fill them from a larger breakpoint or the
-     * default instead of forcing 0px.
-     *
-     * Accepts the D5 spacing object {top,right,bottom,left}, the D4 string
-     * "top|right|bottom|left", and the raw field edit {side, value} that the
-     * builder saved before the padding fields got Divi's spacing handler
-     * (pages edited on 2.4.1 and earlier hold that shape).
-     *
-     * @param string|array $val Padding value.
-     * @return array
-     */
-    public static function dtq_pad_sides($val)
-    {
-        $names = ['top', 'right', 'bottom', 'left'];
-
-        if (is_array($val)) {
-            $parts = [];
-            foreach ($names as $name) {
-                $parts[] = $val[$name] ?? '';
-            }
-            // Raw field edit {side, value}: use it unless that side is set too.
-            $side  = $val['side'] ?? null;
-            $index = is_string($side) ? array_search($side, $names, true) : false;
-            if (false !== $index && '' === $parts[$index] && is_scalar($val['value'] ?? null)) {
-                $parts[$index] = $val['value'];
-            }
-        } else {
-            $parts = array_pad(explode('|', (string) $val), 4, '');
-        }
-
-        $sides = [];
-        foreach ($names as $i => $name) {
-            $part = is_scalar($parts[$i]) ? trim((string) $parts[$i]) : '';
-            if ('' !== $part) {
-                $sides[$name] = $part;
-            }
-        }
-        return $sides;
-    }
-
-    /**
-     * CSS padding shorthand for one breakpoint. Each side comes from the
-     * nearest breakpoint that sets it (phone, then tablet, then desktop),
-     * then from the default, the way Divi's own spacing inherits.
-     *
-     * @param array  $advanced   The `module.advanced` attrs array.
-     * @param string $key        Attribute key, e.g. "frontPadding".
-     * @param string $breakpoint desktop, tablet or phone.
-     * @param string $default    Default value, "top|right|bottom|left".
-     * @return string
-     */
-    public static function dtq_pad_at($advanced, $key, $breakpoint, $default)
-    {
-        $sides = self::dtq_pad_sides($default);
-        foreach (['desktop', 'tablet', 'phone'] as $bp) {
-            $sides = array_merge($sides, self::dtq_pad_sides($advanced[$key][$bp]['value'] ?? ''));
-            if ($bp === $breakpoint) {
-                break;
-            }
-        }
-        return sprintf(
-            '%1$s %2$s %3$s %4$s',
-            $sides['top'] ?? '0px',
-            $sides['right'] ?? '0px',
-            $sides['bottom'] ?? '0px',
-            $sides['left'] ?? '0px'
-        );
-    }
-
     /**
      * Build the flat custom-style declarations that mirror the D4 render_css()
      * `ET_Builder_Element::set_style()` / `get_responsive_styles()` calls.
@@ -178,11 +108,13 @@ trait ModuleStylesTrait
         // differs from the next-larger breakpoint (review precedent).
         // ------------------------------------------------------------------
 
-        // Padding resolves side by side across breakpoints (dtq_pad_at), so a
-        // padding entry reads its own value instead of the plain fallback.
+        // Padding resolves side by side across breakpoints (Shared\Spacing:
+        // a missing side comes from the larger breakpoint, then the default),
+        // so a padding entry reads its own declaration instead of the plain
+        // fallback.
         $pad_at = function ($key, $def) use ($advanced) {
             return function ($breakpoint) use ($advanced, $key, $def) {
-                return self::dtq_pad_at($advanced, $key, $breakpoint, $def);
+                return Spacing::css('padding', $advanced[$key] ?? null, $breakpoint, $def);
             };
         };
 
@@ -212,7 +144,7 @@ trait ModuleStylesTrait
                 'when'    => true,
                 'resolve' => $pad_at($side . 'Padding', '30px|30px|30px|30px'),
                 'rules'   => function ($v) use ($order_class, $side) {
-                    return [[$order_class . " .dtq-flipbox-{$side}-card", sprintf('padding: %s;', $v)]];
+                    return [[$order_class . " .dtq-flipbox-{$side}-card", $v]];
                 },
             ];
             $entries[] = [
@@ -221,7 +153,7 @@ trait ModuleStylesTrait
                 'when'    => true,
                 'resolve' => $pad_at($side . 'CtPadding', '0px|0px|0px|0px'),
                 'rules'   => function ($v) use ($order_class, $side) {
-                    return [[$order_class . " .dtq-flipbox-{$side}-card .dtq-flipbox-content-wrap", sprintf('padding: %s;', $v)]];
+                    return [[$order_class . " .dtq-flipbox-{$side}-card .dtq-flipbox-content-wrap", $v]];
                 },
             ];
             $entries[] = [
@@ -257,7 +189,7 @@ trait ModuleStylesTrait
                 'when'    => true,
                 'resolve' => $pad_at($side . 'ImgPadding', '0px|0px|0px|0px'),
                 'rules'   => function ($v) use ($order_class, $side) {
-                    return [[$order_class . " .dtq-flipbox-figure-{$side} img", sprintf('padding: %s;', $v)]];
+                    return [[$order_class . " .dtq-flipbox-figure-{$side} img", $v]];
                 },
             ];
             $entries[] = [

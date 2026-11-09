@@ -17,6 +17,7 @@ require_once __DIR__ . '/TableOfContentsTrait/ModuleStylesTrait.php';
 require_once __DIR__ . '/TableOfContentsTrait/ModuleClassnamesTrait.php';
 require_once __DIR__ . '/TableOfContentsTrait/ModuleScriptDataTrait.php';
 require_once __DIR__ . '/TableOfContentsTrait/CustomCssTrait.php';
+require_once __DIR__ . '/HeadingIndex.php';
 
 class TableOfContents implements DependencyInterface {
 
@@ -32,9 +33,14 @@ class TableOfContents implements DependencyInterface {
 	public function load() {
 		$module_json_folder_path = DIVI_TORQUE_LITE_MODULES_JSON_PATH . 'table-of-contents/';
 
-		// Inject anchor ids into content headings so the server-rendered
-		// (no-JS / AMP) table of contents links resolve.
+		// Give headings their anchor ids and fill the server-rendered (no-JS /
+		// AMP) list, in one pass over the finished HTML. Gated inside on the TOC
+		// slot, so content without a Table of Contents is returned untouched.
+		// et_builder_render_layout covers a TOC placed in a Theme Builder body
+		// layout, whose Post Content module has rendered the post's headings
+		// into the same HTML by then.
 		add_filter( 'the_content', array( self::class, 'add_heading_ids' ), 99 );
+		add_filter( 'et_builder_render_layout', array( self::class, 'add_heading_ids_to_layout' ), 99 );
 
 		add_action(
 			'init',

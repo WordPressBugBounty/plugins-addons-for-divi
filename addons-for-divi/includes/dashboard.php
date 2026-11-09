@@ -31,8 +31,26 @@ class Dashboard
     /**
      * Pro discount shown on the onboarding's last step, in percent. divitorque.com
      * applies it at checkout, so this is display only; 0 hides the line.
+     * Must equal dt_lifetime_discount() on the site: 0 while it is off
+     * (switched off 2026-11-02 ahead of the Black Friday sale).
      */
-    const PRO_DISCOUNT = 40;
+    const PRO_DISCOUNT = 0;
+
+    /**
+     * Set on a fresh install (Plugin::activation), deleted when the tour is
+     * finished or skipped. While set, every Lite dashboard screen opens the tour.
+     */
+    const SETUP_OPTION = 'divitorque_lite_setup_pending';
+
+    /**
+     * The welcome offer on the tour's last step, in percent (display only):
+     * Starter yearly off its first year, and Starter and Unlimited Lifetime.
+     * divitorque.com/upgrade-pricing/ applies them at checkout and must show the
+     * same numbers (dt_upgrade_offer() in the dt-website theme). 0 hides the
+     * offer and the step falls back to the plain Pro plans.
+     */
+    const OFFER_YEARLY_PERCENT   = 50;
+    const OFFER_LIFETIME_PERCENT = 30;
 
     public static function get_instance()
     {
@@ -330,7 +348,14 @@ class Dashboard
             'moduleInfo'  => ModulesManager::get_all_modules(),
             // Welcome tour (admin/src/pages/Onboarding.jsx).
             'isDivi5'            => function_exists('divitorque_lite_d5_enabled') && divitorque_lite_d5_enabled(),
+            'hasDivi'            => self::has_divi(),
             'onboardingDone'     => self::onboarding_done(),
+            'setupRequired'      => self::setup_required(),
+            'offer'              => [
+                'yearly'   => (int) self::OFFER_YEARLY_PERCENT,
+                'lifetime' => (int) self::OFFER_LIFETIME_PERCENT,
+                'url'      => 'https://divitorque.com/upgrade-pricing/?utm_source=divi-torque-lite&utm_medium=wp-admin&utm_campaign=onboarding',
+            ],
             // Lite's own extensions (the catalog lists only the marketed ones).
             'freeExtensions'     => class_exists(__NAMESPACE__ . '\Extensions_Manager')
                 ? count(array_filter(Extensions_Manager::all(), function ($ext) {
@@ -342,7 +367,86 @@ class Dashboard
             'saddleUrl'          => 'https://saddle.to/?utm_source=divi-torque-lite&utm_medium=wp-admin&utm_campaign=onboarding',
             // Saddle + Saddle Analytics offer (Overview band, welcome tour).
             'recommended'        => Recommended_Plugins::boot_data(),
+            // Black Friday 2026 banner on the Overview, null outside the sale.
+            'blackFriday'        => self::black_friday(),
         ];
+    }
+
+    /**
+     * Black Friday 2026 banner (admin/src/components/BlackFridayBanner.jsx).
+     *
+     * Shown on Lite's own Overview only, never in a WP admin notice. The phase
+     * dates mirror dt_bf() in the dt-website theme (inc/black-friday.php), in
+     * Dhaka time (GMT+6). The sale opens to the public at 18:00 on Nov 13, so
+     * the early-access copy runs until then. No price, no coupon code and no
+     * countdown: each phase states its one real end date. Returns null outside
+     * the campaign, so the banner removes itself on Jan 1, 2027.
+     *
+     * The Cyber Monday and December phases link the Cyber Monday page directly:
+     * the theme 301s the Black Friday page there and drops the UTM query.
+     *
+     * @param int|null $now Unix time to test against; defaults to now.
+     * @return array|null { phase, title, description, cta, url }
+     */
+    public static function black_friday($now = null)
+    {
+        $tz  = new \DateTimeZone('Asia/Dhaka');
+        $now = null === $now ? time() : (int) $now;
+        $at  = function ($date) use ($tz) {
+            return (new \DateTimeImmutable($date, $tz))->getTimestamp();
+        };
+
+        if ($now < $at('2026-11-02 00:00')) {
+            return null;
+        }
+
+        $utm    = '?utm_source=divi-torque-lite&utm_medium=wp-admin&utm_campaign=black-friday-2026';
+        $bf_url = 'https://divitorque.com/black-friday-2026/' . $utm;
+        $cm_url = 'https://divitorque.com/cyber-monday-2026/' . $utm;
+
+        $phases = [
+            [
+                'phase'       => 'early',
+                'to'          => '2026-11-13 18:00',
+                'title'       => __('Black Friday starts Nov 13', 'addons-for-divi'),
+                'description' => __('Join the early-access list to see the Divi Torque Pro deal first.', 'addons-for-divi'),
+                'cta'         => __('Get early access', 'addons-for-divi'),
+                'url'         => $bf_url,
+            ],
+            [
+                'phase'       => 'bf',
+                'to'          => '2026-11-28 00:00',
+                'title'       => __('Black Friday sale on Divi Torque Pro', 'addons-for-divi'),
+                'description' => __('Divi Torque Pro is on sale until Nov 27.', 'addons-for-divi'),
+                'cta'         => __('See the Black Friday deal', 'addons-for-divi'),
+                'url'         => $bf_url,
+            ],
+            [
+                'phase'       => 'cm',
+                'to'          => '2026-12-02 00:00',
+                'title'       => __('Cyber Monday sale on Divi Torque Pro', 'addons-for-divi'),
+                'description' => __('Divi Torque Pro is on sale until Dec 1.', 'addons-for-divi'),
+                'cta'         => __('See the Cyber Monday deal', 'addons-for-divi'),
+                'url'         => $cm_url,
+            ],
+            [
+                'phase'       => 'dec',
+                'to'          => '2027-01-01 00:00',
+                'title'       => __('Holiday sale on Divi Torque Pro', 'addons-for-divi'),
+                'description' => __('Divi Torque Pro is on sale until Dec 31.', 'addons-for-divi'),
+                'cta'         => __('See the holiday deal', 'addons-for-divi'),
+                'url'         => $cm_url,
+            ],
+        ];
+
+        foreach ($phases as $phase) {
+            if ($now < $at($phase['to'])) {
+                unset($phase['to']);
+                return $phase;
+            }
+        }
+
+        return null;
     }
 
     public function body_class($classes)
@@ -395,6 +499,18 @@ class Dashboard
      */
     public function maybe_redirect_to_onboarding()
     {
+        // Fresh install, tour not done yet: any Lite dashboard screen opens it
+        // (server-side, so the WP submenu highlights the right entry; the app's
+        // gated() pages cover in-app navigation).
+        // phpcs:disable WordPress.Security.NonceVerification
+        $on_our_page = is_admin() && isset($_GET['page']) && $this->menu_slug === $_GET['page'];
+        $path        = isset($_GET['path']) ? sanitize_key(wp_unslash($_GET['path'])) : '';
+        // phpcs:enable
+        if ($on_our_page && 'welcome' !== $path && self::setup_required()) {
+            wp_safe_redirect(admin_url('admin.php?page=' . $this->menu_slug . '&path=welcome'));
+            exit;
+        }
+
         if (!get_transient(self::ONBOARDING_TRANSIENT)) {
             return;
         }
@@ -430,6 +546,33 @@ class Dashboard
         }
 
         return !self::onboarding_done();
+    }
+
+    /**
+     * Whether a Divi builder is active: the Divi or Extra theme (or a child
+     * of either) or the Divi Builder plugin. The welcome tour says so when
+     * not, instead of pointing at a builder the site does not have.
+     *
+     * @return bool
+     */
+    public static function has_divi()
+    {
+        if (defined('ET_BUILDER_PLUGIN_ACTIVE') || function_exists('et_setup_theme')) {
+            return true;
+        }
+
+        return in_array(strtolower((string) get_template()), array('divi', 'extra'), true);
+    }
+
+    /**
+     * Whether this screen must open the welcome tour: a fresh install whose
+     * tour nobody has finished or skipped, seen by an admin the tour is for.
+     *
+     * @return bool
+     */
+    public static function setup_required()
+    {
+        return (bool) get_option(self::SETUP_OPTION) && self::should_redirect_to_onboarding();
     }
 
     /**

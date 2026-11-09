@@ -14,39 +14,10 @@ if (!defined('ABSPATH')) {
 
 use ET\Builder\FrontEnd\Module\Style;
 use ET\Builder\Packages\Module\Options\Css\CssStyle;
+use DiviTorqueLite\Modules\Shared\Spacing;
 
 trait ModuleStylesTrait
 {
-    /**
-     * Convert a D4 padding string ("t|r|b|l") or D5 spacing object to a CSS
-     * padding shorthand.
-     *
-     * @param string|array $val Pipe-delimited padding value or spacing object.
-     * @return string
-     */
-    public static function dtq_pad($val)
-    {
-        if (empty($val)) {
-            return '';
-        }
-        // D5 spacing object {top,right,bottom,left} (the migrated/native format).
-        if (is_array($val)) {
-            return sprintf(
-                '%1$s %2$s %3$s %4$s',
-                $val['top'] ?? '0px',
-                $val['right'] ?? '0px',
-                $val['bottom'] ?? '0px',
-                $val['left'] ?? '0px'
-            );
-        }
-        // Legacy D4 pipe-delimited string "top|right|bottom|left".
-        $parts = explode('|', (string) $val);
-        if (4 === count($parts)) {
-            return sprintf('%1$s %2$s %3$s %4$s', $parts[0], $parts[1], $parts[2], $parts[3]);
-        }
-        return (string) $val;
-    }
-
     /**
      * Shared absolute-element declaration builder (mirrors D4
      * get_absolute_element_styles(); also used for the absolute reviewer
@@ -89,6 +60,85 @@ trait ModuleStylesTrait
     }
 
     /**
+     * Normalize the Bubble Border Radius value to a CSS shorthand.
+     *
+     * The field is a free text input that came over from Divi 4, whose
+     * border-radius value is "linked|top-left|top-right|bottom-right|bottom-left"
+     * (off|6px|6px|6px|6px): the first segment is a sync flag, not a corner.
+     * Only that shape used to work. "20px" left every corner at 0px with no
+     * error, and an object never matched at all (#109). Accepted now:
+     *
+     * - the Divi 4 pipe form, with or without the leading on/off flag;
+     * - one plain value for all corners, or a CSS shorthand ("10px 0px");
+     * - an object with corner names (topLeft, topRight, bottomRight,
+     *   bottomLeft, as Divi 5 stores radii) or top/right/bottom/left, read
+     *   in the same order as the CSS shorthand.
+     *
+     * Every corner must parse as a length; anything else, or a missing corner,
+     * becomes 0px, as an empty segment always did. JS twin: bubbleRadius() in
+     * src/divi5/modules/testimonial/bubble-radius.js. Change both together.
+     *
+     * @param mixed $value Raw bubbleRadius attribute value.
+     *
+     * @return string Four lengths: top-left top-right bottom-right bottom-left.
+     */
+    public static function bubble_radius($value)
+    {
+        if (is_array($value)) {
+            $pick    = function ($keys) use ($value) {
+                foreach ($keys as $key) {
+                    if (isset($value[$key]) && '' !== $value[$key]) {
+                        return $value[$key];
+                    }
+                }
+                return '';
+            };
+            $corners = [
+                $pick(['topLeft', 'top_left', 'top-left', 'top']),
+                $pick(['topRight', 'top_right', 'top-right', 'right']),
+                $pick(['bottomRight', 'bottom_right', 'bottom-right', 'bottom']),
+                $pick(['bottomLeft', 'bottom_left', 'bottom-left', 'left']),
+            ];
+        } else {
+            $value = trim((string) $value);
+
+            if (false !== strpos($value, '|')) {
+                $parts = array_map('trim', explode('|', $value));
+                // Five segments is always the Divi 4 shape, flag first.
+                if (5 === count($parts) || in_array(strtolower($parts[0]), ['on', 'off'], true)) {
+                    array_shift($parts);
+                }
+            } else {
+                $parts = '' === $value ? [] : preg_split('/\s+/', $value);
+            }
+
+            // CSS shorthand expansion: 1 value = all corners, 2 = diagonals,
+            // 3 = top-left, top-right and bottom-left, bottom-right.
+            $parts = array_slice($parts, 0, 4);
+            switch (count($parts)) {
+                case 1:
+                    $corners = [$parts[0], $parts[0], $parts[0], $parts[0]];
+                    break;
+                case 2:
+                    $corners = [$parts[0], $parts[1], $parts[0], $parts[1]];
+                    break;
+                case 3:
+                    $corners = [$parts[0], $parts[1], $parts[2], $parts[1]];
+                    break;
+                case 4:
+                    $corners = $parts;
+                    break;
+                default:
+                    $corners = ['', '', '', ''];
+            }
+        }
+
+        return implode(' ', array_map(function ($corner) {
+            return dtq_css_length(is_scalar($corner) ? (string) $corner : '', '0px');
+        }, $corners));
+    }
+
+    /**
      * Build the flat custom-style declarations that mirror the D4 render_css()
      * `ET_Builder_Element::set_style()` calls. Keep this in lockstep with the
      * JS twin in src/divi5/modules/testimonial/styles.jsx.
@@ -116,7 +166,18 @@ trait ModuleStylesTrait
         $alignment             = $val('alignment', 'center');
         $img_position          = $val('imgPosition', 'relative');
         $reviewer_position     = $advanced['reviewerPosition']['desktop']['value'] ?? ($is_legacy ? 'bottom' : 'top');
-        $content_padding       = $val('contentPadding', '30px|30px|30px|30px');
+        // Spacing fields (content, quote icon and bubble padding) read every
+        // stored shape and fill missing sides from the larger breakpoint,
+        // then the default (Shared\Spacing).
+        $spacing_defaults = [
+            'contentPadding' => '30px|30px|30px|30px',
+            'iconPadding'    => '0px|0px|0px|0px',
+            'bubblePadding'  => '15px|15px|15px|15px',
+        ];
+        $pad_css = function ($key, $breakpoint) use ($advanced, $spacing_defaults) {
+            return Spacing::css('padding', $advanced[$key] ?? null, $breakpoint, $spacing_defaults[$key]);
+        };
+
         $icon_alignment        = $val('iconAlignment', 'center');
         $use_custom_icon       = $val('useCustomIcon', 'off');
         $icon_img_val          = $val('iconImg', '');
@@ -126,7 +187,6 @@ trait ModuleStylesTrait
         $icon_bg_color         = $val('iconBgColor', '');
         $icon_size             = $val('iconSize', '70px');
         $icon_opacity          = $val('iconOpacity', '.2');
-        $icon_padding          = $val('iconPadding', '0px|0px|0px|0px');
         $icon_top_spacing      = $val('iconTopSpacing', '40px');
         $icon_bottom_spacing   = $val('iconBottomSpacing', '5px');
         $icon_placement        = $val('iconPlacement', 'background');
@@ -159,7 +219,7 @@ trait ModuleStylesTrait
         // Content (image left/right layouts only, like D4).
         if ('left' === $img_position || 'right' === $img_position) {
             $push($order_class . ' .dtq-testimonial-content', 'flex: 1 1;');
-            $push($order_class . ' .dtq-testimonial-content', sprintf('padding: %s;', self::dtq_pad($content_padding)));
+            $push($order_class . ' .dtq-testimonial-content', $pad_css('contentPadding', 'desktop'));
         }
 
         // Quote icon alignment.
@@ -176,7 +236,7 @@ trait ModuleStylesTrait
             if (!empty($icon_bg_color)) {
                 $push($order_class . ' .dtq-testimonial-icon span', sprintf('background-color: %s !important;', $icon_bg_color));
             }
-            $push($order_class . ' .dtq-testimonial-icon span', sprintf('padding: %1$s; opacity: %2$s;', self::dtq_pad($icon_padding), $icon_opacity));
+            $push($order_class . ' .dtq-testimonial-icon span', sprintf('%1$s opacity: %2$s;', $pad_css('iconPadding', 'desktop'), $icon_opacity));
             $push($order_class . ' .dtq-testimonial-icon svg', sprintf('fill: %s;', $icon_color));
             $push($order_class . ' .dtq-testimonial-icon svg', sprintf('width: %s;', $icon_size));
         } else {
@@ -278,25 +338,18 @@ trait ModuleStylesTrait
         $review_design = $val('reviewDesign', 'normal');
         if ('bubble' === $review_design) {
             $bubble_bg_color  = $val('bubbleBgColor', '#efefef');
-            $bubble_padding   = $val('bubblePadding', '15px|15px|15px|15px');
             $arrow_color      = $val('arrowColor', '#efefef');
             $arrow_placement  = $val('arrowPlacement', 'center');
             $arrow_position_x = $val('arrowPositionX', '15px');
-            $radius           = explode('|', (string) $val('bubbleRadius', 'off|6px|6px|6px|6px'));
-            $r                = function ($i) use ($radius) {
-                return !empty($radius[$i]) ? $radius[$i] : '0px';
-            };
+            $bubble_radius    = self::bubble_radius($val('bubbleRadius', 'off|6px|6px|6px|6px'));
 
             $push($order_class . ' .dtq-testimonial-review', sprintf('background-color: %s !important;', $bubble_bg_color));
             $push(
                 $order_class . ' .dtq-testimonial-review',
                 sprintf(
-                    'position: relative; border-radius: %1$s %2$s %3$s %4$s; padding: %5$s;',
-                    $r(1),
-                    $r(2),
-                    $r(3),
-                    $r(4),
-                    self::dtq_pad($bubble_padding)
+                    'position: relative; border-radius: %1$s; %2$s',
+                    $bubble_radius,
+                    $pad_css('bubblePadding', 'desktop')
                 )
             );
             $push($order_class . ' .dtq-testimonial-review:after', 'content: ""; width: 0;height: 0;position: absolute;border-style: solid;');
@@ -366,7 +419,7 @@ trait ModuleStylesTrait
 
             // Content padding (left/right image layouts only, like desktop).
             if ($is_side && $bp_changed('contentPadding', $breakpoint)) {
-                $push($order_class . ' .dtq-testimonial-content', sprintf('padding: %s;', self::dtq_pad($bp_val('contentPadding', $breakpoint, $content_padding))), $at_rule);
+                $push($order_class . ' .dtq-testimonial-content', $pad_css('contentPadding', $breakpoint), $at_rule);
             }
 
             // Icon size.

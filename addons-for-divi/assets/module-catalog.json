@@ -1,5 +1,5 @@
 {
-	"generated_from": "dt-website inc/icons.php @ 4598311",
+	"generated_from": "dt-website inc/icons.php @ 80d3bcb",
 	"generator": "scripts/sync-module-catalog.mjs — do not edit by hand",
 	"categories": {
 		"content": {
@@ -23,18 +23,22 @@
 		"commerce": {
 			"label": "Commerce"
 		},
+		"woo": {
+			"label": "WooCommerce"
+		},
 		"utility": {
 			"label": "Utility"
 		}
 	},
 	"fallback_glyphs": {
-		"content": "<path d=\"M5 6h14M5 12h14M5 18h9\"/>",
+		"content": "<path d=\"M5 5h14M12 5v14M8 19h8\"/>",
 		"media": "<rect x=\"3\" y=\"5\" width=\"18\" height=\"14\" rx=\"2\"/><circle cx=\"9\" cy=\"10\" r=\"1.6\"/><path d=\"m4 18 5-4 4 3 3-2 4 3\"/>",
 		"social": "<path d=\"M20 11.5a7.5 7.5 0 0 1-10.8 6.7L4 19.5l1.3-4A7.5 7.5 0 1 1 20 11.5Z\"/>",
 		"posts": "<rect x=\"3\" y=\"4\" width=\"18\" height=\"5\" rx=\"1.5\"/><rect x=\"3\" y=\"11\" width=\"18\" height=\"5\" rx=\"1.5\"/><path d=\"M3 19h12\"/>",
 		"forms": "<rect x=\"4\" y=\"3\" width=\"16\" height=\"18\" rx=\"2\"/><path d=\"M8 8h8M8 12h8M8 16h4\"/>",
-		"nav": "<path d=\"M4 7h16M4 12h16M4 17h16\"/>",
+		"nav": "<circle cx=\"12\" cy=\"12\" r=\"9\"/><path d=\"m15.5 8.5-2.2 5.3-4.8 1.7 2.2-5.3z\"/>",
 		"commerce": "<path d=\"M4 7h11l-1 7H6Z\"/><path d=\"M9 7V5a3 3 0 0 1 6 0v2\"/>",
+		"woo": "<path d=\"M3 4h2.5l2 10.5h10L20 7H6.6\"/><circle cx=\"9\" cy=\"19\" r=\"1.4\"/><circle cx=\"16.5\" cy=\"19\" r=\"1.4\"/>",
 		"utility": "<circle cx=\"12\" cy=\"12\" r=\"3.2\"/><path d=\"M12 3v2M12 19v2M3 12h2M19 12h2M5.6 5.6l1.4 1.4M17 17l1.4 1.4M18.4 5.6 17 7M7 17l-1.4 1.4\"/>"
 	},
 	"extra_glyphs": {
@@ -332,7 +336,7 @@
 		},
 		"post-list": {
 			"label": "Post List",
-			"desc": "List blog posts and articles for easy browsing.",
+			"desc": "List blog posts and articles so readers can browse them.",
 			"desc_short": "Simple blog post lists.",
 			"cat": "posts",
 			"pro": false,
@@ -396,7 +400,7 @@
 		},
 		"business-hour": {
 			"label": "Business Hours",
-			"desc": "Opening times, laid out so they are easy to read.",
+			"desc": "Opening times, laid out so they read clearly.",
 			"desc_short": "Tidy opening-hours tables.",
 			"cat": "commerce",
 			"pro": false,
@@ -433,7 +437,7 @@
 			"cat": "content",
 			"pro": false,
 			"flagship": false,
-			"glyph": "<path d=\"M5 6h14M5 12h14M5 18h9\"/>",
+			"glyph": "<path d=\"M5 5h14M12 5v14M8 19h8\"/>",
 			"grad": [
 				"#6E8BFF",
 				"#A77CFF",
@@ -449,7 +453,7 @@
 			"cat": "content",
 			"pro": false,
 			"flagship": false,
-			"glyph": "<path d=\"M5 6h14M5 12h14M5 18h9\"/>",
+			"glyph": "<path d=\"M5 5h14M12 5v14M8 19h8\"/>",
 			"grad": [
 				"#FF8E4F",
 				"#FF6F91",
@@ -497,7 +501,7 @@
 			"cat": "content",
 			"pro": false,
 			"flagship": false,
-			"glyph": "<path d=\"M5 6h14M5 12h14M5 18h9\"/>",
+			"glyph": "<path d=\"M5 5h14M12 5v14M8 19h8\"/>",
 			"grad": [
 				"#5BA8FF",
 				"#8FC5FF",
@@ -513,7 +517,7 @@
 			"cat": "content",
 			"pro": false,
 			"flagship": false,
-			"glyph": "<path d=\"M5 6h14M5 12h14M5 18h9\"/>",
+			"glyph": "<path d=\"M5 5h14M12 5v14M8 19h8\"/>",
 			"grad": [
 				"#FF8A5B",
 				"#FF5FA2",
@@ -529,7 +533,7 @@
 			"cat": "content",
 			"pro": false,
 			"flagship": false,
-			"glyph": "<path d=\"M5 6h14M5 12h14M5 18h9\"/>",
+			"glyph": "<path d=\"M5 5h14M12 5v14M8 19h8\"/>",
 			"grad": [
 				"#FF8A5B",
 				"#FF5FA2",
@@ -545,7 +549,7 @@
 			"cat": "nav",
 			"pro": false,
 			"flagship": false,
-			"glyph": "<path d=\"M4 7h16M4 12h16M4 17h16\"/>",
+			"glyph": "<circle cx=\"12\" cy=\"12\" r=\"9\"/><path d=\"m15.5 8.5-2.2 5.3-4.8 1.7 2.2-5.3z\"/>",
 			"grad": [
 				"#6E8BFF",
 				"#A77CFF",
@@ -952,7 +956,7 @@
 				"#DBF5F1"
 			],
 			"demo_url": "https://divitorque.com/features/testimonial-slider/",
-			"docs_url": "https://divitorque.com/docs/testimonial-slider-2/"
+			"docs_url": "https://divitorque.com/docs/divi-testimonial-slider/"
 		},
 		"basic-list": {
 			"label": "Styled List",
@@ -968,7 +972,7 @@
 				"#FFFFFF"
 			],
 			"demo_url": "https://divitorque.com/features/basic-list/",
-			"docs_url": "https://divitorque.com/docs/basic-list/"
+			"docs_url": "https://divitorque.com/docs/basic-list-7/"
 		},
 		"checkmark-list": {
 			"label": "Checkmark List",
@@ -1176,7 +1180,7 @@
 				"#E0F7F0"
 			],
 			"demo_url": "https://divitorque.com/features/nav-menu/",
-			"docs_url": "https://divitorque.com/docs/nav-menu/"
+			"docs_url": "https://divitorque.com/docs/menu-maker/"
 		},
 		"countdown": {
 			"label": "Evergreen Countdown",
@@ -1233,7 +1237,7 @@
 			"cat": "content",
 			"pro": true,
 			"flagship": false,
-			"glyph": "<path d=\"M5 6h14M5 12h14M5 18h9\"/>",
+			"glyph": "<path d=\"M5 5h14M12 5v14M8 19h8\"/>",
 			"grad": [
 				"#FF6F91",
 				"#FF9E6B",
@@ -1249,7 +1253,7 @@
 			"cat": "content",
 			"pro": true,
 			"flagship": false,
-			"glyph": "<path d=\"M5 6h14M5 12h14M5 18h9\"/>",
+			"glyph": "<path d=\"M5 5h14M12 5v14M8 19h8\"/>",
 			"grad": [
 				"#FF6FAE",
 				"#9B6CFF",
@@ -1606,6 +1610,86 @@
 				"#9C7CFF",
 				"#6E8BFF",
 				"#ECECFF"
+			],
+			"demo_url": null,
+			"docs_url": null
+		},
+		"woo-product-badges": {
+			"label": "Product Badges",
+			"desc": "Sale, new, low-stock and best-seller badges from real store data.",
+			"desc_short": "Rule-based product badges.",
+			"cat": "woo",
+			"pro": true,
+			"flagship": false,
+			"glyph": "<path d=\"M12.6 3.4 20.6 11.4a2 2 0 0 1 0 2.8l-6.4 6.4a2 2 0 0 1-2.8 0l-8-8V4.4a1 1 0 0 1 1-1z\"/><circle cx=\"8\" cy=\"8\" r=\"1.4\"/>",
+			"grad": [
+				"#7FCB45",
+				"#22C09A",
+				"#EAF7D6"
+			],
+			"demo_url": null,
+			"docs_url": null
+		},
+		"woo-stock-bar": {
+			"label": "Stock Progress Bar",
+			"desc": "A stock bar that reads real stock and follows the picked variation.",
+			"desc_short": "Live stock progress bar.",
+			"cat": "woo",
+			"pro": true,
+			"flagship": false,
+			"glyph": "<rect x=\"3\" y=\"9\" width=\"18\" height=\"6\" rx=\"3\"/><path d=\"M6 12h7\"/>",
+			"grad": [
+				"#22C3BE",
+				"#4F8BFF",
+				"#DBF5F1"
+			],
+			"demo_url": null,
+			"docs_url": null
+		},
+		"woo-buy-now": {
+			"label": "Buy Now Button",
+			"desc": "Send shoppers straight to checkout with the product they picked.",
+			"desc_short": "Straight-to-checkout button.",
+			"cat": "woo",
+			"pro": true,
+			"flagship": false,
+			"glyph": "<path d=\"M3 4h2.5l2 10.5h10L20 7H6.6\"/><circle cx=\"9\" cy=\"19\" r=\"1.4\"/><circle cx=\"16.5\" cy=\"19\" r=\"1.4\"/>",
+			"grad": [
+				"#FFB13F",
+				"#FF7A4D",
+				"#FFE7C2"
+			],
+			"demo_url": null,
+			"docs_url": null
+		},
+		"woo-variation-swatches": {
+			"label": "Variation Swatches",
+			"desc": "Color, image and text swatches in place of variation dropdowns.",
+			"desc_short": "Swatches for variations.",
+			"cat": "woo",
+			"pro": true,
+			"flagship": false,
+			"glyph": "<circle cx=\"6.5\" cy=\"12\" r=\"3\"/><circle cx=\"12\" cy=\"12\" r=\"3\"/><circle cx=\"17.5\" cy=\"12\" r=\"3\"/>",
+			"grad": [
+				"#5BA8FF",
+				"#8FC5FF",
+				"#FFFFFF"
+			],
+			"demo_url": null,
+			"docs_url": null
+		},
+		"woo-size-chart": {
+			"label": "Size Chart",
+			"desc": "Size charts in a popup, drawer or inline, with a cm and inch switch.",
+			"desc_short": "Popup and inline size charts.",
+			"cat": "woo",
+			"pro": true,
+			"flagship": false,
+			"glyph": "<rect x=\"2.5\" y=\"8\" width=\"19\" height=\"8\" rx=\"1.5\"/><path d=\"M6.5 8v3M10.5 8v4.5M14.5 8v3M18.5 8v4.5\"/>",
+			"grad": [
+				"#6E8BFF",
+				"#A77CFF",
+				"#E6E9FF"
 			],
 			"demo_url": null,
 			"docs_url": null

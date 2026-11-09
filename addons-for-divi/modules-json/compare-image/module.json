@@ -61,7 +61,7 @@
           },
           "labelPadding": {
             "desktop": {
-              "value": "5px|20px|5px|20px"
+              "value": { "top": "5px", "right": "20px", "bottom": "5px", "left": "20px" }
             }
           },
           "handleStyle": {

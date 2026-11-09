@@ -14,35 +14,10 @@ if (!defined('ABSPATH')) {
 
 use ET\Builder\FrontEnd\Module\Style;
 use ET\Builder\Packages\Module\Options\Css\CssStyle;
+use DiviTorqueLite\Modules\Shared\Spacing;
 
 trait ModuleStylesTrait
 {
-    /**
-     * Convert a spacing field value to a CSS padding shorthand. Accepts both
-     * the D5 spacing object and the legacy D4 pipe-string.
-     *
-     * @param mixed $val Raw spacing value.
-     *
-     * @return string
-     */
-    public static function dtq_spacing($val)
-    {
-        if (empty($val)) {
-            return '';
-        }
-        if (is_array($val)) {
-            return sprintf(
-                '%s %s %s %s',
-                $val['top'] ?? '0px',
-                $val['right'] ?? '0px',
-                $val['bottom'] ?? '0px',
-                $val['left'] ?? '0px'
-            );
-        }
-        $p = explode('|', (string) $val);
-        return 4 === count($p) ? implode(' ', $p) : (string) $val;
-    }
-
     /**
      * Build the dynamic custom style array for a slide, mirroring styles.jsx.
      *
@@ -78,11 +53,11 @@ trait ModuleStylesTrait
         $push($order_class . ' .dtq-image-carousel-item .content-inner', sprintf('text-align: %1$s;', $content_alignment));
 
         // Content padding. Mirrors D4: when unset, the default depends on the
-        // content type (absolute over-image vs normal flow).
-        $padding_css = self::dtq_spacing($advanced['contentPadding']['desktop']['value'] ?? null);
-        if ('' === $padding_css) {
-            $padding_css = 'absolute' === $content_type ? '10px 20px 10px 20px' : '15px 0px 15px 0px';
-        }
+        // content type (absolute over-image vs normal flow). Spacing fields
+        // read every stored shape and fill unset sides from the larger
+        // breakpoint, then this default (Shared\Spacing).
+        $content_pad_default = 'absolute' === $content_type ? '10px|20px|10px|20px' : '15px|0px|15px|0px';
+        $padding_css         = Spacing::value($advanced['contentPadding'] ?? null, 'desktop', $content_pad_default);
         $push($order_class . ' .dtq-image-carousel-item .content .content-inner', sprintf('padding: %1$s;', $padding_css));
 
         $content_bg       = $val('contentBgColor', 'rgba(0,0,0,0)');
@@ -122,10 +97,7 @@ trait ModuleStylesTrait
             $btn_text_color  = $val('buttonTextColor', '#2ea3f2');
             $btn_bg_color    = $val('buttonBgColor', 'rgba(0,0,0,0)');
             $btn_border_col  = $val('buttonBorderColor', '#2ea3f2');
-            $btn_padding     = self::dtq_spacing($advanced['buttonPadding']['desktop']['value'] ?? null);
-            if ('' === $btn_padding) {
-                $btn_padding = '8px 20px 8px 20px';
-            }
+            $btn_padding     = Spacing::value($advanced['buttonPadding'] ?? null, 'desktop', '8px|20px|8px|20px');
             $push(
                 $btn,
                 sprintf(
@@ -195,7 +167,7 @@ trait ModuleStylesTrait
                 }
             }
             if (null !== $bp_raw('contentPadding', $bp)) {
-                $pad = self::dtq_spacing($bp_val('contentPadding', $bp));
+                $pad = Spacing::value($advanced['contentPadding'] ?? null, $bp, $content_pad_default);
                 if ('' !== $pad) {
                     $push_at($at_rule, $order_class . ' .dtq-image-carousel-item .content .content-inner', sprintf('padding: %1$s;', $pad));
                 }

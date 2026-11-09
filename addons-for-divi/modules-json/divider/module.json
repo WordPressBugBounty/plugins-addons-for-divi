@@ -65,7 +65,7 @@
           },
           "shapeMargin": {
             "desktop": {
-              "value": "0px|0px|0px|0px"
+              "value": { "top": "0px", "right": "0px", "bottom": "0px", "left": "0px" }
             }
           },
           "iconColor": {

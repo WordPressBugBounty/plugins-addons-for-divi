@@ -2,16 +2,19 @@
 /**
  * Table of Contents — Server-side render callback.
  *
- * Renders the module shell (optional title + collapse toggle + empty list) and
- * a `data-toc` settings blob. The frontend script (frontend.js) scans the page
- * for headings and builds the nested list, then wires up smooth scroll,
- * scrollspy, sticky and collapse behaviour.
+ * Renders the module shell (optional title + collapse toggle + list) and a
+ * `data-toc` settings blob. The list is a slot that HeadingIndex::fill() fills
+ * from the finished page HTML (see add_heading_ids()); the frontend script
+ * (frontend.js) keeps that list when every link resolves, or scans the page
+ * and builds one, then wires up smooth scroll, scrollspy, sticky and collapse
+ * behaviour.
  *
  * @package divi-torque-lite
  */
 
 namespace DiviTorqueLite\Modules\TableOfContents\TableOfContentsTrait;
 
+use DiviTorqueLite\Modules\TableOfContents\HeadingIndex;
 use ET\Builder\Packages\Module\Module;
 
 trait RenderCallbackTrait {
@@ -65,240 +68,59 @@ trait RenderCallbackTrait {
 	}
 
 	/**
-	 * Recursion guard so building the server list (which renders post content)
-	 * never re-enters the TOC render.
+	 * Give content headings their anchor ids and fill any Table of Contents
+	 * list in the same HTML. Registered on `the_content` at priority 99, after
+	 * Divi has rendered the blocks (see also add_heading_ids_to_layout()).
 	 *
-	 * @var bool
-	 */
-	private static $is_building = false;
-
-	/**
-	 * Slugify heading text into a unique anchor id. Mirrors the frontend
-	 * tocSlugify() so server-rendered anchors match the JS-assigned ids.
-	 */
-	private static function slugify( $text, array &$used ) {
-		$slug = strtolower( trim( (string) $text ) );
-		$slug = preg_replace( '/[^\p{L}\p{N}\s-]/u', '', $slug );
-		$slug = preg_replace( '/[\s_]+/', '-', $slug );
-		$slug = preg_replace( '/-+/', '-', $slug );
-		$slug = trim( $slug, '-' );
-		if ( '' === $slug ) {
-			$slug = 'section';
-		}
-		$base = $slug;
-		$n    = 2;
-		while ( isset( $used[ $slug ] ) ) {
-			$slug = $base . '-' . $n;
-			$n++;
-		}
-		$used[ $slug ] = true;
-		return $slug;
-	}
-
-	/**
-	 * Build the nested <li> markup for the TOC list from a flat list of
-	 * { level, text, id } heading items.
-	 */
-	private static function render_nested( array $items ) {
-		if ( empty( $items ) ) {
-			return '';
-		}
-
-		$levels = array();
-		foreach ( $items as $it ) {
-			$levels[] = (int) $it['level'];
-		}
-
-		$i = 0;
-		return self::render_items( $items, $i, min( $levels ) );
-	}
-
-	/**
-	 * Recursively render the <li> items at a given heading level. Always emits
-	 * balanced <ul>/<li> markup regardless of the heading hierarchy (skipped or
-	 * out-of-order levels). $i is advanced by reference as items are consumed.
-	 */
-	private static function render_items( array $items, &$i, $level ) {
-		$html  = '';
-		$count = count( $items );
-
-		while ( $i < $count ) {
-			$cur = (int) $items[ $i ]['level'];
-
-			// Belongs to a shallower level — hand control back to the caller.
-			if ( $cur < $level ) {
-				break;
-			}
-
-			$item = $items[ $i ];
-			$i++;
-
-			$link = sprintf(
-				'<a href="#%1$s">%2$s</a>',
-				esc_attr( $item['id'] ),
-				esc_html( $item['text'] )
-			);
-
-			// Nest any deeper following items inside this <li>.
-			$children = '';
-			if ( $i < $count && (int) $items[ $i ]['level'] > $cur ) {
-				$children = '<ul>' . self::render_items( $items, $i, (int) $items[ $i ]['level'] ) . '</ul>';
-			}
-
-			$html .= '<li class="dtq-toc-item">' . $link . $children . '</li>';
-		}
-
-		return $html;
-	}
-
-	/**
-	 * Server-render the TOC list by scanning the queried post's content. Used as
-	 * the no-JS / AMP fallback so the list is populated without JavaScript. The
-	 * frontend script re-enhances this when JS is available. Returns '' when not
-	 * applicable so the JS path is used.
-	 */
-	/**
-	 * Per-request cache of the rendered post HTML, so multiple TOC instances on
-	 * one page don't each re-render the content.
+	 * Gated on the TOC slot: only HTML that holds a Table of Contents is
+	 * touched, so no other post or page pays for the regex pass or gets ids
+	 * injected. This replaced a has_block() test on the queried post, which
+	 * also matched when the TOC sat in post content but the list was rendered
+	 * elsewhere, and missed Theme Builder placements entirely.
 	 *
-	 * @var array
+	 * @param string $content Rendered content.
+	 * @return string
 	 */
-	private static $rendered_cache = array();
-
-	private static function build_server_list( $start, $end, $min ) {
-		if ( self::$is_building || is_admin() || ! is_singular() ) {
-			return '';
-		}
-
-		$post = get_queried_object();
-		if ( ! ( $post instanceof \WP_Post ) || empty( $post->post_content ) ) {
-			return '';
-		}
-
-		if ( array_key_exists( $post->ID, self::$rendered_cache ) ) {
-			$rendered = self::$rendered_cache[ $post->ID ];
-		} else {
-			self::$is_building = true;
-			try {
-				$rendered = $post->post_content;
-				if ( function_exists( 'do_blocks' ) ) {
-					$rendered = do_blocks( $rendered );
-				}
-				$rendered = do_shortcode( $rendered );
-			} catch ( \Throwable $e ) {
-				$rendered = '';
-			}
-			self::$is_building            = false;
-			self::$rendered_cache[ $post->ID ] = $rendered;
-		}
-
-		if ( '' === $rendered ) {
-			return '';
-		}
-
-		// Walk the FULL h2-h6 range, not just [start,end], then filter afterwards.
-		// add_heading_ids() slugifies across h2-h6 with its own $used map, so
-		// narrowing the range here would advance the duplicate counter differently
-		// and the two would disagree on suffixes ("-2") for repeated headings —
-		// leaving the rendered anchors pointing at ids that do not exist.
-		if ( ! preg_match_all( '/<h([2-6])\b([^>]*)>(.*?)<\/h\1>/is', (string) $rendered, $matches, PREG_SET_ORDER ) ) {
-			return '';
-		}
-
-		$used  = array();
-		$items = array();
-		foreach ( $matches as $h ) {
-			$level = (int) $h[1];
-			$text  = trim( wp_strip_all_tags( $h[3] ) );
-			if ( '' === $text ) {
-				continue;
-			}
-
-			// A heading that already carries an id keeps it and does not consume a
-			// slug — mirroring add_heading_ids(), so both stay in lockstep.
-			if ( preg_match( '/\sid\s*=\s*["\']([^"\']+)["\']/i', $h[2], $id_match ) ) {
-				$id = $id_match[1];
-			} else {
-				$id = self::slugify( $text, $used );
-			}
-
-			if ( $level < (int) $start || $level > (int) $end ) {
-				continue;
-			}
-
-			$items[] = array(
-				'level' => $level,
-				'text'  => $text,
-				'id'    => $id,
-			);
-		}
-
-		if ( count( $items ) < max( 1, (int) $min ) ) {
-			return '';
-		}
-
-		return self::render_nested( $items );
-	}
-
-	/**
-	 * Does the current singular post contain a Table of Contents module?
-	 *
-	 * Theme Builder placements render the module outside post content, where
-	 * has_block() cannot see it; those still work because the frontend JS assigns
-	 * heading ids client-side. The filter is the escape hatch for forcing
-	 * server-side ids in that case.
-	 *
-	 * @return bool
-	 */
-	private static function page_has_toc() {
-		$has_toc = false;
-		$post    = get_queried_object();
-
-		if ( $post instanceof \WP_Post && function_exists( 'has_block' ) ) {
-			$has_toc = has_block( 'divitorque/table-of-contents', $post );
+	public static function add_heading_ids( $content ) {
+		if ( ! is_string( $content ) || '' === $content || is_admin() ) {
+			return $content;
 		}
 
 		/**
-		 * Filters whether heading ids should be injected on this request.
+		 * Filters whether heading ids are injected into this HTML.
 		 *
-		 * @param bool $has_toc Whether a TOC module was detected in post content.
+		 * @param bool   $has_toc Whether the HTML holds a Table of Contents list slot.
+		 * @param string $content The HTML.
 		 */
-		return (bool) apply_filters( 'divitorque_toc_add_heading_ids', $has_toc );
+		if ( ! apply_filters( 'divitorque_toc_add_heading_ids', HeadingIndex::has_slot( $content ), $content ) ) {
+			return $content;
+		}
+
+		return HeadingIndex::fill( $content );
 	}
 
 	/**
-	 * Add slugified ids to content headings that lack one, so the server-rendered
-	 * (no-JS / AMP) anchors resolve. Registered on `the_content`.
+	 * The same for a Theme Builder body layout, on `et_builder_render_layout`
+	 * at priority 99. By then the layout's Post Content module has rendered
+	 * the post into the same HTML, so a TOC placed in the template lists the
+	 * post's headings.
+	 *
+	 * Body layouts only. A header or footer layout does not hold the page's
+	 * content, and the filter also runs for layouts rendered inside a post
+	 * (a library shortcode), whose TOC slot must survive to the post's own
+	 * `the_content` pass. An unfilled slot is an empty list, which the front
+	 * end builds from the page.
+	 *
+	 * @param string $content Rendered layout.
+	 * @return string
 	 */
-	public static function add_heading_ids( $content ) {
-		if ( is_admin() || ! is_singular() || '' === trim( (string) $content ) ) {
-			return $content;
-		}
+	public static function add_heading_ids_to_layout( $content ) {
+		$is_body_layout = defined( 'ET_THEME_BUILDER_BODY_LAYOUT_POST_TYPE' )
+			&& class_exists( 'ET_Theme_Builder_Layout' )
+			&& method_exists( 'ET_Theme_Builder_Layout', 'get_theme_builder_layout_type' )
+			&& ET_THEME_BUILDER_BODY_LAYOUT_POST_TYPE === \ET_Theme_Builder_Layout::get_theme_builder_layout_type();
 
-		// Only rewrite headings on pages that actually contain a Table of Contents.
-		// This filter is registered on plugin load, so without this gate every
-		// post and page on the site paid for a full regex pass over its content
-		// and had ids injected whether or not the module was used anywhere.
-		if ( ! self::page_has_toc() ) {
-			return $content;
-		}
-
-		$used = array();
-		return preg_replace_callback(
-			'/<h([2-6])\b([^>]*)>(.*?)<\/h\1>/is',
-			function ( $m ) use ( &$used ) {
-				if ( preg_match( '/\sid\s*=/i', $m[2] ) ) {
-					return $m[0]; // Keep an existing id.
-				}
-				$text = trim( wp_strip_all_tags( $m[3] ) );
-				if ( '' === $text ) {
-					return $m[0];
-				}
-				$id = self::slugify( $text, $used );
-				return '<h' . $m[1] . ' id="' . esc_attr( $id ) . '"' . $m[2] . '>' . $m[3] . '</h' . $m[1] . '>';
-			},
-			$content
-		);
+		return $is_body_layout ? self::add_heading_ids( $content ) : $content;
 	}
 
 	/**
@@ -370,10 +192,13 @@ trait RenderCallbackTrait {
 			)
 		);
 
-		// AMP / no-JS fallback: pre-render the list server-side from the queried
-		// post so it works without JavaScript (AMP strips custom JS). The frontend
-		// script enhances/rebuilds this when JS is available.
-		$server_list = self::build_server_list( $start_level, $end_level, $min_headings );
+		// AMP / no-JS fallback: a slot that add_heading_ids() fills with the list
+		// once the page HTML exists (AMP strips custom JS). Not with a content or
+		// exclude selector: PHP cannot evaluate CSS selectors, so a server list
+		// would ignore them; the front end builds that list instead.
+		$server_list = ( '' === trim( (string) $content_selector ) && '' === trim( (string) $exclude_selector ) )
+			? HeadingIndex::slot( $start_level, $end_level, $min_headings )
+			: '';
 
 		// Module wrapper classes.
 		$preset_slug     = preg_replace( '/[^a-z0-9_-]/', '', (string) $style_preset );
@@ -392,9 +217,6 @@ trait RenderCallbackTrait {
 		}
 		$icon_slug         = preg_replace( '/[^a-z]/', '', (string) $collapse_icon );
 		$wrapper_classes[] = 'dtq-toc-icon-' . ( $icon_slug ?: 'chevron' );
-		if ( '' !== $server_list ) {
-			$wrapper_classes[] = 'dtq-toc-prerendered';
-		}
 
 		// Header.
 		$header_html = '';
@@ -418,13 +240,13 @@ trait RenderCallbackTrait {
 		}
 		$sticky_style = ' style="' . $inline_style . '"';
 
-		// Style components.
-		$style_components = '';
-		if ( is_callable( array( $elements, 'style_components' ) ) ) {
-			ob_start();
-			$elements->style_components( array( 'attrName' => 'module' ) );
-			$style_components = ob_get_clean();
-		}
+		// Style components (background pattern/mask, box-shadow overlay). The
+		// method returns its markup; it used to be wrapped in an output buffer as
+		// if it echoed, so the return value was dropped and the options did
+		// nothing on the front end.
+		$style_components = is_callable( array( $elements, 'style_components' ) )
+			? (string) $elements->style_components( array( 'attrName' => 'module' ) )
+			: '';
 
 		$children = sprintf(
 			'%1$s<div class="%2$s" data-toc="%3$s"%4$s>%5$s<nav class="dtq-toc-body"><ul class="dtq-toc-list">%6$s</ul></nav></div>',
@@ -433,7 +255,7 @@ trait RenderCallbackTrait {
 			esc_attr( $toc_data ),
 			$sticky_style,
 			$header_html,
-			$server_list // Already escaped per-node in render_nested().
+			$server_list // A fixed-format HTML comment; filled by HeadingIndex::fill().
 		);
 
 		return Module::render(

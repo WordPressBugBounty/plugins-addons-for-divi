@@ -85,12 +85,12 @@
           },
           "imagePadding": {
             "desktop": {
-              "value": "0px|0px|0px|0px"
+              "value": { "top": "0px", "right": "0px", "bottom": "0px", "left": "0px" }
             }
           },
           "iconPadding": {
             "desktop": {
-              "value": "25px|25px|25px|25px"
+              "value": { "top": "25px", "right": "25px", "bottom": "25px", "left": "25px" }
             }
           },
           "btnSpacingTop": {
@@ -115,7 +115,7 @@
           },
           "contentPadding": {
             "desktop": {
-              "value": "25px|25px|25px|25px"
+              "value": { "top": "25px", "right": "25px", "bottom": "25px", "left": "25px" }
             }
           },
           "iconBgColor": {
@@ -185,7 +185,7 @@
           },
           "badgePadding": {
             "desktop": {
-              "value": "5px|15px|5px|15px"
+              "value": { "top": "5px", "right": "15px", "bottom": "5px", "left": "15px" }
             }
           },
           "badgeBgColor": {

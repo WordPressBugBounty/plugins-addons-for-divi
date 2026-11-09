@@ -35,6 +35,8 @@ trait RenderCallbackTrait
     public static function render_callback($attrs, $content, $block, $elements)
     {
         $advanced = $attrs['module']['advanced'] ?? [];
+        // An empty value falls back, so a cleared Fancy Text prints "Fancy".
+        // Mirrored by fancyValue() in wrapper-class.js for the builder.
         $val      = function ($key, $fallback = '') use ($advanced) {
             $v = $advanced[$key]['desktop']['value'] ?? '';
             return '' !== $v ? $v : $fallback;

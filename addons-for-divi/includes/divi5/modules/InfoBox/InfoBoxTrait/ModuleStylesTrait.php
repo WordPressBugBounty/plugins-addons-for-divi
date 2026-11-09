@@ -14,6 +14,7 @@ if (!defined('ABSPATH')) {
 
 use ET\Builder\FrontEnd\Module\Style;
 use ET\Builder\Packages\Module\Options\Css\CssStyle;
+use DiviTorqueLite\Modules\Shared\Spacing;
 
 trait ModuleStylesTrait
 {
@@ -55,36 +56,15 @@ trait ModuleStylesTrait
         $btn_spacing_top   = $advanced['btnSpacingTop']['desktop']['value']      ?? '15px';
         $title_spacing     = $advanced['titleBottomSpacing']['desktop']['value'] ?? '10px';
         $content_alignment = $advanced['contentAlignment']['desktop']['value']   ?? 'left';
-        $content_padding   = $advanced['contentPadding']['desktop']['value']     ?? '15px|0px|0px|0px';
-        $icon_padding      = $advanced['iconPadding']['desktop']['value']        ?? '0px|0px|0px|0px';
         $vo_icon_color     = $advanced['voIconColor']['desktop']['value']        ?? '';
         $vo_icon_size      = $advanced['voIconSize']['desktop']['value']         ?? '';
         $vo_bg             = $advanced['voBg']['desktop']['value']               ?? '';
 
-        // Convert a D4 "top|right|bottom|left" spacing string OR a migrated D5
-        // spacing object {top,right,bottom,left} into a CSS `padding`
-        // shorthand. Empty segments fall back to 0.
-        $padding_css = function ($value) {
-            if (is_array($value)) {
-                if (empty($value)) {
-                    return '';
-                }
-                $top    = ('' !== ($value['top'] ?? ''))    ? $value['top']    : '0px';
-                $right  = ('' !== ($value['right'] ?? ''))  ? $value['right']  : '0px';
-                $bottom = ('' !== ($value['bottom'] ?? '')) ? $value['bottom'] : '0px';
-                $left   = ('' !== ($value['left'] ?? ''))   ? $value['left']   : '0px';
-                return sprintf('%1$s %2$s %3$s %4$s', $top, $right, $bottom, $left);
-            }
-            if (!is_string($value) || '' === $value) {
-                return '';
-            }
-            $parts = explode('|', $value);
-            $top    = ('' !== ($parts[0] ?? '')) ? $parts[0] : '0px';
-            $right  = ('' !== ($parts[1] ?? '')) ? $parts[1] : '0px';
-            $bottom = ('' !== ($parts[2] ?? '')) ? $parts[2] : '0px';
-            $left   = ('' !== ($parts[3] ?? '')) ? $parts[3] : '0px';
-            return sprintf('%1$s %2$s %3$s %4$s', $top, $right, $bottom, $left);
-        };
+        // Spacing fields read every stored shape (pipe string, spacing
+        // object, the raw {side, value} edit) and fill missing sides from the
+        // default (Shared\Spacing).
+        $content_padding_css = Spacing::css('padding', $advanced['contentPadding'] ?? null, 'desktop', '15px|0px|0px|0px');
+        $icon_padding_css    = Spacing::css('padding', $advanced['iconPadding'] ?? null, 'desktop', '0px|0px|0px|0px');
 
         $push = function ($selector, $declaration) use (&$styles) {
             $styles[] = [
@@ -131,9 +111,8 @@ trait ModuleStylesTrait
         $push($order_class, sprintf('text-align: %1$s;', $content_alignment));
 
         // Content padding.
-        $content_padding_css = $padding_css($content_padding);
         if ('' !== $content_padding_css) {
-            $push($order_class . ' .dtq-info-box-content', sprintf('padding: %1$s;', $content_padding_css));
+            $push($order_class . ' .dtq-info-box-content', $content_padding_css);
         }
 
         // Icon.
@@ -145,9 +124,8 @@ trait ModuleStylesTrait
             }
 
             // Icon padding.
-            $icon_padding_css = $padding_css($icon_padding);
             if ('' !== $icon_padding_css) {
-                $push($order_class . ' .dtq-info-box-icon', sprintf('padding: %1$s;', $icon_padding_css));
+                $push($order_class . ' .dtq-info-box-icon', $icon_padding_css);
             }
         }
 
