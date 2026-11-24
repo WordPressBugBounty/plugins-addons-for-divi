@@ -195,6 +195,41 @@ class Dashboard
      *
      * @return array[]
      */
+    /**
+     * Boot data for the "Divi 5 MCP" page (admin/src/pages/Divi5Mcp.jsx), or
+     * null once SaddleWP Pro is active. Says whether SaddleWP is missing,
+     * installed or active, so the page offers the one action that fits.
+     * Local only: nothing here calls a remote server.
+     *
+     * @return array|null
+     */
+    private static function divi5_mcp_data()
+    {
+        if (defined('SADDLE_PRO_VERSION')) {
+            return null;
+        }
+
+        if (defined('SADDLE_VERSION')) {
+            $status = 'active';
+        } else {
+            if (!function_exists('get_plugins')) {
+                require_once ABSPATH . 'wp-admin/includes/plugin.php';
+            }
+            $status = array_key_exists('saddle/saddle.php', get_plugins()) ? 'installed' : 'missing';
+        }
+
+        $utm = 'utm_source=addons-for-divi&utm_medium=plugin-page&utm_campaign=divi-5-mcp';
+
+        return [
+            'saddle'     => $status,
+            'installUrl' => admin_url('plugin-install.php?s=saddle&tab=search&type=term'),
+            'pluginsUrl' => admin_url('plugins.php'),
+            'openUrl'    => admin_url('admin.php?page=saddle'),
+            'url'        => 'https://saddle.to/divi-5-mcp/?' . $utm,
+            'pricingUrl' => 'https://saddle.to/pricing/?' . $utm,
+        ];
+    }
+
     private function v2_submenus()
     {
         $items = [
@@ -220,6 +255,24 @@ class Dashboard
                 'label' => __('Extensions', 'addons-for-divi'),
                 'path'  => 'extensions',
             ];
+
+            // How an AI agent builds Divi 5 pages with SaddleWP, until
+            // SaddleWP Pro is active (Divi5Mcp.jsx).
+            if (null !== self::divi5_mcp_data()) {
+                $items[] = [
+                    'label' => __('Divi 5 MCP', 'addons-for-divi'),
+                    'path'  => 'divi-5-mcp',
+                ];
+            }
+
+            // A page about Snapback, PlugPress's backup plugin, until Snapback
+            // is installed, once per site.
+            if (Snapback_Card::owns_page()) {
+                $items[] = [
+                    'label' => __('Get Snapback', 'addons-for-divi'),
+                    'path'  => 'get-snapback',
+                ];
+            }
         }
 
         return $items;
@@ -379,8 +432,11 @@ class Dashboard
             'saddleUrl'          => 'https://saddle.to/?utm_source=divi-torque-lite&utm_medium=wp-admin&utm_campaign=onboarding',
             // Saddle + Saddle Analytics offer (Overview band, welcome tour).
             'recommended'        => Recommended_Plugins::boot_data(),
-            // Snapback card on the Overview (Resources).
+            // Snapback banner on the Overview and the "Get Snapback" page.
             'snapback'           => Snapback_Card::boot_data(),
+            'snapbackPage'       => Snapback_Card::page_data(),
+            // The "Divi 5 MCP" page; null once SaddleWP Pro is active.
+            'divi5Mcp'           => self::divi5_mcp_data(),
             // Black Friday 2026 banner on the Overview, null outside the sale.
             'blackFriday'        => self::black_friday(),
         ];

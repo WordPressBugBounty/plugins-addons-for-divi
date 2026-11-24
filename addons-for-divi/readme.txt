@@ -4,7 +4,7 @@ Tags: divi, divi 5, divi modules, divi builder, divi carousel
 Requires at least: 7.0
 Tested up to: 7.1
 Requires PHP: 7.4
-Stable tag: 4.16.2
+Stable tag: 4.17.0
 License: GPLv3
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 
@@ -190,6 +190,10 @@ The X (Twitter) Feed and X (Twitter) Carousel modules connect to the X API (`api
 3. Image Carousel module
 
 == Changelog ==
+
+= Version 4.17.0 =
+* New: A Divi 5 MCP page in the Divi Torque menu. It shows how an AI agent such as Claude, ChatGPT or Cursor builds Divi 5 pages with real modules through SaddleWP, and how to set it up. The page goes away once SaddleWP Pro is active.
+* Improved: a cleaner Divi Torque overview; the Resources cards keep a steady grid.
 
 = Version 4.16.2 =
 * New: A Snapback card under Resources on the Divi Torque overview. Snapback is our backup and recovery plugin. The card shows only on this screen, and the × button hides it for good.
@@ -487,6 +491,9 @@ The X (Twitter) Feed and X (Twitter) Carousel modules connect to the X API (`api
 * Public beta release
 
 == Upgrade Notice ==
+
+= 4.17.0 =
+Adds a Divi 5 MCP page that shows how to build Divi 5 pages with your AI agent, and tidies the overview.
 
 = 4.16.2 =
 Fixes modules that showed in the Divi 5 builder but not on the page, Feature Box borders after moving from Divi 4, and the Accordion Pro and FAQ item gap. The welcome tour can always be left.
