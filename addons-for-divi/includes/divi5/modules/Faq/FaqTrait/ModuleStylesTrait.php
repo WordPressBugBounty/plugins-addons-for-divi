@@ -39,10 +39,17 @@ trait ModuleStylesTrait
         // !important, so a margin set on one item still wins.
         $selector = $order_class . ' ' . str_repeat('.dtq-accordion__item', 4);
 
+        // Desktop at the 10px default keeps the plain 4.15.0 selector, so a FAQ
+        // nobody changed keeps the gap it had before 4.16.0 (Divi's 2.75% where
+        // that rule applies). Divi merges the module.json default into the
+        // attrs, so "nobody changed it" can only be read as "equals the
+        // default". Tablet and phone values always use the stronger selector.
+        $desktop_gap = $spacing['desktop']['value'] ?? '10px';
+
         $styles = [
             [
-                'selector'    => $selector,
-                'declaration' => sprintf('margin-bottom: %1$s;', $spacing['desktop']['value'] ?? '10px'),
+                'selector'    => '10px' === $desktop_gap ? $order_class . ' .dtq-accordion__item' : $selector,
+                'declaration' => sprintf('margin-bottom: %1$s;', $desktop_gap),
             ],
         ];
 

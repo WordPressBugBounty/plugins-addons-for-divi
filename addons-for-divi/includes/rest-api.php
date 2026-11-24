@@ -500,9 +500,7 @@ class RestApi
 
     public function mark_onboarding_done()
     {
-        update_user_meta(get_current_user_id(), Dashboard::ONBOARDING_META, 1);
-        // Finished or skipped once is enough for the whole site.
-        delete_option(Dashboard::SETUP_OPTION);
+        Dashboard::finish_onboarding();
 
         return new WP_REST_Response(['done' => true], 200);
     }

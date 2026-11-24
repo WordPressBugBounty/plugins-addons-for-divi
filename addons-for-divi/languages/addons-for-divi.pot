@@ -9,7 +9,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2026-11-08T23:25:50+00:00\n"
+"POT-Creation-Date: 2026-11-23T23:01:58+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.12.0\n"
 "X-Domain: addons-for-divi\n"
@@ -175,51 +175,51 @@ msgstr ""
 msgid "Extensions"
 msgstr ""
 
-#: includes/dashboard.php:411
+#: includes/dashboard.php:423
 msgid "Black Friday starts Nov 13"
 msgstr ""
 
-#: includes/dashboard.php:412
+#: includes/dashboard.php:424
 msgid "Join the early-access list to see the Divi Torque Pro deal first."
 msgstr ""
 
-#: includes/dashboard.php:413
+#: includes/dashboard.php:425
 msgid "Get early access"
 msgstr ""
 
-#: includes/dashboard.php:419
+#: includes/dashboard.php:431
 msgid "Black Friday sale on Divi Torque Pro"
 msgstr ""
 
-#: includes/dashboard.php:420
+#: includes/dashboard.php:432
 msgid "Divi Torque Pro is on sale until Nov 27."
 msgstr ""
 
-#: includes/dashboard.php:421
+#: includes/dashboard.php:433
 msgid "See the Black Friday deal"
 msgstr ""
 
-#: includes/dashboard.php:427
+#: includes/dashboard.php:439
 msgid "Cyber Monday sale on Divi Torque Pro"
 msgstr ""
 
-#: includes/dashboard.php:428
+#: includes/dashboard.php:440
 msgid "Divi Torque Pro is on sale until Dec 1."
 msgstr ""
 
-#: includes/dashboard.php:429
+#: includes/dashboard.php:441
 msgid "See the Cyber Monday deal"
 msgstr ""
 
-#: includes/dashboard.php:435
+#: includes/dashboard.php:447
 msgid "Holiday sale on Divi Torque Pro"
 msgstr ""
 
-#: includes/dashboard.php:436
+#: includes/dashboard.php:448
 msgid "Divi Torque Pro is on sale until Dec 31."
 msgstr ""
 
-#: includes/dashboard.php:437
+#: includes/dashboard.php:449
 msgid "See the holiday deal"
 msgstr ""
 
@@ -9282,20 +9282,20 @@ msgstr ""
 msgid "Your account cannot activate plugins. Ask a site administrator to activate %s."
 msgstr ""
 
-#: includes/rest-api.php:637
+#: includes/rest-api.php:635
 msgid "Invalid version specified."
 msgstr ""
 
-#: includes/rest-api.php:641
+#: includes/rest-api.php:639
 msgid "That version is already installed."
 msgstr ""
 
-#: includes/rest-api.php:660
+#: includes/rest-api.php:658
 msgid "Rollback failed."
 msgstr ""
 
 #. translators: %s: the plugin version that was rolled back to.
-#: includes/rest-api.php:670
+#: includes/rest-api.php:668
 #, php-format
 msgid "Rolled back to %s."
 msgstr ""

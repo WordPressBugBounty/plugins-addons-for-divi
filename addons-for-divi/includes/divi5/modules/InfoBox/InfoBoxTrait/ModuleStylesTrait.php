@@ -302,6 +302,12 @@ trait ModuleStylesTrait
 
             // Button decoration styles.
             $elements->style(['attrName' => 'button']),
+
+            // Box Border: the whole box. The module's own Border group is
+            // drawn on the image, icon or video (module.styleProps.border), so
+            // a Divi 4 `box` border needs its own attribute or it turns into a
+            // frame around the image (support SU-CE4E7B).
+            $elements->style(['attrName' => 'box']),
         ];
 
         if (!empty($custom_styles)) {

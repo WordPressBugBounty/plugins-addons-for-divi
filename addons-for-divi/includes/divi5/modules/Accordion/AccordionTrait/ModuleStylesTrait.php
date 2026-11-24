@@ -50,8 +50,17 @@ trait ModuleStylesTrait
         // .et_block_column .et_pb_module { margin-bottom: 2.75% }` (0,4,0)
         // otherwise beats the module's own Spacing Between Items. No
         // !important, so a margin set on one item still wins.
-        $selector = $order_class . ' ' . str_repeat('.dtq-accordion__item', 4);
-        $push($selector, sprintf('margin-bottom: %1$s;', $val('itemSpacing', '10px')));
+        //
+        // Desktop at the 10px default keeps the plain 4.15.0 selector, so an
+        // Accordion nobody changed keeps the gap it had before 4.16.0 (Divi's
+        // 2.75% where that rule applies). Divi merges the module.json default
+        // into the attrs before this runs, so "nobody changed it" can only be
+        // read as "equals the default". Tablet and phone values are always set
+        // by the user, so they always use the stronger selector.
+        $selector       = $order_class . ' ' . str_repeat('.dtq-accordion__item', 4);
+        $desktop_gap    = $val('itemSpacing', '10px');
+        $desktop_target = '10px' === $desktop_gap ? $order_class . ' .dtq-accordion__item' : $selector;
+        $push($desktop_target, sprintf('margin-bottom: %1$s;', $desktop_gap));
 
         $tablet = $advanced['itemSpacing']['tablet']['value'] ?? null;
         $phone  = $advanced['itemSpacing']['phone']['value'] ?? null;

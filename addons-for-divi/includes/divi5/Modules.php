@@ -167,9 +167,12 @@ $dtl_d5_is_disabled = function ($slug) use ($dtl_d5_saved) {
     return isset($dtl_d5_saved[$name]) && 'disabled' === $dtl_d5_saved[$name];
 };
 
-$dtl_d5_loaded = array();
+$dtl_d5_loaded   = array();
+$dtl_d5_disabled = array();
 foreach ($dtl_d5_modules as $slug => $info) {
     if ($dtl_d5_is_disabled($slug)) {
+        // Block name as module.json declares it (`tab_item` -> `divitorque/tab-item`).
+        $dtl_d5_disabled[] = 'divitorque/' . str_replace('_', '-', $slug);
         continue;
     }
     $module_file = __DIR__ . '/modules/' . $info[0] . '/' . $info[0] . '.php';
@@ -196,6 +199,18 @@ final class DTL_Divi5_Registrar {
     public static $modules = array();
 
     /**
+     * Block names of the modules switched off in Divi Torque > Modules.
+     *
+     * The builder must not offer these: their PHP is never loaded, so on the
+     * live page they print nothing while the builder still drew them.
+     *
+     * @since 4.16.1
+     *
+     * @var string[]
+     */
+    public static $disabled = array();
+
+    /**
      * Add every loaded D5 module to Divi's dependency tree.
      *
      * @param object $dependency_tree Divi's DependencyTree instance.
@@ -209,7 +224,8 @@ final class DTL_Divi5_Registrar {
     }
 }
 
-DTL_Divi5_Registrar::$modules = $dtl_d5_loaded;
+DTL_Divi5_Registrar::$modules  = $dtl_d5_loaded;
+DTL_Divi5_Registrar::$disabled = $dtl_d5_disabled;
 
 add_action(
     'divi_module_library_modules_dependency_tree',
@@ -442,6 +458,35 @@ function dtl_divi5_enqueue_vb_assets() {
     ]);
 }
 add_action('divi_visual_builder_assets_before_enqueue_scripts', 'dtl_divi5_enqueue_vb_assets');
+
+/**
+ * Tell the builder bundle which modules are switched off.
+ *
+ * A switched-off module's PHP is never loaded (see $dtl_d5_is_disabled), so a
+ * page that holds one prints nothing for it. Before 4.16.1 the bundle still
+ * registered every module, so the builder offered and drew modules that were
+ * blank on the live page. src/divi5/index.js reads `window.dtlDivi5Disabled`
+ * and skips them.
+ *
+ * Runs after Divi has enqueued the app window's scripts: the bundle handle only
+ * exists in WordPress from that point, and an inline script on a handle that
+ * is not registered yet is dropped.
+ *
+ * @since 4.16.1
+ */
+function dtl_divi5_vb_disabled_modules()
+{
+    if (empty(DTL_Divi5_Registrar::$disabled)) {
+        return;
+    }
+
+    wp_add_inline_script(
+        'divi-torque-lite-d5-bundle-script',
+        'window.dtlDivi5Disabled = ' . wp_json_encode(array_values(DTL_Divi5_Registrar::$disabled)) . ';',
+        'before'
+    );
+}
+add_action('divi_visual_builder_assets_after_enqueue_app_window_scripts', 'dtl_divi5_vb_disabled_modules');
 
 /**
  * Load the Divi icon fonts into the Visual Builder app window.

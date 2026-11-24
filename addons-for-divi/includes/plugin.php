@@ -59,6 +59,8 @@ class PluginLoader
         Module_Usage::get_instance();
         require_once DIVI_TORQUE_LITE_DIR . 'includes/recommended-plugins.php';
         Recommended_Plugins::get_instance();
+        require_once DIVI_TORQUE_LITE_DIR . 'includes/snapback-card.php';
+        Snapback_Card::get_instance();
         Dashboard::get_instance();
 
         // Share My Post extension. After Dashboard, which owns the parent menu
@@ -88,8 +90,8 @@ class PluginLoader
     {
         // A fresh install (no earlier Lite on this site) gets the welcome tour on
         // every Divi Torque screen until someone finishes or skips it. Updates
-        // and reactivations never do: the version option survives deactivation.
-        if (false === get_option('divitorque_lite_version')) {
+        // and reactivations never do: earlier Lite's options survive deactivation.
+        if (Dashboard::is_fresh_install()) {
             update_option(Dashboard::SETUP_OPTION, 1);
         }
 

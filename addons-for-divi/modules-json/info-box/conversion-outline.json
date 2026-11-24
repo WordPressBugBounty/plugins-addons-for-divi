@@ -5,7 +5,7 @@
     "background": "module.decoration.background",
     "borders": {
       "photo": "module.decoration.border",
-      "box": "module.decoration.border"
+      "box": "box.decoration.border"
     },
     "box_shadow": {
       "default": "module.decoration.boxShadow"

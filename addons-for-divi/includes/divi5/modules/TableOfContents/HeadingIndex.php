@@ -49,12 +49,59 @@ if (!defined('ABSPATH')) {
  * generated slug never duplicates one; repeats get "-2", "-3"... in document
  * order. All levels h1-h6 are walked, whatever the TOC's own range, so a
  * heading's anchor does not depend on the TOC settings.
+ *
+ * Since 4.16.1 the ids in THEME_IDS are reserved too, and headings inside
+ * <script>, <style> and <textarea> are left alone (that text is code or form
+ * data, not a heading, and an id written into a script string broke it).
  */
 class HeadingIndex
 {
     const HEADING_PATTERN = '/<h([1-6])\b([^>]*)>(.*?)<\/h\1\s*>/is';
 
     const ID_ATTR_PATTERN = '/(^|\s)id\s*=\s*(?:"([^"]*)"|\'([^\']*)\'|([^\s"\'>]+))/i';
+
+    /**
+     * Elements whose text is never a heading.
+     */
+    const RAW_TEXT_PATTERN = '/<(script|style|textarea)\b[^>]*>.*?<\/\1\s*>/is';
+
+    const RAW_TEXT_PLACEHOLDER = '/<!--dtq-toc-raw:(\d+)-->/';
+
+    /**
+     * Ids that Divi, WordPress or WooCommerce already put on the page, outside
+     * the content this pass sees. A heading that took one picked up the
+     * theme's rules for it (Divi floats `#sidebar` at 20.875% width and caps
+     * `#logo` at 54% height) and duplicated an id on the page, so the TOC link
+     * could jump to the wrong element. Only ids a heading slug can produce are
+     * listed (slugs have no "_"). Mirrored by TOC_THEME_IDS in
+     * src/divi5/frontend.js.
+     */
+    const THEME_IDS = [
+        'comment-wrap',
+        'commentform',
+        'comments',
+        'content',
+        'content-area',
+        'et-main-area',
+        'et-secondary-nav',
+        'et-top-navigation',
+        'footer-bottom',
+        'footer-info',
+        'footer-widgets',
+        'left-area',
+        'logo',
+        'main-content',
+        'main-footer',
+        'main-header',
+        'page-container',
+        'respond',
+        'reviews',
+        'sidebar',
+        'top-header',
+        'top-menu',
+        'top-menu-nav',
+        'wpadminbar',
+    ];
 
     const SLOT_PREFIX = '<!--dtq-toc-list:';
 
@@ -132,6 +179,21 @@ class HeadingIndex
         $used  = self::reserved_ids($html);
         $items = [];
 
+        // Set <script>, <style> and <textarea> aside so the heading pass never
+        // rewrites a "<h2>" that is only text inside them.
+        $raw  = [];
+        $work = preg_replace_callback(
+            self::RAW_TEXT_PATTERN,
+            function ($m) use (&$raw) {
+                $raw[] = $m[0];
+                return '<!--dtq-toc-raw:' . (count($raw) - 1) . '-->';
+            },
+            $html
+        );
+        if (null === $work) {
+            return [$html, []];
+        }
+
         $out = preg_replace_callback(
             self::HEADING_PATTERN,
             function ($m) use (&$used, &$items) {
@@ -159,13 +221,26 @@ class HeadingIndex
 
                 return $tag;
             },
-            $html
+            $work
         );
 
         if (null === $out) {
             // PCRE gave up (backtrack limit). Leave the content alone rather
             // than return ids for headings that did not get them.
             return [$html, []];
+        }
+
+        if ($raw) {
+            $out = preg_replace_callback(
+                self::RAW_TEXT_PLACEHOLDER,
+                function ($m) use ($raw) {
+                    return $raw[(int) $m[1]] ?? $m[0];
+                },
+                $out
+            );
+            if (null === $out) {
+                return [$html, []];
+            }
         }
 
         return [$out, $items];
@@ -258,7 +333,7 @@ class HeadingIndex
      */
     private static function reserved_ids($html)
     {
-        $used = [];
+        $used = array_fill_keys(self::THEME_IDS, true);
         if (preg_match_all(self::ID_ATTR_PATTERN, $html, $matches, PREG_SET_ORDER)) {
             foreach ($matches as $m) {
                 $id = trim(html_entity_decode(($m[2] ?? '') . ($m[3] ?? '') . ($m[4] ?? ''), ENT_QUOTES | ENT_HTML5, 'UTF-8'));

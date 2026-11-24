@@ -351,6 +351,18 @@ class Dashboard
             'hasDivi'            => self::has_divi(),
             'onboardingDone'     => self::onboarding_done(),
             'setupRequired'      => self::setup_required(),
+            // Plain admin link that ends the tour when the REST call cannot
+            // (maybe_redirect_to_onboarding()). Raw URL: the app navigates to it.
+            'setupDoneUrl'       => esc_url_raw(
+                add_query_arg(
+                    [
+                        'page'      => $this->menu_slug,
+                        'dtl_setup' => 'done',
+                        '_wpnonce'  => wp_create_nonce('dtl_setup_done'),
+                    ],
+                    admin_url('admin.php')
+                )
+            ),
             'offer'              => [
                 'yearly'   => (int) self::OFFER_YEARLY_PERCENT,
                 'lifetime' => (int) self::OFFER_LIFETIME_PERCENT,
@@ -367,6 +379,8 @@ class Dashboard
             'saddleUrl'          => 'https://saddle.to/?utm_source=divi-torque-lite&utm_medium=wp-admin&utm_campaign=onboarding',
             // Saddle + Saddle Analytics offer (Overview band, welcome tour).
             'recommended'        => Recommended_Plugins::boot_data(),
+            // Snapback card on the Overview (Resources).
+            'snapback'           => Snapback_Card::boot_data(),
             // Black Friday 2026 banner on the Overview, null outside the sale.
             'blackFriday'        => self::black_friday(),
         ];
@@ -506,6 +520,26 @@ class Dashboard
         $on_our_page = is_admin() && isset($_GET['page']) && $this->menu_slug === $_GET['page'];
         $path        = isset($_GET['path']) ? sanitize_key(wp_unslash($_GET['path'])) : '';
         // phpcs:enable
+
+        // The tour's way out when its REST call fails (a security plugin or a
+        // firewall blocking /wp-json/). Until 4.16.1 a failed call left the
+        // setup flag in place, so every Divi Torque screen sent the admin back
+        // to the tour they had just finished or skipped.
+        if ($on_our_page && isset($_GET['dtl_setup']) && 'done' === $_GET['dtl_setup']) {
+            check_admin_referer('dtl_setup_done');
+            if (current_user_can($this->capability)) {
+                self::finish_onboarding();
+            }
+            wp_safe_redirect(admin_url('admin.php?page=' . $this->menu_slug));
+            exit;
+        }
+
+        // A redirect after output has started fails silently, and the exit
+        // that follows it would leave a blank screen.
+        if (headers_sent()) {
+            return;
+        }
+
         if ($on_our_page && 'welcome' !== $path && self::setup_required()) {
             wp_safe_redirect(admin_url('admin.php?page=' . $this->menu_slug . '&path=welcome'));
             exit;
@@ -573,6 +607,53 @@ class Dashboard
     public static function setup_required()
     {
         return (bool) get_option(self::SETUP_OPTION) && self::should_redirect_to_onboarding();
+    }
+
+    /**
+     * Whether Lite has never been active on this site (Plugin::activation()).
+     *
+     * Until 4.16.1 only `divitorque_lite_version` was checked. Lite has only
+     * written it since May 2024, so a site that had Lite before then and
+     * turned it back on was treated as new and held in the tour. Any option
+     * an earlier Lite left behind now counts; Lite has no uninstall routine,
+     * so they survive deactivation.
+     *
+     * @since 4.16.1
+     *
+     * @return bool
+     */
+    public static function is_fresh_install()
+    {
+        $left_by_earlier_lite = [
+            'divitorque_lite_version',
+            'divitorque_lite_activation_time',
+            'divitorque_lite_install_date',
+            '_divitorque_lite_modules',
+            'divitorque_version',
+        ];
+
+        foreach ($left_by_earlier_lite as $option) {
+            if (false !== get_option($option)) {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+    /**
+     * End the welcome tour: for this admin, and the required tour for the site.
+     *
+     * Used by `POST onboarding/done` and by the plain-link fallback in
+     * maybe_redirect_to_onboarding().
+     *
+     * @since 4.16.1
+     */
+    public static function finish_onboarding()
+    {
+        update_user_meta(get_current_user_id(), self::ONBOARDING_META, 1);
+        // Finished or skipped once is enough for the whole site.
+        delete_option(self::SETUP_OPTION);
     }
 
     /**

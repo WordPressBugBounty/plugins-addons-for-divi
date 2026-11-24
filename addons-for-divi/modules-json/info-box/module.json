@@ -1186,6 +1186,28 @@
         }
       }
     },
+    "box": {
+      "type": "object",
+      "selector": "{{selector}}",
+      "settings": {
+        "decoration": {
+          "border": {
+            "groupType": "group-item",
+            "item": {
+              "groupSlug": "designBox",
+              "priority": 10,
+              "render": true,
+              "attrName": "box.decoration.border",
+              "component": {
+                "name": "divi/border",
+                "type": "group",
+                "props": { "grouped": false, "fieldLabel": "Box" }
+              }
+            }
+          }
+        }
+      }
+    },
     "button": {
       "type": "object",
       "selector": "{{selector}} .et_pb_button.dtq-btn-info-box",
@@ -1319,6 +1341,17 @@
           "name": "divi/composite",
           "props": {
             "groupLabel": "Content Layout"
+          }
+        }
+      },
+      "designBox": {
+        "panel": "design",
+        "priority": 15,
+        "groupName": "designBox",
+        "component": {
+          "name": "divi/composite",
+          "props": {
+            "groupLabel": "Box Border"
           }
         }
       },

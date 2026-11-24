@@ -4,7 +4,7 @@ Tags: divi, divi 5, divi modules, divi builder, divi carousel
 Requires at least: 7.0
 Tested up to: 7.1
 Requires PHP: 7.4
-Stable tag: 4.16.0
+Stable tag: 4.16.2
 License: GPLv3
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 
@@ -19,6 +19,8 @@ It is made for anyone who builds websites with Divi, from freelancers and agenci
 Every module is a native Divi 5 module. 26 of them also work in Divi 4, so you can use the plugin on both versions of Divi.
 
 **[View demos](https://divitorque.com/features/?utm_campaign=lite-readme&utm_source=wp.org&utm_medium=textlink-features) · [Documentation](https://divitorque.com/docs/?utm_campaign=lite-readme&utm_source=wp.org&utm_medium=textlink-docs) · [Divi Torque Pro](https://divitorque.com/pricing/?utm_campaign=lite-readme&utm_source=wp.org&utm_medium=textlink-pro)**
+
+Before your next update, take a restore point with [Snapback](https://snapbackwp.com/?utm_source=addons-for-divi&utm_medium=readme&utm_campaign=bf26), a backup and recovery plugin from the same team.
 
 = Divi Modules for Divi 5 =
 
@@ -188,6 +190,15 @@ The X (Twitter) Feed and X (Twitter) Carousel modules connect to the X API (`api
 3. Image Carousel module
 
 == Changelog ==
+
+= Version 4.16.2 =
+* New: A Snapback card under Resources on the Divi Torque overview. Snapback is our backup and recovery plugin. The card shows only on this screen, and the × button hides it for good.
+* Fix: Modules you switch off on the Divi Torque Modules screen no longer appear in the Divi 5 builder. Before, a switched-off module showed in the builder but not on the page.
+* Fix: Accordion Pro and FAQ keep the gap between items they had before 4.16.0, unless you set Spacing Between Items yourself.
+* Fix: Table of Contents no longer gives a heading an ID the theme already uses, such as "sidebar" or "comments", and leaves headings written inside scripts alone.
+* Fix: Skip setup and Go to dashboard always end the welcome tour, even when a security plugin blocks the WordPress REST API. Sites that used Divi Torque Lite before no longer get the tour again when they turn it back on.
+* Fix: A missing usage-sharing file no longer stops the site from loading.
+* Fix: A Feature Box border set on the whole box in Divi 4 now stays on the box after moving to Divi 5, instead of framing the image or icon. The new Box Border setting styles the whole box.
 
 = Version 4.16.0 =
 * Improved: The welcome tour now has five steps. Switch modules on or off right in the tour, choose the optional Saddle and Saddle Analytics installs (unticked until you tick them), and see the current Divi Torque Pro offer. Skip it from the first step.
@@ -476,6 +487,9 @@ The X (Twitter) Feed and X (Twitter) Carousel modules connect to the X API (`api
 * Public beta release
 
 == Upgrade Notice ==
+
+= 4.16.2 =
+Fixes modules that showed in the Divi 5 builder but not on the page, Feature Box borders after moving from Divi 4, and the Accordion Pro and FAQ item gap. The welcome tour can always be left.
 
 = 4.16.0 =
 Fixes Divi 5 padding fields that lost their value, Table of Contents links, tablet and phone settings in several modules, and builder previews. Adds a five-step welcome tour and optional usage sharing.
