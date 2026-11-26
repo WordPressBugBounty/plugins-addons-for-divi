@@ -4,7 +4,7 @@ Tags: divi, divi 5, divi modules, divi builder, divi carousel
 Requires at least: 7.0
 Tested up to: 7.1
 Requires PHP: 7.4
-Stable tag: 4.17.0
+Stable tag: 4.17.1
 License: GPLv3
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 
@@ -191,348 +191,39 @@ The X (Twitter) Feed and X (Twitter) Carousel modules connect to the X API (`api
 
 == Changelog ==
 
+= Version 4.17.1 =
+* Updated Black Friday card on the overview, with the right dates and link.
+
 = Version 4.17.0 =
-* New: A Divi 5 MCP page in the Divi Torque menu. It shows how an AI agent such as Claude, ChatGPT or Cursor builds Divi 5 pages with real modules through SaddleWP, and how to set it up. The page goes away once SaddleWP Pro is active.
-* Improved: a cleaner Divi Torque overview; the Resources cards keep a steady grid.
+* New Divi 5 MCP page in the Divi Torque menu, and a cleaner overview.
 
 = Version 4.16.2 =
-* New: A Snapback card under Resources on the Divi Torque overview. Snapback is our backup and recovery plugin. The card shows only on this screen, and the × button hides it for good.
-* Fix: Modules you switch off on the Divi Torque Modules screen no longer appear in the Divi 5 builder. Before, a switched-off module showed in the builder but not on the page.
-* Fix: Accordion Pro and FAQ keep the gap between items they had before 4.16.0, unless you set Spacing Between Items yourself.
-* Fix: Table of Contents no longer gives a heading an ID the theme already uses, such as "sidebar" or "comments", and leaves headings written inside scripts alone.
-* Fix: Skip setup and Go to dashboard always end the welcome tour, even when a security plugin blocks the WordPress REST API. Sites that used Divi Torque Lite before no longer get the tour again when they turn it back on.
-* Fix: A missing usage-sharing file no longer stops the site from loading.
-* Fix: A Feature Box border set on the whole box in Divi 4 now stays on the box after moving to Divi 5, instead of framing the image or icon. The new Box Border setting styles the whole box.
+* Fixes for switched-off modules in the Divi 5 builder, Accordion Pro and FAQ gaps, Table of Contents, the welcome tour and Feature Box borders.
 
 = Version 4.16.0 =
-* Improved: The welcome tour now has five steps. Switch modules on or off right in the tour, choose the optional Saddle and Saddle Analytics installs (unticked until you tick them), and see the current Divi Torque Pro offer. Skip it from the first step.
-* New: Optional usage sharing with PlugPress: a card on the Divi Torque overview and a short question when you deactivate. Nothing is sent unless you choose to. See External services.
-* New: Modal Popup has Design tab settings for the trigger button and trigger text. Existing popups keep their look.
-* New: Sticky Video Poster Image accepts dynamic content.
-* Fix: Padding fields in Divi 5 keep their value. Changing one side no longer wipes the setting, and pages edited before this update get back the side you set. This affected Business Hours, Before & After Slider, Separator, Icon Box, Image Carousel slides, Feature Box, Image Card, Review Box, Team Member and Testimonial Card.
-* Fix: Settings that show or hide other settings now do so in the Divi 5 builder for Dual Buttons, Animated Counter, Call To Action and Tooltip.
-* Fix: Post Carousel tablet and phone Image Height apply on the page.
-* Fix: Dual Buttons tablet and phone gap and alignment apply on the page.
-* Fix: Accordion Pro and FAQ Spacing Between Items applies on desktop. Tabs Pro and FAQ tablet and phone settings take effect.
-* Fix: Table of Contents links always reach their heading, including headings in other languages, repeated headings and headings with their own ID. Pages without a Table of Contents are left unchanged.
-* Fix: Table of Contents shows its background pattern and mask.
-* Fix: Call To Action overlay covers the whole box and follows its rounded corners.
-* Fix: Testimonial Card Bubble Border Radius accepts a single value.
-* Fix: Business Hours Item Spacing applies on tablet and phone.
-* Fix: Empty titles and descriptions no longer leave a blank gap.
-* Fix: Gradient Heading keeps the new tab and nofollow link choices of pages moved from Divi 4.
-* Fix: Dynamic content inside a text value, such as the post title, now shows on the page instead of disappearing (Divi 5).
-* Fix: The Divi 5 builder preview matches the page for FAQ answers, Accordion Pro Read More and title links, Feature Box YouTube and Vimeo videos, Image Card images, Post List, Separator heading level, Scroll Image icon and a cleared Fancy Text.
-* Tweak: The Divi Torque overview shows the current Divi Torque Pro offer, which you can close.
-* Tweak: The Modules screen lists the Divi Torque Pro WooCommerce modules under their own category.
+* Five-step welcome tour, optional usage sharing, Modal Popup trigger design, and many Divi 5 fixes.
 
 = Version 4.15.0 =
-* New: The Divi Torque overview page recommends Saddle and Saddle Analytics, two free plugins from WordPress.org, with a one-click install. Nothing installs until you click, the page shows what each plugin needs to run, and you can hide the recommendations.
-* New: The welcome tour can install Saddle for you if you choose to manage your site with AI.
-* Fix: Clicking the button on a Flip Card no longer turns the card away and leaves an empty box, including when you come back to the page. This also fixes the Advanced Flip Card in Divi Torque Pro.
-* Fix: A Flip Card no longer stays flipped after you click it. Keyboard users still see the back side when they tab to the card.
+* Optional Saddle and Saddle Analytics install on the overview, and Flip Card button fixes.
 
 = Version 4.14.3 =
-* Fix: In Divi 5, a Feature Box with Image Overlay turned on no longer stops the page from loading.
-* Fix: Image Width on Feature Box and Flip Card sets the exact width again in Divi 5, as it did in Divi 4. Pages moved from Divi 4 get their original layout back.
-* Fix: Business Hours Day Width and Time Width keep the width you set in Divi 5.
-* Fix: Image Carousel, Logo Carousel, Post Carousel and X (Twitter) Carousel now use the tablet and phone values of Slides to Scroll, Drag / Swipe, Show Arrows and Show Dots. Before, only the desktop value was used.
-* Fix: Carousel page numbers and dots wrap onto a second line on narrow screens instead of running off the edge.
-* Fix: The Button Text field shows in the Divi 5 builder for Creative Button, Call To Action, Feature Box, Image Card, Review Box, Flip Card, Accordion Pro Read More and Image Accordion items, so the button label can be changed.
-* Fix: Flip Card padding changed in the Divi 5 builder keeps the other sides instead of setting them to zero.
-* Fix: Flip Card shows Use 3D Animation only for the Flip animation, and its image fields only when Media Type is Image.
+* Divi 5 fixes for Feature Box, Flip Card, Business Hours and carousel tablet and phone settings.
 
 = Version 4.14.2 =
-* Fix: Button style changes made in the Divi 5 builder now show on the button. They were saved where the module did not read them. This affected Flip Card, Creative Button, Call To Action, Contact Form 7 Styler, Image Accordion, Feature Box, Image Card and Review Box.
-* Fix: Button styles on Divi 4 pages now carry over when the page moves to Divi 5. This includes Dual Buttons.
-* Fix: Flip Card in Divi 5 shows one Border group and one Box Shadow group instead of two of each.
-* Tweak: Flip Card no longer shows a Text group in Divi 4 or Divi 5. Its settings had no effect on the card. Use the Front Side and Back Side alignment and the text groups instead.
+* Button styles set in the Divi 5 builder now show, and carry over from Divi 4.
 
 = Version 4.14.1 =
-* Fix: On sites with an image lazy-loading plugin, Image Carousel thumbnails and the repeating slides of Continuous Scroll could stay blank. They now show their images.
+* Image Carousel images show on sites with a lazy-loading plugin.
 
 = Version 4.14.0 =
-* New: Image Carousel has a Continuous Scroll autoplay style. The slides move at a steady speed without stopping, like a film strip. They pause the moment the pointer moves over them and continue from the same spot.
-* New: Image Carousel pause and play button, autoplay progress bar, Progress Bar and Dynamic Dots pagination, and a draggable scrollbar.
-* New: Image Carousel can scroll freely with momentum and follow a trackpad or horizontal mouse wheel. Scrolling up and down still scrolls the page.
-* New: Image Carousel transition effects: Fade, Coverflow, Cards, Flip and Cube.
-* New: Image Carousel thumbnail strip, pinch to zoom, rows, and parallax captions.
-* New: Image Carousel settings for what happens at the last slide, and to stop autoplay once a visitor interacts.
-* Improvement: Image Height also works without Variable Slide Width. Every image gets that height, cropped to fit, so images of different shapes line up.
-* Improvement: Divi 5 carousels pause while scrolled out of view and while a link inside them has keyboard focus, use whole-pixel slide widths, and show their first slides in a row while the page loads.
-* Fix: Divi 5 Image Carousel and Logo Carousel no longer leave extra space under the slides on desktop.
-* Fix: A looping carousel with too few slides for its layout (centered, scrolling several slides at a time, or the Cards effect) no longer repeats or blanks slides. The loop turns off instead.
-* Fix: With Divi Torque Pro active, Divi Torque Lite carousels keep their own behavior whichever plugin's scripts load first.
+* Image Carousel: continuous scroll, new transition effects, thumbnails and a pause button.
 
 = Version 4.13.0 =
-* Fix: Divi 5 sites on PHP 7.4, 8.0 or 8.1 showed a critical error on every page after updating to Lite 4.9.0 or later. Lite works on PHP 7.4 and later again.
-* New: Image Carousel has an Image Height option under Variable Slide Width. Every image gets the same height and each slide keeps its image's own width, so portrait and landscape images share one row.
-* New: Modal Popup opens from any link to its CSS ID, such as a menu item that links to #booking. Links from another page open it on arrival. A new Open Popup On choice, Links Only, hides the trigger button.
-* Fix: In Divi 5, an Autoplay Delay of 0 still paused 2 seconds on every slide, and a Gap Between Slides of 0 still left 10px. Both now use 0, so a carousel can scroll continuously.
-* Fix: An autoplaying carousel with slides of different widths now moves at one steady speed.
-* Fix: Image Carousel and Logo Carousel no longer leave a 30px gap below them on tablets and phones in Divi 5.
-* Fix: An open Modal Popup's dimmed background now covers menus and the site header.
-* Fix: On Divi 5 pages with a Number Counter, the counter did not animate and the modules after it (Image Accordion, SVG Draw, Code Snippet, Sticky Video and the News Ticker controls) did not start.
-* Improvement: The Variable Slide Width description in Image, Logo and Post Carousel now says what the setting does.
+* Fixes a critical error on PHP 7.4 to 8.1; Image Carousel Image Height; Modal Popup opens from links.
 
-= Version 4.12.1 =
-* Fix: With Divi Torque Pro 1.11 or older active, every wp-admin page showed a critical error after updating to Lite 4.9.0 or later. With Pro 1.12, the Sharing Buttons page did. Lite now leaves its screens to Pro only when that Pro version can show them.
-* Fix: Divi 4 carousels (Image Carousel, Logo Carousel and Twitter Feed Carousel) no longer show every slide stacked at full size while the page loads. The first slides show in a row until the carousel starts.
-
-= Version 4.12.0 =
-* New: A short welcome tour after activation shows what Divi Torque Lite adds, where to find the modules in the Visual Builder, how an AI agent can build Divi pages for you, and what Pro includes. You can skip it, and reopen it any time from the dashboard.
-* New: Icon Box can place the icon to the left or right of the title and text in Divi 5.
-* Fix: Image Carousel slides could shrink to zero width on phones when Variable Slide Width had a phone value such as calc(). Slides to Show can no longer be set to 0. If a carousel still looks empty on phones after updating, clear Divi's static CSS cache under Divi > Theme Options > Builder > Advanced.
-* Fix: Divi 4 carousels no longer break when a caching or optimization plugin delays scripts.
-* Fix: The last image in an Image Accordion was taller than the others.
-* Fix: Before and After Slider started twice when Divi Torque Pro was also active, which left a dead handle.
-* Fix: Breadcrumbs now apply the tablet and phone alignment and the link hover color, skip the breadcrumb schema when the trail is empty, and output the schema more safely.
-* Fix: Twitter Feed no longer contacts the X API on every page view when the keys or username are wrong.
-* Fix: Dynamic content in a Gradient Heading, Testimonial, Creative Button label, Animated Text prefix or suffix, or a module image now resolves correctly instead of printing nothing or stopping the page.
-
-= Version 4.11.1 =
-* Fix: A dynamic content value inside a Divi 5 module could take the whole page down with a fatal error. Dynamic values now resolve correctly on the front end.
-* Fix: Background Pattern and Background Mask showed in the Visual Builder but never printed on the front end on 15 modules.
-* Fix: Three Divi 4 settings were dropped when a layout migrated to Divi 5, and nine modules lost the Advanced tab Custom CSS box on migration. All of them carry across now.
-* Fix: Accessibility. Animations respect the reduced motion preference, tab panels can be reached by keyboard, collapsed accordion panels leave the tab order, and the modal dialog announces its name and traps focus in the right dialog.
-* Fix: A style rule in the legacy dashboard was missing a dash.
-* Improved: The dashboard is rebuilt on the latest shared design system.
-
-= Version 4.11.0 =
-* Fix: Post Carousel, Post List and News Ticker showed the oldest posts first. All three now default to newest first, matching WordPress and the Divi Blog module. An existing layout that never set the order explicitly will start showing newest first; the Order setting is still there if you want chronological order back.
-* Fix: Fancy Text rotated nothing when the rotating strings were separated by pipes instead of line breaks. It rendered the whole string as a single item, which looked like a broken web font rather than a settings problem. Pipes and line breaks both work now.
-* Improved: Team Box — the Content Background field now explains that it paints on top of the module Background, so setting only the module Background appears to do nothing. Set Content Background to transparent to let the module Background show through.
-
-= Version 4.10.0 =
-* Fix: FontAwesome icons rendered as empty boxes in every Divi 5 module, on the front end and in the Visual Builder. Divi 5 never loads the FontAwesome font for a third-party module, so Divi Torque now declares it itself.
-* Fix: Icon Box — Icon Padding had no effect on a font icon, which made an icon chip (background + padding + rounded corners) impossible to build. It applied to uploaded images only.
-* Fix: Post List — a FontAwesome list icon was drawn in the Divi icon font, so it came out as the wrong glyph.
-* Fix: Dual Button — the per-button icon never appeared. The icon now renders, including its colour and placement.
-* Fix: Icon Box — the five Absolute Position fields now hide unless Icon Placement is set to Absolute, instead of sitting there doing nothing.
-* Fix: Image Carousel — removed the stray chevron Divi core slides into the item button on hover, which also shifted its padding.
-* Fix: Contact Form 7 — added the missing Layout design group.
-* Improved: Carousels — reworked settings taxonomy and preset pools across the carousel modules, with the navigation and pagination settings now carried through Divi 4 to Divi 5 migration.
-* Improved: Dashboard settings screens refined, with a live preview beside each settings form.
-
-= Version 4.9.0 =
-* New: Tooltip module. Styled, keyboard-accessible tooltips for text, icons, and images.
-* New: Call To Action module. Headline, supporting copy, and up to two buttons in three layouts.
-* New: Creative Button module. Ten hover effects, every one keyboard accessible.
-* New: Image Accordion module. Expanding image panels with per-panel focal point control.
-* New: Sticky Video module. Corner-docking video with a privacy-friendly click-to-load facade.
-* New: Code Snippet module. Syntax highlighting for 13 languages with line numbers and one-click copy.
-* New: SVG Draw module. Draws SVG strokes on scroll, load, or hover. Honors reduced motion.
-* Fix: Tooltip text stays readable when themes set their own paragraph colors.
-* Fix: Sticky Video plays with a single click and the poster hides correctly.
-* Fix: Code Snippet no longer collapses to a single line on the front end.
-
-= Version 4.8.2 =
-* Fix: News Ticker (and any other module toggled in the dashboard) no longer disappears from the Divi 5 builder when Divi Torque Pro is active — module on/off settings are now read from the right place regardless of plugin load order, and both plugins keep them in sync
-* Fix: Video Modal no longer navigates to YouTube/Vimeo alongside opening the popup when the popup script loads late (deferred or delayed JavaScript optimization)
-* Tweak: The module usage panel now labels Divi Library / Theme Builder layouts, reusable blocks and drafts, so it's clear where a "used" module is actually referenced
-* Tweak: WordPress 7.0 is now the minimum supported version
-
-= Version 4.8.1 =
-* Fix: Divi 5's readiness check no longer wrongly lists Divi Torque Lite as a "Divi 4 framework" plugin — its Divi 5 modules are now correctly detected whether Divi 5 runs from the Divi theme or the Divi Builder plugin
-
-= Version 4.8.0 =
-* New: Completely redesigned dashboard — cleaner navigation, module icons, descriptions, demo and docs links (switch back anytime via "Switch to legacy dashboard" in the sidebar footer)
-* New: See exactly which pages use each module, right on the Modules screen
-* New: Accordion, Tabs, Modal Popup, Post Carousel, Table of Contents, Fancy Text, FAQ, and Breadcrumbs can now be toggled in the Module Manager
-* Fix: Disabling a module now actually removes it from the builder (both Divi 4 and Divi 5 — toggles previously didn't take effect)
-
-= Version 4.7.1 =
-* Improved: Carousel (Swiper) and counter libraries now load only on pages that actually use those modules, reducing script weight everywhere else.
-* Fix: Module-level Text settings (Text Color, orientation, and text shadow) were dropped when converting Divi 4 modules to Divi 5, causing some modules — including Review Box — to lose their styling after being edited in Divi 5. The Text option is now preserved across the conversion for all affected modules.
-
-= Version 4.7.0 =
-* Added: 8 new native Divi 5 modules — Accordion, Modal Popup, Tabs, Fancy Text, Table of Contents, Breadcrumbs, FAQ, and Post Carousel. Each is single-purpose, plug-and-play, and built natively for the Divi 5 Builder.
-* Added: Accordion includes style presets, custom open/close icons, click/hover/autoplay activators, scroll-to-item, content animations, and per-item header icons or images.
-* Added: Post Carousel ships 6 blog-card presets (Classic, Editorial, Overlay, Profile, Spotlight, Horizontal), a show/hide toggle for every element, and the lightweight Swiper engine.
-* Added: FAQ and Breadcrumbs output schema.org structured data (FAQPage / BreadcrumbList) for richer search results.
-* Added: Table of Contents auto-builds from page headings with smooth scroll, scroll-spy highlighting, and collapsible sections.
-* Compatibility: Fully backward compatible — all Divi 4 modules and saved layouts continue to work in both Divi 4 and Divi 5. The new modules are Divi 5-only.
-
-= Version 4.6.1 =
-* Fix: Dashboard header logo displayed oversized in some setups; the icon now renders at a fixed size.
-
-= Version 4.6.0 =
-* Added: The remaining dynamic modules now run natively in the Divi 5 Builder — News Ticker, Post List, Contact Form 7, X (Twitter) Feed, and X (Twitter) Carousel. Every Divi Torque module is now native in Divi 5, and your existing Divi 4 layouts migrate automatically.
-* Added: X (Twitter) Feed and X (Twitter) Carousel now use the X (Twitter) API v2. Note: reading timelines requires a paid X API plan (Basic tier or higher) — the field descriptions explain this. API responses are cached to minimize calls.
-* Improved: X (Twitter) Carousel now uses the same lightweight Swiper engine as the other carousels (no extra slider library).
-* Compatibility: Fully backward compatible — all Divi 4 modules and saved layouts continue to work in both Divi 4 and Divi 5.
-
-= Version 4.5.1 =
-* Fix: Icon Box — icon placement (absolute mode) no longer defaults to the top-left corner; position now defaults to center and switching corners (Left Top / Right Top / etc.) clears the opposing sides correctly.
-* Fix: Dual Button — text color, background color, and font size changes now apply correctly on the frontend; Divi's default button styles were overriding the custom selector.
-* Fix: Image Carousel and Logo Carousel — navigation arrow no longer appears doubled on hover (Swiper 12 SVG injection is now suppressed).
-* Fix: Flip Box, Info Box, Info Card, and Review — button styling (color, background, font) now applies correctly on the frontend (same selector specificity fix as Dual Button).
-
-= Version 4.5.0 =
-* Added: Thirteen more modules now run natively in the Divi 5 Builder — Image Carousel, Logo Carousel, Logo Grid, Skill Bar, Business Hours, Scroll Image, Review Box, Flip Card, Testimonial, Number Counter, Before & After Slider, Video Modal, and Animated Text. Every static DiviTorque module is now native in Divi 5, and your existing Divi 4 layouts migrate automatically with their styling intact.
-* Added: All DiviTorque modules are now grouped under a "Divi Torque" folder in the Divi 5 module inserter for quicker access.
-* Added: Logo Grid tooltips now initialize correctly in both Divi 4 and Divi 5.
-* Improved: Business Hours separator/divider SVG patterns render identically in the builder preview and on the front end.
-* Improved: Animated Text typing animation now uses a built-in engine with no external library, so it runs reliably everywhere.
-* Improved: Conditional settings now show and hide correctly in the Divi 5 panels (Review Box, Flip Card, Testimonial, Number Counter, and more).
-* Fix: Flip Card back-side description custom CSS now targets the correct element.
-* Fix: Animated Text per-element border radius now carries over when migrating a Divi 4 layout.
-* Compatibility: Fully backward compatible — all Divi 4 modules and saved layouts continue to work in both Divi 4 and Divi 5.
-
-= Version 4.4.0 =
-* Added: Seven more modules now run natively in the Divi 5 Builder — Divider, Icon Box, Inline Notice, Dual Button, Info Box, Info Card, and Team Member (joining Gradient Heading). Your existing Divi 4 layouts migrate automatically with their styling intact.
-* Added: Video Modal videos now autoplay on mobile (muted, as mobile browsers require) — desktop playback is unchanged.
-* Improved: Divi 5 module spacing, icon rendering, and Dual Button gap/alignment now match the Divi 4 output exactly.
-* Fix: Info Box "Layout" settings group no longer conflicts with the Divi 5 layout options.
-* Compatibility: Fully backward compatible — all Divi 4 modules and saved layouts continue to work in both Divi 4 and Divi 5.
-
-= Version 4.3.0 =
-* Added: Divi 5 support begins! The Gradient Heading module is now available natively in the Divi 5 Builder, with more modules being converted in upcoming releases.
-* Compatibility: Fully backward compatible — existing Divi 4 modules and your saved layouts continue to work unchanged.
-* Fix: Rollback page not accessible on some setups.
-
-= Version 4.2.3 =
-* Update: Build toolchain and internal housekeeping.
-
-= Version 4.2.2 =
-* Security: Patched CVE-2026-4275 — CSRF vulnerability on the plugin install/activate routes. Please update immediately.
-* Added: Plugin rollback — revert to a previous version directly from the dashboard.
-* Removed: Unused geolocation helpers (no tracking).
-* Fix: Dashboard crash caused by a non-iterable modules response.
-
-= Version 4.2.1 =
-* Fix: Dashboard link issue
-* Fix: Module manager issue
-
-= Version 4.2.0 =
-* Fix: Dashboard link issue
-
-= Version 4.1.2 =
-* Fix: Freemius SDK security issue
-
-= Version 4.1.1 =
-* Fix: Some modules issue
-
-= Version 4.1.0 =
-* Fix: Translations now load on the 'init' hook to prevent the "_load_textdomain_just_in_time" notice in WordPress 6.7+, with the textdomain matching the plugin domain 'addons-for-divi'.
-
-= Version 4.0.8 =
-* Fix: jQuery error
-
-= Version 4.0.7 =
-* Fix: Magnific Popup issue
-
-= Version 4.0.6 =
-* Fix: Security issues
-
-= Version 4.0.5 =
-* Fix: Divi Library Shortcode issue
-* Fix: Infobox overlay issue
-* Added: Custom Icon for Video Modal
-
-= Version 4.0.4 =
-* Fix: Image overlay issue - showing blue images
-
-= Version 4.0.3 =
-* Fix: Post Lists module issue
-* Fix: News Ticker module issue
-
-= Version 4.0.2 =
-* Fix: SVN version issue 4.0.0 to 4.0.1
-* Added: Loading icon to rollback button
-
-= Version 4.0.1 =
-* Fix: Resolved various user-facing issues encountered during the update from 3.6.6 to 4.0.0.
-
-= Version 4.0.0 =
-* Fix: Security issues
-* Added: Module on-load demos
-* Added: New module manager
-* Update: Revamped dashboard
-* Update: Cleaner codebase
-
-= Version 3.6.6 =
-* Fix: Modules PHP error
-
-= Version 3.6.5 =
-* Fix: Module deprecated warnings
-
-= Version 3.6.4 =
-* Fix: Modules PHP error
-
-= Version 3.6.3 =
-* Fix: Big close icon issue
-
-= Version 3.6.2 =
-* Added: Single folder for all modules
-* Fix: Module security issues with WordPress 6.2
-* Fix: Swap image issues
-
-= Version 3.6.1 =
-* Security update
-
-= Version 3.6.0 =
-* Deprecated popup extension
-* Deprecated login designer extension
-* Deprecated the admin page
-* Cleaner codebase
-* Removed freemium
-
-= Version 3.5.0 =
-* Cleaner code
-
-= Version 3.0.0 =
-* Rebranding BrainAddons to Divi Torque
-
-= Version 2.0.0 =
-* Codebase optimization
-
-= Version 1.0.0 =
-* Public beta release
+Older versions: [full changelog](https://divitorque.com/changelog/?product=lite-releases).
 
 == Upgrade Notice ==
 
-= 4.17.0 =
-Adds a Divi 5 MCP page that shows how to build Divi 5 pages with your AI agent, and tidies the overview.
-
-= 4.16.2 =
-Fixes modules that showed in the Divi 5 builder but not on the page, Feature Box borders after moving from Divi 4, and the Accordion Pro and FAQ item gap. The welcome tour can always be left.
-
-= 4.16.0 =
-Fixes Divi 5 padding fields that lost their value, Table of Contents links, tablet and phone settings in several modules, and builder previews. Adds a five-step welcome tour and optional usage sharing.
-
-= 4.15.0 =
-Fixes Flip Cards that vanished after a button click, plus Divi 5 fixes for button text and styles, carousel phone settings and Feature Box. Adds optional one-click installs for Saddle and Saddle Analytics.
-
-= 4.14.1 =
-Fixes blank Image Carousel thumbnails and Continuous Scroll slides on sites that use an image lazy-loading plugin.
-
-= 4.14.0 =
-Adds Continuous Scroll to the Image Carousel, plus a pause button, progress bars, free scroll, mouse wheel, transition effects, thumbnails, pinch to zoom and rows. Fixes extra space under Divi 5 carousels on desktop and looping carousels with too few slides.
-
-= 4.13.0 =
-Fixes a critical error on every page for Divi 5 sites on PHP 7.4 to 8.1. Adds Image Height to Image Carousel and menu-link opening to Modal Popup. Fixes Autoplay Delay 0 and Gap 0 in Divi 5 carousels, a gap under carousels on phones, and Divi 5 modules that did not start on pages with a Number Counter.
-
-= 4.12.1 =
-Fixes a critical error on every wp-admin page when an older Divi Torque Pro is active, and stops Divi 4 carousels showing every slide at full size while the page loads.
-
-= 4.12.0 =
-Adds a welcome tour and Left/Right icon placement for Icon Box. Fixes Image Carousel on phones, the Image Accordion last image height, a double Before and After Slider with Pro active, Breadcrumbs styling and schema, Twitter Feed API calls on every page view, and dynamic content in several modules.
-
-= 4.11.1 =
-Fixes a fatal error from dynamic content in Divi 5 modules, restores Background Pattern and Mask on the front end for 15 modules, carries more settings across Divi 4 to Divi 5 migration, and improves keyboard and reduced motion accessibility.
-
-= 4.11.0 =
-Post Carousel, Post List and News Ticker now show newest posts first instead of oldest. Fancy Text accepts pipe-separated rotating strings. Team Box Content Background is now explained in the builder.
-
-= 4.10.0 =
-Icon fixes across Divi 5 modules: FontAwesome icons now render everywhere, plus fixes for Icon Box, Post List, Dual Button, Image Carousel, and Contact Form 7. Carousel settings now migrate fully from Divi 4 to Divi 5.
-
-= 4.9.0 =
-Seven new free modules built natively for Divi 5: Tooltip, Call To Action, Creative Button, Image Accordion, Sticky Video, Code Snippet, and SVG Draw. Plus three module fixes.
-
-= 4.8.2 =
-Fixes disabled modules disappearing from the Divi 5 builder when Divi Torque Pro is active, and a Video Modal navigation glitch with deferred JavaScript. WordPress 7.0 is now the minimum supported version.
-
-= v4.2.2 =
-Important security update (CVE-2026-4275). Please update immediately.
+= 4.17.1 =
+Updates the Black Friday card on the overview.

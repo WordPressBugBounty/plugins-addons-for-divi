@@ -447,16 +447,20 @@ class Dashboard
      *
      * Shown on Lite's own Overview only, never in a WP admin notice. The phase
      * dates mirror dt_bf() in the dt-website theme (inc/black-friday.php), in
-     * Dhaka time (GMT+6). The sale opens to the public at 18:00 on Nov 13, so
-     * the early-access copy runs until then. No price, no coupon code and no
-     * countdown: each phase states its one real end date. Returns null outside
-     * the campaign, so the banner removes itself on Jan 1, 2027.
+     * Dhaka time (GMT+6). Sale v3 (owner 2026-11-26): 70% off every Divi Torque
+     * Pro plan to Nov 30, then 60% from Dec 1 to Dec 30, applied at checkout by
+     * a hidden coupon on divitorque.com. The percent is shown (owner asked for a
+     * "70% discount card"); a dollar amount, a coupon code and a countdown never
+     * are. Each phase states its one real end date. Returns null from Dec 31, so
+     * the banner removes itself.
      *
-     * The Cyber Monday and December phases link the Cyber Monday page directly:
-     * the theme 301s the Black Friday page there and drops the UTM query.
+     * Every phase links the Black Friday page: the theme moves the campaign to
+     * /cyber-monday-2026/ only once that page exists, and that URL was a 404 on
+     * 2026-11-26. `id` keys the hide button per offer, so hiding the 70% card
+     * still shows the 60% one on Dec 1.
      *
      * @param int|null $now Unix time to test against; defaults to now.
-     * @return array|null { phase, title, description, cta, url }
+     * @return array|null { phase, id, title, description, cta, url }
      */
     public static function black_friday($now = null)
     {
@@ -471,12 +475,12 @@ class Dashboard
         }
 
         $utm    = '?utm_source=divi-torque-lite&utm_medium=wp-admin&utm_campaign=black-friday-2026';
-        $bf_url = 'https://divitorque.com/black-friday-2026/' . $utm;
-        $cm_url = 'https://divitorque.com/cyber-monday-2026/' . $utm;
+        $bf_url = 'https://divitorque.com/black-friday-2026/' . $utm . '#plans';
 
         $phases = [
             [
                 'phase'       => 'early',
+                'id'          => 'bf26',
                 'to'          => '2026-11-13 18:00',
                 'title'       => __('Black Friday starts Nov 13', 'addons-for-divi'),
                 'description' => __('Join the early-access list to see the Divi Torque Pro deal first.', 'addons-for-divi'),
@@ -485,27 +489,21 @@ class Dashboard
             ],
             [
                 'phase'       => 'bf',
-                'to'          => '2026-11-28 00:00',
-                'title'       => __('Black Friday sale on Divi Torque Pro', 'addons-for-divi'),
-                'description' => __('Divi Torque Pro is on sale until Nov 27.', 'addons-for-divi'),
-                'cta'         => __('See the Black Friday deal', 'addons-for-divi'),
+                'id'          => 'sale70',
+                'to'          => '2026-12-01 00:00',
+                'title'       => __('Black Friday: 70% off Divi Torque Pro', 'addons-for-divi'),
+                'description' => __('Every plan, yearly or Lifetime, applied at checkout. No code needed. Ends Nov 30, then 60% off until Dec 30.', 'addons-for-divi'),
+                'cta'         => __('Get 70% off', 'addons-for-divi'),
                 'url'         => $bf_url,
             ],
             [
                 'phase'       => 'cm',
-                'to'          => '2026-12-02 00:00',
-                'title'       => __('Cyber Monday sale on Divi Torque Pro', 'addons-for-divi'),
-                'description' => __('Divi Torque Pro is on sale until Dec 1.', 'addons-for-divi'),
-                'cta'         => __('See the Cyber Monday deal', 'addons-for-divi'),
-                'url'         => $cm_url,
-            ],
-            [
-                'phase'       => 'dec',
-                'to'          => '2027-01-01 00:00',
-                'title'       => __('Holiday sale on Divi Torque Pro', 'addons-for-divi'),
-                'description' => __('Divi Torque Pro is on sale until Dec 31.', 'addons-for-divi'),
-                'cta'         => __('See the holiday deal', 'addons-for-divi'),
-                'url'         => $cm_url,
+                'id'          => 'sale60',
+                'to'          => '2026-12-31 00:00',
+                'title'       => __('Cyber Monday & Holiday: 60% off Divi Torque Pro', 'addons-for-divi'),
+                'description' => __('Every plan, yearly or Lifetime, applied at checkout. No code needed. Ends Dec 30.', 'addons-for-divi'),
+                'cta'         => __('Get 60% off', 'addons-for-divi'),
+                'url'         => $bf_url,
             ],
         ];
 

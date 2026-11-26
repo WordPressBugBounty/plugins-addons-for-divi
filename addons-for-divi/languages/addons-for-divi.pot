@@ -9,7 +9,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2026-11-23T23:01:58+00:00\n"
+"POT-Creation-Date: 2026-11-26T12:02:06+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.12.0\n"
 "X-Domain: addons-for-divi\n"
@@ -163,64 +163,60 @@ msgstr ""
 msgid "Divi Torque"
 msgstr ""
 
-#: includes/dashboard.php:202
+#: includes/dashboard.php:237
 msgid "Overview"
 msgstr ""
 
-#: includes/dashboard.php:206
+#: includes/dashboard.php:241
 msgid "Modules"
 msgstr ""
 
-#: includes/dashboard.php:220
+#: includes/dashboard.php:255
 msgid "Extensions"
 msgstr ""
 
-#: includes/dashboard.php:423
+#: includes/dashboard.php:263
+msgid "Divi 5 MCP"
+msgstr ""
+
+#: includes/dashboard.php:272
+msgid "Get Snapback"
+msgstr ""
+
+#: includes/dashboard.php:485
 msgid "Black Friday starts Nov 13"
 msgstr ""
 
-#: includes/dashboard.php:424
+#: includes/dashboard.php:486
 msgid "Join the early-access list to see the Divi Torque Pro deal first."
 msgstr ""
 
-#: includes/dashboard.php:425
+#: includes/dashboard.php:487
 msgid "Get early access"
 msgstr ""
 
-#: includes/dashboard.php:431
-msgid "Black Friday sale on Divi Torque Pro"
+#: includes/dashboard.php:494
+msgid "Black Friday: 70% off Divi Torque Pro"
 msgstr ""
 
-#: includes/dashboard.php:432
-msgid "Divi Torque Pro is on sale until Nov 27."
+#: includes/dashboard.php:495
+msgid "Every plan, yearly or Lifetime, applied at checkout. No code needed. Ends Nov 30, then 60% off until Dec 30."
 msgstr ""
 
-#: includes/dashboard.php:433
-msgid "See the Black Friday deal"
+#: includes/dashboard.php:496
+msgid "Get 70% off"
 msgstr ""
 
-#: includes/dashboard.php:439
-msgid "Cyber Monday sale on Divi Torque Pro"
+#: includes/dashboard.php:503
+msgid "Cyber Monday & Holiday: 60% off Divi Torque Pro"
 msgstr ""
 
-#: includes/dashboard.php:440
-msgid "Divi Torque Pro is on sale until Dec 1."
+#: includes/dashboard.php:504
+msgid "Every plan, yearly or Lifetime, applied at checkout. No code needed. Ends Dec 30."
 msgstr ""
 
-#: includes/dashboard.php:441
-msgid "See the Cyber Monday deal"
-msgstr ""
-
-#: includes/dashboard.php:447
-msgid "Holiday sale on Divi Torque Pro"
-msgstr ""
-
-#: includes/dashboard.php:448
-msgid "Divi Torque Pro is on sale until Dec 31."
-msgstr ""
-
-#: includes/dashboard.php:449
-msgid "See the holiday deal"
+#: includes/dashboard.php:505
+msgid "Get 60% off"
 msgstr ""
 
 #: includes/deprecated/admin.php:22
@@ -9211,40 +9207,40 @@ msgstr ""
 msgid "Here you can define the radius value for your text box border."
 msgstr ""
 
-#: includes/plugin.php:183
+#: includes/plugin.php:185
 msgid "Dashboard"
 msgstr ""
 
-#: includes/plugin.php:190
-#: includes/plugin.php:202
-#: includes/plugin.php:238
+#: includes/plugin.php:192
+#: includes/plugin.php:204
+#: includes/plugin.php:240
 msgid "Rollback"
 msgstr ""
 
-#: includes/plugin.php:201
-#: includes/plugin.php:221
+#: includes/plugin.php:203
+#: includes/plugin.php:223
 msgid "Rollback Divi Torque Lite"
 msgstr ""
 
-#: includes/plugin.php:213
+#: includes/plugin.php:215
 msgid "You do not have permission to access this page."
 msgstr ""
 
 #. translators: %s: the currently installed plugin version number.
-#: includes/plugin.php:223
+#: includes/plugin.php:225
 #, php-format
 msgid "Currently installed: %s"
 msgstr ""
 
-#: includes/plugin.php:226
+#: includes/plugin.php:228
 msgid "Choose a previous version published on WordPress.org. Your active state will be preserved."
 msgstr ""
 
-#: includes/plugin.php:230
+#: includes/plugin.php:232
 msgid "Version"
 msgstr ""
 
-#: includes/plugin.php:232
+#: includes/plugin.php:234
 msgid "Loading versions…"
 msgstr ""
 
